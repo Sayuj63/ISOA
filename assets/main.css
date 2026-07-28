@@ -121,7 +121,7 @@
     padding: 0 16px 16px !important;
     border-radius: 0 !important;
 }
-.policy-pages .shopify-block{
+.policy-pages .shopify-block:not(.rte){
     padding:24px !important;
 }
 .text-block p, .text-block.p>*{
