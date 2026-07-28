@@ -747,7 +747,17 @@ Our customer service team can assist by email Monday through Friday, from 9am to
     customElements.define('contact-form-{{ ai_gen_id }}', ContactForm{{ ai_gen_id }});
   })();
 </script>
+<style>
+#shopify-section-{{ section.id }} {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
 
+#shopify-section-{{ section.id }} > div {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+</style>
 {% schema %}
 {
   "name": "Contact form",
