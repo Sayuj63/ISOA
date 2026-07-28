@@ -436,9 +436,11 @@ contact-form-{{ ai_gen_id }} {
     max-width: 100% !important;
     padding-left: 20px !important;
     padding-right: 20px !important;
-    /* Mobile: match Terms page (.policy-pages .rte @media 749px in main.css)
-       so the heading position is symmetric across the two pages on mobile. */
-    padding-top: 88px !important;
+    /* Mobile: 24px not 88px. Terms uses 88 on .rte but Terms' first section
+       sits at Y=64 mobile; Contact's section_LaJ7Ma sits at Y=128 (Contact's
+       disabled `main` block absorbs 64px extra on mobile). To hit the same
+       final h1.top=152 as Terms, wrap-padding = 152 - 128 = 24. */
+    padding-top: 24px !important;
     padding-bottom: 40px !important;
     border-radius: 10px !important;
   }
