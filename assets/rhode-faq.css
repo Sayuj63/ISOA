@@ -23,6 +23,12 @@
   border-radius: 10px;
   padding: 44px 40px;
   color: #67645e;
+  /* Grid items get implicit min-width: auto (= min-content of children).
+     The pill list's nowrap children push min-content past the column width,
+     which blew the section past the viewport on mobile. min-width: 0 lets
+     the grid child respect its allocated column and enables overflow-x: auto
+     on the pill list to actually scroll. */
+  min-width: 0;
 }
 
 .rhode-faq__nav {
