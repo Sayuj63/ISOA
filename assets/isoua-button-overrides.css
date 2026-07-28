@@ -28,46 +28,24 @@
   --isoa-section-gap: 10px; /* the intended visible gap; = 2 * half-gap */
 }
 
-/* Terms + Contact pages: the announcement bar and the header pill are both
-   grey (#f1f0ed) but there's a 22px WHITE gap between them (announcement
-   section padding-block-end 12 + header .section-settings padding-top 10).
-   Setting the body background to the same grey makes that gap render grey
-   so the two pills read as one seamless surface with the content below.
-   Scoped to just these two pages so the homepage and other templates keep
-   their white page background. */
-body.page-terms-of-service,
-body.page-contact-us,
-body.page-privacy-policy,
-body.page-refund-policy,
-body.page-shipping-policy,
-body.page-do-not-sell-or-share-my-personal-information {
-  background: #f1f0ed;
-}
-
-/* Two elements paint solid white over the body grey between the announcement
-   pill and the header pill (found via DOM inspection at Y=56–78 on terms):
-   1) .section-background inside the header group (announcement bar's bg,
-      color-scheme-1 white). Position: absolute, z-index: -2, covers 0–68.
-   2) The fixed header wrapper ([class*="header-"].fixed) — z-index: 999,
-      background-color: var(--color-background) = white, covers 68–154.
-   Making both transparent on policy + contact pages lets the body grey
-   fill the strip, so the two pills read as one seamless grey surface. */
-body.page-terms-of-service .shopify-section-group-header-group .section-background,
-body.page-contact-us .shopify-section-group-header-group .section-background,
-body.page-privacy-policy .shopify-section-group-header-group .section-background,
-body.page-refund-policy .shopify-section-group-header-group .section-background,
-body.page-shipping-policy .shopify-section-group-header-group .section-background,
-body.page-do-not-sell-or-share-my-personal-information .shopify-section-group-header-group .section-background {
-  background-color: transparent !important;
-}
-
-body.page-terms-of-service [class*="header-"].fixed,
-body.page-contact-us [class*="header-"].fixed,
-body.page-privacy-policy [class*="header-"].fixed,
-body.page-refund-policy [class*="header-"].fixed,
-body.page-shipping-policy [class*="header-"].fixed,
-body.page-do-not-sell-or-share-my-personal-information [class*="header-"].fixed {
-  background-color: transparent !important;
+/* Terms + Contact + policy pages: move the first content section UP so it
+   overlaps the header pill area. The header stays fixed with its own white
+   wrapper — but the section-bg (grey #f1f0ed on these pages, per main.css
+   .policy-pages rules or the contact block rules) rises up to touch the
+   ANNOUNCEMENT BAR bottom. Result: header appears to sit ON TOP OF the
+   grey section, with no visible white strip between the announcement pill
+   and the header pill. Body stays white — no full-page grey. */
+body.page-terms-of-service .content-for-layout > .shopify-section:first-child:not(.hero-wrapper),
+body.page-contact-us .content-for-layout > .shopify-section:first-child:not(.hero-wrapper),
+body.page-privacy-policy .content-for-layout > .shopify-section:first-child:not(.hero-wrapper),
+body.page-refund-policy .content-for-layout > .shopify-section:first-child:not(.hero-wrapper),
+body.page-shipping-policy .content-for-layout > .shopify-section:first-child:not(.hero-wrapper),
+body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .shopify-section:first-child:not(.hero-wrapper) {
+  /* was margin-top: var(--header-group-height, 0) via ss-header-1.liquid:1000
+     which put the section BELOW the fixed header. Negative offset pulls the
+     section top up to sit right under the announcement pill (~-12px) so its
+     grey background fills the gap that used to read as a white strip. */
+  margin-top: -12px !important;
 }
 
 /* =============================================================================
