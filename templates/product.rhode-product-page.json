@@ -1552,6 +1552,79 @@
         "lazy": true
       }
     },
+    "ss_whats_inside_8w8VfA": {
+      "type": "ss-whats-inside",
+      "blocks": {
+        "item_Gx6zwx": {
+          "type": "item",
+          "settings": {
+            "top_text": "",
+            "heading": "",
+            "text": "<p>Hydrocolloid is a sticky, gel-like material that acts like a bandage on the skin.</p>"
+          }
+        },
+        "item_FXwneF": {
+          "type": "item",
+          "settings": {
+            "top_text": "",
+            "heading": "how it works",
+            "text": "<p>Designed for use on surface-level spots, Hydrocolloid patches create a comfy, protective bubble. They shield against stressors and form a gel that helps draw out excess oil.</p>"
+          }
+        },
+        "item_dhccJh": {
+          "type": "item",
+          "settings": {
+            "top_text": "",
+            "heading": "why we love it",
+            "text": "<p>Whether your skin is sensitive or spot-prone, Hydrocolloid is friendly for all skin types. It's a gentle, effortless way to care for your spots on the go or overnight.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_Gx6zwx",
+        "item_FXwneF",
+        "item_dhccJh"
+      ],
+      "name": "SS Whats Inside",
+      "settings": {
+        "image": "shopify://shop_images/Frame_1430103561_-_V8_5e27aaa7-5794-4d58-bb21-95d965160f39.png",
+        "side_title": "what's inside",
+        "max_width": 1400,
+        "desktop_gap": 16,
+        "mobile_gap": 16,
+        "pt": 24,
+        "pb": 24,
+        "pt_mobile": 24,
+        "pb_mobile": 24,
+        "side": 2.5,
+        "side_mobile": 1,
+        "radius": 10,
+        "image_radius": 10,
+        "content_radius": 10,
+        "content_padding": 42,
+        "content_padding_mobile": 24,
+        "side_title_gap": 40,
+        "side_title_gap_mobile": 18,
+        "side_title_size": 28,
+        "side_title_size_mobile": 22,
+        "heading_size": 32,
+        "heading_size_mobile": 22,
+        "text_size": 16,
+        "text_size_mobile": 15,
+        "top_text_size": 16,
+        "top_text_size_mobile": 15,
+        "item_spacing": 36,
+        "item_spacing_mobile": 24,
+        "border_width": 0,
+        "bg_color": "#ffffff",
+        "content_bg": "#f4f2ee",
+        "heading_color": "#444444",
+        "text_color": "#555555",
+        "divider_color": "#cfcfcf",
+        "side_title_color": "#555555",
+        "border_color": "#000000"
+      }
+    },
     "rhode_pdp_on_the_go": {
       "type": "rhode-pdp-on-the-go",
       "blocks": {
@@ -1973,79 +2046,6 @@
         "cta_hover_bg_color": "#4d4b45",
         "cta_text_color": "#ffffff"
       }
-    },
-    "ss_whats_inside_8w8VfA": {
-      "type": "ss-whats-inside",
-      "blocks": {
-        "item_Gx6zwx": {
-          "type": "item",
-          "settings": {
-            "top_text": "",
-            "heading": "",
-            "text": "<p>Hydrocolloid is a sticky, gel-like material that acts like a bandage on the skin.</p>"
-          }
-        },
-        "item_FXwneF": {
-          "type": "item",
-          "settings": {
-            "top_text": "",
-            "heading": "how it works",
-            "text": "<p>Designed for use on surface-level spots, Hydrocolloid patches create a comfy, protective bubble. They shield against stressors and form a gel that helps draw out excess oil.</p>"
-          }
-        },
-        "item_dhccJh": {
-          "type": "item",
-          "settings": {
-            "top_text": "",
-            "heading": "why we love it",
-            "text": "<p>Whether your skin is sensitive or spot-prone, Hydrocolloid is friendly for all skin types. It's a gentle, effortless way to care for your spots on the go or overnight.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "item_Gx6zwx",
-        "item_FXwneF",
-        "item_dhccJh"
-      ],
-      "name": "SS Whats Inside",
-      "settings": {
-        "image": "shopify://shop_images/Frame_1430103561_-_V8_5e27aaa7-5794-4d58-bb21-95d965160f39.png",
-        "side_title": "what's inside",
-        "max_width": 1400,
-        "desktop_gap": 16,
-        "mobile_gap": 16,
-        "pt": 24,
-        "pb": 24,
-        "pt_mobile": 24,
-        "pb_mobile": 24,
-        "side": 2.5,
-        "side_mobile": 1,
-        "radius": 10,
-        "image_radius": 10,
-        "content_radius": 10,
-        "content_padding": 42,
-        "content_padding_mobile": 24,
-        "side_title_gap": 40,
-        "side_title_gap_mobile": 18,
-        "side_title_size": 28,
-        "side_title_size_mobile": 22,
-        "heading_size": 32,
-        "heading_size_mobile": 22,
-        "text_size": 16,
-        "text_size_mobile": 15,
-        "top_text_size": 16,
-        "top_text_size_mobile": 15,
-        "item_spacing": 36,
-        "item_spacing_mobile": 24,
-        "border_width": 0,
-        "bg_color": "#FFFFFF",
-        "content_bg": "#f4f2ee",
-        "heading_color": "#444444",
-        "text_color": "#555555",
-        "divider_color": "#cfcfcf",
-        "side_title_color": "#555555",
-        "border_color": "#000000"
-      }
     }
   },
   "order": [
@@ -2058,11 +2058,11 @@
     "ss_image_with_text_9EpeQg",
     "section_WUmYw7",
     "ss_image_with_text_4PncMc",
+    "ss_whats_inside_8w8VfA",
     "rhode_pdp_on_the_go",
     "ss_featured_collection_13_RrkUFQ",
     "ss_packaging_cUBeaP",
     "section_store_featured_collection_6_hnPVwp",
-    "ss_whats_inside_8w8VfA",
     "rhode_sticky_atc"
   ]
 }
