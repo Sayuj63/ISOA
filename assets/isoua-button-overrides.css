@@ -1,4 +1,29 @@
 /* =============================================================================
+   ISOUA — Vertical rhythm system
+   -----------------------------------------------------------------------------
+   Single source of truth for section-to-section spacing. Every section's
+   vertical padding (block-start + block-end) should draw from these vars so
+   the visible gap between two adjacent pills is:
+
+       gap = A.padding-block-end + B.padding-block-start = 2 * half-gap
+
+   Target gap = 24px on both mobile and desktop (matches the built-in
+   header ↔ announcement-bar gap: SS-Header-1 padding_bottom 12 +
+   header-announcements padding-block-start 12 = 24, per audit).
+
+   Apply on every section:
+       padding-block: var(--isoa-section-half-gap) var(--isoa-section-half-gap)
+   Or the JSON equivalent: padding-block-start: 12, padding-block-end: 12.
+
+   For sections without schema padding (custom sections like rhode-faq), set
+   the padding inline on the section root using the variable.
+   ============================================================================= */
+:root {
+  --isoa-section-half-gap: 12px;
+  --isoa-section-gap: 24px; /* the intended visible gap; = 2 * half-gap */
+}
+
+/* =============================================================================
    ISOUA — Site-wide button style unification
    -----------------------------------------------------------------------------
    The client (Sayuj) wants every primary CTA across the homepage to use the

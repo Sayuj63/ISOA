@@ -157,7 +157,10 @@
    .section-{{ section.id }} {
      border-top: solid {{ border_color }} {{ border_thickness }}px;
      border-bottom: solid {{ border_color }} {{ border_thickness }}px;
-     margin-top: {{ margin_top | times: 0.75 | round: 0 }}px;
+     /* margin_top used verbatim (not × 0.75) so the site-wide vertical
+        rhythm system stays uniform between mobile and desktop.
+        --isoa-section-half-gap is 12px on both viewports. */
+     margin-top: {{ margin_top }}px;
      margin-bottom: {{ margin_bottom | times: 0.75 | round: 0 }}px;
      margin-left: {{ margin_horizontal_mobile }}rem;
      margin-right: {{ margin_horizontal_mobile }}rem;

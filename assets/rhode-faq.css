@@ -2,9 +2,10 @@
    Loaded via sections/rhode-faq.liquid stylesheet_tag. */
 
 .rhode-faq {
-  /* Symmetric vertical padding — bottom equals top so the gap to the
-     tagline / footer mirrors the gap from the hero above. */
-  padding: 24px 0;
+  /* Uses the site-wide vertical rhythm system defined in
+     assets/isoua-button-overrides.css. Half-gap on top + half-gap on the
+     next section's top = 24px visible gap between grey pill edges. */
+  padding: var(--isoa-section-half-gap, 12px) 0;
 }
 
 .rhode-faq__inner {
