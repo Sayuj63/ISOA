@@ -239,13 +239,12 @@ contact-form-{{ ai_gen_id }} {
   margin-bottom: 20px;
 }
 
-/* MOBILE (<=1023px): pill-header offset + bottom corner rounding + top clearance */
+/* MOBILE (<=1023px): pill-header offset + bottom corner rounding + top clearance
+   NOTE: the section margin-top override was removed 2026-07-29 — now handled
+   by isoua-button-overrides.css `body.page-contact-us ... :first-child`
+   which pulls the disabled main-page above section_LaJ7Ma up by -12px.
+   With main at Y=56 and no margin on this section, it flows to Y=56 too. */
 @media screen and (max-width: 1023px) {
-
-  /* Pull section up so it sits flush under the pill (49px = in-flow header offset) */
-  #shopify-section-{{ section.id }} {
-    margin-top: calc(var(--header-group-height, 0px) - 49px) !important;
-  }
 
   /* Square the top corners where the pill rests on the section */
   #shopify-section-{{ section.id }} .border-style.custom-section-content {
@@ -424,14 +423,9 @@ contact-form-{{ ai_gen_id }} {
   background: #ffffff !important;
 }
 
-/* Mobile: match desktop-rule specificity (ID prefix) so this override wins.
-   margin-top on the section clears the position:fixed header — the
-   theme's :first-child auto-offset rule doesn't fire here because the
-   disabled main-page section takes the :first-child slot. */
+/* Mobile: heading + form styling (section margin-top handled globally now,
+   see isoua-button-overrides.css body.page-contact-us :first-child rule). */
 @media screen and (max-width: 749px) {
-  #shopify-section-{{ section.id }} {
-    margin-top: var(--header-group-height, 138px) !important;
-  }
   #shopify-section-{{ section.id }} .ai-section-padding-{{ ai_gen_id }} {
     max-width: 100% !important;
     padding-left: 20px !important;
