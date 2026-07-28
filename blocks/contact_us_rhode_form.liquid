@@ -55,6 +55,28 @@ contact-form-{{ ai_gen_id }} {
   background: transparent;
 }
 
+/* Match the FAQ heading style (assets/rhode-faq.css .rhode-faq__title) so
+   Contact and FAQ read as one system: 34px/800/uppercase/-0.01em desktop,
+   22px mobile. Text stays lowercase in the source — CSS uppercases it. */
+.ai-contact-form-heading-{{ ai_gen_id }} {
+  font-family: 'Inter', sans-serif;
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #4a4844;
+  text-transform: uppercase;
+  font-style: normal;
+  margin: 0 0 28px;
+}
+
+@media (max-width: 749px) {
+  .ai-contact-form-heading-{{ ai_gen_id }} {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+}
+
 .ai-contact-form-field-{{ ai_gen_id }} {
   margin-bottom: 14px;
 }
