@@ -44,6 +44,32 @@ body.page-do-not-sell-or-share-my-personal-information {
   background: #f1f0ed;
 }
 
+/* Two elements paint solid white over the body grey between the announcement
+   pill and the header pill (found via DOM inspection at Y=56–78 on terms):
+   1) .section-background inside the header group (announcement bar's bg,
+      color-scheme-1 white). Position: absolute, z-index: -2, covers 0–68.
+   2) The fixed header wrapper ([class*="header-"].fixed) — z-index: 999,
+      background-color: var(--color-background) = white, covers 68–154.
+   Making both transparent on policy + contact pages lets the body grey
+   fill the strip, so the two pills read as one seamless grey surface. */
+body.page-terms-of-service .shopify-section-group-header-group .section-background,
+body.page-contact-us .shopify-section-group-header-group .section-background,
+body.page-privacy-policy .shopify-section-group-header-group .section-background,
+body.page-refund-policy .shopify-section-group-header-group .section-background,
+body.page-shipping-policy .shopify-section-group-header-group .section-background,
+body.page-do-not-sell-or-share-my-personal-information .shopify-section-group-header-group .section-background {
+  background-color: transparent !important;
+}
+
+body.page-terms-of-service [class*="header-"].fixed,
+body.page-contact-us [class*="header-"].fixed,
+body.page-privacy-policy [class*="header-"].fixed,
+body.page-refund-policy [class*="header-"].fixed,
+body.page-shipping-policy [class*="header-"].fixed,
+body.page-do-not-sell-or-share-my-personal-information [class*="header-"].fixed {
+  background-color: transparent !important;
+}
+
 /* =============================================================================
    ISOUA — Site-wide button style unification
    -----------------------------------------------------------------------------
