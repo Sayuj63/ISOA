@@ -430,11 +430,12 @@ contact-form-{{ ai_gen_id }} {
     max-width: 100% !important;
     padding-left: 20px !important;
     padding-right: 20px !important;
-    /* Mobile: 24px not 88px. Terms uses 88 on .rte but Terms' first section
-       sits at Y=64 mobile; Contact's section_LaJ7Ma sits at Y=128 (Contact's
-       disabled `main` block absorbs 64px extra on mobile). To hit the same
-       final h1.top=152 as Terms, wrap-padding = 152 - 128 = 24. */
-    padding-top: 24px !important;
+    /* 152px matches desktop AND matches Terms mobile (main.css .policy-pages
+       .rte @media 749px was also bumped to 152). With section now moved up
+       to Y=56 via the -12px margin-top override in isoua-button-overrides.css,
+       h1 lands at Y=208 on every viewport — well below the pill bottoms
+       (154 desktop / 138 mobile) so the heading is always visible. */
+    padding-top: 152px !important;
     padding-bottom: 40px !important;
     border-radius: 10px !important;
   }
