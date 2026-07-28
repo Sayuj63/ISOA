@@ -41,6 +41,51 @@
     max-width: 100% !important;
     width: 100%;
 }
+
+/* Policy-page content box — moved here from templates/page.json custom_css
+   because Shopify caps that field at 500 chars. The beige content card
+   sits FLUSH with the header pill (0 top border-radius), has a big top
+   inset so the h1 doesn't kiss the pill, and rounds only at the bottom. */
+.policy-pages .rte,
+.policy-pages .page__content,
+.policy-pages [id*="page-content"] {
+    background-color: #f1f0ed;
+    padding: 152px 48px 100px;
+    border-radius: 0 0 12px 12px;
+    margin: 0 auto;
+    max-width: 860px;
+}
+
+/* Policy page h1 — matched to the FAQ's .rhode-faq__title so headings across
+   the site read as one system (34px/800/uppercase/-0.01em desktop,
+   22px mobile). */
+.policy-pages .rte h1,
+.policy-pages .page__content h1,
+.policy-pages [id*="page-content"] h1 {
+    font-size: 34px !important;
+    font-weight: 800 !important;
+    font-family: Inter, sans-serif !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.01em !important;
+    color: #4a4844 !important;
+    text-transform: uppercase !important;
+    font-style: normal !important;
+    margin: 0 0 28px !important;
+}
+
+@media (max-width: 749px) {
+    .policy-pages .rte,
+    .policy-pages .page__content,
+    .policy-pages [id*="page-content"] {
+        padding: 88px 24px 60px;
+    }
+    .policy-pages .rte h1,
+    .policy-pages .page__content h1,
+    .policy-pages [id*="page-content"] h1 {
+        font-size: 22px !important;
+        margin-bottom: 20px !important;
+    }
+}
 .custom-section-content .shopify-block{
     width:100% !important;
     max-width:100% !important;
