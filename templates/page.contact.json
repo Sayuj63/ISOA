@@ -85,6 +85,10 @@
         "ai_gen_block_2427d61_Nb9k9Y": {
           "type": "contact_us_rhode_form",
           "settings": {
+            "section_padding_top": 80,
+            "section_padding_bottom": 80,
+            "section_padding_left": 24,
+            "section_padding_right": 24,
             "form_max_width": 650,
             "form_padding": 30,
             "border_radius": 12,
@@ -145,7 +149,7 @@
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "padding-block-start": 0,
-        "padding-block-end": 60
+        "padding-block-end": 12
       }
     }
   },
