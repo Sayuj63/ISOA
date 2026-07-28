@@ -18,7 +18,17 @@
     {% content_for 'blocks' %}
   </div>
 </div>
+<style>
+#shopify-section-{{ section.id }} {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
 
+#shopify-section-{{ section.id }} > div {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+</style>
 {% schema %}
 {
   "name": "t:names.page",
