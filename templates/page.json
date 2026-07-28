@@ -49,9 +49,7 @@
         "heading",
         "page-content"
       ],
-      "custom_css": [
-        ".page-width .rte,.page__content,[id*=\"page-content\"]{background-color:#f1f0ed;padding:152px 48px 100px;border-radius:0 0 12px 12px;margin:0 auto;max-width:860px}.page-width .rte h1,.page__content h1,[id*=\"page-content\"] h1{font-size:44px!important;font-weight:700!important;font-family:Inter,sans-serif!important;line-height:1.15!important;font-style:normal!important;margin:0 0 32px!important}"
-      ],
+      "custom_css": [],
       "settings": {
         "content_direction": "column",
         "gap": 32,
