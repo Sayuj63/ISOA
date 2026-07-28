@@ -7,20 +7,25 @@
 
        gap = A.padding-block-end + B.padding-block-start = 2 * half-gap
 
-   Target gap = 24px on both mobile and desktop (matches the built-in
-   header ↔ announcement-bar gap: SS-Header-1 padding_bottom 12 +
-   header-announcements padding-block-start 12 = 24, per audit).
+   Target gap = 10px on both mobile and desktop. Derived from the built-in
+   header ↔ announcement-bar gap, which is NOT the sum of the two sections'
+   schema paddings (header uses position: fixed + JS-controlled top, so
+   announcement.padding-block-end doesn't stack with header.margin-top).
+   The actual visible gap comes from ss-header-1's inner shell:
+       .section-{id}-settings { padding-top: padding_top × 0.3 }
+       = 32 × 0.3 = 9.6 -> 10px (rounded)
+   That 10px is the anchor value for every other section boundary.
 
    Apply on every section:
        padding-block: var(--isoa-section-half-gap) var(--isoa-section-half-gap)
-   Or the JSON equivalent: padding-block-start: 12, padding-block-end: 12.
+   Or the JSON equivalent: padding-block-start: 5, padding-block-end: 5.
 
    For sections without schema padding (custom sections like rhode-faq), set
    the padding inline on the section root using the variable.
    ============================================================================= */
 :root {
-  --isoa-section-half-gap: 12px;
-  --isoa-section-gap: 24px; /* the intended visible gap; = 2 * half-gap */
+  --isoa-section-half-gap: 5px;
+  --isoa-section-gap: 10px; /* the intended visible gap; = 2 * half-gap */
 }
 
 /* =============================================================================
