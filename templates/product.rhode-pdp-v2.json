@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -300,7 +309,7 @@
                     "text_x6E4qX": {
                       "type": "text",
                       "settings": {
-                        "text": "<ul><li>Targets multiple breakouts at once</li><li>Clinically proven to visibly reduce spots</li><li>Leaves breakouts looking smaller, flatter & less red</li><li>Absorbs excess oil & draws out impurities</li><li>Helps calm visible inflammation</li><li>Supports the skin\u2019s natural healing process</li><li>Protects the skin barrier from external stressors</li></ul>",
+                        "text": "<ul><li>Targets multiple breakouts at once</li><li>Clinically proven to visibly reduce spots</li><li>Leaves breakouts looking smaller, flatter & less red</li><li>Absorbs excess oil & draws out impurities</li><li>Helps calm visible inflammation</li><li>Supports the skin’s natural healing process</li><li>Protects the skin barrier from external stressors</li></ul>",
                         "width": "fit-content",
                         "max_width": "none",
                         "alignment": "left",
@@ -339,7 +348,7 @@
                     "text_bABhBY": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>Apply to a clean, dry spot. No skincare underneath. Press gently to seal. Wear for 6\u20138 hours before removing. Remove and cleanse, then follow with your skincare. Use as needed or twice a week.<br/><br/>*isoua trick: wear it overnight for maximum results.</p>",
+                        "text": "<p>Apply to a clean, dry spot. No skincare underneath. Press gently to seal. Wear for 6–8 hours before removing. Remove and cleanse, then follow with your skincare. Use as needed or twice a week.<br/><br/>*isoua trick: wear it overnight for maximum results.</p>",
                         "width": "100%",
                         "max_width": "none",
                         "alignment": "left",
@@ -378,7 +387,7 @@
                     "text_GqXfJT": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>HYDROCOLLOID \u2014  a clinically trusted, gel-like material widely used in advanced wound care to absorb fluids while safeguarding the skin. When applied to acne-prone skin, it draws out excess oil and impurities from congested pores and creates a protective barrier. This barrier shields the skin from stressors and supports gentle, irritation-free recovery.</p>",
+                        "text": "<p>HYDROCOLLOID —  a clinically trusted, gel-like material widely used in advanced wound care to absorb fluids while safeguarding the skin. When applied to acne-prone skin, it draws out excess oil and impurities from congested pores and creates a protective barrier. This barrier shields the skin from stressors and supports gentle, irritation-free recovery.</p>",
                         "width": "100%",
                         "max_width": "none",
                         "alignment": "left",
@@ -418,7 +427,7 @@
                     "text_f3iedd": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>Breakouts occur when pores become clogged with excess oil, bacteria, and debris. Hydrocolloid technology absorbs these impurities from inflamed pores and simultaneously protects the skin from external irritants. By maintaining a moist healing environment, the sheet supports the skin\u2019s natural repair process, promoting calm, low-irritation healing.</p>",
+                        "text": "<p>Breakouts occur when pores become clogged with excess oil, bacteria, and debris. Hydrocolloid technology absorbs these impurities from inflamed pores and simultaneously protects the skin from external irritants. By maintaining a moist healing environment, the sheet supports the skin’s natural repair process, promoting calm, low-irritation healing.</p>",
                         "width": "100%",
                         "max_width": "none",
                         "alignment": "left",
@@ -640,7 +649,7 @@
           "type": "feature",
           "settings": {
             "label": "FYI:",
-            "value": "Sweatproof \u2022 Waterproof <br>\nCruelty-Free \u2022 Vegan \u2022 Gluten-Free <br>  \nDermatologist-Tested  \u2022 Non-Comedogenic"
+            "value": "Sweatproof • Waterproof <br>\nCruelty-Free • Vegan • Gluten-Free <br>  \nDermatologist-Tested  • Non-Comedogenic"
           }
         }
       },
@@ -1984,15 +1993,7 @@
         "text_color": "#67645e",
         "cta_bg_color": "#67645e",
         "cta_hover_bg_color": "#121212",
-        "cta_text_color": "#ffffff",
-        "cta_hover_text_color": "#ffffff",
-        "cta_border_color": "#67645e",
-        "bar_height": 92,
-        "bar_height_mobile": 72,
-        "bottom_offset": 24,
-        "padding_x": 20,
-        "radius": 12,
-        "thumb_size": 52
+        "cta_text_color": "#ffffff"
       }
     },
     "rhode_custom_cursor": {
