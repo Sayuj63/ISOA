@@ -1,0 +1,239 @@
+/* Rhode-style FAQ — pill-rail aligned two-card layout.
+   Loaded via sections/rhode-faq.liquid stylesheet_tag. */
+
+.rhode-faq {
+  padding: 24px 0 80px;
+}
+
+.rhode-faq__inner {
+  max-width: min(
+    calc(var(--page-width) - var(--page-margin) * 2),
+    calc(100% - var(--page-margin) * 2)
+  );
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(300px, 340px) 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.rhode-faq__nav,
+.rhode-faq__panel {
+  background: #f1f0ed;
+  border-radius: 10px;
+  padding: 44px 40px;
+  color: #67645e;
+}
+
+.rhode-faq__nav {
+  position: sticky;
+  top: 120px;
+}
+
+.rhode-faq__title,
+.rhode-faq__panel-title {
+  font-family: var(--font-heading--family, 'Inter'), sans-serif;
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: #4a4844;
+  margin: 0 0 28px;
+  text-transform: uppercase;
+  font-style: normal;
+}
+
+.rhode-faq__cat-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.rhode-faq__cat-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: #67645e;
+  font-family: var(--font-body--family, 'Inter'), sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: left;
+  cursor: pointer;
+  transition: opacity 0.2s ease, color 0.2s ease;
+  width: 100%;
+  line-height: 1.4;
+}
+
+.rhode-faq__cat-btn:hover {
+  opacity: 0.65;
+}
+
+.rhode-faq__cat-btn.is-active {
+  color: #2a2926;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 1.5px;
+}
+
+.rhode-faq__cat-btn:focus-visible {
+  outline: 2px solid #67645e;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.rhode-faq__panel {
+  min-height: 480px;
+}
+
+.rhode-faq__panel[hidden] {
+  display: none !important;
+}
+
+.rhode-faq__qa-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.rhode-faq__item {
+  border-top: 1px solid #d9d7d1;
+  padding: 20px 0;
+}
+
+.rhode-faq__item:last-child {
+  border-bottom: 1px solid #d9d7d1;
+}
+
+.rhode-faq__q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+  font-family: var(--font-body--family, 'Inter'), sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #67645e;
+  line-height: 1.4;
+  list-style: none;
+  padding-right: 4px;
+}
+
+.rhode-faq__q::-webkit-details-marker {
+  display: none;
+}
+
+.rhode-faq__q:hover {
+  opacity: 0.75;
+}
+
+.rhode-faq__q-text {
+  flex: 1;
+}
+
+.rhode-faq__q-icon {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.rhode-faq__q-icon::before,
+.rhode-faq__q-icon::after {
+  content: '';
+  position: absolute;
+  background: #67645e;
+  border-radius: 1px;
+}
+
+.rhode-faq__q-icon::before {
+  top: 50%;
+  left: 2px;
+  right: 2px;
+  height: 1.5px;
+  transform: translateY(-50%);
+}
+
+.rhode-faq__q-icon::after {
+  left: 50%;
+  top: 2px;
+  bottom: 2px;
+  width: 1.5px;
+  transform: translateX(-50%);
+  transition: transform 0.2s ease;
+}
+
+.rhode-faq__item[open] .rhode-faq__q-icon::after {
+  transform: translateX(-50%) scaleY(0);
+}
+
+.rhode-faq__a {
+  margin-top: 16px;
+  font-family: var(--font-body--family, 'Inter'), sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: #67645e;
+  padding-right: 40px;
+  letter-spacing: 0.01em;
+}
+
+.rhode-faq__a br + br {
+  display: block;
+  content: '';
+  margin-top: 6px;
+}
+
+/* Mobile: stack vertically, both cards fully visible, no sticky nav.
+   Fixes the "PRODUCTS is invisible" bug from the old ai_gen block. */
+@media (max-width: 749px) {
+  .rhode-faq {
+    padding: 12px 0 40px;
+  }
+
+  .rhode-faq__inner {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .rhode-faq__nav {
+    position: static;
+    padding: 28px 24px;
+  }
+
+  .rhode-faq__panel {
+    padding: 28px 24px;
+    min-height: auto;
+  }
+
+  .rhode-faq__title,
+  .rhode-faq__panel-title {
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+
+  .rhode-faq__cat-list {
+    gap: 14px;
+  }
+
+  .rhode-faq__cat-btn {
+    font-size: 13px;
+  }
+
+  .rhode-faq__q {
+    font-size: 13px;
+    gap: 16px;
+  }
+
+  .rhode-faq__a {
+    padding-right: 0;
+    font-size: 13px;
+  }
+}
