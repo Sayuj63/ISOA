@@ -191,8 +191,8 @@
   margin-top: 6px;
 }
 
-/* Mobile: stack vertically, both cards fully visible, no sticky nav.
-   Fixes the "PRODUCTS is invisible" bug from the old ai_gen block. */
+/* Mobile: stack vertically. Category nav becomes a horizontal pill carousel
+   (scrolls edge-to-edge, no wrapping) matching the Rhode reference. */
 @media (max-width: 749px) {
   .rhode-faq {
     padding: 12px 0 40px;
@@ -205,7 +205,7 @@
 
   .rhode-faq__nav {
     position: static;
-    padding: 28px 24px;
+    padding: 28px 24px 20px;
   }
 
   .rhode-faq__panel {
@@ -220,11 +220,46 @@
   }
 
   .rhode-faq__cat-list {
-    gap: 14px;
+    flex-direction: row;
+    gap: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -24px;
+    padding: 4px 24px 6px;
+  }
+
+  .rhode-faq__cat-list::-webkit-scrollbar {
+    display: none;
   }
 
   .rhode-faq__cat-btn {
-    font-size: 13px;
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    white-space: nowrap;
+    background: transparent;
+    color: #67645e;
+    border: 1px solid #67645e;
+    border-radius: 999px;
+    padding: 10px 18px;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    text-decoration: none;
+    text-underline-offset: 0;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .rhode-faq__cat-btn.is-active {
+    background: #67645e;
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .rhode-faq__cat-btn:hover {
+    opacity: 1;
   }
 
   .rhode-faq__q {
