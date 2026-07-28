@@ -77,12 +77,11 @@
     .policy-pages .rte,
     .policy-pages .page__content,
     .policy-pages [id*="page-content"] {
-        /* 152px padding-top matches desktop — with section now at Y=56 (via
-           the -12px margin-top override in isoua-button-overrides.css), the
-           h1 lands at Y=208 on both viewports, safely below the mobile pill
-           bottom at Y=138 (54px clearance so the heading doesn't hide
-           behind the fixed header). */
-        padding: 152px 24px 60px;
+        /* !important is required — the mobile .policy-pages .shopify-block
+           rule at line ~120 uses padding: 24px !important, and .rte is
+           ALSO .shopify-block, so without !important the 24px wins and
+           the h1 lands behind the fixed header pill. */
+        padding: 152px 24px 60px !important;
     }
     .policy-pages .rte h1,
     .policy-pages .page__content h1,
