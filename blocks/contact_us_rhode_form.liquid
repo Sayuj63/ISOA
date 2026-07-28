@@ -24,7 +24,11 @@
 
 /* Match the pill rail (same edges as the header) — was 640px hardcoded which
    underfit the pill on desktop and overflowed the viewport on mobile.
-   Formula pulled from --page-width / --page-margin at :root (base.css:233). */
+   Formula pulled from --page-width / --page-margin at :root (base.css:233).
+   padding-top pushes the heading down to sit at the SAME Y as the Terms
+   page's h1 (Terms uses `padding: 152px 48px 100px` on the .rte content
+   box; Contact's section already contributes 5px via section padding-block-
+   start, so wrapper adds 147/83 to hit the same 152/88 total). */
 .ai-contact-form-{{ ai_gen_id }} {
   width: 100%;
   max-width: min(
@@ -32,8 +36,15 @@
     calc(100% - var(--page-margin) * 2)
   );
   margin: 0 auto;
+  padding-top: 147px;
   background: transparent;
   box-sizing: border-box;
+}
+
+@media (max-width: 749px) {
+  .ai-contact-form-{{ ai_gen_id }} {
+    padding-top: 83px;
+  }
 }
 
 .ai-contact-form-container-{{ ai_gen_id }} {
