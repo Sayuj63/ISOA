@@ -199,7 +199,7 @@
         "background_color": "#f1f0ed",
         "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
         "border_color": "#67645e",
-        "margin_top": 5,
+        "margin_top": 12,
         "margin_bottom": 20,
         "margin_horizontal": 2,
         "margin_horizontal_mobile": 1,
