@@ -1,0 +1,883 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "product-information",
+      "blocks": {
+        "media-gallery": {
+          "type": "_product-media-gallery",
+          "static": true,
+          "settings": {
+            "media_presentation": "carousel",
+            "media_columns": "one",
+            "image_gap": 4,
+            "large_first_image": false,
+            "icons_style": "chevron",
+            "slideshow_controls_style": "thumbnails",
+            "slideshow_mobile_controls_style": "hint",
+            "thumbnail_position": "bottom",
+            "thumbnail_width": 56,
+            "thumbnail_radius": 12,
+            "aspect_ratio": "1/1.15",
+            "constrain_to_viewport": false,
+            "media_fit": "cover",
+            "media_radius": 24,
+            "extend_media": false,
+            "zoom": false,
+            "video_loop": false,
+            "hide_variants": true,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "product-details": {
+          "type": "_product-details",
+          "static": true,
+          "settings": {
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "details_position": "flex-start",
+            "gap": 22,
+            "sticky_details_desktop": false,
+            "inherit_color_scheme": false,
+            "color_scheme": "scheme-4",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 24,
+            "padding-block-start": 36,
+            "padding-block-end": 36,
+            "padding-inline-start": 32,
+            "padding-inline-end": 32
+          },
+          "blocks": {
+            "text_title": {
+              "type": "text",
+              "name": "Product title",
+              "settings": {
+                "text": "<h1>{{ closest.product.title }}</h1>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-heading--family)",
+                "font_size": "2.2rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 10,
+                "padding-inline-end": 10
+              },
+              "blocks": {}
+            },
+            "group_subrating": {
+              "type": "group",
+              "name": "Subheading + rating row",
+              "settings": {
+                "content_direction": "row",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-end",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 100,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "link": "",
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "text_subheading": {
+                  "type": "text",
+                  "name": "Subheading",
+                  "settings": {
+                    "text": "<h1>{{ closest.product.metafields.custom.subheading_product_details.value }}</h1>",
+                    "width": "100%",
+                    "max_width": "none",
+                    "alignment": "left",
+                    "type_preset": "h5",
+                    "font": "var(--font-heading--family)",
+                    "font_size": "0.875rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground-heading)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 10,
+                    "padding-inline-end": 10
+                  },
+                  "blocks": {}
+                },
+                "text_rating": {
+                  "type": "text",
+                  "name": "Rating",
+                  "settings": {
+                    "text": "<h2>{{ closest.product.metafields.custom.product_rating.value }}</h2>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "right",
+                    "type_preset": "h6",
+                    "font": "var(--font-heading--family)",
+                    "font_size": "0.875rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 10,
+                    "padding-inline-end": 10
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_subheading",
+                "text_rating"
+              ]
+            },
+            "text_description": {
+              "type": "text",
+              "name": "Product description",
+              "settings": {
+                "text": "{{ closest.product.description }}",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-primary--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 10,
+                "padding-inline-end": 10
+              },
+              "blocks": {}
+            },
+            "price_main": {
+              "type": "price",
+              "name": "Price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": true,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1.25rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 10,
+                "padding-inline-end": 10
+              },
+              "blocks": {}
+            },
+            "buy_buttons_main": {
+              "type": "buy-buttons",
+              "settings": {
+                "stacking": true,
+                "show_pickup_availability": false,
+                "gift_card_form": true,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 20,
+                "padding-inline-end": 20
+              },
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "disabled": true,
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "disabled": true,
+                  "static": true,
+                  "settings": {
+                    "style_class": "button"
+                  },
+                  "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                }
+              },
+              "block_order": []
+            },
+            "accordion_main": {
+              "type": "accordion",
+              "name": "Product accordion",
+              "settings": {
+                "icon": "plus",
+                "dividers": true,
+                "type_preset": "paragraph",
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 10,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 20,
+                "padding-inline-end": 20
+              },
+              "blocks": {
+                "accordion_benefits": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "BENEFITS",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 12
+                  },
+                  "blocks": {
+                    "text_benefits": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<ul><li>100% Hydrocolloid stickers clinically proven to minimize the look of spots</li><li>Absorbs excess oil and draws out impurities</li><li>Leaves spots looking smaller, flatter, and less red</li><li>Creates a protective barrier that shields skin from stressors</li><li>Sweatproof and waterproof — stays on all day</li><li>Comfy, second-skin feel that moves with you</li><li>Suitable for all skin types</li></ul>",
+                        "width": "fit-content",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "paragraph",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_benefits"
+                  ]
+                },
+                "accordion_application": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "APPLICATION",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text_application": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>For best results, apply to a clean, dry spot. No skincare underneath. Press gently to seal. Wear for 6–8 hours before removing. Remove and cleanse, then follow with your skincare. Use as needed.<br/><br/><em>isoua trick: wear it overnight for maximum results.</em></p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_application"
+                  ]
+                },
+                "accordion_ingredients": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "KEY INGREDIENTS",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text_ingredients": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>HYDROCOLLOID — a clinically trusted, gel-like material widely used in advanced wound care to absorb fluids while safeguarding the skin. When applied to spots, it draws out excess oil and impurities while creating a protective barrier that shields against stressors and supports gentle, low-irritation healing.</p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_ingredients"
+                  ]
+                }
+              },
+              "block_order": [
+                "accordion_benefits",
+                "accordion_application",
+                "accordion_ingredients"
+              ]
+            }
+          },
+          "block_order": [
+            "text_title",
+            "group_subrating",
+            "text_description",
+            "price_main",
+            "buy_buttons_main",
+            "accordion_main"
+          ]
+        }
+      },
+      "custom_css": [
+        ".announcement-bar {border-radius: 30px;}",
+        ".h5 {font-size: 12px; text-transform: uppercase; min-height: 0px;}",
+        ".product-information { --rhode-pdp-h: clamp(560px, calc(100vh - var(--header-height, 96px) - 40px), 900px); }"
+      ],
+      "settings": {
+        "content_width": "content-center-aligned",
+        "desktop_media_position": "left",
+        "equal_columns": true,
+        "limit_details_width": false,
+        "gap": 16,
+        "enable_sticky_add_to_cart": true,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 0,
+        "padding-block-end": 24
+      }
+    },
+    "spot_ugc_AbCd": {
+      "type": "ss-slider-5",
+      "blocks": {
+        "ugc_1": {
+          "type": "slide",
+          "settings": {
+            "image_url": "https://www.rhodeskin.com/cdn/shop/files/spotwear-carousel-1_36d1a278-3a24-4a24-ae30-4c2efcdd2817_medium.jpg?v=1775416734",
+            "text": "",
+            "url": ""
+          }
+        },
+        "ugc_2": {
+          "type": "slide",
+          "settings": {
+            "image_url": "https://www.rhodeskin.com/cdn/shop/files/spotwear-carousel-2_dab78fe9-5ca9-45a3-b458-4862d9ade80e_medium.jpg?v=1775416734",
+            "text": "",
+            "url": ""
+          }
+        },
+        "ugc_3": {
+          "type": "slide",
+          "settings": {
+            "image_url": "https://www.rhodeskin.com/cdn/shop/files/spotwear-carousel-3_medium.jpg?v=1775023670",
+            "text": "",
+            "url": ""
+          }
+        },
+        "ugc_4": {
+          "type": "slide",
+          "settings": {
+            "image_url": "https://www.rhodeskin.com/cdn/shop/files/spotwear-carousel-4_medium.jpg?v=1775023670",
+            "text": "",
+            "url": ""
+          }
+        },
+        "ugc_5": {
+          "type": "slide",
+          "settings": {
+            "image_url": "https://www.rhodeskin.com/cdn/shop/files/spotwear-carousel-5_medium.jpg?v=1775023669",
+            "text": "",
+            "url": ""
+          }
+        },
+        "ugc_6": {
+          "type": "slide",
+          "settings": {
+            "image_url": "https://www.rhodeskin.com/cdn/shop/files/spotwear-carousel-6_a3865afa-3daa-4dfe-942e-4466c075e3d1_medium.jpg?v=1775416734",
+            "text": "",
+            "url": ""
+          }
+        },
+        "ugc_7": {
+          "type": "slide",
+          "settings": {
+            "image_url": "https://www.rhodeskin.com/cdn/shop/files/spotwear-carousel-2-1_medium.jpg?v=1775416734",
+            "text": "",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "ugc_1",
+        "ugc_2",
+        "ugc_3",
+        "ugc_4",
+        "ugc_5",
+        "ugc_6",
+        "ugc_7"
+      ],
+      "name": "Spotted On You",
+      "settings": {
+        "heading": "<h2>spotted on you</h2>",
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 24,
+        "heading_size_mobile": 14,
+        "heading_height": 130,
+        "heading_align": "left",
+        "heading_align_mobile": "left",
+        "button": "",
+        "button_url": "",
+        "button_custom": false,
+        "button_font": "josefin_sans_n4",
+        "button_size": 14,
+        "button_size_mobile": 14,
+        "button_height": 100,
+        "button_padding_vertical": 16,
+        "button_padding_vertical_mobile": 16,
+        "button_padding_horizontal": 24,
+        "button_padding_horizontal_mobile": 24,
+        "button_radius": 100,
+        "button_border_thickness": 1,
+        "button_style": "outline",
+        "slider_view": 3.2,
+        "slider_view_mobile": 1.5,
+        "slider_gap": 16,
+        "slider_gap_mobile": 16,
+        "slider_mt": 24,
+        "slider_mt_mobile": 20,
+        "image_radius": 20,
+        "image_border_thickness": 0,
+        "image_ratio": "square",
+        "image_ratio_mobile": "square",
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 0,
+        "text_size_mobile": 0,
+        "text_height": 130,
+        "text_mt": 0,
+        "text_padding_horizontal": 0,
+        "text_padding_horizontal_mobile": 0,
+        "text_align": "left",
+        "text_align_mobile": "left",
+        "navigation_mt": 40,
+        "navigation_mt_mobile": 24,
+        "navigation_pt": 20,
+        "navigation_pt_mobile": 12,
+        "navigation_border_thickness": 1,
+        "arrow_size": 24,
+        "arrow_size_mobile": 24,
+        "button_color": "#67645e",
+        "button_hover_color": "#ffffff",
+        "button_bg_color": "",
+        "button_bg_hover_color": "#67645e",
+        "button_border_color": "#67645e",
+        "button_border_hover_color": "#67645e",
+        "image_border_color": "#e0ddd8",
+        "text_color": "#121212",
+        "navigation_border_color": "#e0ddd8",
+        "arrow_color": "#67645e",
+        "arrow_hover_color": "#67645e",
+        "heading_color": "#121212",
+        "background_color": "#f1f0ed",
+        "background_gradient": "",
+        "border_color": "#e0ddd8",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 3,
+        "margin_horizontal_mobile": 2,
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "padding_horizontal": 3,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": false,
+        "content_width": 140,
+        "border_thickness": 0,
+        "section_radius": 16,
+        "lazy": true
+      }
+    },
+    "spot_mattr_PdQr": {
+      "type": "rhode-pdp-media-attributes",
+      "blocks": {
+        "attr_1": {
+          "type": "attribute",
+          "settings": {
+            "category": "GOOD FOR",
+            "value": "All skin types"
+          }
+        },
+        "attr_2": {
+          "type": "attribute",
+          "settings": {
+            "category": "FEELS LIKE",
+            "value": "A comfy, second-skin feel that stays on all day"
+          }
+        },
+        "attr_3": {
+          "type": "attribute",
+          "settings": {
+            "category": "SMELLS LIKE",
+            "value": "Fragrance-Free"
+          }
+        },
+        "attr_4": {
+          "type": "attribute",
+          "settings": {
+            "category": "FYI",
+            "value": "Sweatproof • Waterproof\nCruelty-Free • Vegan • Gluten-Free\nDermatologist-Tested • Non-Comedogenic"
+          }
+        }
+      },
+      "block_order": [
+        "attr_1",
+        "attr_2",
+        "attr_3",
+        "attr_4"
+      ],
+      "settings": {
+        "heading": "Clinically-proven PATCHES for SPOT CARE on the go.",
+        "image_url": "https://www.rhodeskin.com/cdn/shop/files/spotwear-carousel-3_medium.jpg?v=1775023670",
+        "bg_color": "#f1f0ed",
+        "border_color": "#e0ddd8",
+        "heading_color": "#67645e",
+        "category_color": "#67645e",
+        "value_color": "#67645e",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "spot_words_StUv": {
+      "type": "rhode-pdp-animated-words",
+      "settings": {
+        "label_text": "LEAVES SPOTS LOOKING",
+        "word_1": "smaller",
+        "word_2": "flatter",
+        "word_3": "less red",
+        "image_1_url": "https://www.rhodeskin.com/cdn/shop/files/spotwear-carousel-1_36d1a278-3a24-4a24-ae30-4c2efcdd2817_medium.jpg?v=1775416734",
+        "image_2_url": "https://www.rhodeskin.com/cdn/shop/files/spotwear-carousel-2_dab78fe9-5ca9-45a3-b458-4862d9ade80e_medium.jpg?v=1775416734",
+        "image_3_url": "https://www.rhodeskin.com/cdn/shop/files/spotwear-carousel-6_a3865afa-3daa-4dfe-942e-4466c075e3d1_medium.jpg?v=1775416734",
+        "bg_color": "#f1f0ed",
+        "word_color_inactive": "#8f8a85",
+        "word_color_active": "#e8b4c8",
+        "label_color": "#67645e"
+      }
+    },
+    "spot_ingreds_IjKl": {
+      "type": "rhode-pdp-ingredients",
+      "blocks": {
+        "ingred_1": {
+          "type": "ingredient",
+          "settings": {
+            "name": "hydrocolloid"
+          }
+        }
+      },
+      "block_order": [
+        "ingred_1"
+      ],
+      "settings": {
+        "label": "what's inside",
+        "image_url": "https://www.rhodeskin.com/cdn/shop/files/spotwear-ingredients_medium.jpg?v=1775016103",
+        "right_bg": "#f1f0ed",
+        "active_color": "#67645e",
+        "inactive_color": "#c4c4c4",
+        "label_color": "#67645e",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "spot_claims_MnOp": {
+      "type": "rhode-pdp-claims",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "100%",
+            "description": "Agreed it's comfortable to wear and adheres to skin"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "100%",
+            "description": "Agreed it absorbs oil throughout wear"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "94%",
+            "description": "Agreed it visibly minimizes the appearance of spots"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "number": "90%",
+            "description": "Agreed spots looked smaller and flatter after wear"
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4"
+      ],
+      "settings": {
+        "section_label": "after 8 hours",
+        "period_label": "AFTER 8 HOURS",
+        "image_url": "https://www.rhodeskin.com/cdn/shop/files/spotwear-claims_medium.jpg?v=1775016103",
+        "consumer_disclaimer": "*Based on a 31-subject consumer perception study after 8 hours of wear.",
+        "clinical_label": "clinical results",
+        "clinical_text": "Clinically proven to visibly minimize the look of spots. Independently certified sweatproof and waterproof. *Based on a 31-subject clinical study conducted by an independent testing laboratory.",
+        "bg_color": "#ffffff",
+        "border_color": "#e0ddd8",
+        "stat_color": "#67645e",
+        "desc_color": "#67645e",
+        "label_color": "#67645e",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "spot_routine_QrSt": {
+      "type": "rhode-pdp-selector",
+      "blocks": {
+        "prod_1": {
+          "type": "product",
+          "settings": {
+            "swatch_url": "https://www.rhodeskin.com/cdn/shop/files/spotwear-hb-routine-swatch_754c0fce-c849-496e-83a9-10b575ee1ea3_medium.png?v=1775086072",
+            "name": "Spotwear Daisy",
+            "description": "Create a comfy, protective bubble for spots on the go.",
+            "label": "SPOT"
+          }
+        },
+        "prod_2": {
+          "type": "product",
+          "settings": {
+            "swatch_url": "",
+            "name": "Peptide Eye Prep",
+            "description": "Depuff and brighten the under-eye area in seconds.",
+            "label": "EYE"
+          }
+        },
+        "prod_3": {
+          "type": "product",
+          "settings": {
+            "swatch_url": "",
+            "name": "Glazing Mist",
+            "description": "Mist throughout the day for an instant glow refresh.",
+            "label": "MIST"
+          }
+        },
+        "prod_4": {
+          "type": "product",
+          "settings": {
+            "swatch_url": "",
+            "name": "Peptide Lip Treatment",
+            "description": "Swipe it on anytime for soft, nourished lips.",
+            "label": "LIP"
+          }
+        },
+        "prod_5": {
+          "type": "product",
+          "settings": {
+            "swatch_url": "",
+            "name": "Lip Case",
+            "description": "Carry your phone and your lip treatment in one.",
+            "label": "CASE"
+          }
+        }
+      },
+      "block_order": [
+        "prod_1",
+        "prod_2",
+        "prod_3",
+        "prod_4",
+        "prod_5"
+      ],
+      "settings": {
+        "editorial_text": "Essentials to throw in your purse or pocket.",
+        "hero_image_url": "https://www.rhodeskin.com/cdn/shop/files/spotwear-hb-routine_medium.jpg?v=1775013190",
+        "left_bg": "#f1f0ed",
+        "label_color": "#67645e",
+        "name_color": "#121212",
+        "desc_color": "#67645e",
+        "active_circle_color": "#67645e",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "spot_pkg_UvWx": {
+      "type": "rhode-pdp-sustainability",
+      "blocks": {
+        "annot_1": {
+          "type": "annotation",
+          "settings": {
+            "name": "Spot Stickers",
+            "desc": "Made of 100% Hydrocolloid"
+          }
+        },
+        "annot_2": {
+          "type": "annotation",
+          "settings": {
+            "name": "Pouch",
+            "desc": "Aluminum — keeps stickers clean and flat"
+          }
+        },
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "text": "Gather at least 3 empty products from any brand."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "text": "Contact us with subject line 'isoua recycling' — we'll send you a prepaid label."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "text": "Drop off at your closest mailbox or post office. We'll handle the rest."
+          }
+        }
+      },
+      "block_order": [
+        "annot_1",
+        "annot_2",
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
+      "settings": {
+        "heading_a": "ready-to-wear skincare.",
+        "body_a": "Learn more about the materials that make up Spotwear Daisy.",
+        "diagram_image_url": "https://www.rhodeskin.com/cdn/shop/files/spotwear-recycling-desktop_e43d54be-d301-4f57-9ae9-7d537bc6c21f_medium.jpg?v=1775246917",
+        "heading_b": "how to recycle",
+        "body_b": "We'll recycle your empties for you. Here's how it works:",
+        "product_image_url": "https://www.rhodeskin.com/cdn/shop/files/spotwear-recycling-desktop_e43d54be-d301-4f57-9ae9-7d537bc6c21f_medium.jpg?v=1775246917",
+        "bg_color": "#f1f0ed",
+        "tab_bg_color": "#67645e",
+        "heading_color": "#67645e",
+        "text_color": "#67645e",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main",
+    "spot_ugc_AbCd",
+    "spot_mattr_PdQr",
+    "spot_words_StUv",
+    "spot_ingreds_IjKl",
+    "spot_claims_MnOp",
+    "spot_routine_QrSt",
+    "spot_pkg_UvWx"
+  ]
+}

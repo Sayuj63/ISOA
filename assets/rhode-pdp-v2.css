@@ -1,0 +1,635 @@
+/* ===================================================
+   Rhode PDP v2 — loaded only on product.rhode-pdp-v2
+   =================================================== */
+
+/* ── 1. Height variable ── */
+.product-information {
+  --rhode-pdp-h: clamp(600px, calc(100vh - var(--ss-header-bar-height, var(--header-height, 80px))), 920px);
+}
+
+@media screen and (min-width: 750px) {
+  .product-information__grid--half {
+    min-height: var(--rhode-pdp-h);
+    align-items: stretch;
+  }
+
+  /* ── Image column: fixed height, clip overflow, 10px radius ── */
+  .product-information__grid--half .product-information__media {
+    height: var(--rhode-pdp-h) !important;
+    position: relative !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+    /*
+     * clip-path is more reliable than overflow:hidden alone when child elements
+     * use will-change/transform (hardware acceleration can escape overflow clips).
+     */
+    clip-path: inset(0 round 10px) !important;
+    -webkit-clip-path: inset(0 round 10px) !important;
+  }
+
+  /*
+   * Custom elements (media-gallery, slideshow-component, etc.) are display:inline by default.
+   * display:inline ignores height — must set display:block for height:100% to work.
+   */
+  .product-information__grid--half .product-information__media media-gallery {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .product-information__grid--half .product-information__media slideshow-component {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    position: relative !important;
+  }
+  .product-information__grid--half .product-information__media slideshow-container {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    /* Prevent user drag/swipe from changing slides — only autoplay + thumbnail clicks */
+    pointer-events: none !important;
+    touch-action: none !important;
+  }
+  .product-information__grid--half .product-information__media slideshow-slides {
+    display: block !important;
+    height: 100% !important;
+  }
+  .product-information__grid--half .product-information__media slideshow-slide {
+    display: block !important;
+    height: 100% !important;
+  }
+  .product-information__grid--half .product-information__media .product-media-container {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  .product-information__grid--half .product-information__media .product-media-container img,
+  .product-information__grid--half .product-information__media .product-media-container video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    max-height: none !important;
+    aspect-ratio: auto !important;
+  }
+
+  /* ── Hide slide arrows (prev/next) entirely ── */
+  .product-information__grid--half .product-information__media slideshow-arrows {
+    display: none !important;
+  }
+  .product-information__grid--half .product-information__media .slideshow-controls__arrows {
+    display: none !important;
+  }
+
+  /*
+   * Thumbnails render in normal flow AFTER slideshow-container.
+   * Pull out of flow with position:absolute, placed at bottom-LEFT corner.
+   * slideshow-component is the nearest positioned ancestor (position: relative).
+   */
+  .product-information__grid--half .product-information__media slideshow-controls {
+    position: absolute !important;
+    left: 14px !important;
+    bottom: 16px !important;
+    top: auto !important;
+    right: auto !important;
+    z-index: 4 !important;
+    width: auto !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: flex-end !important;
+    min-height: 0 !important;
+  }
+
+  /* scroll-hint is a custom element (display:inline by default) — must set block */
+  .product-information__grid--half .product-information__media slideshow-controls scroll-hint {
+    display: block !important;
+    overflow: visible !important;
+    width: auto !important;
+    max-height: none !important;
+  }
+
+  /* Thumbnail scroll container: no overflow clipping */
+  .product-information__grid--half .product-information__media slideshow-controls .slideshow-controls__thumbnails-container {
+    overflow: visible !important;
+    max-height: none !important;
+    width: auto !important;
+    display: block !important;
+  }
+
+  /* Thumbnail list: vertical column */
+  .product-information__grid--half .product-information__media slideshow-controls .slideshow-controls__thumbnails {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+  }
+
+  /* Individual thumbnail: small rectangle, 22px radius */
+  .product-information__grid--half .product-information__media slideshow-controls .slideshow-controls__thumbnail {
+    width: 68px !important;
+    height: 50px !important;
+    flex: 0 0 50px !important;
+    aspect-ratio: auto !important;
+    padding: 0 !important;
+    border-radius: 22px !important;
+    overflow: hidden !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    position: relative !important;
+    cursor: pointer !important;
+    background: transparent !important;
+    min-height: 0 !important;
+    min-width: 0 !important;
+  }
+
+  /* Thumbnail image */
+  .product-information__grid--half .product-information__media slideshow-controls .slideshow-controls__thumbnail img,
+  .product-information__grid--half .product-information__media slideshow-controls .slideshow-controls__thumbnail video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 0 !important;
+    display: block !important;
+  }
+
+  /* Grey overlay on inactive thumbnails via ::after */
+  .product-information__grid--half .product-information__media slideshow-controls .slideshow-controls__thumbnail::after {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background: rgba(130, 125, 120, 0.52) !important;
+    transition: background 0.25s ease !important;
+    pointer-events: none !important;
+  }
+
+  /* Active thumbnail: remove grey overlay */
+  .product-information__grid--half .product-information__media slideshow-controls .slideshow-controls__thumbnail[aria-selected="true"]::after {
+    background: rgba(130, 125, 120, 0) !important;
+  }
+  .product-information__grid--half .product-information__media slideshow-controls .slideshow-controls__thumbnail[aria-selected="true"] {
+    outline: none !important;
+    border: none !important;
+    transform: none !important;
+  }
+
+  /* ── Details column: match image height, scrollable ── */
+  .product-information__grid--half .product-details {
+    height: var(--rhode-pdp-h) !important;
+    max-height: var(--rhode-pdp-h) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
+    border-radius: 10px !important;
+  }
+  .product-information__grid--half .product-details > .group-block {
+    align-self: stretch;
+  }
+}
+
+/* Mobile: thumbnail strip bottom-left, smaller */
+@media screen and (max-width: 749px) {
+  .product-information__grid--half .product-information__media slideshow-controls {
+    position: absolute !important;
+    left: 10px !important;
+    bottom: 12px !important;
+    right: auto !important;
+    top: auto !important;
+    z-index: 4 !important;
+    background: transparent !important;
+    padding: 0 !important;
+  }
+  .product-information__grid--half .product-information__media slideshow-controls .slideshow-controls__thumbnail {
+    width: 52px !important;
+    height: 38px !important;
+    border-radius: 16px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-information__grid--half .product-information__media slideshow-controls .slideshow-controls__thumbnail::after {
+    transition: none !important;
+  }
+}
+
+/* ── 2. Announcement bar corner radius (Rhode aesthetic) ── */
+.announcement-bar { border-radius: 30px; }
+.h5 { font-size: 12px; text-transform: uppercase; min-height: 0; }
+
+/* ── 3. Scroll-padding so sticky header doesn't cover anchors ── */
+html {
+  scroll-padding-top: calc(var(--ss-header-bar-height, 80px) + 16px);
+}
+
+/* =====================================================================
+   ISOA — Rhode PDP v2: hero fixes (thumbnails inside image, equal
+   heights, internal scroll on info, Zen Dots title, branded CTA)
+   ===================================================================== */
+
+/* Zen Dots for the H1 title on this template only */
+@media screen and (min-width: 750px) {
+  main#MainContent .product-information h1,
+  main#MainContent .product-information .product-title,
+  main#MainContent .product-information [class*="text-block"] h1 {
+    font-family: 'Zen Dots', 'Josefin Sans', 'Josefin_Sans_n4', sans-serif !important;
+    font-weight: 400 !important;
+    text-transform: lowercase !important;
+    letter-spacing: -0.04em !important;
+    line-height: 1.05 !important;
+    font-style: normal !important;
+  }
+}
+
+/* ─── Hero card layout — equal heights + internal scroll on details ── */
+@media screen and (min-width: 750px) {
+  /* Force the outer grid to a fixed height (image aspect drives it) */
+  .product-information__grid--half {
+    min-height: var(--rhode-pdp-h);
+    max-height: var(--rhode-pdp-h);
+    align-items: stretch;
+  }
+
+  /* Image column: full height, positioned to host absolute thumbnails */
+  .product-information__grid--half .product-information__media {
+    position: relative !important;
+    height: var(--rhode-pdp-h) !important;
+    min-height: var(--rhode-pdp-h) !important;
+    max-height: var(--rhode-pdp-h) !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    clip-path: inset(0 round 12px) !important;
+    -webkit-clip-path: inset(0 round 12px) !important;
+  }
+
+  /* Details column: match height + internal scroll ─── */
+  .product-information__grid--half .product-details,
+  .product-information__grid--half [class*="product-details"] {
+    height: var(--rhode-pdp-h) !important;
+    max-height: var(--rhode-pdp-h) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding-right: 8px !important;
+    scrollbar-width: thin;
+    scrollbar-color: #c4c4c4 transparent;
+    align-self: stretch;
+  }
+
+  /* Slim custom scrollbar */
+  .product-information__grid--half .product-details::-webkit-scrollbar { width: 6px; }
+  .product-information__grid--half .product-details::-webkit-scrollbar-track { background: transparent; }
+  .product-information__grid--half .product-details::-webkit-scrollbar-thumb {
+    background: #c4c4c4;
+    border-radius: 3px;
+  }
+}
+
+/* ─── Force product-media wrapper + image to fill FULL container ─── */
+@media screen and (min-width: 750px) {
+  .product-information__grid--half .product-information__media .product-media,
+  .product-information__grid--half .product-information__media .product-media-container,
+  .product-information__grid--half .product-information__media slideshow-slide,
+  .product-information__grid--half .product-information__media slideshow-slides {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+  }
+  .product-information__grid--half .product-information__media .product-media__image,
+  .product-information__grid--half .product-information__media .product-media img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    aspect-ratio: auto !important;
+    max-height: none !important;
+  }
+}
+
+/* ─── Thumbnails: position ABSOLUTE at bottom-left inside image ─── */
+@media screen and (min-width: 750px) {
+  .product-information__grid--half .product-information__media slideshow-controls,
+  .product-information__grid--half .product-information__media .slideshow-controls,
+  .product-information__grid--half .product-information__media [class*="slideshow-controls"]:not([class*="__thumbnail"]) {
+    position: absolute !important;
+    top: auto !important;
+    bottom: 16px !important;
+    left: 16px !important;
+    right: auto !important;
+    inset: auto auto 16px 16px !important;
+    z-index: 5 !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 64px !important;
+    max-height: 280px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+  }
+
+  .product-information__grid--half .product-information__media .slideshow-controls__thumbnails-container,
+  .product-information__grid--half .product-information__media scroll-hint {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    max-height: 260px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+
+  .product-information__grid--half .product-information__media .slideshow-controls__thumbnails {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    padding: 0 !important;
+  }
+
+  .product-information__grid--half .product-information__media .slideshow-controls__thumbnail {
+    width: 56px !important;
+    height: 56px !important;
+    min-width: 56px !important;
+    max-width: 56px !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+    border: 2px solid rgba(255,255,255,0.65) !important;
+    opacity: 0.75;
+    transition: opacity 0.25s ease, border-color 0.25s ease;
+    padding: 0 !important;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    cursor: pointer;
+  }
+  .product-information__grid--half .product-information__media .slideshow-controls__thumbnail:hover { opacity: 1; }
+  .product-information__grid--half .product-information__media .slideshow-controls__thumbnail[aria-selected="true"],
+  .product-information__grid--half .product-information__media .slideshow-controls__thumbnail.is-selected {
+    border-color: #ffffff !important;
+    opacity: 1;
+  }
+  .product-information__grid--half .product-information__media .slideshow-controls__thumbnail img,
+  .product-information__grid--half .product-information__media .slideshow-controls__thumbnail picture {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  /* Hide arrows if any */
+  .product-information__grid--half .product-information__media slideshow-arrows,
+  .product-information__grid--half .product-information__media .slideshow-controls__arrows {
+    display: none !important;
+  }
+}
+
+/* ─── BUY IT NOW button — branded (dark brown pill).
+   Shopify uses .shopify-payment-button__button--unbranded for the dynamic
+   checkout button, plus regular submit buttons for classic ATC. Cover both. */
+main#MainContent .product-information .shopify-payment-button__button,
+main#MainContent .product-information .shopify-payment-button__button--unbranded,
+main#MainContent .product-information button[type="submit"]:not(.sticky-add-to-cart *):not(.shopify-payment-button__more-options):not([class*="paypal"]):not([class*="apple"]):not([class*="shop-pay"]),
+main#MainContent .product-information .buy-buttons button[type="submit"],
+main#MainContent .product-information .product-form__submit,
+main#MainContent .product-information [class*="add-to-cart"]:not(.sticky-add-to-cart *) {
+  background-color: #67645e !important;
+  color: #ffffff !important;
+  border: 1px solid #67645e !important;
+  border-radius: 999px !important;
+  padding: 18px 32px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  font-size: 13px !important;
+  transition: background-color 0.25s ease-out, color 0.25s ease-out !important;
+  box-shadow: none !important;
+  min-height: 56px !important;
+  width: 100% !important;
+}
+main#MainContent .product-information .shopify-payment-button__button:hover,
+main#MainContent .product-information .shopify-payment-button__button--unbranded:hover,
+main#MainContent .product-information button[type="submit"]:not(.sticky-add-to-cart *):hover {
+  background-color: #121212 !important;
+  color: #ffffff !important;
+  border-color: #121212 !important;
+}
+/* Also target the more-options link if it appears */
+main#MainContent .product-information .shopify-payment-button__more-options {
+  color: #67645e !important;
+  text-decoration: underline !important;
+  font-size: 12px !important;
+  margin-top: 8px !important;
+}
+
+/* ─── Accordion styling ─── */
+main#MainContent .product-information details summary,
+main#MainContent .product-information .accordion summary,
+main#MainContent .product-information .accordion__row summary {
+  padding: 18px 0 !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  color: #67645e !important;
+  border-top: 1px solid #c4c4c4 !important;
+}
+
+/* ─── Info column typography ─── */
+main#MainContent .product-information .product-details {
+  color: #67645e;
+}
+main#MainContent .product-information .product-details p,
+main#MainContent .product-information .product-details .rte {
+  color: #67645e;
+  font-size: 15px;
+  line-height: 1.65;
+}
+main#MainContent .product-information .product-details [class*="price"] {
+  color: #67645e !important;
+  font-weight: 500 !important;
+}
+
+/* ─── Mobile: no fixed-height, no scroll ─── */
+@media (max-width: 749px) {
+  .product-information__grid--half {
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+  .product-information__grid--half .product-information__media,
+  .product-information__grid--half .product-details {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding-right: 0 !important;
+  }
+  .product-information__grid--half .product-information__media slideshow-controls,
+  .product-information__grid--half .product-information__media .slideshow-controls {
+    position: static !important;
+  }
+}
+
+/* ==========================================================================
+   4. PDP GLOBAL ALIGNMENT — match the SS-header-1/homepage rail.
+   The page keeps a white outer shell and every inner panel lands on the same
+   centered width: 1200px at 1280vw, 1360px at 1440vw, with 40px gutters.
+   ========================================================================== */
+main#MainContent {
+  --rhode-pdp-gutter: var(--page-margin, 40px);
+  --rhode-pdp-rail: min(
+    calc(var(--page-width, 1440px) - var(--rhode-pdp-gutter) * 2),
+    calc(100% - var(--rhode-pdp-gutter) * 2)
+  );
+  background: #ffffff;
+}
+
+@media (min-width: 750px) {
+  main#MainContent > .shopify-section {
+    background: #ffffff;
+  }
+
+  main#MainContent > .shopify-section > .product-information,
+  main#MainContent [class*="__ss_slider_5_"][class*="-settings"],
+  main#MainContent [class*="__ss_featured_products_4_"][class*="-settings"],
+  main#MainContent [class*="__ss_image_with_text_"][class*="-settings"],
+  main#MainContent [class*="__ss_featured_collection_13_"][class*="-settings"],
+  main#MainContent [class*="__section_store_featured_collection_6_"][class*="-settings"],
+  main#MainContent [class*="__ss_image_split_row_"] > [class*="-settings"],
+  main#MainContent .section--page-width,
+  main#MainContent .section-background,
+  main#MainContent .rhode-tagline-{{ sid }},
+  main#MainContent .rhode-attrs-{{ sid }},
+  main#MainContent .rhode-results-{{ sid }} {
+    width: var(--rhode-pdp-rail) !important;
+    max-width: var(--rhode-pdp-rail) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+  }
+
+  main#MainContent [class*="__ss_slider_5_"][class*="-settings"],
+  main#MainContent [class*="__ss_image_with_text_"][class*="-settings"],
+  main#MainContent [class*="__section_store_featured_collection_6_"][class*="-settings"] {
+    left: auto !important;
+    right: auto !important;
+  }
+
+  main#MainContent [class*="__ss_targetting_animation_"],
+  main#MainContent [class*="packaging-"],
+  main#MainContent [class*="ss-whats-inside-"] {
+    width: var(--rhode-pdp-rail) !important;
+    max-width: var(--rhode-pdp-rail) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    border-radius: 10px;
+    overflow: hidden;
+    box-sizing: border-box !important;
+  }
+
+  main#MainContent > .shopify-section > .product-information {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  main#MainContent .product-information__grid--half {
+    gap: 12px !important;
+  }
+
+  main#MainContent .product-information__grid--half .product-information__media,
+  main#MainContent .product-information__grid--half .product-details,
+  main#MainContent [class*="__ss_image_with_text_"][class*="-settings"],
+  main#MainContent [class*="__ss_image_split_row_"] > [class*="-settings"],
+  main#MainContent .section-background,
+  main#MainContent [class*="packaging-"],
+  main#MainContent [class*="ss-whats-inside-"] {
+    border-radius: 10px !important;
+  }
+}
+
+@media (max-width: 749px) {
+  main#MainContent {
+    --rhode-pdp-gutter: var(--page-margin, 16px);
+    --rhode-pdp-rail: calc(100% - var(--rhode-pdp-gutter) * 2);
+  }
+}
+
+/* ==========================================================================
+   5. Zen Dots (loaded from section-level <link>). This is a fallback binding
+   in case any heading class needs to force the family.
+   ========================================================================== */
+.rh-title, .rh-eyebrow-title,
+.js-product-main-details h1,
+main#MainContent h1.Product-main-card-title {
+  font-family: 'Zen Dots', 'Josefin Sans', josefin_sans_n4, sans-serif;
+}
+
+/* ==========================================================================
+   6. Rhode signature CTA — clip-path fill on hover (0.5s cubic-bezier)
+   ========================================================================== */
+.rhode-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border: 1px solid var(--rhode-cta-border, #67645e);
+  border-radius: 999px;
+  background: var(--rhode-cta-bg, #67645e);
+  color: var(--rhode-cta-text, #ffffff);
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  overflow: hidden;
+  transition: color 0.25s ease-out;
+}
+.rhode-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--rhode-cta-hover-bg, #121212);
+  clip-path: inset(0 100% 0 0);
+  -webkit-clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+  z-index: 0;
+}
+.rhode-cta > * { position: relative; z-index: 1; }
+.rhode-cta:hover { color: var(--rhode-cta-hover-text, #ffffff); }
+.rhode-cta:hover::before { clip-path: inset(0); -webkit-clip-path: inset(0); }
+
+/* ==========================================================================
+   7. Custom cursor (frosted 120x120 disc)
+   ========================================================================== */
+.rh-cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transform: translate(-60px, -60px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #67645e;
+  font-family: 'Zen Dots', 'Josefin Sans', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: lowercase;
+  transition: opacity 0.5s, visibility 0.5s, transform 0.5s;
+}
+.rh-cursor.is-visible { opacity: 1; visibility: visible; }
+@media (max-width: 749px) { .rh-cursor { display: none; } }

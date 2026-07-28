@@ -1,0 +1,81 @@
+
+
+/* Client ask 2026-06-02: policy/default page should be SEAMLESS with the header —
+   no top padding, no rounded top corners. The header pill bottom edge sits flush
+   against the policy page's gray content area. Bottom padding kept for readability
+   at the bottom of the policy content. -vamshi */
+.policy-pages{
+    display: flex !important;
+    padding: 0 38px 30px !important;
+    border-radius: 0 !important;
+}
+
+/* Kill any inherited rounded corners on the section-background sibling that the
+   .policy-pages .section sits over. The section-background is what visually
+   creates the gray rounded rectangle the client wants flat at the top. */
+/* Also constrain the bg width to the SAME pill formula the header uses so the
+   gray bg's left/right edges line up exactly with the header pill — was 1-3px
+   wider because base.css:413-418 sets `inset: 0` (full viewport width). Now we
+   override left/right + width with the header's `min(page-width - 2*page-margin,
+   100% - 2*page-margin)` formula and center via margin auto. -vamshi */
+.shopify-section:has(.policy-pages) .section-background {
+    border-radius: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: min(
+      calc(var(--page-width) - var(--page-margin) * 2),
+      calc(100% - var(--page-margin) * 2)
+    ) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.policy-pages .shopify-block{
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100%;
+}
+.custom-section-content .shopify-block{
+    width:100% !important;
+    max-width:100% !important;
+}
+.custom-section-content .shopify-block form{
+    max-width:100% !important;
+    width:100% !important;
+    border-radius:14px;
+    background-color: #f1f0ed;
+    padding-top:15px;
+
+}
+.custom-section-content .layout-panel-flex{
+    padding-top:0 !important;
+}
+.page-width-content .layout-panel-flex{
+    padding-bottom:0 !important;
+    padding-top:0 !important;
+}
+.custom-section-content .shopify-block form>div{
+    max-width:50% !important;
+}
+
+
+
+@media screen and (max-width: 950px) {
+
+.policy-pages{
+    padding: 0 16px 16px !important;
+    border-radius: 0 !important;
+}
+.policy-pages .shopify-block{
+    padding:24px !important;
+}
+.text-block p, .text-block.p>*{
+            margin: 10px !important;
+        margin-block: 7px !important;
+        max-width: 100%;
+        margin-inline: 0 !important;
+    }
+    .custom-section-content .shopify-block form>div{
+    max-width: 100% !important;
+}
+}

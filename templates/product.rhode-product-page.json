@@ -1,0 +1,2068 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "product-information",
+      "blocks": {
+        "media-gallery": {
+          "type": "_product-media-gallery",
+          "static": true,
+          "settings": {
+            "media_presentation": "carousel",
+            "media_columns": "two",
+            "image_gap": 4,
+            "large_first_image": false,
+            "icons_style": "chevron",
+            "slideshow_controls_style": "thumbnails",
+            "slideshow_mobile_controls_style": "hint",
+            "thumbnail_position": "bottom",
+            "thumbnail_width": 44,
+            "thumbnail_radius": 10,
+            "aspect_ratio": "adapt",
+            "constrain_to_viewport": true,
+            "media_fit": "cover",
+            "media_radius": 10,
+            "extend_media": false,
+            "zoom": false,
+            "video_loop": false,
+            "hide_variants": true,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "product-details": {
+          "type": "_product-details",
+          "static": true,
+          "settings": {
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "details_position": "flex-start",
+            "gap": 22,
+            "sticky_details_desktop": false,
+            "inherit_color_scheme": false,
+            "color_scheme": "scheme-4",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 10,
+            "padding-block-start": 36,
+            "padding-block-end": 36,
+            "padding-inline-start": 32,
+            "padding-inline-end": 32
+          },
+          "blocks": {
+            "text_6bXyHJ": {
+              "type": "text",
+              "name": "Product title",
+              "settings": {
+                "text": "<h1>{{ closest.product.title }}</h1>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-heading--family)",
+                "font_size": "2.5rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 10,
+                "padding-inline-end": 10
+              },
+              "blocks": {}
+            },
+            "group_tGCQbn": {
+              "type": "group",
+              "name": "t:names.group",
+              "settings": {
+                "content_direction": "row",
+                "vertical_on_mobile": false,
+                "horizontal_alignment": "flex-end",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 100,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "link": "",
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "text_UCV8Qn": {
+                  "type": "text",
+                  "name": "t:names.text",
+                  "settings": {
+                    "text": "<h1>{{ closest.product.metafields.custom.subheading_product_details.value }}</h1>",
+                    "width": "100%",
+                    "max_width": "none",
+                    "alignment": "left",
+                    "type_preset": "h5",
+                    "font": "var(--font-heading--family)",
+                    "font_size": "0.875rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground-heading)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 10,
+                    "padding-inline-end": 10
+                  },
+                  "blocks": {}
+                },
+                "text_A96qDa": {
+                  "type": "text",
+                  "name": "t:names.text",
+                  "settings": {
+                    "text": "<h2>{{ closest.product.metafields.custom.product_rating.value }}</h2>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "right",
+                    "type_preset": "h6",
+                    "font": "var(--font-heading--family)",
+                    "font_size": "0.875rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 10,
+                    "padding-inline-end": 10
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_UCV8Qn",
+                "text_A96qDa"
+              ]
+            },
+            "text_aEtTtq": {
+              "type": "text",
+              "name": "Product description",
+              "settings": {
+                "text": "{{ closest.product.description }}",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-primary--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 10,
+                "padding-inline-end": 10
+              },
+              "blocks": {}
+            },
+            "price_pe7BCR": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": true,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1.25rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 10,
+                "padding-inline-end": 10
+              },
+              "blocks": {}
+            },
+            "buy_buttons_eYQEYi": {
+              "type": "buy-buttons",
+              "settings": {
+                "stacking": true,
+                "show_pickup_availability": false,
+                "gift_card_form": true,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 20,
+                "padding-inline-end": 20
+              },
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "disabled": true,
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "disabled": true,
+                  "static": true,
+                  "settings": {
+                    "style_class": "button"
+                  },
+                  "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                }
+              },
+              "block_order": []
+            },
+            "accordion_XKk6GG": {
+              "type": "accordion",
+              "name": "t:names.accordion",
+              "settings": {
+                "icon": "plus",
+                "dividers": true,
+                "type_preset": "paragraph",
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 10,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 20,
+                "padding-inline-end": 20
+              },
+              "blocks": {
+                "accordion_row_T8EC9a": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "BENEFITS",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 12
+                  },
+                  "blocks": {
+                    "text_x6E4qX": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<ul><li>Targets multiple breakouts at once</li><li>Clinically proven to visibly reduce spots</li><li>Leaves breakouts looking smaller, flatter & less red</li><li>Absorbs excess oil & draws out impurities</li><li>Helps calm visible inflammation</li><li>Supports the skin’s natural healing process</li><li>Protects the skin barrier from external stressors</li></ul>",
+                        "width": "fit-content",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "paragraph",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_x6E4qX"
+                  ]
+                },
+                "accordion_row_bypDPJ": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "APPLICATION",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text_bABhBY": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Apply to a clean, dry spot. No skincare underneath. Press gently to seal. Wear for 6–8 hours before removing. Remove and cleanse, then follow with your skincare. Use as needed or twice a week.<br/><br/>*isoua trick: wear it overnight for maximum results.</p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_bABhBY"
+                  ]
+                },
+                "accordion_row_HfgbPj": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "KEY INGREDIENTS",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text_GqXfJT": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>HYDROCOLLOID —  a clinically trusted, gel-like material widely used in advanced wound care to absorb fluids while safeguarding the skin. When applied to acne-prone skin, it draws out excess oil and impurities from congested pores and creates a protective barrier. This barrier shields the skin from stressors and supports gentle, irritation-free recovery.</p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_GqXfJT"
+                  ]
+                },
+                "accordion_row_FMV8dz": {
+                  "type": "_accordion-row",
+                  "disabled": true,
+                  "settings": {
+                    "heading": "HOW IT WORKS?",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text_f3iedd": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Breakouts occur when pores become clogged with excess oil, bacteria, and debris. Hydrocolloid technology absorbs these impurities from inflamed pores and simultaneously protects the skin from external irritants. By maintaining a moist healing environment, the sheet supports the skin’s natural repair process, promoting calm, low-irritation healing.</p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_f3iedd"
+                  ]
+                }
+              },
+              "block_order": [
+                "accordion_row_T8EC9a",
+                "accordion_row_bypDPJ",
+                "accordion_row_HfgbPj",
+                "accordion_row_FMV8dz"
+              ]
+            }
+          },
+          "block_order": [
+            "text_6bXyHJ",
+            "group_tGCQbn",
+            "text_aEtTtq",
+            "price_pe7BCR",
+            "buy_buttons_eYQEYi",
+            "accordion_XKk6GG"
+          ]
+        }
+      },
+      "custom_css": [
+        ".announcement-bar {border-radius: 10px;}",
+        ".h5 {font-size: 12px; text-transform: uppercase; min-height: 0px;}"
+      ],
+      "settings": {
+        "content_width": "content-center-aligned",
+        "desktop_media_position": "left",
+        "equal_columns": true,
+        "limit_details_width": false,
+        "gap": 12,
+        "enable_sticky_add_to_cart": true,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 0,
+        "padding-block-end": 24
+      }
+    },
+    "ss_slider_5_m7VKpN": {
+      "type": "ss-slider-5",
+      "blocks": {
+        "slide_gkYkj4": {
+          "type": "slide",
+          "settings": {
+            "image_url": "",
+            "text": "",
+            "url": ""
+          }
+        },
+        "slide_tgfeWR": {
+          "type": "slide",
+          "settings": {
+            "image_url": "",
+            "text": "",
+            "url": ""
+          }
+        },
+        "slide_BKfkNg": {
+          "type": "slide",
+          "settings": {
+            "image_url": "",
+            "text": "",
+            "url": ""
+          }
+        },
+        "slide_76TPQM": {
+          "type": "slide",
+          "settings": {
+            "image_url": "",
+            "text": "",
+            "url": ""
+          }
+        },
+        "slide_FabkjX": {
+          "type": "slide",
+          "settings": {
+            "image_url": "",
+            "text": "",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_gkYkj4",
+        "slide_tgfeWR",
+        "slide_BKfkNg",
+        "slide_76TPQM",
+        "slide_FabkjX"
+      ],
+      "name": "SS - Slider #5",
+      "settings": {
+        "heading": "<h2>spotted on you</h2>",
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 24,
+        "heading_size_mobile": 24,
+        "heading_height": 130,
+        "heading_align": "left",
+        "heading_align_mobile": "left",
+        "button": "",
+        "button_url": "",
+        "button_custom": false,
+        "button_font": "josefin_sans_n4",
+        "button_size": 14,
+        "button_size_mobile": 14,
+        "button_height": 100,
+        "button_padding_vertical": 16,
+        "button_padding_vertical_mobile": 16,
+        "button_padding_horizontal": 24,
+        "button_padding_horizontal_mobile": 24,
+        "button_radius": 100,
+        "button_border_thickness": 1,
+        "button_style": "outline",
+        "slider_view": 3.2,
+        "slider_view_mobile": 1.5,
+        "slider_gap": 16,
+        "slider_gap_mobile": 20,
+        "slider_mt": 24,
+        "slider_mt_mobile": 24,
+        "image_radius": 24,
+        "image_border_thickness": 0,
+        "image_ratio": "square",
+        "image_ratio_mobile": "square",
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 0,
+        "text_size_mobile": 0,
+        "text_height": 50,
+        "text_mt": 0,
+        "text_padding_horizontal": 0,
+        "text_padding_horizontal_mobile": 0,
+        "text_align": "left",
+        "text_align_mobile": "left",
+        "navigation_mt": 40,
+        "navigation_mt_mobile": 24,
+        "navigation_pt": 20,
+        "navigation_pt_mobile": 12,
+        "navigation_border_thickness": 1,
+        "arrow_size": 24,
+        "arrow_size_mobile": 24,
+        "button_color": "#000000",
+        "button_hover_color": "#ffffff",
+        "button_bg_color": "",
+        "button_bg_hover_color": "#000000",
+        "button_border_color": "#000000",
+        "button_border_hover_color": "#000000",
+        "image_border_color": "#000000",
+        "text_color": "#ffffff",
+        "navigation_border_color": "#000000",
+        "arrow_color": "#000000",
+        "arrow_hover_color": "#000000",
+        "heading_color": "#67645e",
+        "background_color": "#f1f0ed",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1,
+        "full_width": false,
+        "content_width": 140,
+        "border_thickness": 0,
+        "section_radius": 10,
+        "lazy": true
+      }
+    },
+    "ss_image_split_row_TniKMq": {
+      "type": "ss-image-split-row",
+      "blocks": {
+        "feature_KrtPXd": {
+          "type": "feature",
+          "settings": {
+            "label": "GOOD FOR:",
+            "value": "All skin types"
+          }
+        },
+        "feature_7HH34A": {
+          "type": "feature",
+          "settings": {
+            "label": "FEELS LIKE:",
+            "value": "Comfy, second-skin feel that stays on all day"
+          }
+        },
+        "feature_J8CJxB": {
+          "type": "feature",
+          "settings": {
+            "label": "SMELLS LIKE:",
+            "value": "Fragrance-Free"
+          }
+        },
+        "feature_H4D8Ya": {
+          "type": "feature",
+          "settings": {
+            "label": "FYI:",
+            "value": "Sweatproof • Waterproof <br>\nCruelty-Free • Vegan • Gluten-Free <br>  \nDermatologist-Tested  • Non-Comedogenic"
+          }
+        }
+      },
+      "block_order": [
+        "feature_KrtPXd",
+        "feature_7HH34A",
+        "feature_J8CJxB",
+        "feature_H4D8Ya"
+      ],
+      "name": "SS - Dynamic Feature Split",
+      "settings": {
+        "section_width": 1400,
+        "layout": "content_image",
+        "layout_mobile": "image_content",
+        "desktop_gap": 16,
+        "mobile_gap": 10,
+        "section_padding_top": 24,
+        "section_padding_bottom": 24,
+        "section_padding_horizontal": 0.5,
+        "section_padding_top_mobile": 12,
+        "section_padding_bottom_mobile": 12,
+        "section_padding_horizontal_mobile": 1,
+        "content_padding": 28,
+        "content_padding_mobile": 16,
+        "inside_box_padding": 0,
+        "inside_box_padding_mobile": 0,
+        "content_radius": 10,
+        "image_radius": 10,
+        "image_ratio": "square",
+        "heading": "<h2>Clinically-proven PATCHES for SPOT CARE on the go.</h2>",
+        "heading_size": 32,
+        "heading_size_mobile": 26,
+        "heading_line_height": 120,
+        "label_size": 14,
+        "label_size_mobile": 14,
+        "value_size": 12,
+        "value_size_mobile": 14,
+        "text_line_height": 160,
+        "row_spacing": 14,
+        "row_spacing_mobile": 10,
+        "border_thickness": 0,
+        "border_color": "#d9d9d9",
+        "row_border_color": "#d9d9d9",
+        "section_bg": "#ffffff",
+        "content_bg": "#ebe7e2",
+        "heading_color": "#5b5b5b",
+        "text_color": "#5b5b5b"
+      }
+    },
+    "ss_targetting_animation_Wqer7m": {
+      "type": "ss-targetting-animation",
+      "blocks": {
+        "item_qB8tpU": {
+          "type": "item",
+          "settings": {
+            "heading": "smaller"
+          }
+        },
+        "item_QcFhYc": {
+          "type": "item",
+          "settings": {
+            "heading": "flatter"
+          }
+        },
+        "item_GFb3Qe": {
+          "type": "item",
+          "settings": {
+            "heading": "less red"
+          }
+        }
+      },
+      "block_order": [
+        "item_qB8tpU",
+        "item_QcFhYc",
+        "item_GFb3Qe"
+      ],
+      "name": "Interactive Benefits",
+      "settings": {
+        "top_heading": "LEAVES SPOTS LOOKING",
+        "section_bg": "#ffffff",
+        "container_width": 1400,
+        "desktop_image_width": 2,
+        "desktop_content_width": 2,
+        "desktop_gap": 20,
+        "mobile_gap": 10,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_side_desktop": 40,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "padding_side_mobile": 16,
+        "image_height_desktop": 500,
+        "image_height_mobile": 500,
+        "image_radius_desktop": 10,
+        "image_radius_mobile": 10,
+        "text_font": "inter_n4",
+        "text_size_desktop": 76,
+        "text_size_mobile": 46,
+        "text_weight": 700,
+        "text_line_height": 1,
+        "text_letter_spacing": 0,
+        "text_color": "#8d8d8d",
+        "active_text_color": "#d69cc4",
+        "heading_color": "#5d5d5d",
+        "active_dot_color": "#ece082",
+        "top_heading_size_desktop": 20,
+        "top_heading_size_mobile": 16,
+        "text_gap_desktop": 1,
+        "text_gap_mobile": 1,
+        "animation_speed": 1000,
+        "active_scale": 100,
+        "enable_autoplay": true,
+        "autoplay_speed": 2500
+      }
+    },
+    "ss_featured_products_4_ycPmw7": {
+      "type": "ss-featured-products-4",
+      "blocks": {
+        "text_htaA33": {
+          "type": "text",
+          "settings": {
+            "text": "<p>APPLICATION</p>",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 13,
+            "text_size_mobile": 12,
+            "text_height": 130,
+            "text_color": "#67645e"
+          }
+        },
+        "button_QYA3G7": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button": "EXPLORE THE FULL RANGE",
+            "url": "",
+            "open_in_new_tab": false,
+            "button_style": "outline",
+            "button_custom": false,
+            "button_font": "josefin_sans_n4",
+            "button_size": 14,
+            "button_size_mobile": 14,
+            "button_advanced": false,
+            "button_height": 100,
+            "button_padding_horizontal": 24,
+            "button_padding_horizontal_mobile": 24,
+            "button_padding_vertical": 16,
+            "button_padding_vertical_mobile": 16,
+            "button_radius": 100,
+            "button_border_thickness": 1,
+            "button_full_width_mobile": true,
+            "button_color": "#121212",
+            "button_hover_color": "#ffffff",
+            "button_bg_color": "#ffffff",
+            "button_bg_hover_color": "#121212",
+            "button_border_color": "#121212",
+            "button_border_hover_color": "#121212"
+          }
+        },
+        "slide_4mVBGh": {
+          "type": "slide",
+          "settings": {
+            "title": "For best results, apply to a clean, dry spot.",
+            "description": "",
+            "url": ""
+          }
+        },
+        "slide_JMQmVR": {
+          "type": "slide",
+          "settings": {
+            "title": "Wear for 6-8 hours before removing.",
+            "description": "",
+            "url": ""
+          }
+        },
+        "slide_z6jyAL": {
+          "type": "slide",
+          "settings": {
+            "title": "rhode trick: Mix and match Spotwear shapes and colors to complement your outfit and glam.",
+            "description": "",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_htaA33",
+        "button_QYA3G7",
+        "slide_4mVBGh",
+        "slide_JMQmVR",
+        "slide_z6jyAL"
+      ],
+      "name": "SS - Featured products #4",
+      "settings": {
+        "layout": "content_image",
+        "layout_mobile": "content_image",
+        "layout_gap": 16,
+        "layout_gap_mobile": 16,
+        "image_width": 50,
+        "content_radius": 10,
+        "content_border_thickness": 0,
+        "content_align": "left",
+        "content_align_mobile": "left",
+        "thumbnail_width": 140,
+        "thumbnail_gap": 16,
+        "thumbnail_ratio": "square",
+        "thumbnail_radius": 10,
+        "thumbnail_border_thickness": 1,
+        "image_radius": 10,
+        "image_border_thickness": 0,
+        "title_custom": false,
+        "title_font": "josefin_sans_n4",
+        "title_size": 38,
+        "title_size_mobile": 26,
+        "title_advanced": false,
+        "title_height": 130,
+        "title_mt": 4,
+        "title_mt_mobile": 16,
+        "description_custom": false,
+        "description_font": "josefin_sans_n4",
+        "description_size": 16,
+        "description_size_mobile": 16,
+        "description_height": 150,
+        "buttons_mt": 24,
+        "buttons_mt_mobile": 24,
+        "shop_button": "",
+        "open_in_new_tab": false,
+        "shop_button_style": "outline",
+        "shop_button_custom": false,
+        "shop_button_font": "josefin_sans_n4",
+        "shop_button_size": 14,
+        "shop_button_size_mobile": 14,
+        "shop_button_advanced": false,
+        "shop_button_height": 100,
+        "shop_button_padding_horizontal": 24,
+        "shop_button_padding_horizontal_mobile": 24,
+        "shop_button_padding_vertical": 16,
+        "shop_button_padding_vertical_mobile": 16,
+        "shop_button_radius": 100,
+        "shop_button_border_thickness": 1,
+        "shop_button_full_width_mobile": true,
+        "arrow_show_desktop": true,
+        "arrow_show_mobile": true,
+        "arrow_size": 32,
+        "arrow_size_mobile": 32,
+        "arrow_icon_size": 8,
+        "arrow_icon_size_mobile": 8,
+        "arrow_radius": 100,
+        "arrow_border_thickness": 0,
+        "arrow_hover_effect": "color",
+        "pagination_custom": false,
+        "pagination_font": "josefin_sans_n4",
+        "pagination_size": 10,
+        "pagination_size_mobile": 10,
+        "pagination_height": 130,
+        "thumbnail_active_border_color": "#121212",
+        "title_color": "#afafaf",
+        "title_active_color": "#121212",
+        "description_color": "#121212",
+        "pagination_color": "#121212",
+        "content_bg_color": "#f3f3f3",
+        "content_border_color": "#121212",
+        "image_border_color": "#121212",
+        "shop_button_color": "#ffffff",
+        "shop_button_hover_color": "#121212",
+        "shop_button_bg_color": "#121212",
+        "shop_button_bg_hover_color": "#ffffff",
+        "shop_button_border_color": "#121212",
+        "shop_button_border_hover_color": "#121212",
+        "arrow_color": "#121212",
+        "arrow_hover_color": "#ffffff",
+        "arrow_bg_color": "#ffffff",
+        "arrow_bg_hover_color": "#121212",
+        "arrow_border_color": "#121212",
+        "arrow_border_hover_color": "#121212",
+        "background_style": "solid",
+        "background_color": "#ffffff",
+        "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
+        "border_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "padding_horizontal": 2.5,
+        "padding_horizontal_mobile": 1,
+        "width": "page",
+        "content_width": 1200,
+        "border_thickness": 0,
+        "section_radius": 10,
+        "lazy": true
+      }
+    },
+    "ss_image_with_text_15_rAQEaq": {
+      "type": "ss-image-with-text-15",
+      "blocks": {
+        "item_PeCwtz": {
+          "type": "item",
+          "settings": {
+            "toggle_text": "Heading 1",
+            "heading": "<h2>Heading 1</h2>",
+            "text": "<p>Welcome your customers to your store by sharing temporary offers or explaining to them what your products are about.</p>",
+            "button_label": "Learn More",
+            "button_link": ""
+          }
+        },
+        "item_TPUUT8": {
+          "type": "item",
+          "settings": {
+            "toggle_text": "Heading 2",
+            "heading": "<h2>Heading 2</h2>",
+            "text": "<p>Create trust with your customers by explaining the story of your brand. Share your values or what is important to you.</p>",
+            "button_label": "Learn More",
+            "button_link": ""
+          }
+        },
+        "item_f8CWaa": {
+          "type": "item",
+          "settings": {
+            "toggle_text": "Heading 3",
+            "heading": "<h2>Heading 3</h2>",
+            "text": "<p>Share information about your product with your customers. Describe a product, and share info about your production process...</p>",
+            "button_label": "Learn More",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_PeCwtz",
+        "item_TPUUT8",
+        "item_f8CWaa"
+      ],
+      "name": "SS - Image With Text #15",
+      "settings": {
+        "body_gap": 16,
+        "body_gap_mobile": 10,
+        "image_url": "",
+        "image_position": "right",
+        "image_position_mobile": "top",
+        "image_radius": 10,
+        "image_border_thickness": 0,
+        "image_ratio": "original",
+        "image_ratio_mobile": "original",
+        "content_padding_vertical": 32,
+        "content_padding_vertical_mobile": 16,
+        "content_padding_horizontal": 32,
+        "content_padding_horizontal_mobile": 16,
+        "content_radius": 12,
+        "content_border_thickness": 0,
+        "content_horizontal_align": "start",
+        "content_horizontal_align_mobile": "start",
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 36,
+        "heading_size_mobile": 22,
+        "heading_height": 130,
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 16,
+        "text_size_mobile": 14,
+        "text_height": 170,
+        "text_mt": 24,
+        "toggle_text_padding_vertical": 16,
+        "toggle_text_padding_vertical_mobile": 16,
+        "toggle_text_border_thickness": 1,
+        "toggle_text_custom": false,
+        "toggle_text_font": "josefin_sans_n4",
+        "toggle_text_size": 26,
+        "toggle_text_size_mobile": 20,
+        "toggle_text_height": 130,
+        "content_border_color": "#000000",
+        "content_bg_color": "#f1f0ed",
+        "heading_color": "#67645e",
+        "text_color": "#67645e",
+        "toggle_text_border_color": "#c4c4c4",
+        "toggle_text_color": "#67645e",
+        "pill_button_size": 14,
+        "pill_button_size_mobile": 13,
+        "pill_button_padding_vertical": 12,
+        "pill_button_padding_vertical_mobile": 10,
+        "pill_button_padding_horizontal": 32,
+        "pill_button_padding_horizontal_mobile": 28,
+        "pill_button_mt": 28,
+        "pill_button_mt_mobile": 20,
+        "image_border_color": "#000000",
+        "background_color": "#ffffff",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1,
+        "full_width": true,
+        "content_width": 120,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
+    "ss_image_with_text_9EpeQg": {
+      "type": "ss-image-with-text",
+      "blocks": {
+        "heading_PezQUx": {
+          "type": "heading",
+          "settings": {
+            "heading": "<h2>Image with text #1</h2>",
+            "heading_custom": false,
+            "heading_font": "josefin_sans_n4",
+            "heading_size": 32,
+            "heading_size_mobile": 20,
+            "heading_advanced": false,
+            "heading_height": 130,
+            "heading_mt": 0,
+            "heading_mt_mobile": 0,
+            "heading_color": "#121212"
+          }
+        },
+        "text_jWdTWQ": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Made with care and unconditionally loved by our customers, this signature bestseller exceeds all expectations.</p>",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 14,
+            "text_size_mobile": 14,
+            "text_advanced": false,
+            "text_height": 150,
+            "text_mt": 12,
+            "text_mt_mobile": 12,
+            "text_color": "#121212"
+          }
+        },
+        "button_X8wCrV": {
+          "type": "button",
+          "settings": {
+            "button": "Shop now",
+            "url": "",
+            "open_in_new_tab": false,
+            "button_style": "non_outline",
+            "button_custom": false,
+            "button_font": "josefin_sans_n4",
+            "button_size": 14,
+            "button_size_mobile": 14,
+            "button_advanced": false,
+            "button_height": 100,
+            "button_padding_horizontal": 32,
+            "button_padding_horizontal_mobile": 32,
+            "button_padding_vertical": 16,
+            "button_padding_vertical_mobile": 16,
+            "button_radius": 100,
+            "button_border_thickness": 1,
+            "button_mt": 12,
+            "button_mt_mobile": 12,
+            "button_color": "#ffffff",
+            "button_hover_color": "#ffffff",
+            "button_bg_color": "#121212",
+            "button_bg_hover_color": "#333333",
+            "button_border_color": "#121212",
+            "button_border_hover_color": "#121212"
+          }
+        }
+      },
+      "block_order": [
+        "heading_PezQUx",
+        "text_jWdTWQ",
+        "button_X8wCrV"
+      ],
+      "name": "SS - Image with text #1",
+      "settings": {
+        "layout": "image_content",
+        "layout_mobile": "image_content",
+        "layout_advanced": false,
+        "layout_gap": 16,
+        "layout_gap_mobile": 12,
+        "layout_border_thickness": 0,
+        "layout_radius": 0,
+        "use_shadow": false,
+        "content_align": "left",
+        "content_align_mobile": "left",
+        "content_vertical_align": "center",
+        "image_url": "",
+        "image_radius": 10,
+        "image_border_thickness": 0,
+        "image_ratio": "original",
+        "image_ratio_mobile": "original",
+        "layout_border_color": "#121212",
+        "image_border_color": "#121212",
+        "shadow_color": "#0000001a",
+        "background_style": "solid",
+        "background_color": "#ffffff",
+        "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
+        "outer_background_color": "#ffffff",
+        "border_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 0,
+        "padding_bottom": 24,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1,
+        "width": "page",
+        "content_width": 1200,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
+    "section_WUmYw7": {
+      "type": "section",
+      "blocks": {
+        "image_tHe3G7": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/spotwear-ingredients_2000x_7664a955-22bd-4d5b-ad82-36191e3f454d.png",
+            "link": "",
+            "image_ratio": "adapt",
+            "width": "fill",
+            "custom_width": 75,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 10,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "group_KXWk8L": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-end",
+            "gap": 10,
+            "width": "fit-content",
+            "custom_width": 80,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100,
+            "height": "fill",
+            "custom_height": 100,
+            "inherit_color_scheme": false,
+            "color_scheme": "scheme-2",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 10,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 45,
+            "padding-block-end": 40,
+            "padding-inline-start": 25,
+            "padding-inline-end": 25
+          },
+          "blocks": {
+            "text_Ttpryz": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>Hydrocolloid is a sticky, gel-like material that acts like a bandage on the skin.</p>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 50
+              },
+              "blocks": {}
+            },
+            "divider_KUW3KM": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "width_percent": 100,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
+            "text_k9UVrH": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<h1>how it works</h1>",
+                "width": "fit-content",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "h1",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_wTkhJa": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>Designed for use on surface-level spots, Hydrocolloid patches create a comfy, protective bubble. They shield against stressors and form a gel that helps draw out excess oil.</p>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "divider_JyPtq6": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "width_percent": 100,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
+            "text_PKY7Tc": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<h3>why we love it</h3>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h1",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground-heading)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_MBAWkY": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>Whether your skin is sensitive or spot-prone, Hydrocolloid is friendly for all skin types. It's a gentle, effortless way to care for your spots on the go or overnight.</p>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 50
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_Ttpryz",
+            "divider_KUW3KM",
+            "text_k9UVrH",
+            "text_wTkhJa",
+            "divider_JyPtq6",
+            "text_PKY7Tc",
+            "text_MBAWkY"
+          ]
+        }
+      },
+      "block_order": [
+        "image_tHe3G7",
+        "group_KXWk8L"
+      ],
+      "name": "t:names.image_with_text",
+      "settings": {
+        "content_direction": "row",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 16,
+        "section_width": "page-width",
+        "section_height": "small",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-1",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 10,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 24,
+        "padding-block-end": 24
+      }
+    },
+    "ss_image_with_text_4PncMc": {
+      "type": "ss-image-with-text",
+      "blocks": {
+        "text_AwVhgG": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Made with care and unconditionally loved by our customers, this signature bestseller exceeds all expectations.</p>",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 14,
+            "text_size_mobile": 14,
+            "text_advanced": false,
+            "text_height": 150,
+            "text_mt": 12,
+            "text_mt_mobile": 12,
+            "text_color": "#121212"
+          }
+        },
+        "heading_ytb4th": {
+          "type": "heading",
+          "settings": {
+            "heading": "<h2>Image with text #1</h2>",
+            "heading_custom": false,
+            "heading_font": "josefin_sans_n4",
+            "heading_size": 32,
+            "heading_size_mobile": 20,
+            "heading_advanced": false,
+            "heading_height": 130,
+            "heading_mt": 0,
+            "heading_mt_mobile": 0,
+            "heading_color": "#121212"
+          }
+        },
+        "text_HXgjEK": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Made with care and unconditionally loved by our customers, this signature bestseller exceeds all expectations.</p>",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 14,
+            "text_size_mobile": 14,
+            "text_advanced": false,
+            "text_height": 150,
+            "text_mt": 12,
+            "text_mt_mobile": 12,
+            "text_color": "#121212"
+          }
+        },
+        "button_8zA9yP": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button": "Shop now",
+            "url": "",
+            "open_in_new_tab": false,
+            "button_style": "non_outline",
+            "button_custom": false,
+            "button_font": "josefin_sans_n4",
+            "button_size": 14,
+            "button_size_mobile": 14,
+            "button_advanced": false,
+            "button_height": 100,
+            "button_padding_horizontal": 32,
+            "button_padding_horizontal_mobile": 32,
+            "button_padding_vertical": 16,
+            "button_padding_vertical_mobile": 16,
+            "button_radius": 100,
+            "button_border_thickness": 1,
+            "button_mt": 12,
+            "button_mt_mobile": 12,
+            "button_color": "#ffffff",
+            "button_hover_color": "#ffffff",
+            "button_bg_color": "#121212",
+            "button_bg_hover_color": "#333333",
+            "button_border_color": "#121212",
+            "button_border_hover_color": "#121212"
+          }
+        }
+      },
+      "block_order": [
+        "text_AwVhgG",
+        "heading_ytb4th",
+        "text_HXgjEK",
+        "button_8zA9yP"
+      ],
+      "disabled": true,
+      "name": "SS - Image with text #1",
+      "settings": {
+        "layout": "image_content",
+        "layout_mobile": "image_content",
+        "layout_advanced": false,
+        "layout_gap": 16,
+        "layout_gap_mobile": 12,
+        "layout_border_thickness": 0,
+        "layout_radius": 0,
+        "use_shadow": false,
+        "content_align": "left",
+        "content_align_mobile": "left",
+        "content_vertical_align": "center",
+        "image_url": "",
+        "image_radius": 10,
+        "image_border_thickness": 0,
+        "image_ratio": "square",
+        "image_ratio_mobile": "square",
+        "layout_border_color": "#121212",
+        "image_border_color": "#121212",
+        "shadow_color": "#0000001a",
+        "background_style": "solid",
+        "background_color": "#ffffff",
+        "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
+        "outer_background_color": "#ffffff",
+        "border_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1,
+        "width": "page",
+        "content_width": 1200,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
+    "rhode_pdp_on_the_go": {
+      "type": "rhode-pdp-on-the-go",
+      "blocks": {
+        "slide_spotwear": {
+          "type": "product",
+          "settings": {
+            "label": "SPOT",
+            "product_name": "spotwear",
+            "description": "create a comfy, protective bubble to leave spots looking smaller, flatter, and less red"
+          }
+        },
+        "slide_depuff": {
+          "type": "product",
+          "settings": {
+            "label": "DEPUFF",
+            "product_name": "peptide eye prep",
+            "description": "depuff and brighten whenever your under-eyes need a little wake-up"
+          }
+        },
+        "slide_mist": {
+          "type": "product",
+          "settings": {
+            "label": "MIST",
+            "product_name": "glazing mist",
+            "description": "mist throughout the day for a hydrating, glowy refresh"
+          }
+        },
+        "slide_nourish": {
+          "type": "product",
+          "settings": {
+            "label": "NOURISH",
+            "product_name": "peptide lip treatment",
+            "description": "swipe it on anytime to hydrate lips with a glossy, high-shine finish"
+          }
+        },
+        "slide_prep": {
+          "type": "product",
+          "settings": {
+            "label": "PREP",
+            "product_name": "glazing milk",
+            "description": "a lightweight ceramide facial essence to prep skin for the rest of your routine"
+          }
+        }
+      },
+      "block_order": [
+        "slide_spotwear",
+        "slide_depuff",
+        "slide_mist",
+        "slide_nourish",
+        "slide_prep"
+      ],
+      "settings": {
+        "title": "Take your rhode ON THE GO.",
+        "subtitle": "Essentials to throw in your purse or pocket.",
+        "card_bg_color": "#f1f0ed",
+        "image_bg_color": "#e5e3df",
+        "active_circle_color": "#e29fc8"
+      }
+    },
+    "ss_featured_collection_13_RrkUFQ": {
+      "type": "ss-featured-collection-13",
+      "blocks": {
+        "image_yJ44j9": {
+          "type": "image",
+          "settings": {
+            "product": "",
+            "tag": "Tag",
+            "custom_title": "Product title",
+            "details": "<p>Details</p>"
+          }
+        },
+        "image_TLMFRt": {
+          "type": "image",
+          "settings": {
+            "product": "",
+            "tag": "Tag",
+            "custom_title": "Product title",
+            "details": "<p>Details</p>"
+          }
+        },
+        "image_gVq3zr": {
+          "type": "image",
+          "settings": {
+            "product": "",
+            "tag": "Tag",
+            "custom_title": "Product title",
+            "details": "<p>Details</p>"
+          }
+        },
+        "image_GGNzhY": {
+          "type": "image",
+          "settings": {
+            "product": "",
+            "tag": "Tag",
+            "custom_title": "Product title",
+            "details": "<p>Details</p>"
+          }
+        }
+      },
+      "block_order": [
+        "image_yJ44j9",
+        "image_TLMFRt",
+        "image_gVq3zr",
+        "image_GGNzhY"
+      ],
+      "name": "SS - Featured collection #13",
+      "settings": {
+        "collection": "",
+        "collection_show": 10,
+        "layout": "image_content",
+        "layout_mobile": "image_content",
+        "layout_gap": 16,
+        "layout_gap_mobile": 16,
+        "image_radius": 10,
+        "image_border_thickness": 0,
+        "image_ratio_mobile": "square",
+        "tag_custom": false,
+        "tag_font": "josefin_sans_n4",
+        "tag_size": 40,
+        "tag_size_mobile": 32,
+        "tag_height": 100,
+        "tag_align": "left",
+        "tag_align_mobile": "left",
+        "dots_size": 6,
+        "dots_size_mobile": 6,
+        "dots_show_desktop": true,
+        "dots_show_mobile": true,
+        "product_padding_horizontal": 32,
+        "product_padding_horizontal_mobile": 24,
+        "product_padding_vertical": 32,
+        "product_padding_vertical_mobile": 24,
+        "product_radius": 10,
+        "product_border_thickness": 0,
+        "content_image_border_thickness": 0,
+        "content_image_radius": 10,
+        "content_image_ratio": "portrait",
+        "content_image_ratio_mobile": "square",
+        "product_content_mt": 20,
+        "product_content_mt_mobile": 16,
+        "product_content_vertical_align": "bottom",
+        "title_custom": false,
+        "title_font": "josefin_sans_n4",
+        "title_size": 18,
+        "title_size_mobile": 14,
+        "title_height": 150,
+        "details_custom": false,
+        "details_font": "josefin_sans_n4",
+        "details_size": 16,
+        "details_size_mobile": 14,
+        "details_height": 150,
+        "details_mt": 4,
+        "details_mt_mobile": 4,
+        "button_text": "SHOP NOW",
+        "button_custom": false,
+        "button_font": "josefin_sans_n4",
+        "button_size": 14,
+        "button_size_mobile": 14,
+        "button_height": 100,
+        "button_padding_horizontal": 16,
+        "button_padding_horizontal_mobile": 16,
+        "button_padding_vertical": 12,
+        "button_padding_vertical_mobile": 12,
+        "button_radius": 100,
+        "button_border_thickness": 1,
+        "button_mt": 12,
+        "button_mt_mobile": 12,
+        "count_custom": false,
+        "count_font": "josefin_sans_n4",
+        "count_size": 40,
+        "count_size_mobile": 32,
+        "count_height": 100,
+        "arrow_size": 48,
+        "arrow_size_mobile": 38,
+        "arrow_icon_size": 10,
+        "arrow_icon_size_mobile": 8,
+        "arrow_border_thickness": 1,
+        "arrow_radius": 100,
+        "arrow_hover_effect": "color",
+        "arrow_show_desktop": true,
+        "arrow_show_mobile": false,
+        "tag_color": "#67645e",
+        "dots_color": "#ffffff",
+        "image_border_color": "#000000",
+        "title_color": "#67645e",
+        "details_color": "#67645e",
+        "count_color": "#67645e",
+        "content_image_border_color": "#000000",
+        "product_bg_color": "#f1f0ed",
+        "product_border_color": "#000000",
+        "button_color": "#67645e",
+        "button_hover_color": "#67645e",
+        "button_bg_color": "",
+        "button_bg_hover_color": "",
+        "button_border_color": "#67645e",
+        "button_border_hover_color": "#67645e",
+        "arrow_color": "#747577",
+        "arrow_hover_color": "#747577",
+        "arrow_bg_color": "",
+        "arrow_bg_hover_color": "",
+        "arrow_border_color": "#747577",
+        "arrow_border_hover_color": "#747577",
+        "background_color": "#ffffff",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 2,
+        "margin_horizontal_mobile": 1,
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1,
+        "full_width": false,
+        "content_width": 1200,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
+    "ss_packaging_cUBeaP": {
+      "type": "ss-packaging",
+      "name": "Packaging",
+      "settings": {
+        "image": "shopify://shop_images/spotwear-recycling-desktop_2000x_ac757d77-e957-45e7-aeaa-23904a779c25.png",
+        "section_width": 120,
+        "section_radius": 10,
+        "section_border": 0,
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "padding_side": 40,
+        "padding_side_mobile": 16,
+        "content_gap": 40,
+        "content_gap_mobile": 20,
+        "side_width": 88,
+        "side_width_mobile": 64,
+        "image_radius": 12,
+        "image_height": 460,
+        "image_height_mobile": 320,
+        "heading": "ready-to-wear skincare",
+        "description": "Learn more about the materials of Spotwear.",
+        "material_1_title": "Spot Stickers",
+        "material_1_text": "Made of 100% Hydrocolloid",
+        "material_2_title": "Pouch",
+        "material_2_text": "Aluminum",
+        "vertical_text": "packaging",
+        "heading_size": 64,
+        "heading_size_mobile": 24,
+        "text_size": 16,
+        "text_size_mobile": 14,
+        "vertical_text_size": 30,
+        "vertical_text_size_mobile": 20,
+        "section_bg": "#eceae7",
+        "side_bg": "#918d87",
+        "text_color": "#67645e",
+        "border_color": "#000000"
+      }
+    },
+    "section_store_featured_collection_6_hnPVwp": {
+      "type": "section-store-featured-collection-6",
+      "blocks": {
+        "slide_piXCUY": {
+          "type": "slide",
+          "settings": {
+            "product": "",
+            "heading": "Slide 1",
+            "button_text": "SHOP NOW"
+          }
+        },
+        "slide_YgDBGM": {
+          "type": "slide",
+          "settings": {
+            "product": "",
+            "heading": "FEELS LIKE:",
+            "button_text": "Comfy, second-skin feel that stays on all day"
+          }
+        },
+        "slide_EGrgLp": {
+          "type": "slide",
+          "settings": {
+            "product": "",
+            "heading": "SMELLS LIKE:",
+            "button_text": "Fragrance-Free"
+          }
+        },
+        "slide_brcJrc": {
+          "type": "slide",
+          "settings": {
+            "product": "",
+            "heading": "Slide 4",
+            "button_text": "SHOP NOW"
+          }
+        }
+      },
+      "block_order": [
+        "slide_piXCUY",
+        "slide_YgDBGM",
+        "slide_EGrgLp",
+        "slide_brcJrc"
+      ],
+      "name": "SECTION STORE - Featured Collection #6",
+      "settings": {
+        "collection": "",
+        "collection_show": 10,
+        "slider_view": 3,
+        "slider_view_mobile": 1.2,
+        "slider_gap": 40,
+        "slider_gap_mobile": 20,
+        "slide_padding_vertical": 28,
+        "slide_padding_vertical_mobile": 16,
+        "slide_padding_horizontal": 16,
+        "slide_padding_horizontal_mobile": 12,
+        "slide_radius": 12,
+        "slide_border_thickness": 0,
+        "slide_ratio": "portrait",
+        "slide_ratio_mobile": "portrait",
+        "slide_overlay": 0,
+        "slide_shadow": false,
+        "content_use_bg": false,
+        "heading": "Store",
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 40,
+        "heading_size_mobile": 14,
+        "heading_height": 130,
+        "title_custom": false,
+        "title_font": "josefin_sans_n4",
+        "title_size": 40,
+        "title_size_mobile": 40,
+        "title_height": 150,
+        "price_from": "From",
+        "price_custom": false,
+        "price_font": "josefin_sans_n4",
+        "price_size": 18,
+        "price_size_mobile": 14,
+        "price_height": 150,
+        "price_compare": false,
+        "hide_vendor": false,
+        "vendor_custom": false,
+        "vendor_font": "josefin_sans_n4",
+        "vendor_size": 16,
+        "vendor_size_mobile": 14,
+        "vendor_height": 130,
+        "vendor_mt": 8,
+        "vendor_mt_mobile": 8,
+        "button_text": "SHOP NOW",
+        "button_custom": false,
+        "button_font": "josefin_sans_n4",
+        "button_size": 14,
+        "button_size_mobile": 14,
+        "button_height": 100,
+        "button_padding_vertical": 14,
+        "button_padding_vertical_mobile": 12,
+        "button_padding_horizontal": 12,
+        "button_padding_horizontal_mobile": 12,
+        "button_radius": 100,
+        "button_border_thickness": 0,
+        "button_mt_mobile": 16,
+        "button_style": "non_outline",
+        "arrow_size": 48,
+        "arrow_size_mobile": 48,
+        "arrow_icon_size": 8,
+        "arrow_icon_size_mobile": 8,
+        "arrow_border_thickness": 0,
+        "arrow_radius": 100,
+        "arrow_hover_effect": "color",
+        "arrow_show_desktop": true,
+        "arrow_show_mobile": false,
+        "slide_bg_color": "#f8f8f8",
+        "slide_border_color": "#696660",
+        "slide_shadow_color": "#696660",
+        "slide_overlay_color": "#000000",
+        "heading_color": "#696660",
+        "content_bg": "linear-gradient(180deg, rgba(255, 255, 255, 0) 55%, rgba(255, 255, 255, 0.7) 100%)",
+        "title_color": "#696660",
+        "price_color": "#696660",
+        "price_original_color": "#696660",
+        "vendor_color": "#696660",
+        "button_color": "#696660",
+        "button_hover_color": "#ffffff",
+        "button_bg_color": "#ffffff",
+        "button_bg_hover_color": "#696660",
+        "button_border_color": "#696660",
+        "button_border_hover_color": "#696660",
+        "arrow_color": "#696660",
+        "arrow_hover_color": "#ffffff",
+        "arrow_bg_color": "#ffffff",
+        "arrow_bg_hover_color": "#696660",
+        "arrow_border_color": "#696660",
+        "arrow_border_hover_color": "#696660",
+        "background_color": "#ffffff",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "padding_horizontal": 3,
+        "padding_horizontal_mobile": 1,
+        "full_width": true,
+        "content_width": 120,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
+    "rhode_sticky_atc": {
+      "type": "rhode-sticky-atc",
+      "settings": {
+        "title_override": "SPOTWEAR DAISY",
+        "cta_label": "BUY {SHAPE}",
+        "sold_out_label": "SOLD OUT",
+        "hero_selector": "[data-rh-hero], .product-information",
+        "bar_bg_color": "#faf7f2",
+        "title_color": "#67645e",
+        "text_color": "#67645e",
+        "cta_bg_color": "#67645e",
+        "cta_hover_bg_color": "#4d4b45",
+        "cta_text_color": "#ffffff"
+      }
+    },
+    "ss_whats_inside_8w8VfA": {
+      "type": "ss-whats-inside",
+      "blocks": {
+        "item_Gx6zwx": {
+          "type": "item",
+          "settings": {
+            "top_text": "",
+            "heading": "",
+            "text": "<p>Hydrocolloid is a sticky, gel-like material that acts like a bandage on the skin.</p>"
+          }
+        },
+        "item_FXwneF": {
+          "type": "item",
+          "settings": {
+            "top_text": "",
+            "heading": "how it works",
+            "text": "<p>Designed for use on surface-level spots, Hydrocolloid patches create a comfy, protective bubble. They shield against stressors and form a gel that helps draw out excess oil.</p>"
+          }
+        },
+        "item_dhccJh": {
+          "type": "item",
+          "settings": {
+            "top_text": "",
+            "heading": "why we love it",
+            "text": "<p>Whether your skin is sensitive or spot-prone, Hydrocolloid is friendly for all skin types. It's a gentle, effortless way to care for your spots on the go or overnight.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_Gx6zwx",
+        "item_FXwneF",
+        "item_dhccJh"
+      ],
+      "name": "SS Whats Inside",
+      "settings": {
+        "image": "shopify://shop_images/Frame_1430103561_-_V8_5e27aaa7-5794-4d58-bb21-95d965160f39.png",
+        "side_title": "what's inside",
+        "max_width": 1400,
+        "desktop_gap": 16,
+        "mobile_gap": 16,
+        "pt": 24,
+        "pb": 24,
+        "pt_mobile": 24,
+        "pb_mobile": 24,
+        "side": 2.5,
+        "side_mobile": 1,
+        "radius": 10,
+        "image_radius": 10,
+        "content_radius": 10,
+        "content_padding": 42,
+        "content_padding_mobile": 24,
+        "side_title_gap": 40,
+        "side_title_gap_mobile": 18,
+        "side_title_size": 28,
+        "side_title_size_mobile": 22,
+        "heading_size": 32,
+        "heading_size_mobile": 22,
+        "text_size": 16,
+        "text_size_mobile": 15,
+        "top_text_size": 16,
+        "top_text_size_mobile": 15,
+        "item_spacing": 36,
+        "item_spacing_mobile": 24,
+        "border_width": 0,
+        "bg_color": "#FFFFFF",
+        "content_bg": "#f4f2ee",
+        "heading_color": "#444444",
+        "text_color": "#555555",
+        "divider_color": "#cfcfcf",
+        "side_title_color": "#555555",
+        "border_color": "#000000"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "ss_slider_5_m7VKpN",
+    "ss_image_split_row_TniKMq",
+    "ss_targetting_animation_Wqer7m",
+    "ss_featured_products_4_ycPmw7",
+    "ss_image_with_text_15_rAQEaq",
+    "ss_image_with_text_9EpeQg",
+    "section_WUmYw7",
+    "ss_image_with_text_4PncMc",
+    "rhode_pdp_on_the_go",
+    "ss_featured_collection_13_RrkUFQ",
+    "ss_packaging_cUBeaP",
+    "section_store_featured_collection_6_hnPVwp",
+    "ss_whats_inside_8w8VfA",
+    "rhode_sticky_atc"
+  ]
+}

@@ -1,0 +1,834 @@
+{% comment %}
+=========================================================
+SS - Dynamic Feature Split Section
+Fully Dynamic Shopify Section
+=========================================================
+{% endcomment %}
+
+{%- liquid
+  assign section_bg = section.settings.section_bg
+  assign content_bg = section.settings.content_bg
+
+  assign section_width = section.settings.section_width
+  assign desktop_gap = section.settings.desktop_gap
+  assign mobile_gap = section.settings.mobile_gap
+
+  assign section_padding_top = section.settings.section_padding_top
+  assign section_padding_bottom = section.settings.section_padding_bottom
+  assign section_padding_horizontal = section.settings.section_padding_horizontal
+
+  assign section_padding_top_mobile = section.settings.section_padding_top_mobile
+  assign section_padding_bottom_mobile = section.settings.section_padding_bottom_mobile
+  assign section_padding_horizontal_mobile = section.settings.section_padding_horizontal_mobile
+
+  assign content_padding = section.settings.content_padding
+  assign content_padding_mobile = section.settings.content_padding_mobile
+
+  assign inside_box_padding = section.settings.inside_box_padding
+assign inside_box_padding_mobile = section.settings.inside_box_padding_mobile
+
+  assign content_radius = section.settings.content_radius
+  assign image_radius = section.settings.image_radius
+
+  assign border_thickness = section.settings.border_thickness
+  assign border_color = section.settings.border_color
+
+  assign row_border_color = section.settings.row_border_color
+  assign row_spacing = section.settings.row_spacing
+  assign row_spacing_mobile = section.settings.row_spacing_mobile
+
+  assign image = section.settings.image
+
+  assign layout = section.settings.layout
+  assign layout_mobile = section.settings.layout_mobile
+
+  assign image_ratio = section.settings.image_ratio
+
+  assign heading_size = section.settings.heading_size
+  assign heading_size_mobile = section.settings.heading_size_mobile
+  assign heading_color = section.settings.heading_color
+
+  assign label_size = section.settings.label_size
+  assign label_size_mobile = section.settings.label_size_mobile
+
+  assign value_size = section.settings.value_size
+  assign value_size_mobile = section.settings.value_size_mobile
+
+  assign text_color = section.settings.text_color
+
+  assign heading_line_height = section.settings.heading_line_height
+  assign text_line_height = section.settings.text_line_height
+-%}
+
+<style>
+
+.section-{{ section.id }} {
+  background: {{ section_bg }};
+  padding:
+    {{ section_padding_top_mobile }}px
+    {{ section_padding_horizontal_mobile }}rem
+    {{ section_padding_bottom_mobile }}px;
+}
+
+.section-{{ section.id }}-inner {
+  max-width: {{ section_width }}px;
+  margin: 0 auto;
+}
+
+.feature-grid-{{ section.id }} {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: {{ mobile_gap }}px;
+  align-items: stretch;
+}
+
+.feature-content-{{ section.id }},
+.feature-image-{{ section.id }} {
+  width: 100%;
+  height: 100%;
+}
+
+.feature-content-{{ section.id }} {
+  background: {{ content_bg }};
+  padding: {{ content_padding_mobile }}px;
+  border-radius: {{ content_radius }}px;
+  border: {{ border_thickness }}px solid {{ border_color }};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.feature-heading-{{ section.id }} {
+  margin-bottom: 40px;
+}
+
+.feature-heading-{{ section.id }} * {
+  margin: 0;
+  font-size: {{ heading_size_mobile }}px;
+  line-height: {{ heading_line_height }}%;
+  color: {{ heading_color }};
+  font-weight: 400;
+  letter-spacing: -1px;
+}
+
+.feature-list-{{ section.id }} {
+  width: 100%;
+  padding: {{ inside_box_padding_mobile }}px;
+}
+
+.feature-row-{{ section.id }} {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  padding: {{ row_spacing_mobile }}px 0;
+  border-top: 1px solid {{ row_border_color }};
+}
+
+.feature-row-{{ section.id }}:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.feature-label-{{ section.id }} {
+  min-width: 140px;
+  font-size: {{ label_size_mobile }}px;
+  color: {{ text_color }};
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.feature-value-{{ section.id }} {
+  max-width: 70%;
+  text-align: right;
+  font-size: {{ value_size_mobile }}px;
+  line-height: {{ text_line_height }}%;
+  color: {{ text_color }};
+}
+
+.feature-image-{{ section.id }} {
+  overflow: hidden;
+  border-radius: {{ image_radius }}px;
+  border: {{ border_thickness }}px solid {{ border_color }};
+  display: flex;
+}
+
+.feature-image-{{ section.id }} img,
+.feature-image-{{ section.id }} svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.feature-image-{{ section.id }} svg {
+  background: #e5e5e5;
+}
+
+{% if image_ratio == 'square' %}
+.feature-image-{{ section.id }} {
+  aspect-ratio: 1/1;
+}
+{% elsif image_ratio == 'portrait' %}
+.feature-image-{{ section.id }} {
+  aspect-ratio: 9/12;
+}
+{% elsif image_ratio == 'landscape' %}
+.feature-image-{{ section.id }} {
+  aspect-ratio: 12/8;
+}
+{% endif %}
+
+{% if layout_mobile == 'image_content' %}
+.feature-grid-{{ section.id }} {
+  grid-template-areas:
+  "image"
+  "content";
+}
+{% else %}
+.feature-grid-{{ section.id }} {
+  grid-template-areas:
+  "content"
+  "image";
+}
+{% endif %}
+
+.feature-image-{{ section.id }} {
+  grid-area: image;
+}
+
+.feature-content-{{ section.id }} {
+  grid-area: content;
+}
+
+@media screen and (min-width: 1024px) {
+
+  .section-{{ section.id }} {
+    padding:
+      {{ section_padding_top }}px
+      {{ section_padding_horizontal }}rem
+      {{ section_padding_bottom }}px;
+  }
+
+  .feature-grid-{{ section.id }} {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: {{ desktop_gap }}px;
+  }
+
+  {% if layout == 'image_content' %}
+  .feature-grid-{{ section.id }} {
+    grid-template-areas: "image content";
+  }
+  {% else %}
+  .feature-grid-{{ section.id }} {
+    grid-template-areas: "content image";
+  }
+  {% endif %}
+
+  .feature-content-{{ section.id }} {
+    padding: {{ content_padding }}px;
+  }
+  .feature-list-{{ section.id }} {
+  padding: {{ inside_box_padding }}px;
+}
+
+  .feature-heading-{{ section.id }} * {
+    font-size: {{ heading_size }}px;
+  }
+
+  .feature-row-{{ section.id }} {
+    padding: {{ row_spacing }}px 0;
+  }
+
+  .feature-label-{{ section.id }} {
+    font-size: {{ label_size }}px;
+  }
+
+  .feature-value-{{ section.id }} {
+    font-size: {{ value_size }}px;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+
+  .feature-row-{{ section.id }} {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .feature-value-{{ section.id }} {
+    max-width: 100%;
+    text-align: left;
+  }
+
+}
+
+{%- if template == 'product.rhode-product-page' -%}
+  /* PDP width rail. Horizon's subgrid already places every `.section-{id}` at
+     the pill rail (40 → viewport-40) via `grid-column: 2`, so the OUTER is
+     already pill-flush — the INNER just needs to fill it. Applying the
+     `min(page-width - margin*2, 100% - margin*2)` formula here (like some other
+     sections do) would apply a SECOND 40px inset on each side and shrink the
+     inner to 1280px inside a 1360px outer. So we simply zero the outer padding
+     and let the inner span 100%. -vamshi */
+  .section-{{ section.id }} {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    background: transparent !important;
+  }
+  .section-{{ section.id }}-inner {
+    max-width: 100% !important;
+    margin-inline: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  /* Reset the theme-global italic <h2> so the heading renders upright. */
+  .feature-heading-{{ section.id }} *,
+  .feature-heading-{{ section.id }} h1,
+  .feature-heading-{{ section.id }} h2,
+  .feature-heading-{{ section.id }} p {
+    font-style: normal;
+  }
+  @media screen and (min-width: 1024px) {
+    .feature-content-{{ section.id }} {
+      justify-content: flex-end;
+      align-items: flex-start;
+    }
+    .feature-image-{{ section.id }} {
+      background: #f1f0ed;
+    }
+    .feature-image-{{ section.id }} svg {
+      background: #f1f0ed;
+    }
+    .feature-image-{{ section.id }} img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+{%- endif -%}
+
+</style>
+
+<div class="section-{{ section.id }}">
+
+  <div class="section-{{ section.id }}-inner">
+
+    <div class="feature-grid-{{ section.id }}">
+
+      <div class="feature-content-{{ section.id }}">
+
+        {% if section.settings.heading != blank %}
+          <div class="feature-heading-{{ section.id }}">
+            {{ section.settings.heading }}
+          </div>
+        {% endif %}
+
+        <div class="feature-list-{{ section.id }}">
+
+          {% for block in section.blocks %}
+            {% if block.type == 'feature' %}
+
+              <div class="feature-row-{{ section.id }}" {{ block.shopify_attributes }}>
+
+                <div class="feature-label-{{ section.id }}">
+                  {{ block.settings.label }}
+                </div>
+
+                <div class="feature-value-{{ section.id }}">
+                  {{ block.settings.value }}
+                </div>
+
+              </div>
+
+            {% endif %}
+          {% endfor %}
+
+        </div>
+
+      </div>
+
+      <div class="feature-image-{{ section.id }}">
+
+        {% if image != blank %}
+
+          {{
+            image
+            | image_url: width: 2000
+            | image_tag:
+              loading: 'lazy',
+              widths: '375,550,750,1100,1500,2000',
+              alt: image.alt
+          }}
+
+        {% else %}
+
+          {{ 'image' | placeholder_svg_tag }}
+
+        {% endif %}
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+{% schema %}
+{
+  "name": "SS-Dynamic Feature Split",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "section_width",
+      "min": 900,
+      "max": 2200,
+      "step": 50,
+      "unit": "px",
+      "label": "Section Width",
+      "default": 1400
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Desktop Layout",
+      "default": "content_image",
+      "options": [
+        {
+          "label": "Content Left",
+          "value": "content_image"
+        },
+        {
+          "label": "Image Left",
+          "value": "image_content"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "layout_mobile",
+      "label": "Mobile Layout",
+      "default": "content_image",
+      "options": [
+        {
+          "label": "Content Top",
+          "value": "content_image"
+        },
+        {
+          "label": "Image Top",
+          "value": "image_content"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "desktop_gap",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Desktop Gap",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "mobile_gap",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile Gap",
+      "default": 30
+    },
+
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "section_padding_horizontal",
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "unit": "rem",
+      "label": "Horizontal",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Mobile",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Mobile",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_horizontal_mobile",
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "unit": "rem",
+      "label": "Horizontal Mobile",
+      "default": 1
+    },
+
+    {
+      "type": "header",
+      "content": "Content Box"
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Content Padding",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "content_padding_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Content Padding Mobile",
+      "default": 24
+    },
+
+{
+  "type": "range",
+  "id": "inside_box_padding",
+  "min": 0,
+  "max": 100,
+  "step": 2,
+  "unit": "px",
+  "label": "Inside Box Padding",
+  "default": 30
+},
+{
+  "type": "range",
+  "id": "inside_box_padding_mobile",
+  "min": 0,
+  "max": 60,
+  "step": 2,
+  "unit": "px",
+  "label": "Inside Box Padding Mobile",
+  "default": 20
+},
+
+    {
+      "type": "range",
+      "id": "content_radius",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Content Radius",
+      "default": 20
+    },
+
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Image Radius",
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image Ratio",
+      "default": "square",
+      "options": [
+        {
+          "label": "Square",
+          "value": "square"
+        },
+        {
+          "label": "Portrait",
+          "value": "portrait"
+        },
+        {
+          "label": "Landscape",
+          "value": "landscape"
+        }
+      ]
+    },
+
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<h2>Clinically-proven PATCHES for SPOT CARE on the go.</h2>"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 16,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size Mobile",
+      "default": 34
+    },
+    {
+      "type": "range",
+      "id": "heading_line_height",
+      "min": 80,
+      "max": 200,
+      "step": 5,
+      "unit": "%",
+      "label": "Heading Line Height",
+      "default": 110
+    },
+
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "range",
+      "id": "label_size",
+      "min": 10,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Label Size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "label_size_mobile",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Label Size Mobile",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "value_size",
+      "min": 10,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Value Size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "value_size_mobile",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Value Size Mobile",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "text_line_height",
+      "min": 80,
+      "max": 220,
+      "step": 5,
+      "unit": "%",
+      "label": "Text Line Height",
+      "default": 160
+    },
+
+    {
+      "type": "header",
+      "content": "Rows"
+    },
+    {
+      "type": "range",
+      "id": "row_spacing",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Row Spacing",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "row_spacing_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Row Spacing Mobile",
+      "default": 18
+    },
+
+    {
+      "type": "header",
+      "content": "Borders"
+    },
+    {
+      "type": "range",
+      "id": "border_thickness",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Border Thickness",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Color",
+      "default": "#d9d9d9"
+    },
+    {
+      "type": "color",
+      "id": "row_border_color",
+      "label": "Row Border Color",
+      "default": "#d9d9d9"
+    },
+
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "section_bg",
+      "label": "Section Background",
+      "default": "#f4f1ec"
+    },
+    {
+      "type": "color",
+      "id": "content_bg",
+      "label": "Content Background",
+      "default": "#ebe7e2"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#5b5b5b"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#5b5b5b"
+    }
+
+  ],
+
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "GOOD FOR:"
+        },
+        {
+          "type": "textarea",
+          "id": "value",
+          "label": "Value",
+          "default": "All skin types"
+        }
+      ]
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "SS - Dynamic Feature Split",
+      "blocks": [
+        {
+          "type": "feature"
+        },
+        {
+          "type": "feature"
+        },
+        {
+          "type": "feature"
+        },
+        {
+          "type": "feature"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

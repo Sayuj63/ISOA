@@ -1,0 +1,629 @@
+{% comment %}
+  Rhode Hero — product-main-card
+  Fresh build from the two Rhode PDP analysis reports (structural + interaction audit).
+  DOM matches Rhode's shape: outer pill container → 12px-radius card → left media
+  (vertical thumb Swiper + horizontal main Swiper, both 1000ms) + right info column
+  (eyebrow, Zen Dots title, rating, price, shape links, ATC with clip-path fill, accordion).
+{% endcomment %}
+{%- assign sid = section.id -%}
+{%- assign p = product -%}
+{%- assign v = p.selected_or_first_available_variant -%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+<style>
+/* ─────────────────────────────────────────────────────────────
+   Outer container — matches the ISOA header pill width exactly
+   ───────────────────────────────────────────────────────────── */
+.rhode-hero-{{ sid }} {
+  padding-block: {{ section.settings.padding_top }}px {{ section.settings.padding_bottom }}px;
+  background: {{ section.settings.section_bg_color }};
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  color: {{ section.settings.text_color }};
+}
+.rhode-hero-{{ sid }} .rh-outer {
+  max-width: min(
+    calc(var(--page-width, 1200px) - var(--page-margin, 40px) * 2),
+    calc(100% - var(--page-margin, 40px) * 2)
+  );
+  margin-inline: auto;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Card — 12px radius, translucent beige, 2-col grid
+   min-height guarantees the card can never collapse
+   ───────────────────────────────────────────────────────────── */
+.rhode-hero-{{ sid }} .rh-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr {{ section.settings.info_col_width }}px;
+  grid-template-rows: 1fr;
+  background: {{ section.settings.card_bg_color }};
+  border-radius: {{ section.settings.card_radius }}px;
+  overflow: hidden;
+  min-height: {{ section.settings.card_min_height }}px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   LEFT column — media area (contains thumb rail + main slider)
+   Uses its own internal grid: fixed-width thumb column + flex main
+   height:100% chain guarantees the Swiper never collapses to 0
+   ───────────────────────────────────────────────────────────── */
+.rhode-hero-{{ sid }} .rh-media {
+  position: relative;
+  display: grid;
+  grid-template-columns: {{ section.settings.thumb_col_width }}px 1fr;
+  gap: {{ section.settings.thumb_gap_x }}px;
+  padding: {{ section.settings.media_padding }}px;
+  height: 100%;
+  min-height: 0;
+}
+
+/* Vertical thumb Swiper — 5 thumbs, 52×52 each, spaceBetween 12 */
+.rhode-hero-{{ sid }} .rh-thumbs {
+  position: relative;
+  align-self: center;
+  height: calc(
+    {{ section.settings.thumb_col_width }}px * {{ section.settings.thumbs_visible }}
+    + {{ section.settings.thumb_gap_y }}px * ({{ section.settings.thumbs_visible }} - 1)
+  );
+  max-height: 100%;
+  overflow: hidden;
+}
+.rhode-hero-{{ sid }} .rh-thumbs .swiper { height: 100%; width: 100%; }
+.rhode-hero-{{ sid }} .rh-thumbs .swiper-slide {
+  height: {{ section.settings.thumb_col_width }}px !important;
+  cursor: pointer;
+  border-radius: 6px;
+  overflow: hidden;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+.rhode-hero-{{ sid }} .rh-thumbs .swiper-slide.swiper-slide-thumb-active { opacity: 1; }
+.rhode-hero-{{ sid }} .rh-thumbs img {
+  width: 100%; height: 100%; object-fit: cover; display: block; background: #e8e6e1;
+}
+
+/* Main slider — horizontal, 1000ms ease, slidesPerView 1 spaceBetween 32 */
+.rhode-hero-{{ sid }} .rh-slider {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  background: {{ section.settings.image_bg_color }};
+  min-height: 0;
+}
+.rhode-hero-{{ sid }} .rh-slider .swiper { height: 100%; }
+.rhode-hero-{{ sid }} .rh-slider .swiper-slide {
+  display: flex; align-items: center; justify-content: center;
+  background: {{ section.settings.image_bg_color }};
+}
+.rhode-hero-{{ sid }} .rh-slider .swiper-slide img,
+.rhode-hero-{{ sid }} .rh-slider .swiper-slide video {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.rhode-hero-{{ sid }} .rh-slider .swiper-slide.rh-empty {
+  background: {{ section.settings.image_bg_color }};
+}
+
+/* ─────────────────────────────────────────────────────────────
+   RIGHT column — info card
+   ───────────────────────────────────────────────────────────── */
+.rhode-hero-{{ sid }} .rh-info {
+  padding: {{ section.settings.info_padding_top }}px {{ section.settings.info_padding_x }}px {{ section.settings.info_padding_bottom }}px;
+  display: flex; flex-direction: column;
+  gap: {{ section.settings.info_gap }}px;
+  align-self: stretch;
+  justify-content: center;
+  background: {{ section.settings.info_bg_color }};
+  color: {{ section.settings.text_color }};
+}
+.rhode-hero-{{ sid }} .rh-eyebrow {
+  margin: 0;
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: {{ section.settings.eyebrow_color }};
+}
+.rhode-hero-{{ sid }} .rh-title {
+  margin: 0 !important;
+  font-family: 'Zen Dots', 'Josefin Sans', sans-serif !important;
+  font-size: clamp(40px, 5vw, {{ section.settings.title_size_desktop }}px) !important;
+  font-weight: 400 !important;
+  line-height: 1.0 !important;
+  letter-spacing: -0.04em !important;
+  text-transform: lowercase !important;
+  color: {{ section.settings.title_color }} !important;
+}
+.rhode-hero-{{ sid }} .rh-rating {
+  display: flex; align-items: center; gap: 12px;
+  font-family: inherit;
+  font-size: 12px;
+  color: {{ section.settings.text_color }};
+  letter-spacing: 0.02em;
+}
+.rhode-hero-{{ sid }} .rh-rating-stars {
+  color: {{ section.settings.title_color }};
+  letter-spacing: 2px;
+  font-size: 14px;
+}
+.rhode-hero-{{ sid }} .rh-price {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 400;
+  color: {{ section.settings.price_color }};
+}
+.rhode-hero-{{ sid }} .rh-price s { opacity: 0.6; margin-right: 8px; }
+.rhode-hero-{{ sid }} .rh-desc {
+  font-size: 15px;
+  line-height: 1.65;
+  color: {{ section.settings.text_color }};
+}
+.rhode-hero-{{ sid }} .rh-desc p { margin: 0; }
+.rhode-hero-{{ sid }} .rh-desc p + p { margin-top: 10px; }
+
+/* Shape links — Rhode's cross-product navigation (::after ring for selected) */
+.rhode-hero-{{ sid }} .rh-shapes { display: flex; flex-direction: column; gap: 12px; }
+.rhode-hero-{{ sid }} .rh-shapes-label {
+  margin: 0;
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: {{ section.settings.eyebrow_color }};
+}
+.rhode-hero-{{ sid }} .rh-shapes-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.rhode-hero-{{ sid }} .rh-shape {
+  position: relative;
+  width: 40px; height: 40px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  text-decoration: none;
+  overflow: visible;
+  transition: filter 0.2s ease;
+}
+.rhode-hero-{{ sid }} .rh-shape img,
+.rhode-hero-{{ sid }} .rh-shape .rh-shape-fill {
+  width: 100%; height: 100%; object-fit: cover;
+  border-radius: 50%; display: block;
+}
+.rhode-hero-{{ sid }} .rh-shape::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 125%; height: 125%;
+  transform: translate(-50%, -50%);
+  border: 1px solid {{ section.settings.shape_ring_color }};
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.rhode-hero-{{ sid }} .rh-shape.is-selected::after { opacity: 1; }
+
+/* CTA — clip-path hover fill (Rhode's Button-fill-content pattern) */
+.rhode-hero-{{ sid }} .rh-form { display: flex; flex-direction: column; gap: 12px; margin: 0; }
+.rhode-hero-{{ sid }} .rh-cta {
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border: 1px solid {{ section.settings.cta_border_color }};
+  border-radius: 999px;
+  background: {{ section.settings.cta_bg_color }};
+  color: {{ section.settings.cta_text_color }};
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  overflow: hidden;
+  transition: color 0.25s ease-out;
+}
+.rhode-hero-{{ sid }} .rh-cta .rh-cta-fill {
+  position: absolute; inset: 0;
+  background: {{ section.settings.cta_hover_bg_color }};
+  clip-path: inset(0 100% 0 0);
+  -webkit-clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.rhode-hero-{{ sid }} .rh-cta:hover { color: {{ section.settings.cta_hover_text_color }}; }
+.rhode-hero-{{ sid }} .rh-cta:hover .rh-cta-fill { clip-path: inset(0); -webkit-clip-path: inset(0); }
+.rhode-hero-{{ sid }} .rh-cta .rh-cta-label { position: relative; z-index: 1; }
+.rhode-hero-{{ sid }} .rh-cta[disabled] { opacity: 0.5; cursor: not-allowed; }
+
+/* Accordion — max-height 0 ↔ scrollHeight, 0.7s cubic-bezier chrome easing */
+.rhode-hero-{{ sid }} .rh-accordion { margin-top: 4px; }
+.rhode-hero-{{ sid }} .rh-tab { border-top: 1px solid {{ section.settings.accordion_border_color }}; }
+.rhode-hero-{{ sid }} .rh-tab:last-child { border-bottom: 1px solid {{ section.settings.accordion_border_color }}; }
+.rhode-hero-{{ sid }} .rh-tab-toggle {
+  width: 100%;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: {{ section.settings.title_color }};
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.rhode-hero-{{ sid }} .rh-tab-icon {
+  position: relative; width: 18px; height: 18px; flex-shrink: 0;
+}
+.rhode-hero-{{ sid }} .rh-tab-icon span {
+  position: absolute; top: 8px; left: 0;
+  width: 18px; height: 2px;
+  background: {{ section.settings.title_color }};
+  transform-origin: center;
+  transition: transform 0.7s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.rhode-hero-{{ sid }} .rh-tab-icon span:nth-child(2) { transform: rotate(90deg); }
+.rhode-hero-{{ sid }} .rh-tab.is-open .rh-tab-icon span:nth-child(1) { transform: rotate(180deg); }
+.rhode-hero-{{ sid }} .rh-tab.is-open .rh-tab-icon span:nth-child(2) { transform: rotate(0deg); }
+.rhode-hero-{{ sid }} .rh-tab-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.7s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.rhode-hero-{{ sid }} .rh-tab-panel-inner {
+  padding: 0 0 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: {{ section.settings.text_color }};
+}
+.rhode-hero-{{ sid }} .rh-tab-panel-inner ul { margin: 0; padding-left: 20px; }
+.rhode-hero-{{ sid }} .rh-tab-panel-inner li { margin-bottom: 6px; }
+.rhode-hero-{{ sid }} .rh-tab-panel-inner p { margin: 0 0 12px; }
+.rhode-hero-{{ sid }} .rh-tab-panel-inner p:last-child { margin-bottom: 0; }
+
+/* ─────────────────────────────────────────────────────────────
+   Mobile — stacks into single column
+   Card radius top: 12/12/12/12; on desktop no split radii needed
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 749px) {
+  .rhode-hero-{{ sid }} .rh-card {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    min-height: 0;
+    background: {{ section.settings.info_bg_color_mobile }};
+  }
+  .rhode-hero-{{ sid }} .rh-media {
+    padding: 0;
+    grid-template-columns: 1fr;
+    height: auto;
+    aspect-ratio: 1 / 1.15;
+  }
+  .rhode-hero-{{ sid }} .rh-thumbs { display: none; }
+  .rhode-hero-{{ sid }} .rh-slider {
+    border-radius: {{ section.settings.card_radius }}px {{ section.settings.card_radius }}px 0 0;
+    height: 100%;
+  }
+  .rhode-hero-{{ sid }} .rh-info {
+    padding: 32px 16px 16px;
+    background: {{ section.settings.info_bg_color_mobile }};
+    border-radius: 0 0 {{ section.settings.card_radius }}px {{ section.settings.card_radius }}px;
+    gap: {{ section.settings.info_gap_mobile }}px;
+  }
+  .rhode-hero-{{ sid }} .rh-title {
+    font-size: 40px !important;
+    line-height: 40px !important;
+    letter-spacing: -1.6px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rhode-hero-{{ sid }} * { transition: none !important; }
+}
+</style>
+
+<section class="rhode-hero-{{ sid }}" data-rh-hero>
+  <div class="rh-outer">
+    <div class="rh-card">
+      <!-- LEFT: media -->
+      <div class="rh-media">
+        <div class="rh-thumbs">
+          <div class="swiper" data-rh-thumbs>
+            <div class="swiper-wrapper">
+              {%- if p.media.size > 0 -%}
+                {%- for m in p.media -%}
+                  <div class="swiper-slide" data-idx="{{ forloop.index0 }}">
+                    <img
+                      src="{{ m.preview_image | image_url: width: 200 }}"
+                      alt="{{ m.alt | default: p.title | escape }} thumbnail"
+                      width="{{ m.preview_image.width }}"
+                      height="{{ m.preview_image.height }}"
+                      loading="lazy">
+                  </div>
+                {%- endfor -%}
+              {%- else -%}
+                {%- for i in (1..4) -%}
+                  <div class="swiper-slide" data-idx="{{ forloop.index0 }}">
+                    {{ 'lifestyle-1' | placeholder_svg_tag }}
+                  </div>
+                {%- endfor -%}
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+        <div class="rh-slider">
+          <div class="swiper" data-rh-main>
+            <div class="swiper-wrapper">
+              {%- if p.media.size > 0 -%}
+                {%- for m in p.media -%}
+                  <div class="swiper-slide">
+                    {%- if m.media_type == 'video' -%}
+                      <video src="{{ m.sources[0].url }}" playsinline muted loop autoplay></video>
+                    {%- else -%}
+                      <img
+                        src="{{ m | image_url: width: 1400 }}"
+                        alt="{{ m.alt | default: p.title | escape }}"
+                        width="{{ m.preview_image.width }}"
+                        height="{{ m.preview_image.height }}"
+                        loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+                    {%- endif -%}
+                  </div>
+                {%- endfor -%}
+              {%- else -%}
+                {%- for i in (1..4) -%}
+                  <div class="swiper-slide rh-empty">{{ 'product-1' | placeholder_svg_tag }}</div>
+                {%- endfor -%}
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: info -->
+      <div class="rh-info">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="rh-eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+
+        <h1 class="rh-title">{{ p.title | default: section.settings.title_fallback }}</h1>
+
+        {%- if section.settings.show_rating -%}
+          <div class="rh-rating">
+            <span class="rh-rating-stars" aria-hidden="true">★★★★★</span>
+            <span>Rated {{ section.settings.rating_value }} out of 5 · {{ section.settings.rating_count }} reviews</span>
+          </div>
+        {%- endif -%}
+
+        <p class="rh-price">
+          {%- if v.compare_at_price and v.compare_at_price > v.price -%}
+            <s>{{ v.compare_at_price | money }}</s>
+          {%- endif -%}
+          {{ v.price | money }}
+        </p>
+
+        {%- if section.settings.short_desc != blank -%}
+          <div class="rh-desc">{{ section.settings.short_desc }}</div>
+        {%- elsif p.description != blank -%}
+          <div class="rh-desc">{{ p.description | truncate: 200 }}</div>
+        {%- endif -%}
+
+        {%- assign shape_blocks = section.blocks | where: 'type', 'shape_link' -%}
+        {%- if shape_blocks.size > 0 -%}
+          <div class="rh-shapes">
+            {%- if section.settings.shapes_label != blank -%}
+              <p class="rh-shapes-label">{{ section.settings.shapes_label }}</p>
+            {%- endif -%}
+            <div class="rh-shapes-row">
+              {%- for block in shape_blocks -%}
+                {%- assign is_sel = false -%}
+                {%- if block.settings.handle != blank and p.handle == block.settings.handle -%}
+                  {%- assign is_sel = true -%}
+                {%- endif -%}
+                {%- assign shape_url = block.settings.url -%}
+                {%- if shape_url == blank and block.settings.handle != blank -%}
+                  {%- assign shape_url = '/products/' | append: block.settings.handle -%}
+                {%- endif -%}
+                <a href="{{ shape_url | default: '#' }}"
+                   class="rh-shape{% if is_sel %} is-selected{% endif %}"
+                   aria-label="Select {{ block.settings.name | escape }}"
+                   {% if is_sel %}aria-current="page"{% endif %}
+                   {{ block.shopify_attributes }}>
+                  {%- if block.settings.image != blank -%}
+                    <img src="{{ block.settings.image | image_url: width: 80 }}" alt="{{ block.settings.name | escape }}" loading="lazy">
+                  {%- else -%}
+                    <span class="rh-shape-fill" style="background: {{ block.settings.fallback_color }};"></span>
+                  {%- endif -%}
+                </a>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        <form method="post" action="/cart/add" enctype="multipart/form-data" class="rh-form">
+          <input type="hidden" name="id" value="{{ v.id }}">
+          <input type="hidden" name="quantity" value="1">
+          <button type="submit" class="rh-cta" {% unless v.available %}disabled{% endunless %}>
+            <span class="rh-cta-fill" aria-hidden="true"></span>
+            <span class="rh-cta-label">
+              {%- if v.available -%}
+                {{ section.settings.cta_label }} · {{ v.price | money }}
+              {%- else -%}
+                {{ section.settings.sold_out_label }}
+              {%- endif -%}
+            </span>
+          </button>
+        </form>
+
+        {%- assign accordion_blocks = section.blocks | where: 'type', 'accordion' -%}
+        {%- if accordion_blocks.size > 0 -%}
+          <div class="rh-accordion">
+            {%- for block in accordion_blocks -%}
+              <div class="rh-tab" data-rh-tab {{ block.shopify_attributes }}>
+                <button type="button" class="rh-tab-toggle" aria-expanded="false">
+                  <span>{{ block.settings.heading }}</span>
+                  <span class="rh-tab-icon" aria-hidden="true"><span></span><span></span></span>
+                </button>
+                <div class="rh-tab-panel">
+                  <div class="rh-tab-panel-inner">{{ block.settings.content }}</div>
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+<script>
+(function(){
+  var sid = '{{ sid }}';
+  function boot() {
+    if (typeof Swiper === 'undefined') return setTimeout(boot, 60);
+    var root = document.querySelector('.rhode-hero-' + sid);
+    if (!root) return;
+
+    var thumbsEl = root.querySelector('[data-rh-thumbs]');
+    var mainEl   = root.querySelector('[data-rh-main]');
+    if (!thumbsEl || !mainEl) return;
+
+    /* Vertical thumb Swiper: speed 1000, slidesPerView {{ section.settings.thumbs_visible }}, spaceBetween {{ section.settings.thumb_gap_y }} */
+    var thumbs = new Swiper(thumbsEl, {
+      direction: 'vertical',
+      slidesPerView: {{ section.settings.thumbs_visible }},
+      spaceBetween: {{ section.settings.thumb_gap_y }},
+      speed: 1000,
+      watchSlidesProgress: true,
+      allowTouchMove: false
+    });
+
+    /* Main horizontal Swiper: speed 1000 ease, slide effect, spaceBetween 32, 1 per view */
+    var main = new Swiper(mainEl, {
+      effect: 'slide',
+      slidesPerView: 1,
+      spaceBetween: {{ section.settings.main_gap }},
+      speed: 1000,
+      loop: false,
+      allowTouchMove: false,
+      thumbs: { swiper: thumbs, slideThumbActiveClass: 'swiper-slide-thumb-active' }
+    });
+
+    /* Mobile: enable finger swipe on the main slider */
+    var mq = window.matchMedia('(max-width: 749px)');
+    function applyTouch() { main.params.allowTouchMove = mq.matches; main.update(); }
+    applyTouch();
+    if (mq.addEventListener) mq.addEventListener('change', applyTouch);
+
+    /* Accordion: max-height 0 ↔ scrollHeight */
+    root.querySelectorAll('[data-rh-tab]').forEach(function(tab){
+      var btn   = tab.querySelector('.rh-tab-toggle');
+      var panel = tab.querySelector('.rh-tab-panel');
+      if (!btn || !panel) return;
+      btn.addEventListener('click', function(){
+        var open = tab.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        panel.style.maxHeight = open ? (panel.scrollHeight + 'px') : '0px';
+      });
+    });
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); }
+  else { boot(); }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Rhode — Hero",
+  "settings": [
+    { "type": "header", "content": "Copy" },
+    { "type": "text",     "id": "eyebrow",         "label": "Eyebrow (uppercase line above title)", "default": "DESIGNED WITH JUSTIN BIEBER" },
+    { "type": "text",     "id": "title_fallback",  "label": "Title fallback (used only when product.title is blank)", "default": "spotwear" },
+    { "type": "richtext", "id": "short_desc",      "label": "Short description (overrides product.description)" },
+    { "type": "text",     "id": "cta_label",       "label": "CTA label",                             "default": "BUY" },
+    { "type": "text",     "id": "sold_out_label",  "label": "Sold-out label",                        "default": "SOLD OUT" },
+    { "type": "text",     "id": "shapes_label",    "label": "Shape row label",                       "default": "Shape" },
+
+    { "type": "header", "content": "Rating" },
+    { "type": "checkbox", "id": "show_rating",  "label": "Show rating row", "default": true },
+    { "type": "text",     "id": "rating_value", "label": "Rating value",    "default": "4.6" },
+    { "type": "text",     "id": "rating_count", "label": "Review count",    "default": "63" },
+
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "section_bg_color",     "label": "Section background",              "default": "#ffffff" },
+    { "type": "color", "id": "card_bg_color",        "label": "Card background (desktop)",       "default": "#edecec" },
+    { "type": "color", "id": "info_bg_color",        "label": "Info column background (desktop)","default": "#f1f0ed" },
+    { "type": "color", "id": "info_bg_color_mobile", "label": "Info column background (mobile)", "default": "#f1f0ed" },
+    { "type": "color", "id": "image_bg_color",       "label": "Image slide background",          "default": "#f6f5f2" },
+    { "type": "color", "id": "title_color",          "label": "Title colour",                    "default": "#67645e" },
+    { "type": "color", "id": "eyebrow_color",        "label": "Eyebrow/label colour",            "default": "#67645e" },
+    { "type": "color", "id": "text_color",           "label": "Body text colour",                "default": "#67645e" },
+    { "type": "color", "id": "price_color",          "label": "Price colour",                    "default": "#67645e" },
+    { "type": "color", "id": "shape_ring_color",     "label": "Shape selected ring colour",      "default": "#67645e" },
+    { "type": "color", "id": "accordion_border_color","label": "Accordion divider colour",       "default": "#c4c4c4" },
+    { "type": "color", "id": "cta_bg_color",         "label": "CTA background",                  "default": "#67645e" },
+    { "type": "color", "id": "cta_hover_bg_color",   "label": "CTA hover background",            "default": "#121212" },
+    { "type": "color", "id": "cta_text_color",       "label": "CTA text",                        "default": "#ffffff" },
+    { "type": "color", "id": "cta_hover_text_color", "label": "CTA hover text",                  "default": "#ffffff" },
+    { "type": "color", "id": "cta_border_color",     "label": "CTA border",                      "default": "#67645e" },
+
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "card_radius",        "min": 0,  "max": 32,  "step": 2, "label": "Card radius (px)",                 "default": 12 },
+    { "type": "range", "id": "card_min_height",    "min": 480,"max": 900, "step": 20,"label": "Card minimum height (desktop, px)","default": 720 },
+    { "type": "range", "id": "info_col_width",     "min": 360,"max": 720, "step": 20,"label": "Info column width (desktop, px)",  "default": 560 },
+    { "type": "range", "id": "media_padding",      "min": 16, "max": 64,  "step": 4, "label": "Media area padding (desktop, px)", "default": 32 },
+    { "type": "range", "id": "thumb_col_width",    "min": 44, "max": 96,  "step": 4, "label": "Thumb column width (px)",          "default": 52 },
+    { "type": "range", "id": "thumb_gap_x",        "min": 8,  "max": 48,  "step": 2, "label": "Gap between thumbs and main (px)", "default": 20 },
+    { "type": "range", "id": "thumb_gap_y",        "min": 4,  "max": 24,  "step": 2, "label": "Gap between thumbs (px)",          "default": 12 },
+    { "type": "range", "id": "thumbs_visible",     "min": 3,  "max": 6,   "step": 1, "label": "Thumbs visible at once",           "default": 4 },
+    { "type": "range", "id": "main_gap",           "min": 0,  "max": 64,  "step": 4, "label": "Main slider slide gap (px)",       "default": 32 },
+    { "type": "range", "id": "info_padding_top",   "min": 20, "max": 80,  "step": 4, "label": "Info column padding-top (px)",     "default": 40 },
+    { "type": "range", "id": "info_padding_bottom","min": 20, "max": 80,  "step": 4, "label": "Info column padding-bottom (px)",  "default": 40 },
+    { "type": "range", "id": "info_padding_x",     "min": 20, "max": 64,  "step": 4, "label": "Info column padding-x (px)",       "default": 40 },
+    { "type": "range", "id": "info_gap",           "min": 8,  "max": 32,  "step": 2, "label": "Info column vertical gap (px)",    "default": 20 },
+    { "type": "range", "id": "info_gap_mobile",    "min": 6,  "max": 24,  "step": 2, "label": "Info column vertical gap (mobile)","default": 16 },
+    { "type": "range", "id": "title_size_desktop", "min": 40, "max": 96,  "step": 2, "label": "Title max size (desktop, px)",     "default": 58 },
+    { "type": "range", "id": "padding_top",        "min": 0,  "max": 160, "step": 8, "label": "Section outer padding-top",        "default": 24 },
+    { "type": "range", "id": "padding_bottom",     "min": 0,  "max": 160, "step": 8, "label": "Section outer padding-bottom",     "default": 32 }
+  ],
+  "blocks": [
+    {
+      "type": "shape_link",
+      "name": "Shape link (variant)",
+      "settings": [
+        { "type": "text",         "id": "name",           "label": "Shape name",         "default": "daisy" },
+        { "type": "text",         "id": "handle",         "label": "Product handle",     "default": "spotwear-daisy",
+          "info": "Used for the active-ring match when the current product handle equals this value." },
+        { "type": "text",         "id": "url",            "label": "Explicit URL (overrides handle-based link)" },
+        { "type": "image_picker", "id": "image",          "label": "Shape image (optional)" },
+        { "type": "color",        "id": "fallback_color", "label": "Fallback fill colour","default": "#e29fc8" }
+      ]
+    },
+    {
+      "type": "accordion",
+      "name": "Accordion row",
+      "settings": [
+        { "type": "text",     "id": "heading", "label": "Heading",  "default": "BENEFITS" },
+        { "type": "richtext", "id": "content", "label": "Content",  "default": "<ul><li>Add benefit copy here</li></ul>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rhode — Hero",
+      "settings": { "eyebrow": "DESIGNED WITH JUSTIN BIEBER" },
+      "blocks": [
+        { "type": "shape_link", "settings": { "name": "daisy",      "handle": "spotwear-daisy",      "fallback_color": "#e29fc8" } },
+        { "type": "shape_link", "settings": { "name": "bubble",     "handle": "spotwear-bubble",     "fallback_color": "#f4d3c4" } },
+        { "type": "shape_link", "settings": { "name": "shroom",     "handle": "spotwear-shroom",     "fallback_color": "#d6c1a8" } },
+        { "type": "shape_link", "settings": { "name": "curve",      "handle": "spotwear-curve",      "fallback_color": "#c8beb2" } },
+        { "type": "shape_link", "settings": { "name": "jelly bean", "handle": "spotwear-jelly-bean", "fallback_color": "#e5d8c5" } },
+        { "type": "accordion",  "settings": { "heading": "BENEFITS",        "content": "<ul><li>Targets multiple breakouts at once</li><li>Absorbs impurities from congested pores</li><li>Leaves breakouts smaller, flatter, less red</li></ul>" } },
+        { "type": "accordion",  "settings": { "heading": "APPLICATION",     "content": "<p>Apply to a clean, dry spot. Press gently to seal. Wear 6-8 hours before removing.</p>" } },
+        { "type": "accordion",  "settings": { "heading": "KEY INGREDIENTS", "content": "<p><strong>Hydrocolloid</strong> — a gel-like material that draws out impurities and protects the skin.</p>" } }
+      ]
+    }
+  ],
+  "enabled_on": { "templates": ["product"] }
+}
+{% endschema %}

@@ -1,0 +1,250 @@
+{% comment %}
+  Rhode PDP — full-width sticky bottom bar (matches spotwear-daisy reference).
+  Left: product name + inline shape swatches. Right: BUY {LAST-WORD} - $price pill.
+  Hides on hero visible, appears once scrolled past. -vamshi
+{% endcomment %}
+
+{%- assign sid = section.id -%}
+{%- assign p = product -%}
+{%- assign v = p.selected_or_first_available_variant -%}
+{%- assign last_word = p.title | split: ' ' | last | upcase -%}
+{%- assign btn_label = section.settings.cta_label | replace: '{SHAPE}', last_word -%}
+
+<style>
+  .rhode-satc-{{ sid }} {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: {{ section.settings.bar_bg_color }};
+    z-index: 50;
+    padding: 14px clamp(20px, 4vw, 56px);
+    color: {{ section.settings.text_color }};
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.05);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(110%);
+    transition:
+      opacity 0.7s cubic-bezier(0.76, 0, 0.24, 1),
+      visibility 0.7s cubic-bezier(0.76, 0, 0.24, 1),
+      transform 0.7s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+  .rhode-satc-{{ sid }}.is-visible {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .rhode-satc-{{ sid }} .rs-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+  .rhode-satc-{{ sid }} .rs-title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: {{ section.settings.title_color }};
+    white-space: nowrap;
+  }
+  .rhode-satc-{{ sid }} .rs-swatches {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .rhode-satc-{{ sid }} .rs-swatch {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+  .rhode-satc-{{ sid }} .rs-swatch:hover {
+    transform: scale(1.08);
+  }
+  .rhode-satc-{{ sid }} .rs-swatch img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  .rhode-satc-{{ sid }} .rs-swatch__dot {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #d9d7d1;
+    display: block;
+  }
+  .rhode-satc-{{ sid }} .rs-swatch.is-active::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border: 1px solid #67645e;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .rhode-satc-{{ sid }} form {
+    margin: 0;
+    flex-shrink: 0;
+  }
+  .rhode-satc-{{ sid }} .rs-cta {
+    position: relative;
+    overflow: hidden;
+    border: 0;
+    border-radius: 999px;
+    padding: 16px 36px;
+    background: {{ section.settings.cta_bg_color }};
+    color: {{ section.settings.cta_text_color }};
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.35s cubic-bezier(0.76, 0, 0.24, 1);
+    white-space: nowrap;
+  }
+  .rhode-satc-{{ sid }} .rs-cta:hover {
+    background: {{ section.settings.cta_hover_bg_color }};
+  }
+  .rhode-satc-{{ sid }} .rs-cta[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  @media (max-width: 749px) {
+    .rhode-satc-{{ sid }} {
+      padding: 10px 16px;
+      gap: 10px;
+    }
+    .rhode-satc-{{ sid }} .rs-title {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+    }
+    .rhode-satc-{{ sid }} .rs-swatch {
+      width: 24px;
+      height: 24px;
+    }
+    .rhode-satc-{{ sid }} .rs-swatches {
+      gap: 6px;
+    }
+    .rhode-satc-{{ sid }} .rs-cta {
+      padding: 12px 20px;
+      font-size: 11px;
+    }
+  }
+
+  /* Kill Horizon's default sticky-add-to-cart on this template. */
+  {% if template == 'product.rhode-product-page' %}
+    .sticky-add-to-cart__bar,
+    .sticky-add-to-cart {
+      display: none !important;
+    }
+  {% endif %}
+</style>
+
+<aside class="rhode-satc-{{ sid }}" data-rh-satc aria-label="Sticky add to cart">
+  <div class="rs-left">
+    <span class="rs-title">{{ p.title | upcase }}</span>
+
+    {%- comment -%}
+      Render one swatch per REAL product variant. Each variant links to itself
+      via `variant.url` (Shopify's `?variant=` param). Icon comes from the
+      variant metafield `custom.swatch_icon` if present, otherwise a neutral
+      grey circle placeholder — no hardcoded colors. Later, adding per-variant
+      icon uploads via the variant metafield will make them show automatically.
+    {%- endcomment -%}
+    {%- if p.variants.size > 1 -%}
+      <div class="rs-swatches">
+        {%- for variant in p.variants -%}
+          {%- assign vicon = variant.metafields.custom.swatch_icon.value -%}
+          <a
+            href="{{ variant.url }}"
+            class="rs-swatch {% if variant.id == v.id %}is-active{% endif %}"
+            title="{{ variant.title | escape }}"
+            aria-label="{{ variant.title | escape }}"
+          >
+            {%- if vicon != blank -%}
+              {{ vicon | image_url: width: 96 | image_tag: alt: variant.title, loading: 'lazy' }}
+            {%- elsif variant.featured_image != blank -%}
+              <img src="{{ variant.featured_image | image_url: width: 96 }}" alt="{{ variant.title | escape }}" loading="lazy">
+            {%- else -%}
+              <span class="rs-swatch__dot"></span>
+            {%- endif -%}
+          </a>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <form method="post" action="/cart/add" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="{{ v.id }}">
+    <input type="hidden" name="quantity" value="1">
+    <button type="submit" class="rs-cta" {% unless v.available %}disabled{% endunless %}>
+      {%- if v.available -%}
+        {{ btn_label }} - {{ v.price | money }}
+      {%- else -%}
+        {{ section.settings.sold_out_label }}
+      {%- endif -%}
+    </button>
+  </form>
+</aside>
+
+<script>
+  (function () {
+    var bar = document.querySelector('.rhode-satc-{{ sid }}');
+    if (!bar) return;
+    var trigger = document.querySelector('{{ section.settings.hero_selector }}');
+    if (!trigger) {
+      // Fallback: show once user scrolls 400px down.
+      window.addEventListener('scroll', function () {
+        if (window.scrollY > 400) bar.classList.add('is-visible');
+        else bar.classList.remove('is-visible');
+      });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) bar.classList.remove('is-visible');
+        else bar.classList.add('is-visible');
+      });
+    }, { threshold: 0 });
+    io.observe(trigger);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Rhode · Sticky ATC",
+  "settings": [
+    { "type": "text",  "id": "title_override",   "label": "Title override (leave as product title, or type a custom label)", "default": "SPOTWEAR DAISY" },
+    { "type": "text",  "id": "cta_label",        "label": "CTA label (use {SHAPE} for last word of product title)", "default": "BUY {SHAPE}" },
+    { "type": "text",  "id": "sold_out_label",   "label": "Sold-out label", "default": "SOLD OUT" },
+    { "type": "text",  "id": "hero_selector",    "label": "Selector to watch (hero — hide bar while visible)", "default": "[data-rh-hero], .product-information" },
+    { "type": "color", "id": "bar_bg_color",       "label": "Bar background",       "default": "#faf7f2" },
+    { "type": "color", "id": "title_color",        "label": "Title color",          "default": "#67645e" },
+    { "type": "color", "id": "text_color",         "label": "Body text",            "default": "#67645e" },
+    { "type": "color", "id": "cta_bg_color",       "label": "CTA background",       "default": "#67645e" },
+    { "type": "color", "id": "cta_hover_bg_color", "label": "CTA hover background", "default": "#4d4b45" },
+    { "type": "color", "id": "cta_text_color",     "label": "CTA text",             "default": "#ffffff" }
+  ],
+  "presets": [
+    { "name": "Rhode · Sticky ATC" }
+  ],
+  "enabled_on": { "templates": ["product"] }
+}
+{% endschema %}

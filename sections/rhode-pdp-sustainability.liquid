@@ -1,0 +1,405 @@
+{% comment %}Rhode PDP — Sustainability: sliding panel A (packaging diagram) / panel B (recycling steps){% endcomment %}
+{%- assign sid = section.id -%}
+<style>
+.rhode-sust2-{{ sid }} {
+  padding-block: {{ section.settings.padding_top }}px {{ section.settings.padding_bottom }}px;
+}
+.rhode-sust2-{{ sid }} .rs2-inner {
+  max-width: min(
+    calc(var(--page-width, 1200px) - var(--page-margin, 40px) * 2),
+    calc(100% - var(--page-margin, 40px) * 2)
+  );
+  margin-inline: auto;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  height: clamp(500px, 70vh, 800px);
+}
+/* ── Panels ── */
+.rhode-sust2-{{ sid }} .rs2-panels {
+  position: absolute;
+  inset: 0;
+  /* leave room for tab strip on right */
+  right: 56px;
+}
+.rhode-sust2-{{ sid }} .rs2-panel {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  background-color: {{ section.settings.bg_color }};
+  opacity: 0;
+  transform: translateX(-24px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  pointer-events: none;
+}
+.rhode-sust2-{{ sid }} .rs2-panel.is-active {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+/* Panel A: 40/60 */
+.rhode-sust2-{{ sid }} .rs2-panel-a {
+  grid-template-columns: 2fr 3fr;
+}
+/* Panel B: 50/50 */
+.rhode-sust2-{{ sid }} .rs2-panel-b {
+  grid-template-columns: 1fr 1fr;
+  transform: translateX(24px);
+}
+.rhode-sust2-{{ sid }} .rs2-panel-b.is-active {
+  transform: translateX(0);
+}
+/* ── Panel columns ── */
+.rhode-sust2-{{ sid }} .rs2-col-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 48px 44px;
+  overflow: auto;
+}
+.rhode-sust2-{{ sid }} .rs2-col-media {
+  position: relative;
+  overflow: hidden;
+}
+.rhode-sust2-{{ sid }} .rs2-col-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* ── Typography ── */
+.rhode-sust2-{{ sid }} .rs2-heading {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: clamp(28px, 4vw, 56px);
+  font-weight: 300;
+  line-height: 1.15;
+  color: {{ section.settings.heading_color }};
+  margin: 0 0 20px;
+}
+.rhode-sust2-{{ sid }} .rs2-body {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: {{ section.settings.text_color }};
+  margin: 0 0 32px;
+}
+/* ── Steps (Panel B) ── */
+.rhode-sust2-{{ sid }} .rs2-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.rhode-sust2-{{ sid }} .rs2-step {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  padding-block: 16px;
+  border-top: 1px solid rgba(103,100,94,0.25);
+}
+.rhode-sust2-{{ sid }} .rs2-step:last-child {
+  border-bottom: 1px solid rgba(103,100,94,0.25);
+}
+.rhode-sust2-{{ sid }} .rs2-step__num {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: rgba(103,100,94,0.5);
+  flex-shrink: 0;
+  padding-top: 3px;
+  min-width: 22px;
+}
+.rhode-sust2-{{ sid }} .rs2-step__text {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: {{ section.settings.text_color }};
+  margin: 0;
+}
+/* ── Panel A diagram image (contain) ── */
+.rhode-sust2-{{ sid }} .rs2-diagram-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.rhode-sust2-{{ sid }} .rs2-diagram-wrap img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  padding: 24px;
+  box-sizing: border-box;
+}
+/* ── Vertical tab strip ── */
+.rhode-sust2-{{ sid }} .rs2-tabs {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 56px;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+.rhode-sust2-{{ sid }} .rs2-tab {
+  flex: 1;
+  background-color: {{ section.settings.tab_bg_color }};
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 16px 0;
+  transition: background 0.22s ease, opacity 0.22s ease;
+  line-height: 1;
+}
+.rhode-sust2-{{ sid }} .rs2-tab:first-child {
+  border-bottom: 1px solid rgba(255,255,255,0.25);
+}
+.rhode-sust2-{{ sid }} .rs2-tab:hover {
+  opacity: 0.85;
+}
+/* ── Mobile ── */
+@media (max-width: 749px) {
+  .rhode-sust2-{{ sid }} .rs2-inner {
+    height: auto;
+    min-height: 500px;
+  }
+  .rhode-sust2-{{ sid }} .rs2-panels {
+    right: 44px;
+  }
+  .rhode-sust2-{{ sid }} .rs2-tabs {
+    width: 44px;
+  }
+  .rhode-sust2-{{ sid }} .rs2-panel-a,
+  .rhode-sust2-{{ sid }} .rs2-panel-b {
+    grid-template-columns: 1fr;
+  }
+  .rhode-sust2-{{ sid }} .rs2-col-media,
+  .rhode-sust2-{{ sid }} .rs2-diagram-wrap {
+    min-height: 220px;
+  }
+  .rhode-sust2-{{ sid }} .rs2-col-text {
+    padding: 28px 24px;
+  }
+  .rhode-sust2-{{ sid }} .rs2-panel {
+    position: relative;
+    overflow: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rhode-sust2-{{ sid }} .rs2-panel { transition: none; }
+}
+</style>
+
+<div class="rhode-sust2-{{ sid }}">
+  <div class="rs2-inner">
+
+    <!-- Panels -->
+    <div class="rs2-panels" data-rs2-panels>
+
+      <!-- Panel A: Less harm / diagram -->
+      <div class="rs2-panel rs2-panel-a is-active" data-rs2-panel="a" aria-label="Packaging panel">
+        <div class="rs2-col-text">
+          {%- if section.settings.heading_a != blank -%}
+            <h2 class="rs2-heading">{{ section.settings.heading_a }}</h2>
+          {%- endif -%}
+          {%- if section.settings.body_a != blank -%}
+            <p class="rs2-body">{{ section.settings.body_a }}</p>
+          {%- endif -%}
+          {%- assign annotations = section.blocks | where: 'type', 'annotation' -%}
+          {%- if annotations.size > 0 -%}
+            <ul class="rs2-steps">
+              {%- for block in annotations -%}
+                <li class="rs2-step" {{ block.shopify_attributes }}>
+                  <span class="rs2-step__num">—</span>
+                  <p class="rs2-step__text"><strong>{{ block.settings.name }}</strong>{% if block.settings.desc != blank %}: {{ block.settings.desc }}{% endif %}</p>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+        <div class="rs2-diagram-wrap">
+          {%- if section.settings.diagram_image != blank -%}
+            <img src="{{ section.settings.diagram_image | image_url: width: 900 }}" alt="{{ section.settings.diagram_image.alt | default: 'Packaging diagram' }}" loading="lazy">
+          {%- elsif section.settings.diagram_image_url != blank -%}
+            <img src="{{ section.settings.diagram_image_url }}" alt="Packaging diagram" loading="lazy">
+          {%- else -%}
+            <div style="background:#e8e6e1;position:absolute;inset:0;"></div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Panel B: Recycling steps -->
+      <div class="rs2-panel rs2-panel-b" data-rs2-panel="b" aria-label="Recycling panel">
+        <div class="rs2-col-text">
+          {%- if section.settings.heading_b != blank -%}
+            <h2 class="rs2-heading">{{ section.settings.heading_b }}</h2>
+          {%- endif -%}
+          {%- if section.settings.body_b != blank -%}
+            <p class="rs2-body">{{ section.settings.body_b }}</p>
+          {%- endif -%}
+          {%- assign steps = section.blocks | where: 'type', 'step' -%}
+          {%- if steps.size > 0 -%}
+            <ul class="rs2-steps">
+              {%- for block in steps -%}
+                <li class="rs2-step" {{ block.shopify_attributes }}>
+                  <span class="rs2-step__num">0{{ forloop.index }}</span>
+                  <p class="rs2-step__text">{{ block.settings.text }}</p>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+        <div class="rs2-col-media">
+          {%- if section.settings.product_image != blank -%}
+            <img src="{{ section.settings.product_image | image_url: width: 900 }}" alt="{{ section.settings.product_image.alt | default: 'Recyclable packaging' }}" loading="lazy">
+          {%- elsif section.settings.product_image_url != blank -%}
+            <img src="{{ section.settings.product_image_url }}" alt="Recyclable packaging" loading="lazy">
+          {%- else -%}
+            <div style="background:#e8e6e1;position:absolute;inset:0;"></div>
+          {%- endif -%}
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Vertical tabs -->
+    <div class="rs2-tabs" aria-label="Panel navigation">
+      <button class="rs2-tab" data-rs2-tab="top" aria-label="Switch panel">
+        <span data-rs2-tab-top-text>CLICK HERE</span>
+      </button>
+      <button class="rs2-tab" data-rs2-tab="bottom" aria-label="Switch panel">
+        <span data-rs2-tab-bot-text>HOW TO RECYCLE</span>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  var root = document.querySelector('.rhode-sust2-{{ sid }}');
+  if (!root) return;
+
+  var panelA    = root.querySelector('[data-rs2-panel="a"]');
+  var panelB    = root.querySelector('[data-rs2-panel="b"]');
+  var tabTop    = root.querySelector('[data-rs2-tab="top"]');
+  var tabBot    = root.querySelector('[data-rs2-tab="bottom"]');
+  var topText   = root.querySelector('[data-rs2-tab-top-text]');
+  var botText   = root.querySelector('[data-rs2-tab-bot-text]');
+  var isA       = true;
+
+  function updateTabs() {
+    if (isA) {
+      if (topText) topText.textContent = 'CLICK HERE';
+      if (botText) botText.textContent = 'HOW TO RECYCLE';
+    } else {
+      if (topText) topText.textContent = 'SEE DETAILS';
+      if (botText) botText.textContent = 'PACKAGING';
+    }
+  }
+
+  function toggle() {
+    isA = !isA;
+    if (isA) {
+      panelA.classList.add('is-active');
+      panelB.classList.remove('is-active');
+    } else {
+      panelB.classList.add('is-active');
+      panelA.classList.remove('is-active');
+    }
+    updateTabs();
+  }
+
+  if (tabTop) tabTop.addEventListener('click', toggle);
+  if (tabBot) tabBot.addEventListener('click', toggle);
+
+  updateTabs();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Rhode — Sustainability",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Panel A — Packaging"
+    },
+    { "type": "text",         "id": "heading_a",          "label": "Heading A",           "default": "Less harm, more good." },
+    { "type": "textarea",     "id": "body_a",             "label": "Body A",              "default": "Our packaging is made with post-consumer recycled materials." },
+    { "type": "image_picker", "id": "diagram_image",      "label": "Diagram image" },
+    { "type": "text",         "id": "diagram_image_url",  "label": "Diagram image URL (fallback)" },
+    {
+      "type": "header",
+      "content": "Panel B — Recycling"
+    },
+    { "type": "text",         "id": "heading_b",          "label": "Heading B",           "default": "recycling 101" },
+    { "type": "textarea",     "id": "body_b",             "label": "Body B",              "default": "We'll recycle your empties for you. Here's how it works:" },
+    { "type": "image_picker", "id": "product_image",      "label": "Product image" },
+    { "type": "text",         "id": "product_image_url",  "label": "Product image URL (fallback)" },
+    {
+      "type": "header",
+      "content": "Styling"
+    },
+    { "type": "color", "id": "bg_color",       "label": "Background",       "default": "#f1f0ed" },
+    { "type": "color", "id": "tab_bg_color",   "label": "Tab strip colour", "default": "#888888" },
+    { "type": "color", "id": "heading_color",  "label": "Heading colour",   "default": "#121212" },
+    { "type": "color", "id": "text_color",     "label": "Body/step colour", "default": "#67645e" },
+    {
+      "type": "range", "id": "padding_top",
+      "min": 0, "max": 160, "step": 8,
+      "label": "Padding top", "default": 0
+    },
+    {
+      "type": "range", "id": "padding_bottom",
+      "min": 0, "max": 160, "step": 8,
+      "label": "Padding bottom", "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Recycling step",
+      "settings": [
+        { "type": "textarea", "id": "text", "label": "Step text", "default": "Gather at least 3 empty products from any brand." }
+      ]
+    },
+    {
+      "type": "annotation",
+      "name": "Packaging annotation",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Component name", "default": "Unit Carton" },
+        { "type": "text", "id": "desc", "label": "Description",    "default": "100% recyclable and FSC-certified paper" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rhode — Sustainability",
+      "blocks": [
+        { "type": "step",       "settings": { "text": "Gather at least 3 empty products from any brand." } },
+        { "type": "step",       "settings": { "text": "Contact us with subject line 'isoua recycling' — we'll send you a prepaid label." } },
+        { "type": "step",       "settings": { "text": "Drop off at your closest mailbox or post office. We'll handle the rest." } },
+        { "type": "annotation", "settings": { "name": "Unit Carton", "desc": "100% recyclable and FSC-certified paper" } },
+        { "type": "annotation", "settings": { "name": "Cap",         "desc": "50% PCR PP #5" } },
+        { "type": "annotation", "settings": { "name": "Stick",       "desc": "50% PCR PP #5" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

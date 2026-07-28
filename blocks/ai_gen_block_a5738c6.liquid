@@ -1,0 +1,882 @@
+{% doc %}
+  @prompt
+    Create a complete product card matching Rhode Skin's design with all these elements: a large category heading at the top-left of the image (like "boost"), a "new" badge in the top-right corner, product image, star rating with review count below the image, bold product title, short product description text, price, and a "BUY NOW" style button at the bottom. The card should have clean spacing, minimal styling, and a premium aesthetic. All elements should be customizable, including the category label, badge text, product details, and button styling., THE BOOST HEADING THEY HAD ON THE LEFT TOP OF THE PRODUCT CARD IS MISSING, ALL THE STAR RATINGS AND PRODUCT NAME TEXT BUY NOW BUTTON WITH PRICE IS ON THE PRODUCT CARD , INCREASE CARD HEIGHT, THE PRICE AND BUY NOW BUTTON COMES WHEN THE PRODUCT CARD IS HOVERED, AND THE INFORMATION IS GONE GIVING IT AN ANIMATION EFFECT,, IT SHOWS LIKE THIS WHEN HOVERED  , THE PRODUCT PRICE SHOULD COME AFTER BUY NOW BUTTON
+    
+    , ADD 1 MORE TEXT BOX FOR THE PRICE OPPOSITE TO THE PRODUCT NAME, THE BUY NOW BUTTON SHOULD SHOULD BUY NOW - PRICE IN A BUTTON ITSELF , CAN YOU KEEP THE BUTTON TEXT ALIGNMENT AS CENTER
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-product-card-{{ ai_gen_id }} {
+    display: block;
+    position: relative;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    background-color: {{ block.settings.card_background }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .ai-product-card-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    height: {{ block.settings.card_height }}px;
+    overflow: hidden;
+  }
+
+  .ai-product-card-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-product-card-category-{{ ai_gen_id }} {
+    position: absolute;
+    top: {{ block.settings.category_top_spacing }}px;
+    left: {{ block.settings.category_left_spacing }}px;
+    font-size: {{ block.settings.category_font_size }}px;
+    font-weight: {{ block.settings.category_font_weight }};
+    color: {{ block.settings.category_color }};
+    text-transform: {{ block.settings.category_text_transform }};
+    z-index: 2;
+    letter-spacing: 0.5px;
+  }
+
+  .ai-product-card-badge-{{ ai_gen_id }} {
+    position: absolute;
+    top: {{ block.settings.badge_top_spacing }}px;
+    right: {{ block.settings.badge_right_spacing }}px;
+    background-color: {{ block.settings.badge_background }};
+    color: {{ block.settings.badge_text_color }};
+    padding: {{ block.settings.badge_padding_vertical }}px {{ block.settings.badge_padding_horizontal }}px;
+    font-size: {{ block.settings.badge_font_size }}px;
+    font-weight: {{ block.settings.badge_font_weight }};
+    text-transform: {{ block.settings.badge_text_transform }};
+    border-radius: {{ block.settings.badge_border_radius }}px;
+    z-index: 2;
+    letter-spacing: 0.5px;
+  }
+
+  .ai-product-card-info-{{ ai_gen_id }} {
+    padding: {{ block.settings.info_padding }}px;
+    background-color: {{ block.settings.card_background }};
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .ai-product-card-rating-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: {{ block.settings.rating_bottom_spacing }}px;
+  }
+
+  .ai-product-card-stars-{{ ai_gen_id }} {
+    display: flex;
+    gap: 2px;
+  }
+
+  .ai-product-card-star-{{ ai_gen_id }} {
+    width: {{ block.settings.star_size }}px;
+    height: {{ block.settings.star_size }}px;
+    fill: {{ block.settings.star_color }};
+  }
+
+  .ai-product-card-review-count-{{ ai_gen_id }} {
+    font-size: {{ block.settings.review_count_font_size }}px;
+    color: {{ block.settings.review_count_color }};
+  }
+
+  .ai-product-card-title-row-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: {{ block.settings.title_bottom_spacing }}px;
+  }
+
+  .ai-product-card-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_font_size }}px;
+    font-weight: {{ block.settings.title_font_weight }};
+    color: {{ block.settings.title_color }};
+    margin: 0;
+    line-height: 1.3;
+    flex: 1;
+  }
+
+  .ai-product-card-static-price-{{ ai_gen_id }} {
+    font-size: {{ block.settings.static_price_font_size }}px;
+    font-weight: {{ block.settings.static_price_font_weight }};
+    color: {{ block.settings.static_price_color }};
+    white-space: nowrap;
+  }
+
+  .ai-product-card-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.description_font_size }}px;
+    color: {{ block.settings.description_color }};
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .ai-product-card-hover-content-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: {{ block.settings.info_padding }}px;
+    background-color: {{ block.settings.card_background }};
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+  }
+
+  .ai-product-card-{{ ai_gen_id }}:hover .ai-product-card-info-{{ ai_gen_id }} {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  .ai-product-card-{{ ai_gen_id }}:hover .ai-product-card-hover-content-{{ ai_gen_id }} {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .ai-product-card-button-{{ ai_gen_id }} {
+    width: 100%;
+    padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    border: {{ block.settings.button_border_width }}px solid {{ block.settings.button_border_color }};
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: {{ block.settings.button_font_weight }};
+    text-transform: {{ block.settings.button_text_transform }};
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    letter-spacing: 1px;
+  }
+
+  .ai-product-card-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+    color: {{ block.settings.button_hover_text_color }};
+    border-color: {{ block.settings.button_hover_border_color }};
+  }
+
+  .ai-product-card-button-text-{{ ai_gen_id }} {
+    white-space: nowrap;
+  }
+
+  .ai-product-card-button-price-{{ ai_gen_id }} {
+    font-size: {{ block.settings.button_price_font_size }}px;
+    font-weight: {{ block.settings.button_price_font_weight }};
+    white-space: nowrap;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-product-card-{{ ai_gen_id }} {
+      width: 100%;
+    }
+
+    .ai-product-card-image-wrapper-{{ ai_gen_id }} {
+      height: {{ block.settings.card_height | times: 0.8 }}px;
+    }
+  }
+{% endstyle %}
+
+<product-card-{{ ai_gen_id }}
+  class="ai-product-card-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-product-card-image-wrapper-{{ ai_gen_id }}">
+    {% if block.settings.product_image %}
+      <img
+        src="{{ block.settings.product_image | image_url: width: 800 }}"
+        alt="{{ block.settings.product_image.alt | escape }}"
+        class="ai-product-card-image-{{ ai_gen_id }}"
+        loading="lazy"
+        width="800"
+        height="{{ block.settings.card_height }}"
+      >
+    {% else %}
+      <div class="ai-product-card-image-placeholder-{{ ai_gen_id }}">
+        {{ 'product-1' | placeholder_svg_tag }}
+      </div>
+    {% endif %}
+
+    {% if block.settings.category_label != blank %}
+      <div class="ai-product-card-category-{{ ai_gen_id }}">
+        {{ block.settings.category_label }}
+      </div>
+    {% endif %}
+
+    {% if block.settings.badge_text != blank %}
+      <div class="ai-product-card-badge-{{ ai_gen_id }}">
+        {{ block.settings.badge_text }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="ai-product-card-info-{{ ai_gen_id }}">
+    {% if block.settings.show_rating %}
+      <div class="ai-product-card-rating-{{ ai_gen_id }}">
+        <div class="ai-product-card-stars-{{ ai_gen_id }}">
+          {% for i in (1..5) %}
+            <svg
+              class="ai-product-card-star-{{ ai_gen_id }}"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          {% endfor %}
+        </div>
+        {% if block.settings.review_count != blank %}
+          <span class="ai-product-card-review-count-{{ ai_gen_id }}">
+            ({{ block.settings.review_count }})
+          </span>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="ai-product-card-title-row-{{ ai_gen_id }}">
+      {% if block.settings.product_title != blank %}
+        <h3 class="ai-product-card-title-{{ ai_gen_id }}">
+          {{ block.settings.product_title }}
+        </h3>
+      {% endif %}
+
+      {% if block.settings.static_price != blank %}
+        <div class="ai-product-card-static-price-{{ ai_gen_id }}">
+          {{ block.settings.static_price }}
+        </div>
+      {% endif %}
+    </div>
+
+    {% if block.settings.product_description != blank %}
+      <p class="ai-product-card-description-{{ ai_gen_id }}">
+        {{ block.settings.product_description }}
+      </p>
+    {% endif %}
+  </div>
+
+  <div class="ai-product-card-hover-content-{{ ai_gen_id }}">
+    {% if block.settings.button_text != blank %}
+      <a
+        href="{{ block.settings.button_link }}"
+        class="ai-product-card-button-{{ ai_gen_id }}"
+      >
+        <span class="ai-product-card-button-text-{{ ai_gen_id }}">
+          {{ block.settings.button_text }}
+        </span>
+        {% if block.settings.product_price != blank %}
+          <span class="ai-product-card-button-price-{{ ai_gen_id }}">
+            {{ block.settings.product_price }}
+          </span>
+        {% endif %}
+      </a>
+    {% endif %}
+  </div>
+</product-card-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ProductCard{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.style.display = 'block';
+      }
+    }
+
+    customElements.define('product-card-{{ ai_gen_id }}', ProductCard{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product card",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Card settings"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "card_height",
+      "label": "Card height",
+      "min": 300,
+      "max": 700,
+      "step": 50,
+      "unit": "px",
+      "default": 500
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "info_padding",
+      "label": "Content padding",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Product image"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Category label"
+    },
+    {
+      "type": "text",
+      "id": "category_label",
+      "label": "Text",
+      "default": "boost"
+    },
+    {
+      "type": "range",
+      "id": "category_font_size",
+      "label": "Font size",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "category_font_weight",
+      "label": "Font weight",
+      "min": 300,
+      "max": 900,
+      "step": 100,
+      "default": 700
+    },
+    {
+      "type": "color",
+      "id": "category_color",
+      "label": "Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "category_text_transform",
+      "label": "Text transform",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "uppercase",
+          "label": "Uppercase"
+        },
+        {
+          "value": "lowercase",
+          "label": "Lowercase"
+        }
+      ],
+      "default": "lowercase"
+    },
+    {
+      "type": "range",
+      "id": "category_top_spacing",
+      "label": "Top spacing",
+      "min": 10,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "category_left_spacing",
+      "label": "Left spacing",
+      "min": 10,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Badge"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Text",
+      "default": "new"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "badge_font_size",
+      "label": "Font size",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "badge_font_weight",
+      "label": "Font weight",
+      "min": 300,
+      "max": 900,
+      "step": 100,
+      "default": 600
+    },
+    {
+      "type": "select",
+      "id": "badge_text_transform",
+      "label": "Text transform",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "uppercase",
+          "label": "Uppercase"
+        },
+        {
+          "value": "lowercase",
+          "label": "Lowercase"
+        }
+      ],
+      "default": "uppercase"
+    },
+    {
+      "type": "range",
+      "id": "badge_padding_vertical",
+      "label": "Vertical padding",
+      "min": 2,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "badge_padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 4,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "badge_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "badge_top_spacing",
+      "label": "Top spacing",
+      "min": 10,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "badge_right_spacing",
+      "label": "Right spacing",
+      "min": 10,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Rating"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Show rating",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "star_size",
+      "label": "Star size",
+      "min": 10,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#000000"
+    },
+    {
+      "type": "text",
+      "id": "review_count",
+      "label": "Review count",
+      "default": "124"
+    },
+    {
+      "type": "range",
+      "id": "review_count_font_size",
+      "label": "Review count font size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "color",
+      "id": "review_count_color",
+      "label": "Review count color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "rating_bottom_spacing",
+      "label": "Bottom spacing",
+      "min": 5,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Product title"
+    },
+    {
+      "type": "text",
+      "id": "product_title",
+      "label": "Title",
+      "default": "Peptide Glazing Fluid"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "title_font_weight",
+      "label": "Font weight",
+      "min": 300,
+      "max": 900,
+      "step": 100,
+      "default": 600
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "title_bottom_spacing",
+      "label": "Bottom spacing",
+      "min": 5,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Static price"
+    },
+    {
+      "type": "text",
+      "id": "static_price",
+      "label": "Price",
+      "default": "₹2,999"
+    },
+    {
+      "type": "range",
+      "id": "static_price_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "static_price_font_weight",
+      "label": "Font weight",
+      "min": 300,
+      "max": 900,
+      "step": 100,
+      "default": 600
+    },
+    {
+      "type": "color",
+      "id": "static_price_color",
+      "label": "Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Product description"
+    },
+    {
+      "type": "textarea",
+      "id": "product_description",
+      "label": "Description",
+      "default": "A lightweight serum that delivers instant hydration and a dewy glow."
+    },
+    {
+      "type": "range",
+      "id": "description_font_size",
+      "label": "Font size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Text",
+      "default": "BUY NOW"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Font size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_font_weight",
+      "label": "Font weight",
+      "min": 300,
+      "max": 900,
+      "step": 100,
+      "default": 600
+    },
+    {
+      "type": "select",
+      "id": "button_text_transform",
+      "label": "Text transform",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "uppercase",
+          "label": "Uppercase"
+        },
+        {
+          "value": "lowercase",
+          "label": "Lowercase"
+        }
+      ],
+      "default": "uppercase"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Border color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "button_border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "label": "Vertical padding",
+      "min": 8,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 10,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Hover text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_border_color",
+      "label": "Hover border color",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Button price"
+    },
+    {
+      "type": "text",
+      "id": "product_price",
+      "label": "Price",
+      "default": "₹2,999"
+    },
+    {
+      "type": "range",
+      "id": "button_price_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_price_font_weight",
+      "label": "Font weight",
+      "min": 300,
+      "max": 900,
+      "step": 100,
+      "default": 600
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product card"
+    }
+  ]
+}
+{% endschema %}

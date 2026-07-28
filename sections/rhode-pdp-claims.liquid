@@ -1,0 +1,297 @@
+{% comment %}Rhode PDP — Claims: 2-col (stats left, image right) + clinical box below{% endcomment %}
+{%- assign sid = section.id -%}
+<style>
+.rhode-claims-{{ sid }} {
+  background-color: {{ section.settings.bg_color }};
+  padding-block: {{ section.settings.padding_top }}px {{ section.settings.padding_bottom }}px;
+}
+.rhode-claims-{{ sid }} .rc-inner {
+  max-width: min(
+    calc(var(--page-width, 1200px) - var(--page-margin, 40px) * 2),
+    calc(100% - var(--page-margin, 40px) * 2)
+  );
+  margin-inline: auto;
+}
+.rhode-claims-{{ sid }} .rc-section-label {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: {{ section.settings.label_color }};
+  margin: 0 0 40px;
+  display: block;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.rhode-claims-{{ sid }}.rc-in .rc-section-label { opacity: 1; transform: none; }
+/* 2-col container */
+.rhode-claims-{{ sid }} .rc-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid {{ section.settings.border_color }};
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 440px;
+}
+/* Stats column */
+.rhode-claims-{{ sid }} .rc-stats {
+  padding: 52px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.rhode-claims-{{ sid }} .rc-period-label {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: {{ section.settings.label_color }};
+  margin: 0 0 36px;
+  display: block;
+}
+.rhode-claims-{{ sid }} .rc-stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.rhode-claims-{{ sid }} .rc-stat {
+  padding: 28px 0;
+  border-bottom: 1px solid {{ section.settings.border_color }};
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.rhode-claims-{{ sid }}.rc-in .rc-stat { opacity: 1; transform: none; }
+.rhode-claims-{{ sid }}.rc-in .rc-stat:nth-child(1) { transition-delay: 0.05s; }
+.rhode-claims-{{ sid }}.rc-in .rc-stat:nth-child(2) { transition-delay: 0.12s; }
+.rhode-claims-{{ sid }}.rc-in .rc-stat:nth-child(3) { transition-delay: 0.19s; }
+.rhode-claims-{{ sid }}.rc-in .rc-stat:nth-child(4) { transition-delay: 0.26s; }
+.rhode-claims-{{ sid }} .rc-stat:nth-child(odd) {
+  padding-right: 28px;
+  border-right: 1px solid {{ section.settings.border_color }};
+}
+.rhode-claims-{{ sid }} .rc-stat:nth-child(even) {
+  padding-left: 28px;
+}
+.rhode-claims-{{ sid }} .rc-stat:nth-last-child(-n+2) {
+  border-bottom: none;
+}
+.rhode-claims-{{ sid }} .rc-stat__number {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: clamp(36px, 4.5vw, 64px);
+  font-weight: 300;
+  line-height: 1;
+  color: {{ section.settings.stat_color }};
+  display: block;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+.rhode-claims-{{ sid }} .rc-stat__desc {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: 0.06em;
+  color: {{ section.settings.desc_color }};
+  text-transform: uppercase;
+  margin: 0;
+}
+.rhode-claims-{{ sid }} .rc-disclaimer {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  color: {{ section.settings.desc_color }};
+  opacity: 0.65;
+  margin: 28px 0 0;
+  line-height: 1.55;
+}
+/* Image column */
+.rhode-claims-{{ sid }} .rc-image {
+  position: relative;
+  overflow: hidden;
+  border-left: 1px solid {{ section.settings.border_color }};
+}
+.rhode-claims-{{ sid }} .rc-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Clinical box below */
+.rhode-claims-{{ sid }} .rc-clinical {
+  margin-top: 20px;
+  padding: 36px 48px;
+  border: 1px solid {{ section.settings.border_color }};
+  border-radius: 12px;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;
+}
+.rhode-claims-{{ sid }}.rc-in .rc-clinical { opacity: 1; transform: none; }
+.rhode-claims-{{ sid }} .rc-clinical__label {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: {{ section.settings.label_color }};
+  display: block;
+  margin-bottom: 16px;
+}
+.rhode-claims-{{ sid }} .rc-clinical__text {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.75;
+  color: {{ section.settings.desc_color }};
+  margin: 0;
+}
+/* Mobile */
+@media (max-width: 749px) {
+  .rhode-claims-{{ sid }} .rc-top {
+    grid-template-columns: 1fr;
+    border-radius: 12px;
+  }
+  .rhode-claims-{{ sid }} .rc-image {
+    min-height: 280px;
+    border-left: none;
+    border-top: 1px solid {{ section.settings.border_color }};
+    order: -1;
+  }
+  .rhode-claims-{{ sid }} .rc-stats {
+    padding: 36px 28px;
+  }
+  .rhode-claims-{{ sid }} .rc-clinical {
+    padding: 28px 24px;
+    border-radius: 10px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rhode-claims-{{ sid }} .rc-section-label,
+  .rhode-claims-{{ sid }} .rc-stat,
+  .rhode-claims-{{ sid }} .rc-clinical { opacity: 1; transform: none; transition: none; }
+}
+</style>
+
+<div class="rhode-claims-{{ sid }}">
+  <div class="rc-inner">
+    {%- if section.settings.section_label != blank -%}
+      <span class="rc-section-label">{{ section.settings.section_label }}</span>
+    {%- endif -%}
+
+    <div class="rc-top">
+      <!-- Stats column -->
+      <div class="rc-stats">
+        {%- if section.settings.period_label != blank -%}
+          <span class="rc-period-label">{{ section.settings.period_label }}</span>
+        {%- endif -%}
+        <div class="rc-stat-grid">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'stat' -%}
+              <div class="rc-stat" {{ block.shopify_attributes }}>
+                <span class="rc-stat__number">{{ block.settings.number }}</span>
+                <p class="rc-stat__desc">{{ block.settings.description }}</p>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        {%- if section.settings.consumer_disclaimer != blank -%}
+          <p class="rc-disclaimer">{{ section.settings.consumer_disclaimer }}</p>
+        {%- endif -%}
+      </div>
+
+      <!-- Image column -->
+      <div class="rc-image">
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 900 }}"
+            alt="{{ section.settings.image.alt | default: 'Clinical results' | escape }}"
+            loading="lazy"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+          >
+        {%- elsif section.settings.image_url != blank -%}
+          <img src="{{ section.settings.image_url }}" alt="Clinical results" loading="lazy">
+        {%- else -%}
+          <div style="background:#e0ddd8;position:absolute;inset:0;"></div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if section.settings.clinical_text != blank -%}
+      <div class="rc-clinical">
+        {%- if section.settings.clinical_label != blank -%}
+          <span class="rc-clinical__label">{{ section.settings.clinical_label }}</span>
+        {%- endif -%}
+        <p class="rc-clinical__text">{{ section.settings.clinical_text }}</p>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+(function(){
+  var el = document.querySelector('.rhode-claims-{{ sid }}');
+  if (!el) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { el.classList.add('rc-in'); return; }
+  new IntersectionObserver(function(entries, obs){
+    if (entries[0].isIntersecting) { el.classList.add('rc-in'); obs.disconnect(); }
+  }, { threshold: 0.1 }).observe(el);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Rhode — Claims",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text",         "id": "section_label",        "label": "Top section label",      "default": "after 8 hours" },
+    { "type": "text",         "id": "period_label",         "label": "Period label (stats col)","default": "AFTER 8 HOURS" },
+    { "type": "image_picker", "id": "image",                "label": "Right side image" },
+    { "type": "text",         "id": "image_url",            "label": "Image URL (fallback)" },
+    { "type": "textarea",     "id": "consumer_disclaimer",  "label": "Consumer study disclaimer" },
+    { "type": "text",         "id": "clinical_label",       "label": "Clinical box label",     "default": "clinical results" },
+    { "type": "textarea",     "id": "clinical_text",        "label": "Clinical box text" },
+    { "type": "color",        "id": "bg_color",             "label": "Background",             "default": "#ffffff" },
+    { "type": "color",        "id": "border_color",         "label": "Border colour",          "default": "#e0ddd8" },
+    { "type": "color",        "id": "stat_color",           "label": "Stat number colour",     "default": "#67645e" },
+    { "type": "color",        "id": "desc_color",           "label": "Description colour",     "default": "#67645e" },
+    { "type": "color",        "id": "label_color",          "label": "Label colour",           "default": "#67645e" },
+    {
+      "type": "range", "id": "padding_top",
+      "min": 0, "max": 160, "step": 8,
+      "label": "Padding top", "default": 80
+    },
+    {
+      "type": "range", "id": "padding_bottom",
+      "min": 0, "max": 160, "step": 8,
+      "label": "Padding bottom", "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Consumer stat",
+      "settings": [
+        { "type": "text",     "id": "number",      "label": "Percentage / number", "default": "100%" },
+        { "type": "textarea", "id": "description", "label": "Description (shown in caps)", "default": "Agreed it's comfortable to wear" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rhode — Claims",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "100%", "description": "Agreed it's comfortable to wear and adheres to skin" } },
+        { "type": "stat", "settings": { "number": "100%", "description": "Agreed it absorbs oil throughout wear" } },
+        { "type": "stat", "settings": { "number": "94%",  "description": "Agreed it visibly minimizes the appearance of spots" } },
+        { "type": "stat", "settings": { "number": "90%",  "description": "Agreed spots looked smaller and flatter after wear" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

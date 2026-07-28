@@ -1,0 +1,267 @@
+{% comment %}Rhode PDP — Animated ingredients: 2-col pill, oval slides between ingredient names{% endcomment %}
+{%- assign sid = section.id -%}
+<style>
+.rhode-ingreds-{{ sid }} {
+  padding-block: {{ section.settings.padding_top }}px {{ section.settings.padding_bottom }}px;
+}
+.rhode-ingreds-{{ sid }} .ri-inner {
+  max-width: min(
+    calc(var(--page-width, 1200px) - var(--page-margin, 40px) * 2),
+    calc(100% - var(--page-margin, 40px) * 2)
+  );
+  margin-inline: auto;
+  border-radius: 10px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 500px;
+}
+/* ── LEFT: full-height image ── */
+.rhode-ingreds-{{ sid }} .ri-left {
+  position: relative;
+  overflow: hidden;
+  min-height: 400px;
+}
+.rhode-ingreds-{{ sid }} .ri-left img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* ── RIGHT: ingredient list ── */
+.rhode-ingreds-{{ sid }} .ri-right {
+  background-color: {{ section.settings.right_bg }};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 44px;
+  position: relative;
+}
+.rhode-ingreds-{{ sid }} .ri-label {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: {{ section.settings.label_color }};
+  display: block;
+  margin-bottom: 28px;
+  text-align: center;
+}
+/* ingredient list */
+.rhode-ingreds-{{ sid }} .ri-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+}
+.rhode-ingreds-{{ sid }} .ri-item {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: clamp(36px, 5vw, 72px);
+  font-weight: 300;
+  line-height: 1.3;
+  color: {{ section.settings.inactive_color }};
+  cursor: pointer;
+  transition: color 0.35s ease;
+  padding: 2px 20px;
+  display: block;
+  position: relative;
+  z-index: 1;
+  user-select: none;
+}
+.rhode-ingreds-{{ sid }} .ri-item.is-active {
+  color: {{ section.settings.active_color }};
+}
+/* Animated oval */
+.rhode-ingreds-{{ sid }} .ri-oval {
+  position: absolute;
+  border: 2px solid {{ section.settings.active_color }};
+  border-radius: 999px;
+  pointer-events: none;
+  transition: top 0.55s cubic-bezier(0.4,0,0.2,1),
+              height 0.55s cubic-bezier(0.4,0,0.2,1),
+              width 0.55s cubic-bezier(0.4,0,0.2,1),
+              left 0.55s cubic-bezier(0.4,0,0.2,1);
+  z-index: 0;
+}
+/* ── Mobile ── */
+@media (max-width: 749px) {
+  .rhode-ingreds-{{ sid }} .ri-inner {
+    grid-template-columns: 1fr;
+  }
+  .rhode-ingreds-{{ sid }} .ri-left {
+    min-height: 280px;
+  }
+  .rhode-ingreds-{{ sid }} .ri-right {
+    padding: 40px 24px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rhode-ingreds-{{ sid }} .ri-oval { transition: none; }
+  .rhode-ingreds-{{ sid }} .ri-item { transition: none; }
+}
+</style>
+
+<div class="rhode-ingreds-{{ sid }}">
+  <div class="ri-inner">
+
+    <!-- LEFT: image -->
+    <div class="ri-left">
+      {%- if section.settings.image != blank -%}
+        <img
+          src="{{ section.settings.image | image_url: width: 900 }}"
+          alt="{{ section.settings.image.alt | default: 'Ingredients' | escape }}"
+          loading="lazy"
+          width="{{ section.settings.image.width }}"
+          height="{{ section.settings.image.height }}"
+        >
+      {%- elsif section.settings.image_url != blank -%}
+        <img src="{{ section.settings.image_url }}" alt="Ingredients" loading="lazy">
+      {%- else -%}
+        <div style="background:#e8e6e1;width:100%;height:100%;position:absolute;inset:0;"></div>
+      {%- endif -%}
+    </div>
+
+    <!-- RIGHT: animated ingredient list -->
+    <div class="ri-right" data-ri-right>
+      {%- if section.settings.label != blank -%}
+        <span class="ri-label">{{ section.settings.label }}</span>
+      {%- endif -%}
+
+      <ul class="ri-list" data-ri-list>
+        {%- for block in section.blocks -%}
+          <li
+            class="ri-item{% if forloop.first %} is-active{% endif %}"
+            data-ri-item="{{ forloop.index0 }}"
+            {{ block.shopify_attributes }}
+          >{{ block.settings.name }}</li>
+        {%- else -%}
+          <li class="ri-item is-active" data-ri-item="0">peptides</li>
+          <li class="ri-item" data-ri-item="1">tamanu oil</li>
+          <li class="ri-item" data-ri-item="2">shea butter</li>
+        {%- endfor -%}
+      </ul>
+
+      <!-- Animated oval appended by JS -->
+      <div class="ri-oval" data-ri-oval aria-hidden="true"></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  var root   = document.querySelector('.rhode-ingreds-{{ sid }}');
+  if (!root) return;
+
+  var right  = root.querySelector('[data-ri-right]');
+  var list   = root.querySelector('[data-ri-list]');
+  var oval   = root.querySelector('[data-ri-oval]');
+  var items  = Array.from(root.querySelectorAll('[data-ri-item]'));
+  if (!items.length || !oval) return;
+
+  var current   = 0;
+  var timer     = null;
+  var interval  = 2400;
+  var paused    = false;
+
+  function positionOval(idx) {
+    var el      = items[idx];
+    var elRect  = el.getBoundingClientRect();
+    var pRect   = right.getBoundingClientRect();
+    var padH    = 14;
+    var padV    = 6;
+
+    oval.style.left   = (elRect.left - pRect.left - padH) + 'px';
+    oval.style.top    = (elRect.top  - pRect.top  - padV) + 'px';
+    oval.style.width  = (elRect.width  + padH * 2) + 'px';
+    oval.style.height = (elRect.height + padV * 2) + 'px';
+  }
+
+  function goTo(idx) {
+    items[current].classList.remove('is-active');
+    current = ((idx % items.length) + items.length) % items.length;
+    items[current].classList.add('is-active');
+    positionOval(current);
+  }
+
+  function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(function() {
+      if (!paused) goTo(current + 1);
+    }, interval);
+  }
+
+  // Click to jump
+  items.forEach(function(item, i) {
+    item.addEventListener('click', function() { goTo(i); });
+  });
+
+  // Pause on hover
+  right.addEventListener('mouseenter', function() { paused = true; });
+  right.addEventListener('mouseleave', function() { paused = false; });
+
+  // Resize: reposition
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() { positionOval(current); }, 80);
+  });
+
+  // Init after layout settles
+  setTimeout(function() {
+    positionOval(0);
+    startTimer();
+  }, 300);
+
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Rhode — Ingredients",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text",         "id": "label",          "label": "Label",              "default": "MADE WITH" },
+    { "type": "image_picker", "id": "image",          "label": "Left image" },
+    { "type": "text",         "id": "image_url",      "label": "Image URL (fallback)" },
+    { "type": "color",        "id": "right_bg",       "label": "Right BG",           "default": "#f1f0ed" },
+    { "type": "color",        "id": "active_color",   "label": "Active ingredient",  "default": "#67645e" },
+    { "type": "color",        "id": "inactive_color", "label": "Inactive ingredient","default": "#c4c4c4" },
+    { "type": "color",        "id": "label_color",    "label": "Label colour",       "default": "#67645e" },
+    {
+      "type": "range", "id": "padding_top",
+      "min": 0, "max": 160, "step": 8,
+      "label": "Padding top", "default": 0
+    },
+    {
+      "type": "range", "id": "padding_bottom",
+      "min": 0, "max": 160, "step": 8,
+      "label": "Padding bottom", "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Ingredient name", "default": "peptides" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rhode — Ingredients",
+      "blocks": [
+        { "type": "ingredient", "settings": { "name": "peptides" } },
+        { "type": "ingredient", "settings": { "name": "tamanu oil" } },
+        { "type": "ingredient", "settings": { "name": "shea butter" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1567 @@
+{% comment %}
+---------------------------------------------------------
+Copyright © 2023 Section Store. All rights reserved.
+Unauthorized copying, modification, distribution, or use
+of this code or any portion of it, is strictly prohibited.
+Violators will be prosecuted to the fullest extent of the law.
+For inquiries or permissions, contact daniel@section.store
+---------------------------------------------------------
+{% endcomment %}
+
+{%- liquid 
+  assign padding_horizontal = section.settings.padding_horizontal
+  assign padding_horizontal_mobile = section.settings.padding_horizontal_mobile
+  assign padding_top = section.settings.padding_top
+  assign padding_bottom = section.settings.padding_bottom
+  assign border_color = section.settings.border_color
+  assign border_thickness = section.settings.border_thickness
+  assign margin_top = section.settings.margin_top
+  assign margin_bottom = section.settings.margin_bottom
+  assign margin_horizontal_mobile = section.settings.margin_horizontal_mobile
+  assign margin_horizontal = section.settings.margin_horizontal
+  assign background_color = section.settings.background_color
+  assign background_gradient = section.settings.background_gradient
+  assign full_width = section.settings.full_width
+  assign content_width = section.settings.content_width
+  assign lazy = section.settings.lazy
+  assign section_radius = section.settings.section_radius
+
+  assign body_gap_mobile = section.settings.body_gap_mobile
+  assign body_gap = section.settings.body_gap
+
+  assign image = section.settings.image
+  assign image_radius = section.settings.image_radius
+  assign image_border_thickness = section.settings.image_border_thickness
+  assign image_border_color = section.settings.image_border_color
+  assign image_ratio = section.settings.image_ratio
+  assign image_ratio_mobile = section.settings.image_ratio_mobile
+  assign image_position_mobile = section.settings.image_position_mobile
+  assign image_position = section.settings.image_position
+
+  assign content_horizontal_align_mobile = section.settings.content_horizontal_align_mobile
+  assign content_horizontal_align = section.settings.content_horizontal_align
+  assign content_padding_horizontal_mobile = section.settings.content_padding_horizontal_mobile
+  assign content_padding_horizontal = section.settings.content_padding_horizontal
+  assign content_padding_vertical_mobile = section.settings.content_padding_vertical_mobile
+  assign content_padding_vertical = section.settings.content_padding_vertical
+  assign content_border_thickness = section.settings.content_border_thickness
+  assign content_border_color = section.settings.content_border_color
+  assign content_radius = section.settings.content_radius
+  assign content_bg_color = section.settings.content_bg_color
+
+  assign text_align = ""
+  if content_horizontal_align == "start"
+    assign text_align = "left"
+  elsif content_horizontal_align == "center"
+    assign text_align = "center"
+  else
+    assign text_align = "right"
+  endif
+
+  assign text_align_mobile = ""
+  if content_horizontal_align_mobile == "start"
+    assign text_align_mobile = "left"
+  elsif content_horizontal_align_mobile == "center"
+    assign text_align_mobile = "center"
+  else
+    assign text_align_mobile = "right"
+  endif
+
+  assign heading_size = section.settings.heading_size
+  assign heading_size_mobile = section.settings.heading_size_mobile
+  assign heading_color = section.settings.heading_color
+  assign heading_custom = section.settings.heading_custom
+  assign heading_font = section.settings.heading_font
+  assign heading_height = section.settings.heading_height
+
+  assign text_size = section.settings.text_size
+  assign text_size_mobile = section.settings.text_size_mobile
+  assign text_color = section.settings.text_color
+  assign text_custom = section.settings.text_custom
+  assign text_font = section.settings.text_font
+  assign text_height = section.settings.text_height
+  assign text_mt = section.settings.text_mt
+
+  assign toggle_text_size = section.settings.toggle_text_size
+  assign toggle_text_size_mobile = section.settings.toggle_text_size_mobile
+  assign toggle_text_color = section.settings.toggle_text_color
+  assign toggle_text_custom = section.settings.toggle_text_custom
+  assign toggle_text_font = section.settings.toggle_text_font
+  assign toggle_text_height = section.settings.toggle_text_height
+  assign toggle_text_padding_vertical = section.settings.toggle_text_padding_vertical
+  assign toggle_text_padding_vertical_mobile = section.settings.toggle_text_padding_vertical_mobile
+  assign toggle_text_border_thickness = section.settings.toggle_text_border_thickness
+  assign toggle_text_border_color = section.settings.toggle_text_border_color
+  
+-%}
+
+{%- style -%}
+
+  {{  heading_font | font_face: font_display: 'swap' }}
+  {{  text_font | font_face: font_display: 'swap' }}
+  {{  toggle_text_font | font_face: font_display: 'swap' }}
+  
+  .section-{{ section.id }} {
+    border-top: solid {{ border_color }} {{ border_thickness }}px;
+    border-bottom: solid {{ border_color }} {{ border_thickness }}px;
+    margin-top: {{ margin_top | times: 0.75 | round: 0 }}px;
+    margin-bottom: {{ margin_bottom | times: 0.75 | round: 0 }}px;
+    margin-left: {{ margin_horizontal_mobile }}rem;
+    margin-right: {{ margin_horizontal_mobile }}rem;
+    border-radius: {{ section_radius | times: 0.6 | round: 0 }}px;
+    overflow: hidden;
+  }
+  
+  .section-{{ section.id }}-settings {
+    margin: 0 auto;
+    padding-top: {{ padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
+    padding-left: {{ padding_horizontal_mobile }}rem;
+    padding-right: {{ padding_horizontal_mobile }}rem;
+  }
+
+  .image-text-body-{{ section.id }} {
+    display: grid;
+    gap: {{ body_gap_mobile }}px;
+  }
+
+  .image-text-image-{{ section.id }} {
+    border-radius: {{ image_radius }}px;
+    outline: {{ image_border_thickness }}px solid {{ image_border_color }};
+    overflow: hidden;
+    position: relative;
+  }
+
+  .image-text-image-{{ section.id }} img,
+  .image-text-image-{{ section.id }} svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    box-shadow: none;
+    border: 0px;
+  }
+
+  .image-text-image-{{ section.id }} svg {
+    background-color: #AFAFAF;
+  }
+
+  .image-text-content-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 30px;
+    align-items: {{ content_horizontal_align_mobile }};
+    padding: {{ content_padding_vertical_mobile }}px {{ content_padding_horizontal_mobile }}px;
+    border-radius: {{ content_radius }}px;
+    border: {{ content_border_thickness }}px solid {{ content_border_color }};
+    background-color: {{ content_bg_color }};
+    overflow: hidden;
+  }
+
+  .image-text-item-{{ section.id }} {
+    display: none;
+  }
+
+  .image-text-item-{{ section.id }}.active {
+    display: block;
+  }
+
+  .image-text-heading-{{ section.id }} {
+    width: 100%;
+    text-align: {{ text_align_mobile }};
+  }
+
+  .image-text-heading-{{ section.id }} * {
+    margin: 0;
+    font-size: {{ heading_size_mobile }}px;
+    color: {{ heading_color }};
+    line-height: {{ heading_height }}%;
+    text-transform: unset;
+    word-break: break-word;
+  }
+
+  .image-text-text-{{ section.id }} {
+    width: 100%;
+    margin-top: {{ text_mt | times: 0.75 | round: 0 }}px;
+    text-align: {{ text_align_mobile }};
+  }
+
+  .image-text-text-{{ section.id }} * {
+    margin: 0;
+    font-size: {{ text_size_mobile }}px;
+    line-height: {{ text_height }}%;
+    color: {{ text_color }};
+    text-transform: unset;
+    word-break: break-word;
+  }
+
+  .image-text-toggles-{{ section.id }} {
+    width: 100%;
+  }
+
+  .image-text-toggle-{{ section.id }} {
+    width: 100%;
+    text-align: {{ text_align_mobile }};
+    padding: {{ toggle_text_padding_vertical_mobile }}px 0px;
+    border-top: {{ toggle_text_border_thickness }}px solid {{ toggle_text_border_color }};
+  }
+
+  .image-text-toggle-{{ section.id }} * {
+    margin: 0;
+    font-size: {{ toggle_text_size_mobile }}px;
+    line-height: {{ toggle_text_height }}%;
+    color: {{ toggle_text_color }};
+    text-transform: unset;
+    word-break: break-word;
+    opacity: 0.75;
+    transition: all 0.25s ease 0s;
+    font-weight: 700;
+  }
+
+  .image-text-toggle-{{ section.id }}.active * {
+    opacity: 1;
+    transition: all 0.25s ease 0s;
+  }
+
+  .image-text-toggle-{{ section.id }}:hover * {
+    opacity: 1;
+    transition: all 0.25s ease 0s;
+  }
+  
+  @media(min-width: 1024px) {
+
+    .section-{{ section.id }} {
+      margin-top: {{ margin_top }}px;
+      margin-bottom: {{ margin_bottom }}px;
+      margin-left: {{ margin_horizontal }}rem;
+      margin-right: {{ margin_horizontal }}rem;
+      border-radius: {{ section_radius }}px;
+    }
+    
+    .section-{{ section.id }}-settings {
+    max-width: 1440px;
+    margin: 0 auto;
+
+    padding-top: {{ padding_top }}px;
+    padding-bottom: {{ padding_bottom }}px;
+
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+
+    .image-text-body-{{ section.id }} {
+      grid-template-columns: 1fr 1fr;
+      gap: {{ body_gap }}px;
+    }
+
+    .image-text-content-{{ section.id }} {
+      align-items: {{ content_horizontal_align }};
+      padding: {{ content_padding_vertical }}px {{ content_padding_horizontal }}px;
+    }
+
+    .image-text-heading-{{ section.id }} {
+      text-align: {{ text_align }};
+    }
+    
+    .image-text-heading-{{ section.id }} * {
+      font-size: {{ heading_size }}px;
+    }
+
+    .image-text-text-{{ section.id }} {
+      margin-top: {{ text_mt }}px;
+      text-align: {{ text_align }};
+    }
+
+    .image-text-text-{{ section.id }} * {
+      font-size: {{ text_size }}px;
+    }
+
+    .image-text-toggle-{{ section.id }} {
+      text-align: {{ text_align }};
+      padding: {{ toggle_text_padding_vertical }}px 0px;
+    }
+  
+    .image-text-toggle-{{ section.id }} * {
+      font-size: {{ toggle_text_size }}px;
+    }
+  }
+  /* =========================
+   PILL BUTTON CSS
+========================= */
+
+.isoua-pill-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 14px 32px;
+  margin-top: 28px;
+
+  border: 1px solid #67645e;
+  border-radius: 999px;
+
+  background-color: transparent;
+  color: #67645e;
+
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  width: fit-content;
+  position: relative;
+  overflow: hidden;
+  /* color delayed so it flips roughly when the fill reaches button centre */
+  transition: color 0.15s ease 0.2s, border-color 0.3s ease;
+}
+
+/* sliding fill layer — starts offscreen in the entry direction (JS sets data-dir on mouseenter/mouseleave) */
+.section-{{ section.id }} .isoua-pill-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #67645e;
+  border-radius: inherit;
+  transform: translateY(101%);
+  transition: transform 0.45s cubic-bezier(.76, 0, .24, 1);
+  z-index: 0;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.section-{{ section.id }} .isoua-pill-button[data-dir="top"]::before    { transform: translateY(-101%); }
+.section-{{ section.id }} .isoua-pill-button[data-dir="bottom"]::before { transform: translateY(101%);  }
+.section-{{ section.id }} .isoua-pill-button[data-dir="left"]::before   { transform: translateX(-101%); }
+.section-{{ section.id }} .isoua-pill-button[data-dir="right"]::before  { transform: translateX(101%);  }
+
+/* fill slides to center on hover */
+.section-{{ section.id }} .isoua-pill-button:hover::before { transform: translate(0, 0); }
+
+/* label span sits above fill */
+.isoua-pill-button > span {
+  position: relative;
+  z-index: 1;
+}
+
+/* text turns white; the 0.2s delay on the base transition syncs it with fill mid-point */
+.isoua-pill-button:hover {
+  color: #ffffff;
+}
+
+@media screen and (max-width: 768px) {
+  .isoua-pill-button {
+    padding: 12px 24px;
+    margin-top: 20px;
+    font-size: 13px;
+  }
+
+  .section-{{ section.id }}-settings {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .image-text-content-{{ section.id }} {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .section-{{ section.id }}-settings {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+
+  .image-text-content-{{ section.id }} {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+{%- endstyle -%}
+
+{% unless full_width %}
+  <style>
+    .section-{{ section.id }}-settings {
+      max-width: {{ content_width }}rem;
+    }
+  </style>
+{% endunless %}
+
+{% if margin_horizontal_mobile > 0 %}
+  <style>
+    .section-{{ section.id }} {
+      border-left: solid {{ border_color }} {{ border_thickness }}px;
+      border-right: solid {{ border_color }} {{ border_thickness }}px;
+    }
+    
+    @media(min-width: 1024px) {
+      .section-{{ section.id }} {
+        border-left: 0px;
+        border-right: 0px;
+      }
+    }
+  </style>
+{% endif %}
+
+{% if margin_horizontal > 0 %}
+  <style>
+    @media(min-width: 1024px) {
+      .section-{{ section.id }} {
+        border-left: solid {{ border_color }} {{ border_thickness }}px;
+        border-right: solid {{ border_color }} {{ border_thickness }}px;
+      }
+    }
+  </style>
+{% endif %}
+
+{% if heading_custom %}
+  <style>
+    .image-text-heading-{{ section.id }} * {
+      font-family: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+      font-weight: {{ heading_font.weight }};
+      font-style: {{ heading_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if text_custom %}
+  <style>
+    .image-text-text-{{ section.id }} * {
+      font-family: {{ text_font.family }}, {{ text_font.fallback_families }};
+      font-weight: {{ text_font.weight }};
+      font-style: {{ text_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if toggle_text_custom %}
+  <style>
+    .image-text-toggle-{{ section.id }} * {
+      font-family: {{ toggle_text_font.family }}, {{ toggle_text_font.fallback_families }};
+      font-weight: {{ toggle_text_font.weight }};
+      font-style: {{ toggle_text_font.style }};
+    }
+  </style>
+{% endif %}
+
+{% if image_position_mobile == "top" %}
+  <style>
+    .image-text-image-{{ section.id }} {
+      order: 1;
+    }
+
+    .image-text-content-{{ section.id }} {
+      order: 2;
+    }
+  </style>
+{% else %}
+  <style>
+    .image-text-image-{{ section.id }} {
+      order: 2;
+    }
+
+    .image-text-content-{{ section.id }} {
+      order: 1;
+    }
+  </style>
+{% endif %}
+
+{% if image_position == "right" %}
+  <style>
+    @media(min-width: 1024px) {
+      .image-text-image-{{ section.id }} {
+        order: 2;
+      }
+  
+      .image-text-content-{{ section.id }} {
+        order: 1;
+      }
+    }
+  </style>
+{% else %}
+  <style>
+    @media(min-width: 1024px) {
+      .image-text-image-{{ section.id }} {
+        order: 1;
+      }
+  
+      .image-text-content-{{ section.id }} {
+        order: 2;
+      }
+    }
+  </style>
+{% endif %}
+
+{% if image_ratio_mobile == "portrait" %}
+  <style>
+    .image-text-image-{{ section.id }} {
+     aspect-ratio: 9.6/12; 
+    }
+  </style>
+{% elsif image_ratio_mobile == "landscape" %}
+  <style>
+    .image-text-image-{{ section.id }}{
+     aspect-ratio: 12/9; 
+    }
+  </style>
+{% elsif image_ratio_mobile == "square" %}
+  <style>
+    .image-text-image-{{ section.id }} {
+     aspect-ratio: 12/12; 
+    }
+  </style>
+{% else %}
+  <style>
+    .image-text-image-{{ section.id }} {
+     aspect-ratio: auto; 
+    }
+  </style>
+{% endif %}
+
+{% if image_ratio == "portrait" %}
+  <style>
+    @media(min-width: 1024px) {
+     .image-text-image-{{ section.id }} {
+       aspect-ratio: 9.6/12; 
+      } 
+    }
+  </style>
+{% elsif image_ratio == "landscape" %}
+  <style>
+    @media(min-width: 1024px) {
+      .image-text-image-{{ section.id }}{
+       aspect-ratio: 12/9; 
+      }
+    }
+  </style>
+{% elsif image_ratio == "square" %}
+  <style>
+    @media(min-width: 1024px) {
+      .image-text-image-{{ section.id }} {
+       aspect-ratio: 12/12;
+      }
+    }
+  </style>
+{% else %}
+  <style>
+    @media(min-width: 1024px) {
+      .image-text-image-{{ section.id }} {
+       aspect-ratio: auto;
+      }
+    }
+  </style>
+{% endif %}
+
+<style>
+  /* Restore the original width logic from this file's prior revision:
+     - OUTER .section-{id} spans the full viewport (so the section bg, if any, extends
+       edge-to-edge) by zeroing horizontal margins/padding/borders.
+     - INNER .section-{id}-settings is constrained to the same central-column formula
+       the announcement bar block's parent uses, then centered with margin-inline:auto.
+     This is the exact same width math the announcement bar block resolves to (min of
+     page-width-minus-margins and 100%-minus-margins), so the inner content aligns flush
+     with the announcement bar's visible pill on both desktop and mobile.
+
+     The image and content card keep their editor-controlled image_radius / content_radius
+     (left untouched intentionally — earlier revision forced both to 0, which the client
+     asked to revert). -vamshi */
+  .section-{{ section.id }} {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .section-{{ section.id }}-settings {
+    max-width: min(
+      calc(var(--page-width) - var(--page-margin) * 2),
+      calc(100% - var(--page-margin) * 2)
+    ) !important;
+    margin-inline: auto !important;
+    /* Zero the inner's HORIZONTAL padding so the visible pill is exactly the formula
+       value (~1840px on a 1920vw viewport), matching the announcement bar / header.
+       Lines 119/249/331/342 of this file set padding-left/right from editor settings,
+       which would otherwise widen the visible box past the formula by up to 96px on
+       desktop with default box-sizing:content-box. Vertical padding (padding_top /
+       padding_bottom from the editor) is intentionally NOT touched, so the section
+       keeps its top/bottom breathing room. -vamshi */
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* Mobile: image stacks ABOVE content. Keep them flush (gap: 0) and make the
+     touching edges SHARP so they read as one tall rectangle with only OUTER corners
+     rounded — top corners on the image, bottom corners on the content. Matches the
+     Rhode reference (image 20 ask). -vamshi */
+  .image-text-body-{{ section.id }} {
+    gap: 0 !important;
+  }
+
+  .image-text-image-{{ section.id }} {
+    /* image is the TOP cell on mobile → round top, sharpen bottom */
+    border-radius: 10px 10px 0 0 !important;
+  }
+
+  .image-text-content-{{ section.id }} {
+    /* content is the BOTTOM cell on mobile → sharpen top, round bottom */
+    border-radius: 0 0 10px 10px !important;
+  }
+
+  /* Desktop: image and content sit side by side as separate rounded cards with a
+     visible gap between them (Rhode reference image 19). Restore the editor's
+     body_gap on desktop and round all 4 corners on each card. -vamshi */
+  @media (min-width: 1024px) {
+    .image-text-body-{{ section.id }} {
+      gap: {{ body_gap }}px !important;
+    }
+
+    .image-text-image-{{ section.id }} {
+      border-radius: 10px !important;
+    }
+
+    .image-text-content-{{ section.id }} {
+      border-radius: 10px !important;
+    }
+  }
+
+  /* Heading / body / toggle font sizes are NOT overridden here — they flow from the section schema (heading_size, heading_size_mobile, text_size, text_size_mobile, toggle_text_size, toggle_text_size_mobile) so the client can edit them in the theme editor. -vamshi */
+
+  /* Pill button: only structural changes (1px border, transparent bg, pill shape via 999px radius). Sizing comes from new schema settings (Pill button font size / padding / margin top) so client controls without code. Scoped to this section so other .isoua-pill-button instances on the site are untouched. -vamshi */
+  .section-{{ section.id }} .isoua-pill-button {
+    background-color: transparent !important;
+    border-width: 1px !important;
+    border-radius: 999px !important;
+    font-size: {{ section.settings.pill_button_size_mobile | default: 13 }}px !important;
+    padding: {{ section.settings.pill_button_padding_vertical_mobile | default: 10 }}px {{ section.settings.pill_button_padding_horizontal_mobile | default: 28 }}px !important;
+    margin-top: {{ section.settings.pill_button_mt_mobile | default: 20 }}px !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  @media(min-width: 1024px) {
+    .section-{{ section.id }} .isoua-pill-button {
+      font-size: {{ section.settings.pill_button_size | default: 14 }}px !important;
+      padding: {{ section.settings.pill_button_padding_vertical | default: 12 }}px {{ section.settings.pill_button_padding_horizontal | default: 32 }}px !important;
+      margin-top: {{ section.settings.pill_button_mt | default: 28 }}px !important;
+    }
+  }
+</style>
+
+<div class="section-{{ section.id }} image-text-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
+    <div class="section-{{ section.id }}-settings">
+      <div class="image-text-body-{{ section.id }}">
+        <div class="image-text-content-{{ section.id }}">
+          <div class="image-text-items-{{ section.id }}">
+            {% for block in section.blocks %}
+              <div class="image-text-item-{{ section.id }} {% if forloop.first %}active{% endif %}" data-id="{{ block.id }}">
+                {% if block.settings.heading != blank %}
+                  <div class="image-text-heading-{{ section.id }}">
+                    {{ block.settings.heading }}
+                  </div>
+                {% endif %}
+                
+                {% if block.settings.text != blank %}
+                  <div class="image-text-text-{{ section.id }}">
+                    {{ block.settings.text }}
+                  </div>
+                {% endif %}
+
+                {% if block.settings.button_label != blank %}
+  <a
+    href="{{ block.settings.button_link }}"
+    class="isoua-pill-button"
+    aria-label="{{ block.settings.button_label }}"
+  >
+    <span>{{ block.settings.button_label }}</span>
+  </a>
+{% endif %}
+                
+
+
+              </div>
+            {% endfor %}
+          </div>
+          <div class="image-text-toggles-{{ section.id }}">
+            {% for block in section.blocks %}
+              <div class="image-text-toggle-{{ section.id }} {% if forloop.first %}active{% endif %}" id="{{ block.id }}">
+                <p class="image-text-toggle-text-{{ section.id }}">{{ block.settings.toggle_text }}</p>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="image-text-image-{{ section.id }}">
+          {% if image != blank %}
+         <img 
+  src="{{ image | image_url }}" 
+  alt="{{ image.alt }}"
+  width="{{ image.width }}"
+  height="{{ image.height }}"
+  {% if lazy %}loading="lazy"{% endif %}
+/>
+>
+          {% elsif section.settings.image_url != blank %}
+            <img src="{{ section.settings.image_url }}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+          {% else %}
+            {{ 'image' | placeholder_svg_tag }}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+</div>
+
+<script>
+  function initImageWithText15() {
+    
+    let toggles = document.querySelectorAll('.image-text-toggle-{{ section.id }}');
+    let items = document.querySelectorAll('.image-text-item-{{ section.id }}');
+    if(toggles) {
+      toggles.forEach((el, index) => {
+        el.addEventListener('click', () => {
+          toggles.forEach(element => {
+            element.classList.remove('active');
+          });
+          el.classList.add('active');
+
+          if(items) {
+            items.forEach(element => {
+              element.classList.remove('active');
+              let dataId = element.getAttribute('data-id');
+              if(el.id == dataId) {
+                element.classList.add('active');
+              }
+            })
+          }
+        })
+
+        el.addEventListener('mouseover', () => {
+          toggles.forEach(element => {
+            element.classList.remove('active');
+          });
+          el.classList.add('active');
+
+          if(items) {
+            items.forEach(element => {
+              element.classList.remove('active');
+              let dataId = element.getAttribute('data-id');
+              if(el.id == dataId) {
+                element.classList.add('active');
+              }
+            })
+          }
+        });
+      })
+    }
+
+    // Direction-based slide-fill hover: mouseenter records entry direction as data-dir;
+    // mouseleave records exit direction so ::before animates back out the right way.
+    document.querySelectorAll('.section-{{ section.id }} .isoua-pill-button').forEach(function(btn) {
+      function getDir(e) {
+        var r = btn.getBoundingClientRect();
+        var x = e.clientX - r.left, y = e.clientY - r.top;
+        var d = [['top', y], ['bottom', r.height - y], ['left', x], ['right', r.width - x]];
+        return d.reduce(function(a, b) { return a[1] < b[1] ? a : b; })[0];
+      }
+      btn.addEventListener('mouseenter', function(e) { btn.setAttribute('data-dir', getDir(e)); });
+      btn.addEventListener('mouseleave', function(e) { btn.setAttribute('data-dir', getDir(e)); });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initImageWithText15);
+  
+  if (Shopify.designMode) {
+     document.addEventListener('shopify:section:unload', initImageWithText15);
+     document.addEventListener('shopify:section:load', initImageWithText15);
+  }
+</script>
+
+{% schema %}
+  {
+    "name": "SS - Image With Text #15",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Save to display section correctly."
+      },
+      {
+          "type": "header",
+          "content": "Body Settings"
+      },
+      {
+          "type": "range",
+          "id": "body_gap",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Body Gap",
+          "default": 32
+      },
+      {
+          "type": "range",
+          "id": "body_gap_mobile",
+          "min": 0,
+          "max": 100,
+          "step": 2,
+          "unit": "px",
+          "label": "Body Gap - Mobile",
+          "default": 16
+      },
+      {
+        "type": "header",
+        "content": "Image Settings"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "image_url",
+        "label": "Fallback image URL (placeholder)"
+      },
+      {
+        "type": "select",
+        "id": "image_position",
+        "label": "Image Position - Desktop",
+        "default": "right",
+        "options": [
+          {
+            "label": "Left",
+            "value": "left"
+          },
+          {
+            "label": "Right",
+            "value": "right"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "image_position_mobile",
+        "label": "Image Position - Mobile",
+        "default": "top",
+        "options": [
+          {
+            "label": "Top",
+            "value": "top"
+          },
+          {
+            "label": "Bottom",
+            "value": "bottom"
+          }
+        ]
+      },
+      {
+         "type": "range",
+         "id": "image_radius",
+         "min": 0,
+         "max": 100,
+         "step": 2,
+         "unit": "px",
+         "label": "Image Roundness",
+         "default": 12
+      },
+      {
+         "type": "range",
+         "id": "image_border_thickness",
+         "min": 0,
+         "max": 10,
+         "step": 1,
+         "unit": "px",
+         "label": "Image Border Thickness",
+         "default": 0
+      },
+      {
+        "type": "select",
+        "id": "image_ratio",
+        "label": "Image Aspect Ratio",
+        "default": "square",
+        "options": [
+          {
+            "label": "Portrait",
+            "value": "portrait"
+          },
+          {
+            "label": "Square",
+            "value": "square"
+          },
+          {
+            "label": "Landscape",
+            "value": "landscape"
+          },
+          {
+            "label": "Original",
+            "value": "original"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "image_ratio_mobile",
+        "label": "Image Aspect Ratio - Mobile",
+        "default": "square",
+        "options": [
+          {
+            "label": "Portrait",
+            "value": "portrait"
+          },
+          {
+            "label": "Square",
+            "value": "square"
+          },
+          {
+            "label": "Landscape",
+            "value": "landscape"
+          },
+          {
+            "label": "Original",
+            "value": "original"
+          }
+        ]
+      },
+      {
+          "type": "header",
+          "content": "Content Settings"
+      },
+      {
+        "type": "range",
+        "id": "content_padding_vertical",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Content Padding Vertical",
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "content_padding_vertical_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Content Padding Vertical - Mobile",
+        "default": 16
+      },
+      {
+         "type": "range",
+         "id": "content_padding_horizontal",
+         "min": 0,
+         "max": 100,
+         "step": 2,
+         "unit": "px",
+         "label": "Content Padding Horizontal",
+         "default": 32
+      },
+      {
+         "type": "range",
+         "id": "content_padding_horizontal_mobile",
+         "min": 0,
+         "max": 100,
+         "step": 2,
+         "unit": "px",
+         "label": "Content Padding Horizontal - Mobile",
+         "default": 16
+      },
+      {
+         "type": "range",
+         "id": "content_radius",
+         "min": 0,
+         "max": 100,
+         "step": 2,
+         "unit": "px",
+         "label": "Content Border Radius",
+         "default": 12
+      },
+      {
+         "type": "range",
+         "id": "content_border_thickness",
+         "min": 0,
+         "max": 10,
+         "step": 1,
+         "unit": "px",
+         "label": "Content Border Thickness",
+         "default": 0
+      },
+      {
+          "type": "select",
+          "id": "content_horizontal_align",
+          "label": "Content Horizontal Align",
+          "default": "start",
+          "options": [
+              {
+                  "label": "Left",
+                  "value": "start"
+              },
+              {
+                  "label": "Center",
+                  "value": "center"
+              },
+              {
+                  "label": "Right",
+                  "value": "end"
+              }
+          ]
+      },
+      {
+          "type": "select",
+          "id": "content_horizontal_align_mobile",
+          "label": "Content Horizontal Align - Mobile",
+          "default": "start",
+          "options": [
+              {
+                  "label": "Left",
+                  "value": "start"
+              },
+              {
+                  "label": "Center",
+                  "value": "center"
+              },
+              {
+                  "label": "Right",
+                  "value": "end"
+              }
+          ]
+      },
+      {
+        "type": "header",
+        "content": "Heading Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "heading_custom",
+        "label": "Use Custom Font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "heading_font",
+        "label": "Heading Font Family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "heading_size",
+        "min": 0,
+        "max": 72,
+        "step": 2,
+        "unit": "px",
+        "label": "Heading Size",
+        "default": 36
+      },
+      {
+        "type": "range",
+        "id": "heading_size_mobile",
+        "min": 0,
+        "max": 72,
+        "step": 2,
+        "unit": "px",
+        "label": "Heading Size - Mobile",
+        "default": 26
+      },
+      {
+        "type": "range",
+        "id": "heading_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Heading Line Height",
+        "default": 130
+      },
+      {
+        "type": "header",
+        "content": "Text Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "text_custom",
+        "label": "Use Custom Font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "text_font",
+        "label": "Text Font Family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "text_size",
+        "min": 0,
+        "max": 70,
+        "step": 2,
+        "unit": "px",
+        "label": "Text Size",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "text_size_mobile",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "Text Size - Mobile",
+        "default": 14
+      },
+      {
+        "type": "range",
+        "id": "text_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Text Line Height",
+        "default": 170
+      },
+      {
+        "type": "range",
+        "id": "text_mt",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Text Margin Top",
+        "default": 24
+      },
+      {
+        "type": "header",
+        "content": "Toggle Text Settings"
+      },
+      {
+        "type": "range",
+        "id": "toggle_text_padding_vertical",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Toggle Text Padding Vertical",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "toggle_text_padding_vertical_mobile",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Toggle Text Padding Vertical - Mobile",
+        "default": 16
+      },
+      {
+         "type": "range",
+         "id": "toggle_text_border_thickness",
+         "min": 0,
+         "max": 10,
+         "step": 1,
+         "unit": "px",
+         "label": "Toggle Text Border Thickness",
+         "default": 1
+      },
+      {
+        "type": "checkbox",
+        "id": "toggle_text_custom",
+        "label": "Use Custom Font",
+        "default": false
+      },
+      {
+        "type": "font_picker",
+        "id": "toggle_text_font",
+        "label": "Toggle Text Font Family",
+        "default": "josefin_sans_n4"
+      },
+      {
+        "type": "range",
+        "id": "toggle_text_size",
+        "min": 0,
+        "max": 70,
+        "step": 2,
+        "unit": "px",
+        "label": "Toggle Text Size",
+        "default": 26
+      },
+      {
+        "type": "range",
+        "id": "toggle_text_size_mobile",
+        "min": 0,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "Toggle Text Size - Mobile",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "toggle_text_height",
+        "min": 50,
+        "max": 200,
+        "step": 10,
+        "unit": "%",
+        "label": "Toggle Text Line Height",
+        "default": 130
+      },
+      {
+        "type": "header",
+        "content": "Content Colors"
+      },
+      {
+        "type": "color",
+        "label": "Content Border Color",
+        "id": "content_border_color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "label": "Content Background Color",
+        "id": "content_bg_color",
+        "default": "#F1F0ED"
+      },
+      {
+        "type": "color",
+        "label": "Heading Color",
+        "id": "heading_color",
+        "default": "#67645e"
+      },
+      {
+        "type": "color",
+        "label": "Text Color",
+        "id": "text_color",
+        "default": "#67645e"
+      },
+      {
+        "type": "color",
+        "label": "Toggle Text Border Color",
+        "id": "toggle_text_border_color",
+        "default": "#c4c4c4"
+      },
+      {
+        "type": "color",
+        "label": "Toggle Text Color",
+        "id": "toggle_text_color",
+        "default": "#67645e"
+      },
+      {
+        "type": "header",
+        "content": "Pill button (OUR IMPACT / OUR VALUES)"
+      },
+      {
+        "type": "range",
+        "id": "pill_button_size",
+        "label": "Font size (desktop)",
+        "min": 10,
+        "max": 24,
+        "step": 1,
+        "unit": "px",
+        "default": 14
+      },
+      {
+        "type": "range",
+        "id": "pill_button_size_mobile",
+        "label": "Font size (mobile)",
+        "min": 10,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "default": 13
+      },
+      {
+        "type": "range",
+        "id": "pill_button_padding_vertical",
+        "label": "Vertical padding (desktop)",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "pill_button_padding_vertical_mobile",
+        "label": "Vertical padding (mobile)",
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "unit": "px",
+        "default": 10
+      },
+      {
+        "type": "range",
+        "id": "pill_button_padding_horizontal",
+        "label": "Horizontal padding (desktop)",
+        "min": 0,
+        "max": 80,
+        "step": 2,
+        "unit": "px",
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "pill_button_padding_horizontal_mobile",
+        "label": "Horizontal padding (mobile)",
+        "min": 0,
+        "max": 80,
+        "step": 2,
+        "unit": "px",
+        "default": 28
+      },
+      {
+        "type": "range",
+        "id": "pill_button_mt",
+        "label": "Margin top (desktop)",
+        "min": 0,
+        "max": 80,
+        "step": 2,
+        "unit": "px",
+        "default": 28
+      },
+      {
+        "type": "range",
+        "id": "pill_button_mt_mobile",
+        "label": "Margin top (mobile)",
+        "min": 0,
+        "max": 60,
+        "step": 2,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "header",
+        "content": "Section Colors"
+      },
+      {
+        "type": "color",
+        "label": "Image Border Color",
+        "id": "image_border_color",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "label": "Section background",
+        "id": "background_color",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color_background",
+        "id": "background_gradient",
+        "label": "Section background gradient"
+      },
+      {
+        "type": "color",
+        "label": "Border",
+        "id": "border_color",
+        "default": "#000000"
+      },
+      {
+        "type": "header",
+        "content": "Section margin (outside)"
+      },
+      {
+        "type": "range",
+        "id": "margin_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Margin top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Margin bottom",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_horizontal",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "unit": "rem",
+        "label": "Margin sides",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "margin_horizontal_mobile",
+        "min": 0,
+        "max": 15,
+        "step": 0.5,
+        "unit": "rem",
+        "label": "Margin sides mobile",
+        "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Section padding (inside)"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "Padding top",
+        "default": 36
+      },
+      {
+         "type": "range",
+         "id": "padding_bottom",
+         "min": 0,
+         "max": 100,
+         "step": 4,
+         "unit": "px",
+         "label": "Padding bottom",
+         "default": 36
+      },
+      {
+        "type": "range",
+        "id": "padding_horizontal",
+        "min": 0,
+        "max": 30,
+        "step": 1,
+        "unit": "rem",
+        "label": "Padding sides",
+        "default": 5
+      },
+      {
+        "type": "range",
+        "id": "padding_horizontal_mobile",
+        "min": 0,
+        "max": 15,
+        "step": 0.5,
+        "unit": "rem",
+        "label": "Padding sides mobile",
+        "default": 1.5
+      },
+      {
+        "type": "header",
+        "content": "Section Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Full Width",
+        "default": true
+      },
+      {
+        "type": "range",
+        "id": "content_width",
+        "min": 0,
+        "max": 400,
+        "step": 10,
+        "unit": "rem",
+        "label": "Section content width",
+        "default": 120
+      },
+      {
+        "type": "range",
+        "id": "border_thickness",
+        "min": 0,
+        "max": 50,
+        "step": 1,
+        "unit": "px",
+        "label": "Border thickness",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "section_radius",
+        "min": 0,
+        "max": 100,
+        "step": 2,
+        "unit": "px",
+        "label": "Section Roundness",
+        "default": 0
+      },
+      {
+        "type": "checkbox",
+        "id": "lazy",
+        "label": "Lazy load",
+        "info": "Lazy load images for speed optimisation",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "item",
+        "name": "Item",
+        "settings": [
+          {
+            "type": "text",
+            "id": "toggle_text",
+            "label": "Toggle Text",
+            "default": "Toggle"
+          }, 
+          {
+            "type": "richtext",
+            "id": "heading",
+            "label": "Heading",
+            "default": "<h3>Heading</h3>"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>Pair text with an image to give customers insight into your brand. Tell a story, explain a product detail, or describe a new promotion.</p>"
+          }
+          ,
+{
+  "type": "text",
+  "id": "button_label",
+  "label": "Button Label",
+  "default": "Learn More"
+},
+{
+  "type": "url",
+  "id": "button_link",
+  "label": "Button Link"
+}
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "SS - Image With Text #15",
+        "blocks": [
+          {
+            "type": "item",
+            "settings": {
+              "toggle_text": "Heading 1",
+              "text": "<p>Welcome your customers to your store by sharing temporary offers or explaining to them what your products are about.</p>",
+              "heading": "<h2>Heading 1</h2>"
+            }
+          },
+          {
+            "type": "item",
+            "settings": {
+              "toggle_text": "Heading 2",
+              "text": "<p>Create trust with your customers by explaining the story of your brand. Share your values or what is important to you.</p>",
+              "heading": "<h2>Heading 2</h2>"
+            }
+          },
+          {
+            "type": "item",
+            "settings": {
+              "toggle_text": "Heading 3",
+              "text": "<p>Share information about your product with your customers. Describe a product, and share info about your production process...</p>",
+              "heading": "<h2>Heading 3</h2>"
+            }
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

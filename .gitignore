@@ -1,0 +1,28 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Shopify CLI local state
+.shopify/
+
+# Local tooling
+.claude/
+.playwright-mcp/
+
+# Verification artifacts
+tmp/
+
+# Design reference mockups (too large for repo)
+/*.pdf
+
+# Root-level verification screenshots (theme images under assets/ are still tracked)
+/*.png

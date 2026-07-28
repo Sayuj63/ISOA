@@ -1,0 +1,172 @@
+{% comment %}Rhode PDP — Product attribute cards: Good For / Feels Like / Looks Like / Smells Like{% endcomment %}
+{%- assign sid = section.id -%}
+<style>
+.rhode-attrs-{{ sid }} {
+  background-color: {{ section.settings.bg_color }};
+  padding-block: {{ section.settings.padding_top }}px {{ section.settings.padding_bottom }}px;
+}
+.rhode-attrs-{{ sid }} .ra-inner {
+  max-width: min(
+    calc(var(--page-width, 1200px) - var(--page-margin, 40px) * 2),
+    calc(100% - var(--page-margin, 40px) * 2)
+  );
+  margin-inline: auto;
+}
+.rhode-attrs-{{ sid }} .ra-section-label {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: {{ section.settings.label_color }};
+  margin: 0 0 36px;
+  display: block;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.rhode-attrs-{{ sid }}.ra-in .ra-section-label { opacity: 1; transform: none; }
+.rhode-attrs-{{ sid }} .ra-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid {{ section.settings.border_color }};
+  border-radius: 16px;
+  overflow: hidden;
+}
+.rhode-attrs-{{ sid }} .ra-card {
+  padding: 44px 32px;
+  border-right: 1px solid {{ section.settings.border_color }};
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.rhode-attrs-{{ sid }} .ra-card:last-child { border-right: none; }
+.rhode-attrs-{{ sid }}.ra-in .ra-card { opacity: 1; transform: none; }
+.rhode-attrs-{{ sid }}.ra-in .ra-card:nth-child(1) { transition-delay: 0.05s; }
+.rhode-attrs-{{ sid }}.ra-in .ra-card:nth-child(2) { transition-delay: 0.12s; }
+.rhode-attrs-{{ sid }}.ra-in .ra-card:nth-child(3) { transition-delay: 0.19s; }
+.rhode-attrs-{{ sid }}.ra-in .ra-card:nth-child(4) { transition-delay: 0.26s; }
+.rhode-attrs-{{ sid }} .ra-card__icon {
+  width: 28px;
+  height: 28px;
+  margin-bottom: 20px;
+  display: block;
+  color: {{ section.settings.category_color }};
+  opacity: 0.6;
+}
+.rhode-attrs-{{ sid }} .ra-card__category {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: {{ section.settings.category_color }};
+  margin: 0 0 14px;
+  display: block;
+}
+.rhode-attrs-{{ sid }} .ra-card__value {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: {{ section.settings.value_color }};
+  margin: 0;
+}
+@media (max-width: 1023px) {
+  .rhode-attrs-{{ sid }} .ra-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .rhode-attrs-{{ sid }} .ra-card:nth-child(2) { border-right: none; }
+  .rhode-attrs-{{ sid }} .ra-card:nth-child(odd):not(:nth-last-child(-n+2)) { border-right: 1px solid {{ section.settings.border_color }}; }
+  .rhode-attrs-{{ sid }} .ra-card:nth-child(1),
+  .rhode-attrs-{{ sid }} .ra-card:nth-child(2) {
+    border-bottom: 1px solid {{ section.settings.border_color }};
+  }
+}
+@media (max-width: 749px) {
+  .rhode-attrs-{{ sid }} .ra-inner {
+    max-width: calc(100% - var(--page-margin, 16px) * 2);
+  }
+  .rhode-attrs-{{ sid }} .ra-grid {
+    grid-template-columns: 1fr 1fr;
+    border-radius: 12px;
+  }
+  .rhode-attrs-{{ sid }} .ra-card {
+    padding: 28px 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rhode-attrs-{{ sid }} .ra-section-label,
+  .rhode-attrs-{{ sid }} .ra-card { opacity: 1; transform: none; transition: none; }
+}
+</style>
+
+<div class="rhode-attrs-{{ sid }}">
+  <div class="ra-inner">
+    {%- if section.settings.section_label != blank -%}
+      <span class="ra-section-label">{{ section.settings.section_label }}</span>
+    {%- endif -%}
+    <div class="ra-grid">
+      {%- for block in section.blocks -%}
+        <div class="ra-card" {{ block.shopify_attributes }}>
+          <span class="ra-card__category">{{ block.settings.category }}</span>
+          <p class="ra-card__value">{{ block.settings.value }}</p>
+        </div>
+      {%- else -%}
+        <div class="ra-card"><span class="ra-card__category">good for</span><p class="ra-card__value">All skin types</p></div>
+        <div class="ra-card"><span class="ra-card__category">feels like</span><p class="ra-card__value">A creamy, lightweight texture that melts on smoothly</p></div>
+        <div class="ra-card"><span class="ra-card__category">looks like</span><p class="ra-card__value">A warm bronze that adds soft, natural dimension</p></div>
+        <div class="ra-card"><span class="ra-card__category">smells like</span><p class="ra-card__value">Fragrance-free</p></div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var el = document.querySelector('.rhode-attrs-{{ sid }}');
+  if (!el) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { el.classList.add('ra-in'); return; }
+  new IntersectionObserver(function(entries, obs){
+    if (entries[0].isIntersecting) { el.classList.add('ra-in'); obs.disconnect(); }
+  }, { threshold: 0.12 }).observe(el);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Rhode — Attributes",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "section_label", "label": "Section label", "default": "what to expect" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#ffffff" },
+    { "type": "color", "id": "border_color", "label": "Border colour", "default": "#e0ddd8" },
+    { "type": "color", "id": "category_color", "label": "Category colour", "default": "#67645e" },
+    { "type": "color", "id": "value_color", "label": "Value colour", "default": "#121212" },
+    { "type": "color", "id": "label_color", "label": "Section label colour", "default": "#67645e" },
+    { "type": "range", "id": "padding_top", "min": 24, "max": 120, "step": 8, "label": "Padding top", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "min": 24, "max": 120, "step": 8, "label": "Padding bottom", "default": 72 }
+  ],
+  "blocks": [
+    {
+      "type": "attribute",
+      "name": "Attribute card",
+      "settings": [
+        { "type": "text", "id": "category", "label": "Category label", "default": "good for" },
+        { "type": "textarea", "id": "value", "label": "Value text", "default": "All skin types" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rhode — Attributes",
+      "blocks": [
+        { "type": "attribute", "settings": { "category": "good for", "value": "All skin types" } },
+        { "type": "attribute", "settings": { "category": "feels like", "value": "A creamy, lightweight texture that melts on smoothly" } },
+        { "type": "attribute", "settings": { "category": "looks like", "value": "A warm bronze that adds soft, natural dimension" } },
+        { "type": "attribute", "settings": { "category": "smells like", "value": "Fragrance-free" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

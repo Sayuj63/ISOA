@@ -1,0 +1,1783 @@
+{% comment %}
+---------------------------------------------------------
+Copyright © 2023 Section Store. All rights reserved.
+Unauthorized copying, modification, distribution, or use
+of this code or any portion of it, is strictly prohibited.
+Violators will be prosecuted to the fullest extent of the law.
+For inquiries or permissions, contact daniel@section.store
+---------------------------------------------------------
+{% endcomment %}
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+
+{%- liquid 
+  assign padding_horizontal = section.settings.padding_horizontal
+  assign padding_horizontal_mobile = section.settings.padding_horizontal_mobile
+  assign padding_top = section.settings.padding_top
+  assign padding_bottom = section.settings.padding_bottom
+  assign border_color = section.settings.border_color
+  assign border_thickness = section.settings.border_thickness
+  assign margin_top = section.settings.margin_top
+  assign margin_bottom = section.settings.margin_bottom
+  assign margin_horizontal_mobile = section.settings.margin_horizontal_mobile
+  assign margin_horizontal = section.settings.margin_horizontal
+  assign background_color = section.settings.background_color
+  assign background_gradient = section.settings.background_gradient
+  assign full_width = section.settings.full_width
+  assign content_width = section.settings.content_width
+  assign lazy = section.settings.lazy
+  assign section_radius = section.settings.section_radius
+
+  assign heading = section.settings.heading
+  assign heading_size = section.settings.heading_size
+  assign heading_size_mobile = section.settings.heading_size_mobile
+  assign heading_color = section.settings.heading_color
+  assign heading_custom = section.settings.heading_custom
+  assign heading_font = section.settings.heading_font
+  assign heading_height = section.settings.heading_height
+  assign heading_align = section.settings.heading_align
+  assign heading_align_mobile = section.settings.heading_align_mobile
+
+  assign button = section.settings.button
+  assign button_url = section.settings.button_url
+  assign button_size = section.settings.button_size
+  assign button_size_mobile = section.settings.button_size_mobile
+  assign button_color = section.settings.button_color
+  assign button_hover_color = section.settings.button_hover_color
+  assign button_custom = section.settings.button_custom
+  assign button_font = section.settings.button_font
+  assign button_height = section.settings.button_height
+  assign button_padding_vertical = section.settings.button_padding_vertical
+  assign button_padding_vertical_mobile = section.settings.button_padding_vertical_mobile
+  assign button_padding_horizontal = section.settings.button_padding_horizontal
+  assign button_padding_horizontal_mobile = section.settings.button_padding_horizontal_mobile
+  assign button_radius = section.settings.button_radius
+  assign button_border_thickness = section.settings.button_border_thickness
+  assign button_border_color = section.settings.button_border_color
+  assign button_border_hover_color = section.settings.button_border_hover_color
+  assign button_bg_color = section.settings.button_bg_color
+  assign button_bg_hover_color = section.settings.button_bg_hover_color
+  assign button_style = section.settings.button_style
+
+  assign slider_view = section.settings.slider_view
+  assign slider_view_mobile = section.settings.slider_view_mobile
+  assign slider_gap = section.settings.slider_gap
+  assign slider_gap_mobile = section.settings.slider_gap_mobile
+  assign slider_mt = section.settings.slider_mt
+  assign slider_mt_mobile = section.settings.slider_mt_mobile
+
+  assign image_radius = section.settings.image_radius
+  assign image_border_thickness = section.settings.image_border_thickness
+  assign image_border_color = section.settings.image_border_color
+  assign image_ratio = section.settings.image_ratio
+  assign image_ratio_mobile = section.settings.image_ratio_mobile
+
+  assign text_size = section.settings.text_size
+  assign text_size_mobile = section.settings.text_size_mobile
+  assign text_color = section.settings.text_color
+  assign text_custom = section.settings.text_custom
+  assign text_font = section.settings.text_font
+  assign text_height = section.settings.text_height
+  assign text_align = section.settings.text_align
+  assign text_align_mobile = section.settings.text_align_mobile
+  assign text_padding_horizontal = section.settings.text_padding_horizontal
+  assign text_padding_horizontal_mobile = section.settings.text_padding_horizontal_mobile
+  assign text_mt = section.settings.text_mt
+
+  assign navigation_mt_mobile = section.settings.navigation_mt_mobile
+  assign navigation_mt = section.settings.navigation_mt
+  assign navigation_pt_mobile = section.settings.navigation_pt_mobile
+  assign navigation_pt = section.settings.navigation_pt
+  assign navigation_border_color = section.settings.navigation_border_color
+  assign navigation_border_thickness = section.settings.navigation_border_thickness
+
+  assign arrow_size = section.settings.arrow_size
+  assign arrow_size_mobile = section.settings.arrow_size_mobile
+  assign arrow_color = section.settings.arrow_color
+  assign arrow_hover_color = section.settings.arrow_hover_color
+-%}
+
+{%- style -%}
+
+    {{  heading_font | font_face: font_display: 'swap' }}
+    {{  button_font | font_face: font_display: 'swap' }}
+    {{  text_font | font_face: font_display: 'swap' }}
+  
+    .section-{{ section.id }} {
+        border-top: solid {{ border_color }} {{ border_thickness }}px;
+        border-bottom: solid {{ border_color }} {{ border_thickness }}px;
+        margin-top: {{ margin_top | times: 0.75 | round: 0 }}px;
+        margin-bottom: {{ margin_bottom | times: 0.75 | round: 0 }}px;
+        margin-left: {{ margin_horizontal_mobile }}rem;
+        margin-right: {{ margin_horizontal_mobile }}rem;
+        border-radius: {{ section_radius | times: 0.6 | round: 0 }}px;
+        overflow: hidden;
+    }
+    
+    .section-{{ section.id }}-settings {
+        margin: 0 auto;
+        padding-top: {{ padding_top | times: 0.75 | round: 0 }}px;
+        padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
+        padding-left: {{ padding_horizontal_mobile }}rem;
+        padding-right: {{ padding_horizontal_mobile }}rem;
+    }
+
+    .slider-top-{{ section.id }} {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .slider-heading-{{ section.id }} {
+        width: 100%;
+    }
+
+    .slider-heading-{{ section.id }} * {
+        margin: 0;
+        font-size: {{ heading_size_mobile }}px;
+        color: {{ heading_color }};
+        line-height: {{ heading_height }}%;
+        text-transform: unset;
+    }
+
+    .slider-button-{{ section.id }} {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        max-width: fit-content;
+        margin: 0;
+        font-size: {{ button_size_mobile }}px;
+        color: {{ button_color }};
+        line-height: {{ button_height }}%;
+        text-align: center;
+        text-transform: unset;
+        text-decoration: none;
+        padding: {{ button_padding_vertical_mobile }}px {{ button_padding_horizontal_mobile }}px;
+        border-radius: {{ button_radius }}px;
+        transition: all 0.25s ease 0s;
+        position: relative;
+        font-weight: 700;
+        z-index: 2;
+        box-sizing: border-box;
+    }
+
+    .slider-button-{{ section.id }} svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .slider-button-{{ section.id }} svg path {
+        fill: {{ button_color }};
+        transition: all 0.25s ease 0s;
+    }
+
+    .slider-button-{{ section.id }}:hover {
+        color: {{ button_hover_color }};
+        transition: all 0.25s ease 0s;
+    }
+
+    .slider-button-{{ section.id }}:hover svg path {
+        fill: {{ button_hover_color }};
+        transition: all 0.25s ease 0s;
+    }
+
+    .slider-slider-{{ section.id }} {
+        margin-top: {{ slider_mt_mobile }}px;
+        overflow: visible !important;
+    }
+
+    .slider-slide-{{ section.id }} {
+      text-decoration: none;
+    }
+
+    .slider-image-{{ section.id }} {  
+        overflow: hidden;
+        border-radius: {{ image_radius }}px;
+        border: {{ image_border_thickness }}px solid {{ image_border_color }};
+    }
+
+    .slider-image-{{ section.id }} img,
+    .slider-image-{{ section.id }} svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover
+    }
+
+    .slider-image-{{ section.id }} svg {
+        background-color: #AFAFAF;
+    }
+
+    .slider-second-image-{{ section.id }} {
+        display: none;
+    }
+
+    .slider-slide-{{ section.id }}:hover .slider-second-image-{{ section.id }} {
+        display: block;
+    }
+
+    .slider-slide-{{ section.id }}:hover .slider-first-image-{{ section.id }} {
+        display: none;
+    }
+
+    .slider-text-{{ section.id }} {
+        padding: 0px {{ text_padding_horizontal_mobile }}px;
+        margin-top: {{ text_mt | times: 0.75 | round: 0 }}px;
+        text-align: {{ text_align_mobile }};
+    }
+
+    .slider-text-{{ section.id }} * {
+        margin: 0;
+        font-size: {{ text_size_mobile }}px;
+        color: {{ text_color }};
+        line-height: {{ text_height }}%;
+        text-transform: unset;
+        transition: all 0.25s ease 0s;
+    }
+
+    .slider-slide-{{ section.id }}:hover .slider-text-{{ section.id }} *{
+        opacity: 0.6;
+    }
+
+    .slider-navigation-{{ section.id }} {
+        margin-top: {{ navigation_mt_mobile }}px;
+        padding-top: {{ navigation_pt_mobile }}px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        border-top: {{ navigation_border_thickness }}px solid {{ navigation_border_color }};
+    }
+
+    .slider-btn-prev-{{ section.id }},
+    .slider-btn-next-{{ section.id }} {
+        position: static !important;
+        flex: 0 0 {{ arrow_size_mobile }}px;
+        height: {{ arrow_size_mobile }}px;
+        flex-shrink: 0;
+        border: 0px;
+        box-shadow: none;
+        background: transparent;
+        cursor: pointer;
+    }
+
+    .slider-btn-prev-{{ section.id }} svg,
+    .slider-btn-next-{{ section.id }} svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .slider-btn-prev-{{ section.id }} svg path,
+    .slider-btn-next-{{ section.id }} svg path {
+        fill: {{ arrow_color }};
+        transition: all 0.25s ease 0s;
+    }
+
+    .slider-btn-prev-{{ section.id }}:hover svg path,
+    .slider-btn-next-{{ section.id }}:hover svg path {
+        fill: {{ arrow_hover_color }};
+        transition: all 0.25s ease 0s;
+    }
+
+    .slider-btn-prev-{{ section.id }}.swiper-button-disabled,
+    .slider-btn-next-{{ section.id }}.swiper-button-disabled {
+        opacity: 0.3;
+    }
+    
+    @media(min-width: 1024px) {
+
+        .section-{{ section.id }} {
+            margin-top: {{ margin_top }}px;
+            margin-bottom: {{ margin_bottom }}px;
+            margin-left: {{ margin_horizontal }}rem;
+            margin-right: {{ margin_horizontal }}rem;
+            border-radius: {{ section_radius }}px;
+        }
+        
+        .section-{{ section.id }}-settings {
+            padding: 0 5rem;
+            padding-top: {{ padding_top }}px;
+            padding-bottom: {{ padding_bottom }}px;
+            padding-left: {{ padding_horizontal }}rem;
+            padding-right: {{ padding_horizontal }}rem;
+        }
+        
+        .slider-heading-{{ section.id }} * {
+            font-size: {{ heading_size }}px;
+        }
+
+        .slider-button-{{ section.id }} {
+            padding: {{ button_padding_vertical }}px {{ button_padding_horizontal }}px;
+            font-size: {{ button_size }}px;
+        }
+
+        .slider-slider-{{ section.id }} {
+            margin-top: {{ slider_mt }}px;
+        }
+
+        .slider-text-{{ section.id }} {
+            padding: 0px {{ text_padding_horizontal }}px;
+            margin-top: {{ text_mt }}px;
+            text-align: {{ text_align }};
+        }
+
+        .slider-text-{{ section.id }} * {
+            font-size: {{ text_size }}px;
+        }
+
+        .slider-navigation-{{ section.id }} {
+            margin-top: {{ navigation_mt }}px;
+            padding-top: {{ navigation_pt }}px;
+        }
+
+        .slider-btn-prev-{{ section.id }},
+        .slider-btn-next-{{ section.id }} {
+            flex: 0 0 {{ arrow_size }}px;
+            height: {{ arrow_size }}px;
+        }
+    }
+  
+{%- endstyle -%}
+
+{% unless full_width %}
+    <style>
+        .section-{{ section.id }}-settings {
+            max-width: {{ content_width }}rem;
+        }
+    </style>
+{% endunless %}
+
+{% if margin_horizontal_mobile > 0 %}
+  <style>
+    .section-{{ section.id }} {
+        border-left: solid {{ border_color }} {{ border_thickness }}px;
+        border-right: solid {{ border_color }} {{ border_thickness }}px;
+    }
+    
+    @media(min-width: 1024px) {
+        .section-{{ section.id }} {
+            border-left: 0px;
+            border-right: 0px;
+        }
+    }
+  </style>
+{% endif %}
+
+{% if margin_horizontal > 0 %}
+  <style>
+    @media(min-width: 1024px) {
+        .section-{{ section.id }} {
+            border-left: solid {{ border_color }} {{ border_thickness }}px;
+            border-right: solid {{ border_color }} {{ border_thickness }}px;
+        }
+    }
+  </style>
+{% endif %}
+
+{% if heading_custom %}
+    <style>
+        .slider-heading-{{ section.id }} * {
+            font-family: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+            font-weight: {{ heading_font.weight }};
+            font-style: {{ heading_font.style }};
+        }
+    </style>
+{% endif %}
+
+{% if button_custom %}
+    <style>
+        .slider-button-{{ section.id }} {
+            font-family: {{ button_font.family }}, {{ button_font.fallback_families }};
+            font-weight: {{ button_font.weight }};
+            font-style: {{ button_font.style }};
+        }
+    </style>
+{% endif %}
+
+{% if text_custom %}
+    <style>
+      .slider-text-{{ section.id }} * {
+        font-family: {{ text_font.family }}, {{ text_font.fallback_families }};
+        font-weight: {{ text_font.weight }};
+        font-style: {{ text_font.style }};
+      }
+    </style>
+  {% endif %}
+
+{% if button == blank %}
+    <style>
+        .slider-heading-{{ section.id }} {
+            text-align: {{ heading_align_mobile }} !important;
+        }
+
+        @media(min-width: 1024px) {
+            .slider-heading-{{ section.id }} {
+                text-align: {{ heading_align }} !important;
+            }
+        }
+    </style>
+{% endif %}
+
+{% if button_style == "non_outline" or button_style == "non_outline_arrow" %}
+    <style>
+        .slider-button-{{ section.id }} {
+            background-color: {{ button_bg_color }};
+        }
+    
+        .slider-button-{{ section.id }}:hover {
+            background-color: {{ button_bg_hover_color }};
+        }
+    </style>
+{% elsif button_style == "outline" or button_style == "outline_arrow" %}
+    <style>
+        .slider-button-{{ section.id }} {
+            background-color: {{ button_bg_color }};
+            border: {{ button_border_thickness }}px solid {{ button_border_color }};
+        }
+    
+        .slider-button-{{ section.id }}:hover {
+            background-color: {{ button_bg_hover_color }};
+            border: {{ button_border_thickness }}px solid {{ button_border_hover_color }};
+        }
+    </style>
+{% elsif button_style == "link" %}
+    <style>
+        .slider-button-{{ section.id }} {
+            padding: 0px !important;
+            max-width: fit-content !important;
+        }
+    </style>
+{% endif %}
+
+{% if image_ratio_mobile == "portrait" %}
+    <style>
+        .slider-image-{{ section.id }} {
+            aspect-ratio: 9.6/14; 
+        }
+    </style>
+{% elsif image_ratio_mobile == "landscape" %}
+    <style>
+        .slider-image-{{ section.id }} {
+            aspect-ratio: 12/9; 
+        }
+    </style>
+{% elsif image_ratio_mobile == "square" %}
+    <style>
+        .slider-image-{{ section.id }} {
+            aspect-ratio: 12/12; 
+        }
+    </style>
+{% else %}
+    <style>
+        .slider-image-{{ section.id }} {
+            aspect-ratio: auto; 
+        }
+    </style>
+{% endif %}
+  
+{% if image_ratio == "portrait" %}
+    <style>
+        @media(min-width: 1024px) {
+            .slider-image-{{ section.id }} {
+                aspect-ratio: 9.6/14; 
+            } 
+        }
+    </style>
+{% elsif image_ratio == "landscape" %}
+    <style>
+        @media(min-width: 1024px) {
+            .slider-image-{{ section.id }} {
+                aspect-ratio: 12/9; 
+            }
+        }
+    </style>
+{% elsif image_ratio == "square" %}
+    <style>
+        @media(min-width: 1024px) {
+            .slider-image-{{ section.id }} {
+                aspect-ratio: 12/12; 
+            }
+        }
+    </style>
+{% else %}
+    <style>
+        @media(min-width: 1024px) {
+            .slider-image-{{ section.id }} {
+                aspect-ratio: auto; 
+            }
+        }
+    </style>
+{% endif %}
+
+{% comment %} PREVIEW {% endcomment %}
+<style>
+    .slider-slider-{{ section.id }}.preview .swiper-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+  
+    .slider-slider-{{ section.id }}.preview .slider-slide-{{ section.id }} {
+        width: 100%;
+    }
+  
+    .slider-slider-{{ section.id }}.preview .slider-slide-{{ section.id }}:not(:first-child) {
+        margin-left: {{ slider_gap_mobile }}px;
+    } 
+  
+    @media(min-width: 1024px) {
+        .slider-slider-{{ section.id }}.preview .slider-slide-{{ section.id }}:not(:first-child) {
+            margin-left: {{ slider_gap }}px;
+        } 
+    
+        .slider-slider-{{ section.id }}.preview .slider-slide-{{ section.id }} {
+            width: 30%;
+        }
+    }
+</style>
+
+<style>
+  /* Align this section's inner pill with SS - Header #1's inner pill width WITHOUT
+     breaking the peek/reveal carousel effect.
+
+     IMPORTANT — preserved functionality:
+     `.slider-slider-{id}` has `overflow: visible !important` (line 191), which is what
+     lets slides extend visually past the swiper container into the page margin to create
+     the "next card peeks off the right edge" reveal. Combined with editor-controlled
+     `slider_view` (e.g. 3.2 desktop / 1.5 mobile), 3 (or 1) full cards fit inside the
+     container + the next slide peeks past it. We do NOT touch overflow, swiper init,
+     slidesPerView, slidesOffset, or any schema — those drive the reveal.
+
+     What we change:
+     - Outer `.section-{id}` forced edge-to-edge (zero margin/border) so the central-
+       column formula on the inner resolves correctly regardless of editor's
+       margin_horizontal setting.
+     - Inner `.section-{id}-settings` constrained to the SS-Header-1 pill formula
+       `min(page-width - 2*page-margin, 100% - 2*page-margin)` — identical to
+       --ss-header-width and Horizon's .section--page-width central column.
+     - Inner `.section-{id}-settings` horizontal padding zeroed (was `padding_horizontal:
+       5rem` desktop / `1.5rem` mobile from editor = 160px/48px inset). Without this,
+       the carousel container, OUR COLLECTIONS heading row, and bottom nav row sit
+       80px/24px INSIDE the pill on each side. Zeroing makes them flush with the pill
+       edges. The peek still works exactly as before — `overflow: visible` doesn't care
+       about the container's padding, only its width.
+     Vertical padding (padding_top/bottom) intentionally untouched so editor still owns
+     top/bottom breathing room. -vamshi */
+  .section-{{ section.id }} {
+    margin-left: 0;
+    margin-right: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .section-{{ section.id }}-settings {
+    width: 100% !important;
+    max-width: min(
+      calc(var(--page-width) - var(--page-margin) * 2),
+      calc(100% - var(--page-margin) * 2)
+    ) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    /* Clip the peek/reveal at the pill right edge. .slider-slider-{id} still has
+       `overflow: visible !important` (line 191) so the swiper-wrapper happily
+       translates slides past its container for the peek effect — but now ancestor
+       `.section-{id}-settings` (at pill width) clips the visible portion at the pill
+       boundary. Result: 3 full cards inside pill + 0.2 peek of 4th card right up to
+       pill right edge, nothing past it. Swiper navigation (NEXT arrow) still scrolls
+       the wrapper as before; slides 5+ are translated in the DOM and become visible
+       when scrolled in. Using `overflow-x: clip` instead of `overflow-x: hidden` so
+       no new positioning/containing-block context is created and vertical overflow
+       stays untouched. -vamshi */
+    overflow-x: clip !important;
+  }
+
+  /* Client ask 2026-06-02 (rhodeskin.com/#rhode-you reference): rebuild the nav row
+     and CTA placement to match. Reference layout, top → bottom:
+       1. heading (alone, left)
+       2. carousel
+       3. nav row = progressbar pagination (flex-grow, fills width) + prev + next
+          circular outline arrows on the right
+       4. centered outline pill button (FIND US ON SOCIAL) on its own row
+
+     All visual styling matches the OUR VALUES pill (#67645e on transparent → flip on
+     hover) so the entire section reads as one unified Rhode-style block. The base
+     CSS in the section stylesheet above already styles arrows/buttons/etc., but we
+     need to override several properties to land on the reference look. -vamshi */
+
+  /* --- Top row layout: heading + (desktop-only) button ---------------------------
+     Mobile: heading alone, left-aligned, button shows in the bottom CTA wrap.
+     Desktop: heading left + button right on the same row (matches Rhode reference
+     image 14). Achieved by hiding the desktop CTA wrapper on mobile and the bottom
+     CTA wrapper on desktop — see the @media rules at the end of this block. -vamshi */
+  .slider-top-{{ section.id }} {
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 16px !important;
+  }
+
+  /* Default state (mobile-first): top button hidden, bottom CTA visible. */
+  .slider-top-cta-{{ section.id }} {
+    display: none !important;
+  }
+
+  /* --- Section bg: keep editor-controlled background_color but apply it to the INNER
+     pill-width container instead of the full-viewport outer. Otherwise the gray
+     bg overflows past the header pill edges. Outer goes transparent, inner gets the
+     bg + 24px corner radius (matches the Rhode reference's rounded section block and
+     the ss-image-with-text-15 card below it). 2026-06-02 client ask. -vamshi */
+  .section-{{ section.id }} {
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+
+  .section-{{ section.id }}-settings {
+    background-color: {{ background_color }} !important;
+    {%- if background_gradient != blank and background_gradient != 'none' -%}
+    background-image: {{ background_gradient }} !important;
+    {%- endif -%}
+    border-radius: 10px !important;
+    /* Inner section padding — 10px mobile / 32px desktop (overridden in @media) — so
+       the heading no longer touches the bg left edge, and so the first/last cards sit
+       INSIDE the bg with the rounded corners visible around them (matches the Rhode
+       reference image 14 / 18). The carousel peek effect still works: the cards
+       extend past the right padding via overflow:visible on .slider-slider, clipped
+       at the inner pill's right edge by overflow-x: clip. -vamshi */
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  /* --- Navigation row: pagination grows, arrows pinned right ---------------------- */
+  .slider-navigation-{{ section.id }} {
+    margin-top: 16px !important;
+    padding-top: 0 !important;
+    border-top: 0 !important;
+    gap: 12px !important;
+    align-items: center !important;
+  }
+
+  /* Progressbar pagination — gray track + black active fill, takes all available
+     width left of the arrows. Swiper renders the progressbar as a `.swiper-pagination`
+     with a `.swiper-pagination-progressbar-fill` child translated horizontally to
+     show progress. */
+  .slider-pagination-{{ section.id }} {
+    position: relative !important;
+    flex: 1 1 auto !important;
+    height: 2px !important;
+    background-color: #c4c4c4 !important;
+    border-radius: 2px !important;
+    overflow: hidden !important;
+    /* swiper applies inline transform to its child, but in case its default classes
+       still try to position the container, override left/right insets. */
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    width: auto !important;
+  }
+
+  .slider-pagination-{{ section.id }} .swiper-pagination-progressbar-fill {
+    background-color: #67645e !important;
+    border-radius: 2px !important;
+  }
+
+  /* --- Circular outline arrows (OUR VALUES pill style, but round) -----------------
+     Mobile 32px / desktop 40px — smaller so they read in proportion with the 2px
+     progress bar to their left (client ask: "make the arrows smaller / align with
+     the progress bar"). -vamshi */
+  .slider-btn-prev-{{ section.id }},
+  .slider-btn-next-{{ section.id }} {
+    flex: 0 0 32px !important;
+    height: 32px !important;
+    width: 32px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 1px solid #67645e !important;
+    border-radius: 999px !important;
+    background-color: transparent !important;
+    color: #67645e !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    transition: background-color 0.25s ease, color 0.25s ease !important;
+  }
+
+  .slider-btn-prev-{{ section.id }} svg,
+  .slider-btn-next-{{ section.id }} svg {
+    width: 10px !important;
+    height: 10px !important;
+    object-fit: contain !important;
+  }
+
+  .slider-btn-prev-{{ section.id }} svg path,
+  .slider-btn-next-{{ section.id }} svg path {
+    fill: #67645e !important;
+    transition: fill 0.25s ease !important;
+  }
+
+  .slider-btn-prev-{{ section.id }}:hover,
+  .slider-btn-next-{{ section.id }}:hover {
+    background-color: #67645e !important;
+  }
+
+  .slider-btn-prev-{{ section.id }}:hover svg path,
+  .slider-btn-next-{{ section.id }}:hover svg path {
+    fill: #ffffff !important;
+  }
+
+  /* --- Bottom-centered CTA wrapper (button moved here from .slider-top-{id}) ------ */
+  .slider-cta-wrap-{{ section.id }} {
+    display: flex !important;
+    justify-content: center !important;
+    margin-top: 28px !important;
+  }
+
+  /* Button itself — single line (the previous flex container constrained it to wrap
+     onto two rows). The site-wide isoua-button-overrides.css already gives this
+     button the OUR VALUES pill style; we only add white-space: nowrap so a label
+     like "FIND US ON SOCIALS" or "FIND US ON SOCIAL" never breaks. */
+  .slider-button-{{ section.id }} {
+    white-space: nowrap !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  /* Direction-based slide-fill hover for the CTA button.
+     ::before slides in from the mouse-entry direction (data-dir set by JS).
+     We keep background-color: transparent on hover so the ::before provides the
+     visual fill instead — this overrides isoua-button-overrides.css (same
+     specificity, section styles cascade later so this wins). -vamshi */
+  .slider-button-{{ section.id }} {
+    position: relative !important;
+    overflow: hidden !important;
+    transition: color 0.15s ease 0.2s, border-color 0.3s ease !important;
+  }
+
+  .slider-button-{{ section.id }}::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #67645e;
+    border-radius: inherit;
+    transform: translateY(101%);
+    transition: transform 0.45s cubic-bezier(.76, 0, .24, 1);
+    z-index: 0;
+    will-change: transform;
+    pointer-events: none;
+  }
+
+  .slider-button-{{ section.id }}[data-dir="top"]::before    { transform: translateY(-101%); }
+  .slider-button-{{ section.id }}[data-dir="bottom"]::before { transform: translateY(101%);  }
+  .slider-button-{{ section.id }}[data-dir="left"]::before   { transform: translateX(-101%); }
+  .slider-button-{{ section.id }}[data-dir="right"]::before  { transform: translateX(101%);  }
+
+  .slider-button-{{ section.id }}:hover::before { transform: translate(0, 0); }
+
+  .slider-button-{{ section.id }} > span {
+    position: relative !important;
+    z-index: 1 !important;
+  }
+
+  .slider-button-{{ section.id }}:hover {
+    background-color: transparent !important;
+    color: #ffffff !important;
+  }
+
+  /* --- Desktop tweaks ------------------------------------------------------------- */
+  @media (min-width: 1024px) {
+    /* Inner pill horizontal padding bumped from 24 to 32px for desktop breathing room. */
+    .section-{{ section.id }}-settings {
+      padding-left: 32px !important;
+      padding-right: 32px !important;
+      padding-top: 32px !important;
+      padding-bottom: 32px !important;
+    }
+
+    .slider-btn-prev-{{ section.id }},
+    .slider-btn-next-{{ section.id }} {
+      flex: 0 0 40px !important;
+      height: 40px !important;
+      width: 40px !important;
+    }
+
+    .slider-btn-prev-{{ section.id }} svg,
+    .slider-btn-next-{{ section.id }} svg {
+      width: 12px !important;
+      height: 12px !important;
+    }
+
+    /* Desktop button placement flip: bottom CTA hidden, top-right CTA visible (next
+       to heading via .slider-top-{id}'s space-between). Matches Rhode desktop. */
+    .slider-cta-wrap-{{ section.id }} {
+      display: none !important;
+    }
+
+    .slider-top-cta-{{ section.id }} {
+      display: inline-flex !important;
+    }
+  }
+</style>
+
+<div class="section-{{ section.id }} slider-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
+    <div class="section-{{ section.id }}-settings">
+        <div class="slider-top-{{ section.id }}">
+            {% if heading != blank %}
+                <div class="slider-heading-{{ section.id }}">
+                    {{ heading }}
+                </div>
+            {% endif %}
+            {% if button != blank %}
+                <div class="slider-top-cta-{{ section.id }}">
+                    <a href="{{ button_url }}" class="slider-button-{{ section.id }}">
+                        <span>{{ button }}</span>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+        <div class="slider-slider-{{ section.id }} swiper preview">
+            <div class="swiper-wrapper">
+                {% for block in section.blocks %}
+                    <{% if block.settings.url != blank %}a href="{{ block.settings.url }}"{% else %}div{% endif %} class="slider-slide-{{ section.id }} swiper-slide">
+                        <div class="slider-image-{{ section.id }}">
+                            {% if block.settings.image != blank %}
+                                <img src="{{ block.settings.image | image_url }}" alt="{{ block.settings.image.alt }}" {% if lazy %}loading="lazy"{% endif %} {% if block.settings.second_image != blank %}class="slider-first-image-{{ section.id }}"{% endif %}>
+                            {% elsif block.settings.image_url != blank %}
+                                <img src="{{ block.settings.image_url }}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
+                            {% else %}
+                                {{ 'image' | placeholder_svg_tag }}
+                            {% endif %}
+
+                            {% if block.settings.second_image != blank %}
+                                <img src="{{ block.settings.second_image | image_url }}" alt="{{ block.settings.second_image.alt }}" {% if lazy %}loading="lazy"{% endif %} class="slider-second-image-{{ section.id }}">
+                            {% endif %}
+                        </div>
+                        {% if block.settings.text != blank %}
+                            <div class="slider-text-{{ section.id }}">
+                                {{ block.settings.text }}
+                            </div>
+                        {% endif %}
+                    </{% if block.settings.url != blank %}a{% else %}div{% endif %}>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="slider-navigation-{{ section.id }}">
+            <div class="slider-pagination-{{ section.id }} swiper-pagination"></div>
+            <button class="slider-btn-prev-{{ section.id }}" aria-label="Previous slide">
+                <svg fill="none" width="14" class="icon icon-swiper-caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13 15">
+                    <path d="M0 7.5 12.75.139V14.86L0 7.5Z" fill="currentColor"></path>
+                </svg>
+            </button>
+            <button class="slider-btn-next-{{ section.id }}" aria-label="Next slide">
+                <svg fill="none" width="14" class="icon icon-swiper-caret" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13 15">
+                    <path d="M13 7.5.25 14.861V.14L13 7.5Z" fill="currentColor"></path>
+                </svg>
+            </button>
+        </div>
+        {% if button != blank %}
+            <div class="slider-cta-wrap-{{ section.id }}">
+                <a href="{{ button_url }}" class="slider-button-{{ section.id }}">
+                    <span>{{ button }}</span>
+                    {% if button_style == "non_outline_arrow" or button_style == "outline_arrow" %}
+                    <svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M187.827 98.7858C188.123 98.4749 188.123 98.4749 188.123 98.1761C188.419 97.8652 188.419 97.5663 188.704 97.5663C189 96.9566 189 96.6458 189 96.0361C189 95.4263 189 94.8166 188.704 94.5058C188.704 94.195 188.408 93.8961 188.123 93.5852C188.123 93.2744 187.827 93.2744 187.827 92.9755L103.287 4.21945C102.41 3.29889 101.533 3 100.668 3C99.791 3 98.6295 3.31083 98.0488 4.21945C97.1719 5.14 96.8872 6.06058 96.8872 6.96919C96.8872 7.88974 97.1833 9.10918 98.0488 9.7189L175.587 92.0539H6.79206C4.75371 92.0539 3 93.895 3 96.0351C3 98.1751 4.75365 100.016 6.79206 100.016H175.575L97.7543 182.042C96.2967 183.572 96.2967 186.322 97.7543 187.852C99.2119 189.383 101.831 189.383 103.288 187.852L187.827 98.7858Z" fill="black"></path>
+                        <path d="M169.5 104L16.5 102.5V90H171L97.5 10.5V7L107.5 4.5C131.167 29.6667 180.2 81.5 187 87.5C193.8 93.5 191.5 99 189.5 101L105.5 184L94 181.5L169.5 104Z" fill="black"></path>
+                    </svg>
+                    {% endif %}
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  function initSlider5() {
+    document.querySelector('.slider-slider-{{ section.id }}').classList.remove('preview');
+    const slider = new Swiper(".slider-slider-{{ section.id }}", {
+      speed: 300,
+      spaceBetween: 20,
+      navigation: {
+        nextEl: '.slider-btn-next-{{ section.id }}',
+        prevEl: '.slider-btn-prev-{{ section.id }}',
+      },
+      pagination: {
+        el: '.slider-pagination-{{ section.id }}',
+        type: 'progressbar',
+      },
+      breakpoints: {
+        320: {
+          spaceBetween: {{ slider_gap_mobile }},
+          slidesPerView: {{ slider_view_mobile }}
+        },
+        768: {
+          spaceBetween: {{ slider_gap_mobile }},
+          slidesPerView: {{ slider_view | times: 0.5 | round: 0 }}
+        },
+        1024: {
+          spaceBetween: {{ slider_gap }},
+          slidesPerView: {{ slider_view }}
+        }
+      }
+    });
+
+    document.querySelectorAll('.slider-button-{{ section.id }}').forEach(function(btn) {
+      function getDir(e) {
+        var r = btn.getBoundingClientRect();
+        var x = e.clientX - r.left, y = e.clientY - r.top;
+        var d = [['top', y], ['bottom', r.height - y], ['left', x], ['right', r.width - x]];
+        return d.reduce(function(a, b) { return a[1] < b[1] ? a : b; })[0];
+      }
+      btn.addEventListener('mouseenter', function(e) { btn.setAttribute('data-dir', getDir(e)); });
+      btn.addEventListener('mouseleave', function(e) { btn.setAttribute('data-dir', getDir(e)); });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initSlider5);
+  
+  if (Shopify.designMode) {
+     document.addEventListener('shopify:section:unload', initSlider5);
+     document.addEventListener('shopify:section:load', initSlider5);
+  }
+</script>
+
+{% schema %}
+  {
+    "name": "SS - Slider #5",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Save settings for slider to show correct."
+        },
+        {
+            "type": "header",
+            "content": "Heading Settings"
+        },
+        {
+            "type": "richtext",
+            "id": "heading",
+            "label": "Heading",
+            "default": "<h2>OUR COLLECTIONS</h2>"
+        },
+        {
+            "type": "checkbox",
+            "id": "heading_custom",
+            "label": "Use Custom Font",
+            "default": false
+        },
+        {
+            "type": "font_picker",
+            "id": "heading_font",
+            "label": "Heading Font Family",
+            "default": "josefin_sans_n4"
+        },
+        {
+            "type": "range",
+            "id": "heading_size",
+            "min": 0,
+            "max": 72,
+            "step": 2,
+            "unit": "px",
+            "label": "Heading Size",
+            "default": 14
+        },
+        {
+            "type": "range",
+            "id": "heading_size_mobile",
+            "min": 0,
+            "max": 72,
+            "step": 2,
+            "unit": "px",
+            "label": "Heading Size - Mobile",
+            "default": 14
+        },
+        {
+            "type": "range",
+            "id": "heading_height",
+            "min": 50,
+            "max": 200,
+            "step": 10,
+            "unit": "%",
+            "label": "Heading Line Height",
+            "default": 130
+        },
+        {
+            "type": "text_alignment",
+            "id": "heading_align",
+            "label": "Heading Align",
+            "info": "If no Button"
+        },
+        {
+            "type": "text_alignment",
+            "id": "heading_align_mobile",
+            "label": "Heading Align - Mobile",
+            "info": "If no Button"
+        },
+        {
+            "type": "header",
+            "content": "Button Settings"
+        },
+        {
+            "type": "text",
+            "id": "button",
+            "label": "Button Text",
+            "default": "VIEW ALL"
+        },
+        {
+            "type": "url",
+            "id": "button_url",
+            "label": "Button URL"
+        },
+        {
+            "type": "checkbox",
+            "id": "button_custom",
+            "label": "Use Custom Font",
+            "default": false
+        },
+        {
+            "type": "font_picker",
+            "id": "button_font",
+            "label": "Button Font Family",
+            "default": "josefin_sans_n4"
+        },
+        {
+            "type": "range",
+            "id": "button_size",
+            "min": 0,
+            "max": 30,
+            "step": 1,
+            "unit": "px",
+            "label": "Button Size",
+            "default": 14
+        },
+        {
+            "type": "range",
+            "id": "button_size_mobile",
+            "min": 0,
+            "max": 30,
+            "step": 1,
+            "unit": "px",
+            "label": "Button Size - Mobile",
+            "default": 14
+        },
+        {
+            "type": "range",
+            "id": "button_height",
+            "min": 50,
+            "max": 200,
+            "step": 10,
+            "unit": "%",
+            "label": "Button Line Height",
+            "default": 100
+        },
+        {
+            "type": "range",
+            "id": "button_padding_vertical",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Button Padding Vertical",
+            "default": 16
+        },
+        {
+            "type": "range",
+            "id": "button_padding_vertical_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Button Padding Vertical - Mobile",
+            "default": 16
+        },
+        {
+            "type": "range",
+            "id": "button_padding_horizontal",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Button Padding Horizontal",
+            "default": 24
+        },
+        {
+            "type": "range",
+            "id": "button_padding_horizontal_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Button Padding Horizontal - Mobile",
+            "default": 24
+        },
+        {
+            "type": "range",
+            "id": "button_radius",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Button Roundness",
+            "default": 100
+        },
+        {
+            "type": "range",
+            "id": "button_border_thickness",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "unit": "px",
+            "label": "Button Border Thickness",
+            "default": 1
+        },
+        {
+            "type": "select",
+            "id": "button_style",
+            "label": "Button Style",
+            "default": "outline",
+            "options": [
+            {
+                "label": "Link",
+                "value": "link"
+            },
+            {
+                "label": "Non-Outline",
+                "value": "non_outline"
+            },
+            {
+                "label": "Non-Outline & Arrow",
+                "value": "non_outline_arrow"
+            },
+            {
+                "label": "Outline",
+                "value": "outline"
+            },
+            {
+                "label": "Outline & Arrow",
+                "value": "outline_arrow"
+            }
+            ]
+        },
+        {
+            "type": "header",
+            "content": "Slider Settings"
+        },
+        {
+            "type": "range",
+            "id": "slider_view",
+            "min": 2,
+            "max": 6,
+            "step": 0.1,
+            "label": "Slider Per View",
+            "default": 3.2
+        },
+        {
+            "type": "range",
+            "id": "slider_view_mobile",
+            "min": 1,
+            "max": 3,
+            "step": 0.1,
+            "label": "Slider Per View - Mobile",
+            "default": 1.5
+        },
+        {
+            "type": "range",
+            "id": "slider_gap",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Slider Gap",
+            "default": 16
+        },
+        {
+            "type": "range",
+            "id": "slider_gap_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Slider Gap - Mobile",
+            "default": 20
+        },
+        {
+            "type": "range",
+            "id": "slider_mt",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Slider Margin Top",
+            "default": 24
+        },
+        {
+            "type": "range",
+            "id": "slider_mt_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Slider Margin Top - Mobile",
+            "default": 24
+        },
+        {
+            "type": "header",
+            "content": "Slide Image Settings"
+        },
+        {
+            "type": "range",
+            "id": "image_radius",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Image Border Radius",
+            "default": 24
+        },
+        {
+            "type": "range",
+            "id": "image_border_thickness",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "unit": "px",
+            "label": "Image Border Thickness",
+            "default": 0
+        },
+        {
+            "type": "select",
+            "id": "image_ratio",
+            "label": "Image Aspect Ratio",
+            "default": "landscape",
+            "options": [
+            {
+                "label": "Portrait",
+                "value": "portrait"
+            },
+            {
+                "label": "Square",
+                "value": "square"
+            },
+            {
+                "label": "Landscape",
+                "value": "landscape"
+            },
+            {
+                "label": "Original",
+                "value": "original"
+            }
+            ]
+        },
+        {
+            "type": "select",
+            "id": "image_ratio_mobile",
+            "label": "Image Aspect Ratio - Mobile",
+            "default": "landscape",
+            "options": [
+            {
+                "label": "Portrait",
+                "value": "portrait"
+            },
+            {
+                "label": "Square",
+                "value": "square"
+            },
+            {
+                "label": "Landscape",
+                "value": "landscape"
+            },
+            {
+                "label": "Original",
+                "value": "original"
+            }
+            ]
+        },
+        {
+            "type": "header",
+            "content": "Card Text Settings"
+        },
+        {
+            "type": "checkbox",
+            "id": "text_custom",
+            "label": "Use Custom Font",
+            "default": false
+        },
+        {
+            "type": "font_picker",
+            "id": "text_font",
+            "label": "Text Font Family",
+            "default": "josefin_sans_n4"
+        },
+        {
+            "type": "range",
+            "id": "text_size",
+            "min": 0,
+            "max": 72,
+            "step": 2,
+            "unit": "px",
+            "label": "Text Size",
+            "default": 20
+        },
+        {
+            "type": "range",
+            "id": "text_size_mobile",
+            "min": 0,
+            "max": 40,
+            "step": 2,
+            "unit": "px",
+            "label": "Text Size - Mobile",
+            "default": 18
+        },
+        {
+            "type": "range",
+            "id": "text_height",
+            "min": 50,
+            "max": 200,
+            "step": 10,
+            "unit": "%",
+            "label": "Text Line Height",
+            "default": 130
+        },
+        {
+            "type": "range",
+            "id": "text_mt",
+            "min": 0,
+            "max": 40,
+            "step": 2,
+            "unit": "px",
+            "label": "Text Margin Top",
+            "default": 16
+        },
+        {
+            "type": "range",
+            "id": "text_padding_horizontal",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Text Padding Horizontal",
+            "default": 24
+        },
+        {
+            "type": "range",
+            "id": "text_padding_horizontal_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Text Padding Horizontal - Mobile",
+            "default": 12
+        },
+        {
+            "type": "text_alignment",
+            "id": "text_align",
+            "label": "Text Align"
+        },
+        {
+            "type": "text_alignment",
+            "id": "text_align_mobile",
+            "label": "Text Align - Mobile"
+        },
+        {
+            "type": "header",
+            "content": "Navigation Settings"
+        },
+        {
+            "type": "range",
+            "id": "navigation_mt",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Navigation Margin Top",
+            "default": 40
+        },
+        {
+            "type": "range",
+            "id": "navigation_mt_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Navigation Margin Top - Mobile",
+            "default": 24
+        },
+        {
+            "type": "range",
+            "id": "navigation_pt",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Navigation Padding Top",
+            "default": 20
+        },
+        {
+            "type": "range",
+            "id": "navigation_pt_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Navigation Padding Top - Mobile",
+            "default": 12
+        },
+        {
+            "type": "range",
+            "id": "navigation_border_thickness",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "unit": "px",
+            "label": "Navigation Border Thickness",
+            "default": 1
+        },
+        {
+            "type": "header",
+            "content": "Navigation Arrows Settings"
+        },
+        {
+            "type": "range",
+            "id": "arrow_size",
+            "min": 16,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Arrow Size",
+            "default": 24
+        },
+        {
+            "type": "range",
+            "id": "arrow_size_mobile",
+            "min": 16,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Arrow Size - Mobile",
+            "default": 24
+        },
+        {
+            "type": "header",
+            "content": "Button Colors"
+        },
+        {
+            "type": "color",
+            "label": "Button Text Color",
+            "id": "button_color",
+            "default": "#000000"
+        },
+        {
+            "type": "color",
+            "label": "Button Hover Text Color",
+            "id": "button_hover_color",
+            "default": "#FFFFFF"
+        },
+        {
+            "type": "color",
+            "label": "Button Background Color",
+            "id": "button_bg_color"
+        },
+        {
+            "type": "color",
+            "label": "Button Background Hover Color",
+            "id": "button_bg_hover_color",
+            "default": "#000000"
+        },
+        {
+            "type": "color",
+            "label": "Button Border Color",
+            "id": "button_border_color",
+            "default": "#000000"
+        },
+        {
+            "type": "color",
+            "label": "Button Border Hover Color",
+            "id": "button_border_hover_color",
+            "default": "#000000"
+        },
+        {
+            "type": "header",
+            "content": "Card Colors"
+        },
+        {
+            "type": "color",
+            "label": "Image Border Color",
+            "id": "image_border_color",
+            "default": "#000000"
+        },
+        {
+            "type": "color",
+            "label": "Card Text Color",
+            "id": "text_color",
+            "default": "#000000"
+        },
+        {
+            "type": "header",
+            "content": "Navigation Colors"
+        },
+        {
+            "type": "color",
+            "label": "Navigation Border Color",
+            "id": "navigation_border_color",
+            "default": "#000000"
+        },
+        {
+            "type": "color",
+            "label": "Navigation Arrow Color",
+            "id": "arrow_color",
+            "default": "#000000"
+        },
+        {
+            "type": "color",
+            "label": "Navigation Arrow Hover Color",
+            "id": "arrow_hover_color",
+            "default": "#000000"
+        },
+        {
+            "type": "header",
+            "content": "Section Colors"
+        },
+        {
+            "type": "color",
+            "label": "Heading Color",
+            "id": "heading_color",
+            "default": "#000000"
+        },
+        {
+            "type": "color",
+            "label": "Section background",
+            "id": "background_color",
+            "default": "#FFFFFF"
+        },
+        {
+            "type": "color_background",
+            "id": "background_gradient",
+            "label": "Section background gradient"
+        },
+        {
+            "type": "color",
+            "label": "Border",
+            "id": "border_color",
+            "default": "#000000"
+        },
+        {
+            "type": "header",
+            "content": "Section margin (outside)"
+        },
+        {
+            "type": "range",
+            "id": "margin_top",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "Margin top",
+            "default": 0
+        },
+        {
+            "type": "range",
+            "id": "margin_bottom",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "Margin bottom",
+            "default": 0
+        },
+        {
+            "type": "range",
+            "id": "margin_horizontal",
+            "min": 0,
+            "max": 30,
+            "step": 1,
+            "unit": "rem",
+            "label": "Margin sides",
+            "default": 0
+        },
+        {
+            "type": "range",
+            "id": "margin_horizontal_mobile",
+            "min": 0,
+            "max": 15,
+            "step": 0.5,
+            "unit": "rem",
+            "label": "Margin sides mobile",
+            "default": 0
+        },
+        {
+            "type": "header",
+            "content": "Section padding (inside)"
+        },
+        {
+            "type": "range",
+            "id": "padding_top",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding top",
+            "default": 36
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding bottom",
+            "default": 36
+        },
+        {
+            "type": "range",
+            "id": "padding_horizontal",
+            "min": 0,
+            "max": 30,
+            "step": 1,
+            "unit": "rem",
+            "label": "Padding sides",
+            "default": 5
+        },
+        {
+            "type": "range",
+            "id": "padding_horizontal_mobile",
+            "min": 0,
+            "max": 15,
+            "step": 0.5,
+            "unit": "rem",
+            "label": "Padding sides mobile",
+            "default": 1.5
+        },
+        {
+            "type": "header",
+            "content": "Section Settings"
+        },
+        {
+            "type": "checkbox",
+            "id": "full_width",
+            "label": "Full Width",
+            "default": false
+        },
+        {
+            "type": "range",
+            "id": "content_width",
+            "min": 0,
+            "max": 400,
+            "step": 10,
+            "unit": "rem",
+            "label": "Section content width",
+            "default": 140
+        },
+        {
+            "type": "range",
+            "id": "border_thickness",
+            "min": 0,
+            "max": 50,
+            "step": 1,
+            "unit": "px",
+            "label": "Border thickness",
+            "default": 0
+        },
+        {
+            "type": "range",
+            "id": "section_radius",
+            "min": 0,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Section Roundness",
+            "default": 0
+        },
+        {
+            "type": "checkbox",
+            "id": "lazy",
+            "label": "Lazy load",
+            "info": "Lazy load images for speed optimisation",
+            "default": true
+        }
+    ],
+    "blocks": [
+        {
+            "type": "slide",
+            "name": "Slide",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "second_image",
+                    "label": "Second Image"
+                },
+                {
+                    "type": "text",
+                    "id": "image_url",
+                    "label": "Fallback image URL (placeholder)"
+                },
+                {
+                    "type": "richtext",
+                    "id": "text",
+                    "label": "Text",
+                    "default": "<p>Collection title</p>"
+                },
+                {
+                    "type": "url",
+                    "id": "url",
+                    "label": "URL"
+                }
+            ]
+        }
+    ],
+    "presets": [
+      {
+        "name": "SS - Slider #5",
+        "blocks": [
+            {
+                "type": "slide",
+                "settings": {
+                    "text": "<p>Collection title</p>"
+                }
+            },
+            {
+                "type": "slide",
+                "settings": {
+                    "text": "<p>Collection title</p>"
+                }
+            },
+            {
+                "type": "slide",
+                "settings": {
+                    "text": "<p>Collection title</p>"
+                }
+            },
+            {
+                "type": "slide",
+                "settings": {
+                    "text": "<p>Collection title</p>"
+                }
+            },
+            {
+                "type": "slide",
+                "settings": {
+                    "text": "<p>Collection title</p>"
+                }
+            }
+        ]
+      }
+    ]
+  }
+{% endschema %}

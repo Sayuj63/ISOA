@@ -1,0 +1,177 @@
+{% comment %}Rhode PDP — Media + Attributes: heading + attr rows left, image right{% endcomment %}
+{%- assign sid = section.id -%}
+<style>
+.rma-{{ sid }} {
+  background: {{ section.settings.bg_color }};
+  padding-block: {{ section.settings.padding_top }}px {{ section.settings.padding_bottom }}px;
+}
+.rma-{{ sid }} .rma-inner {
+  max-width: min(
+    calc(var(--page-width, 1200px) - var(--page-margin, 40px) * 2),
+    calc(100% - var(--page-margin, 40px) * 2)
+  );
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  min-height: 520px;
+}
+.rma-{{ sid }} .rma-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 64px 56px 64px 0;
+}
+.rma-{{ sid }} .rma-heading {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: clamp(22px, 2.4vw, 34px);
+  font-weight: 400;
+  line-height: 1.35;
+  color: {{ section.settings.heading_color }};
+  margin: 0 0 52px;
+  letter-spacing: -0.01em;
+}
+.rma-{{ sid }} .rma-attrs {
+  display: flex;
+  flex-direction: column;
+}
+.rma-{{ sid }} .rma-attr {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 18px 0;
+  border-top: 1px solid {{ section.settings.border_color }};
+  gap: 24px;
+}
+.rma-{{ sid }} .rma-attrs .rma-attr:last-child {
+  border-bottom: 1px solid {{ section.settings.border_color }};
+}
+.rma-{{ sid }} .rma-attr__cat {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: {{ section.settings.category_color }};
+  white-space: nowrap;
+}
+.rma-{{ sid }} .rma-attr__val {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: {{ section.settings.value_color }};
+  text-align: right;
+  line-height: 1.55;
+}
+/* Right image column */
+.rma-{{ sid }} .rma-right {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.rma-{{ sid }} .rma-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Mobile */
+@media (max-width: 749px) {
+  .rma-{{ sid }} .rma-inner {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .rma-{{ sid }} .rma-left {
+    padding: 40px 0 40px;
+    order: 2;
+  }
+  .rma-{{ sid }} .rma-right {
+    min-height: 280px;
+    order: 1;
+  }
+}
+</style>
+
+<div class="rma-{{ sid }}">
+  <div class="rma-inner">
+    <div class="rma-left">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="rma-heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      <div class="rma-attrs">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'attribute' -%}
+            <div class="rma-attr" {{ block.shopify_attributes }}>
+              <span class="rma-attr__cat">{{ block.settings.category }}</span>
+              <span class="rma-attr__val">{{ block.settings.value }}</span>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="rma-right">
+      {%- if section.settings.image != blank -%}
+        <img
+          src="{{ section.settings.image | image_url: width: 1000 }}"
+          alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"
+          loading="lazy"
+          width="{{ section.settings.image.width }}"
+          height="{{ section.settings.image.height }}"
+        >
+      {%- elsif section.settings.image_url != blank -%}
+        <img src="{{ section.settings.image_url }}" alt="{{ section.settings.heading | escape }}" loading="lazy">
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Rhode — Media Attrs",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "textarea",     "id": "heading",        "label": "Heading",              "default": "Clinically-proven PATCHES for SPOT CARE on the go." },
+    { "type": "image_picker", "id": "image",          "label": "Right side image" },
+    { "type": "text",         "id": "image_url",      "label": "Image URL (fallback)" },
+    { "type": "color",        "id": "bg_color",       "label": "Background",           "default": "#f1f0ed" },
+    { "type": "color",        "id": "border_color",   "label": "Divider colour",       "default": "#e0ddd8" },
+    { "type": "color",        "id": "heading_color",  "label": "Heading colour",       "default": "#67645e" },
+    { "type": "color",        "id": "category_color", "label": "Category label colour","default": "#67645e" },
+    { "type": "color",        "id": "value_color",    "label": "Value colour",         "default": "#67645e" },
+    {
+      "type": "range", "id": "padding_top",
+      "min": 0, "max": 160, "step": 8,
+      "label": "Padding top", "default": 0
+    },
+    {
+      "type": "range", "id": "padding_bottom",
+      "min": 0, "max": 160, "step": 8,
+      "label": "Padding bottom", "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "attribute",
+      "name": "Attribute row",
+      "settings": [
+        { "type": "text",     "id": "category", "label": "Category", "default": "GOOD FOR" },
+        { "type": "textarea", "id": "value",    "label": "Value",    "default": "All skin types" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rhode — Media Attrs",
+      "blocks": [
+        { "type": "attribute", "settings": { "category": "GOOD FOR",    "value": "All skin types" } },
+        { "type": "attribute", "settings": { "category": "FEELS LIKE",  "value": "Comfy, second-skin feel that stays on all day" } },
+        { "type": "attribute", "settings": { "category": "SMELLS LIKE", "value": "Fragrance-Free" } },
+        { "type": "attribute", "settings": { "category": "FYI",         "value": "Sweatproof • Waterproof • Cruelty-Free • Vegan • Gluten-Free • Dermatologist-Tested • Non-Comedogenic" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

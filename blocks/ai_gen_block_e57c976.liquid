@@ -1,0 +1,578 @@
+{% doc %}
+  @prompt
+    Create a horizontal navigation bar with rounded pill-shaped category buttons. Each button should have a thin border, light background, and uppercase text. Spacing between buttons should be consistent. The last button ("Shop All") should be filled with a dark background and white text to act as a primary CTA. Use a clean, minimal, premium aesthetic similar to modern skincare brands., he layout must support adding or removing pills without breaking. Keep all pills in a single row with horizontal scrolling if needed. Each pill should have rounded edges, a thin border, uppercase text, and consistent spacing. Prevent pills from wrapping or shrinking.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-category-nav-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: {{ block.settings.vertical_padding }}px 0;
+    overflow: hidden;
+  }
+
+  .ai-category-nav-container-{{ ai_gen_id }} {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: {{ block.settings.button_spacing }}px;
+    align-items: center;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: {{ block.settings.scrollbar_color }} transparent;
+    padding-bottom: 4px;
+  }
+
+  .ai-category-nav-container-{{ ai_gen_id }}::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .ai-category-nav-container-{{ ai_gen_id }}::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .ai-category-nav-container-{{ ai_gen_id }}::-webkit-scrollbar-thumb {
+    background-color: {{ block.settings.scrollbar_color }};
+    border-radius: 3px;
+  }
+
+  .ai-category-nav-button-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: {{ block.settings.button_padding_vertical }}px {{ block.settings.button_padding_horizontal }}px;
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    border: {{ block.settings.button_border_width }}px solid {{ block.settings.button_border_color }};
+    border-radius: {{ block.settings.button_border_radius }}px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: {{ block.settings.button_font_size }}px;
+    font-weight: {{ block.settings.button_font_weight }};
+    letter-spacing: {{ block.settings.letter_spacing }}px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .ai-category-nav-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+    color: {{ block.settings.button_hover_text_color }};
+    border-color: {{ block.settings.button_hover_border_color }};
+  }
+
+  .ai-category-nav-button-primary-{{ ai_gen_id }} {
+    background-color: {{ block.settings.primary_button_background }};
+    color: {{ block.settings.primary_button_text_color }};
+    border-color: {{ block.settings.primary_button_border_color }};
+  }
+
+  .ai-category-nav-button-primary-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.primary_button_hover_background }};
+    color: {{ block.settings.primary_button_hover_text_color }};
+    border-color: {{ block.settings.primary_button_hover_border_color }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-category-nav-button-{{ ai_gen_id }} {
+      font-size: {{ block.settings.button_font_size | times: 0.9 }}px;
+      padding: {{ block.settings.button_padding_vertical | times: 0.85 }}px {{ block.settings.button_padding_horizontal | times: 0.85 }}px;
+    }
+  }
+{% endstyle %}
+
+<category-navigation-{{ ai_gen_id }}
+  class="ai-category-nav-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-category-nav-container-{{ ai_gen_id }}">
+    {% if block.settings.category_1_text != blank %}
+      <a
+        href="{{ block.settings.category_1_link }}"
+        class="ai-category-nav-button-{{ ai_gen_id }}"
+      >
+        {{ block.settings.category_1_text }}
+      </a>
+    {% endif %}
+
+    {% if block.settings.category_2_text != blank %}
+      <a
+        href="{{ block.settings.category_2_link }}"
+        class="ai-category-nav-button-{{ ai_gen_id }}"
+      >
+        {{ block.settings.category_2_text }}
+      </a>
+    {% endif %}
+
+    {% if block.settings.category_3_text != blank %}
+      <a
+        href="{{ block.settings.category_3_link }}"
+        class="ai-category-nav-button-{{ ai_gen_id }}"
+      >
+        {{ block.settings.category_3_text }}
+      </a>
+    {% endif %}
+
+    {% if block.settings.category_4_text != blank %}
+      <a
+        href="{{ block.settings.category_4_link }}"
+        class="ai-category-nav-button-{{ ai_gen_id }}"
+      >
+        {{ block.settings.category_4_text }}
+      </a>
+    {% endif %}
+
+    {% if block.settings.category_5_text != blank %}
+      <a
+        href="{{ block.settings.category_5_link }}"
+        class="ai-category-nav-button-{{ ai_gen_id }}"
+      >
+        {{ block.settings.category_5_text }}
+      </a>
+    {% endif %}
+
+    {% if block.settings.category_6_text != blank %}
+      <a
+        href="{{ block.settings.category_6_link }}"
+        class="ai-category-nav-button-{{ ai_gen_id }}"
+      >
+        {{ block.settings.category_6_text }}
+      </a>
+    {% endif %}
+
+    {% if block.settings.category_7_text != blank %}
+      <a
+        href="{{ block.settings.category_7_link }}"
+        class="ai-category-nav-button-{{ ai_gen_id }}"
+      >
+        {{ block.settings.category_7_text }}
+      </a>
+    {% endif %}
+
+    {% if block.settings.category_8_text != blank %}
+      <a
+        href="{{ block.settings.category_8_link }}"
+        class="ai-category-nav-button-{{ ai_gen_id }}"
+      >
+        {{ block.settings.category_8_text }}
+      </a>
+    {% endif %}
+
+    {% if block.settings.primary_button_text != blank %}
+      <a
+        href="{{ block.settings.primary_button_link }}"
+        class="ai-category-nav-button-{{ ai_gen_id }} ai-category-nav-button-primary-{{ ai_gen_id }}"
+      >
+        {{ block.settings.primary_button_text }}
+      </a>
+    {% endif %}
+  </div>
+</category-navigation-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class CategoryNavigation{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        const container = this.querySelector('.ai-category-nav-container-{{ ai_gen_id }}');
+        
+        if (container) {
+          let isDown = false;
+          let startX;
+          let scrollLeft;
+
+          container.addEventListener('mousedown', (e) => {
+            isDown = true;
+            container.style.cursor = 'grabbing';
+            startX = e.pageX - container.offsetLeft;
+            scrollLeft = container.scrollLeft;
+          });
+
+          container.addEventListener('mouseleave', () => {
+            isDown = false;
+            container.style.cursor = 'grab';
+          });
+
+          container.addEventListener('mouseup', () => {
+            isDown = false;
+            container.style.cursor = 'grab';
+          });
+
+          container.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - container.offsetLeft;
+            const walk = (x - startX) * 1.5;
+            container.scrollLeft = scrollLeft - walk;
+          });
+
+          if (container.scrollWidth > container.clientWidth) {
+            container.style.cursor = 'grab';
+          }
+        }
+      }
+    }
+
+    customElements.define('category-navigation-{{ ai_gen_id }}', CategoryNavigation{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Category navigation",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "vertical_padding",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "button_spacing",
+      "label": "Button spacing",
+      "min": 4,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "scrollbar_color",
+      "label": "Scrollbar color",
+      "default": "#cccccc"
+    },
+    {
+      "type": "header",
+      "content": "Category 1"
+    },
+    {
+      "type": "text",
+      "id": "category_1_text",
+      "label": "Text",
+      "default": "Cleansers"
+    },
+    {
+      "type": "url",
+      "id": "category_1_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Category 2"
+    },
+    {
+      "type": "text",
+      "id": "category_2_text",
+      "label": "Text",
+      "default": "Serums"
+    },
+    {
+      "type": "url",
+      "id": "category_2_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Category 3"
+    },
+    {
+      "type": "text",
+      "id": "category_3_text",
+      "label": "Text",
+      "default": "Moisturizers"
+    },
+    {
+      "type": "url",
+      "id": "category_3_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Category 4"
+    },
+    {
+      "type": "text",
+      "id": "category_4_text",
+      "label": "Text",
+      "default": "Masks"
+    },
+    {
+      "type": "url",
+      "id": "category_4_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Category 5"
+    },
+    {
+      "type": "text",
+      "id": "category_5_text",
+      "label": "Text",
+      "default": "Suncare"
+    },
+    {
+      "type": "url",
+      "id": "category_5_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Category 6"
+    },
+    {
+      "type": "text",
+      "id": "category_6_text",
+      "label": "Text"
+    },
+    {
+      "type": "url",
+      "id": "category_6_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Category 7"
+    },
+    {
+      "type": "text",
+      "id": "category_7_text",
+      "label": "Text"
+    },
+    {
+      "type": "url",
+      "id": "category_7_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Category 8"
+    },
+    {
+      "type": "text",
+      "id": "category_8_text",
+      "label": "Text"
+    },
+    {
+      "type": "url",
+      "id": "category_8_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Primary button (CTA)"
+    },
+    {
+      "type": "text",
+      "id": "primary_button_text",
+      "label": "Text",
+      "default": "Shop All"
+    },
+    {
+      "type": "url",
+      "id": "primary_button_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Button style"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Font size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "button_font_weight",
+      "label": "Font weight",
+      "options": [
+        {
+          "value": "400",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "range",
+      "id": "letter_spacing",
+      "label": "Letter spacing",
+      "min": 0,
+      "max": 2,
+      "step": 0.1,
+      "unit": "px",
+      "default": 0.5
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical",
+      "label": "Vertical padding",
+      "min": 6,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 12,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Border radius",
+      "min": 16,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "button_border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "header",
+      "content": "Regular button colors"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Border",
+      "default": "#e6e6e6"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Hover background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_text_color",
+      "label": "Hover text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_border_color",
+      "label": "Hover border",
+      "default": "#cccccc"
+    },
+    {
+      "type": "header",
+      "content": "Primary button colors"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_background",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_border_color",
+      "label": "Border",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_hover_background",
+      "label": "Hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_hover_text_color",
+      "label": "Hover text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "primary_button_hover_border_color",
+      "label": "Hover border",
+      "default": "#333333"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category navigation"
+    }
+  ]
+}
+{% endschema %}

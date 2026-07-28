@@ -1,0 +1,1010 @@
+{% comment %}
+=============================================================================
+INTERACTIVE BENEFITS SECTION
+FULLY FIXED + SHOPIFY 2.0
+=============================================================================
+{% endcomment %}
+
+<section id="benefits-{{ section.id }}" class="rh-benefits">
+
+  <div class="rh-benefits__container">
+
+    <div class="rh-benefits__grid">
+
+      <!-- IMAGE -->
+      <div class="rh-media">
+
+        {% for block in section.blocks %}
+          {% assign image = block.settings.image %}
+
+          <div
+            class="rh-media__item {% if forloop.first %}is-active{% endif %}"
+            data-index="{{ forloop.index0 }}"
+            {{ block.shopify_attributes }}
+          >
+
+            {% if image != blank %}
+              <img
+                src="{{ image | image_url: width: 2200 }}"
+                srcset="
+                  {{ image | image_url: width: 500 }} 500w,
+                  {{ image | image_url: width: 800 }} 800w,
+                  {{ image | image_url: width: 1200 }} 1200w,
+                  {{ image | image_url: width: 1600 }} 1600w,
+                  {{ image | image_url: width: 2200 }} 2200w
+                "
+                sizes="(max-width: 768px) 100vw, 50vw"
+                width="{{ image.width }}"
+                height="{{ image.height }}"
+                alt="{{ image.alt | escape }}"
+                loading="lazy"
+              >
+            {% endif %}
+
+          </div>
+
+        {% endfor %}
+
+      </div>
+
+      <!-- CONTENT -->
+      <div class="rh-content">
+
+        <div class="rh-top-heading">
+          {{ section.settings.top_heading }}
+        </div>
+
+        <div class="rh-text-list">
+
+          {% for block in section.blocks %}
+
+            <button
+              class="rh-text-item {% if forloop.first %}is-active{% endif %}"
+              data-index="{{ forloop.index0 }}"
+              type="button"
+            >
+              <span class="rh-text-inner rh-text-inner--primary">
+                {{ block.settings.heading }}
+              </span>
+              <span class="rh-text-inner rh-text-inner--secondary" aria-hidden="true">
+                {{ block.settings.heading }}
+              </span>
+            </button>
+
+          {% endfor %}
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<style>
+
+#benefits-{{ section.id }}{
+
+  --bg: {{ section.settings.section_bg }};
+  --container: {{ section.settings.container_width }}px;
+
+  --desktop-gap: {{ section.settings.desktop_gap }}px;
+  --mobile-gap: {{ section.settings.mobile_gap }}px;
+
+  --image-radius-desktop: {{ section.settings.image_radius_desktop }}px;
+  --image-radius-mobile: {{ section.settings.image_radius_mobile }}px;
+
+  --image-height-desktop: {{ section.settings.image_height_desktop }}px;
+  --image-height-mobile: {{ section.settings.image_height_mobile }}px;
+
+  --heading-color: {{ section.settings.heading_color }};
+
+  --text-color: {{ section.settings.text_color }};
+  --active-color: {{ section.settings.active_text_color }};
+
+  --anim-speed: {{ section.settings.animation_speed }}ms;
+
+  --text-scale: {{ section.settings.active_scale }};
+
+  background: var(--bg);
+
+  padding:
+    {{ section.settings.padding_top_desktop }}px
+    {{ section.settings.padding_side_desktop }}px
+    {{ section.settings.padding_bottom_desktop }}px;
+
+  overflow:hidden;
+  position:relative;
+}
+
+#benefits-{{ section.id }} *{
+  box-sizing:border-box;
+}
+
+#benefits-{{ section.id }} .rh-benefits__container{
+  max-width:var(--container);
+  margin:auto;
+}
+
+#benefits-{{ section.id }} .rh-benefits__grid{
+
+  display:grid;
+
+  grid-template-columns:
+    minmax(0, {{ section.settings.desktop_image_width }}fr)
+    minmax(0, {{ section.settings.desktop_content_width }}fr);
+
+  gap:var(--desktop-gap);
+
+  align-items:center;
+}
+
+#benefits-{{ section.id }} .rh-media{
+
+  position:relative;
+
+  height:var(--image-height-desktop);
+
+  min-height:500px;
+
+  border-radius:var(--image-radius-desktop);
+
+  overflow:hidden;
+
+  background:#ddd;
+}
+
+#benefits-{{ section.id }} .rh-media__item{
+
+  position:absolute;
+
+  inset:0;
+
+  opacity:0;
+
+  visibility:hidden;
+
+  transform:scale(1.04);
+
+  will-change:transform, opacity;
+
+  transition:
+    opacity var(--anim-speed) cubic-bezier(.22,.61,.36,1),
+    transform var(--anim-speed) cubic-bezier(.22,.61,.36,1),
+    visibility .3s;
+}
+
+#benefits-{{ section.id }} .rh-media__item.is-active{
+
+  opacity:1;
+
+  visibility:visible;
+
+  transform:scale(1);
+
+  z-index:2;
+}
+
+#benefits-{{ section.id }} .rh-media img{
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:cover;
+
+  display:block;
+}
+
+#benefits-{{ section.id }} .rh-content{
+  position:relative;
+  z-index:5;
+}
+
+#benefits-{{ section.id }} .rh-top-heading{
+
+  font-size:{{ section.settings.top_heading_size_desktop }}px;
+
+  font-weight:700;
+
+  letter-spacing:1px;
+
+  text-transform:uppercase;
+
+  color:var(--heading-color);
+
+  margin-bottom:32px;
+}
+
+#benefits-{{ section.id }} .rh-text-list{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:{{ section.settings.text_gap_desktop }}px;
+}
+
+#benefits-{{ section.id }} .rh-text-item{
+
+  border:none;
+
+  background:none;
+
+  padding:0;
+
+  cursor:pointer;
+
+  width:fit-content;
+
+  text-align:center;
+
+  position:relative;
+}
+
+#benefits-{{ section.id }} .rh-text-inner{
+
+  display:inline-block;
+
+  font-family:{{ section.settings.text_font.family }}, sans-serif;
+
+  font-size:{{ section.settings.text_size_desktop }}px;
+
+  line-height:{{ section.settings.text_line_height }};
+
+  letter-spacing:{{ section.settings.text_letter_spacing }}px;
+
+  font-weight:{{ section.settings.text_weight }};
+
+  color:var(--text-color);
+
+  opacity:.35;
+
+  transform:
+    translateX(0px)
+    scale(1);
+
+  transition:
+    transform var(--anim-speed) cubic-bezier(.22,.61,.36,1),
+    color var(--anim-speed) ease,
+    opacity var(--anim-speed) ease;
+}
+
+#benefits-{{ section.id }} .rh-text-item.is-active .rh-text-inner{
+
+  color:var(--active-color);
+
+  opacity:1;
+
+  transform:
+    translateX(10px)
+scale(calc(var(--text-scale) / 100));}
+
+#benefits-{{ section.id }} .rh-text-item::before{
+
+  content:'';
+
+  position:center;
+
+  
+  width:0;
+
+  height:0;
+
+  border-radius:50%;
+
+  background:{{ section.settings.active_dot_color }};
+
+  transform:translateY(-50%);
+
+  transition:all .45s cubic-bezier(.22,.61,.36,1);
+}
+
+#benefits-{{ section.id }} .rh-text-item.is-active::before{
+
+  width:8px;
+
+  height:8px;
+}
+
+@media screen and (max-width:768px){
+
+  #benefits-{{ section.id }}{
+
+    padding:
+      {{ section.settings.padding_top_mobile }}px
+      {{ section.settings.padding_side_mobile }}px
+      {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  #benefits-{{ section.id }} .rh-benefits__grid{
+
+    grid-template-columns:1fr;
+
+    gap:var(--mobile-gap);
+  }
+
+  #benefits-{{ section.id }} .rh-media{
+
+    height:var(--image-height-mobile);
+
+    min-height:300px;
+
+    border-radius:var(--image-radius-mobile);
+  }
+
+  #benefits-{{ section.id }} .rh-top-heading{
+
+    font-size:{{ section.settings.top_heading_size_mobile }}px;
+
+    text-align:center;
+
+    margin-bottom:24px;
+  }
+
+  #benefits-{{ section.id }} .rh-text-list{
+
+    gap:{{ section.settings.text_gap_mobile }}px;
+
+    align-items:center;
+  }
+
+  #benefits-{{ section.id }} .rh-text-item{
+
+    width:100%;
+
+    text-align:center;
+  }
+
+  #benefits-{{ section.id }} .rh-text-inner{
+
+    font-size:{{ section.settings.text_size_mobile }}px;
+  }
+
+  #benefits-{{ section.id }} .rh-text-item::before{
+    display:none;
+  }
+
+}
+
+/* Secondary pink layer — hidden by default so no visual change on other templates. -vamshi */
+#benefits-{{ section.id }} .rh-text-inner--secondary{
+  display:none;
+}
+
+{% if template == 'product.rhode-product-page' %}
+  /* --- PDP override: grey pill container at header-pill width, centered text block,
+     outlined pink secondary layer with clip-path slide reveal. -vamshi */
+
+  #benefits-{{ section.id }}{
+    background: transparent !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* Grey pill wrapper matches SS-header-1 pill edges. Very thin padding around the
+     image so the media fills nearly the whole left half of the pill. -vamshi */
+  #benefits-{{ section.id }} .rh-benefits__container{
+    max-width: min(
+      calc(var(--page-width) - var(--page-margin) * 2),
+      calc(100% - var(--page-margin) * 2)
+    ) !important;
+    margin-inline: auto !important;
+    background: #f1f0ed !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+    padding: 8px !important;
+    box-sizing: border-box;
+  }
+
+  #benefits-{{ section.id }} .rh-benefits__grid{
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    align-items: stretch !important;
+    gap: 16px !important;
+    min-height: 620px;
+  }
+
+  #benefits-{{ section.id }} .rh-media{
+    border-radius: 8px !important;
+    background: #e5e3df !important;
+    height: 100% !important;
+    min-height: 620px !important;
+    align-self: stretch !important;
+    overflow: hidden !important;
+  }
+
+  #benefits-{{ section.id }} .rh-media__item{
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 1s cubic-bezier(.76,0,.24,1),
+      transform 1s cubic-bezier(.76,0,.24,1);
+  }
+  #benefits-{{ section.id }} .rh-media__item.is-active{
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* Alternate slide direction — index 1 slides down from top, others rise from bottom. */
+  #benefits-{{ section.id }} .rh-media__item[data-index="1"]{
+    transform: translateY(-24px);
+  }
+  #benefits-{{ section.id }} .rh-media__item[data-index="1"].is-active{
+    transform: translateY(0);
+  }
+
+  /* Center the text block horizontally + vertically in its column. */
+  #benefits-{{ section.id }} .rh-content{
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 !important;
+    text-align: center !important;
+  }
+
+  #benefits-{{ section.id }} .rh-top-heading{
+    margin-bottom: 24px !important;
+    color: #67645e !important;
+    letter-spacing: 1.4px !important;
+    text-align: center !important;
+  }
+
+  #benefits-{{ section.id }} .rh-text-list{
+    gap: 8px !important;
+    align-items: center !important;
+  }
+
+  #benefits-{{ section.id }} .rh-text-item{
+    position: relative !important;
+    display: inline-block;
+    width: fit-content;
+    text-align: center !important;
+    overflow: visible;
+    line-height: 1 !important;
+  }
+
+  #benefits-{{ section.id }} .rh-text-inner{
+    display: inline-block;
+    color: #b7b4ae !important;
+    opacity: 1 !important;
+    transform: none !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+    line-height: 1 !important;
+  }
+  /* Kill the base theme's transform/color transitions ONLY on the primary
+     layer — the secondary layer needs its clip-path transition intact. */
+  #benefits-{{ section.id }} .rh-text-inner--primary{
+    transition: none !important;
+  }
+
+  /* Pink secondary layer — "strong font" look via 1.5px text-stroke; slides in L→R
+     via clip-path, slides out R→L (right-clip grows) — both simultaneously with
+     matched 1s cubic-bezier easing. */
+  #benefits-{{ section.id }} .rh-text-inner--secondary{
+    display: inline-block;
+    position: absolute;
+    inset: 0;
+    color: #e29fc8 !important;
+    -webkit-text-stroke: 1.5px #67645e;
+    text-stroke: 1.5px #67645e;
+    paint-order: stroke fill;
+    font-weight: 700 !important;
+    clip-path: inset(0 100% 0 0);
+    -webkit-clip-path: inset(0 100% 0 0);
+    transition:
+      clip-path 1s cubic-bezier(.76,0,.24,1),
+      -webkit-clip-path 1s cubic-bezier(.76,0,.24,1);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  #benefits-{{ section.id }} .rh-text-item.is-active .rh-text-inner--secondary{
+    clip-path: inset(0 0 0 0);
+    -webkit-clip-path: inset(0 0 0 0);
+  }
+
+  #benefits-{{ section.id }} .rh-text-item.is-active .rh-text-inner--primary{
+    color: #b7b4ae !important;
+  }
+
+  /* Kill leftover dot indicator on PDP. */
+  #benefits-{{ section.id }} .rh-text-item::before,
+  #benefits-{{ section.id }} .rh-text-item.is-active::before{
+    display: none !important;
+  }
+
+  @media screen and (max-width: 768px){
+    #benefits-{{ section.id }} .rh-benefits__container{
+      padding: 20px !important;
+    }
+    #benefits-{{ section.id }} .rh-benefits__grid{
+      grid-template-columns: 1fr !important;
+      min-height: 0;
+      gap: 20px !important;
+    }
+    #benefits-{{ section.id }} .rh-media{
+      min-height: 340px !important;
+    }
+  }
+{% endif %}
+
+</style>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function(){
+
+  const section = document.querySelector('#benefits-{{ section.id }}');
+
+  if(!section) return;
+
+  const textItems = section.querySelectorAll('.rh-text-item');
+
+  const imageItems = section.querySelectorAll('.rh-media__item');
+
+  let activeIndex = 0;
+
+  /* Rhode-style hover: swap classes immediately on every hover — no
+     `isAnimating` guard, no setTimeout between text and image. The CSS
+     clip-path transition on `.rh-text-inner--secondary` handles the
+     L→R fill (incoming) and R→L unfill (outgoing) in parallel, at the
+     same duration, so both directions animate simultaneously. The image
+     crossfade fires on the same tick — feels responsive, no delay. */
+
+  function activateSlide(index){
+    index = Number(index);
+    if(index === activeIndex) return;
+
+    textItems.forEach((el, i) => el.classList.toggle('is-active', i === index));
+    imageItems.forEach((el, i) => el.classList.toggle('is-active', i === index));
+
+    activeIndex = index;
+  }
+
+  textItems.forEach((item)=>{
+
+    item.addEventListener('mouseenter', ()=>{
+
+      if(window.innerWidth > 768){
+
+        activateSlide(item.dataset.index);
+
+      }
+
+    });
+
+    item.addEventListener('click', ()=>{
+
+      activateSlide(item.dataset.index);
+
+    });
+
+  });
+
+  {% if section.settings.enable_autoplay %}
+
+  let autoplay = setInterval(()=>{
+
+    let next = activeIndex + 1;
+
+    if(next >= textItems.length){
+
+      next = 0;
+
+    }
+
+    activateSlide(next);
+
+  }, {{ section.settings.autoplay_speed }});
+
+  section.addEventListener('mouseenter', ()=>{
+
+    clearInterval(autoplay);
+
+  });
+
+  section.addEventListener('mouseleave', ()=>{
+
+    autoplay = setInterval(()=>{
+
+      let next = activeIndex + 1;
+
+      if(next >= textItems.length){
+
+        next = 0;
+
+      }
+
+      activateSlide(next);
+
+    }, {{ section.settings.autoplay_speed }});
+
+  });
+
+  {% endif %}
+
+});
+
+</script>
+
+{% schema %}
+{
+  "name":"Interactive Benefits",
+
+  "settings":[
+
+    {
+      "type":"text",
+      "id":"top_heading",
+      "label":"Top Heading",
+      "default":"LEAVES SPOTS LOOKING"
+    },
+
+    {
+      "type":"color",
+      "id":"section_bg",
+      "label":"Background",
+      "default":"#efefeb"
+    },
+
+    {
+      "type":"range",
+      "id":"container_width",
+      "label":"Container Width",
+      "min":900,
+      "max":1800,
+      "step":20,
+      "default":1400
+    },
+
+    {
+      "type":"range",
+      "id":"desktop_image_width",
+      "label":"Desktop Image Width",
+      "min":1,
+      "max":5,
+      "step":1,
+      "default":3
+    },
+
+    {
+      "type":"range",
+      "id":"desktop_content_width",
+      "label":"Desktop Content Width",
+      "min":1,
+      "max":5,
+      "step":1,
+      "default":2
+    },
+
+    {
+      "type":"range",
+      "id":"desktop_gap",
+      "label":"Desktop Gap",
+      "min":0,
+      "max":120,
+      "step":2,
+      "default":10
+    },
+
+    {
+      "type":"range",
+      "id":"mobile_gap",
+      "label":"Mobile Gap",
+      "min":0,
+      "max":80,
+      "step":2,
+      "default":10
+    },
+
+    {
+      "type":"range",
+      "id":"padding_top_desktop",
+      "label":"Padding Top Desktop",
+      "min":0,
+      "max":200,
+      "step":4,
+      "default":80
+    },
+
+    {
+      "type":"range",
+      "id":"padding_bottom_desktop",
+      "label":"Padding Bottom Desktop",
+      "min":0,
+      "max":200,
+      "step":4,
+      "default":80
+    },
+
+    {
+      "type":"range",
+      "id":"padding_side_desktop",
+      "label":"Padding Side Desktop",
+      "min":0,
+      "max":100,
+      "step":2,
+      "default":40
+    },
+
+    {
+      "type":"range",
+      "id":"padding_top_mobile",
+      "label":"Padding Top Mobile",
+      "min":0,
+      "max":120,
+      "step":2,
+      "default":40
+    },
+
+    {
+      "type":"range",
+      "id":"padding_bottom_mobile",
+      "label":"Padding Bottom Mobile",
+      "min":0,
+      "max":120,
+      "step":2,
+      "default":40
+    },
+
+    {
+      "type":"range",
+      "id":"padding_side_mobile",
+      "label":"Padding Side Mobile",
+      "min":0,
+      "max":40,
+      "step":2,
+      "default":16
+    },
+
+    {
+      "type":"range",
+      "id":"image_height_desktop",
+      "label":"Image Height Desktop",
+      "min":300,
+      "max":1000,
+      "step":10,
+      "default":700
+    },
+
+    {
+      "type":"range",
+      "id":"image_height_mobile",
+      "label":"Image Height Mobile",
+      "min":250,
+      "max":700,
+      "step":10,
+      "default":420
+    },
+
+    {
+      "type":"range",
+      "id":"image_radius_desktop",
+      "label":"Image Radius Desktop",
+      "min":0,
+      "max":60,
+      "step":1,
+      "default":20
+    },
+
+    {
+      "type":"range",
+      "id":"image_radius_mobile",
+      "label":"Image Radius Mobile",
+      "min":0,
+      "max":60,
+      "step":1,
+      "default":16
+    },
+
+    {
+      "type":"font_picker",
+      "id":"text_font",
+      "label":"Text Font",
+      "default":"assistant_n4"
+    },
+
+    {
+      "type":"range",
+      "id":"text_size_desktop",
+      "label":"Text Size Desktop",
+      "min":20,
+      "max":140,
+      "step":2,
+      "default":76
+    },
+
+    {
+      "type":"range",
+      "id":"text_size_mobile",
+      "label":"Text Size Mobile",
+      "min":20,
+      "max":80,
+      "step":2,
+      "default":46
+    },
+
+    {
+      "type":"range",
+      "id":"text_weight",
+      "label":"Text Weight",
+      "min":100,
+      "max":900,
+      "step":100,
+      "default":700
+    },
+
+    {
+      "type":"range",
+      "id":"text_line_height",
+      "label":"Text Line Height",
+      "min":1,
+      "max":2,
+      "step":0.1,
+      "default":1
+    },
+
+    {
+      "type":"range",
+      "id":"text_letter_spacing",
+      "label":"Text Letter Spacing",
+      "min":-5,
+      "max":20,
+      "step":1,
+      "default":0
+    },
+
+    {
+      "type":"color",
+      "id":"text_color",
+      "label":"Inactive Text Color",
+      "default":"#8d8d8d"
+    },
+
+    {
+      "type":"color",
+      "id":"active_text_color",
+      "label":"Active Text Color",
+      "default":"#d69cc4"
+    },
+
+    {
+      "type":"color",
+      "id":"heading_color",
+      "label":"Heading Color",
+      "default":"#5d5d5d"
+    },
+
+    {
+      "type":"color",
+      "id":"active_dot_color",
+      "label":"Active Dot Color",
+      "default":"#ece082"
+    },
+
+    {
+      "type":"range",
+      "id":"top_heading_size_desktop",
+      "label":"Top Heading Size Desktop",
+      "min":10,
+      "max":60,
+      "step":1,
+      "default":16
+    },
+
+    {
+      "type":"range",
+      "id":"top_heading_size_mobile",
+      "label":"Top Heading Size Mobile",
+      "min":10,
+      "max":40,
+      "step":1,
+      "default":14
+    },
+
+    {
+      "type":"range",
+      "id":"text_gap_desktop",
+      "label":"Text Gap Desktop",
+      "min":0,
+      "max":10,
+      "step":1,
+      "default":1
+    },
+
+    {
+      "type":"range",
+      "id":"text_gap_mobile",
+      "label":"Text Gap Mobile",
+      "min":0,
+      "max":10,
+      "step":1,
+      "default":1
+    },
+
+    {
+      "type":"range",
+      "id":"animation_speed",
+      "label":"Animation Speed",
+      "min":200,
+      "max":2000,
+      "step":50,
+      "default":700
+    },
+
+  {
+  "type":"range",
+  "id":"active_scale",
+  "label":"Active Text Scale %",
+  "min":100,
+  "max":120,
+  "step":1,
+  "default":102
+},
+
+    {
+      "type":"checkbox",
+      "id":"enable_autoplay",
+      "label":"Enable Autoplay",
+      "default":false
+    },
+
+    {
+      "type":"range",
+      "id":"autoplay_speed",
+      "label":"Autoplay Speed",
+      "min":2000,
+      "max":9000,
+      "step":500,
+      "default":4000
+    }
+
+  ],
+
+  "blocks":[
+    {
+      "type":"item",
+      "name":"Benefit Item",
+
+      "settings":[
+
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"Image"
+        },
+
+        {
+          "type":"text",
+          "id":"heading",
+          "label":"Heading",
+          "default":"smaller"
+        }
+
+      ]
+    }
+  ],
+
+  "presets":[
+    {
+      "name":"Interactive Benefits",
+
+      "blocks":[
+        {
+          "type":"item"
+        },
+        {
+          "type":"item"
+        },
+        {
+          "type":"item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

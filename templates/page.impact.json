@@ -1,0 +1,597 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "blocks": {
+        "heading": {
+          "type": "text",
+          "name": "Title",
+          "disabled": true,
+          "settings": {
+            "text": "<h1>{{ closest.page.title }}</h1>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h2",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": true,
+            "background_color": "#f1f0ed",
+            "corner_radius": 12,
+            "padding-block-start": 12,
+            "padding-block-end": 12,
+            "padding-inline-start": 10,
+            "padding-inline-end": 10
+          },
+          "blocks": {}
+        },
+        "page-content": {
+          "type": "page-content",
+          "settings": {},
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "page-content"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "/* Wrap the page content block in a styled container */.page-width .rte,.page__content,[id*=\"page-content\"] {background-color: #f1f0ed; /* your desired background */ padding: 40px 48px; border-radius: 12px; /* optional rounded corners */ margin: 32px auto; max-width: 860px; /* optional max-width constraint */}"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "gap": 32,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "hero_FeGc7p": {
+      "type": "hero",
+      "blocks": {
+        "text_ytmgRT": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>MINIMAL skincare, minimal FOOTPRINT.<br/></p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-heading--family)",
+            "font_size": "1.25rem",
+            "line_height": "tight",
+            "letter_spacing": "tight",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground-heading)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_ytmgRT"
+      ],
+      "custom_css": [
+        ".hero {padding: 3vw; border-radius: 10px; overflow: hidden;}",
+        ".hero img,.hero__media img,.hero__media {border-radius: 10px;}"
+      ],
+      "name": "t:names.hero",
+      "settings": {
+        "media_type_1": "image",
+        "media_type_2": "image",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": false,
+        "media_type_1_mobile": "image",
+        "image_1_mobile": "shopify://shop_images/image_f73e951f-1256-4a48-befd-1b3463dd990f.png",
+        "media_type_2_mobile": "image",
+        "link": "",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 14,
+        "section_width": "page-width",
+        "section_height": "large",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-1",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "gradient",
+        "gradient_direction": "to top",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 24,
+        "padding-block-end": 24
+      }
+    },
+    "ss_image_with_text_HiVAhA": {
+      "type": "ss-image-with-text",
+      "blocks": {
+        "heading_CzTeVJ": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Our commitment to OUR PLANET.</p>",
+            "heading_custom": false,
+            "heading_font": "josefin_sans_n4",
+            "heading_size": 32,
+            "heading_size_mobile": 32,
+            "heading_advanced": false,
+            "heading_height": 130,
+            "heading_mt": 0,
+            "heading_mt_mobile": 0,
+            "heading_color": "#121212"
+          }
+        },
+        "text_zDeTLJ": {
+          "type": "text",
+          "settings": {
+            "text": "<p>ISOUA believes in reducing overconsumption and involving our community in the process. From our limited product releases to consciously-sourced ingredients, we are committed to mindful skincare, every step of the way.</p>",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 14,
+            "text_size_mobile": 14,
+            "text_advanced": false,
+            "text_height": 150,
+            "text_mt": 12,
+            "text_mt_mobile": 12,
+            "text_color": "#121212"
+          }
+        }
+      },
+      "block_order": [
+        "heading_CzTeVJ",
+        "text_zDeTLJ"
+      ],
+      "name": "SS - Image with text #1",
+      "settings": {
+        "layout": "content_image",
+        "layout_mobile": "image_content",
+        "layout_advanced": false,
+        "layout_gap": 32,
+        "layout_gap_mobile": 24,
+        "layout_border_thickness": 0,
+        "layout_radius": 0,
+        "use_shadow": false,
+        "content_align": "left",
+        "content_align_mobile": "left",
+        "content_vertical_align": "center",
+        "image_url": "",
+        "image_radius": 16,
+        "image_border_thickness": 0,
+        "image_ratio": "square",
+        "image_ratio_mobile": "square",
+        "layout_border_color": "#121212",
+        "image_border_color": "#121212",
+        "shadow_color": "#0000001a",
+        "background_style": "solid",
+        "background_color": "#ffffff",
+        "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
+        "outer_background_color": "#ffffff",
+        "border_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "width": "page",
+        "content_width": 1200,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
+    "hero_V8dEDA": {
+      "type": "hero",
+      "blocks": {
+        "text_jNmdB7": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>We only have ONE FACE (and ONE WORLD) to PROTECT.<br/><br/></p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-heading--family)",
+            "font_size": "1.25rem",
+            "line_height": "tight",
+            "letter_spacing": "tight",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground-heading)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_jNmdB7"
+      ],
+      "custom_css": [
+        ".hero {padding: 3vw; border-radius: 10px; overflow: hidden;}",
+        ".hero img,.hero__media img,.hero__media {border-radius: 10px;}"
+      ],
+      "name": "t:names.hero",
+      "settings": {
+        "media_type_1": "image",
+        "media_type_2": "image",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": false,
+        "media_type_1_mobile": "image",
+        "image_1_mobile": "shopify://shop_images/image_f73e951f-1256-4a48-befd-1b3463dd990f.png",
+        "media_type_2_mobile": "image",
+        "link": "",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 14,
+        "section_width": "page-width",
+        "section_height": "large",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-1",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "gradient",
+        "gradient_direction": "to top",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 24,
+        "padding-block-end": 24
+      }
+    },
+    "ss_image_with_text_15_HhiCCE": {
+      "type": "ss-image-with-text-15",
+      "blocks": {
+        "item_rC9UnC": {
+          "type": "item",
+          "settings": {
+            "toggle_text": "Our formulas",
+            "heading": "<p>minimal & good for you</p>",
+            "text": "<p>A responsible approach to cruelty-free, clean, vegan ingredients. Suitable for all skin types. Fragrance-free and dermatologist-developed.</p><p></p><p></p>",
+            "button_label": "Learn More",
+            "button_link": ""
+          }
+        },
+        "item_xJfqQE": {
+          "type": "item",
+          "settings": {
+            "toggle_text": "Our packaging",
+            "heading": "<p>fyi, we use pcr</p>",
+            "text": "<p>ISOUA’s pouch bags, bottles, tubes, and caps are made with post-consumer recycled (PCR) materials. See more details on each product's page—along with easy-to-follow recycling instructions.<br/><br/></p>",
+            "button_label": "Learn More",
+            "button_link": ""
+          }
+        },
+        "item_KVPPV7": {
+          "type": "item",
+          "settings": {
+            "toggle_text": "Your empties",
+            "heading": "<p>we got you</p>",
+            "text": "<p>Easily ship back at least 3 empty products if you'd like us to recycle them for you. Email hello@isoua.com for a complimentary shipping label.</p>",
+            "button_label": "Learn More",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_rC9UnC",
+        "item_xJfqQE",
+        "item_KVPPV7"
+      ],
+      "name": "SS - Image With Text #15",
+      "settings": {
+        "body_gap": 12,
+        "body_gap_mobile": 12,
+        "image_url": "",
+        "image_position": "left",
+        "image_position_mobile": "top",
+        "image_radius": 12,
+        "image_border_thickness": 0,
+        "image_ratio": "original",
+        "image_ratio_mobile": "original",
+        "content_padding_vertical": 32,
+        "content_padding_vertical_mobile": 16,
+        "content_padding_horizontal": 32,
+        "content_padding_horizontal_mobile": 16,
+        "content_radius": 12,
+        "content_border_thickness": 0,
+        "content_horizontal_align": "start",
+        "content_horizontal_align_mobile": "start",
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 36,
+        "heading_size_mobile": 26,
+        "heading_height": 130,
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 16,
+        "text_size_mobile": 14,
+        "text_height": 170,
+        "text_mt": 24,
+        "toggle_text_padding_vertical": 16,
+        "toggle_text_padding_vertical_mobile": 16,
+        "toggle_text_border_thickness": 1,
+        "toggle_text_custom": false,
+        "toggle_text_font": "josefin_sans_n4",
+        "toggle_text_size": 26,
+        "toggle_text_size_mobile": 20,
+        "toggle_text_height": 130,
+        "content_border_color": "#000000",
+        "content_bg_color": "#f1f0ed",
+        "heading_color": "#67645e",
+        "text_color": "#67645e",
+        "toggle_text_border_color": "#c4c4c4",
+        "toggle_text_color": "#67645e",
+        "pill_button_size": 14,
+        "pill_button_size_mobile": 13,
+        "pill_button_padding_vertical": 12,
+        "pill_button_padding_vertical_mobile": 10,
+        "pill_button_padding_horizontal": 32,
+        "pill_button_padding_horizontal_mobile": 28,
+        "pill_button_mt": 28,
+        "pill_button_mt_mobile": 20,
+        "image_border_color": "#000000",
+        "background_color": "#ffffff",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 0,
+        "padding_bottom": 24,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": true,
+        "content_width": 120,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
+    "ss_image_with_text_14_nEexmb": {
+      "type": "ss-image-with-text-14",
+      "blocks": {
+        "heading_heytAg": {
+          "type": "heading",
+          "settings": {
+            "heading": "<h2>our shippers<br/><br/></h2>",
+            "heading_custom": false,
+            "heading_font": "josefin_sans_n4",
+            "heading_size": 36,
+            "heading_size_mobile": 26,
+            "heading_height": 130,
+            "heading_mt": 0,
+            "heading_mt_mobile": 0,
+            "heading_color": "#000000"
+          }
+        },
+        "text_zwzTqH": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Your new ISOUA products will arrive in *zero-waste* Boox boxes that reduce your environmental impact by up to 70% compared to single-use shipping boxes. More reasons why it’s a cleaner way to ship:  <br/><br/>✔️ Boox boxes can be reused up to 12 times<br/>✔️ No bubble wrap, no excess waste<br/>✔️ Any inserts are made from recycled paper or FSC-certified materials<br/>✔️ Just scan the QR code on the interior of the Boox box, follow the easy steps, and drop your Boox off at a local return location<br/><br/></p>",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 16,
+            "text_size_mobile": 14,
+            "text_mt": 24,
+            "text_mt_mobile": 16,
+            "text_color": "#000000"
+          }
+        },
+        "button_NGiCEW": {
+          "type": "button",
+          "settings": {
+            "button": "LEARN MORE",
+            "button_url": "shopify://pages/sustainability",
+            "button_custom": false,
+            "button_font": "josefin_sans_n4",
+            "button_size": 13,
+            "button_size_mobile": 13,
+            "button_height": 100,
+            "button_mt": 24,
+            "button_mt_mobile": 24,
+            "button_padding_vertical": 12,
+            "button_padding_vertical_mobile": 12,
+            "button_padding_horizontal": 30,
+            "button_padding_horizontal_mobile": 30,
+            "button_radius": 100,
+            "button_border_thickness": 1,
+            "button_style": "outline",
+            "button_color": "#000000",
+            "button_hover_color": "#ffffff",
+            "button_bg_color": "",
+            "button_bg_hover_color": "#000000",
+            "button_border_color": "#000000",
+            "button_border_hover_color": "#000000"
+          }
+        },
+        "scrolling_WTRk7P": {
+          "type": "scrolling",
+          "settings": {
+            "scrolling_velocity": 20,
+            "scrolling_velocity_mobile": 32,
+            "scrolling_gap": 16,
+            "scrolling_gap_mobile": 16,
+            "scrolling_mt": 16,
+            "scrolling_mt_mobile": 16,
+            "scrolling_mb": 12,
+            "scrolling_type": "vertical",
+            "reverse_direction": false,
+            "text": "sustainable ",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 60,
+            "text_size_mobile": 40,
+            "text_mr": 16,
+            "text_mr_mobile": 16,
+            "icon_size": 32,
+            "icon_size_mobile": 32,
+            "animate_icon": true,
+            "hide_icon": false,
+            "text_color": "#121212",
+            "icon_color": "#121212"
+          }
+        }
+      },
+      "block_order": [
+        "heading_heytAg",
+        "text_zwzTqH",
+        "button_NGiCEW",
+        "scrolling_WTRk7P"
+      ],
+      "name": "SS - Image With Text #14",
+      "settings": {
+        "body_gap": 10,
+        "body_gap_mobile": 0,
+        "content_horizontal_align": "start",
+        "content_horizontal_align_mobile": "start",
+        "content_vertical_align": "center",
+        "content_padding_vertical": 0,
+        "content_padding_vertical_mobile": 0,
+        "content_padding_horizontal": 32,
+        "content_padding_horizontal_mobile": 16,
+        "image_position": "right",
+        "image_position_mobile": "top",
+        "image_ratio": "portrait",
+        "image_ratio_mobile": "portrait",
+        "background_color": "#F1F0ED",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 2,
+        "margin_horizontal_mobile": 1.5,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_horizontal": 0,
+        "padding_horizontal_mobile": 0,
+        "full_width": true,
+        "content_width": 120,
+        "border_thickness": 0,
+        "section_radius": 10,
+        "lazy": true
+      }
+    },
+    "hero_bgT9Jn": {
+      "type": "hero",
+      "blocks": {
+        "text_4VgVyy": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>Hello GLOW, goodbye GARBAGE<strong>.</strong></p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-heading--family)",
+            "font_size": "1.25rem",
+            "line_height": "tight",
+            "letter_spacing": "tight",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground-heading)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_4VgVyy"
+      ],
+      "custom_css": [
+        ".hero {padding: 3vw; border-radius: 10px; overflow: hidden;}",
+        ".hero img,.hero__media img,.hero__media {border-radius: 10px;}"
+      ],
+      "name": "t:names.hero",
+      "settings": {
+        "media_type_1": "image",
+        "media_type_2": "image",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": false,
+        "media_type_1_mobile": "image",
+        "image_1_mobile": "shopify://shop_images/image_f73e951f-1256-4a48-befd-1b3463dd990f.png",
+        "media_type_2_mobile": "image",
+        "link": "",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 14,
+        "section_width": "page-width",
+        "section_height": "large",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-1",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "gradient",
+        "gradient_direction": "to top",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 24,
+        "padding-block-end": 24
+      }
+    }
+  },
+  "order": [
+    "main",
+    "hero_FeGc7p",
+    "ss_image_with_text_HiVAhA",
+    "hero_V8dEDA",
+    "ss_image_with_text_15_HhiCCE",
+    "ss_image_with_text_14_nEexmb",
+    "hero_bgT9Jn"
+  ]
+}

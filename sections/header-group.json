@@ -1,0 +1,241 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "1775594938c7f22730": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_a6cbe80_YDqLqB": {
+          "type": "ai_gen_block_a6cbe80",
+          "settings": {
+            "announcement_text": "<p><strong>FREE SHIPPING PAN INDIA ON PREPAID ORDERS</strong></p>",
+            "desktop_width_percent": 100,
+            "margin_top_desktop": 15,
+            "margin_bottom_desktop": 0,
+            "margin_left_desktop": 0,
+            "margin_right_desktop": 0,
+            "padding_vertical": 12,
+            "padding_horizontal": 0,
+            "margin_top_mobile": 15,
+            "margin_bottom_mobile": 0,
+            "margin_left_mobile": 0,
+            "margin_right_mobile": 0,
+            "padding_vertical_mobile": 12,
+            "padding_horizontal_mobile": 5,
+            "border_radius": 10,
+            "background_color": "#f1f0ed",
+            "text_color": "#67645e",
+            "font_size": 12,
+            "font_size_mobile": 12,
+            "text_transform": "uppercase",
+            "link_color": "#ffffff",
+            "link_hover_color": "#cccccc",
+            "link_decoration": "underline"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_a6cbe80_YDqLqB"
+      ],
+      "name": "Announcement Bar",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-1",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 10,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 12,
+        "padding-block-end": 12
+      }
+    },
+    "header_section": {
+      "type": "header",
+      "blocks": {
+        "header-logo": {
+          "type": "_header-logo",
+          "static": true,
+          "settings": {
+            "hide_logo_on_home_page": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          },
+          "blocks": {}
+        },
+        "header-menu": {
+          "type": "_header-menu",
+          "static": true,
+          "settings": {
+            "menu": "main-menu",
+            "color_scheme": "scheme-3",
+            "type_font_primary_size": "0.875rem",
+            "menu_font_style": "regular",
+            "type_font_primary_link": "body",
+            "type_case_primary_link": "uppercase",
+            "menu_style": "text",
+            "featured_products_aspect_ratio": "4 / 5",
+            "featured_collections_aspect_ratio": "16 / 9",
+            "image_border_radius": 0,
+            "navigation_bar": false,
+            "color_scheme_navigation_bar": "",
+            "drawer_accordion": false,
+            "drawer_accordion_expand_first": true,
+            "drawer_dividers": false
+          },
+          "blocks": {}
+        }
+      },
+      "disabled": true,
+      "custom_css": [
+        ".header {text-transform: uppercase !important; font-weight: bold !important;}",
+        "@media screen and (max-width: 760px) {.header {margin-top: 10px; }}"
+      ],
+      "settings": {
+        "logo_position": "center",
+        "menu_position": "left",
+        "menu_row": "top",
+        "customer_account_menu": "customer-account-main-menu",
+        "show_search": true,
+        "search_position": "right",
+        "search_row": "top",
+        "show_country": true,
+        "country_selector_style": false,
+        "show_language": false,
+        "localization_font": "heading",
+        "localization_font_size": "1rem",
+        "localization_position": "right",
+        "localization_row": "top",
+        "section_width": "page-width",
+        "section_height": "compact",
+        "enable_sticky_header": "scroll-up",
+        "divider_width": 0,
+        "divider_size": "page-width",
+        "border_width": 0,
+        "actions_display_style": "text",
+        "actions_font_size": "0.875rem",
+        "actions_font": "body",
+        "actions_text_case": "uppercase",
+        "color_scheme_top": "scheme-1",
+        "color_scheme_bottom": "",
+        "color_scheme_transparent": "scheme-6",
+        "enable_transparent_header_home": true,
+        "home_color_scheme": "default",
+        "enable_transparent_header_product": true,
+        "product_color_scheme": "default",
+        "enable_transparent_header_collection": true,
+        "collection_color_scheme": "default"
+      }
+    },
+    "ss_header_1_V6CPNx": {
+      "type": "ss-header-1",
+      "custom_css": [],
+      "name": "SS - Header #1",
+      "settings": {
+        "show_type": "scroll_up",
+        "transparent_bg": "home",
+        "body_gap": 40,
+        "body_gap_mobile": 12,
+        "menu": "main-menu",
+        "mega_menu_radius": 10,
+        "mega_menu_radius_top": 10,
+        "mega_menu_margin_top": 10,
+        "list_gap": 30,
+        "list_gap_mobile": 24,
+        "link_custom": false,
+        "link_font": "josefin_sans_n4",
+        "link_size": 16,
+        "link_size_mobile": 14,
+        "link_height": 130,
+        "menu_icon_size_mobile": 22,
+        "logo_width": 150,
+        "logo_width_mobile": 140,
+        "logo_position": "center",
+        "name_custom": false,
+        "name_font": "josefin_sans_n4",
+        "name_size": 32,
+        "name_size_mobile": 20,
+        "name_height": 130,
+        "right_gap": 30,
+        "right_gap_mobile": 12,
+        "right_link_custom": false,
+        "right_link_font": "josefin_sans_n4",
+        "right_link_size": 16,
+        "right_link_height": 130,
+        "icon_size": 20,
+        "icon_size_mobile": 18,
+        "use_search": true,
+        "search_text": "SEARCH",
+        "search_icon_desktop": false,
+        "search_menu_mobile": false,
+        "use_account": true,
+        "account_text": "ACCOUNT",
+        "account_icon_desktop": false,
+        "account_menu_mobile": true,
+        "cart_text": "CART",
+        "cart_icon_desktop": false,
+        "mobile_menu_bg_color": "#f1f0ed",
+        "link_color": "#67645e",
+        "link_hover_color": "#67645e",
+        "link_hero_color": "#ffffff",
+        "link_hover_hero_color": "#ffffff",
+        "name_color": "#67645e",
+        "name_hover_color": "#67645e",
+        "name_hero_color": "#ffffff",
+        "name_hover_hero_color": "#ffffff",
+        "right_link_color": "#67645e",
+        "right_link_hover_color": "#67645e",
+        "right_link_hero_color": "#ffffff",
+        "right_link_hover_hero_color": "#ffffff",
+        "background_style": "solid",
+        "background_color": "#f1f0ed",
+        "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
+        "border_color": "#000000",
+        "margin_top": 52,
+        "margin_top_other": 52,
+        "margin_horizontal": 3,
+        "margin_horizontal_mobile": 2,
+        "padding_top": 32,
+        "padding_bottom": 12,
+        "padding_horizontal": 3,
+        "padding_horizontal_mobile": 1,
+        "width": "page",
+        "content_width": 1200,
+        "border_thickness": 0,
+        "section_radius": 10,
+        "lazy": false
+      }
+    }
+  },
+  "order": [
+    "1775594938c7f22730",
+    "header_section",
+    "ss_header_1_V6CPNx"
+  ]
+}

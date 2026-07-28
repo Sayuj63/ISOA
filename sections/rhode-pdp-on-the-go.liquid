@@ -1,0 +1,419 @@
+{%- comment -%}
+  Rhode PDP — "Take your rhode ON THE GO" 5-tab slider.
+  Left: swappable portrait image. Right: grey pill card with title, subtitle,
+  active product name + description + graphic, and 5 numbered circle tabs at
+  the bottom. Circle 01-05: active gets `#e29fc8` fill; label under the active
+  circle stays visible. Click / tap on any circle swaps every element.
+  -vamshi
+{%- endcomment -%}
+
+{%- liquid
+  assign sid = section.id
+  assign card_bg = section.settings.card_bg_color | default: '#f1f0ed'
+  assign image_bg = section.settings.image_bg_color | default: '#e5e3df'
+  assign active_color = section.settings.active_circle_color | default: '#e29fc8'
+-%}
+
+<section class="rh-otg" id="rh-otg-{{ sid }}" data-rh-otg>
+  <div class="rh-otg__pill">
+    <div class="rh-otg__grid">
+      <div class="rh-otg__media">
+        {%- for block in section.blocks -%}
+          <div
+            class="rh-otg__slide {% if forloop.first %}is-active{% endif %}"
+            data-slide="{{ forloop.index0 }}"
+            {{ block.shopify_attributes }}
+          >
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 1600
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '400,600,800,1000,1200,1400,1600',
+                  sizes: '(min-width: 750px) 50vw, 100vw',
+                  alt: block.settings.image.alt
+              }}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'rh-otg__placeholder' }}
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <div class="rh-otg__card">
+        <div class="rh-otg__head">
+          <h2 class="rh-otg__title">{{ section.settings.title }}</h2>
+          {%- if section.settings.subtitle != blank -%}
+            <p class="rh-otg__subtitle">{{ section.settings.subtitle }}</p>
+          {%- endif -%}
+        </div>
+
+        <div class="rh-otg__body">
+          {%- for block in section.blocks -%}
+            <div
+              class="rh-otg__item {% if forloop.first %}is-active{% endif %}"
+              data-slide="{{ forloop.index0 }}"
+            >
+              <div class="rh-otg__item-text">
+                <div class="rh-otg__product">{{ block.settings.product_name }}</div>
+                {%- if block.settings.description != blank -%}
+                  <p class="rh-otg__desc">{{ block.settings.description }}</p>
+                {%- endif -%}
+              </div>
+              {%- if block.settings.graphic != blank -%}
+                <div class="rh-otg__graphic">
+                  {{
+                    block.settings.graphic
+                    | image_url: width: 400
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '150,250,400',
+                      alt: block.settings.product_name
+                  }}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <div class="rh-otg__nav">
+          {%- for block in section.blocks -%}
+            <button
+              type="button"
+              class="rh-otg__circle {% if forloop.first %}is-active{% endif %}"
+              data-slide="{{ forloop.index0 }}"
+              aria-label="{{ block.settings.label | default: block.settings.product_name }}"
+            >
+              <span class="rh-otg__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+            </button>
+          {%- endfor -%}
+        </div>
+
+        <div class="rh-otg__label-row" aria-hidden="true">
+          {%- for block in section.blocks -%}
+            <span
+              class="rh-otg__label {% if forloop.first %}is-active{% endif %}"
+              data-slide="{{ forloop.index0 }}"
+            >{{ block.settings.label }}</span>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Width rail. Horizon's subgrid places `.section` (which this section renders
+     inside) at `grid-column: 2`, i.e. already pill-flush. Applying the
+     `min(page-width - margin*2, 100% - margin*2)` formula on the inner would
+     apply a SECOND 40px inset per side (measured 80→1360 inside a 40→1400
+     outer). So the outer just gets vertical padding, and the inner fills 100%. */
+  #rh-otg-{{ sid }}{
+    padding: 24px 0;
+  }
+  #rh-otg-{{ sid }} .rh-otg__pill{
+    max-width: 100%;
+    margin-inline: 0;
+  }
+  #rh-otg-{{ sid }} .rh-otg__grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  #rh-otg-{{ sid }} .rh-otg__media{
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    overflow: hidden;
+    background: {{ image_bg }};
+  }
+  #rh-otg-{{ sid }} .rh-otg__slide{
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: scale(1.02);
+    transition:
+      opacity .9s cubic-bezier(.76,0,.24,1),
+      transform 1s cubic-bezier(.76,0,.24,1);
+  }
+  #rh-otg-{{ sid }} .rh-otg__slide.is-active{
+    opacity: 1;
+    transform: scale(1);
+  }
+  #rh-otg-{{ sid }} .rh-otg__slide img,
+  #rh-otg-{{ sid }} .rh-otg__slide svg{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  #rh-otg-{{ sid }} .rh-otg__card{
+    position: relative;
+    background: {{ card_bg }};
+    border-radius: 10px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    min-height: 480px;
+  }
+  #rh-otg-{{ sid }} .rh-otg__title{
+    margin: 0 0 8px;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    color: #67645e;
+    font-style: normal;
+  }
+  #rh-otg-{{ sid }} .rh-otg__subtitle{
+    margin: 0;
+    font-size: 14px;
+    color: #7b7872;
+    line-height: 1.4;
+  }
+  #rh-otg-{{ sid }} .rh-otg__body{
+    position: relative;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    margin: 24px 0;
+    min-height: 120px;
+  }
+  #rh-otg-{{ sid }} .rh-otg__item{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .5s cubic-bezier(.76,0,.24,1), visibility 0s linear .5s;
+  }
+  #rh-otg-{{ sid }} .rh-otg__item.is-active{
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .5s cubic-bezier(.76,0,.24,1), visibility 0s linear 0s;
+  }
+  #rh-otg-{{ sid }} .rh-otg__item-text{
+    flex: 1 1 auto;
+    max-width: 60%;
+  }
+  #rh-otg-{{ sid }} .rh-otg__product{
+    font-weight: 700;
+    font-size: 15px;
+    color: #67645e;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #67645e;
+    display: inline-block;
+    min-width: 60%;
+    margin-bottom: 8px;
+  }
+  #rh-otg-{{ sid }} .rh-otg__desc{
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #67645e;
+  }
+  #rh-otg-{{ sid }} .rh-otg__graphic{
+    flex: 0 0 auto;
+    width: 140px;
+    max-width: 40%;
+  }
+  #rh-otg-{{ sid }} .rh-otg__graphic img{
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  #rh-otg-{{ sid }} .rh-otg__nav{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+  }
+  #rh-otg-{{ sid }} .rh-otg__circle{
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    border: 1px solid #67645e;
+    background: transparent;
+    color: #67645e;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: background .35s cubic-bezier(.76,0,.24,1),
+                color .35s cubic-bezier(.76,0,.24,1),
+                border-color .35s cubic-bezier(.76,0,.24,1);
+  }
+  #rh-otg-{{ sid }} .rh-otg__circle:hover{
+    border-color: {{ active_color }};
+  }
+  #rh-otg-{{ sid }} .rh-otg__circle.is-active{
+    background: {{ active_color }};
+    border-color: {{ active_color }};
+    color: #ffffff;
+  }
+  #rh-otg-{{ sid }} .rh-otg__label-row{
+    position: relative;
+    height: 20px;
+    margin-top: 10px;
+    text-align: center;
+  }
+  #rh-otg-{{ sid }} .rh-otg__label{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #67645e;
+    opacity: 0;
+    transition: opacity .35s cubic-bezier(.76,0,.24,1);
+  }
+  #rh-otg-{{ sid }} .rh-otg__label.is-active{
+    opacity: 1;
+  }
+
+  @media (min-width: 750px){
+    #rh-otg-{{ sid }} .rh-otg__grid{
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    #rh-otg-{{ sid }} .rh-otg__media{
+      aspect-ratio: 1 / 1;
+    }
+    #rh-otg-{{ sid }} .rh-otg__card{
+      padding: 36px 40px;
+      min-height: 0;
+    }
+    #rh-otg-{{ sid }} .rh-otg__title{
+      font-size: 40px;
+    }
+  }
+</style>
+
+<script>
+  (function(){
+    var root = document.getElementById('rh-otg-{{ sid }}');
+    if(!root) return;
+
+    var circles = root.querySelectorAll('.rh-otg__circle');
+    var slides  = root.querySelectorAll('.rh-otg__slide');
+    var items   = root.querySelectorAll('.rh-otg__item');
+    var labels  = root.querySelectorAll('.rh-otg__label');
+
+    function activate(index){
+      [circles, slides, items, labels].forEach(function(group){
+        group.forEach(function(el){
+          el.classList.toggle('is-active', Number(el.dataset.slide) === index);
+        });
+      });
+    }
+
+    circles.forEach(function(el){
+      var idx = Number(el.dataset.slide);
+      // Hover activates the slide (desktop only — mobile still uses tap).
+      el.addEventListener('mouseenter', function(){
+        if (window.matchMedia('(min-width: 750px)').matches) activate(idx);
+      });
+      el.addEventListener('click', function(){ activate(idx); });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Rhode PDP · On the go",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Take your rhode ON THE GO."
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Essentials to throw in your purse or pocket."
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card background",
+      "default": "#f1f0ed"
+    },
+    {
+      "type": "color",
+      "id": "image_bg_color",
+      "label": "Image placeholder background",
+      "default": "#e5e3df"
+    },
+    {
+      "type": "color",
+      "id": "active_circle_color",
+      "label": "Active circle color",
+      "default": "#e29fc8"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Model / lifestyle image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Short label (under active circle)",
+          "default": "SPOT"
+        },
+        {
+          "type": "text",
+          "id": "product_name",
+          "label": "Product name",
+          "default": "spotwear"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "create a comfy, protective bubble to leave spots looking smaller, flatter, and less red"
+        },
+        {
+          "type": "image_picker",
+          "id": "graphic",
+          "label": "Product graphic (small illustration on the right)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "Rhode PDP · On the go",
+      "blocks": [
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" }
+      ]
+    }
+  ]
+}
+{% endschema %}

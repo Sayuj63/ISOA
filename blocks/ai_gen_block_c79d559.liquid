@@ -1,0 +1,600 @@
+{% doc %}
+  @prompt
+    Create a horizontal navigation bar with rounded pill-shaped category buttons. Each button should have a thin border, light background, and uppercase text. Spacing between buttons should be consistent. The last button ("Shop All") should be filled with a dark background and white text to act as a primary CTA. Use a clean, minimal, premium aesthetic similar to modern skincare brands., he layout must support adding or removing pills without breaking. Keep all pills in a single row with horizontal scrolling if needed. Each pill should have rounded edges, a thin border, uppercase text, and consistent spacing. Prevent pills from wrapping or shrinking. and keep the pills centred aligned
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-category-nav-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: {{ block.settings.vertical_padding }}px 0;
+  }
+
+  .ai-category-nav-wrapper-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .ai-category-nav-scroll-{{ ai_gen_id }} {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    max-width: 100%;
+  }
+
+  .ai-category-nav-scroll-{{ ai_gen_id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ai-category-nav-list-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.pill_spacing }}px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: nowrap;
+    width: max-content;
+  }
+
+  .ai-category-nav-item-{{ ai_gen_id }} {
+    flex-shrink: 0;
+  }
+
+  .ai-category-nav-pill-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: {{ block.settings.pill_padding_vertical }}px {{ block.settings.pill_padding_horizontal }}px;
+    background-color: {{ block.settings.pill_background }};
+    color: {{ block.settings.pill_text_color }};
+    border: {{ block.settings.pill_border_width }}px solid {{ block.settings.pill_border_color }};
+    border-radius: {{ block.settings.pill_border_radius }}px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: {{ block.settings.pill_font_size }}px;
+    font-weight: {{ block.settings.pill_font_weight }};
+    letter-spacing: {{ block.settings.pill_letter_spacing }}px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .ai-category-nav-pill-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.pill_hover_background }};
+    color: {{ block.settings.pill_hover_text_color }};
+    border-color: {{ block.settings.pill_hover_border_color }};
+  }
+
+  .ai-category-nav-pill-primary-{{ ai_gen_id }} {
+    background-color: {{ block.settings.primary_pill_background }};
+    color: {{ block.settings.primary_pill_text_color }};
+    border-color: {{ block.settings.primary_pill_border_color }};
+  }
+
+  .ai-category-nav-pill-primary-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.primary_pill_hover_background }};
+    color: {{ block.settings.primary_pill_hover_text_color }};
+    border-color: {{ block.settings.primary_pill_hover_border_color }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-category-nav-{{ ai_gen_id }} {
+      width: 100%;
+    }
+
+    .ai-category-nav-pill-{{ ai_gen_id }} {
+      font-size: {{ block.settings.pill_font_size | times: 0.9 }}px;
+      padding: {{ block.settings.pill_padding_vertical | times: 0.9 }}px {{ block.settings.pill_padding_horizontal | times: 0.9 }}px;
+    }
+  }
+{% endstyle %}
+
+<category-nav-{{ ai_gen_id }} class="ai-category-nav-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-category-nav-wrapper-{{ ai_gen_id }}">
+    <div class="ai-category-nav-scroll-{{ ai_gen_id }}">
+      <ul class="ai-category-nav-list-{{ ai_gen_id }}">
+        {% for i in (1..8) %}
+          {% liquid
+            assign pill_enabled_key = 'pill_' | append: i | append: '_enabled'
+            assign pill_text_key = 'pill_' | append: i | append: '_text'
+            assign pill_link_key = 'pill_' | append: i | append: '_link'
+            assign is_primary_key = 'pill_' | append: i | append: '_is_primary'
+
+            assign pill_enabled = block.settings[pill_enabled_key]
+            assign pill_text = block.settings[pill_text_key]
+            assign pill_link = block.settings[pill_link_key]
+            assign is_primary = block.settings[is_primary_key]
+          %}
+
+          {% if pill_enabled and pill_text != blank %}
+            <li class="ai-category-nav-item-{{ ai_gen_id }}">
+              <a
+                href="{{ pill_link }}"
+                class="ai-category-nav-pill-{{ ai_gen_id }} {% if is_primary %}ai-category-nav-pill-primary-{{ ai_gen_id }}{% endif %}"
+              >
+                {{ pill_text }}
+              </a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</category-nav-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class CategoryNav{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.scrollContainer = this.querySelector('.ai-category-nav-scroll-{{ ai_gen_id }}');
+        this.setupScrollBehavior();
+      }
+
+      setupScrollBehavior() {
+        if (!this.scrollContainer) return;
+
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        this.scrollContainer.addEventListener('mousedown', (e) => {
+          isDown = true;
+          this.scrollContainer.style.cursor = 'grabbing';
+          startX = e.pageX - this.scrollContainer.offsetLeft;
+          scrollLeft = this.scrollContainer.scrollLeft;
+        });
+
+        this.scrollContainer.addEventListener('mouseleave', () => {
+          isDown = false;
+          this.scrollContainer.style.cursor = 'grab';
+        });
+
+        this.scrollContainer.addEventListener('mouseup', () => {
+          isDown = false;
+          this.scrollContainer.style.cursor = 'grab';
+        });
+
+        this.scrollContainer.addEventListener('mousemove', (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          const x = e.pageX - this.scrollContainer.offsetLeft;
+          const walk = (x - startX) * 2;
+          this.scrollContainer.scrollLeft = scrollLeft - walk;
+        });
+      }
+    }
+
+    customElements.define('category-nav-{{ ai_gen_id }}', CategoryNav{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Category navigation pills",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "vertical_padding",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "pill_spacing",
+      "label": "Spacing between pills",
+      "min": 4,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Pill style"
+    },
+    {
+      "type": "range",
+      "id": "pill_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "pill_padding_vertical",
+      "label": "Vertical padding",
+      "min": 4,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "pill_padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "pill_border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "header",
+      "content": "Pill typography"
+    },
+    {
+      "type": "range",
+      "id": "pill_font_size",
+      "label": "Font size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "pill_font_weight",
+      "label": "Font weight",
+      "min": 400,
+      "max": 700,
+      "step": 100,
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "pill_letter_spacing",
+      "label": "Letter spacing",
+      "min": 0,
+      "max": 2,
+      "step": 0.1,
+      "unit": "px",
+      "default": 0.5
+    },
+    {
+      "type": "header",
+      "content": "Default pill colors"
+    },
+    {
+      "type": "color",
+      "id": "pill_background",
+      "label": "Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "pill_text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "pill_border_color",
+      "label": "Border",
+      "default": "#E6E6E6"
+    },
+    {
+      "type": "color",
+      "id": "pill_hover_background",
+      "label": "Hover background",
+      "default": "#F5F5F5"
+    },
+    {
+      "type": "color",
+      "id": "pill_hover_text_color",
+      "label": "Hover text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "pill_hover_border_color",
+      "label": "Hover border",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Primary pill colors"
+    },
+    {
+      "type": "color",
+      "id": "primary_pill_background",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "primary_pill_text_color",
+      "label": "Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "primary_pill_border_color",
+      "label": "Border",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "primary_pill_hover_background",
+      "label": "Hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "primary_pill_hover_text_color",
+      "label": "Hover text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "primary_pill_hover_border_color",
+      "label": "Hover border",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Pill 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "pill_1_enabled",
+      "label": "Enable pill 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "pill_1_text",
+      "label": "Text",
+      "default": "Cleansers"
+    },
+    {
+      "type": "url",
+      "id": "pill_1_link",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "pill_1_is_primary",
+      "label": "Primary style",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Pill 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "pill_2_enabled",
+      "label": "Enable pill 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "pill_2_text",
+      "label": "Text",
+      "default": "Serums"
+    },
+    {
+      "type": "url",
+      "id": "pill_2_link",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "pill_2_is_primary",
+      "label": "Primary style",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Pill 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "pill_3_enabled",
+      "label": "Enable pill 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "pill_3_text",
+      "label": "Text",
+      "default": "Moisturizers"
+    },
+    {
+      "type": "url",
+      "id": "pill_3_link",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "pill_3_is_primary",
+      "label": "Primary style",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Pill 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "pill_4_enabled",
+      "label": "Enable pill 4",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "pill_4_text",
+      "label": "Text",
+      "default": "Masks"
+    },
+    {
+      "type": "url",
+      "id": "pill_4_link",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "pill_4_is_primary",
+      "label": "Primary style",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Pill 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "pill_5_enabled",
+      "label": "Enable pill 5",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "pill_5_text",
+      "label": "Text",
+      "default": "Sunscreen"
+    },
+    {
+      "type": "url",
+      "id": "pill_5_link",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "pill_5_is_primary",
+      "label": "Primary style",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Pill 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "pill_6_enabled",
+      "label": "Enable pill 6",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "pill_6_text",
+      "label": "Text",
+      "default": "Eye Care"
+    },
+    {
+      "type": "url",
+      "id": "pill_6_link",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "pill_6_is_primary",
+      "label": "Primary style",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Pill 7"
+    },
+    {
+      "type": "checkbox",
+      "id": "pill_7_enabled",
+      "label": "Enable pill 7",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "pill_7_text",
+      "label": "Text",
+      "default": "Treatments"
+    },
+    {
+      "type": "url",
+      "id": "pill_7_link",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "pill_7_is_primary",
+      "label": "Primary style",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Pill 8"
+    },
+    {
+      "type": "checkbox",
+      "id": "pill_8_enabled",
+      "label": "Enable pill 8",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "pill_8_text",
+      "label": "Text",
+      "default": "Shop All"
+    },
+    {
+      "type": "url",
+      "id": "pill_8_link",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "pill_8_is_primary",
+      "label": "Primary style",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category navigation pills"
+    }
+  ]
+}
+{% endschema %}

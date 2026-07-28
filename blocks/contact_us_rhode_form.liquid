@@ -1,0 +1,993 @@
+{% doc %}
+  @prompt
+    Create a complete contact form with the following fields in this exact order: 1. First and Last Name (required text input), 2. Email (required email input), 3. Contact Reason (required dropdown with these exact options: Order status, Cancel or modify an order, Returns or exchanges, My order is missing, My order arrived damaged, Issue with my product, Shipping questions, Product questions, Partnerships/collaboration, Wholesale requests, Other/general inquiry), 4. Topic (required text input), 5. Tell us the details (required textarea), 6. Optional file upload field supporting up to 10 files max with total size less than 50MB with drag-and-drop, paste, and upload button support showing "No file chosen" by default, 7. Submit button. The form should match the existing contact page styling and be clean and minimal., make the form center aligned on the page
+    
+    
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+
+/* Rhode-clone contact page: form is a centered 640px column on white.
+   Kill inherited beige card + rounding coming from main.css .custom-section-content
+   .shopify-block form so this section reads like Rhode's contact page. */
+#shopify-section-{{ section.id }} > div,
+#shopify-section-{{ section.id }} .section-background {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+#shopify-section-{{ section.id }} .custom-section-content .shopify-block form {
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Center the whole form column on the page (Rhode measured: 600px @ 1440vw). */
+.ai-contact-form-{{ ai_gen_id }} {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  background: transparent;
+  box-sizing: border-box;
+}
+
+.ai-contact-form-container-{{ ai_gen_id }} {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  background: transparent;
+  padding: 0;
+}
+
+contact-form-{{ ai_gen_id }} {
+  display: block;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  background: transparent;
+}
+
+.ai-contact-form-field-{{ ai_gen_id }} {
+  margin-bottom: 14px;
+}
+
+.ai-contact-form-label-{{ ai_gen_id }} {
+  display: none !important;
+
+}
+
+.ai-contact-form-required-{{ ai_gen_id }} {
+  color: #000;
+}
+
+.ai-contact-form-input-{{ ai_gen_id }},
+.ai-contact-form-select-{{ ai_gen_id }},
+.ai-contact-form-textarea-{{ ai_gen_id }} {
+  width: 100%;
+  border: 1px solid #d8d5d1;
+  background: #f8f7f5;
+  color: #4f4b46;
+  font-size: 12px;
+  font-family: inherit;
+  padding: 0 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  box-shadow: none;
+
+}
+
+.ai-contact-form-input-{{ ai_gen_id }},
+.ai-contact-form-select-{{ ai_gen_id }} {
+  height: 38px;
+}
+
+.ai-contact-form-textarea-{{ ai_gen_id }} {
+  min-height: 120px;
+  padding-top: 12px;
+  resize: none;
+}
+
+.ai-contact-form-input-{{ ai_gen_id }}:focus,
+.ai-contact-form-select-{{ ai_gen_id }}:focus,
+.ai-contact-form-textarea-{{ ai_gen_id }}:focus {
+  outline: none;
+  border-color: #8d877f;
+  background: #ffffff;
+}
+
+.ai-contact-form-input-{{ ai_gen_id }}::placeholder,
+.ai-contact-form-textarea-{{ ai_gen_id }}::placeholder {
+  color: #8b8680;
+}
+
+.ai-contact-form-file-upload-{{ ai_gen_id }} {
+  border: 1px solid #d8d5d1;
+  border-radius: 6px;
+  background: #ffffff;
+  padding: 14px;
+  text-align: left;
+  position: relative;
+}
+
+.ai-contact-form-file-upload-{{ ai_gen_id }}.drag-over {
+  border-color: #8d877f;
+  background: #faf9f7;
+}
+
+.ai-contact-form-file-input-{{ ai_gen_id }} {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ai-contact-form-file-label-{{ ai_gen_id }} {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.ai-contact-form-file-icon-{{ ai_gen_id }} {
+  width: 16px;
+  height: 16px;
+  opacity: 0.6;
+}
+
+.ai-contact-form-file-text-{{ ai_gen_id }} {
+  flex: 1;
+  font-size: 11px;
+  color: #6f6a64;
+}
+
+.ai-contact-form-file-button-{{ ai_gen_id }} {
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-size: 11px;
+  color: #6f6a64;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.ai-contact-form-file-button-{{ ai_gen_id }}:hover {
+  opacity: 0.7;
+}
+
+.ai-contact-form-file-hint-{{ ai_gen_id }} {
+  margin-top: 8px;
+  font-size: 10px;
+  color: #9a958f;
+  line-height: 1.4;
+}
+
+.ai-contact-form-file-list-{{ ai_gen_id }} {
+  margin-top: 10px;
+}
+
+.ai-contact-form-file-item-{{ ai_gen_id }} {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  padding: 6px 0;
+  border-bottom: 1px solid #ece9e4;
+}
+
+.ai-contact-form-file-remove-{{ ai_gen_id }} {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  color: #777;
+}
+
+.ai-contact-form-submit-{{ ai_gen_id }} {
+  width: 100%;
+  height: 46px;
+  border-radius: 999px;
+  border: 1px solid #6d6963;
+  background: transparent;
+  color: #5e5a55;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  margin-top: 8px;
+}
+
+.ai-contact-form-submit-{{ ai_gen_id }}:hover {
+  background: #5e5a55;
+  color: #fff;
+}
+
+.ai-contact-form-success-{{ ai_gen_id }},
+.ai-contact-form-error-{{ ai_gen_id }} {
+  font-size: 12px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+/* MOBILE (<=1023px): pill-header offset + bottom corner rounding + top clearance */
+@media screen and (max-width: 1023px) {
+
+  /* Pull section up so it sits flush under the pill (49px = in-flow header offset) */
+  #shopify-section-{{ section.id }} {
+    margin-top: calc(var(--header-group-height, 0px) - 49px) !important;
+  }
+
+  /* Square the top corners where the pill rests on the section */
+  #shopify-section-{{ section.id }} .border-style.custom-section-content {
+    border-radius: 0 0 10px 10px !important;
+  }
+
+  /* Form is a pass-through wrapper on mobile — no padding, so the grey pill
+     child fills the section width (16→359) matching the SS-Header-1 pill.
+     Header clearance is handled by the section-level margin-top rule below. */
+  contact-form-{{ ai_gen_id }} form {
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Mobile heading: bigger and bolder to match reference */
+  contact-form-{{ ai_gen_id }} h1 {
+    font-size: 38px !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.01em !important;
+  }
+}
+
+/* MOBILE (<=768px): larger touch targets, overflow guard */
+@media screen and (max-width: 768px) {
+
+  .ai-contact-form-{{ ai_gen_id }} {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    overflow-x: hidden;
+  }
+
+  .ai-contact-form-container-{{ ai_gen_id }} {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px 0 0;
+    box-sizing: border-box;
+  }
+
+  .ai-contact-form-field-{{ ai_gen_id }} {
+    width: 100%;
+    margin-bottom: 14px;
+  }
+
+  .ai-contact-form-input-{{ ai_gen_id }},
+  .ai-contact-form-select-{{ ai_gen_id }},
+  .ai-contact-form-textarea-{{ ai_gen_id }},
+  .ai-contact-form-file-upload-{{ ai_gen_id }},
+  .ai-contact-form-submit-{{ ai_gen_id }} {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .ai-contact-form-input-{{ ai_gen_id }},
+  .ai-contact-form-select-{{ ai_gen_id }} {
+    height: 46px;
+    font-size: 16px;
+  }
+
+  .ai-contact-form-textarea-{{ ai_gen_id }} {
+    font-size: 16px;
+  }
+
+  .ai-contact-form-file-label-{{ ai_gen_id }} {
+    gap: 8px;
+  }
+
+  .ai-contact-form-file-button-{{ ai_gen_id }} {
+    white-space: nowrap;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+}
+.ai-section-padding-{{ ai_gen_id }} {
+  padding-top: {{ block.settings.section_padding_top }}px;
+  padding-bottom: {{ block.settings.section_padding_bottom }}px;
+  padding-left: {{ block.settings.section_padding_left }}px;
+  padding-right: {{ block.settings.section_padding_right }}px;
+  box-sizing: border-box;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* Rhode's submit button: full-width outlined pill, brand foreground. */
+.ai-contact-form-submit-{{ ai_gen_id }} {
+  width: 100%;
+  height: 48px;
+  border-radius: 999px;
+  border: 1px solid #67645e;
+  background: transparent;
+  color: #67645e;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  margin-top: 16px;
+}
+.ai-contact-form-submit-{{ ai_gen_id }}:hover {
+  background: #67645e;
+  color: #ffffff;
+}
+
+/* DESKTOP (>=1024px): ss-header-1.liquid handles offset via
+   .content-for-layout > .shopify-section:first-child { margin-top: var(--header-group-height) }
+   No override needed. */
+
+/* Grey pill card = full section pill width (matches SS-Header-1 pill: 40→1400 at 1440vw).
+   ID-prefixed selector needed to beat main.css's
+   `.custom-section-content .shopify-block form > div { max-width: 50% !important }`
+   which has specificity (0,3,1) — an ID lifts us to (1,1,0). */
+#shopify-section-{{ section.id }} .ai-section-padding-{{ ai_gen_id }} {
+  background: #f1f0ed !important;
+  border-radius: 10px !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  padding-top: 64px !important;
+  padding-bottom: 64px !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Outer wrappers fill the pill's section width. */
+.ai-contact-form-{{ ai_gen_id }},
+contact-form-{{ ai_gen_id }} {
+  max-width: 100% !important;
+  width: 100% !important;
+  display: block !important;
+}
+
+/* Heading + intro AND form fields column stay centered at 600px inside the
+   wide grey pill — matches Rhode's contact form width. */
+.ai-contact-form-container-{{ ai_gen_id }},
+.ai-contact-form-intro-{{ ai_gen_id }} {
+  max-width: 600px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Force inputs/select/textarea/file-upload/button to fill the pill's inner
+   width. A Horizon baseline rule on .contact-form input caps controls at
+   ~272px — force override via !important. Height bumped to 48 to feel
+   less cramped now that they're wider. */
+.ai-contact-form-input-{{ ai_gen_id }},
+.ai-contact-form-select-{{ ai_gen_id }},
+.ai-contact-form-textarea-{{ ai_gen_id }},
+.ai-contact-form-file-upload-{{ ai_gen_id }},
+.ai-contact-form-submit-{{ ai_gen_id }} {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+.ai-contact-form-input-{{ ai_gen_id }},
+.ai-contact-form-select-{{ ai_gen_id }} {
+  height: 48px !important;
+  background: #ffffff !important;
+  font-size: 13px !important;
+}
+.ai-contact-form-textarea-{{ ai_gen_id }} {
+  background: #ffffff !important;
+  min-height: 140px !important;
+  font-size: 13px !important;
+}
+.ai-contact-form-file-upload-{{ ai_gen_id }} {
+  background: #ffffff !important;
+}
+
+/* Mobile: match desktop-rule specificity (ID prefix) so this override wins.
+   margin-top on the section clears the position:fixed header — the
+   theme's :first-child auto-offset rule doesn't fire here because the
+   disabled main-page section takes the :first-child slot. */
+@media screen and (max-width: 749px) {
+  #shopify-section-{{ section.id }} {
+    margin-top: var(--header-group-height, 138px) !important;
+  }
+  #shopify-section-{{ section.id }} .ai-section-padding-{{ ai_gen_id }} {
+    max-width: 100% !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+    border-radius: 10px !important;
+  }
+  .ai-contact-form-{{ ai_gen_id }},
+  contact-form-{{ ai_gen_id }} {
+    max-width: 100% !important;
+  }
+}
+
+{% endstyle %}
+
+<contact-form-{{ ai_gen_id }} class="ai-contact-form-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {%- form 'contact' -%}
+
+<div class="ai-section-padding-{{ ai_gen_id }}">
+
+<div class="ai-contact-form-intro-{{ ai_gen_id }}" style="max-width:640px;margin:0 auto 28px;text-align:left;padding:0;box-sizing:border-box;">
+
+
+
+<h1 class="ai-contact-form-heading-{{ ai_gen_id }}" style="font-size:44px;font-weight:700;letter-spacing:-0.01em;font-style:normal;line-height:1.1;margin:0 0 14px;color:#67645e;">
+    contact us
+  </h1>
+
+   
+<p>
+Feel free to reach out to us at any time. We're here to help with orders, product questions, and any feedback you may have.
+</p>
+ <p>
+Our customer service team can assist by email Monday through Friday, from 9am to 5pm IST (excluding holidays).
+<br> We'll aim to get back to you within 2 business days.
+
+</p>
+<p>
+* indicates a required field
+
+  </p>
+</div>
+
+    <div class="ai-contact-form-container-{{ ai_gen_id }}">
+      {%- if form.posted_successfully? -%}
+        <div class="ai-contact-form-success-{{ ai_gen_id }}">
+          {{ block.settings.success_message }}
+        </div>
+      {%- endif -%}
+
+      {%- if form.errors -%}
+        <div class="ai-contact-form-error-{{ ai_gen_id }}">
+          <p><strong>{{ block.settings.error_heading }}</strong></p>
+          <ul style="margin: 8px 0 0 20px; padding: 0;">
+            {%- for field in form.errors -%}
+              <li>{{ form.errors.messages[field] }}</li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+
+      <div class="ai-contact-form-field-{{ ai_gen_id }}">
+        
+        <input
+          type="text"
+          id="contact-name-{{ ai_gen_id }}"
+          name="contact[name]"
+          class="ai-contact-form-input-{{ ai_gen_id }}"
+          value="{{ form.name }}"
+          placeholder="First and Last Name*"
+          required
+          aria-required="true"
+        >
+      </div>
+
+      <div class="ai-contact-form-field-{{ ai_gen_id }}">
+       
+        <input
+          type="email"
+          id="contact-email-{{ ai_gen_id }}"
+          name="contact[email]"
+          class="ai-contact-form-input-{{ ai_gen_id }}"
+          value="{{ form.email }}"
+          placeholder="Email*"
+          required
+          aria-required="true"
+          autocomplete="email"
+        >
+      </div>
+
+      <div class="ai-contact-form-field-{{ ai_gen_id }}">
+        <label for="contact-reason-{{ ai_gen_id }}" class="ai-contact-form-label-{{ ai_gen_id }}">
+          Contact Reason<span class="ai-contact-form-required-{{ ai_gen_id }}">*</span>
+        </label>
+        <select
+          id="contact-reason-{{ ai_gen_id }}"
+          name="contact[reason]"
+          class="ai-contact-form-select-{{ ai_gen_id }}"
+          required
+          aria-required="true"
+        >
+          <option value="">Select a reason</option>
+          <option value="Order status">Order status</option>
+          <option value="Cancel or modify an order">Cancel or modify an order</option>
+          <option value="Returns or exchanges">Returns or exchanges</option>
+          <option value="My order is missing">My order is missing</option>
+          <option value="My order arrived damaged">My order arrived damaged</option>
+          <option value="Issue with my product">Issue with my product</option>
+          <option value="Shipping questions">Shipping questions</option>
+          <option value="Product questions">Product questions</option>
+          <option value="Partnerships/collaboration">Partnerships/collaboration</option>
+          <option value="Wholesale requests">Wholesale requests</option>
+          <option value="Other/general inquiry">Other/general inquiry</option>
+        </select>
+      </div>
+
+      <div class="ai-contact-form-field-{{ ai_gen_id }}">
+       
+       <input
+  type="text"
+  id="contact-topic-{{ ai_gen_id }}"
+  name="contact[topic]"
+  class="ai-contact-form-input-{{ ai_gen_id }}"
+  placeholder="Topic*"
+  required
+  aria-required="true"
+>
+      </div>
+
+      <div class="ai-contact-form-field-{{ ai_gen_id }}">
+       
+        <textarea
+  id="contact-body-{{ ai_gen_id }}"
+  name="contact[body]"
+  class="ai-contact-form-textarea-{{ ai_gen_id }}"
+  placeholder="Tell us the details*"
+  required
+  aria-required="true"
+>{{ form.body }}</textarea>
+      </div>
+
+      <div class="ai-contact-form-field-{{ ai_gen_id }}">
+        <label class="ai-contact-form-label-{{ ai_gen_id }}">
+          File Upload (Optional)
+        </label>
+        <div class="ai-contact-form-file-upload-{{ ai_gen_id }}" data-file-upload>
+          <input
+            type="file"
+            id="contact-files-{{ ai_gen_id }}"
+            class="ai-contact-form-file-input-{{ ai_gen_id }}"
+            multiple
+            accept="image/*,.pdf,.doc,.docx,.txt"
+            data-file-input
+          >
+          <label for="contact-files-{{ ai_gen_id }}" class="ai-contact-form-file-label-{{ ai_gen_id }}">
+            <svg class="ai-contact-form-file-icon-{{ ai_gen_id }}" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+            </svg>
+            <div class="ai-contact-form-file-text-{{ ai_gen_id }}">
+              <span data-file-status>No file chosen</span>
+            </div>
+            <button type="button" class="ai-contact-form-file-button-{{ ai_gen_id }}">
+              Choose Files
+            </button>
+          </label>
+          <div class="ai-contact-form-file-hint-{{ ai_gen_id }}">
+            Drag and drop, paste, or click to upload (Max 10 files, 50MB total)
+          </div>
+          <div class="ai-contact-form-file-list-{{ ai_gen_id }}" data-file-list></div>
+          <div class="ai-contact-form-file-error-{{ ai_gen_id }}" data-file-error style="display: none;"></div>
+        </div>
+      </div>
+
+      <button type="submit" class="ai-contact-form-submit-{{ ai_gen_id }}">
+        {{ block.settings.submit_button_text }}
+      </button>
+        </div>
+  </div>
+  {%- endform -%}
+</contact-form-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class ContactForm{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.maxFiles = 10;
+        this.maxTotalSize = 50 * 1024 * 1024;
+        this.files = [];
+      }
+
+      connectedCallback() {
+        this.fileUpload = this.querySelector('[data-file-upload]');
+        this.fileInput = this.querySelector('[data-file-input]');
+        this.fileList = this.querySelector('[data-file-list]');
+        this.fileStatus = this.querySelector('[data-file-status]');
+        this.fileError = this.querySelector('[data-file-error]');
+
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        this.fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
+        
+        this.fileUpload.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          this.fileUpload.classList.add('drag-over');
+        });
+
+        this.fileUpload.addEventListener('dragleave', () => {
+          this.fileUpload.classList.remove('drag-over');
+        });
+
+        this.fileUpload.addEventListener('drop', (e) => {
+          e.preventDefault();
+          this.fileUpload.classList.remove('drag-over');
+          this.handleFiles(e.dataTransfer.files);
+        });
+
+        this.addEventListener('paste', (e) => {
+          const items = e.clipboardData.items;
+          const files = [];
+          for (let i = 0; i < items.length; i++) {
+            if (items[i].kind === 'file') {
+              files.push(items[i].getAsFile());
+            }
+          }
+          if (files.length > 0) {
+            e.preventDefault();
+            this.handleFiles(files);
+          }
+        });
+      }
+
+      handleFileSelect(e) {
+        this.handleFiles(e.target.files);
+      }
+
+      handleFiles(fileList) {
+        const newFiles = Array.from(fileList);
+        
+        if (this.files.length + newFiles.length > this.maxFiles) {
+          this.showError(`Maximum ${this.maxFiles} files allowed`);
+          return;
+        }
+
+        const totalSize = [...this.files, ...newFiles].reduce((sum, file) => sum + file.size, 0);
+        if (totalSize > this.maxTotalSize) {
+          this.showError('Total file size exceeds 50MB');
+          return;
+        }
+
+        this.files = [...this.files, ...newFiles];
+        this.updateFileList();
+        this.hideError();
+      }
+
+      updateFileList() {
+        if (this.files.length === 0) {
+          this.fileStatus.textContent = 'No file chosen';
+          this.fileList.innerHTML = '';
+          return;
+        }
+
+        this.fileStatus.textContent = `${this.files.length} file${this.files.length > 1 ? 's' : ''} selected`;
+        
+        this.fileList.innerHTML = this.files.map((file, index) => `
+          <div class="ai-contact-form-file-item-{{ ai_gen_id }}">
+            <span class="ai-contact-form-file-item-name-{{ ai_gen_id }}">${this.escapeHtml(file.name)}</span>
+            <span class="ai-contact-form-file-item-size-{{ ai_gen_id }}">${this.formatFileSize(file.size)}</span>
+            <button type="button" class="ai-contact-form-file-remove-{{ ai_gen_id }}" data-remove="${index}" aria-label="Remove file">&#215;</button>
+          </div>
+        `).join('');
+
+        this.fileList.querySelectorAll('[data-remove]').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const index = parseInt(e.target.getAttribute('data-remove'));
+            this.removeFile(index);
+          });
+        });
+      }
+
+      removeFile(index) {
+        this.files.splice(index, 1);
+        this.updateFileList();
+        this.hideError();
+      }
+
+      formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+      }
+
+      showError(message) {
+        this.fileError.textContent = message;
+        this.fileError.style.display = 'block';
+      }
+
+      hideError() {
+        this.fileError.style.display = 'none';
+      }
+
+      escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+    }
+
+    customElements.define('contact-form-{{ ai_gen_id }}', ContactForm{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Contact form",
+  "settings": [
+    {
+  "type": "header",
+  "content": "Form layout"
+},
+{
+  "type": "range",
+  "id": "section_padding_top",
+  "label": "Section padding top",
+  "min": 0,
+  "max": 200,
+  "step": 4,
+  "unit": "px",
+  "default": 80
+},
+{
+  "type": "range",
+  "id": "section_padding_bottom",
+  "label": "Section padding bottom",
+  "min": 0,
+  "max": 200,
+  "step": 4,
+  "unit": "px",
+  "default": 80
+},
+{
+  "type": "range",
+  "id": "section_padding_left",
+  "label": "Section padding left",
+  "min": 0,
+  "max": 100,
+  "step": 4,
+  "unit": "px",
+  "default": 24
+},
+{
+  "type": "range",
+  "id": "section_padding_right",
+  "label": "Section padding right",
+  "min": 0,
+  "max": 100,
+  "step": 4,
+  "unit": "px",
+  "default": 24
+},
+{
+  "type": "range",
+  "id": "form_max_width",
+  "label": "Maximum width",
+  "min": 400,
+  "max": 1000,
+  "step": 50,
+  "unit": "px",
+  "default": 700
+},
+
+    {
+      "type": "range",
+      "id": "form_padding",
+      "label": "Padding",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "required_color",
+      "label": "Required asterisk",
+      "default": "#d82c0d"
+    },
+    {
+      "type": "header",
+      "content": "Input fields"
+    },
+    {
+      "type": "color",
+      "id": "input_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "Border",
+      "default": "#dfdfdf"
+    },
+    {
+      "type": "color",
+      "id": "input_hover_background",
+      "label": "Hover background",
+      "default": "#fafafa"
+    },
+    {
+      "type": "color",
+      "id": "input_focus_border_color",
+      "label": "Focus border",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "input_border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "input_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Submit button"
+    },
+    {
+      "type": "text",
+      "id": "submit_button_text",
+      "label": "Button text",
+      "default": "Submit"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Hover background",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "label_font_size",
+      "label": "Label size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "input_font_size",
+      "label": "Input size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Messages"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thank you for contacting us. We'll get back to you as soon as possible."
+    },
+    {
+      "type": "text",
+      "id": "error_heading",
+      "label": "Error heading",
+      "default": "Please correct the following errors:"
+    },
+    {
+      "type": "color",
+      "id": "success_background",
+      "label": "Success background",
+      "default": "#d4edda"
+    },
+    {
+      "type": "color",
+      "id": "success_text_color",
+      "label": "Success text",
+      "default": "#155724"
+    },
+    {
+      "type": "color",
+      "id": "error_background",
+      "label": "Error background",
+      "default": "#f8d7da"
+    },
+    {
+      "type": "color",
+      "id": "error_text_color",
+      "label": "Error text",
+      "default": "#721c24"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact form"
+    }
+  ]
+}
+{% endschema %}

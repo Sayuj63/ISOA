@@ -1,0 +1,193 @@
+{% comment %}Rhode PDP — Consumer study results with animated stat numbers{% endcomment %}
+{%- assign sid = section.id -%}
+<style>
+.rhode-results-{{ sid }} {
+  background-color: {{ section.settings.bg_color }};
+  padding-block: {{ section.settings.padding_top }}px {{ section.settings.padding_bottom }}px;
+}
+.rhode-results-{{ sid }} .rr-inner {
+  max-width: min(
+    calc(var(--page-width, 1200px) - var(--page-margin, 40px) * 2),
+    calc(100% - var(--page-margin, 40px) * 2)
+  );
+  margin-inline: auto;
+}
+.rhode-results-{{ sid }} .rr-section-label {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: {{ section.settings.label_color }};
+  margin: 0 0 52px;
+  display: block;
+  text-align: {{ section.settings.alignment }};
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.rhode-results-{{ sid }}.rr-in .rr-section-label { opacity: 1; transform: none; }
+.rhode-results-{{ sid }} .rr-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid {{ section.settings.divider_color }};
+  border-radius: 16px;
+  overflow: hidden;
+}
+.rhode-results-{{ sid }} .rr-stat {
+  padding: 52px 40px;
+  border-right: 1px solid {{ section.settings.divider_color }};
+  text-align: {{ section.settings.alignment }};
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.72s ease, transform 0.72s ease;
+}
+.rhode-results-{{ sid }} .rr-stat:last-child { border-right: none; }
+.rhode-results-{{ sid }}.rr-in .rr-stat { opacity: 1; transform: none; }
+.rhode-results-{{ sid }}.rr-in .rr-stat:nth-child(1) { transition-delay: 0.06s; }
+.rhode-results-{{ sid }}.rr-in .rr-stat:nth-child(2) { transition-delay: 0.14s; }
+.rhode-results-{{ sid }}.rr-in .rr-stat:nth-child(3) { transition-delay: 0.22s; }
+.rhode-results-{{ sid }} .rr-stat__number {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: clamp(52px, 6.5vw, 88px);
+  font-weight: 300;
+  line-height: 1;
+  color: {{ section.settings.stat_color }};
+  display: block;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+.rhode-results-{{ sid }} .rr-stat__desc {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: 0.06em;
+  color: {{ section.settings.desc_color }};
+  text-transform: uppercase;
+  max-width: 240px;
+  margin-block: 0;
+  {% if section.settings.alignment == 'center' %}margin-inline: auto;{% endif %}
+}
+.rhode-results-{{ sid }} .rr-clinical {
+  margin-top: 48px;
+  padding: 40px;
+  border: 1px solid {{ section.settings.divider_color }};
+  border-radius: 12px;
+  text-align: {{ section.settings.alignment }};
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.65s ease 0.3s, transform 0.65s ease 0.3s;
+}
+.rhode-results-{{ sid }}.rr-in .rr-clinical { opacity: 1; transform: none; }
+.rhode-results-{{ sid }} .rr-clinical__text {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: {{ section.settings.desc_color }};
+  margin: 0;
+  max-width: 580px;
+  {% if section.settings.alignment == 'center' %}margin-inline: auto;{% endif %}
+}
+@media (max-width: 1023px) {
+  .rhode-results-{{ sid }} .rr-stats {
+    grid-template-columns: 1fr;
+    border-radius: 12px;
+  }
+  .rhode-results-{{ sid }} .rr-stat {
+    border-right: none;
+    border-bottom: 1px solid {{ section.settings.divider_color }};
+    padding: 40px 32px;
+  }
+  .rhode-results-{{ sid }} .rr-stat:last-child { border-bottom: none; }
+}
+@media (max-width: 749px) {
+  .rhode-results-{{ sid }} .rr-inner {
+    max-width: calc(100% - var(--page-margin, 16px) * 2);
+  }
+  .rhode-results-{{ sid }} .rr-stat { padding: 36px 24px; }
+  .rhode-results-{{ sid }} .rr-clinical { padding: 28px 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rhode-results-{{ sid }} .rr-section-label,
+  .rhode-results-{{ sid }} .rr-stat,
+  .rhode-results-{{ sid }} .rr-clinical { opacity: 1; transform: none; transition: none; }
+}
+</style>
+
+<div class="rhode-results-{{ sid }}">
+  <div class="rr-inner">
+    {%- if section.settings.section_label != blank -%}
+      <span class="rr-section-label">{{ section.settings.section_label }}</span>
+    {%- endif -%}
+    <div class="rr-stats">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'stat' -%}
+          <div class="rr-stat" {{ block.shopify_attributes }}>
+            <span class="rr-stat__number">{{ block.settings.number }}</span>
+            <p class="rr-stat__desc">{{ block.settings.description }}</p>
+          </div>
+        {%- endif -%}
+      {%- else -%}
+        <div class="rr-stat"><span class="rr-stat__number">100%</span><p class="rr-stat__desc">Agreed it melts into skin and applies smoothly</p></div>
+        <div class="rr-stat"><span class="rr-stat__number">97%</span><p class="rr-stat__desc">Agreed the formula is not heavy or sticky</p></div>
+        <div class="rr-stat"><span class="rr-stat__number">91%</span><p class="rr-stat__desc">Agreed the bronzer feels hydrating</p></div>
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.clinical_text != blank -%}
+      <div class="rr-clinical">
+        <p class="rr-clinical__text">{{ section.settings.clinical_text }}</p>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+(function(){
+  var el = document.querySelector('.rhode-results-{{ sid }}');
+  if (!el) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { el.classList.add('rr-in'); return; }
+  new IntersectionObserver(function(entries, obs){
+    if (entries[0].isIntersecting) { el.classList.add('rr-in'); obs.disconnect(); }
+  }, { threshold: 0.1 }).observe(el);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Rhode — Study Results",
+  "settings": [
+    { "type": "text", "id": "section_label", "label": "Section label", "default": "consumer perception study" },
+    { "type": "select", "id": "alignment", "label": "Alignment", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }], "default": "center" },
+    { "type": "textarea", "id": "clinical_text", "label": "Clinical claim (shown in box below stats)", "default": "Clinically shown to last at least 8 hours upon application. Results based on a 34-subject consumer perception study conducted by an independent testing lab." },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#f1f0ed" },
+    { "type": "color", "id": "divider_color", "label": "Border / divider colour", "default": "#c4c4c4" },
+    { "type": "color", "id": "stat_color", "label": "Stat number colour", "default": "#67645e" },
+    { "type": "color", "id": "desc_color", "label": "Description colour", "default": "#67645e" },
+    { "type": "color", "id": "label_color", "label": "Label colour", "default": "#67645e" },
+    { "type": "range", "id": "padding_top", "min": 24, "max": 160, "step": 8, "label": "Padding top", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "min": 24, "max": 160, "step": 8, "label": "Padding bottom", "default": 80 }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number / percentage", "default": "100%" },
+        { "type": "textarea", "id": "description", "label": "Description (uppercase small text)", "default": "Agreed it melts into skin and applies smoothly" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rhode — Study Results",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "100%", "description": "Agreed it melts into skin and applies smoothly" } },
+        { "type": "stat", "settings": { "number": "97%", "description": "Agreed the formula is not heavy or sticky" } },
+        { "type": "stat", "settings": { "number": "91%", "description": "Agreed the bronzer feels hydrating" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

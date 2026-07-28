@@ -1,0 +1,34 @@
+{% comment %}
+  Rhode PDP — Custom cursor (frosted 120x120 disc following mouse over target sliders).
+{% endcomment %}
+<div class="rh-cursor" data-rh-cursor aria-hidden="true"><span>{{ section.settings.hint }}</span></div>
+
+<script>
+(function(){
+  var el = document.querySelector('[data-rh-cursor]');
+  if (!el) return;
+  var mq = window.matchMedia('(max-width: 749px)');
+  if (mq.matches) return;
+  var targets = document.querySelectorAll({{ section.settings.selectors | json }});
+  if (!targets.length) return;
+  function move(e){ el.style.top = e.clientY + 'px'; el.style.left = e.clientX + 'px'; }
+  function show(){ el.classList.add('is-visible'); document.addEventListener('mousemove', move); }
+  function hide(){ el.classList.remove('is-visible'); document.removeEventListener('mousemove', move); }
+  targets.forEach(function(t){
+    t.addEventListener('mouseenter', show);
+    t.addEventListener('mouseleave', hide);
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Rhode — Custom Cursor",
+  "settings": [
+    { "type": "textarea", "id": "selectors", "label": "Selectors (comma-separated)", "default": ".ss-slider-5, .featured-collection-13, [data-rh-cursor-target]" },
+    { "type": "text", "id": "hint", "label": "Text inside disc", "default": "swipe" }
+  ],
+  "presets": [ { "name": "Rhode — Custom Cursor" } ],
+  "enabled_on": { "templates": ["product"] }
+}
+{% endschema %}

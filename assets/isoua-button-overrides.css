@@ -1,0 +1,207 @@
+/* =============================================================================
+   ISOUA — Site-wide button style unification
+   -----------------------------------------------------------------------------
+   The client (Sayuj) wants every primary CTA across the homepage to use the
+   exact same "OUR VALUES" / "OUR IMPACT" pill button from ss-image-with-text-15
+   (`.isoua-pill-button` defined at ss-image-with-text-15.liquid:293-327).
+
+   Reference style (taken verbatim from that file):
+     padding:        14px 32px        desktop / 12px 24px mobile
+     border:         1px solid #67645e
+     border-radius:  999px            (full pill)
+     background:     transparent      → #67645e on :hover
+     color:          #67645e          → #ffffff on :hover
+     font-size:      14px desktop     / 13px mobile
+     font-weight:    600
+     letter-spacing: 1px
+     text-transform: uppercase
+     transition:     all 0.3s ease
+
+   Sections this applies to (homepage):
+     - Hero (#1 and #2)              .hero a.button-secondary, .hero a.button
+     - ss-image-with-text             a[class*="image-with-button-"]
+     - ss-featured-collection-6       [class*="collection-button-"]   (SHOP NOW)
+     - ss-featured-collection-13      [class*="featured-product-button-"]  (SHOP NOW)
+     - ss-slider-5                    [class*="slider-button-"]       (VIEW ALL)
+     - ss-image-with-text-15          .isoua-pill-button  (REFERENCE — left alone)
+
+   What we intentionally DO NOT override (per-section behaviour preserved):
+     - position / bottom / left / transform        — collection-6 hover-slide-up
+     - width (when section sets calc()/100%)        — collection-6 absolute fill
+     - margin-top                                   — section-defined stacking
+     - SVG arrows in button markup                  — schema-controlled, just recoloured
+     - font-family                                  — every section already sets
+                                                       josefin_sans_n4 via schema
+
+   Specificity strategy:
+     - All selectors are >= 2 classes (0,0,2,0) to beat any single-class rule in
+       section {% stylesheet %} blocks (0,0,1,0).
+     - `!important` is added to every property because several sections set their
+       button colours / borders with `!important` from editor schema values.
+     - Loaded via snippets/stylesheets.liquid AFTER main.css so cascade order is
+       on our side. -vamshi
+   ============================================================================= */
+
+/* -------------------------------------------------------------------
+   Default state (desktop = mobile-first base)
+   Values mirror the EFFECTIVE OUR VALUES button (.isoua-pill-button + the
+   per-section scoped override at ss-image-with-text-15.liquid:580-595 with
+   schema defaults). 2026-06-02 client ask: every section button must be
+   bit-identical to OUR VALUES. -vamshi
+   ------------------------------------------------------------------- */
+.shopify-section .hero a.button,
+.shopify-section .hero a.button-secondary,
+.shopify-section a[class*="image-with-button-"],
+.shopify-section [class*="collection-button-"],
+.shopify-section [class*="featured-product-button-"],
+.shopify-section [class*="slider-button-"] {
+  padding: 12px 32px !important;
+  border: 1px solid #67645e !important;
+  border-radius: 999px !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  color: #67645e !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  text-decoration-color: transparent !important;
+  transition: all 0.3s ease !important;
+  /* Kill theme's shadow-based border on .button-secondary (base.css:1294 in root) */
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+/* Inner text wrapper used by ss-image-with-text (per-block <p> inside the <a>) and
+   by ss-slider-5 (inner <span>) — make sure they inherit and don't fight. */
+.shopify-section .hero a.button .button-text,
+.shopify-section .hero a.button-secondary .button-text,
+.shopify-section a[class*="image-with-button-"] *,
+.shopify-section [class*="collection-button-"] *,
+.shopify-section [class*="featured-product-button-"] *,
+.shopify-section [class*="slider-button-"] span {
+  color: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  letter-spacing: inherit !important;
+  text-transform: inherit !important;
+  background: transparent !important;
+}
+
+/* Recolour any inline SVG icon (slider-5 VIEW ALL arrow, etc.) to match text */
+.shopify-section .hero a.button svg path,
+.shopify-section .hero a.button-secondary svg path,
+.shopify-section a[class*="image-with-button-"] svg path,
+.shopify-section [class*="collection-button-"] svg path,
+.shopify-section [class*="featured-product-button-"] svg path,
+.shopify-section [class*="slider-button-"] svg path {
+  fill: #67645e !important;
+  transition: fill 0.3s ease !important;
+}
+
+/* -------------------------------------------------------------------
+   Hover — flip to filled brown with white text
+   ------------------------------------------------------------------- */
+.shopify-section .hero a.button:hover,
+.shopify-section .hero a.button-secondary:hover,
+.shopify-section a[class*="image-with-button-"]:hover,
+.shopify-section [class*="collection-button-"]:hover,
+.shopify-section [class*="featured-product-button-"]:hover,
+.shopify-section [class*="slider-button-"]:hover {
+  background-color: #67645e !important;
+  background-image: none !important;
+  color: #ffffff !important;
+  border-color: #67645e !important;
+}
+
+/* Also flip SVG arrow on hover */
+.shopify-section .hero a.button:hover svg path,
+.shopify-section .hero a.button-secondary:hover svg path,
+.shopify-section a[class*="image-with-button-"]:hover svg path,
+.shopify-section [class*="collection-button-"]:hover svg path,
+.shopify-section [class*="featured-product-button-"]:hover svg path,
+.shopify-section [class*="slider-button-"]:hover svg path {
+  fill: #ffffff !important;
+}
+
+/* Hover state inner text on collection-6's hover-revealed SHOP NOW button —
+   collection-slide hover triggers the slide-up of [class*="collection-button-"]
+   so we need to flip its inner colour too when the SLIDE is hovered (not just
+   the button). */
+.shopify-section [class*="collection-slide-"]:hover [class*="collection-button-"] {
+  background-color: #67645e !important;
+  color: #ffffff !important;
+  border-color: #67645e !important;
+}
+
+.shopify-section [class*="collection-slide-"]:hover [class*="collection-button-"] svg path {
+  fill: #ffffff !important;
+}
+
+/* Rhode-parity slide-up timing. The site-wide button base (line 71) sets
+   `transition: all 0.3s ease !important` for colour flips. For CTAs that live
+   inside a `collection-slide` and reveal via `bottom` on card hover, we need
+   the `bottom` axis to animate slower to match the 0.7s image crossfade.
+   Colour/background/border keep the 0.3s ease flip. */
+.shopify-section [class*="collection-slide-"] [class*="collection-button-"] {
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, bottom .7s cubic-bezier(.76,0,.24,1) !important;
+}
+
+/* -------------------------------------------------------------------
+   Mobile (max-width: 768px) — matches OUR VALUES mobile schema:
+   pill_button_padding_vertical_mobile: 10, pill_button_padding_horizontal_mobile: 28,
+   pill_button_size_mobile: 13.
+   ------------------------------------------------------------------- */
+@media screen and (max-width: 768px) {
+  .shopify-section .hero a.button,
+  .shopify-section .hero a.button-secondary,
+  .shopify-section a[class*="image-with-button-"],
+  .shopify-section [class*="collection-button-"],
+  .shopify-section [class*="featured-product-button-"],
+  .shopify-section [class*="slider-button-"] {
+    padding: 10px 28px !important;
+    font-size: 13px !important;
+  }
+}
+
+/* Uniform mobile heading size across Terms + Contact to match FAQ.
+   Terms h1 renders at 44px + Contact h1 at 38px by default — shrink both to
+   ~24px on <=749px so all three pages read at the same scale. Top spacing
+   is left alone; both pages already sit at ~150-168px below the header. */
+@media screen and (max-width: 749px) {
+  body.page-terms-of-service h1,
+  body.page-terms-of-service .rte h1,
+  body.page-contact-us h1,
+  body.page-contact-us [class*="contact-form-heading"] {
+    font-size: 24px !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.01em !important;
+    margin-bottom: 16px !important;
+  }
+}
+
+/* =============================================================================
+   ISOUA — Kill the italic heading font site-wide.
+   -----------------------------------------------------------------------------
+   Horizon's default heading font (Inter Italic 800) renders every H1/H2/H3
+   as italic via `font-style: var(--font-h*--style)`, where each of those
+   variables inherits from `--font-heading--style`, which is fed by the theme
+   setting `type_heading_font.style` (currently italic). Overriding at the
+   CSS-variable level means every h1-h6 across the site (FAQ, About, product
+   pages, etc.) renders upright without touching the Shopify setting. -vamshi
+   ========================================================================== */
+:root,
+body {
+  --font-heading--style: normal;
+  --font-h1--style: normal;
+  --font-h2--style: normal;
+  --font-h3--style: normal;
+  --font-h4--style: normal;
+  --font-h5--style: normal;
+  --font-h6--style: normal;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-style: normal;
+}

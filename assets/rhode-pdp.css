@@ -1,0 +1,865 @@
+/* Rhode PDP — equal-height columns + thumbnail-overlay.
+   Loaded on product.rhode-product-page and product.spotwear-pdp via theme.liquid. */
+
+.product-information {
+  /* Row height. Below the header height, viewport-relative, but clamped so it
+     never grows past 820 or shrinks under 560. spotwear-pdp overrides this via
+     section custom_css. */
+  --rhode-pdp-h: clamp(560px, calc(100vh - var(--header-height, 96px) - 120px), 820px);
+}
+
+/* PDP hero — pill width + 16px column gap. Snaps to the same rail as every other
+   section on the template so the left edge of the image and the right edge of the
+   details card land on the SS-header-1 pill edges. The 4-column subgrid Horizon
+   ships (margin | media | details | margin) is replaced with a 2-column 1fr 1fr
+   grid so the section can share the pill formula. Loaded only on product.rhode-
+   product-page (via theme.liquid conditional). -vamshi */
+@media screen and (min-width: 750px) {
+  main#MainContent > .shopify-section > .product-information {
+    max-width: min(
+      calc(var(--page-width, 1440px) - var(--page-margin, 40px) * 2),
+      calc(100% - var(--page-margin, 40px) * 2)
+    );
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  main#MainContent .product-information__grid--half {
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 16px;
+  }
+
+  main#MainContent .product-information__grid--half .product-information__media,
+  main#MainContent .product-information__grid--half .product-details {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    grid-column: auto;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  /* Lock the grid's single row to --rhode-pdp-h so both columns get a definite height.
+     Without this, grid-template-rows is auto and height:100% on descendants never resolves. */
+  .product-information__grid--half {
+    grid-template-rows: var(--rhode-pdp-h) !important;
+    align-items: stretch;
+  }
+
+  /* ── Left: image column ── */
+  .product-information__grid--half .product-information__media {
+    position: relative !important;
+    overflow: hidden !important;
+    display: block !important;
+  }
+
+  /* media-gallery absolutely fills the column — avoids the percentage-height chain issue
+     through custom elements that have no explicit height. */
+  .product-information__grid--half .product-information__media media-gallery {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    display: block !important;
+  }
+
+  /* Custom elements default to display:inline — override and fill the gallery bounds */
+  .product-information__grid--half .product-information__media slideshow-component {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    position: relative !important;
+  }
+
+  .product-information__grid--half .product-information__media slideshow-container,
+  .product-information__grid--half .product-information__media slideshow-slides {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* slideshow-slide: flex item in slideshow-slides, must have definite height */
+  .product-information__grid--half .product-information__media slideshow-slide {
+    height: 100% !important;
+  }
+
+  /* product-media-constraint-wrapper only exists when constrain_to_viewport=true;
+     included here in case that setting changes. */
+  .product-information__grid--half .product-information__media .product-media-constraint-wrapper {
+    width: 100% !important;
+    height: 100% !important;
+    padding-bottom: 0 !important;
+    aspect-ratio: unset !important;
+  }
+
+  /* Cancel the 1/1.15 aspect-ratio that base.css enforces via --gallery-aspect-ratio */
+  .product-information__grid--half .product-information__media .product-media-container {
+    width: 100% !important;
+    height: 100% !important;
+    aspect-ratio: unset !important;
+  }
+
+  .product-information__grid--half .product-information__media .product-media-container img,
+  .product-information__grid--half .product-information__media .product-media-container video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    aspect-ratio: unset !important;
+    max-height: none !important;
+  }
+
+  /* ── Right: details column — locked to the row height, internal scroll on overflow ──
+     Two rules working together:
+     - `min-height: 0` overrides the grid item's default `min-height: auto` so the
+       row height (--rhode-pdp-h) is the actual cap when content is long. Without
+       it the details would grow to fit content and bleed into the next section.
+     - `height: 100%` forces the details to fill the row height even when content
+       is SHORT, so the card matches the image column height in both directions.
+     Combined: fixed height = row height, scroll internally when content > height. */
+  /* Two rules together lock the details column to the row height:
+     - `.product-details` gets align-self: stretch + height: 100% so the grid
+       item itself fills the row.
+     - `.product-details > .group-block` (Horizon's inner wrapper that actually
+       carries the color-scheme background) is forced to inherit that height,
+       otherwise the block stylesheet at blocks/_product-details.liquid:55-57
+       leaves it at `height: min-content` and the grey card visually collapses
+       to content height even though the outer .product-details is stretched.
+     Scrollbar goes on the group-block since that's the element that renders
+     the visible background. */
+  .product-information__grid--half .product-details {
+    min-height: 0 !important;
+    height: 100% !important;
+    align-self: stretch !important;
+    display: block !important;
+    border-radius: 10px;
+  }
+
+  .product-information__grid--half .product-details > .group-block {
+    height: 100% !important;
+    min-height: 100% !important;
+    align-self: stretch !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
+    border-radius: inherit;
+  }
+
+  .product-information__grid--half .product-information__media {
+    height: 100% !important;
+    align-self: stretch !important;
+    border-radius: 10px;
+  }
+
+  /* ── Thumbnail strip: absolute bottom-left corner of the image column ── */
+  .product-information__grid--half .product-information__media slideshow-controls[thumbnails] {
+    position: absolute !important;
+    left: 20px !important;
+    right: auto !important;
+    bottom: 24px !important;
+    top: auto !important;
+    width: auto !important;
+    max-width: none !important;
+    z-index: 4;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    min-height: 0 !important;
+  }
+
+  .product-information__grid--half .product-information__media slideshow-controls[thumbnails] .slideshow-controls__thumbnails-container {
+    padding: 0 !important;
+    overflow: visible !important;
+    width: auto !important;
+    max-height: none !important;
+  }
+
+  .product-information__grid--half .product-information__media slideshow-controls[thumbnails] .slideshow-controls__thumbnails {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    align-items: flex-start !important;
+    margin-inline: 0 !important;
+    padding-inline: 0 !important;
+    padding-block: 0 !important;
+    width: auto !important;
+  }
+
+  .product-information__grid--half .product-information__media slideshow-controls[thumbnails] .slideshow-controls__thumbnail {
+    width: 56px !important;
+    height: 56px !important;
+    flex: 0 0 56px;
+    padding: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    border: 1.5px solid transparent;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .product-information__grid--half .product-information__media slideshow-controls[thumbnails] .slideshow-controls__thumbnail img,
+  .product-information__grid--half .product-information__media slideshow-controls[thumbnails] .slideshow-controls__thumbnail video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+  }
+
+  .product-information__grid--half .product-information__media slideshow-controls[thumbnails] .slideshow-controls__thumbnail[aria-selected='true'] {
+    border-color: rgba(255, 255, 255, 0.95);
+    transform: scale(1.04);
+  }
+}
+
+@media screen and (max-width: 749px) {
+  /* Mobile hero image radius — match desktop's 10px rounding (line 148-152).
+     Both the wrapper AND the child img/video get the radius: the wrapper needs
+     overflow: hidden so the child image can't paint over the rounded corners,
+     and the img itself gets border-radius so if the wrapper's overflow is ever
+     unset elsewhere the corners still render. -vamshi */
+  .product-information__grid--half .product-information__media {
+    border-radius: 10px !important;
+    overflow: hidden !important;
+  }
+
+  .product-information__grid--half .product-information__media .product-media-container,
+  .product-information__grid--half .product-information__media .product-media-container img,
+  .product-information__grid--half .product-information__media .product-media-container video,
+  .product-information__grid--half .product-information__media slideshow-slide img,
+  .product-information__grid--half .product-information__media slideshow-slide video {
+    border-radius: 10px !important;
+  }
+
+  .product-information__grid--half .product-information__media slideshow-controls[thumbnails] {
+    position: absolute !important;
+    left: 12px !important;
+    right: auto !important;
+    bottom: 12px !important;
+    top: auto !important;
+    width: auto !important;
+    max-width: none !important;
+    z-index: 4;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    min-height: 0 !important;
+  }
+
+  .product-information__grid--half .product-information__media slideshow-controls[thumbnails] .slideshow-controls__thumbnails-container {
+    padding: 0 !important;
+    overflow: visible !important;
+    width: auto !important;
+    max-height: none !important;
+  }
+
+  .product-information__grid--half .product-information__media slideshow-controls[thumbnails] .slideshow-controls__thumbnails {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    align-items: flex-start !important;
+    margin-inline: 0 !important;
+    padding-inline: 0 !important;
+    padding-block: 0 !important;
+    width: auto !important;
+  }
+
+  .product-information__grid--half .product-information__media slideshow-controls[thumbnails] .slideshow-controls__thumbnail {
+    width: 44px !important;
+    height: 44px !important;
+    flex: 0 0 44px;
+    padding: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+    border: 1.5px solid transparent;
+  }
+
+  .product-information__grid--half .product-information__media slideshow-controls[thumbnails] .slideshow-controls__thumbnail img,
+  .product-information__grid--half .product-information__media slideshow-controls[thumbnails] .slideshow-controls__thumbnail video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+  }
+
+  .product-information__grid--half .product-information__media slideshow-controls[thumbnails] .slideshow-controls__thumbnail[aria-selected='true'] {
+    border-color: rgba(255, 255, 255, 0.95);
+  }
+}
+
+/* ==========================================================================
+   PDP-only: force every section's inner wrapper to the SS-header-1 pill width
+   and standardize the image/text column gap. Symmetry is the primary rule —
+   every section's left/right edges land on the exact same rail, and the gap
+   between the image column and the content column is the same everywhere. -vamshi
+   ========================================================================== */
+
+main#MainContent {
+  --rhode-pill: min(
+    calc(var(--page-width, 1440px) - var(--page-margin, 40px) * 2),
+    calc(100% - var(--page-margin, 40px) * 2)
+  );
+  --rhode-gap: 16px;
+}
+
+@media (min-width: 750px) {
+  /* ─── Width rail — every direct section wrapper snaps to the pill ─── */
+
+  /* ss-featured-products-4 — "Application" slider. */
+  main#MainContent [class^="section-ss_featured_products_4_"][class$="-settings"],
+  main#MainContent [class*=" section-ss_featured_products_4_"][class$="-settings"] {
+    width: var(--rhode-pill) !important;
+    max-width: var(--rhode-pill) !important;
+    margin-inline: auto !important;
+    box-sizing: border-box;
+  }
+
+  /* ss-packaging — the outer `.packaging-{id}` already applies
+     `padding-inline: 40px` (its `padding_side` setting), so its content area is
+     exactly the pill width. The `.packaging-wrapper` inherits that via
+     `width: 100%`. Do NOT re-apply the pill min() formula here — that would
+     subtract another 80px and shrink the wrapper to 1280 inside a 1360 area. */
+
+  /* ss-whats-inside — ingredient list section: extend both sides to the rail. */
+  main#MainContent .ss-whats-inside-inner {
+    max-width: var(--rhode-pill) !important;
+    margin-inline: auto !important;
+    box-sizing: border-box;
+  }
+  main#MainContent [class^="ss-whats-inside-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* ss-featured-collection-13 — the spot-selector was rendering slightly wider
+     than the header pill; force it to the exact rail. */
+  main#MainContent [class^="section-ss_featured_collection_13_"][class$="-settings"],
+  main#MainContent [class*=" section-ss_featured_collection_13_"][class$="-settings"] {
+    max-width: var(--rhode-pill) !important;
+    margin-inline: auto !important;
+    box-sizing: border-box;
+  }
+
+  /* section.liquid (Horizon's built-in `.section--page-width`) escapes the theme's
+     3-column subgrid (--full-page-grid-margin | --full-page-grid-central-column-width
+     | --full-page-grid-margin) and lands on the SS-header-1 pill rail directly.
+     Same visual pattern as ss-image-with-text-15's inner .section-{id}-settings. */
+  main#MainContent .section--page-width {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+    max-width: var(--rhode-pill) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box;
+  }
+  main#MainContent .section--page-width > * {
+    grid-column: 1 / -1 !important;
+  }
+  main#MainContent .section-background {
+    max-width: var(--rhode-pill) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* section.liquid instances with content_direction:row (hydrocolloid section).
+     Horizon renders the row as a flex, but the image-block is aspect-ratio
+     locked (1/1) which prevents `flex: 1 1 0` from actually giving it half the
+     row — it caps at its square height and the group-block eats the rest.
+     Switch the row to CSS grid with `1fr 1fr` so both columns get exactly half
+     the row minus the 16px gap, regardless of intrinsic aspect ratios. Also
+     hide the class-less empty custom-liquid ghost div so it doesn't consume a
+     grid cell. */
+  main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px !important;
+    align-items: stretch !important;
+    /* Give the row a minimum height so the image doesn't collapse when the
+       text card is short. Matches the row height when the image was still
+       driving the layout via its 1:1 aspect ratio (~639px on desktop). */
+    min-height: 620px;
+  }
+  main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > div:not([class]),
+  main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > div[class=""] {
+    display: none !important;
+  }
+  main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > .image-block,
+  main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > .group-block {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+  /* Break the image's aspect-ratio lock so it fills the grid cell height. */
+  main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > .image-block img {
+    aspect-ratio: unset !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  /* Any section whose direct wrapper still overflows past the rail. */
+  main#MainContent > .shopify-section > .section > .section-inner {
+    max-width: var(--rhode-pill) !important;
+    margin-inline: auto !important;
+  }
+
+  /* ─── Column gap — every image/text split uses --rhode-gap ─── */
+
+  main#MainContent [class^="featured-body-"],
+  main#MainContent [class*=" featured-body-"],
+  main#MainContent [class^="feature-grid-"],
+  main#MainContent [class*=" feature-grid-"],
+  main#MainContent [class^="image-with-body-"],
+  main#MainContent [class*=" image-with-body-"],
+  main#MainContent .ss-whats-inside-inner {
+    gap: var(--rhode-gap) !important;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────
+     ss-featured-products-4 — "Application" slider Rhode-style cleanup.
+     Ship-defaults show all three slide titles stacked with the active one
+     bold + "SHOP NOW" + "EXPLORE THE FULL RANGE" buttons + a numeric "1/3"
+     pagination on the image. Rhode's reference is minimal: thumbnails top,
+     one active step (01/02/03) with description text and a circular arrow
+     button next to it, big image on the right — no buttons, no pagination
+     text, no stacked inactive titles.
+     ───────────────────────────────────────────────────────────────── */
+
+  /* Hide inactive slide titles — only show the active step's text. */
+  main#MainContent [class^="featured-title-desktop-"]:not(.active),
+  main#MainContent [class*=" featured-title-desktop-"]:not(.active) {
+    display: none !important;
+  }
+
+  /* Inject "(01)" / "(02)" / "(03)" prefix on the active title via CSS counter. */
+  main#MainContent [class^="featured-titles-"],
+  main#MainContent [class*=" featured-titles-"] {
+    counter-reset: rh-step;
+  }
+  main#MainContent [class^="featured-title-desktop-"],
+  main#MainContent [class*=" featured-title-desktop-"] {
+    counter-increment: rh-step;
+    color: #67645e !important;
+    font-weight: 400 !important;
+    font-size: 26px !important;
+    line-height: 1.25 !important;
+  }
+  main#MainContent [class^="featured-title-desktop-"]::before,
+  main#MainContent [class*=" featured-title-desktop-"]::before {
+    content: "(0" counter(rh-step) ")";
+    display: inline;
+    margin-right: 10px;
+    font-size: 13px;
+    color: #7b7872;
+    vertical-align: 8px;
+  }
+
+  /* Hide the numeric pagination text ("1/3") on the image column — Rhode uses
+     only dot indicators over the image, not a text counter. */
+  main#MainContent [class^="featured-pagination-"],
+  main#MainContent [class*=" featured-pagination-"] {
+    display: none !important;
+  }
+
+  /* Hide the "EXPLORE THE FULL RANGE" outline button + any Shop-now button. */
+  main#MainContent [class^="featured-buttons-"] > [class^="featured-button-"],
+  main#MainContent [class^="featured-shop-button-"] {
+    display: none !important;
+  }
+
+  /* Style the small APPLICATION label (from the `text_htaA33` block) — sits
+     above the step title as a small caps eyebrow. */
+  main#MainContent [class^="featured-text-"] p,
+  main#MainContent [class*=" featured-text-"] p {
+    margin: 0 0 12px !important;
+    font-size: 13px !important;
+    letter-spacing: 1.4px !important;
+    text-transform: uppercase;
+    color: #67645e !important;
+    font-weight: 700 !important;
+  }
+
+  /* Move the arrow prev/next controls next to the title text on the left,
+     out of the bottom-of-image slider-controls row. */
+  main#MainContent [class^="featured-buttons-"],
+  main#MainContent [class*=" featured-buttons-"] {
+    display: flex !important;
+    gap: 12px !important;
+    align-items: center !important;
+    margin-top: 20px !important;
+    justify-content: flex-start !important;
+  }
+
+  /* Mobile static-images block is mobile-only. Suppress on desktop; the
+     per-slide swiper image handles desktop imagery. */
+  main#MainContent [class^="featured-mobile-static-"] {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   SECTION GAP UNIFICATION — every visible section-to-section transition on
+   the PDP renders with the SAME visual gap. Each section wrapper gets its
+   top+bottom padding zeroed so all vertical spacing is driven by a single
+   margin-top rule on `.shopify-section + .shopify-section`.
+
+   Excluded automatically: the hero (uses `.product-information`, not
+   `.section-*-settings`) and the sticky ATC (position: fixed, out of flow).
+   ========================================================================== */
+
+@media (min-width: 750px) {
+  main#MainContent > .shopify-section > div,
+  main#MainContent > .shopify-section > section:not(.rh-otg),
+  main#MainContent [class^="section-"][class$="-settings"],
+  main#MainContent > .shopify-section > .section--page-width > .section-background,
+  main#MainContent [class^="packaging-"]:not(.packaging-wrapper) {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  main#MainContent > .shopify-section {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  main#MainContent > .shopify-section + .shopify-section {
+    margin-top: 48px !important;
+  }
+}
+
+@media (max-width: 749px) {
+  main#MainContent > .shopify-section > div,
+  main#MainContent > .shopify-section > section:not(.rh-otg),
+  main#MainContent [class^="section-"][class$="-settings"],
+  main#MainContent > .shopify-section > .section--page-width > .section-background,
+  main#MainContent [class^="packaging-"]:not(.packaging-wrapper) {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  main#MainContent > .shopify-section {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  main#MainContent > .shopify-section + .shopify-section {
+    margin-top: 32px !important;
+  }
+}
+
+/* Canonical internal top/bot padding for the two grey (#f1f0ed) pill sections.
+   Reasserts a uniform 32px after the zero-out above neutralizes per-section
+   padding-block. ss-slider-5 already declares 32 in its liquid (line 800-806)
+   but was being zeroed; ss-targetting-animation was rendering at 8. Both now
+   match. Left/right left to each section (columns require different insets). */
+main#MainContent [class*="ss_slider_5"][class$="-settings"],
+main#MainContent .rh-benefits__container {
+  padding-block: 32px !important;
+}
+
+/* ==========================================================================
+   MOBILE polish — PDP layout below 750px.
+   Two priorities on mobile:
+   1. Clip any horizontal overflow (mostly the header's off-canvas menu drawer
+      which is sized for desktop even when closed on mobile — leaves a 200px
+      horizontal scroll otherwise).
+   2. Prevent split-column sections from breaking the viewport when Horizon's
+      default 2-col grid tries to render at desktop widths on tight screens.
+   ========================================================================== */
+
+@media (max-width: 749px) {
+  /* 1 · Global overflow safety.
+     The ss-header-1 mobile menu drawer + a couple of Horizon subgrid rows can
+     compute widths larger than the viewport (they're built for a desktop grid).
+     `overflow-x: hidden` on html + body prevents horizontal scroll page-wide
+     without affecting sticky/fixed positioning. */
+  html, body {
+    overflow-x: hidden;
+  }
+  main#MainContent {
+    overflow-x: clip;
+  }
+
+  /* 2 · rhode-pdp-on-the-go — the 88px nav circles at 20px gap don't fit five
+     across 390px viewport (5×88 + 4×20 = 520px). Shrink and tighten on mobile. */
+  [id^="rh-otg-"] .rh-otg__nav {
+    gap: 10px !important;
+  }
+  [id^="rh-otg-"] .rh-otg__circle {
+    width: 52px !important;
+    height: 52px !important;
+    font-size: 13px !important;
+  }
+
+  /* 3 · rhode-sticky-atc — tighten padding, drop the swatch strip if content
+     starts to wrap. Title font already shrinks (11px) via the section's own
+     mobile @media. Also cap the CTA width so it doesn't overrun the bar. */
+  [class*="rhode-satc-"] {
+    padding: 8px 12px !important;
+  }
+  [class*="rhode-satc-"] .rs-cta {
+    padding: 10px 16px !important;
+    font-size: 11px !important;
+  }
+  [class*="rhode-satc-"] .rs-title {
+    max-width: 40vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* 4 · Hydrocolloid section (`section.liquid` with content_direction:row) —
+     force stack on mobile. My desktop rule sets `display: grid` on the row;
+     mobile needs `display: flex; flex-direction: column` so image is on top,
+     text card below. */
+  main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+  main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > .image-block,
+  main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > .group-block {
+    width: 100% !important;
+    flex: 0 0 auto !important;
+  }
+
+  /* 5 · Hero (product-information) — release the desktop height lock so image
+     and details stack naturally instead of squeezing into a 620px row. */
+  .product-information__grid--half .product-details,
+  .product-information__grid--half .product-information__media {
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    align-self: auto !important;
+  }
+  .product-information__grid--half .product-details > .group-block {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* 5.5 · Container pill alignment on mobile — the desktop rule at
+     min-width:750 doesn't cascade. --page-margin resolves to 16px via
+     base.css:330, so this places the container at left=16, right=374 in a
+     390 viewport (matches every other section's mobile pill). */
+  main#MainContent > .shopify-section > .product-information {
+    max-width: min(
+      calc(var(--page-width, 1440px) - var(--page-margin, 16px) * 2),
+      calc(100% - var(--page-margin, 16px) * 2)
+    );
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* 5.6 · Escape Horizon's subgrid on mobile. .product-information__grid
+     inherits `grid-template-columns: subgrid` from the parent's 3-track
+     `16px 326px 16px`, which collapses the media column to 0px. Force flex
+     column so media stacks above details, each at full pill width. */
+  main#MainContent .product-information__grid,
+  main#MainContent .product-information__grid--half {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: none !important;
+    grid-template-rows: none !important;
+    gap: 16px !important;
+    align-items: stretch !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  main#MainContent .product-information__grid > .product-information__media,
+  main#MainContent .product-information__grid > .product-details,
+  main#MainContent .product-information__grid--half > .product-information__media,
+  main#MainContent .product-information__grid--half > .product-details {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    grid-column: auto !important;
+  }
+
+  /* 5.7 · Product title h1 — Rhode's spotwear on mobile reads ~30px greyish,
+     not 40px black. Direct .text-block child of the OUTER .group-block content;
+     the nested subheading group is deeper so it's excluded by the `>` combinators. */
+  main#MainContent .product-details > .group-block > .group-block-content > .text-block > h1 {
+    font-size: 30px !important;
+    font-weight: 700 !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.4px !important;
+    color: #67645e !important;
+    margin-bottom: 6px !important;
+    text-transform: none !important;
+  }
+
+  /* 5.8 · Subheading h1 "Designed with Justin Bieber" — sits inside a
+     NESTED .group-block (row with rating). Style as Rhode's eyebrow: 14px
+     bold uppercase with 0.3px tracking. `.group-block .group-block` catches
+     only the nested-inside-outer case, so the title h1 is unaffected. */
+  main#MainContent .product-details .group-block .group-block .text-block > h1 {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.3px !important;
+    line-height: 1.3 !important;
+    margin: 0 !important;
+  }
+
+  /* 5.9 · Rating h2 in the nested subheading group — align to eyebrow row
+     baseline. Weight 500 to differentiate from the bold subheading. */
+  main#MainContent .product-details .group-block .group-block .text-block > h2 {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    line-height: 1.3 !important;
+    letter-spacing: 0.2px !important;
+    margin: 0 !important;
+  }
+
+  /* 6 · Hide the "1/3" numeric pagination on ss-featured-products-4 on mobile
+     too (my desktop rule was scoped inside min-width:750). Rhode never shows
+     the numeric counter — dots only. */
+  main#MainContent [class^="featured-pagination-"],
+  main#MainContent [class*=" featured-pagination-"],
+  main#MainContent [class^="featured-buttons-"] > [class^="featured-button-"],
+  main#MainContent [class^="featured-shop-button-"] {
+    display: none !important;
+  }
+  /* Also hide inactive titles on mobile (desktop rule was scoped). */
+  main#MainContent [class^="featured-title-desktop-"]:not(.active),
+  main#MainContent [class*=" featured-title-desktop-"]:not(.active) {
+    display: none !important;
+  }
+
+  /* 7 · rhode-pdp-on-the-go — release the 480px card min-height on mobile;
+     card should size to content when stacked. */
+  [id^="rh-otg-"] .rh-otg__card {
+    min-height: 0 !important;
+    padding: 20px !important;
+  }
+  [id^="rh-otg-"] .rh-otg__body {
+    min-height: 100px !important;
+  }
+
+  /* 7.5 · rhode-pdp-on-the-go title — hardcoded 32px in the section liquid.
+     Match Rhode's 23px Swiss on mobile. */
+  [id^="rh-otg-"] .rh-otg__title {
+    font-size: 23px !important;
+    font-weight: 400 !important;
+    line-height: 1.15 !important;
+  }
+
+  /* 7.6 · Hydrocolloid section (`section.liquid` inside a Horizon section--
+     page-width). Its heading blocks render as h1/h2/h3 at Horizon's default
+     mobile sizing. Match Rhode's 22px lowercase display for "how it works /
+     why we love it". */
+  main#MainContent .section--page-width .section-content-wrapper :is(h1, h2, h3) {
+    font-size: 22px !important;
+    font-weight: 400 !important;
+    line-height: 1.15 !important;
+  }
+
+  /* 8 · Hydrocolloid section — the spotwear-ingredients illustration reads
+     as empty grey on mobile because the image is light-on-light and adds no
+     value stacked above the text card. Hide it on mobile; desktop still
+     shows the two-column image + text layout. */
+  main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > .image-block {
+    display: none !important;
+  }
+  /* Kill any Horizon phantom class-less div that slips into the flex row on
+     mobile — same defensive rule as the desktop counterpart at :374. */
+  main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > div:not([class]) {
+    display: none !important;
+  }
+
+  /* 9 · ss-targetting-animation (smaller/flatter/less red) — grid stacks to
+     1 column on mobile via base rule, and my desktop min-height:620 doesn't
+     leak. Just tighten the pill padding on mobile so it doesn't waste
+     vertical space. */
+  [id^="benefits-"] .rh-benefits__container {
+    padding: 12px !important;
+  }
+  [id^="benefits-"] .rh-media {
+    min-height: 280px !important;
+  }
+
+  /* 10 · ss-image-split-row — heading→first-row gap. Section liquid hardcodes
+     `.feature-heading { margin-bottom: 40px }` + adds 20px list padding-top,
+     giving a 60px gap on mobile. Rhode's is 28px. Trim both to match. */
+  main#MainContent [class^="feature-heading-"] {
+    margin-bottom: 20px !important;
+  }
+  main#MainContent [class^="feature-list-"] {
+    padding-top: 8px !important;
+  }
+
+  /* 11 · ss-featured-products-4 — mobile step title. Section CSS hardcodes
+     `.featured-title font-weight: 700` producing chunky bold. Rhode's
+     equivalent is 26.38px w400. Override weight (size handled via JSON). */
+  main#MainContent [class^="featured-title-"] {
+    font-weight: 400 !important;
+  }
+
+  /* 11.05 · Application section mobile layout — Rhode stacks 2 thumbnails
+     + 1 main image ABOVE the APPLICATION eyebrow + step swiper. The
+     per-slide image is hidden on mobile because the imagery is now static
+     above the swiper (see .featured-mobile-static-{id} in the liquid). */
+  main#MainContent [class^="featured-mobile-static-"] {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  main#MainContent [class^="featured-mobile-thumbs-"] {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  main#MainContent [class^="featured-mobile-thumb-"] {
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #f1f0ed;
+  }
+  main#MainContent [class^="featured-mobile-thumb-"] img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  main#MainContent [class^="featured-mobile-main-"] {
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #f1f0ed;
+  }
+  main#MainContent [class^="featured-mobile-main-"] img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  /* Hide per-slide image container on mobile (imagery now sits in the
+     static block above; per-slide only needs to hold text + arrow). */
+  main#MainContent [class^="featured-slide-image-"] {
+    display: none !important;
+  }
+
+  /* 11.1 · APPLICATION eyebrow — desktop rule at line ~462 wasn't scoped for
+     mobile. Match Rhode's 14px w700 with 0.28px letter-spacing on mobile. */
+  main#MainContent [class^="featured-text-"] p,
+  main#MainContent [class*=" featured-text-"] p {
+    margin: 0 0 12px !important;
+    font-size: 14px !important;
+    letter-spacing: 0.3px !important;
+    text-transform: uppercase !important;
+    color: #67645e !important;
+    font-weight: 700 !important;
+  }
+}

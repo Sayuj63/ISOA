@@ -1,0 +1,364 @@
+{% comment %}Rhode PDP — Application steps: 2-col pill card, thumbnail nav, arrow advance{% endcomment %}
+{%- assign sid = section.id -%}
+<style>
+.rhode-app2-{{ sid }} {
+  padding-block: {{ section.settings.padding_top }}px {{ section.settings.padding_bottom }}px;
+}
+.rhode-app2-{{ sid }} .ra2-inner {
+  max-width: min(
+    calc(var(--page-width, 1200px) - var(--page-margin, 40px) * 2),
+    calc(100% - var(--page-margin, 40px) * 2)
+  );
+  margin-inline: auto;
+  border-radius: 10px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 520px;
+}
+/* ── LEFT column ── */
+.rhode-app2-{{ sid }} .ra2-left {
+  background-color: {{ section.settings.left_bg }};
+  display: flex;
+  flex-direction: column;
+  padding: 36px 44px;
+}
+/* thumbnail row */
+.rhode-app2-{{ sid }} .ra2-thumbs {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.rhode-app2-{{ sid }} .ra2-thumb {
+  width: 90px;
+  height: 68px;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.4;
+  position: relative;
+  flex-shrink: 0;
+  transition: opacity 0.25s ease;
+  border: none;
+  padding: 0;
+  background: none;
+}
+.rhode-app2-{{ sid }} .ra2-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background-color: #e8e6e1;
+}
+.rhode-app2-{{ sid }} .ra2-thumb.is-active {
+  opacity: 1;
+}
+.rhode-app2-{{ sid }} .ra2-thumb-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: {{ section.settings.heading_color }};
+  transform: scaleX(0);
+  transition: transform 0.25s ease;
+  transform-origin: left;
+}
+.rhode-app2-{{ sid }} .ra2-thumb.is-active .ra2-thumb-indicator {
+  transform: scaleX(1);
+}
+/* spacer pushes bottom content down */
+.rhode-app2-{{ sid }} .ra2-spacer { flex: 1; }
+/* bottom: label + step text + arrow */
+.rhode-app2-{{ sid }} .ra2-content {
+  flex-shrink: 0;
+}
+.rhode-app2-{{ sid }} .ra2-label {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: {{ section.settings.label_color }};
+  display: block;
+  margin-bottom: 12px;
+}
+.rhode-app2-{{ sid }} .ra2-step-line {
+  display: block;
+  margin-bottom: 28px;
+}
+.rhode-app2-{{ sid }} .ra2-step-num {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: clamp(28px, 3.5vw, 48px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: {{ section.settings.number_color }};
+  float: left;
+  margin-right: 10px;
+}
+.rhode-app2-{{ sid }} .ra2-step-heading {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: clamp(28px, 3.5vw, 48px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: {{ section.settings.heading_color }};
+  display: block;
+  overflow: hidden;
+}
+.rhode-app2-{{ sid }} .ra2-step-heading-wrap {
+  min-height: calc(clamp(28px, 3.5vw, 48px) * 2.3);
+  position: relative;
+}
+.rhode-app2-{{ sid }} .ra2-heading-slide {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  opacity: 0;
+  transform: translateY(8px);
+  position: absolute;
+  top: 0; left: 0; right: 0;
+}
+.rhode-app2-{{ sid }} .ra2-heading-slide.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  position: relative;
+}
+/* arrow button */
+.rhode-app2-{{ sid }} .ra2-arrow {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1.5px solid {{ section.settings.heading_color }};
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.22s ease, color 0.22s ease;
+  flex-shrink: 0;
+}
+.rhode-app2-{{ sid }} .ra2-arrow:hover {
+  background: {{ section.settings.heading_color }};
+}
+.rhode-app2-{{ sid }} .ra2-arrow:hover svg path {
+  stroke: #fff;
+}
+.rhode-app2-{{ sid }} .ra2-arrow svg {
+  width: 20px;
+  height: 20px;
+}
+.rhode-app2-{{ sid }} .ra2-arrow svg path {
+  stroke: {{ section.settings.heading_color }};
+  transition: stroke 0.22s ease;
+}
+/* ── RIGHT column ── */
+.rhode-app2-{{ sid }} .ra2-right {
+  position: relative;
+  overflow: hidden;
+  min-height: 400px;
+}
+.rhode-app2-{{ sid }} .ra2-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.4s ease;
+  opacity: 0;
+}
+.rhode-app2-{{ sid }} .ra2-img.is-active {
+  opacity: 1;
+}
+/* ── Mobile ── */
+@media (max-width: 749px) {
+  .rhode-app2-{{ sid }} .ra2-inner {
+    grid-template-columns: 1fr;
+    border-radius: 10px;
+  }
+  .rhode-app2-{{ sid }} .ra2-right {
+    min-height: 300px;
+    order: -1;
+  }
+  .rhode-app2-{{ sid }} .ra2-left {
+    padding: 28px 24px;
+  }
+  .rhode-app2-{{ sid }} .ra2-thumb {
+    width: 72px;
+    height: 54px;
+  }
+  .rhode-app2-{{ sid }} .ra2-spacer {
+    min-height: 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rhode-app2-{{ sid }} .ra2-img,
+  .rhode-app2-{{ sid }} .ra2-heading-slide,
+  .rhode-app2-{{ sid }} .ra2-thumb,
+  .rhode-app2-{{ sid }} .ra2-thumb-indicator { transition: none; }
+}
+</style>
+
+<div class="rhode-app2-{{ sid }}">
+  <div class="ra2-inner">
+
+    <!-- LEFT -->
+    <div class="ra2-left">
+      <!-- Thumbnail row -->
+      <div class="ra2-thumbs" role="tablist" aria-label="Application steps">
+        {%- for block in section.blocks -%}
+          <button
+            class="ra2-thumb{% if forloop.first %} is-active{% endif %}"
+            data-ra2-thumb="{{ forloop.index0 }}"
+            role="tab"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            aria-label="Step {{ forloop.index }}"
+            {{ block.shopify_attributes }}
+          >
+            {%- if block.settings.thumbnail != blank -%}
+              <img src="{{ block.settings.thumbnail | image_url: width: 200 }}" alt="Step {{ forloop.index }} thumbnail" loading="lazy">
+            {%- elsif block.settings.thumbnail_url != blank -%}
+              <img src="{{ block.settings.thumbnail_url }}" alt="Step {{ forloop.index }} thumbnail" loading="lazy">
+            {%- else -%}
+              <img src="{{ block.settings.image_url | default: '' }}" alt="Step {{ forloop.index }} thumbnail" loading="lazy" style="background:#e8e6e1;">
+            {%- endif -%}
+            <span class="ra2-thumb-indicator"></span>
+          </button>
+        {%- endfor -%}
+      </div>
+
+      <div class="ra2-spacer"></div>
+
+      <!-- Bottom content -->
+      <div class="ra2-content">
+        {%- if section.settings.section_label != blank -%}
+          <span class="ra2-label">{{ section.settings.section_label }}</span>
+        {%- endif -%}
+
+        <div class="ra2-step-heading-wrap">
+          {%- for block in section.blocks -%}
+            <span class="ra2-heading-slide{% if forloop.first %} is-active{% endif %}" data-ra2-slide="{{ forloop.index0 }}">
+              <span class="ra2-step-line">
+                <span class="ra2-step-num">({{ block.settings.step_number | default: forloop.index | prepend: '0' | slice: -2, 2 }})</span>
+                <span class="ra2-step-heading">{{ block.settings.heading }}</span>
+              </span>
+            </span>
+          {%- endfor -%}
+        </div>
+
+        <button class="ra2-arrow" aria-label="Next step" data-ra2-arrow>
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M5 12H19M13 6L19 12L13 18" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- RIGHT: full-height image stack -->
+    <div class="ra2-right" aria-live="polite">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.image != blank -%}
+          <img
+            class="ra2-img{% if forloop.first %} is-active{% endif %}"
+            src="{{ block.settings.image | image_url: width: 900 }}"
+            alt="{{ block.settings.image.alt | default: block.settings.heading | escape }}"
+            data-ra2-img="{{ forloop.index0 }}"
+            loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+          >
+        {%- elsif block.settings.image_url != blank -%}
+          <img
+            class="ra2-img{% if forloop.first %} is-active{% endif %}"
+            src="{{ block.settings.image_url }}"
+            alt="{{ block.settings.heading | escape }}"
+            data-ra2-img="{{ forloop.index0 }}"
+            loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+          >
+        {%- else -%}
+          <div class="ra2-img{% if forloop.first %} is-active{% endif %}" data-ra2-img="{{ forloop.index0 }}" style="background:#e8e6e1;"></div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  var root = document.querySelector('.rhode-app2-{{ sid }}');
+  if (!root) return;
+  var thumbs   = Array.from(root.querySelectorAll('[data-ra2-thumb]'));
+  var slides   = Array.from(root.querySelectorAll('[data-ra2-slide]'));
+  var imgs     = Array.from(root.querySelectorAll('[data-ra2-img]'));
+  var arrowBtn = root.querySelector('[data-ra2-arrow]');
+  var current  = 0;
+
+  function goTo(idx) {
+    var total = thumbs.length;
+    idx = ((idx % total) + total) % total;
+    thumbs[current].classList.remove('is-active');
+    thumbs[current].setAttribute('aria-selected','false');
+    slides[current].classList.remove('is-active');
+    imgs[current].classList.remove('is-active');
+
+    current = idx;
+    thumbs[current].classList.add('is-active');
+    thumbs[current].setAttribute('aria-selected','true');
+    slides[current].classList.add('is-active');
+    imgs[current].classList.add('is-active');
+  }
+
+  thumbs.forEach(function(btn, i) {
+    btn.addEventListener('click', function(){ goTo(i); });
+  });
+
+  if (arrowBtn) {
+    arrowBtn.addEventListener('click', function(){ goTo(current + 1); });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Rhode — Application",
+  "max_blocks": 5,
+  "settings": [
+    { "type": "text",  "id": "section_label", "label": "Label",          "default": "APPLICATION" },
+    { "type": "color", "id": "left_bg",        "label": "Left BG",        "default": "#f1f0ed" },
+    { "type": "color", "id": "heading_color",  "label": "Heading colour", "default": "#121212" },
+    { "type": "color", "id": "label_color",    "label": "Label colour",   "default": "#67645e" },
+    { "type": "color", "id": "number_color",   "label": "Number colour",  "default": "#67645e" },
+    {
+      "type": "range", "id": "padding_top",
+      "min": 0, "max": 160, "step": 8,
+      "label": "Padding top", "default": 0
+    },
+    {
+      "type": "range", "id": "padding_bottom",
+      "min": 0, "max": 160, "step": 8,
+      "label": "Padding bottom", "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "image_picker", "id": "thumbnail",     "label": "Thumbnail image" },
+        { "type": "text",         "id": "thumbnail_url", "label": "Thumbnail URL (fallback)" },
+        { "type": "image_picker", "id": "image",         "label": "Full image" },
+        { "type": "text",         "id": "image_url",     "label": "Full image URL (fallback)" },
+        { "type": "text",         "id": "step_number",   "label": "Step number", "default": "01" },
+        { "type": "text",         "id": "heading",       "label": "Heading",     "default": "Apply a small amount onto your fingertip." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rhode — Application",
+      "blocks": [
+        { "type": "step", "settings": { "step_number": "01", "heading": "Scoop out a small amount onto your fingertip." } },
+        { "type": "step", "settings": { "step_number": "02", "heading": "Tap onto forehead, cheeks, nose, and jawline." } },
+        { "type": "step", "settings": { "step_number": "03", "heading": "Layer for a deeper, more dimensional bronze." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,462 @@
+{% comment %}
+<!-- Designed by OnHOW YouTube Channel - Anas El Medlaoui -->
+{% endcomment %}
+
+{% if section.settings.enable %}
+  <style data-onhow-custom-fonts>
+    {% assign items = section.blocks | reverse %}
+
+    {% for block in items %}
+      {% assign url = block.settings.custom_font_url %}
+      {% assign custom_font_weight = block.settings.custom_font_weight %}
+      {% assign custom_font_style = block.settings.custom_font_style %}
+      
+      {% assign apply_h1 = block.settings.apply_h1 %}
+      {% assign apply_h2 = block.settings.apply_h2 %}
+      {% assign apply_h3 = block.settings.apply_h3 %}
+      {% assign apply_h4 = block.settings.apply_h4 %}
+      {% assign apply_h5 = block.settings.apply_h5 %}
+      {% assign apply_h6 = block.settings.apply_h6 %}
+      {% assign apply_span = block.settings.apply_span %}
+      {% assign apply_p = block.settings.apply_p %}
+      {% assign apply_custom = block.settings.apply_custom %}
+      {% assign apply_a = block.settings.apply_a %}
+      {% assign apply_input = block.settings.apply_input %}
+      {% assign apply_label = block.settings.apply_label %}
+      {% assign apply_legend = block.settings.apply_legend %}
+      {% assign apply_button = block.settings.apply_button %}
+      {% assign apply_summary = block.settings.apply_summary %}
+      {% assign apply_select = block.settings.apply_select %}
+      {% assign apply_option = block.settings.apply_option %}
+      {% assign apply_small = block.settings.apply_small %}
+
+      {% if url != blank and url != "" %}
+        {% assign url_parts = url | split: '/' %}
+        {% assign filename = url_parts.last | split: '.' | first %}
+        {% assign name = filename | replace: '%20', ' ' | replace: '_', ' ' | replace: '-', ' ' | capitalize %}
+
+        {% capture font_type %}
+          {% if url contains ".otf" %}
+            opentype
+          {% elsif url contains ".ttf" %}
+            truetype
+          {% elsif url contains ".svg" %}
+            svg
+          {% elsif url contains ".woff2" %}
+            woff2
+          {% else %}
+            woff
+          {% endif %}
+        {% endcapture %}
+        {% assign font_type = font_type | strip %}
+        @font-face {
+          font-family: 'onhow-{{ name }}';
+          src: url({{ url }}) format('{{ font_type }}');
+          font-display: swap;
+          
+          {% if custom_font_style != 'none' %}
+            font-style: {{ custom_font_style }};
+          {% endif %}
+          
+          {% if custom_font_weight != 'none' %}
+            font-weight: {{ custom_font_weight }};
+          {% endif %}
+        }
+
+        {% if apply_h1 %}
+          h1, .h1:not(h2):not(h3):not(h4):not(h5):not(h6) {
+            font-family: 'onhow-{{ name }}', var(--font-heading-family) !important;
+            font-weight: {{ custom_font_weight }} !important;
+          }
+        {% endif %}
+
+        {% if apply_h2 %}
+          h2, .h2 {
+            font-family: 'onhow-{{ name }}', var(--font-heading-family) !important;
+            font-weight: {{ custom_font_weight }} !important;
+          }
+        {% endif %}
+
+        {% if apply_h3 %}
+          h3, .h3 {
+            font-family: 'onhow-{{ name }}', var(--font-heading-family) !important;
+            font-weight: {{ custom_font_weight }} !important;
+          }
+        {% endif %}
+
+        {% if apply_h4 %}
+          h4, .h4 {
+            font-family: 'onhow-{{ name }}', var(--font-heading-family) !important;
+            font-weight: {{ custom_font_weight }} !important;
+          }
+        {% endif %}
+
+        {% if apply_h5 %}
+          h5, .h5 {
+            font-family: 'onhow-{{ name }}', var(--font-heading-family) !important;
+            font-weight: {{ custom_font_weight }} !important;
+          }
+        {% endif %}
+
+        {% if apply_h6 %}
+          h6, .h6 {
+            font-family: 'onhow-{{ name }}', var(--font-heading-family) !important;
+            font-weight: {{ custom_font_weight }} !important;
+          }
+        {% endif %}
+
+        {% if apply_p %}
+          p, .rte p {
+            font-family: 'onhow-{{ name }}', var(--font-body-family) !important;
+            font-weight: {{ custom_font_weight }} !important;
+          }
+        {% endif %}
+
+        {% if apply_a %}
+          a:not(.button):not(.btn):not(.slider-button):not(.field__button):not(.newsletter-form__button):not(.modal__close-button):not(.disclosure__button):not(.localization-form__select):not(.country-selector__close-button):not(.reset__button):not(.search__button):not(.cart-notification__close), .link:not(.button), .full-unstyled-link:not(.button) {
+            font-family: 'onhow-{{ name }}', var(--font-body-family) !important;
+            font-weight: {{ custom_font_weight }} !important;
+          }
+        {% endif %}
+
+        {% if apply_input %}
+          input, input[type="text"], input[type="email"], input[type="search"], input[type="password"], input[type="tel"], input[type="url"], input[type="number"], textarea, .field__input {
+            font-family: 'onhow-{{ name }}', var(--font-body-family) !important;
+            font-weight: {{ custom_font_weight }} !important;
+          }
+        {% endif %}
+
+        {% if apply_label %}
+          label, .field__label {
+            font-family: 'onhow-{{ name }}', var(--font-body-family) !important;
+            font-weight: {{ custom_font_weight }} !important;
+          }
+        {% endif %}
+
+        {% if apply_legend %}
+          legend {
+            font-family: 'onhow-{{ name }}', var(--font-body-family) !important;
+            font-weight: {{ custom_font_weight }} !important;
+          }
+        {% endif %}
+
+        {% if apply_button %}
+          button, .button, .btn, input[type="submit"], input[type="button"], input[type="reset"], [role="button"], .slider-button, .field__button, .newsletter-form__button, .modal__close-button, .disclosure__button, .localization-form__select, .country-selector__close-button, .reset__button, .search__button, .cart-notification__close, .button-label {
+            font-family: 'onhow-{{ name }}', var(--font-body-family) !important;
+            font-weight: {{ custom_font_weight }} !important;
+          }
+        {% endif %}
+
+        {% if apply_summary %}
+          summary, .list-menu__item summary, details summary {
+            font-family: 'onhow-{{ name }}', var(--font-body-family) !important;
+            font-weight: {{ custom_font_weight }} !important;
+          }
+        {% endif %}
+
+        {% if apply_select %}
+          select, .select {
+            font-family: 'onhow-{{ name }}', var(--font-body-family) !important;
+            font-weight: {{ custom_font_weight }} !important;
+          }
+        {% endif %}
+
+        {% if apply_option %}
+          option {
+            font-family: 'onhow-{{ name }}', var(--font-body-family) !important;
+            font-weight: {{ custom_font_weight }} !important;
+          }
+        {% endif %}
+
+        {% if apply_small %}
+          small, .caption, .caption-large, .copyright__content {
+            font-family: 'onhow-{{ name }}', var(--font-body-family) !important;
+            font-weight: {{ custom_font_weight }} !important;
+          }
+        {% endif %}
+
+        {% if apply_span %}
+          span, .badge, .price-item, .visually-hidden, .svg-wrapper {
+            font-family: 'onhow-{{ name }}', var(--font-body-family) !important;
+            font-weight: {{ custom_font_weight }} !important;
+          }
+        {% endif %}
+
+        {% if apply_custom != "" and apply_custom != blank %}
+          {{ apply_custom }} {
+            font-family: 'onhow-{{ name }}', var(--font-body-family) !important;
+            font-weight: {{ custom_font_weight }} !important;
+          }
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </style>
+{% endif %}
+
+{% comment %}
+<!-- Designed by OnHOW YouTube Channel - Anas El Medlaoui -->
+{% endcomment %}
+
+{% schema %}
+{
+  "name": "OnHOW Custom Font",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "Enable custom fonts",
+      "default": true,
+      "info": "Toggle this option to turn all custom fonts on or off"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "font_config",
+      "name": "Custom Font",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Font Source"
+        },
+        {
+          "type": "text",
+          "id": "custom_font_url",
+          "label": "Font URL",
+          "info": "Upload your font file to Files section and copy its URL here. Supports .woff, .woff2, .ttf, .otf, and .svg formats."
+        },
+        {
+          "type": "select",
+          "id": "custom_font_weight",
+          "label": "Font weight",
+          "default": "normal",
+          "options": [
+            {
+              "value": "none",
+              "label": "Use file default"
+            },
+            {
+              "value": "normal",
+              "label": "Normal"
+            },
+            {
+              "value": "bold",
+              "label": "Bold"
+            },
+            {
+              "value": "100",
+              "label": "Thin (100)"
+            },
+            {
+              "value": "200",
+              "label": "Extra Light (200)"
+            },
+            {
+              "value": "300",
+              "label": "Light (300)"
+            },
+            {
+              "value": "400",
+              "label": "Regular (400)"
+            },
+            {
+              "value": "500",
+              "label": "Medium (500)"
+            },
+            {
+              "value": "600",
+              "label": "Semi Bold (600)"
+            },
+            {
+              "value": "700",
+              "label": "Bold (700)"
+            },
+            {
+              "value": "800",
+              "label": "Extra Bold (800)"
+            },
+            {
+              "value": "900",
+              "label": "Black (900)"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "custom_font_style",
+          "label": "Font style",
+          "default": "none",
+          "options": [
+            {
+              "value": "none",
+              "label": "Use file default"
+            },
+            {
+              "value": "normal",
+              "label": "Normal"
+            },
+            {
+              "value": "italic",
+              "label": "Italic"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Heading Elements"
+        },
+        {
+          "type": "checkbox",
+          "id": "apply_h1",
+          "label": "Main Page Titles",
+          "default": true,
+          "info": "The largest headings on the page, typically used for page titles and major sections"
+        },
+        {
+          "type": "checkbox",
+          "id": "apply_h2",
+          "label": "Section Headings",
+          "default": true,
+          "info": "Second-level headings used for major sections within a page"
+        },
+        {
+          "type": "checkbox",
+          "id": "apply_h3",
+          "label": "Subsection Titles",
+          "default": true,
+          "info": "Third-level headings used for subsections and product titles"
+        },
+        {
+          "type": "checkbox",
+          "id": "apply_h4",
+          "label": "Minor Headings",
+          "default": true,
+          "info": "Fourth-level headings used for content blocks and smaller sections"
+        },
+        {
+          "type": "checkbox",
+          "id": "apply_h5",
+          "label": "Small Headings",
+          "default": true,
+          "info": "Fifth-level headings used for small content blocks and widget titles"
+        },
+        {
+          "type": "checkbox",
+          "id": "apply_h6",
+          "label": "Smallest Headings",
+          "default": true,
+          "info": "The smallest heading level, used for minor titles and labels"
+        },
+        {
+          "type": "header",
+          "content": "Text Elements"
+        },
+        {
+          "type": "checkbox",
+          "id": "apply_p",
+          "label": "Body Text/Paragraphs",
+          "default": true,
+          "info": "Regular paragraphs of text throughout your store"
+        },
+        {
+          "type": "checkbox",
+          "id": "apply_span",
+          "label": "Inline Text Elements",
+          "default": true,
+          "info": "Text highlights, badges, and styled text fragments"
+        },
+        {
+          "type": "checkbox",
+          "id": "apply_a",
+          "label": "Links",
+          "default": true,
+          "info": "Clickable links throughout your store"
+        },
+        {
+          "type": "checkbox",
+          "id": "apply_small",
+          "label": "Fine Print Text",
+          "default": true,
+          "info": "Smaller text used for disclaimers, footnotes, and legal text"
+        },
+        {
+          "type": "header",
+          "content": "Form Elements"
+        },
+        {
+          "type": "checkbox",
+          "id": "apply_input",
+          "label": "Form Fields",
+          "default": true,
+          "info": "Input fields for customer information and search boxes"
+        },
+        {
+          "type": "checkbox",
+          "id": "apply_label",
+          "label": "Form Field Labels",
+          "default": true,
+          "info": "Text labels that identify form fields"
+        },
+        {
+          "type": "checkbox",
+          "id": "apply_button",
+          "label": "Buttons",
+          "default": true,
+          "info": "All buttons including Add to Cart, Checkout, and action buttons"
+        },
+        {
+          "type": "checkbox",
+          "id": "apply_select",
+          "label": "Dropdown Menus",
+          "default": true,
+          "info": "Selection menus like product variants and shipping options"
+        },
+        {
+          "type": "checkbox",
+          "id": "apply_option",
+          "label": "Dropdown Options",
+          "default": true,
+          "info": "Individual items within dropdown menus"
+        },
+        {
+          "type": "header",
+          "content": "Other Elements"
+        },
+        {
+          "type": "checkbox",
+          "id": "apply_legend",
+          "label": "Form Legends",
+          "default": true,
+          "info": "Captions for groups of form controls"
+        },
+        {
+          "type": "checkbox",
+          "id": "apply_summary",
+          "label": "Collapsible Headers",
+          "default": true,
+          "info": "Clickable headers for expandable content sections"
+        },
+        {
+          "type": "textarea",
+          "id": "apply_custom",
+          "label": "Custom Selectors",
+          "info": "Apply font to custom CSS selectors (for advanced users)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "OnHOW Custom Font",
+      "blocks": [
+        {
+          "type": "font_config"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% comment %}
+<!-- Designed by OnHOW YouTube Channel - Anas El Medlaoui -->
+{% endcomment %}

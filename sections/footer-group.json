@@ -1,0 +1,221 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "ss_footer_7_MGqMrt": {
+      "type": "ss-footer-7",
+      "blocks": {
+        "logo_NLU8zw": {
+          "type": "logo",
+          "settings": {
+            "logo": "shopify://shop_images/AZAZ.png",
+            "image_width": 100,
+            "image_width_mobile": 100,
+            "text": "",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 120,
+            "text_size_mobile": 40,
+            "text_height": 100,
+            "text_color": "#121212"
+          }
+        },
+        "column_EyNGGJ": {
+          "type": "column",
+          "settings": {
+            "heading": "NAVIGATE",
+            "menu": "navigate"
+          }
+        },
+        "socials_E4HHkq": {
+          "type": "socials",
+          "settings": {
+            "heading": "SOCIALS",
+            "twitter_text": "",
+            "twitter": "",
+            "facebook_text": "Facebook",
+            "facebook": "",
+            "linkedin_text": "LinkedIn",
+            "linkedin": "",
+            "instagram_text": "Instagram",
+            "instagram": "#",
+            "youtube_text": "YouTube",
+            "youtube": "#",
+            "pinterest_text": "Pinterest",
+            "pinterest": "#",
+            "whatsapp_text": "WhatsApp",
+            "whatsapp": "#",
+            "tiktok_text": "TikTok",
+            "tiktok": "#"
+          }
+        },
+        "column_zwH3Mc": {
+          "type": "column",
+          "settings": {
+            "heading": "OFFICIAL",
+            "menu": "company"
+          }
+        },
+        "text_GiiFdk": {
+          "type": "text",
+          "name": "SUPPORT",
+          "settings": {
+            "heading": "SUPPORT",
+            "text": "<p>We’re here M-F <br/>9 am - 5 pm IST.<br/><br/><a href=\"/pages/contact-us\" title=\"CONTACT US\">Drop us a note anytime.</a></p><p><a href=\"/pages/do-not-sell-or-share-my-personal-information\" title=\"DO NOT SELL OR SHARE MY PERSONAL INFORMATION\">Do Not Sell or Share My Personal Information</a></p><p></p>"
+          }
+        }
+      },
+      "block_order": [
+        "logo_NLU8zw",
+        "column_EyNGGJ",
+        "socials_E4HHkq",
+        "column_zwH3Mc",
+        "text_GiiFdk"
+      ],
+      "name": "SS - Footer #7",
+      "settings": {
+        "block_border_thickness": 1,
+        "content_padding_advanced": true,
+        "block_padding_vertical": 40,
+        "block_padding_vertical_mobile": 28,
+        "block_padding_horizontal": 40,
+        "block_padding_horizontal_mobile": 16,
+        "text": "<p>Breakouts, handled.<br/><br/>Acne care & exclusive drops—curated by Alyssa.<br/><br/></p>",
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 16,
+        "text_size_mobile": 14,
+        "text_height": 150,
+        "text_align": "left",
+        "text_align_mobile": "left",
+        "use_newsletter": true,
+        "use_redirect": false,
+        "redirect_url": "",
+        "newsletter_radius": 10,
+        "newsletter_border_thickness": 1,
+        "newsletter_advanced": false,
+        "newsletter_gap": 0,
+        "newsletter_gap_mobile": 0,
+        "newsletter_mt": 16,
+        "newsletter_mt_mobile": 14,
+        "input_placeholder": "Email Address",
+        "input_custom": false,
+        "input_font": "josefin_sans_n4",
+        "input_size": 12,
+        "input_size_mobile": 12,
+        "input_advanced": false,
+        "input_height": 100,
+        "input_padding_vertical": 16,
+        "input_padding_vertical_mobile": 16,
+        "input_padding_horizontal": 16,
+        "input_padding_horizontal_mobile": 16,
+        "input_radius": 0,
+        "input_border_thickness": 0,
+        "submit": "SUBSCRIBE",
+        "submit_custom": false,
+        "submit_font": "josefin_sans_n4",
+        "submit_size": 12,
+        "submit_size_mobile": 12,
+        "submit_advanced": false,
+        "submit_height": 100,
+        "submit_padding_vertical": 16,
+        "submit_padding_vertical_mobile": 16,
+        "submit_padding_horizontal": 24,
+        "submit_padding_horizontal_mobile": 24,
+        "submit_radius": 0,
+        "submit_border_thickness": 0,
+        "thanks_text": "Thanks for subscribing!",
+        "thanks_text_custom": false,
+        "thanks_text_font": "josefin_sans_n4",
+        "thanks_text_size": 12,
+        "thanks_text_size_mobile": 12,
+        "thanks_text_advanced": false,
+        "thanks_text_height": 150,
+        "thanks_text_mt": 24,
+        "thanks_text_mt_mobile": 20,
+        "privacy_text": "<p>By signing up, you agree to our <a href=\"/pages/privacy-policy\" title=\"PRIVACY POLICY\">Privacy Policy*.</a></p>",
+        "privacy_text_custom": false,
+        "privacy_text_font": "josefin_sans_n4",
+        "privacy_text_size": 12,
+        "privacy_text_size_mobile": 12,
+        "privacy_text_advanced": false,
+        "privacy_text_height": 150,
+        "privacy_text_mt": 16,
+        "privacy_text_mt_mobile": 16,
+        "privacy_text_align": "left",
+        "privacy_text_align_mobile": "left",
+        "column_heading_custom": false,
+        "column_heading_font": "josefin_sans_n4",
+        "column_heading_size": 12,
+        "column_heading_size_mobile": 10,
+        "column_heading_height": 130,
+        "list_advanced": true,
+        "list_mt": 16,
+        "list_mt_mobile": 14,
+        "list_gap": 24,
+        "list_gap_mobile": 16,
+        "link_custom": false,
+        "link_font": "josefin_sans_n4",
+        "link_size": 16,
+        "link_size_mobile": 12,
+        "link_height": 130,
+        "column_text_custom": false,
+        "column_text_font": "josefin_sans_n4",
+        "column_text_size": 16,
+        "column_text_size_mobile": 12,
+        "column_text_advanced": false,
+        "column_text_height": 150,
+        "column_text_mt": 16,
+        "column_text_mt_mobile": 14,
+        "block_border_color": "#67645e",
+        "text_color": "#67645e",
+        "privacy_text_color": "#67645e",
+        "newsletter_border_color": "#67645e",
+        "input_bg_color": "#ffffff",
+        "input_border_color": "#67645e",
+        "input_color": "#67645e",
+        "input_placeholder_color": "#67645e",
+        "thanks_text_color": "#67645e",
+        "submit_color": "#67645e",
+        "submit_hover_color": "#ffffff",
+        "submit_bg_color": "#ffffff",
+        "submit_bg_hover_color": "#67645e",
+        "submit_border_color": "#67645e",
+        "submit_border_hover_color": "#67645e",
+        "column_heading_color": "#67645e",
+        "column_text_color": "#67645e",
+        "link_color": "#67645e",
+        "link_hover_color": "#333333",
+        "background_style": "solid",
+        "background_color": "#f1f0ed",
+        "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
+        "border_color": "#67645e",
+        "margin_top": 0,
+        "margin_bottom": 20,
+        "margin_horizontal": 2,
+        "margin_horizontal_mobile": 1,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_horizontal": 0,
+        "padding_horizontal_mobile": 0,
+        "width": "page",
+        "content_width": 1400,
+        "border_thickness": 0,
+        "section_radius": 10,
+        "lazy": true
+      }
+    }
+  },
+  "order": [
+    "ss_footer_7_MGqMrt"
+  ]
+}

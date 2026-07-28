@@ -1,0 +1,154 @@
+/*
+ * ISOA — Mobile collection card layout (Laani clone)
+ *
+ * Loaded only when template contains 'collection' (see layout/theme.liquid).
+ * Scope: all rules gated by `@media (max-width: 749px)`; desktop is untouched.
+ *
+ * Goals (mobile only, viewport <= 749px):
+ * 1. Force 2-column product grid.
+ * 2. Reorder card children so text (title, review, price) renders ABOVE the image.
+ * 3. Title uppercase + bold in ISOA brand foreground (#67645e).
+ * 4. Image container: 16px radius, aspect-ratio preserved, floating quick-add
+ *    circle button pinned bottom-left of the image.
+ * 5. Grid gap: 12px vertical, 8px horizontal.
+ */
+
+@media screen and (max-width: 749px) {
+  /* --- 1. Grid: force 2 columns, tight horizontal gap --- */
+  .product-grid-container .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px 8px !important;
+    padding-inline: 12px;
+  }
+
+  /* Neutralize the JSON-level size preset so both columns behave identically */
+  .product-grid[data-product-card-size] .product-grid__item {
+    width: auto;
+    min-width: 0;
+  }
+
+  /* --- 2. Reorder card children: text above image --- */
+  .product-grid__item .product-card__content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  /* Native DOM order is: card-gallery, zoom-out-details, <a class="contents"> (title),
+     <product-price>. We reorder via `order` so image sits at the bottom. */
+  .product-grid__item .product-card__content > .card-gallery {
+    order: 4;
+    margin-top: 4px;
+  }
+  .product-grid__item .product-card__content > .product-grid-view-zoom-out--details {
+    order: 0; /* keep hidden phantom out of the way */
+  }
+  .product-grid__item .product-card__content > a.contents {
+    order: 1; /* title */
+  }
+  .product-grid__item .product-card__content > .rating-wrapper {
+    order: 2; /* stars, if a review block gets added */
+  }
+  .product-grid__item .product-card__content > product-price {
+    order: 3; /* price sits just above the image */
+  }
+
+  /* --- 3. Title styling: uppercase, bold, brand color --- */
+  .product-grid__item .product-card__content > a.contents .text-block,
+  .product-grid__item .product-card__content > a.contents .text-block > * {
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    font-size: 0.78rem;
+    color: #67645e;
+    margin: 0;
+  }
+
+  /* --- 4. Image container: rounded corners + floating quick-add circle --- */
+  .product-grid__item .card-gallery {
+    border-radius: 16px !important;
+    overflow: hidden;
+    background: #f1f0ed; /* matches ISOA pill grey while images load */
+  }
+
+  /* Anchor form flex container to bottom-LEFT so the button sits bottom-left */
+  .product-grid__item .card-gallery .quick-add__product-form-component .shopify-product-form {
+    justify-content: flex-start;
+  }
+
+  /* Restyle the theme's absolute quick-add button (already position:absolute
+     inside .quick-add which spans the gallery). Flip right → left, shrink to
+     a 40px circle, replace fill with ISOA white/foreground border. */
+  .product-grid__item .card-gallery .quick-add__button.add-to-cart-button {
+    /* neutralize theme's right offset */
+    right: auto;
+    left: max(var(--quick-add-right, 10px), calc((var(--border-radius) + var(--quick-add-right, 10px)) * (1 - cos(45deg))));
+    bottom: 10px;
+    width: 40px;
+    height: 40px;
+    min-width: 0;
+    min-height: 40px;
+    padding: 0;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #67645e;
+    border: 1px solid #67645e;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    opacity: 1;
+    overflow: hidden;
+  }
+
+  /* Replace the theme's cart-icon glyph with a clean plus */
+  .product-grid__item .card-gallery .quick-add__button .add-to-cart-icon,
+  .product-grid__item .card-gallery .quick-add__button .add-to-cart-text__content,
+  .product-grid__item .card-gallery .quick-add__button .svg-wrapper {
+    display: none !important;
+  }
+  .product-grid__item .card-gallery .quick-add__button .add-to-cart-text {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0;
+    padding: 0;
+  }
+  .product-grid__item .card-gallery .quick-add__button .add-to-cart-text::before {
+    content: "+";
+    font-size: 22px;
+    line-height: 1;
+    font-weight: 400;
+    color: #67645e;
+  }
+
+  /* Price alignment/size tweak on mobile */
+  .product-grid__item .product-card__content > product-price {
+    font-size: 0.85rem;
+    color: #67645e;
+    font-weight: 500;
+  }
+
+  /* Rating (when a review block is added) — brand foreground stars */
+  .product-grid__item .product-card__content > .rating-wrapper {
+    --star-fill-color: #67645e;
+    --star-fill-color-rgb: 103, 100, 94;
+  }
+  .product-grid__item .product-card__content > .rating-wrapper .rating {
+    --star-size: 12px;
+  }
+  .product-grid__item .product-card__content > .rating-wrapper .rating-count {
+    font-size: 0.72rem;
+    color: #67645e;
+  }
+
+  /* Kill product-card__link click-hijack on the image half so the quick-add button
+     doesn't fire the whole-card link. Horizon's z-index handles this but be explicit. */
+  .product-grid__item .card-gallery quick-add-component.quick-add {
+    isolation: isolate;
+  }
+}

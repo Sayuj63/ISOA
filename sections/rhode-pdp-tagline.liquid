@@ -1,0 +1,114 @@
+{% comment %}Rhode PDP — Editorial tagline / "what it is" strip.{% endcomment %}
+{%- assign sid = section.id -%}
+<style>
+.rhode-tagline-{{ sid }} {
+  background-color: {{ section.settings.bg_color }};
+  padding-block: {{ section.settings.padding_top }}px {{ section.settings.padding_bottom }}px;
+}
+.rhode-tagline-{{ sid }} .rt-inner {
+  max-width: min(
+    calc(var(--page-width, 1200px) - var(--page-margin, 40px) * 2),
+    calc(100% - var(--page-margin, 40px) * 2)
+  );
+  margin-inline: auto;
+  text-align: {{ section.settings.alignment }};
+}
+.rhode-tagline-{{ sid }} .rt-label {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: {{ section.settings.label_color }};
+  margin: 0 0 28px;
+  display: block;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.rhode-tagline-{{ sid }} .rt-heading {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: clamp(30px, 4.5vw, 64px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: {{ section.settings.text_color }};
+  margin: 0 0 24px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.75s ease 0.1s, transform 0.75s ease 0.1s;
+}
+.rhode-tagline-{{ sid }} .rt-body {
+  font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
+  font-size: clamp(14px, 1.4vw, 18px);
+  font-weight: 400;
+  line-height: 1.75;
+  color: {{ section.settings.body_color }};
+  max-width: 620px;
+  margin-block: 0;
+  {% if section.settings.alignment == 'center' %}margin-inline: auto;{% endif %}
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.75s ease 0.2s, transform 0.75s ease 0.2s;
+}
+.rhode-tagline-{{ sid }}.rt-in .rt-label,
+.rhode-tagline-{{ sid }}.rt-in .rt-heading,
+.rhode-tagline-{{ sid }}.rt-in .rt-body {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .rhode-tagline-{{ sid }} .rt-label,
+  .rhode-tagline-{{ sid }} .rt-heading,
+  .rhode-tagline-{{ sid }} .rt-body { opacity: 1; transform: none; transition: none; }
+}
+@media (max-width: 749px) {
+  .rhode-tagline-{{ sid }} .rt-inner {
+    max-width: calc(100% - var(--page-margin, 16px) * 2);
+  }
+}
+</style>
+
+<div class="rhode-tagline-{{ sid }}">
+  <div class="rt-inner">
+    {%- if section.settings.label != blank -%}
+      <span class="rt-label">{{ section.settings.label }}</span>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <p class="rt-heading">{{ section.settings.heading }}</p>
+    {%- endif -%}
+    {%- if section.settings.body != blank -%}
+      <p class="rt-body">{{ section.settings.body }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+(function(){
+  var el = document.querySelector('.rhode-tagline-{{ sid }}');
+  if (!el) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { el.classList.add('rt-in'); return; }
+  new IntersectionObserver(function(entries, obs){
+    if (entries[0].isIntersecting) { el.classList.add('rt-in'); obs.disconnect(); }
+  }, { threshold: 0.12 }).observe(el);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Rhode — Tagline",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label (small caps)", "default": "what it is" },
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "A pocket of sun." },
+    { "type": "textarea", "id": "body", "label": "Body text", "default": "Our on-the-go cream bronzer delivers hydrating, buildable colour that melts into skin — long-wearing warmth in the palm of your hand." },
+    { "type": "select", "id": "alignment", "label": "Alignment", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }], "default": "center" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#f1f0ed" },
+    { "type": "color", "id": "text_color", "label": "Heading colour", "default": "#67645e" },
+    { "type": "color", "id": "body_color", "label": "Body colour", "default": "#67645e" },
+    { "type": "color", "id": "label_color", "label": "Label colour", "default": "#67645e" },
+    { "type": "range", "id": "padding_top", "min": 24, "max": 160, "step": 8, "label": "Padding top", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "min": 24, "max": 160, "step": 8, "label": "Padding bottom", "default": 96 }
+  ],
+  "presets": [{ "name": "Rhode — Tagline" }]
+}
+{% endschema %}

@@ -1,0 +1,218 @@
+/* =============================================================================
+   ISOUA — Rhode-parity collection page cards (v2 — full-card grey frame)
+   -----------------------------------------------------------------------------
+   Rebuilds the /collections/* grid cards to match rhodeskin.com/collections/shop:
+     • The WHOLE card is a grey rounded box (not just the image slot).
+     • Top-left brand-text label ("highlight" style) always visible above images.
+     • Primary image lives in a 4/5 aspect area at top; title + price sit at the
+       bottom of the same grey card (default state).
+     • On hover (desktop): secondary image fades in inset:0 on the whole card —
+       covers image 1 AND the title/price at the bottom. Only brand-text (z:5)
+       and BUY CTA (z:6) remain visible on top of the portrait.
+     • On mobile: the second-image reveal has no hover, so instead we always
+       show the BUY CTA + price and hide the noisy title stack (per client ask).
+   Loaded only on `template.name == 'collection'` via layout/theme.liquid.
+   ============================================================================= */
+
+/* ---------- Card frame — grey box, the whole card --------------------- */
+
+body.template-collection .product-card {
+  position: relative;
+  background-color: #f1f0ed;
+  border-radius: 12px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+body.template-collection .product-card .product-card__content.product-grid__card {
+  padding: 0 16px 16px;
+  gap: 4px;
+  background: transparent;
+  position: relative;
+  z-index: 2;
+}
+
+/* Kill the native gallery — we render our own image stack. */
+body.template-collection .product-card .card-gallery {
+  display: none !important;
+}
+
+body.template-collection .product-card .product-grid__card > *:not(.card-gallery) {
+  color: #67645e;
+  transition: opacity .5s ease;
+}
+
+/* ---------- Primary image slot (in-flow, aspect 4/5) ------------------ */
+
+body.template-collection .product-card .isoua-rc-frame {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  background-color: #f1f0ed;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+  margin-bottom: 12px;
+}
+
+body.template-collection .product-card .isoua-rc-img--primary {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity .7s cubic-bezier(.76,0,.24,1);
+  opacity: 1;
+}
+
+/* ---------- Secondary image — inset:0 on the WHOLE card ---------------- */
+
+body.template-collection .product-card .isoua-rc-img--secondary {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  opacity: 0;
+  z-index: 3;
+  pointer-events: none;
+  transition: opacity .7s cubic-bezier(.76,0,.24,1);
+}
+
+body.template-collection .product-card:hover .isoua-rc-img--primary,
+body.template-collection .product-card:focus-within .isoua-rc-img--primary {
+  opacity: 0;
+}
+
+body.template-collection .product-card:hover .isoua-rc-img--secondary,
+body.template-collection .product-card:focus-within .isoua-rc-img--secondary {
+  opacity: 1;
+}
+
+/* When the secondary image is up, kill the title/price under it. */
+body.template-collection .product-card:hover .product-grid__card > *:not(.card-gallery),
+body.template-collection .product-card:focus-within .product-grid__card > *:not(.card-gallery) {
+  opacity: 0;
+}
+
+/* ---------- Top-left brand-text label ---------------------------------- */
+
+body.template-collection .product-card .isoua-rc-brand {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  z-index: 5;
+  color: #67645e;
+  font-family: var(--font-heading--family, var(--font-body--family));
+  font-size: clamp(28px, 3.4vw, 44px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: lowercase;
+  pointer-events: none;
+}
+
+/* ---------- BUY CTA — hidden by default, slides up on hover ------------ */
+
+body.template-collection .product-card .isoua-rc-cta-wrap {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  z-index: 6;
+  display: flex;
+  justify-content: center;
+  transform: translateY(calc(100% + 24px));
+  transition: transform .7s cubic-bezier(.76,0,.24,1);
+  pointer-events: none;
+}
+
+body.template-collection .product-card:hover .isoua-rc-cta-wrap,
+body.template-collection .product-card:focus-within .isoua-rc-cta-wrap {
+  transform: translateY(0);
+}
+
+body.template-collection .product-card .isoua-rc-cta {
+  display: inline-block;
+  width: 100%;
+  min-height: 44px;
+  padding: 14px 16px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #67645e;
+  font-family: var(--font-body--family);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.1;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+body.template-collection .product-card .isoua-rc-cta strong {
+  font-weight: 700;
+  margin-left: 4px;
+}
+
+/* CTA text variants — full title on desktop, price-only on mobile. */
+body.template-collection .product-card .isoua-rc-cta__desktop { display: inline; }
+body.template-collection .product-card .isoua-rc-cta__mobile { display: none; }
+
+/* Keep the invisible card link on top so clicks route to the PDP. */
+body.template-collection .product-card .product-card__link {
+  z-index: 10;
+}
+
+/* ---------- Mobile — BUY + price always visible, no title text ---------- */
+
+@media (max-width: 749px) {
+  body.template-collection .product-card {
+    border-radius: 10px;
+  }
+
+  body.template-collection .product-card .isoua-rc-frame {
+    aspect-ratio: 1 / 1.05;
+    margin-bottom: 0;
+  }
+
+  /* Hide native title stack entirely on mobile — the CTA carries the info. */
+  body.template-collection .product-card .product-card__content.product-grid__card {
+    display: none;
+  }
+
+  /* Mobile brand label is smaller / tucked in tighter. */
+  body.template-collection .product-card .isoua-rc-brand {
+    top: 12px;
+    left: 14px;
+    font-size: 24px;
+  }
+
+  /* Always show BUY + price pill on mobile (no hover to trigger). */
+  body.template-collection .product-card .isoua-rc-cta-wrap {
+    transform: translateY(0);
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+  }
+
+  body.template-collection .product-card .isoua-rc-cta {
+    min-height: 40px;
+    padding: 11px 14px;
+    font-size: 11px;
+  }
+
+  body.template-collection .product-card .isoua-rc-cta__desktop { display: none; }
+  body.template-collection .product-card .isoua-rc-cta__mobile { display: inline; }
+
+  /* Hide the secondary hover image on mobile — no crossfade needed. */
+  body.template-collection .product-card .isoua-rc-img--secondary {
+    display: none;
+  }
+}

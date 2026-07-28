@@ -1,0 +1,553 @@
+{% doc %}
+  @prompt
+    Create a fully dynamic, scrollable FAQ section that replicates Rhode Skin’s FAQ page.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | replace: '-', '' | downcase %}
+
+{% style %}
+  /* 1. Break out of the Horizon Theme's default padding to force full-width */
+  .ai-faq-container-{{ ai_gen_id }} {
+    display: block;
+    width: 100vw !important;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 0 0 40px 0;
+    background: transparent;
+  }
+  .mobile{
+    display:none;
+  }
+
+  .ai-faq-layout-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: minmax(220px, auto) 1fr;
+    gap: 40px;
+    align-items: start;
+    max-width: 100%;
+    margin: 0;
+    padding: 0 var(--page-margin, 40px);
+    box-sizing: border-box;
+  }
+
+  .ai-faq-nav-{{ ai_gen_id }} {
+    position: sticky;
+    top: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #f1f0ed;
+    padding: 0.5vw;
+    border-radius: 12px;
+  }
+
+  .ai-faq-nav-item-{{ ai_gen_id }} {
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    /* On-brand ISOA nav: body font (Inter), heavier weight, uppercase w/ letter-spacing.
+       Mirrors the .rh-otg__label pattern on the PDP grey pill. */
+    font-family: var(--font-body--family), {{ block.settings.nav_font.fallback_families }};
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: {{ block.settings.nav_text_color }};
+    transition: all 0.3s ease;
+    position: relative;
+    border-radius: 8px;
+  }
+
+  .ai-faq-nav-item-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.nav_hover_bg }};
+  }
+
+  {% comment %} .ai-faq-nav-item-{{ ai_gen_id }}.active {
+    background-color: {{ block.settings.nav_active_bg }};
+    color: {{ block.settings.nav_active_text_color }};
+  } {% endcomment %}
+
+  .ai-faq-nav-item-{{ ai_gen_id }}.active {
+    {% comment %} background-color: {{ block.settings.nav_active_bg }}; {% endcomment %}
+    color: {{ block.settings.nav_active_text_color }};
+    transform: translateX(6px);
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .ai-faq-nav-item-{{ ai_gen_id }}.active::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: {{ block.settings.nav_active_text_color }};
+  }
+
+  .ai-faq-content-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    width: 100%;
+    background: #f1f0ed;
+    padding: 1vw;
+    border-radius: 12px;
+  }
+
+  .ai-faq-category-{{ ai_gen_id }} {
+    scroll-margin-top: 120px;
+    width: 100%;
+  }
+
+  .ai-faq-category-title-{{ ai_gen_id }} {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 24px 0;
+    color: {{ block.settings.category_title_color }};
+    font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
+    font-style: normal !important;
+  }
+
+  .ai-faq-questions-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .ai-faq-question-{{ ai_gen_id }} {
+    border-bottom: 1px solid {{ block.settings.divider_color }};
+  }
+
+  .ai-faq-question-{{ ai_gen_id }}:last-child {
+    border-bottom: none;
+  }
+
+  .ai-faq-question-header-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    cursor: pointer;
+    gap: 15px;
+  }
+
+  .ai-faq-question-text-{{ ai_gen_id }} {
+    font-size: 14px;
+    font-weight: 500;
+    color: {{ block.settings.question_text_color }};
+    margin: 0;
+    flex: 1;
+    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
+    font-style: normal !important;
+  }
+
+  .ai-faq-toggle-{{ ai_gen_id }} {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: {{ block.settings.toggle_bg_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-faq-toggle-icon-{{ ai_gen_id }} {
+    width: 14px;
+    height: 14px;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-faq-toggle-icon-{{ ai_gen_id }}::before,
+  .ai-faq-toggle-icon-{{ ai_gen_id }}::after {
+    content: '';
+    position: absolute;
+    background-color: {{ block.settings.toggle_icon_color }};
+    transition: transform 0.3s ease;
+  }
+
+  .ai-faq-toggle-icon-{{ ai_gen_id }}::before {
+    width: 14px;
+    height: 2px;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
+
+  .ai-faq-toggle-icon-{{ ai_gen_id }}::after {
+    width: 2px;
+    height: 14px;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+  }
+
+  .ai-faq-question-{{ ai_gen_id }}.open .ai-faq-toggle-icon-{{ ai_gen_id }} {
+    transform: rotate(45deg);
+  }
+
+  .ai-faq-answer-{{ ai_gen_id }} {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+
+  .ai-faq-answer-content-{{ ai_gen_id }} {
+    padding: 0 0 16px 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: {{ block.settings.answer_text_color }};
+    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
+  }
+
+  /* --- BULLETPROOF MOBILE OVERRIDES --- */
+  @media screen and (max-width: 950px) {
+    /* Container inset matches SS-Header-1 pill outer edge (measured live: 16px on 375vw).
+       Top padding trimmed 20→5 to match Rhode's hero→FAQ gap (~11px) at 375vw. */
+    .ai-faq-container-{{ ai_gen_id }} {
+      padding: 5px 1rem 20px;
+    }
+    .content-for-layout[data-template="page.faq"] .spacing-style .spacing-style h1{
+      display:none;
+    }
+
+    /* Grey pill: outer edge = container padding (32px inset, matches header pill),
+       inner padding 1rem matches header pill's padding_horizontal_mobile,
+       radius 10px matches site convention (announcement bar + section_radius). */
+    .ai-faq-layout-{{ ai_gen_id }} {
+      display: flex !important;
+      flex-direction: column;
+      gap: 0;
+      padding: 1rem !important;
+      width: 100%;
+      border-radius: 10px;
+      background: #f1f0ed;
+    }
+    /* "FAQ" mobile title — same style as question text (Inter 700 uppercase), sized up for section-heading prominence. */
+    .ai-faq-layout-{{ ai_gen_id }} span{
+      font-size: 20px !important;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 1vw 0 1vw 1rem;
+    }
+
+    /* Keep the horizontal scrolling pills, but remove sticky vertical logic */
+    .ai-faq-nav-{{ ai_gen_id }} {
+      position: relative !important;
+      top: auto !important;
+      flex-direction: row;
+      overflow-x: auto;
+      gap: 12px;
+      padding: 5vw 0px 0px 0px !important;
+      margin: 0 !important;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      width: 100%;
+      border-radius: 10px 10px 0 0;
+      box-sizing: border-box;
+    }
+
+    .ai-faq-nav-{{ ai_gen_id }}::-webkit-scrollbar {
+      display: none;
+    }
+
+    .ai-faq-nav-item-{{ ai_gen_id }} {
+      white-space: nowrap;
+      padding: 10px 20px;
+      font-size: 13px;
+      border-radius: 999px;
+      border: 1px solid {{ block.settings.mobile_pill_border_color }};
+      background-color: {{ block.settings.mobile_pill_bg }};
+    }
+
+    /* Content stretches fully; horizontal padding comes from the pill wrapper. */
+    .ai-faq-content-{{ ai_gen_id }} {
+      gap: 40px;
+      width: 100%;
+      border-radius: 0 0 10px 10px;
+      padding: 0 0 1rem;
+    }
+
+    .ai-faq-category-title-{{ ai_gen_id }} {
+      padding: 10vw 0px 1vw;
+      margin:0;
+      border-bottom:.1px solid #c7c7c7;
+      font-size:5vw !important;
+    }
+
+    .ai-faq-question-{{ ai_gen_id }} {
+      padding: 0 15px 0 0 ;
+    }
+    /* Match announcement-bar text on mobile: 12px, bold, uppercase already in copy. */
+    .ai-faq-question-text-{{ ai_gen_id }} {
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .ai-faq-nav-item-{{ ai_gen_id }}.active {
+      display:none;
+    }
+    .ai-faq-answer-content-{{ ai_gen_id }} {
+      font-size:3vw;
+    }
+    .mobile{
+      display:flex;
+    }
+  }
+{% endstyle %}
+
+<faq-section-{{ ai_gen_id }} class="ai-faq-container-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-faq-layout-{{ ai_gen_id }}">
+    <span class="mobile">FAQ</span>
+    <nav class="ai-faq-nav-{{ ai_gen_id }}" data-faq-nav></nav>
+    <div class="ai-faq-content-{{ ai_gen_id }}" data-faq-content></div>
+  </div>
+</faq-section-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    if (customElements.get('faq-section-{{ ai_gen_id }}')) {
+      return;
+    }
+
+    const faqDataRaw{{ ai_gen_id }} = [
+      {% if block.settings.category_1_name != blank %}{ category: {{ block.settings.category_1_name | json }}, questions: [{% for i in (1..20) %}{% assign question_key = 'cat1_q' | append: i %}{% assign answer_key = 'cat1_a' | append: i %}{% if block.settings[question_key] != blank %}{ question: {{ block.settings[question_key] | json }}, answer: {{ block.settings[answer_key] | default: '' | json }} }{% unless forloop.last %},{% endunless %}{% endif %}{% endfor %}]},{% endif %}
+      {% if block.settings.category_2_name != blank %}{ category: {{ block.settings.category_2_name | json }}, questions: [{% for i in (1..20) %}{% assign question_key = 'cat2_q' | append: i %}{% assign answer_key = 'cat2_a' | append: i %}{% if block.settings[question_key] != blank %}{ question: {{ block.settings[question_key] | json }}, answer: {{ block.settings[answer_key] | default: '' | json }} }{% unless forloop.last %},{% endunless %}{% endif %}{% endfor %}]},{% endif %}
+      {% if block.settings.category_3_name != blank %}{ category: {{ block.settings.category_3_name | json }}, questions: [{% for i in (1..20) %}{% assign question_key = 'cat3_q' | append: i %}{% assign answer_key = 'cat3_a' | append: i %}{% if block.settings[question_key] != blank %}{ question: {{ block.settings[question_key] | json }}, answer: {{ block.settings[answer_key] | default: '' | json }} }{% unless forloop.last %},{% endunless %}{% endif %}{% endfor %}]},{% endif %}
+      {% if block.settings.category_4_name != blank %}{ category: {{ block.settings.category_4_name | json }}, questions: [{% for i in (1..20) %}{% assign question_key = 'cat4_q' | append: i %}{% assign answer_key = 'cat4_a' | append: i %}{% if block.settings[question_key] != blank %}{ question: {{ block.settings[question_key] | json }}, answer: {{ block.settings[answer_key] | default: '' | json }} }{% unless forloop.last %},{% endunless %}{% endif %}{% endfor %}]},{% endif %}
+      {% if block.settings.category_5_name != blank %}{ category: {{ block.settings.category_5_name | json }}, questions: [{% for i in (1..20) %}{% assign question_key = 'cat5_q' | append: i %}{% assign answer_key = 'cat5_a' | append: i %}{% if block.settings[question_key] != blank %}{ question: {{ block.settings[question_key] | json }}, answer: {{ block.settings[answer_key] | default: '' | json }} }{% unless forloop.last %},{% endunless %}{% endif %}{% endfor %}]},{% endif %}
+      {% if block.settings.category_6_name != blank %}{ category: {{ block.settings.category_6_name | json }}, questions: [{% for i in (1..20) %}{% assign question_key = 'cat6_q' | append: i %}{% assign answer_key = 'cat6_a' | append: i %}{% if block.settings[question_key] != blank %}{ question: {{ block.settings[question_key] | json }}, answer: {{ block.settings[answer_key] | default: '' | json }} }{% unless forloop.last %},{% endunless %}{% endif %}{% endfor %}]},{% endif %}
+      {% if block.settings.category_7_name != blank %}{ category: {{ block.settings.category_7_name | json }}, questions: [{% for i in (1..20) %}{% assign question_key = 'cat7_q' | append: i %}{% assign answer_key = 'cat7_a' | append: i %}{% if block.settings[question_key] != blank %}{ question: {{ block.settings[question_key] | json }}, answer: {{ block.settings[answer_key] | default: '' | json }} }{% unless forloop.last %},{% endunless %}{% endif %}{% endfor %}]},{% endif %}
+      {% if block.settings.category_8_name != blank %}{ category: {{ block.settings.category_8_name | json }}, questions: [{% for i in (1..20) %}{% assign question_key = 'cat8_q' | append: i %}{% assign answer_key = 'cat8_a' | append: i %}{% if block.settings[question_key] != blank %}{ question: {{ block.settings[question_key] | json }}, answer: {{ block.settings[answer_key] | default: '' | json }} }{% unless forloop.last %},{% endunless %}{% endif %}{% endfor %}]},{% endif %}
+      {% if block.settings.category_9_name != blank %}{ category: {{ block.settings.category_9_name | json }}, questions: [{% for i in (1..20) %}{% assign question_key = 'cat9_q' | append: i %}{% assign answer_key = 'cat9_a' | append: i %}{% if block.settings[question_key] != blank %}{ question: {{ block.settings[question_key] | json }}, answer: {{ block.settings[answer_key] | default: '' | json }} }{% unless forloop.last %},{% endunless %}{% endif %}{% endfor %}]},{% endif %}
+      {% if block.settings.category_10_name != blank %}{ category: {{ block.settings.category_10_name | json }}, questions: [{% for i in (1..20) %}{% assign question_key = 'cat10_q' | append: i %}{% assign answer_key = 'cat10_a' | append: i %}{% if block.settings[question_key] != blank %}{ question: {{ block.settings[question_key] | json }}, answer: {{ block.settings[answer_key] | default: '' | json }} }{% unless forloop.last %},{% endunless %}{% endif %}{% endfor %}]} {% endif %}
+    ];
+
+    const faqData{{ ai_gen_id }} = faqDataRaw{{ ai_gen_id }}.filter(cat => cat && cat.category && cat.questions && cat.questions.length > 0);
+
+    class FaqSection{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.faqData = faqData{{ ai_gen_id }};
+      }
+
+      connectedCallback() {
+        this.navContainer = this.querySelector('[data-faq-nav]');
+        this.contentContainer = this.querySelector('[data-faq-content]');
+        
+        if (this.faqData.length > 0) {
+          this.render();
+          this.setupEventListeners();
+          
+          // ONLY run the scroll-hijacking observer on Desktop to fix the mobile scroll bug
+          if (window.innerWidth > 989) {
+            setTimeout(() => {
+              this.setupScrollObserver();
+            }, 100);
+          }
+        }
+      }
+
+      render() {
+        this.navContainer.innerHTML = this.faqData.map((cat, index) => `
+          <button class="ai-faq-nav-item-{{ ai_gen_id }} ${index === 0 ? 'active' : ''}" data-category="${index}">
+            ${cat.category}
+          </button>
+        `).join('');
+
+        this.contentContainer.innerHTML = this.faqData.map((cat, catIndex) => `
+          <div class="ai-faq-category-{{ ai_gen_id }}" id="category-{{ ai_gen_id }}-${catIndex}" data-category="${catIndex}">
+            <h2 class="ai-faq-category-title-{{ ai_gen_id }}">${cat.category}</h2>
+            <div class="ai-faq-questions-{{ ai_gen_id }}">
+              ${cat.questions.map((q, qIndex) => `
+                <div class="ai-faq-question-{{ ai_gen_id }}">
+                  <div class="ai-faq-question-header-{{ ai_gen_id }}">
+                    <h3 class="ai-faq-question-text-{{ ai_gen_id }}">${q.question}</h3>
+                    <div class="ai-faq-toggle-{{ ai_gen_id }}">
+                      <div class="ai-faq-toggle-icon-{{ ai_gen_id }}"></div>
+                    </div>
+                  </div>
+                  <div class="ai-faq-answer-{{ ai_gen_id }}">
+                    <div class="ai-faq-answer-content-{{ ai_gen_id }}">${q.answer}</div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `).join('');
+      }
+
+      setupEventListeners() {
+        this.navContainer.querySelectorAll('.ai-faq-nav-item-{{ ai_gen_id }}').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            const categoryIndex = e.target.dataset.category;
+            const categoryEl = document.getElementById('category-{{ ai_gen_id }}-' + categoryIndex);
+            
+            if (categoryEl) {
+              // Scroll safely without locking the page
+              const yOffset = -100; 
+              const y = categoryEl.getBoundingClientRect().top + window.pageYOffset + yOffset;
+              window.scrollTo({top: y, behavior: 'smooth'});
+              
+              this.navContainer.querySelectorAll('.ai-faq-nav-item-{{ ai_gen_id }}').forEach(b => b.classList.remove('active'));
+              e.target.classList.add('active');
+            }
+          });
+        });
+
+        this.contentContainer.querySelectorAll('.ai-faq-question-header-{{ ai_gen_id }}').forEach(header => {
+          header.addEventListener('click', (e) => {
+            const questionEl = e.currentTarget.closest('.ai-faq-question-{{ ai_gen_id }}');
+            const categoryEl = questionEl.closest('.ai-faq-category-{{ ai_gen_id }}');
+            const isOpen = questionEl.classList.contains('open');
+            
+            categoryEl.querySelectorAll('.ai-faq-question-{{ ai_gen_id }}').forEach(q => {
+              q.classList.remove('open');
+              q.querySelector('.ai-faq-answer-{{ ai_gen_id }}').style.maxHeight = null;
+            });
+            
+            if (!isOpen) {
+              questionEl.classList.add('open');
+              const answer = questionEl.querySelector('.ai-faq-answer-{{ ai_gen_id }}');
+              const content = answer.querySelector('.ai-faq-answer-content-{{ ai_gen_id }}');
+              answer.style.maxHeight = content.scrollHeight + 'px';
+            }
+          });
+        });
+      }
+
+      setupScrollObserver() {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const categoryIndex = entry.target.dataset.category;
+              this.navContainer.querySelectorAll('.ai-faq-nav-item-{{ ai_gen_id }}').forEach(btn => btn.classList.remove('active'));
+              const activeBtn = this.navContainer.querySelector('[data-category="' + categoryIndex + '"]');
+              if (activeBtn) activeBtn.classList.add('active');
+            }
+          });
+        }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+        this.contentContainer.querySelectorAll('.ai-faq-category-{{ ai_gen_id }}').forEach(category => {
+          observer.observe(category);
+        });
+      }
+    }
+
+    customElements.define('faq-section-{{ ai_gen_id }}', FaqSection{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "FAQ section",
+  "settings": [
+    { "type": "header", "content": "Category 1" },
+    { "type": "text", "id": "category_1_name", "label": "Category name", "default": "General" },
+    { "type": "text", "id": "cat1_q1", "label": "Question 1", "default": "What is your return policy?" },
+    { "type": "textarea", "id": "cat1_a1", "label": "Answer 1", "default": "We offer a 30-day return policy on all items." },
+    { "type": "text", "id": "cat1_q2", "label": "Question 2", "default": "How long does shipping take?" },
+    { "type": "textarea", "id": "cat1_a2", "label": "Answer 2", "default": "Standard shipping takes 5-7 business days." },
+    { "type": "text", "id": "cat1_q3", "label": "Question 3" }, { "type": "textarea", "id": "cat1_a3", "label": "Answer 3" },
+    { "type": "text", "id": "cat1_q4", "label": "Question 4" }, { "type": "textarea", "id": "cat1_a4", "label": "Answer 4" },
+    { "type": "text", "id": "cat1_q5", "label": "Question 5" }, { "type": "textarea", "id": "cat1_a5", "label": "Answer 5" },
+    { "type": "text", "id": "cat1_q6", "label": "Question 6" }, { "type": "textarea", "id": "cat1_a6", "label": "Answer 6" },
+    { "type": "text", "id": "cat1_q7", "label": "Question 7" }, { "type": "textarea", "id": "cat1_a7", "label": "Answer 7" },
+    { "type": "text", "id": "cat1_q8", "label": "Question 8" }, { "type": "textarea", "id": "cat1_a8", "label": "Answer 8" },
+    { "type": "text", "id": "cat1_q9", "label": "Question 9" }, { "type": "textarea", "id": "cat1_a9", "label": "Answer 9" },
+    { "type": "text", "id": "cat1_q10", "label": "Question 10" }, { "type": "textarea", "id": "cat1_a10", "label": "Answer 10" },
+    
+    { "type": "header", "content": "Category 2" },
+    { "type": "text", "id": "category_2_name", "label": "Category name", "default": "Shipping" },
+    { "type": "text", "id": "cat2_q1", "label": "Question 1", "default": "Do you ship internationally?" },
+    { "type": "textarea", "id": "cat2_a1", "label": "Answer 1", "default": "Yes, we ship to most countries worldwide." },
+    { "type": "text", "id": "cat2_q2", "label": "Question 2" }, { "type": "textarea", "id": "cat2_a2", "label": "Answer 2" },
+    { "type": "text", "id": "cat2_q3", "label": "Question 3" }, { "type": "textarea", "id": "cat2_a3", "label": "Answer 3" },
+    { "type": "text", "id": "cat2_q4", "label": "Question 4" }, { "type": "textarea", "id": "cat2_a4", "label": "Answer 4" },
+    { "type": "text", "id": "cat2_q5", "label": "Question 5" }, { "type": "textarea", "id": "cat2_a5", "label": "Answer 5" },
+    { "type": "text", "id": "cat2_q6", "label": "Question 6" }, { "type": "textarea", "id": "cat2_a6", "label": "Answer 6" },
+    { "type": "text", "id": "cat2_q7", "label": "Question 7" }, { "type": "textarea", "id": "cat2_a7", "label": "Answer 7" },
+    { "type": "text", "id": "cat2_q8", "label": "Question 8" }, { "type": "textarea", "id": "cat2_a8", "label": "Answer 8" },
+    { "type": "text", "id": "cat2_q9", "label": "Question 9" }, { "type": "textarea", "id": "cat2_a9", "label": "Answer 9" },
+    { "type": "text", "id": "cat2_q10", "label": "Question 10" }, { "type": "textarea", "id": "cat2_a10", "label": "Answer 10" },
+
+    { "type": "header", "content": "Category 3" },
+    { "type": "text", "id": "category_3_name", "label": "Category name", "default": "Returns" },
+    { "type": "text", "id": "cat3_q1", "label": "Question 1", "default": "How do I start a return?" },
+    { "type": "textarea", "id": "cat3_a1", "label": "Answer 1", "default": "Contact our support team to initiate a return." },
+    { "type": "text", "id": "cat3_q2", "label": "Question 2" }, { "type": "textarea", "id": "cat3_a2", "label": "Answer 2" },
+    { "type": "text", "id": "cat3_q3", "label": "Question 3" }, { "type": "textarea", "id": "cat3_a3", "label": "Answer 3" },
+    { "type": "text", "id": "cat3_q4", "label": "Question 4" }, { "type": "textarea", "id": "cat3_a4", "label": "Answer 4" },
+    { "type": "text", "id": "cat3_q5", "label": "Question 5" }, { "type": "textarea", "id": "cat3_a5", "label": "Answer 5" },
+    { "type": "text", "id": "cat3_q6", "label": "Question 6" }, { "type": "textarea", "id": "cat3_a6", "label": "Answer 6" },
+    { "type": "text", "id": "cat3_q7", "label": "Question 7" }, { "type": "textarea", "id": "cat3_a7", "label": "Answer 7" },
+    { "type": "text", "id": "cat3_q8", "label": "Question 8" }, { "type": "textarea", "id": "cat3_a8", "label": "Answer 8" },
+    { "type": "text", "id": "cat3_q9", "label": "Question 9" }, { "type": "textarea", "id": "cat3_a9", "label": "Answer 9" },
+    { "type": "text", "id": "cat3_q10", "label": "Question 10" }, { "type": "textarea", "id": "cat3_a10", "label": "Answer 10" },
+
+    { "type": "header", "content": "Category 4" },
+    { "type": "text", "id": "category_4_name", "label": "Category name" },
+    { "type": "text", "id": "cat4_q1", "label": "Question 1" }, { "type": "textarea", "id": "cat4_a1", "label": "Answer 1" },
+    { "type": "text", "id": "cat4_q2", "label": "Question 2" }, { "type": "textarea", "id": "cat4_a2", "label": "Answer 2" },
+    { "type": "text", "id": "cat4_q3", "label": "Question 3" }, { "type": "textarea", "id": "cat4_a3", "label": "Answer 3" },
+    { "type": "text", "id": "cat4_q4", "label": "Question 4" }, { "type": "textarea", "id": "cat4_a4", "label": "Answer 4" },
+    { "type": "text", "id": "cat4_q5", "label": "Question 5" }, { "type": "textarea", "id": "cat4_a5", "label": "Answer 5" },
+    { "type": "text", "id": "cat4_q6", "label": "Question 6" }, { "type": "textarea", "id": "cat4_a6", "label": "Answer 6" },
+    { "type": "text", "id": "cat4_q7", "label": "Question 7" }, { "type": "textarea", "id": "cat4_a7", "label": "Answer 7" },
+    { "type": "text", "id": "cat4_q8", "label": "Question 8" }, { "type": "textarea", "id": "cat4_a8", "label": "Answer 8" },
+    { "type": "text", "id": "cat4_q9", "label": "Question 9" }, { "type": "textarea", "id": "cat4_a9", "label": "Answer 9" },
+    { "type": "text", "id": "cat4_q10", "label": "Question 10" }, { "type": "textarea", "id": "cat4_a10", "label": "Answer 10" },
+
+    { "type": "header", "content": "Category 5" },
+    { "type": "text", "id": "category_5_name", "label": "Category name" },
+    { "type": "text", "id": "cat5_q1", "label": "Question 1" }, { "type": "textarea", "id": "cat5_a1", "label": "Answer 1" },
+    { "type": "text", "id": "cat5_q2", "label": "Question 2" }, { "type": "textarea", "id": "cat5_a2", "label": "Answer 2" },
+    { "type": "text", "id": "cat5_q3", "label": "Question 3" }, { "type": "textarea", "id": "cat5_a3", "label": "Answer 3" },
+    { "type": "text", "id": "cat5_q4", "label": "Question 4" }, { "type": "textarea", "id": "cat5_a4", "label": "Answer 4" },
+    { "type": "text", "id": "cat5_q5", "label": "Question 5" }, { "type": "textarea", "id": "cat5_a5", "label": "Answer 5" },
+    { "type": "text", "id": "cat5_q6", "label": "Question 6" }, { "type": "textarea", "id": "cat5_a6", "label": "Answer 6" },
+    { "type": "text", "id": "cat5_q7", "label": "Question 7" }, { "type": "textarea", "id": "cat5_a7", "label": "Answer 7" },
+    { "type": "text", "id": "cat5_q8", "label": "Question 8" }, { "type": "textarea", "id": "cat5_a8", "label": "Answer 8" },
+    { "type": "text", "id": "cat5_q9", "label": "Question 9" }, { "type": "textarea", "id": "cat5_a9", "label": "Answer 9" },
+    { "type": "text", "id": "cat5_q10", "label": "Question 10" }, { "type": "textarea", "id": "cat5_a10", "label": "Answer 10" },
+
+    { "type": "header", "content": "Navigation style" },
+    { "type": "font_picker", "id": "nav_font", "label": "Font", "default": "inter_n5" },
+    { "type": "color", "id": "nav_text_color", "label": "Text color", "default": "#666666" },
+    { "type": "color", "id": "nav_hover_bg", "label": "Hover background", "default": "#f5f5f5" },
+    { "type": "color", "id": "nav_active_bg", "label": "Active background", "default": "#000000" },
+    { "type": "color", "id": "nav_active_text_color", "label": "Active text color", "default": "#ffffff" },
+
+    { "type": "header", "content": "Mobile navigation" },
+    { "type": "color", "id": "mobile_pill_bg", "label": "Pill background", "default": "#ffffff" },
+    { "type": "color", "id": "mobile_pill_border_color", "label": "Pill border", "default": "#e0e0e0" },
+    { "type": "color", "id": "mobile_pill_active_bg", "label": "Active pill background", "default": "#f5f5f5" },
+    { "type": "color", "id": "mobile_pill_active_border", "label": "Active pill border", "default": "#000000" },
+
+    { "type": "header", "content": "Content style" },
+    { "type": "font_picker", "id": "heading_font", "label": "Category heading font", "default": "inter_n8" },
+    { "type": "font_picker", "id": "body_font", "label": "Question and answer font", "default": "inter_n4" },
+    { "type": "color", "id": "category_title_color", "label": "Category title color", "default": "#000000" },
+    { "type": "color", "id": "question_text_color", "label": "Question text color", "default": "#000000" },
+    { "type": "color", "id": "answer_text_color", "label": "Answer text color", "default": "#666666" },
+    { "type": "color", "id": "divider_color", "label": "Divider color", "default": "#e0e0e0" },
+
+    { "type": "header", "content": "Toggle button" },
+    { "type": "color", "id": "toggle_bg_color", "label": "Background color", "default": "#f0f0f0" },
+    { "type": "color", "id": "toggle_icon_color", "label": "Icon color", "default": "#000000" }
+  ],
+  "presets": [
+    {
+      "name": "FAQ section"
+    }
+  ]
+}
+{% endschema %}
