@@ -2,7 +2,9 @@
    Loaded via sections/rhode-faq.liquid stylesheet_tag. */
 
 .rhode-faq {
-  padding: 24px 0 80px;
+  /* Symmetric vertical padding — bottom equals top so the gap to the
+     tagline / footer mirrors the gap from the hero above. */
+  padding: 24px 0;
 }
 
 .rhode-faq__inner {
@@ -197,44 +199,48 @@
   margin-top: 6px;
 }
 
-/* Mobile: stack vertically. Category nav becomes a horizontal pill carousel
-   (scrolls edge-to-edge, no wrapping) matching the Rhode reference. */
+/* Mobile: nav and panel visually merge into ONE card (gap: 0, matched
+   border-radius). Category nav becomes a horizontal pill carousel with
+   pills inset from the card edges — no negative-margin edge-to-edge
+   trick, so the pills breathe against the card's inner padding. */
 @media (max-width: 749px) {
   .rhode-faq {
-    padding: 12px 0 40px;
+    /* Symmetric — match hero->FAQ gap above with FAQ->tagline gap below */
+    padding: 12px 0;
   }
 
   .rhode-faq__inner {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 0;
   }
 
   .rhode-faq__nav {
     position: static;
-    padding: 28px 24px 20px;
+    padding: 24px 24px 16px;
+    border-radius: 10px 10px 0 0;
   }
 
   .rhode-faq__panel {
-    padding: 28px 24px;
+    padding: 20px 24px 28px;
     min-height: auto;
+    border-radius: 0 0 10px 10px;
   }
 
   .rhode-faq__title,
   .rhode-faq__panel-title {
-    font-size: 26px;
-    margin-bottom: 20px;
+    font-size: 22px;
+    margin-bottom: 16px;
   }
 
   .rhode-faq__cat-list {
     flex-direction: row;
-    gap: 10px;
+    gap: 8px;
     overflow-x: auto;
     overflow-y: hidden;
-    scroll-snap-type: x proximity;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
-    margin: 0 -24px;
-    padding: 4px 24px 6px;
+    /* Small vertical padding so pill borders don't clip against scroll edges */
+    padding-block: 2px 4px;
   }
 
   .rhode-faq__cat-list::-webkit-scrollbar {
@@ -243,15 +249,14 @@
 
   .rhode-faq__cat-btn {
     flex: 0 0 auto;
-    scroll-snap-align: start;
     white-space: nowrap;
     background: transparent;
     color: #67645e;
     border: 1px solid #67645e;
     border-radius: 999px;
-    padding: 10px 18px;
-    font-size: 12px;
-    letter-spacing: 0.05em;
+    padding: 7px 14px;
+    font-size: 11px;
+    letter-spacing: 0.04em;
     line-height: 1;
     text-decoration: none;
     text-underline-offset: 0;
