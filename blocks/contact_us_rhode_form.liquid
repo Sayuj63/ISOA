@@ -22,10 +22,15 @@
   padding-top: 0 !important;
 }
 
-/* Center the whole form column on the page (Rhode measured: 600px @ 1440vw). */
+/* Match the pill rail (same edges as the header) — was 640px hardcoded which
+   underfit the pill on desktop and overflowed the viewport on mobile.
+   Formula pulled from --page-width / --page-margin at :root (base.css:233). */
 .ai-contact-form-{{ ai_gen_id }} {
   width: 100%;
-  max-width: 640px;
+  max-width: min(
+    calc(var(--page-width) - var(--page-margin) * 2),
+    calc(100% - var(--page-margin) * 2)
+  );
   margin: 0 auto;
   background: transparent;
   box-sizing: border-box;
@@ -42,7 +47,10 @@
 contact-form-{{ ai_gen_id }} {
   display: block;
   width: 100%;
-  max-width: 640px;
+  max-width: min(
+    calc(var(--page-width) - var(--page-margin) * 2),
+    calc(100% - var(--page-margin) * 2)
+  );
   margin: 0 auto;
   background: transparent;
 }
