@@ -101,9 +101,30 @@
   pointer-events: none;
 }
 
+.isoa-rc-reviews {
+  grid-column: 1 / -1;
+  grid-row: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 4px;
+  font-size: 12px;
+  line-height: 1.2;
+  color: #67645e;
+}
+
+.isoa-rc-stars {
+  letter-spacing: 0.05em;
+  color: #67645e;
+}
+
+.isoa-rc-review-count {
+  color: #67645e;
+  opacity: 0.85;
+}
+
 .isoa-rc-title {
   grid-column: 1;
-  grid-row: 1;
   margin: 0;
   font-weight: 700;
   font-size: clamp(15px, 1.2vw, 20px);
