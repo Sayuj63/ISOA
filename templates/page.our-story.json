@@ -504,7 +504,8 @@
         "group_hKxVim"
       ],
       "custom_css": [
-        "{padding: 2vw; border-radius: 24px; overflow: hidden;}"
+        "{margin-inline: 3.1vw; padding: 2vw; border-radius: 10px; overflow: hidden;}",
+        "@media screen and (max-width: 749px) {{margin-inline: 16px; padding: 16px; }}"
       ],
       "name": "t:names.multicolumn",
       "settings": {
@@ -629,7 +630,7 @@
         "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
         "outer_background_color": "#ffffff",
         "border_color": "#121212",
-        "margin_top": 0,
+        "margin_top": 24,
         "margin_bottom": 0,
         "margin_horizontal": 0,
         "margin_horizontal_mobile": 0,
