@@ -64,53 +64,6 @@
     },
     "hero_efkYrN": {
       "type": "hero",
-      "blocks": {
-        "text_DKmi43": {
-          "type": "text",
-          "name": "t:names.heading",
-          "settings": {
-            "text": "<p>Browse our latest products</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h2",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground-heading)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "button_WdAmn3": {
-          "type": "button",
-          "name": "t:names.button",
-          "settings": {
-            "label": "Shop all",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button-secondary",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "text_DKmi43",
-        "button_WdAmn3"
-      ],
       "custom_css": [
         ".hero {padding: 1.5vw; padding-top: 0; overflow: hidden;}",
         ".hero img,.hero__media img,.hero__media {border-radius: 10px;}",
@@ -164,7 +117,7 @@
             "heading_height": 130,
             "heading_mt": 0,
             "heading_mt_mobile": 0,
-            "heading_color": "#121212"
+            "heading_color": "#67645E"
           }
         },
         "text_8jWfVK": {
@@ -179,7 +132,7 @@
             "text_height": 150,
             "text_mt": 12,
             "text_mt_mobile": 12,
-            "text_color": "#121212"
+            "text_color": "#67645E"
           }
         }
       },
@@ -243,7 +196,7 @@
             "heading_height": 130,
             "heading_mt": 0,
             "heading_mt_mobile": 0,
-            "heading_color": "#121212"
+            "heading_color": "#67645E"
           }
         },
         "text_TJBmWR": {
@@ -258,7 +211,7 @@
             "text_height": 150,
             "text_mt": 12,
             "text_mt_mobile": 12,
-            "text_color": "#121212"
+            "text_color": "#67645E"
           }
         }
       },
@@ -322,7 +275,7 @@
             "heading_height": 130,
             "heading_mt": 0,
             "heading_mt_mobile": 0,
-            "heading_color": "#121212"
+            "heading_color": "#67645E"
           }
         },
         "text_MJ4Bpj": {
@@ -337,7 +290,7 @@
             "text_height": 150,
             "text_mt": 12,
             "text_mt_mobile": 12,
-            "text_color": "#121212"
+            "text_color": "#67645E"
           }
         }
       },
@@ -401,7 +354,7 @@
             "heading_height": 130,
             "heading_mt": 0,
             "heading_mt_mobile": 0,
-            "heading_color": "#121212"
+            "heading_color": "#67645E"
           }
         },
         "text_YKVqzm": {
@@ -416,7 +369,7 @@
             "text_height": 150,
             "text_mt": 12,
             "text_mt_mobile": 12,
-            "text_color": "#121212"
+            "text_color": "#67645E"
           }
         }
       },
@@ -480,7 +433,7 @@
             "heading_height": 130,
             "heading_mt": 0,
             "heading_mt_mobile": 0,
-            "heading_color": "#121212"
+            "heading_color": "#67645E"
           }
         },
         "text_6GqQmx": {
@@ -495,7 +448,7 @@
             "text_height": 150,
             "text_mt": 12,
             "text_mt_mobile": 12,
-            "text_color": "#121212"
+            "text_color": "#67645E"
           }
         }
       },
@@ -559,7 +512,7 @@
             "heading_height": 130,
             "heading_mt": 0,
             "heading_mt_mobile": 0,
-            "heading_color": "#121212"
+            "heading_color": "#67645E"
           }
         },
         "text_Qn4cQA": {
@@ -574,7 +527,7 @@
             "text_height": 150,
             "text_mt": 12,
             "text_mt_mobile": 12,
-            "text_color": "#121212"
+            "text_color": "#67645E"
           }
         }
       },
@@ -638,7 +591,7 @@
             "heading_height": 130,
             "heading_mt": 0,
             "heading_mt_mobile": 0,
-            "heading_color": "#121212"
+            "heading_color": "#67645E"
           }
         },
         "text_NMXa4p": {
@@ -653,7 +606,7 @@
             "text_height": 150,
             "text_mt": 12,
             "text_mt_mobile": 12,
-            "text_color": "#121212"
+            "text_color": "#67645E"
           }
         }
       },
