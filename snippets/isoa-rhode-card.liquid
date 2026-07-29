@@ -74,6 +74,9 @@
       {%- endif -%}
     </div>
 
-    <span class="isoa-rc-cta" aria-hidden="true">BUY — <strong>{{ price_formatted }}</strong></span>
+    <span class="isoa-rc-cta" aria-hidden="true">
+      <span class="isoa-rc-cta__desktop">BUY — <strong>{{ price_formatted }}</strong></span>
+      <span class="isoa-rc-cta__mobile">BUY — <strong>{{ price_short }}</strong></span>
+    </span>
   </a>
 </article>
