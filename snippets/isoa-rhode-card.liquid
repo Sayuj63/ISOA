@@ -28,6 +28,7 @@
   endif
 
   assign price_formatted = product.price | money
+  assign price_short = product.price | money_without_trailing_zeros
   assign title_up = product.title | upcase
 -%}
 
