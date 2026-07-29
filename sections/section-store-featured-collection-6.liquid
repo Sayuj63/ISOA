@@ -921,7 +921,13 @@ For inquiries or permissions, contact daniel@section.store
             {% endfor %}
           {% else %}
           {% for block in section.blocks %}
-            <{% if block.settings.product != blank %}a href="{{ block.settings.product.url }}"{% else %}div{% endif %} class="collection-slide-{{ section.id }} swiper-slide">
+            {% if block.settings.product != blank %}
+              <div class="collection-slide-{{ section.id }} swiper-slide isoa-fc6-slide">
+                {% render 'isoa-rhode-card', product: block.settings.product %}
+              </div>
+              {% continue %}
+            {% endif %}
+            <div class="collection-slide-{{ section.id }} swiper-slide">
               <div class="collection-image-{{ section.id }} {% if block.settings.second_image != blank or block.settings.product.media.size > 1 %}collection-first-image-{{ section.id }}{% endif %}">
                 {% if block.settings.image != blank %}
                   <img src="{{ block.settings.image | image_url }}" alt="{{ block.settings.image.alt }}" {% if lazy %}loading="lazy"{% endif %}>
