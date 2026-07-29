@@ -928,6 +928,8 @@ For inquiries or permissions, contact daniel@section.store
                 {% render 'isoa-rhode-card', product: block.settings.product %}
               </div>
               {% continue %}
+            {% else %}
+              {% continue %}
             {% endif %}
             <div class="collection-slide-{{ section.id }} swiper-slide">
               <div class="collection-image-{{ section.id }} {% if block.settings.second_image != blank or block.settings.product.media.size > 1 %}collection-first-image-{{ section.id }}{% endif %}">
