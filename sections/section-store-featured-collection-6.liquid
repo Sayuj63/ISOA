@@ -1031,12 +1031,20 @@ For inquiries or permissions, contact daniel@section.store
   .shopify-section .swiper-wrapper:has(.isoa-fc6-slide) {
     align-items: stretch;
   }
-  .shopify-section .isoa-fc6-slide {
+  .shopify-section .isoa-fc6-slide,
+  .shopify-section .swiper-slide.isoa-fc6-slide {
+    aspect-ratio: auto !important;
     height: auto !important;
     display: block !important;
     background: transparent !important;
     padding: 0 !important;
     border: 0 !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+  .shopify-section .isoa-fc6-slide::after {
+    display: none !important;
   }
   .shopify-section .isoa-fc6-slide .isoa-rc-card {
     width: 100%;
