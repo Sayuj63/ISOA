@@ -489,6 +489,127 @@
         "padding-block-end": 24
       }
     },
+    "rhode_prep_toggle_new": {
+      "type": "rhode-prep-toggle",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "index": "1",
+            "label": "HIGHLIGHT",
+            "title": "highlight milk",
+            "subtitle": "MULTIPURPOSE LUMINIZER"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "index": "2",
+            "label": "PREP",
+            "title": "prep hydrator",
+            "subtitle": "HYDRATING SKIN PRIMER"
+          }
+        },
+        "row_1_1": {
+          "type": "row",
+          "settings": {
+            "step_index": "1",
+            "label": "WHAT IT IS",
+            "content": "A hybrid luminizer that enhances bare skin and makeup with a shimmery, naturally luminous finish."
+          }
+        },
+        "row_1_2": {
+          "type": "row",
+          "settings": {
+            "step_index": "1",
+            "label": "BENEFITS",
+            "content": "• Provides all-day hydration • Leaves skin looking luminous with a soft, pearly finish"
+          }
+        },
+        "row_1_3": {
+          "type": "row",
+          "settings": {
+            "step_index": "1",
+            "label": "WHERE IT FITS IN YOUR ROUTINE",
+            "content": "On its own on bare skin, mixed into makeup, or layered with skincare and SPF."
+          }
+        },
+        "row_1_4": {
+          "type": "row",
+          "settings": {
+            "step_index": "1",
+            "label": "THE EFFECT",
+            "content": "Hydrated, glowy skin with a pearly finish"
+          }
+        },
+        "row_1_5": {
+          "type": "row",
+          "settings": {
+            "step_index": "1",
+            "label": "KEY INGREDIENTS",
+            "content": "Ceramide Trio • Mineral Complex • Vitamin E • Glycerin"
+          }
+        },
+        "row_2_1": {
+          "type": "row",
+          "settings": {
+            "step_index": "2",
+            "label": "WHAT IT IS",
+            "content": "A hydrating primer that preps skin with a smooth, dewy base for makeup or skincare."
+          }
+        },
+        "row_2_2": {
+          "type": "row",
+          "settings": {
+            "step_index": "2",
+            "label": "BENEFITS",
+            "content": "• Deeply hydrates and plumps • Creates a smooth base that helps makeup wear better"
+          }
+        },
+        "row_2_3": {
+          "type": "row",
+          "settings": {
+            "step_index": "2",
+            "label": "WHERE IT FITS IN YOUR ROUTINE",
+            "content": "After cleansing and serums, before SPF and makeup."
+          }
+        },
+        "row_2_4": {
+          "type": "row",
+          "settings": {
+            "step_index": "2",
+            "label": "THE EFFECT",
+            "content": "Soft, dewy, primed skin"
+          }
+        },
+        "row_2_5": {
+          "type": "row",
+          "settings": {
+            "step_index": "2",
+            "label": "KEY INGREDIENTS",
+            "content": "Hyaluronic Acid • Peptides • Niacinamide • Squalane"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "row_1_1",
+        "row_1_2",
+        "row_1_3",
+        "row_1_4",
+        "row_1_5",
+        "row_2_1",
+        "row_2_2",
+        "row_2_3",
+        "row_2_4",
+        "row_2_5"
+      ],
+      "settings": {
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
     "ss_slider_5_m7VKpN": {
       "type": "ss-slider-5",
       "blocks": {
@@ -2082,6 +2203,7 @@
   },
   "order": [
     "main",
+    "rhode_prep_toggle_new",
     "ss_slider_5_m7VKpN",
     "ss_image_split_row_TniKMq",
     "ss_targetting_animation_Wqer7m",
