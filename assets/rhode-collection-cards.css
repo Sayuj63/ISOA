@@ -97,7 +97,7 @@
   position: absolute;
   left: 16px;
   right: 16px;
-  bottom: 16px;
+  bottom: calc(100% - var(--frame-h, 0px) + 16px);
   z-index: 5;
   display: block;
   padding: 14px 16px;
@@ -119,6 +119,11 @@
   transition: opacity 0.55s cubic-bezier(0.76, 0, 0.24, 1) 0.15s,
               transform 0.55s cubic-bezier(0.76, 0, 0.24, 1) 0.15s;
   pointer-events: none;
+}
+
+.isoa-rc-frame ~ .isoa-rc-cta {
+  bottom: auto;
+  top: calc(1 / 1.16 * 100cqw - 60px);
 }
 
 .isoa-rc-cta strong {
