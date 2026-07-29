@@ -225,11 +225,9 @@
 @media (max-width: 749px) {
   .isoa-rc-card {
     border-radius: 10px;
-    display: flex;
-    flex-direction: column;
   }
   .isoa-rc-link {
-    display: contents;
+    grid-template-rows: auto auto auto;
   }
   .isoa-rc-brand {
     top: 12px;
@@ -244,21 +242,27 @@
   }
   .isoa-rc-info {
     padding: 10px 14px 6px;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr;
     row-gap: 4px;
   }
   .isoa-rc-title {
-    font-size: 14px;
+    font-size: 13px;
+    line-height: 1.25;
   }
   .isoa-rc-price {
-    font-size: 14px;
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: start;
+    font-size: 13px;
   }
   .isoa-rc-subtitle {
     display: none;
   }
   .isoa-rc-cta {
-    position: static;
-    order: 3;
+    grid-row: 3;
+    grid-column: 1;
+    align-self: stretch;
+    justify-self: stretch;
     margin: 4px 14px 14px;
     background: transparent;
     border: 1px solid #67645e;
