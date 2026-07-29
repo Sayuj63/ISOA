@@ -15,7 +15,9 @@
 
 .isoa-rc-link,
 .isoa-rc-link:visited {
-  display: block;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
   color: inherit;
   text-decoration: none;
 }
@@ -26,6 +28,8 @@
   width: 100%;
   overflow: hidden;
   background: #f1f0ed;
+  grid-row: 1;
+  grid-column: 1;
 }
 
 .isoa-rc-img {
