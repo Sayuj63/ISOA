@@ -1,7 +1,8 @@
 /* ISOA · Rhode-style collection card
    Loaded on `template contains 'collection'` via layout/theme.liquid.
-   Snippet: snippets/isoa-rhode-card.liquid
-   Grid: sections/main-collection.liquid renders <li> → snippet. */
+   Snippet: snippets/isoa-rhode-card.liquid.
+   All child elements sit inside .isoa-rc-frame so the card is aspect-ratio-
+   locked — all cards share the same height regardless of title line count. */
 
 .isoa-rc-card {
   position: relative;
@@ -15,21 +16,17 @@
 
 .isoa-rc-link,
 .isoa-rc-link:visited {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto;
+  display: block;
   color: inherit;
   text-decoration: none;
 }
 
 .isoa-rc-frame {
   position: relative;
-  aspect-ratio: 1 / 1.16;
+  aspect-ratio: 4 / 5;
   width: 100%;
   overflow: hidden;
   background: #f1f0ed;
-  grid-row: 1;
-  grid-column: 1;
 }
 
 .isoa-rc-img {
@@ -50,26 +47,14 @@
 .isoa-rc-img--secondary {
   opacity: 0;
   visibility: hidden;
-  z-index: 2;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .isoa-rc-card:hover .isoa-rc-img--primary,
-  .isoa-rc-card:focus-within .isoa-rc-img--primary {
-    opacity: 0;
-  }
-  .isoa-rc-card:hover .isoa-rc-img--secondary,
-  .isoa-rc-card:focus-within .isoa-rc-img--secondary {
-    opacity: 1;
-    visibility: visible;
-  }
+  z-index: 3;
 }
 
 .isoa-rc-brand {
   position: absolute;
   top: 20px;
   left: 24px;
-  z-index: 4;
+  z-index: 5;
   font-family: var(--font-heading--family, var(--font-body--family));
   font-size: clamp(28px, 3.4vw, 52px);
   font-weight: 800;
@@ -84,7 +69,7 @@
   position: absolute;
   top: 20px;
   right: 20px;
-  z-index: 4;
+  z-index: 5;
   padding: 6px 12px;
   border-radius: 999px;
   background: #67645e;
@@ -97,13 +82,63 @@
   pointer-events: none;
 }
 
-.isoa-rc-cta {
-  grid-row: 1;
+.isoa-rc-info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 20px 24px 22px;
+  background: transparent;
+  color: #67645e;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 12px;
+  row-gap: 2px;
+  align-items: baseline;
+  transition: opacity 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+  pointer-events: none;
+}
+
+.isoa-rc-title {
   grid-column: 1;
-  align-self: end;
-  justify-self: stretch;
-  margin: 16px;
-  z-index: 5;
+  grid-row: 1;
+  margin: 0;
+  font-weight: 700;
+  font-size: clamp(15px, 1.2vw, 20px);
+  letter-spacing: 0.03em;
+  color: #67645e;
+  line-height: 1.2;
+}
+
+.isoa-rc-price {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
+  font-weight: 700;
+  font-size: clamp(15px, 1.2vw, 20px);
+  color: #67645e;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.isoa-rc-subtitle {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  margin: 4px 0 0;
+  font-weight: 400;
+  font-size: 14px;
+  color: #67645e;
+  opacity: 0.85;
+  line-height: 1.35;
+}
+
+.isoa-rc-cta {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 4;
   display: block;
   padding: 14px 16px;
   border-radius: 999px;
@@ -126,11 +161,6 @@
   pointer-events: none;
 }
 
-.isoa-rc-info {
-  grid-row: 2;
-  grid-column: 1;
-}
-
 .isoa-rc-cta strong {
   font-weight: 700;
   margin-left: 2px;
@@ -140,6 +170,19 @@
 .isoa-rc-cta__mobile { display: none; }
 
 @media (hover: hover) and (pointer: fine) {
+  .isoa-rc-card:hover .isoa-rc-img--primary,
+  .isoa-rc-card:focus-within .isoa-rc-img--primary {
+    opacity: 0;
+  }
+  .isoa-rc-card:hover .isoa-rc-img--secondary,
+  .isoa-rc-card:focus-within .isoa-rc-img--secondary {
+    opacity: 1;
+    visibility: visible;
+  }
+  .isoa-rc-card:hover .isoa-rc-info,
+  .isoa-rc-card:focus-within .isoa-rc-info {
+    opacity: 0;
+  }
   .isoa-rc-card:hover .isoa-rc-cta,
   .isoa-rc-card:focus-within .isoa-rc-cta {
     opacity: 1;
@@ -147,58 +190,7 @@
   }
 }
 
-.isoa-rc-info {
-  padding: 14px 20px 20px;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  column-gap: 12px;
-  row-gap: 2px;
-  align-items: baseline;
-  transition: opacity 0.35s ease;
-}
-
-.isoa-rc-title {
-  grid-column: 1;
-  grid-row: 1;
-  margin: 0;
-  font-weight: 700;
-  font-size: clamp(15px, 1.2vw, 20px);
-  letter-spacing: 0.03em;
-  color: #67645e;
-  line-height: 1.2;
-}
-
-.isoa-rc-price {
-  grid-column: 2;
-  grid-row: 1;
-  margin: 0;
-  font-weight: 700;
-  font-size: clamp(15px, 1.2vw, 20px);
-  color: #67645e;
-  line-height: 1.2;
-}
-
-.isoa-rc-subtitle {
-  grid-column: 1 / -1;
-  grid-row: 2;
-  margin: 4px 0 0;
-  font-weight: 400;
-  font-size: 14px;
-  color: #67645e;
-  opacity: 0.85;
-  line-height: 1.35;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .isoa-rc-card:hover .isoa-rc-info,
-  .isoa-rc-card:focus-within .isoa-rc-info {
-    opacity: 0;
-  }
-}
-
-/* Grid parent — 3 col desktop, 2 col mobile.
-   :has() targets Horizon's .product-grid when it holds our cards; the
-   .isoa-rc-grid class is a fallback selector we set in main-collection.liquid. */
+/* Grid parent — 3 col desktop, 2 col mobile. */
 .isoa-rc-grid,
 .product-grid:has(.isoa-rc-card),
 .product-grid--collection:has(.isoa-rc-card) {
@@ -229,8 +221,8 @@
   .isoa-rc-card {
     border-radius: 10px;
   }
-  .isoa-rc-link {
-    grid-template-rows: auto auto auto;
+  .isoa-rc-frame {
+    aspect-ratio: 4 / 5.4;
   }
   .isoa-rc-brand {
     top: 12px;
@@ -244,7 +236,7 @@
     font-size: 10px;
   }
   .isoa-rc-info {
-    padding: 10px 14px 6px;
+    padding: 14px 16px 16px;
     grid-template-columns: 1fr;
     row-gap: 4px;
   }
@@ -262,28 +254,9 @@
     display: none;
   }
   .isoa-rc-cta {
-    grid-row: 3;
-    grid-column: 1;
-    align-self: stretch;
-    justify-self: stretch;
-    margin: 4px 12px 12px;
-    background: transparent;
-    border: 1px solid #67645e;
-    color: #67645e;
-    opacity: 1;
-    transform: none;
-    padding: 8px 10px;
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    pointer-events: auto;
-  }
-  .isoa-rc-cta__desktop { display: none; }
-  .isoa-rc-cta__mobile { display: inline; }
-  .isoa-rc-img--secondary {
     display: none;
   }
-  .isoa-rc-card:hover .isoa-rc-info,
-  .isoa-rc-card:focus-within .isoa-rc-info {
-    opacity: 1;
+  .isoa-rc-img--secondary {
+    display: none;
   }
 }
