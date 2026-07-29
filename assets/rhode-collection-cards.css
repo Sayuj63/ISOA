@@ -135,13 +135,13 @@
 
 .isoa-rc-price {
   grid-column: 2;
-  grid-row: 1;
   margin: 0;
   font-weight: 700;
   font-size: clamp(15px, 1.2vw, 20px);
   color: #67645e;
   line-height: 1.2;
   white-space: nowrap;
+  align-self: baseline;
 }
 
 .isoa-rc-subtitle {
