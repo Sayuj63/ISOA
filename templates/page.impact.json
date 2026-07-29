@@ -286,9 +286,9 @@
         "item_YeDxCa": {
           "type": "item",
           "settings": {
-            "toggle_text": "our values",
-            "heading": "<p><strong>our values</strong></p>",
-            "text": "<p>It was important to us to build a value-driven business. At ISOUA, we believe in: Simplicity. Affordability. Authenticity. Quality. Transparency.</p>",
+            "toggle_text": "our formulas",
+            "heading": "<p><br/>minimal & good for you<br/><br/></p>",
+            "text": "<p>A responsible approach to cruelty-free, clean, vegan ingredients. Suitable for all skin types. Fragrance-free and dermatologist-developed.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -296,9 +296,9 @@
         "item_kL8KcV": {
           "type": "item",
           "settings": {
-            "toggle_text": "scientifically proven formulas",
-            "heading": "<p><strong>rooted in science</strong></p>",
-            "text": "<p>Expert-led. Science-backed. Developed with dermatologists and chemists, our formulas are designed to deliver visible results—instantly, and with continued use.</p>",
+            "toggle_text": "our packaging",
+            "heading": "<p>fyi, we use pcr</p>",
+            "text": "<p>ISOUA’s bottles, tubes, and caps are made with post-consumer recycled (PCR) materials. See more details on each product's page—along with easy-to-follow recycling instructions.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -306,9 +306,9 @@
         "item_g6YHmj": {
           "type": "item",
           "settings": {
-            "toggle_text": "our minimal footprint",
-            "heading": "<p><strong>The ISOUA philosophy</strong></p>",
-            "text": "<p>Less, but better. From limited releases to consciously sourced ingredients, we are committed to mindful skincare. Vegan. Cruelty-free. Fragrance-free. No excess.</p>",
+            "toggle_text": "your empties",
+            "heading": "<p>we've got you</p>",
+            "text": "<p>Easily ship back at least 3 empty products if you'd like us to recycle them for you. Email hello@isoua.com for a complimentary shipping label.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -396,7 +396,7 @@
         "heading_heytAg": {
           "type": "heading",
           "settings": {
-            "heading": "<h2>our shippers<br/><br/></h2>",
+            "heading": "<h2>our shippers</h2>",
             "heading_custom": false,
             "heading_font": "josefin_sans_n4",
             "heading_size": 36,
@@ -410,7 +410,7 @@
         "text_zwzTqH": {
           "type": "text",
           "settings": {
-            "text": "<p>Your new ISOUA products will arrive in *zero-waste* Boox boxes that reduce your environmental impact by up to 70% compared to single-use shipping boxes. More reasons why it’s a cleaner way to ship:  <br/><br/>✔️ Boox boxes can be reused up to 12 times<br/>✔️ No bubble wrap, no excess waste<br/>✔️ Any inserts are made from recycled paper or FSC-certified materials<br/>✔️ Just scan the QR code on the interior of the Boox box, follow the easy steps, and drop your Boox off at a local return location<br/><br/></p>",
+            "text": "<p>Your new ISOUA products will arrive in *zero-waste* Boox boxes that reduce your environmental impact by up to 70% compared to single-use shipping boxes. More reasons why it’s a cleaner way to ship:  </p><p></p><p></p><p><br/><br/>✔️ Boox boxes can be reused up to 12 times<br/>✔️ No bubble wrap, no excess waste<br/>✔️ Any inserts are made from recycled paper or FSC-certified materials<br/>✔️ Just scan the QR code on the interior of the Boox box, follow the easy steps, and drop your Boox off at a local return location</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 16,
@@ -483,7 +483,7 @@
       ],
       "name": "SS - Image With Text #14",
       "settings": {
-        "body_gap": 10,
+        "body_gap": 6,
         "body_gap_mobile": 4,
         "content_horizontal_align": "start",
         "content_horizontal_align_mobile": "start",
