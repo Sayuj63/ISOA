@@ -2041,7 +2041,7 @@
         "slide_piXCUY": {
           "type": "slide",
           "settings": {
-            "product": "",
+            "product": "spotwear",
             "heading": "Slide 1",
             "button_text": "SHOP NOW"
           }
@@ -2049,7 +2049,7 @@
         "slide_YgDBGM": {
           "type": "slide",
           "settings": {
-            "product": "",
+            "product": "the-peptide-eye-prep-set",
             "heading": "FEELS LIKE:",
             "button_text": "Comfy, second-skin feel that stays on all day"
           }
@@ -2057,7 +2057,7 @@
         "slide_EGrgLp": {
           "type": "slide",
           "settings": {
-            "product": "",
+            "product": "hydrocolloid-breakout-recovery-mask",
             "heading": "SMELLS LIKE:",
             "button_text": "Fragrance-Free"
           }
