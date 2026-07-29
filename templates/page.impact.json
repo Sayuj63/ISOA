@@ -404,7 +404,7 @@
             "heading_height": 130,
             "heading_mt": 0,
             "heading_mt_mobile": 0,
-            "heading_color": "#000000"
+            "heading_color": "#67645E"
           }
         },
         "text_zwzTqH": {
@@ -413,11 +413,11 @@
             "text": "<p>Your new ISOUA products will arrive in *zero-waste* Boox boxes that reduce your environmental impact by up to 70% compared to single-use shipping boxes. More reasons why it’s a cleaner way to ship:  </p><p></p><p></p><p><br/><br/>✔️ Boox boxes can be reused up to 12 times<br/>✔️ No bubble wrap, no excess waste<br/>✔️ Any inserts are made from recycled paper or FSC-certified materials<br/>✔️ Just scan the QR code on the interior of the Boox box, follow the easy steps, and drop your Boox off at a local return location</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
-            "text_size": 16,
+            "text_size": 12,
             "text_size_mobile": 14,
-            "text_mt": 24,
+            "text_mt": 100,
             "text_mt_mobile": 16,
-            "text_color": "#000000"
+            "text_color": "#67645E"
           }
         },
         "button_NGiCEW": {
@@ -439,7 +439,7 @@
             "button_radius": 100,
             "button_border_thickness": 1,
             "button_style": "outline",
-            "button_color": "#000000",
+            "button_color": "#67645E",
             "button_hover_color": "#ffffff",
             "button_bg_color": "",
             "button_bg_hover_color": "#000000",
@@ -470,8 +470,8 @@
             "icon_size_mobile": 32,
             "animate_icon": true,
             "hide_icon": false,
-            "text_color": "#121212",
-            "icon_color": "#121212"
+            "text_color": "#67645E",
+            "icon_color": "#67645E"
           }
         }
       },
