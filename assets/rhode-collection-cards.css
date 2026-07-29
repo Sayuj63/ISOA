@@ -1,9 +1,9 @@
 /* ISOA · Rhode-style collection card
    Loaded on `template contains 'collection'` via layout/theme.liquid.
    Snippet: snippets/isoa-rhode-card.liquid.
-   Typography measured directly from rhodeskin.com/collections/shop (Playwright,
-   2026-07-30). Card height uniformity is enforced by CSS grid on the card so
-   all cards share `grid-template-rows: auto 1fr auto`. */
+   All child elements sit inside .isoa-rc-frame so the card is aspect-ratio-
+   locked — all cards share the same height regardless of title line count.
+   Title + price overlay the bottom of the image with transparent background. */
 
 .isoa-rc-card {
   position: relative;
@@ -17,16 +17,14 @@
 
 .isoa-rc-link,
 .isoa-rc-link:visited {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  height: 100%;
+  display: block;
   color: inherit;
   text-decoration: none;
 }
 
 .isoa-rc-frame {
   position: relative;
-  aspect-ratio: 1 / 1.16;
+  aspect-ratio: 4 / 5;
   width: 100%;
   overflow: hidden;
   background: #f1f0ed;
@@ -59,10 +57,10 @@
   left: 24px;
   z-index: 5;
   font-family: var(--font-heading--family, var(--font-body--family));
-  font-size: 50px;
+  font-size: clamp(28px, 3.4vw, 52px);
   font-weight: 800;
-  line-height: 1.2;
-  letter-spacing: -0.04em;
+  line-height: 1;
+  letter-spacing: -0.02em;
   text-transform: lowercase;
   color: #67645e;
   pointer-events: none;
@@ -73,24 +71,83 @@
   top: 20px;
   right: 20px;
   z-index: 5;
-  padding: 4px 8px;
-  border-radius: 10px;
+  padding: 6px 12px;
+  border-radius: 999px;
   background: #67645e;
   color: #fff;
-  font-family: var(--font-heading--family, var(--font-body--family));
   font-size: 11px;
-  font-weight: 400;
-  line-height: 11px;
-  letter-spacing: -0.04em;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.04em;
   text-transform: lowercase;
   pointer-events: none;
 }
 
+.isoa-rc-info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 20px 24px 22px;
+  background: transparent;
+  color: #67645e;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 12px;
+  row-gap: 2px;
+  align-items: baseline;
+  transition: opacity 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+  pointer-events: none;
+}
+
+.isoa-rc-title {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0;
+  font-weight: 700;
+  font-size: clamp(15px, 1.2vw, 20px);
+  letter-spacing: 0.03em;
+  color: #67645e;
+  line-height: 1.2;
+}
+
+.isoa-rc-price {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
+  font-weight: 700;
+  font-size: clamp(15px, 1.2vw, 20px);
+  color: #67645e;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.isoa-rc-subtitle {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  margin: 4px 0 0;
+  font-weight: 400;
+  font-size: 14px;
+  color: #67645e;
+  opacity: 0.85;
+  line-height: 1.35;
+}
+
 .isoa-rc-cta {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 4;
   display: block;
   padding: 14px 16px;
   border-radius: 999px;
+  background: #ffffff;
+  color: #67645e;
   font-family: var(--font-body--family);
+  font-size: 13px;
+  font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-align: center;
@@ -98,23 +155,6 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.isoa-rc-cta strong {
-  font-weight: 700;
-  margin-left: 2px;
-}
-
-.isoa-rc-cta--hover {
-  position: absolute;
-  left: 16px;
-  right: 16px;
-  bottom: 16px;
-  z-index: 4;
-  background: #ffffff;
-  color: #67645e;
-  font-size: 13px;
-  font-weight: 500;
   opacity: 0;
   transform: translateY(8px);
   transition: opacity 0.55s cubic-bezier(0.76, 0, 0.24, 1) 0.15s,
@@ -122,9 +162,13 @@
   pointer-events: none;
 }
 
-.isoa-rc-cta--mobile {
-  display: none;
+.isoa-rc-cta strong {
+  font-weight: 700;
+  margin-left: 2px;
 }
+
+.isoa-rc-cta__desktop { display: inline; }
+.isoa-rc-cta__mobile { display: none; }
 
 @media (hover: hover) and (pointer: fine) {
   .isoa-rc-card:hover .isoa-rc-img--primary,
@@ -140,86 +184,11 @@
   .isoa-rc-card:focus-within .isoa-rc-info {
     opacity: 0;
   }
-  .isoa-rc-card:hover .isoa-rc-cta--hover,
-  .isoa-rc-card:focus-within .isoa-rc-cta--hover {
+  .isoa-rc-card:hover .isoa-rc-cta,
+  .isoa-rc-card:focus-within .isoa-rc-cta {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.isoa-rc-info {
-  padding: 28px;
-  border-top: 1px solid rgba(103, 100, 94, 0.12);
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  color: #67645e;
-  transition: opacity 0.5s cubic-bezier(0.76, 0, 0.24, 1);
-}
-
-.isoa-rc-reviews {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  line-height: 1.4;
-  color: #67645e;
-  margin-bottom: 2px;
-}
-
-.isoa-rc-stars {
-  letter-spacing: 0.05em;
-  color: #67645e;
-}
-
-.isoa-rc-review-count {
-  color: #67645e;
-  opacity: 0.85;
-}
-
-.isoa-rc-titlerow {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  column-gap: 12px;
-  align-items: baseline;
-}
-
-.isoa-rc-title {
-  grid-column: 1;
-  margin: 0;
-  font-weight: 700;
-  font-size: 18px;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: #67645e;
-  line-height: 1.5;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-}
-
-.isoa-rc-price {
-  grid-column: 2;
-  margin: 0;
-  font-weight: 700;
-  font-size: 18px;
-  color: #67645e;
-  line-height: 1.5;
-  white-space: nowrap;
-}
-
-.isoa-rc-subtitle {
-  margin: 0;
-  font-weight: 400;
-  font-size: 16px;
-  color: #67645e;
-  line-height: 1.5;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  overflow: hidden;
-  opacity: 0.9;
 }
 
 /* Grid parent — 3 col desktop, 2 col mobile. */
@@ -234,17 +203,10 @@
   margin: 0;
 }
 
+.isoa-rc-grid > li,
 .product-grid:has(.isoa-rc-card) > li,
-.product-grid--collection:has(.isoa-rc-card) > li,
-.isoa-rc-grid > li {
+.product-grid--collection:has(.isoa-rc-card) > li {
   list-style: none;
-  display: flex;
-}
-
-.product-grid:has(.isoa-rc-card) > li > .isoa-rc-card,
-.product-grid--collection:has(.isoa-rc-card) > li > .isoa-rc-card,
-.isoa-rc-grid > li > .isoa-rc-card {
-  width: 100%;
 }
 
 @media (max-width: 989px) {
@@ -260,78 +222,42 @@
   .isoa-rc-card {
     border-radius: 10px;
   }
-
+  .isoa-rc-frame {
+    aspect-ratio: 4 / 5.4;
+  }
   .isoa-rc-brand {
-    top: 14px;
+    top: 12px;
     left: 14px;
-    font-size: 18px;
-    letter-spacing: -0.04em;
-    line-height: 1.2;
+    font-size: clamp(22px, 8vw, 34px);
   }
-
   .isoa-rc-badge {
-    top: 14px;
+    top: 12px;
     right: 12px;
-    padding: 4px 8px;
+    padding: 4px 10px;
     font-size: 10px;
-    line-height: 10px;
   }
-
   .isoa-rc-info {
-    padding: 14px 14px 6px;
-    gap: 4px;
-    border-top: 1px solid rgba(103, 100, 94, 0.12);
-  }
-
-  .isoa-rc-reviews {
-    font-size: 11px;
-    gap: 4px;
-    margin-bottom: 0;
-  }
-
-  .isoa-rc-titlerow {
+    padding: 14px 16px 16px;
     grid-template-columns: 1fr;
+    row-gap: 4px;
   }
-
   .isoa-rc-title {
-    font-size: 12px;
-    letter-spacing: 0.02em;
-    line-height: 1.3;
-    -webkit-line-clamp: 2;
+    font-size: 13px;
+    line-height: 1.25;
   }
-
   .isoa-rc-price {
-    display: none;
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: start;
+    font-size: 13px;
   }
-
   .isoa-rc-subtitle {
     display: none;
   }
-
-  .isoa-rc-cta--hover {
+  .isoa-rc-cta {
     display: none;
   }
-
-  .isoa-rc-cta--mobile {
-    display: block;
-    margin: 6px 14px 14px;
-    padding: 9px 12px;
-    background: transparent;
-    border: 1px solid #67645e;
-    color: #67645e;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    line-height: 1.1;
-    text-transform: uppercase;
-  }
-
   .isoa-rc-img--secondary {
     display: none;
-  }
-
-  .isoa-rc-card:hover .isoa-rc-info,
-  .isoa-rc-card:focus-within .isoa-rc-info {
-    opacity: 1;
   }
 }
