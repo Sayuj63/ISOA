@@ -63,8 +63,6 @@
       {%- if is_new -%}
         <span class="isoa-rc-badge">new</span>
       {%- endif -%}
-
-      <span class="isoa-rc-cta" aria-hidden="true">BUY — <strong>{{ price_formatted }}</strong></span>
     </div>
 
     <div class="isoa-rc-info">
@@ -74,5 +72,7 @@
         <p class="isoa-rc-subtitle">{{ subtitle }}</p>
       {%- endif -%}
     </div>
+
+    <span class="isoa-rc-cta" aria-hidden="true">BUY — <strong>{{ price_formatted }}</strong></span>
   </a>
 </article>
