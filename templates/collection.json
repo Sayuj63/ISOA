@@ -9,113 +9,14 @@
  */
 {
   "sections": {
-    "1775514523f3dd00b6": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_c79d559_FhtKbz": {
-          "type": "ai_gen_block_c79d559",
-          "settings": {
-            "desktop_width_percent": 100,
-            "vertical_padding": 20,
-            "pill_spacing": 10,
-            "pill_border_radius": 50,
-            "pill_padding_vertical": 10,
-            "pill_padding_horizontal": 24,
-            "pill_border_width": 1,
-            "pill_font_size": 12,
-            "pill_font_weight": 500,
-            "pill_letter_spacing": 0.5,
-            "pill_background": "#ffffff",
-            "pill_text_color": "#000000",
-            "pill_border_color": "#e6e6e6",
-            "pill_hover_background": "#f5f5f5",
-            "pill_hover_text_color": "#000000",
-            "pill_hover_border_color": "#000000",
-            "primary_pill_background": "#000000",
-            "primary_pill_text_color": "#ffffff",
-            "primary_pill_border_color": "#000000",
-            "primary_pill_hover_background": "#333333",
-            "primary_pill_hover_text_color": "#ffffff",
-            "primary_pill_hover_border_color": "#333333",
-            "pill_1_enabled": true,
-            "pill_1_text": "SKIN",
-            "pill_1_link": "",
-            "pill_1_is_primary": false,
-            "pill_2_enabled": true,
-            "pill_2_text": "LIP+CHEEK",
-            "pill_2_link": "",
-            "pill_2_is_primary": false,
-            "pill_3_enabled": true,
-            "pill_3_text": "SETS",
-            "pill_3_link": "",
-            "pill_3_is_primary": false,
-            "pill_4_enabled": true,
-            "pill_4_text": "ON THE GO",
-            "pill_4_link": "",
-            "pill_4_is_primary": false,
-            "pill_5_enabled": true,
-            "pill_5_text": "AWARD WINNERS",
-            "pill_5_link": "",
-            "pill_5_is_primary": false,
-            "pill_6_enabled": false,
-            "pill_6_text": "Eye Care",
-            "pill_6_link": "",
-            "pill_6_is_primary": false,
-            "pill_7_enabled": false,
-            "pill_7_text": "Treatments",
-            "pill_7_link": "",
-            "pill_7_is_primary": false,
-            "pill_8_enabled": true,
-            "pill_8_text": "Shop All",
-            "pill_8_link": "",
-            "pill_8_is_primary": false
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_c79d559_FhtKbz"
-      ],
-      "disabled": true,
-      "custom_css": [
-        ".ai-category-nav-container-al2nnyk1zvefmdlbiqaigenblocke57c976feqmwx {display: flex; flex-wrap: wrap; justify-content: center;}"
-      ],
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "color_scheme": "",
-        "background_media": "none",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "hero_rbHVqm": {
+    "hero_3LDdHX": {
       "type": "hero",
       "blocks": {
-        "text_idtUKe": {
+        "text_PGeAbf": {
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h3><em>An </em>Award-Winning<em> MASK</em></h3>",
+            "text": "<p>Browse our latest products</p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -137,38 +38,12 @@
           },
           "blocks": {}
         },
-        "text_QNGBVW": {
-          "type": "text",
-          "name": "t:names.text",
-          "settings": {
-            "text": "<p><em>Spotwear won a </em>COSMOPOLITAN <em>2026 Holy Grail Beauty Award for Best Acne Patch!</em></p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h4",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "button_M4LLjV": {
+        "button_LxP6g9": {
           "type": "button",
           "name": "t:names.button",
           "settings": {
-            "label": "About the Winner",
-            "link": "shopify://products/hydrocolloid-breakout-recovery-mask",
+            "label": "Shop all",
+            "link": "shopify://collections/all",
             "open_in_new_tab": false,
             "style_class": "button-secondary",
             "width": "fit-content",
@@ -180,23 +55,22 @@
         }
       },
       "block_order": [
-        "text_idtUKe",
-        "text_QNGBVW",
-        "button_M4LLjV"
+        "text_PGeAbf",
+        "button_LxP6g9"
       ],
       "custom_css": [
-        ".hero {padding: 3vw; overflow: hidden;}",
-        ".hero img,.hero__media img,.hero__media {border-radius: 10px;}"
+        ".hero {padding: 1.5vw; padding-top: 0; overflow: hidden;}",
+        ".hero img,.hero__media img,.hero__media {border-radius: 10px;}",
+        "@media screen and (max-width: 749px) {.hero {margin-top: 0; position: relative; z-index: 0; }}"
       ],
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
-        "image_1": "shopify://shop_images/alix-cosmo-desktop_2b0e766d-e861-44e1-b11c-9d171d647e90.png",
+        "image_1": "shopify://shop_images/image_b86ad320-eb99-4d51-9373-41e94e1c8aec.png",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": true,
         "media_type_1_mobile": "image",
-        "image_1_mobile": "shopify://shop_images/Frame_1430103561_-_V8_5e27aaa7-5794-4d58-bb21-95d965160f39.png",
         "media_type_2_mobile": "image",
         "link": "",
         "open_in_new_tab": false,
@@ -218,8 +92,8 @@
         "gradient_direction": "to bottom",
         "blurred_reflection": false,
         "reflection_opacity": 75,
-        "padding-block-start": 0,
-        "padding-block-end": 70
+        "padding-block-start": 24,
+        "padding-block-end": 24
       }
     },
     "main": {
@@ -239,8 +113,8 @@
             "enable_grid_density": true,
             "inherit_color_scheme": true,
             "color_scheme": "",
-            "padding-block-start": 8,
-            "padding-block-end": 8,
+            "padding-block-start": 36,
+            "padding-block-end": 36,
             "padding-inline-start": 0,
             "padding-inline-end": 0,
             "facets_margin_bottom": 8,
@@ -384,6 +258,7 @@
       "block_order": [
         "text_amAM4H"
       ],
+      "disabled": true,
       "custom_css": [
         ".marquee__content .marquee__repeated-items .marquee__wrapper .custom {border-radius: 10px;}"
       ],
@@ -396,138 +271,105 @@
         "gap_between_elements": 24
       }
     },
-    "hero_GTHtWF": {
-      "type": "hero",
+    "pill_navigation_qUQQgf": {
+      "type": "pill-navigation",
       "blocks": {
-        "text_fDaayX": {
-          "type": "text",
-          "name": "t:names.heading",
+        "pill_wxMNPQ": {
+          "type": "pill",
           "settings": {
-            "text": "<h3><em>An </em>Award-Winning<em> MASK</em></h3>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h2",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground-heading)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "label": "Featured",
+            "link": "",
+            "active": false,
+            "open_new_tab": false
+          }
         },
-        "text_48kNqd": {
-          "type": "text",
-          "name": "t:names.text",
+        "pill_MRAnqN": {
+          "type": "pill",
           "settings": {
-            "text": "<p><em>Spotwear won a </em>COSMOPOLITAN <em>2026 Holy Grail Beauty Award for Best Acne Patch!</em></p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h4",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "label": "Skin",
+            "link": "",
+            "active": false,
+            "open_new_tab": false
+          }
         },
-        "button_ADU6fk": {
-          "type": "button",
-          "name": "t:names.button",
+        "pill_ezYHiY": {
+          "type": "pill",
           "settings": {
-            "label": "About the Winner",
-            "link": "shopify://products/hydrocolloid-breakout-recovery-mask",
-            "open_in_new_tab": false,
-            "style_class": "button-secondary",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
+            "label": "Lip + Cheek",
+            "link": "",
+            "active": false,
+            "open_new_tab": false
+          }
+        },
+        "pill_wVXbym": {
+          "type": "pill",
+          "settings": {
+            "label": "Sets",
+            "link": "",
+            "active": false,
+            "open_new_tab": false
+          }
+        },
+        "pill_p83HDW": {
+          "type": "pill",
+          "settings": {
+            "label": "On The Go",
+            "link": "",
+            "active": false,
+            "open_new_tab": false
+          }
+        },
+        "pill_VattzW": {
+          "type": "pill",
+          "settings": {
+            "label": "Award Winners",
+            "link": "",
+            "active": false,
+            "open_new_tab": false
+          }
+        },
+        "pill_PYfMrA": {
+          "type": "pill",
+          "settings": {
+            "label": "Shop All",
+            "link": "",
+            "active": true,
+            "open_new_tab": false
+          }
         }
       },
       "block_order": [
-        "text_fDaayX",
-        "text_48kNqd",
-        "button_ADU6fk"
+        "pill_wxMNPQ",
+        "pill_MRAnqN",
+        "pill_ezYHiY",
+        "pill_wVXbym",
+        "pill_p83HDW",
+        "pill_VattzW",
+        "pill_PYfMrA"
       ],
-      "custom_css": [
-        ".hero {padding: 3vw; overflow: hidden;}",
-        ".hero img,.hero__media img,.hero__media {border-radius: 10px;}"
-      ],
-      "name": "t:names.hero",
+      "name": "Pill navigation",
       "settings": {
-        "media_type_1": "image",
-        "image_1": "shopify://shop_images/alix-cosmo-desktop_2b0e766d-e861-44e1-b11c-9d171d647e90.png",
-        "media_type_2": "image",
-        "stack_media_on_mobile": false,
-        "custom_mobile_media": true,
-        "media_type_1_mobile": "image",
-        "image_1_mobile": "shopify://shop_images/Frame_1430103561_-_V8_5e27aaa7-5794-4d58-bb21-95d965160f39.png",
-        "media_type_2_mobile": "image",
-        "link": "",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": false,
-        "horizontal_alignment": "space-between",
-        "vertical_alignment": "flex-end",
-        "align_baseline": true,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 10,
-        "section_width": "page-width",
-        "section_height": "large",
-        "section_height_custom": 50,
-        "color_scheme": "scheme-1",
-        "toggle_overlay": false,
-        "overlay_color": "#12121266",
-        "overlay_style": "solid",
-        "gradient_direction": "to bottom",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 0,
-        "padding-block-end": 70
-      }
-    },
-    "custom_liquid_pTJkL4": {
-      "type": "custom-liquid",
-      "name": "t:names.custom_liquid",
-      "settings": {
-        "custom_liquid": "",
-        "color_scheme": "",
-        "section_width": "page-width",
-        "padding-block-start": 0,
-        "padding-block-end": 0
+        "gap": 24,
+        "padding_horizontal": 27,
+        "padding_vertical": 13,
+        "border_radius": 30,
+        "border_width": 1,
+        "font_size": 18,
+        "background_color": "#FFFFFF",
+        "text_color": "#686762",
+        "border_color": "#686762",
+        "active_background_color": "#686762",
+        "active_text_color": "#FFFFFF",
+        "active_border_color": "#686762",
+        "padding_top": 20,
+        "padding_bottom": 20
       }
     }
   },
   "order": [
-    "1775514523f3dd00b6",
-    "hero_rbHVqm",
+    "hero_3LDdHX",
+    "pill_navigation_qUQQgf",
     "main",
-    "marquee_4W7nyE",
-    "hero_GTHtWF",
-    "custom_liquid_pTJkL4"
+    "marquee_4W7nyE"
   ]
 }
