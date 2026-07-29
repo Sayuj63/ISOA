@@ -214,8 +214,8 @@
         "image_FJkrK4"
       ],
       "custom_css": [
-        "{margin-left: 40px; margin-right: 40px; padding-top: 24px; padding-bottom: 24px; text-align: center;}",
-        "@media screen and (max-width: 749px) {{margin-left: 16px; margin-right: 16px; padding-top: 24px; padding-bottom: 24px; }}"
+        "{margin-left: 40px; margin-right: 40px; padding-top: 24px; padding-bottom: 24px; text-align: center; border-radius: 10px !important; overflow: hidden;}",
+        "@media screen and (max-width: 749px) {{margin-left: 16px; margin-right: 16px; padding-top: 24px; padding-bottom: 24px; border-radius: 10px; border-radius: 10px !important; overflow: hidden; }}"
       ],
       "name": "t:names.pull_quote",
       "settings": {
