@@ -1028,14 +1028,21 @@ For inquiries or permissions, contact daniel@section.store
     margin-right: 0 !important;
   }
 
+  .shopify-section .swiper-wrapper:has(.isoa-fc6-slide) {
+    align-items: stretch;
+  }
   .shopify-section .isoa-fc6-slide {
-    height: auto;
-    display: block;
+    height: auto !important;
+    display: block !important;
+    background: transparent !important;
+    padding: 0 !important;
+    border: 0 !important;
   }
   .shopify-section .isoa-fc6-slide .isoa-rc-card {
-    height: 100%;
+    width: 100%;
+    height: auto;
   }
-  .shopify-section .isoa-fc6-legacy { display: none; }
+  .shopify-section .isoa-fc6-legacy { display: none !important; }
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
