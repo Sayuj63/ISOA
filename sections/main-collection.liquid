@@ -58,9 +58,13 @@
             data-product-id="{{ product.id }}"
             ref="cards[]"
           >
-            {% # theme-check-disable %}
-            {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
-            {% # theme-check-enable %}
+            {%- if template contains 'collection' -%}
+              {% render 'isoa-rhode-card', product: product %}
+            {%- else -%}
+              {% # theme-check-disable %}
+              {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
+              {% # theme-check-enable %}
+            {%- endif -%}
           </li>
         {% endfor %}
       {% endcapture %}
