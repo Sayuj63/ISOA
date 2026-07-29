@@ -1053,6 +1053,37 @@
         "lazy": true
       }
     },
+    "rhode_clinical_results_new": {
+      "type": "rhode-clinical-results",
+      "blocks": {
+        "bullet_1": {
+          "type": "bullet",
+          "settings": {
+            "text": "PROVIDES ALL-DAY HYDRATION"
+          }
+        },
+        "bullet_2": {
+          "type": "bullet",
+          "settings": {
+            "text": "REDUCES THE APPEARANCE OF REDNESS OVER TIME"
+          }
+        }
+      },
+      "block_order": [
+        "bullet_1",
+        "bullet_2"
+      ],
+      "settings": {
+        "heading": "clinical results",
+        "footnote": "<p>*Based on a 53-subject clinical study after immediate and 12 hours of use.</p>",
+        "tab1_label": "consumer study results",
+        "tab1_content": "<p>Consumer study details go here.</p>",
+        "tab2_label": "clinical results",
+        "tab2_content": "<p>Clinical study details go here.</p>",
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
     "ss_image_with_text_9EpeQg": {
       "type": "ss-image-with-text",
       "blocks": {
@@ -1121,6 +1152,7 @@
         "text_jWdTWQ",
         "button_X8wCrV"
       ],
+      "disabled": true,
       "name": "SS - Image with text #1",
       "settings": {
         "layout": "image_content",
@@ -2056,6 +2088,7 @@
     "ss_featured_products_4_ycPmw7",
     "ss_image_with_text_15_rAQEaq",
     "ss_image_with_text_9EpeQg",
+    "rhode_clinical_results_new",
     "section_WUmYw7",
     "ss_image_with_text_4PncMc",
     "ss_whats_inside_8w8VfA",
