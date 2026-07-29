@@ -266,16 +266,19 @@
     grid-column: 1;
     align-self: stretch;
     justify-self: stretch;
-    margin: 4px 14px 14px;
+    margin: 4px 12px 12px;
     background: transparent;
     border: 1px solid #67645e;
     color: #67645e;
     opacity: 1;
     transform: none;
-    padding: 10px 14px;
-    font-size: 12px;
+    padding: 8px 10px;
+    font-size: 11px;
+    letter-spacing: 0.04em;
     pointer-events: auto;
   }
+  .isoa-rc-cta__desktop { display: none; }
+  .isoa-rc-cta__mobile { display: inline; }
   .isoa-rc-img--secondary {
     display: none;
   }
