@@ -1015,6 +1015,9 @@
         "group_WQEVkU",
         "group_hKxVim"
       ],
+      "custom_css": [
+        "{padding: 2vw; border-radius: 24px; overflow: hidden;}"
+      ],
       "name": "t:names.multicolumn",
       "settings": {
         "content_direction": "row",
