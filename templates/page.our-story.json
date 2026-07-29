@@ -214,8 +214,8 @@
         "image_FJkrK4"
       ],
       "custom_css": [
-        "{margin: 54px; padding: 32px 12px;}",
-        "@media screen and (max-width: 749px) {{margin: 16px; padding: 28px 20px; }}"
+        "{margin: 54px; padding: 28px 20px; border-radius: 10px; text-align: center;}",
+        "@media screen and (max-width: 749px) {{margin: 16px; padding: 22px 16px; }}"
       ],
       "name": "t:names.pull_quote",
       "settings": {
