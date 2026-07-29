@@ -214,8 +214,8 @@
         "image_FJkrK4"
       ],
       "custom_css": [
-        "{margin-left: 54px; margin-right: 54px;}",
-        "/* Mobile */@media screen and (max-width: 749px) {.your-section-class {margin-left: 16px; margin-right: 16px; }}"
+        "{margin: 54px; padding: 32px 12px;}",
+        "@media screen and (max-width: 749px) {{margin: 16px; padding: 28px 20px; }}"
       ],
       "name": "t:names.pull_quote",
       "settings": {
@@ -242,8 +242,8 @@
         "overlay_color": "#00000026",
         "overlay_style": "solid",
         "gradient_direction": "to top",
-        "padding-block-start": 100,
-        "padding-block-end": 100
+        "padding-block-start": 0,
+        "padding-block-end": 0
       }
     },
     "ss_image_with_text_bwqzNC": {
