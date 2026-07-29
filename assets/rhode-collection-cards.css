@@ -136,6 +136,9 @@
   margin-left: 2px;
 }
 
+.isoa-rc-cta__desktop { display: inline; }
+.isoa-rc-cta__mobile { display: none; }
+
 @media (hover: hover) and (pointer: fine) {
   .isoa-rc-card:hover .isoa-rc-cta,
   .isoa-rc-card:focus-within .isoa-rc-cta {
