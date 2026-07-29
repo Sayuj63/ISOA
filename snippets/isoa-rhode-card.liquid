@@ -64,19 +64,19 @@
       {%- if is_new -%}
         <span class="isoa-rc-badge">new</span>
       {%- endif -%}
-    </div>
 
-    <div class="isoa-rc-info">
-      <p class="isoa-rc-title">{{ title_up }}</p>
-      <p class="isoa-rc-price">{{ price_formatted }}</p>
-      {%- if subtitle != blank -%}
-        <p class="isoa-rc-subtitle">{{ subtitle }}</p>
-      {%- endif -%}
-    </div>
+      <div class="isoa-rc-info">
+        <p class="isoa-rc-title">{{ title_up }}</p>
+        <p class="isoa-rc-price">{{ price_formatted }}</p>
+        {%- if subtitle != blank -%}
+          <p class="isoa-rc-subtitle">{{ subtitle }}</p>
+        {%- endif -%}
+      </div>
 
-    <span class="isoa-rc-cta" aria-hidden="true">
-      <span class="isoa-rc-cta__desktop">BUY — <strong>{{ price_formatted }}</strong></span>
-      <span class="isoa-rc-cta__mobile">BUY — <strong>{{ price_short }}</strong></span>
-    </span>
+      <span class="isoa-rc-cta" aria-hidden="true">
+        <span class="isoa-rc-cta__desktop">BUY — <strong>{{ price_formatted }}</strong></span>
+        <span class="isoa-rc-cta__mobile">BUY — <strong>{{ price_short }}</strong></span>
+      </span>
+    </div>
   </a>
 </article>
