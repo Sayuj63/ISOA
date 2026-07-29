@@ -213,10 +213,7 @@
         "text_kd69Kz",
         "image_FJkrK4"
       ],
-      "custom_css": [
-        "{margin: 54px; padding: 28px 20px; border-radius: 10px; text-align: center;}",
-        "@media screen and (max-width: 749px) {{margin: 16px; padding: 22px 16px; }}"
-      ],
+      "custom_css": [],
       "name": "t:names.pull_quote",
       "settings": {
         "content_direction": "column",
