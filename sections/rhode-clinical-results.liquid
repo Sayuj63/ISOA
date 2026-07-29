@@ -1,0 +1,367 @@
+<style>
+  .section-{{ section.id }} {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .section-{{ section.id }}-inner {
+    max-width: min(
+      calc(var(--page-width) - var(--page-margin) * 2),
+      calc(100% - var(--page-margin) * 2)
+    );
+    margin-inline: auto;
+    padding-block: {{ section.settings.padding_top }}px {{ section.settings.padding_bottom }}px;
+  }
+
+  .rh-clin-grid-{{ section.id }} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .rh-clin-card-{{ section.id }},
+  .rh-clin-image-{{ section.id }} {
+    min-height: 620px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .rh-clin-card-{{ section.id }} {
+    background: #f1f0ed;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    color: #67645e;
+  }
+
+  .rh-clin-heading-{{ section.id }} {
+    font-family: var(--font-heading--family);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 3rem;
+    line-height: 1.05;
+    letter-spacing: 0;
+    text-transform: lowercase;
+    margin: 0 0 32px 0;
+    color: transparent;
+    -webkit-text-stroke: 1px #e29fc8;
+  }
+
+  .rh-clin-bullets-{{ section.id }} {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .rh-clin-bullets-{{ section.id }} li {
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: #67645e;
+    line-height: 1.35;
+    padding-left: 18px;
+    position: relative;
+  }
+
+  .rh-clin-bullets-{{ section.id }} li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #67645e;
+  }
+
+  .rh-clin-footnote-{{ section.id }} {
+    margin-top: 24px;
+    font-size: 0.75rem;
+    color: #67645e;
+    opacity: 0.75;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .rh-clin-footnote-{{ section.id }} p {
+    margin: 0;
+  }
+
+  .rh-clin-tabs-{{ section.id }} {
+    margin-top: auto;
+    padding-top: 24px;
+    border-top: 1px solid rgba(103, 100, 94, 0.2);
+  }
+
+  .rh-clin-row-{{ section.id }} {
+    border-bottom: 1px solid rgba(103, 100, 94, 0.2);
+  }
+
+  .rh-clin-row-{{ section.id }}:last-child {
+    border-bottom: 0;
+  }
+
+  .rh-clin-row-head-{{ section.id }} {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #67645e;
+    text-transform: lowercase;
+    text-align: left;
+  }
+
+  .rh-clin-row-chevron-{{ section.id }} {
+    transition: transform 0.25s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+  }
+
+  .rh-clin-row-{{ section.id }}.is-open .rh-clin-row-chevron-{{ section.id }} {
+    transform: rotate(180deg);
+  }
+
+  .rh-clin-row-body-{{ section.id }} {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease, padding 0.25s ease;
+    color: #67645e;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .rh-clin-row-{{ section.id }}.is-open .rh-clin-row-body-{{ section.id }} {
+    max-height: 600px;
+    padding: 0 0 20px 0;
+  }
+
+  .rh-clin-image-{{ section.id }} {
+    background: #e5e3df;
+    position: relative;
+  }
+
+  .rh-clin-image-{{ section.id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 749px) {
+    .rh-clin-grid-{{ section.id }} {
+      grid-template-columns: 1fr;
+    }
+    .rh-clin-card-{{ section.id }},
+    .rh-clin-image-{{ section.id }} {
+      min-height: 0;
+    }
+    .rh-clin-card-{{ section.id }} {
+      padding: 28px;
+      order: 1;
+    }
+    .rh-clin-image-{{ section.id }} {
+      order: 2;
+      aspect-ratio: 4 / 5;
+    }
+    .rh-clin-heading-{{ section.id }} {
+      font-size: 2rem;
+      margin-bottom: 24px;
+    }
+  }
+</style>
+
+<section class="section-{{ section.id }}" aria-label="{{ section.settings.heading | default: 'clinical results' }}">
+  <div class="section-{{ section.id }}-inner">
+    <div class="rh-clin-grid-{{ section.id }}">
+      <div class="rh-clin-card-{{ section.id }}">
+        <h2 class="rh-clin-heading-{{ section.id }}">{{ section.settings.heading }}</h2>
+
+        {%- assign bullet_blocks = section.blocks | where: 'type', 'bullet' -%}
+        {%- if bullet_blocks.size > 0 -%}
+          <ul class="rh-clin-bullets-{{ section.id }}">
+            {%- for block in bullet_blocks -%}
+              <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if section.settings.footnote != blank -%}
+          <div class="rh-clin-footnote-{{ section.id }}">{{ section.settings.footnote }}</div>
+        {%- endif -%}
+
+        <div class="rh-clin-tabs-{{ section.id }}" data-rh-clin-tabs>
+          <div class="rh-clin-row-{{ section.id }}" data-rh-clin-row>
+            <button type="button" class="rh-clin-row-head-{{ section.id }}" data-rh-clin-toggle aria-expanded="false">
+              <span>{{ section.settings.tab1_label }}</span>
+              <span class="rh-clin-row-chevron-{{ section.id }}" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 5l4 4 4-4" stroke="#67645e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="rh-clin-row-body-{{ section.id }}">{{ section.settings.tab1_content }}</div>
+          </div>
+          <div class="rh-clin-row-{{ section.id }}" data-rh-clin-row>
+            <button type="button" class="rh-clin-row-head-{{ section.id }}" data-rh-clin-toggle aria-expanded="false">
+              <span>{{ section.settings.tab2_label }}</span>
+              <span class="rh-clin-row-chevron-{{ section.id }}" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 5l4 4 4-4" stroke="#67645e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </button>
+            <div class="rh-clin-row-body-{{ section.id }}">{{ section.settings.tab2_content }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rh-clin-image-{{ section.id }}">
+        {%- if section.settings.portrait != blank -%}
+          {{ section.settings.portrait | image_url: width: 1400 | image_tag:
+            loading: 'lazy',
+            widths: '400,600,900,1200,1400',
+            sizes: '(max-width: 749px) 100vw, 50vw',
+            alt: section.settings.portrait.alt | default: 'clinical results portrait'
+          }}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var scope = document.currentScript.previousElementSibling;
+    if (!scope) return;
+    var rows = scope.querySelectorAll('[data-rh-clin-row]');
+    rows.forEach(function (row) {
+      var btn = row.querySelector('[data-rh-clin-toggle]');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var open = row.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Rhode Clinical Results",
+  "tag": "section",
+  "class": "rhode-clinical-results",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "clinical results"
+    },
+    {
+      "type": "image_picker",
+      "id": "portrait",
+      "label": "Portrait image (right column)"
+    },
+    {
+      "type": "richtext",
+      "id": "footnote",
+      "label": "Footnote (small italic line)",
+      "default": "<p>*Based on a 53-subject clinical study after immediate and 12 hours of use.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Tab 1"
+    },
+    {
+      "type": "text",
+      "id": "tab1_label",
+      "label": "Tab 1 label",
+      "default": "consumer study results"
+    },
+    {
+      "type": "richtext",
+      "id": "tab1_content",
+      "label": "Tab 1 content",
+      "default": "<p>Consumer study details go here.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Tab 2"
+    },
+    {
+      "type": "text",
+      "id": "tab2_label",
+      "label": "Tab 2 label",
+      "default": "clinical results"
+    },
+    {
+      "type": "richtext",
+      "id": "tab2_content",
+      "label": "Tab 2 content",
+      "default": "<p>Clinical study details go here.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bullet",
+      "name": "Bullet",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "PROVIDES ALL-DAY HYDRATION"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rhode Clinical Results",
+      "blocks": [
+        { "type": "bullet", "settings": { "text": "PROVIDES ALL-DAY HYDRATION" } },
+        { "type": "bullet", "settings": { "text": "REDUCES THE APPEARANCE OF REDNESS OVER TIME" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
