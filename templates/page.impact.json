@@ -174,10 +174,10 @@
         "layout": "content_image",
         "layout_mobile": "image_content",
         "layout_advanced": false,
-        "layout_gap": 32,
+        "layout_gap": 100,
         "layout_gap_mobile": 24,
         "layout_border_thickness": 0,
-        "layout_radius": 0,
+        "layout_radius": 10,
         "use_shadow": false,
         "content_align": "left",
         "content_align_mobile": "left",
@@ -206,7 +206,7 @@
         "width": "page",
         "content_width": 1200,
         "border_thickness": 0,
-        "section_radius": 0,
+        "section_radius": 10,
         "lazy": true
       }
     },
