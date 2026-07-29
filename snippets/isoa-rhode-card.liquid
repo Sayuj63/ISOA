@@ -1,0 +1,78 @@
+{%- liquid
+  assign primary_media = product.featured_media
+  assign secondary_media = product.media[1]
+  assign hover_meta = product.metafields.custom.hover_image
+  if hover_meta and hover_meta.value
+    assign secondary_media = hover_meta.value
+  endif
+  if secondary_media == blank
+    assign secondary_media = primary_media
+  endif
+
+  assign category_label = product.metafields.custom.card_category
+  if category_label == blank
+    assign category_label = product.type
+  endif
+  if category_label == blank
+    assign category_label = product.vendor
+  endif
+
+  assign subtitle = product.metafields.custom.card_subtitle
+  if subtitle == blank
+    assign subtitle = product.metafields.custom.subtitle
+  endif
+
+  assign is_new = false
+  if product.tags contains 'new' or product.tags contains 'New' or product.tags contains 'NEW'
+    assign is_new = true
+  endif
+
+  assign price_formatted = product.price | money
+  assign title_up = product.title | upcase
+-%}
+
+<article class="isoa-rc-card" data-handle="{{ product.handle }}">
+  <a class="isoa-rc-link" href="{{ product.url }}" aria-label="{{ product.title | escape }} {{ price_formatted | strip_html }}">
+    <div class="isoa-rc-frame">
+      {%- if primary_media -%}
+        <img
+          class="isoa-rc-img isoa-rc-img--primary"
+          src="{{ primary_media | image_url: width: 800 }}"
+          srcset="{{ primary_media | image_url: width: 400 }} 400w, {{ primary_media | image_url: width: 800 }} 800w, {{ primary_media | image_url: width: 1200 }} 1200w"
+          sizes="(max-width: 749px) 50vw, 33vw"
+          loading="lazy"
+          decoding="async"
+          alt="{{ primary_media.alt | default: product.title | escape }}">
+      {%- endif -%}
+
+      {%- if secondary_media and secondary_media != primary_media -%}
+        <img
+          class="isoa-rc-img isoa-rc-img--secondary"
+          src="{{ secondary_media | image_url: width: 800 }}"
+          srcset="{{ secondary_media | image_url: width: 400 }} 400w, {{ secondary_media | image_url: width: 800 }} 800w, {{ secondary_media | image_url: width: 1200 }} 1200w"
+          sizes="(max-width: 749px) 50vw, 33vw"
+          loading="lazy"
+          decoding="async"
+          alt="{{ secondary_media.alt | default: product.title | escape }}">
+      {%- endif -%}
+
+      {%- if category_label != blank -%}
+        <span class="isoa-rc-brand">{{ category_label | downcase }}</span>
+      {%- endif -%}
+
+      {%- if is_new -%}
+        <span class="isoa-rc-badge">new</span>
+      {%- endif -%}
+
+      <span class="isoa-rc-cta" aria-hidden="true">BUY — <strong>{{ price_formatted }}</strong></span>
+    </div>
+
+    <div class="isoa-rc-info">
+      <p class="isoa-rc-title">{{ title_up }}</p>
+      <p class="isoa-rc-price">{{ price_formatted }}</p>
+      {%- if subtitle != blank -%}
+        <p class="isoa-rc-subtitle">{{ subtitle }}</p>
+      {%- endif -%}
+    </div>
+  </a>
+</article>
