@@ -1,6 +1,472 @@
+{% doc %}
+  @prompt
+    Create a dynamic horizontal pill-style navigation/filter bar section for a collections page. Design specs: horizontally scrollable row of pill-shaped buttons with border-radius ~50px; default pill style: white/transparent background, thin dark border (1px solid #222), dark text; active pill: dark filled background (#222), white text; compact size with 20-28px horizontal padding, 8-10px vertical padding; uppercase font, letter-spacing, font-size 11-13px; 8px gap between pills; no bar background. Functionality: fully dynamic blocks in theme editor - each pill block has Label (text) and Link (URL) settings; active state auto-detected via current URL match using JS; section settings for alignment (left/center/right), active pill color, inactive border color, inactive text color; horizontal scroll on mobile without wrapping; hover tint on inactive pills; accessible with aria-label on nav and aria-current on active pill. Use Liquid, scoped CSS, and small JS for URL-based active detection.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-pill-nav-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+  }
+
+  .ai-pill-nav-container-{{ ai_gen_id }} {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .ai-pill-nav-container-{{ ai_gen_id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ai-pill-nav-list-{{ ai_gen_id }} {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    justify-content: {{ block.settings.alignment }};
+    min-width: min-content;
+  }
+
+  .ai-pill-nav-item-{{ ai_gen_id }} {
+    flex-shrink: 0;
+  }
+
+  .ai-pill-nav-link-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: {{ block.settings.vertical_padding }}px {{ block.settings.horizontal_padding }}px;
+    background-color: {{ block.settings.inactive_background }};
+    color: {{ block.settings.inactive_text_color }};
+    border: 1px solid {{ block.settings.inactive_border_color }};
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: {{ block.settings.font_size }}px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  .ai-pill-nav-link-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.inactive_hover_background }};
+  }
+
+  .ai-pill-nav-link-{{ ai_gen_id }}.active {
+    background-color: {{ block.settings.active_background }};
+    color: {{ block.settings.active_text_color }};
+    border-color: {{ block.settings.active_background }};
+  }
+
+  .ai-pill-nav-link-{{ ai_gen_id }}.active:hover {
+    background-color: {{ block.settings.active_background }};
+  }
+{% endstyle %}
+
+<pill-navigation-{{ ai_gen_id }}
+  class="ai-pill-nav-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <nav
+    class="ai-pill-nav-container-{{ ai_gen_id }}"
+    aria-label="Collection filter navigation"
+  >
+    <ul class="ai-pill-nav-list-{{ ai_gen_id }}">
+      {% liquid
+        assign pill_1_label = block.settings.pill_1_label
+        assign pill_1_link = block.settings.pill_1_link
+        assign pill_2_label = block.settings.pill_2_label
+        assign pill_2_link = block.settings.pill_2_link
+        assign pill_3_label = block.settings.pill_3_label
+        assign pill_3_link = block.settings.pill_3_link
+        assign pill_4_label = block.settings.pill_4_label
+        assign pill_4_link = block.settings.pill_4_link
+        assign pill_5_label = block.settings.pill_5_label
+        assign pill_5_link = block.settings.pill_5_link
+        assign pill_6_label = block.settings.pill_6_label
+        assign pill_6_link = block.settings.pill_6_link
+        assign pill_7_label = block.settings.pill_7_label
+        assign pill_7_link = block.settings.pill_7_link
+        assign pill_8_label = block.settings.pill_8_label
+        assign pill_8_link = block.settings.pill_8_link
+      %}
+
+      {% if pill_1_label != blank %}
+        <li class="ai-pill-nav-item-{{ ai_gen_id }}">
+          <a
+            href="{{ pill_1_link }}"
+            class="ai-pill-nav-link-{{ ai_gen_id }}"
+            data-pill-url="{{ pill_1_link }}"
+          >
+            {{ pill_1_label }}
+          </a>
+        </li>
+      {% endif %}
+
+      {% if pill_2_label != blank %}
+        <li class="ai-pill-nav-item-{{ ai_gen_id }}">
+          <a
+            href="{{ pill_2_link }}"
+            class="ai-pill-nav-link-{{ ai_gen_id }}"
+            data-pill-url="{{ pill_2_link }}"
+          >
+            {{ pill_2_label }}
+          </a>
+        </li>
+      {% endif %}
+
+      {% if pill_3_label != blank %}
+        <li class="ai-pill-nav-item-{{ ai_gen_id }}">
+          <a
+            href="{{ pill_3_link }}"
+            class="ai-pill-nav-link-{{ ai_gen_id }}"
+            data-pill-url="{{ pill_3_link }}"
+          >
+            {{ pill_3_label }}
+          </a>
+        </li>
+      {% endif %}
+
+      {% if pill_4_label != blank %}
+        <li class="ai-pill-nav-item-{{ ai_gen_id }}">
+          <a
+            href="{{ pill_4_link }}"
+            class="ai-pill-nav-link-{{ ai_gen_id }}"
+            data-pill-url="{{ pill_4_link }}"
+          >
+            {{ pill_4_label }}
+          </a>
+        </li>
+      {% endif %}
+
+      {% if pill_5_label != blank %}
+        <li class="ai-pill-nav-item-{{ ai_gen_id }}">
+          <a
+            href="{{ pill_5_link }}"
+            class="ai-pill-nav-link-{{ ai_gen_id }}"
+            data-pill-url="{{ pill_5_link }}"
+          >
+            {{ pill_5_label }}
+          </a>
+        </li>
+      {% endif %}
+
+      {% if pill_6_label != blank %}
+        <li class="ai-pill-nav-item-{{ ai_gen_id }}">
+          <a
+            href="{{ pill_6_link }}"
+            class="ai-pill-nav-link-{{ ai_gen_id }}"
+            data-pill-url="{{ pill_6_link }}"
+          >
+            {{ pill_6_label }}
+          </a>
+        </li>
+      {% endif %}
+
+      {% if pill_7_label != blank %}
+        <li class="ai-pill-nav-item-{{ ai_gen_id }}">
+          <a
+            href="{{ pill_7_link }}"
+            class="ai-pill-nav-link-{{ ai_gen_id }}"
+            data-pill-url="{{ pill_7_link }}"
+          >
+            {{ pill_7_label }}
+          </a>
+        </li>
+      {% endif %}
+
+      {% if pill_8_label != blank %}
+        <li class="ai-pill-nav-item-{{ ai_gen_id }}">
+          <a
+            href="{{ pill_8_link }}"
+            class="ai-pill-nav-link-{{ ai_gen_id }}"
+            data-pill-url="{{ pill_8_link }}"
+          >
+            {{ pill_8_label }}
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+</pill-navigation-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class PillNavigation{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.pills = this.querySelectorAll('.ai-pill-nav-link-{{ ai_gen_id }}');
+        this.setActiveState();
+      }
+
+      setActiveState() {
+        const currentPath = window.location.pathname;
+        const currentUrl = window.location.href;
+
+        this.pills.forEach((pill) => {
+          const pillUrl = pill.getAttribute('data-pill-url');
+          
+          if (!pillUrl) return;
+
+          let pillPath = pillUrl;
+          try {
+            const url = new URL(pillUrl, window.location.origin);
+            pillPath = url.pathname;
+          } catch (e) {
+            pillPath = pillUrl;
+          }
+
+          if (currentPath === pillPath || currentUrl === pillUrl) {
+            pill.classList.add('active');
+            pill.setAttribute('aria-current', 'page');
+          } else {
+            pill.classList.remove('active');
+            pill.removeAttribute('aria-current');
+          }
+        });
+      }
+    }
+
+    customElements.define('pill-navigation-{{ ai_gen_id }}', PillNavigation{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Pill navigation",
+  "tag": null,
+  "class": "pill-navigation-block",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Pill style"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font size",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "horizontal_padding",
+      "label": "Horizontal padding",
+      "min": 12,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "vertical_padding",
+      "label": "Vertical padding",
+      "min": 4,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 9
+    },
+    {
+      "type": "header",
+      "content": "Inactive pill"
+    },
+    {
+      "type": "color",
+      "id": "inactive_background",
+      "label": "Background",
+      "default": "rgba(0,0,0,0)"
+    },
+    {
+      "type": "color",
+      "id": "inactive_text_color",
+      "label": "Text",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "id": "inactive_border_color",
+      "label": "Border",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "id": "inactive_hover_background",
+      "label": "Hover background",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "header",
+      "content": "Active pill"
+    },
+    {
+      "type": "color",
+      "id": "active_background",
+      "label": "Background",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "id": "active_text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Pill 1"
+    },
+    {
+      "type": "text",
+      "id": "pill_1_label",
+      "label": "Label",
+      "default": "All"
+    },
+    {
+      "type": "url",
+      "id": "pill_1_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Pill 2"
+    },
+    {
+      "type": "text",
+      "id": "pill_2_label",
+      "label": "Label",
+      "default": "New"
+    },
+    {
+      "type": "url",
+      "id": "pill_2_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Pill 3"
+    },
+    {
+      "type": "text",
+      "id": "pill_3_label",
+      "label": "Label",
+      "default": "Best Sellers"
+    },
+    {
+      "type": "url",
+      "id": "pill_3_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Pill 4"
+    },
+    {
+      "type": "text",
+      "id": "pill_4_label",
+      "label": "Label",
+      "default": "Sale"
+    },
+    {
+      "type": "url",
+      "id": "pill_4_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Pill 5"
+    },
+    {
+      "type": "text",
+      "id": "pill_5_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "pill_5_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Pill 6"
+    },
+    {
+      "type": "text",
+      "id": "pill_6_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "pill_6_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Pill 7"
+    },
+    {
+      "type": "text",
+      "id": "pill_7_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "pill_7_link",
+      "label": "Link"
+    },
+    {
+      "type": "header",
+      "content": "Pill 8"
+    },
+    {
+      "type": "text",
+      "id": "pill_8_label",
+      "label": "Label"
+    },
+    {
+      "type": "url",
+      "id": "pill_8_link",
+      "label": "Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pill navigation"
+    }
+  ]
+}
 {% endschema %}
