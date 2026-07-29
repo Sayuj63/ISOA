@@ -13,6 +13,8 @@ For inquiries or permissions, contact daniel@section.store
   href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
 />
 
+{{ 'rhode-collection-cards.css' | asset_url | stylesheet_tag }}
+
 {%- liquid 
   assign padding_horizontal = section.settings.padding_horizontal
   assign padding_horizontal_mobile = section.settings.padding_horizontal_mobile
