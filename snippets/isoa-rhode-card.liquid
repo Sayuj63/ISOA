@@ -22,10 +22,7 @@
     assign subtitle = product.metafields.custom.subtitle
   endif
 
-  assign is_new = false
-  if product.tags contains 'new' or product.tags contains 'New' or product.tags contains 'NEW'
-    assign is_new = true
-  endif
+  assign is_new = true
 
   assign price_formatted = product.price | money
   assign price_short = product.price | money_without_trailing_zeros
