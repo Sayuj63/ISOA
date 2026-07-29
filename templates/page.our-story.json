@@ -163,7 +163,7 @@
         "text_kd69Kz": {
           "type": "text",
           "settings": {
-            "text": "<p>My journey towards healthier skin inspired me to develop products that really work, in a way that’s accessible to everyone. Rhode is dedicated to making products based in science and great formulation, simplifying many of the mysteries and complex narratives behind efficacious skincare. I hope these will become your go-to essentials that can live in your bathroom, be your favorite travel companion, improve your skin over time, and keep your skin happy and hydrated.</p>",
+            "text": "<p>My journey with PCOS and cystic acne led me to create products that are simple, effective, and accessible.</p><p>ISOUA is built on science-led formulations that cut through the noise, focusing only on what truly works.</p><p>Designed for acne-prone, sensitive skin, these are everyday essentials made to support your skin through every phase, keeping it clear, calm, and balanced.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "center",
@@ -252,7 +252,7 @@
         "heading_DjwTBV": {
           "type": "heading",
           "settings": {
-            "heading": "<h2>Image with text #1</h2>",
+            "heading": "<p><strong>intentional skincare</strong></p>",
             "heading_custom": false,
             "heading_font": "josefin_sans_n4",
             "heading_size": 32,
@@ -267,7 +267,7 @@
         "text_4k3Uy7": {
           "type": "text",
           "settings": {
-            "text": "<p>Made with care and unconditionally loved by our customers, this signature bestseller exceeds all expectations.</p>",
+            "text": "<p>A curated line of essentials, thoughtfully formulated with minimal yet high-performance ingredients.<br/><br/>Each product is designed to support a healthy, balanced skin barrier, which is simple and effective over time.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 14,
@@ -401,30 +401,30 @@
         "item_BHBJVg": {
           "type": "item",
           "settings": {
-            "toggle_text": "Heading 1",
-            "heading": "<h2>Heading 1</h2>",
-            "text": "<p>Welcome your customers to your store by sharing temporary offers or explaining to them what your products are about.</p>",
-            "button_label": "Learn More",
+            "toggle_text": "our values",
+            "heading": "<p><strong>our values</strong></p>",
+            "text": "<p>It was important to us to build a value-driven business. At ISOUA, we believe in: Simplicity. Affordability. Authenticity. Quality. Transparency.</p>",
+            "button_label": "",
             "button_link": ""
           }
         },
         "item_P3tjNF": {
           "type": "item",
           "settings": {
-            "toggle_text": "Heading 2",
-            "heading": "<h2>Heading 2</h2>",
-            "text": "<p>Create trust with your customers by explaining the story of your brand. Share your values or what is important to you.</p>",
-            "button_label": "Learn More",
+            "toggle_text": "scientifically proven formulas",
+            "heading": "<p><strong>rooted in science</strong></p>",
+            "text": "<p>Expert-led. Science-backed. Developed with dermatologists and chemists, our formulas are designed to deliver visible results—instantly, and with continued use.</p>",
+            "button_label": "",
             "button_link": ""
           }
         },
         "item_nyCpfz": {
           "type": "item",
           "settings": {
-            "toggle_text": "Heading 3",
-            "heading": "<h2>Heading 3</h2>",
-            "text": "<p>Share information about your product with your customers. Describe a product, and share info about your production process...</p>",
-            "button_label": "Learn More",
+            "toggle_text": "our minimal footprint",
+            "heading": "<p><strong>The ISOUA philosophy</strong></p>",
+            "text": "<p>Less, but better. From limited releases to consciously sourced ingredients, we are committed to mindful skincare. Vegan. Cruelty-free. Fragrance-free. No excess.</p>",
+            "button_label": "",
             "button_link": ""
           }
         }
@@ -436,17 +436,17 @@
       ],
       "name": "SS - Image With Text #15",
       "settings": {
-        "body_gap": 32,
+        "body_gap": 20,
         "body_gap_mobile": 16,
         "image_url": "",
         "image_position": "left",
         "image_position_mobile": "top",
         "image_radius": 12,
         "image_border_thickness": 0,
-        "image_ratio": "original",
-        "image_ratio_mobile": "original",
-        "content_padding_vertical": 32,
-        "content_padding_vertical_mobile": 16,
+        "image_ratio": "portrait",
+        "image_ratio_mobile": "portrait",
+        "content_padding_vertical": 12,
+        "content_padding_vertical_mobile": 12,
         "content_padding_horizontal": 32,
         "content_padding_horizontal_mobile": 16,
         "content_radius": 12,
@@ -464,7 +464,7 @@
         "text_size_mobile": 14,
         "text_height": 170,
         "text_mt": 24,
-        "toggle_text_padding_vertical": 16,
+        "toggle_text_padding_vertical": 10,
         "toggle_text_padding_vertical_mobile": 16,
         "toggle_text_border_thickness": 1,
         "toggle_text_custom": false,
@@ -496,145 +496,10 @@
         "margin_horizontal_mobile": 0,
         "padding_top": 0,
         "padding_bottom": 24,
-        "padding_horizontal": 5,
+        "padding_horizontal": 3,
         "padding_horizontal_mobile": 1.5,
         "full_width": true,
         "content_width": 120,
-        "border_thickness": 0,
-        "section_radius": 0,
-        "lazy": true
-      }
-    },
-    "ss_slider_5_bRt6pY": {
-      "type": "ss-slider-5",
-      "blocks": {
-        "slide_JX7h3W": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/hp-footer-summer_2480x_e77df663-26ac-458b-b8c3-00bfcba9e468.webp",
-            "second_image": "shopify://shop_images/spotwear-recycling-desktop_2000x_ac757d77-e957-45e7-aeaa-23904a779c25.png",
-            "image_url": "",
-            "text": "<p>Collection title</p>",
-            "url": ""
-          }
-        },
-        "slide_hyc3YY": {
-          "type": "slide",
-          "settings": {
-            "image_url": "",
-            "text": "<p>Collection title</p>",
-            "url": ""
-          }
-        },
-        "slide_cxcF6H": {
-          "type": "slide",
-          "settings": {
-            "image_url": "",
-            "text": "<p>Collection title</p>",
-            "url": ""
-          }
-        },
-        "slide_a3NxJ3": {
-          "type": "slide",
-          "settings": {
-            "image_url": "",
-            "text": "<p>Collection title</p>",
-            "url": ""
-          }
-        },
-        "slide_tXFTWz": {
-          "type": "slide",
-          "settings": {
-            "image_url": "",
-            "text": "<p>Collection title</p>",
-            "url": ""
-          }
-        }
-      },
-      "block_order": [
-        "slide_JX7h3W",
-        "slide_hyc3YY",
-        "slide_cxcF6H",
-        "slide_a3NxJ3",
-        "slide_tXFTWz"
-      ],
-      "custom_css": [],
-      "name": "SS - Slider #5",
-      "settings": {
-        "heading": "<p><strong>research-backed ingredients</strong></p>",
-        "heading_custom": false,
-        "heading_font": "josefin_sans_n4",
-        "heading_size": 36,
-        "heading_size_mobile": 14,
-        "heading_height": 130,
-        "heading_align": "left",
-        "heading_align_mobile": "left",
-        "button": "",
-        "button_url": "",
-        "button_custom": false,
-        "button_font": "josefin_sans_n4",
-        "button_size": 0,
-        "button_size_mobile": 0,
-        "button_height": 50,
-        "button_padding_vertical": 0,
-        "button_padding_vertical_mobile": 0,
-        "button_padding_horizontal": 0,
-        "button_padding_horizontal_mobile": 0,
-        "button_radius": 0,
-        "button_border_thickness": 0,
-        "button_style": "outline",
-        "slider_view": 3.2,
-        "slider_view_mobile": 1.5,
-        "slider_gap": 16,
-        "slider_gap_mobile": 20,
-        "slider_mt": 24,
-        "slider_mt_mobile": 24,
-        "image_radius": 10,
-        "image_border_thickness": 0,
-        "image_ratio": "square",
-        "image_ratio_mobile": "square",
-        "text_custom": false,
-        "text_font": "josefin_sans_n4",
-        "text_size": 20,
-        "text_size_mobile": 18,
-        "text_height": 130,
-        "text_mt": 16,
-        "text_padding_horizontal": 24,
-        "text_padding_horizontal_mobile": 12,
-        "text_align": "left",
-        "text_align_mobile": "left",
-        "navigation_mt": 40,
-        "navigation_mt_mobile": 24,
-        "navigation_pt": 20,
-        "navigation_pt_mobile": 12,
-        "navigation_border_thickness": 1,
-        "arrow_size": 16,
-        "arrow_size_mobile": 16,
-        "button_color": "#000000",
-        "button_hover_color": "#ffffff",
-        "button_bg_color": "",
-        "button_bg_hover_color": "#000000",
-        "button_border_color": "#000000",
-        "button_border_hover_color": "#000000",
-        "image_border_color": "#000000",
-        "text_color": "#000000",
-        "navigation_border_color": "#000000",
-        "arrow_color": "#000000",
-        "arrow_hover_color": "#000000",
-        "heading_color": "#000000",
-        "background_color": "#f1f0ed",
-        "background_gradient": "",
-        "border_color": "#000000",
-        "margin_top": 0,
-        "margin_bottom": 24,
-        "margin_horizontal": 0,
-        "margin_horizontal_mobile": 0,
-        "padding_top": 28,
-        "padding_bottom": 28,
-        "padding_horizontal": 5,
-        "padding_horizontal_mobile": 1.5,
-        "full_width": false,
-        "content_width": 140,
         "border_thickness": 0,
         "section_radius": 0,
         "lazy": true
@@ -647,11 +512,11 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<h2>New arrivals</h2>",
+            "text": "<p><strong>MEET THE ADVISORY BOARD</strong></p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
-            "type_preset": "rte",
+            "type_preset": "h1",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
             "line_height": "normal",
@@ -673,10 +538,10 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>We make things that work better and last longer. Our products solve real problems with clean design and honest materials.</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
+            "text": "<p>Our Skincare Advisory Board brings together experts in cosmetic chemistry and dermatology. Guided by the latest research, they shape every formula—from concept to final finish.</p>",
+            "width": "100%",
+            "max_width": "none",
+            "alignment": "center",
             "type_preset": "rte",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
@@ -770,7 +635,7 @@
             "link": "",
             "open_in_new_tab": false,
             "placeholder": "",
-            "padding-block-start": 10,
+            "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
@@ -798,15 +663,41 @@
               },
               "blocks": {}
             },
-            "text_8Qw9YQ": {
+            "text_eHtmCm": {
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>Customer care</h2>",
+                "text": "<p><span style=\"text-decoration:underline\">DR. JI-HOON PARK</span></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
-                "type_preset": "h4",
+                "type_preset": "h1",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_bEkJi3": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>Cosmetic scientist, Seoul</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h5",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
                 "line_height": "normal",
@@ -828,7 +719,7 @@
               "type": "text",
               "name": "t:names.description",
               "settings": {
-                "text": "<p>We're always on your side: keeping our loyal customers happy is our top priority and number one goal.</p>",
+                "text": "<p>Dr Park is a formulation specialist with over a decade of experience in cosmetic science, focusing on barrier repair and hydration systems.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -853,132 +744,12 @@
           },
           "block_order": [
             "image_qXMPKE",
-            "text_8Qw9YQ",
+            "text_eHtmCm",
+            "text_bEkJi3",
             "text_Kgk9XV"
           ]
         },
-        "group_WQEVkU": {
-          "type": "group",
-          "name": "t:names.column",
-          "settings": {
-            "content_direction": "column",
-            "vertical_on_mobile": true,
-            "horizontal_alignment": "flex-start",
-            "vertical_alignment": "center",
-            "align_baseline": false,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "flex-start",
-            "gap": 8,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 10,
-            "toggle_overlay": false,
-            "overlay_color": "#00000026",
-            "overlay_style": "solid",
-            "gradient_direction": "to top",
-            "link": "",
-            "open_in_new_tab": false,
-            "placeholder": "",
-            "padding-block-start": 10,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "image_hEdV3t": {
-              "type": "image",
-              "name": "t:names.image",
-              "settings": {
-                "link": "",
-                "image_ratio": "adapt",
-                "width": "custom",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 10,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "text_U3pmNz": {
-              "type": "text",
-              "name": "t:names.heading",
-              "settings": {
-                "text": "<h2>Customer care</h2>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "center",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "text_fGdJx4": {
-              "type": "text",
-              "name": "t:names.description",
-              "settings": {
-                "text": "<p>We're always on your side: keeping our loyal customers happy is our top priority and number one goal.</p>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "center",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "image_hEdV3t",
-            "text_U3pmNz",
-            "text_fGdJx4"
-          ]
-        },
-        "group_hKxVim": {
+        "group_8QmLHp": {
           "type": "group",
           "name": "t:names.column",
           "settings": {
@@ -1012,13 +783,13 @@
             "link": "",
             "open_in_new_tab": false,
             "placeholder": "",
-            "padding-block-start": 10,
+            "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
           "blocks": {
-            "image_NVtapf": {
+            "image_yJwea4": {
               "type": "image",
               "name": "t:names.image",
               "settings": {
@@ -1040,15 +811,15 @@
               },
               "blocks": {}
             },
-            "text_VXjnUG": {
+            "text_byYzmL": {
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>Customer care</h2>",
+                "text": "<p><span style=\"text-decoration:underline\">DR. SOO-JIN KIM</span></p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
-                "type_preset": "h4",
+                "type_preset": "h1",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
                 "line_height": "normal",
@@ -1066,11 +837,37 @@
               },
               "blocks": {}
             },
-            "text_VJFxfA": {
+            "text_nyae9e": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>Dermatology consultant, Seoul</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_rLJYV8": {
               "type": "text",
               "name": "t:names.description",
               "settings": {
-                "text": "<p>We're always on your side: keeping our loyal customers happy is our top priority and number one goal.</p>",
+                "text": "<p>Dr Kim is a board-certified dermatologist known for her work with sensitive and acne-prone skin, prioritising long-term skin health and balance.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
@@ -1094,16 +891,165 @@
             }
           },
           "block_order": [
-            "image_NVtapf",
-            "text_VXjnUG",
-            "text_VJFxfA"
+            "image_yJwea4",
+            "text_byYzmL",
+            "text_nyae9e",
+            "text_rLJYV8"
+          ]
+        },
+        "group_QUA3ed": {
+          "type": "group",
+          "name": "t:names.column",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 8,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "image_riUCU8": {
+              "type": "image",
+              "name": "t:names.image",
+              "settings": {
+                "link": "",
+                "image_ratio": "adapt",
+                "width": "custom",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 10,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_J8hCPR": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<p><span style=\"text-decoration:underline\">DR. AARAV MEHTA</span></p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h1",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_f3wjLK": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>Dermatology advisor, India</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h5",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_j9VkEe": {
+              "type": "text",
+              "name": "t:names.description",
+              "settings": {
+                "text": "<p>Dr Mehta is a practising dermatologist experienced with diverse Indian skin types, combining clinical insight with practical, everyday skincare solutions.</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_riUCU8",
+            "text_J8hCPR",
+            "text_f3wjLK",
+            "text_j9VkEe"
           ]
         }
       },
       "block_order": [
         "group_364zDE",
-        "group_WQEVkU",
-        "group_hKxVim"
+        "group_8QmLHp",
+        "group_QUA3ed"
       ],
       "custom_css": [
         "{margin-inline: 3.1vw; padding: 2vw; border-radius: 10px; overflow: hidden;}",
@@ -1135,7 +1081,77 @@
         "overlay_style": "solid",
         "gradient_direction": "to top",
         "padding-block-start": 0,
-        "padding-block-end": 24
+        "padding-block-end": 12
+      }
+    },
+    "hero_aVBdBQ": {
+      "type": "hero",
+      "blocks": {
+        "text_Nj7cxM": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>MINIMAL skincare, minimal FOOTPRINT.<br/></p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-heading--family)",
+            "font_size": "1.25rem",
+            "line_height": "tight",
+            "letter_spacing": "tight",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground-heading)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_Nj7cxM"
+      ],
+      "custom_css": [
+        ".hero {padding: 2vw; border-radius: 24px; overflow: hidden;}",
+        ".hero img,.hero__media img,.hero__media {border-radius: 10px;}"
+      ],
+      "name": "t:names.hero",
+      "settings": {
+        "media_type_1": "image",
+        "media_type_2": "image",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": false,
+        "media_type_1_mobile": "image",
+        "image_1_mobile": "shopify://shop_images/image_f73e951f-1256-4a48-befd-1b3463dd990f.png",
+        "media_type_2_mobile": "image",
+        "link": "",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 14,
+        "section_width": "page-width",
+        "section_height": "large",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-1",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "gradient",
+        "gradient_direction": "to top",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 40,
+        "padding-block-end": 0
       }
     },
     "ss_featured_collection_6_cFEgN8": {
@@ -1277,7 +1293,7 @@
         "margin_bottom": 0,
         "margin_horizontal": 0,
         "margin_horizontal_mobile": 0,
-        "padding_top": 24,
+        "padding_top": 0,
         "padding_bottom": 12,
         "padding_horizontal": 4,
         "padding_horizontal_mobile": 1.5,
@@ -1296,9 +1312,9 @@
     "ss_image_with_text_bwqzNC",
     "hero_BU3jQP",
     "ss_image_with_text_15_VLxknD",
-    "ss_slider_5_bRt6pY",
     "section_NKG9AC",
     "section_RKjyxn",
+    "hero_aVBdBQ",
     "ss_featured_collection_6_cFEgN8"
   ]
 }
