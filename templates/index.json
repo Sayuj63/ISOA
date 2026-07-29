@@ -789,7 +789,7 @@
         "heading_DDArrH": {
           "type": "heading",
           "settings": {
-            "heading": "<h2>Image with text #1</h2>",
+            "heading": "<p>patch on the go</p>",
             "heading_custom": false,
             "heading_font": "josefin_sans_n4",
             "heading_size": 32,
@@ -804,7 +804,7 @@
         "text_BRGXQR": {
           "type": "text",
           "settings": {
-            "text": "<p>Made with care and unconditionally loved by our customers, this signature bestseller exceeds all expectations.</p>",
+            "text": "<p>A little something that protects your skin. These discreet micro-dart patches deliver targeted care right where you need it, while the compact design makes them easy to carry and use anytime, anywhere.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 14,
@@ -819,7 +819,7 @@
         "button_9pVLiq": {
           "type": "button",
           "settings": {
-            "button": "Shop now",
+            "button": "GET SPOTWEAR",
             "url": "",
             "open_in_new_tab": false,
             "button_style": "non_outline",
