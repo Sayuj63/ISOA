@@ -280,58 +280,58 @@
         "padding-block-end": 24
       }
     },
-    "ss_image_with_text_15_HhiCCE": {
+    "ss_image_with_text_15_UzxNhw": {
       "type": "ss-image-with-text-15",
       "blocks": {
-        "item_rC9UnC": {
+        "item_YeDxCa": {
           "type": "item",
           "settings": {
-            "toggle_text": "Our formulas",
-            "heading": "<p>minimal & good for you</p>",
-            "text": "<p>A responsible approach to cruelty-free, clean, vegan ingredients. Suitable for all skin types. Fragrance-free and dermatologist-developed.</p><p></p><p></p>",
-            "button_label": "Learn More",
+            "toggle_text": "our values",
+            "heading": "<p><strong>our values</strong></p>",
+            "text": "<p>It was important to us to build a value-driven business. At ISOUA, we believe in: Simplicity. Affordability. Authenticity. Quality. Transparency.</p>",
+            "button_label": "",
             "button_link": ""
           }
         },
-        "item_xJfqQE": {
+        "item_kL8KcV": {
           "type": "item",
           "settings": {
-            "toggle_text": "Our packaging",
-            "heading": "<p>fyi, we use pcr</p>",
-            "text": "<p>ISOUA’s pouch bags, bottles, tubes, and caps are made with post-consumer recycled (PCR) materials. See more details on each product's page—along with easy-to-follow recycling instructions.<br/><br/></p>",
-            "button_label": "Learn More",
+            "toggle_text": "scientifically proven formulas",
+            "heading": "<p><strong>rooted in science</strong></p>",
+            "text": "<p>Expert-led. Science-backed. Developed with dermatologists and chemists, our formulas are designed to deliver visible results—instantly, and with continued use.</p>",
+            "button_label": "",
             "button_link": ""
           }
         },
-        "item_KVPPV7": {
+        "item_g6YHmj": {
           "type": "item",
           "settings": {
-            "toggle_text": "Your empties",
-            "heading": "<p>we got you</p>",
-            "text": "<p>Easily ship back at least 3 empty products if you'd like us to recycle them for you. Email hello@isoua.com for a complimentary shipping label.</p>",
-            "button_label": "Learn More",
+            "toggle_text": "our minimal footprint",
+            "heading": "<p><strong>The ISOUA philosophy</strong></p>",
+            "text": "<p>Less, but better. From limited releases to consciously sourced ingredients, we are committed to mindful skincare. Vegan. Cruelty-free. Fragrance-free. No excess.</p>",
+            "button_label": "",
             "button_link": ""
           }
         }
       },
       "block_order": [
-        "item_rC9UnC",
-        "item_xJfqQE",
-        "item_KVPPV7"
+        "item_YeDxCa",
+        "item_kL8KcV",
+        "item_g6YHmj"
       ],
       "name": "SS - Image With Text #15",
       "settings": {
-        "body_gap": 12,
-        "body_gap_mobile": 12,
+        "body_gap": 20,
+        "body_gap_mobile": 16,
         "image_url": "",
         "image_position": "left",
         "image_position_mobile": "top",
         "image_radius": 12,
         "image_border_thickness": 0,
-        "image_ratio": "original",
-        "image_ratio_mobile": "original",
-        "content_padding_vertical": 32,
-        "content_padding_vertical_mobile": 16,
+        "image_ratio": "portrait",
+        "image_ratio_mobile": "portrait",
+        "content_padding_vertical": 12,
+        "content_padding_vertical_mobile": 12,
         "content_padding_horizontal": 32,
         "content_padding_horizontal_mobile": 16,
         "content_radius": 12,
@@ -349,7 +349,7 @@
         "text_size_mobile": 14,
         "text_height": 170,
         "text_mt": 24,
-        "toggle_text_padding_vertical": 16,
+        "toggle_text_padding_vertical": 10,
         "toggle_text_padding_vertical_mobile": 16,
         "toggle_text_border_thickness": 1,
         "toggle_text_custom": false,
@@ -380,8 +380,8 @@
         "margin_horizontal": 0,
         "margin_horizontal_mobile": 0,
         "padding_top": 0,
-        "padding_bottom": 28,
-        "padding_horizontal": 5,
+        "padding_bottom": 24,
+        "padding_horizontal": 3,
         "padding_horizontal_mobile": 1.5,
         "full_width": true,
         "content_width": 120,
@@ -484,12 +484,12 @@
       "name": "SS - Image With Text #14",
       "settings": {
         "body_gap": 10,
-        "body_gap_mobile": 0,
+        "body_gap_mobile": 4,
         "content_horizontal_align": "start",
         "content_horizontal_align_mobile": "start",
         "content_vertical_align": "center",
         "content_padding_vertical": 0,
-        "content_padding_vertical_mobile": 0,
+        "content_padding_vertical_mobile": 22,
         "content_padding_horizontal": 32,
         "content_padding_horizontal_mobile": 16,
         "image_position": "right",
@@ -508,7 +508,7 @@
         "padding_horizontal": 0,
         "padding_horizontal_mobile": 0,
         "full_width": true,
-        "content_width": 120,
+        "content_width": 0,
         "border_thickness": 0,
         "section_radius": 10,
         "lazy": true
@@ -590,7 +590,7 @@
     "hero_FeGc7p",
     "ss_image_with_text_HiVAhA",
     "hero_V8dEDA",
-    "ss_image_with_text_15_HhiCCE",
+    "ss_image_with_text_15_UzxNhw",
     "ss_image_with_text_14_nEexmb",
     "hero_bgT9Jn"
   ]
