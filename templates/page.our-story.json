@@ -95,7 +95,7 @@
         "text_aDG9y4"
       ],
       "custom_css": [
-        ".hero {padding: 3vw; border-radius: 24px; overflow: hidden;}",
+        ".hero {padding: 2vw; border-radius: 24px; overflow: hidden;}",
         ".hero img,.hero__media img,.hero__media {border-radius: 10px;}"
       ],
       "name": "t:names.hero",
@@ -128,7 +128,7 @@
         "blurred_reflection": false,
         "reflection_opacity": 75,
         "padding-block-start": 40,
-        "padding-block-end": 40
+        "padding-block-end": 0
       }
     },
     "ss_image_with_text_bwqzNC": {
@@ -274,7 +274,7 @@
         "text_HhniwP"
       ],
       "custom_css": [
-        ".hero {padding: 3vw; border-radius: 24px; overflow: hidden;}",
+        ".hero {padding: 2vw; border-radius: 24px; overflow: hidden;}",
         ".hero img,.hero__media img,.hero__media {border-radius: 10px;}"
       ],
       "name": "t:names.hero",
@@ -306,8 +306,8 @@
         "gradient_direction": "to top",
         "blurred_reflection": false,
         "reflection_opacity": 75,
-        "padding-block-start": 40,
-        "padding-block-end": 40
+        "padding-block-start": 12,
+        "padding-block-end": 28
       }
     },
     "ss_image_with_text_15_VLxknD": {
@@ -543,8 +543,8 @@
         "margin_bottom": 0,
         "margin_horizontal": 0,
         "margin_horizontal_mobile": 0,
-        "padding_top": 36,
-        "padding_bottom": 36,
+        "padding_top": 28,
+        "padding_bottom": 28,
         "padding_horizontal": 5,
         "padding_horizontal_mobile": 1.5,
         "full_width": false,
@@ -1184,7 +1184,7 @@
         "margin_horizontal": 0,
         "margin_horizontal_mobile": 0,
         "padding_top": 24,
-        "padding_bottom": 24,
+        "padding_bottom": 12,
         "padding_horizontal": 4,
         "padding_horizontal_mobile": 1.5,
         "full_width": true,

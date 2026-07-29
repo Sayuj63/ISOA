@@ -95,7 +95,7 @@
         "text_ytmgRT"
       ],
       "custom_css": [
-        ".hero {padding: 3vw; border-radius: 10px; overflow: hidden;}",
+        ".hero {padding: 2vw; border-radius: 10px; overflow: hidden;}",
         ".hero img,.hero__media img,.hero__media {border-radius: 10px;}"
       ],
       "name": "t:names.hero",
@@ -244,7 +244,7 @@
         "text_jNmdB7"
       ],
       "custom_css": [
-        ".hero {padding: 3vw; border-radius: 10px; overflow: hidden;}",
+        ".hero {padding: 2vw; border-radius: 10px; overflow: hidden;}",
         ".hero img,.hero__media img,.hero__media {border-radius: 10px;}"
       ],
       "name": "t:names.hero",
@@ -380,7 +380,7 @@
         "margin_horizontal": 0,
         "margin_horizontal_mobile": 0,
         "padding_top": 0,
-        "padding_bottom": 24,
+        "padding_bottom": 28,
         "padding_horizontal": 5,
         "padding_horizontal_mobile": 1.5,
         "full_width": true,
@@ -496,15 +496,15 @@
         "image_position_mobile": "top",
         "image_ratio": "portrait",
         "image_ratio_mobile": "portrait",
-        "background_color": "#F1F0ED",
+        "background_color": "#f1f0ed",
         "background_gradient": "",
         "border_color": "#000000",
         "margin_top": 0,
         "margin_bottom": 0,
-        "margin_horizontal": 2,
+        "margin_horizontal": 3,
         "margin_horizontal_mobile": 1.5,
         "padding_top": 0,
-        "padding_bottom": 0,
+        "padding_bottom": 12,
         "padding_horizontal": 0,
         "padding_horizontal_mobile": 0,
         "full_width": true,
@@ -548,7 +548,7 @@
         "text_4VgVyy"
       ],
       "custom_css": [
-        ".hero {padding: 3vw; border-radius: 10px; overflow: hidden;}",
+        ".hero {padding: 1vw; border-radius: 10px; overflow: hidden;}",
         ".hero img,.hero__media img,.hero__media {border-radius: 10px;}"
       ],
       "name": "t:names.hero",

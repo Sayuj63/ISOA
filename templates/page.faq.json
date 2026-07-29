@@ -259,7 +259,7 @@
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
-            "padding-block-start": 13,
+            "padding-block-start": 24,
             "padding-block-end": 10,
             "padding-inline-start": 0,
             "padding-inline-end": 0
@@ -290,13 +290,13 @@
         "border": "solid",
         "border_width": 0,
         "border_opacity": 0,
-        "border_radius": 0,
+        "border_radius": 10,
         "toggle_overlay": false,
         "overlay_color": "#00000026",
         "overlay_style": "gradient",
         "gradient_direction": "to top",
-        "padding-block-start": 5,
-        "padding-block-end": 0
+        "padding-block-start": 12,
+        "padding-block-end": 12
       }
     }
   },
