@@ -78,6 +78,21 @@
       {%- endif -%}
 
       <div class="isoa-rc-info">
+        {%- if show_reviews -%}
+          <div class="isoa-rc-reviews" aria-label="{{ review_stars }} stars from {{ review_count }} reviews">
+            <span class="isoa-rc-stars" aria-hidden="true">
+              {%- assign full = review_stars | floor -%}
+              {%- assign has_half = false -%}
+              {%- assign fractional = review_stars | minus: full -%}
+              {%- if fractional >= 0.25 and fractional < 0.75 -%}{%- assign has_half = true -%}{%- endif -%}
+              {%- if fractional >= 0.75 -%}{%- assign full = full | plus: 1 -%}{%- endif -%}
+              {%- for i in (1..5) -%}
+                {%- if forloop.index0 < full -%}★{%- elsif has_half and forloop.index0 == full -%}⯪{%- else -%}☆{%- endif -%}
+              {%- endfor -%}
+            </span>
+            <span class="isoa-rc-review-count">({{ review_count }})</span>
+          </div>
+        {%- endif -%}
         <p class="isoa-rc-title">{{ title_up }}</p>
         <p class="isoa-rc-price">{{ price_formatted }}</p>
         {%- if subtitle != blank -%}
