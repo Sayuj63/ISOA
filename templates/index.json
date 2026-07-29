@@ -892,6 +892,115 @@
         "lazy": true
       }
     },
+    "ss_image_with_text_qPqKib": {
+      "type": "ss-image-with-text",
+      "blocks": {
+        "heading_fX8gyH": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>patch on the go</p>",
+            "heading_custom": false,
+            "heading_font": "josefin_sans_n4",
+            "heading_size": 32,
+            "heading_size_mobile": 32,
+            "heading_advanced": false,
+            "heading_height": 130,
+            "heading_mt": 0,
+            "heading_mt_mobile": 0,
+            "heading_color": "#121212"
+          }
+        },
+        "text_HFgCpp": {
+          "type": "text",
+          "settings": {
+            "text": "<p>A little something that protects your skin. These discreet micro-dart patches deliver targeted care right where you need it, while the compact design makes them easy to carry and use anytime, anywhere.</p>",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 14,
+            "text_size_mobile": 14,
+            "text_advanced": true,
+            "text_height": 150,
+            "text_mt": 12,
+            "text_mt_mobile": 12,
+            "text_color": "#121212"
+          }
+        },
+        "button_GaxKpM": {
+          "type": "button",
+          "settings": {
+            "button": "GET SPOTWEAR",
+            "url": "",
+            "open_in_new_tab": false,
+            "button_style": "non_outline",
+            "button_custom": false,
+            "button_font": "josefin_sans_n4",
+            "button_size": 14,
+            "button_size_mobile": 14,
+            "button_advanced": false,
+            "button_height": 100,
+            "button_padding_horizontal": 32,
+            "button_padding_horizontal_mobile": 32,
+            "button_padding_vertical": 16,
+            "button_padding_vertical_mobile": 16,
+            "button_radius": 100,
+            "button_border_thickness": 1,
+            "button_mt": 12,
+            "button_mt_mobile": 12,
+            "button_color": "#ffffff",
+            "button_hover_color": "#ffffff",
+            "button_bg_color": "#121212",
+            "button_bg_hover_color": "#333333",
+            "button_border_color": "#121212",
+            "button_border_hover_color": "#121212"
+          }
+        }
+      },
+      "block_order": [
+        "heading_fX8gyH",
+        "text_HFgCpp",
+        "button_GaxKpM"
+      ],
+      "name": "SS - Image with text #1",
+      "settings": {
+        "layout": "image_content",
+        "layout_mobile": "image_content",
+        "layout_advanced": true,
+        "layout_gap": 24,
+        "layout_gap_mobile": 12,
+        "layout_border_thickness": 0,
+        "layout_radius": 10,
+        "use_shadow": false,
+        "content_align": "left",
+        "content_align_mobile": "left",
+        "content_vertical_align": "center",
+        "image_url": "",
+        "image_radius": 10,
+        "image_border_thickness": 0,
+        "image_ratio": "square",
+        "image_ratio_mobile": "square",
+        "layout_border_color": "#121212",
+        "image_border_color": "#121212",
+        "shadow_color": "#0000001a",
+        "background_style": "solid",
+        "background_color": "#ffffff",
+        "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
+        "outer_background_color": "#ffffff",
+        "border_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0.5,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 16,
+        "padding_bottom": 16,
+        "padding_horizontal": 2,
+        "padding_horizontal_mobile": 1,
+        "width": "page",
+        "content_width": 1200,
+        "border_thickness": 0,
+        "section_radius": 10,
+        "lazy": true
+      }
+    },
     "ss_slider_5_4PzGG9": {
       "type": "ss-slider-5",
       "blocks": {
@@ -1143,6 +1252,7 @@
     "media_with_content_6PehFB",
     "product_hotspots_7xKcFa",
     "ss_image_with_text_KKFA76",
+    "ss_image_with_text_qPqKib",
     "ss_slider_5_4PzGG9",
     "ss_image_with_text_15_aE3G3D"
   ]
