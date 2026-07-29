@@ -30,6 +30,21 @@
   assign price_formatted = product.price | money
   assign price_short = product.price | money_without_trailing_zeros
   assign title_up = product.title | upcase
+
+  assign review_count_meta = product.metafields.custom.review_count
+  assign review_count = 0
+  if review_count_meta and review_count_meta.value
+    assign review_count = review_count_meta.value | plus: 0
+  endif
+  assign review_stars_meta = product.metafields.custom.review_stars
+  assign review_stars = 4.5
+  if review_stars_meta and review_stars_meta.value
+    assign review_stars = review_stars_meta.value | times: 1.0
+  endif
+  assign show_reviews = false
+  if review_count > 0
+    assign show_reviews = true
+  endif
 -%}
 
 <article class="isoa-rc-card" data-handle="{{ product.handle }}">
