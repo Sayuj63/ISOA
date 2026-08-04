@@ -1084,56 +1084,55 @@
   <div class="section-{{ section.id }}-settings">
     <div class="featured-body-{{ section.id }}">
       {% assign slide_blocks = section.blocks | where: 'type', 'slide' %}
-      {%- if section.settings.mobile_thumb_1 != blank
-          or section.settings.mobile_thumb_2 != blank
-          or section.settings.mobile_main != blank
-      -%}
-        <div class="featured-mobile-static-{{ section.id }}">
-          {%- if section.settings.mobile_thumb_1 != blank or section.settings.mobile_thumb_2 != blank -%}
-            <div class="featured-mobile-thumbs-{{ section.id }}">
-              <div class="featured-mobile-thumb-{{ section.id }}">
-                {% if section.settings.mobile_thumb_1 != blank %}
-                  {{
-                    section.settings.mobile_thumb_1
-                    | image_url: width: 750
-                    | image_tag:
-                      loading: 'lazy',
-                      sizes: '(min-width: 750px) 0px, 45vw',
-                      widths: '240, 375, 550, 750',
-                      alt: section.settings.mobile_thumb_1.alt
-                  }}
-                {% endif %}
-              </div>
-              <div class="featured-mobile-thumb-{{ section.id }}">
-                {% if section.settings.mobile_thumb_2 != blank %}
-                  {{
-                    section.settings.mobile_thumb_2
-                    | image_url: width: 750
-                    | image_tag:
-                      loading: 'lazy',
-                      sizes: '(min-width: 750px) 0px, 45vw',
-                      widths: '240, 375, 550, 750',
-                      alt: section.settings.mobile_thumb_2.alt
-                  }}
-                {% endif %}
-              </div>
-            </div>
-          {%- endif -%}
-          {%- if section.settings.mobile_main != blank -%}
-            <div class="featured-mobile-main-{{ section.id }}">
+      <div class="featured-mobile-static-{{ section.id }}">
+        <div class="featured-mobile-thumbs-{{ section.id }}">
+          <div class="featured-mobile-thumb-{{ section.id }}">
+            {% if section.settings.mobile_thumb_1 != blank %}
               {{
-                section.settings.mobile_main
-                | image_url: width: 1200
+                section.settings.mobile_thumb_1
+                | image_url: width: 750
                 | image_tag:
                   loading: 'lazy',
-                  sizes: '(min-width: 750px) 0px, 92vw',
-                  widths: '375, 550, 750, 950, 1200',
-                  alt: section.settings.mobile_main.alt
+                  sizes: '(min-width: 750px) 0px, 45vw',
+                  widths: '240, 375, 550, 750',
+                  alt: section.settings.mobile_thumb_1.alt
               }}
-            </div>
-          {%- endif -%}
+            {% else %}
+              <img src="{{ 'spotwear-app-1.jpg' | asset_url }}" alt="Spotwear sticker sheet" loading="lazy" width="220" height="240">
+            {% endif %}
+          </div>
+          <div class="featured-mobile-thumb-{{ section.id }}">
+            {% if section.settings.mobile_thumb_2 != blank %}
+              {{
+                section.settings.mobile_thumb_2
+                | image_url: width: 750
+                | image_tag:
+                  loading: 'lazy',
+                  sizes: '(min-width: 750px) 0px, 45vw',
+                  widths: '240, 375, 550, 750',
+                  alt: section.settings.mobile_thumb_2.alt
+              }}
+            {% else %}
+              <img src="{{ 'spotwear-app-2.jpg' | asset_url }}" alt="Person wearing Spotwear stickers" loading="lazy" width="220" height="240">
+            {% endif %}
+          </div>
         </div>
-      {%- endif -%}
+        <div class="featured-mobile-main-{{ section.id }}">
+          {% if section.settings.mobile_main != blank %}
+            {{
+              section.settings.mobile_main
+              | image_url: width: 1200
+              | image_tag:
+                loading: 'lazy',
+                sizes: '(min-width: 750px) 0px, 92vw',
+                widths: '375, 550, 750, 950, 1200',
+                alt: section.settings.mobile_main.alt
+            }}
+          {% else %}
+            <img src="{{ 'spotwear-app-3-mobile.jpg' | asset_url }}" alt="People wearing Spotwear stickers" loading="lazy" width="100" height="52">
+          {% endif %}
+        </div>
+      </div>
 
       {% if slide_blocks.size > 0 %}
         <div class="featured-mobile-steps-{{ section.id }}" data-featured-mobile-steps>
