@@ -999,6 +999,15 @@
   .content-for-layout > .shopify-section:first-child:not(.hero-wrapper) {
     margin-top: var(--header-group-height, 0);
   }
+
+  /* Product heroes need a visible separation from the fixed nav pill. Keep
+     this in the shared header (rather than PDP CSS) because products can use
+     either the default product template or the Rhode PDP template. */
+  @media (min-width: 750px) {
+    body.template-product .content-for-layout > .shopify-section:first-child:not(.hero-wrapper) {
+      margin-top: calc(var(--header-group-height, 0px) + var(--isoa-section-gap, 10px));
+    }
+  }
 {%- endstyle -%}
 
 {% if width == 'custom' %}
