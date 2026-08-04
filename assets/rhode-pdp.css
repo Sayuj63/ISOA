@@ -815,9 +815,7 @@ main#MainContent .rh-benefits__container {
   main#MainContent [class^="featured-mobile-static-"] {
     display: flex;
     flex-direction: column;
-    width: 88%;
     gap: 12px;
-    margin-inline: auto;
     margin-bottom: 16px;
   }
   main#MainContent [class^="featured-mobile-thumbs-"] {
