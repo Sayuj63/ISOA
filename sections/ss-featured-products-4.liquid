@@ -1083,6 +1083,7 @@
 >
   <div class="section-{{ section.id }}-settings">
     <div class="featured-body-{{ section.id }}">
+      {% assign slide_blocks = section.blocks | where: 'type', 'slide' %}
       {%- if section.settings.mobile_thumb_1 != blank
           or section.settings.mobile_thumb_2 != blank
           or section.settings.mobile_main != blank
@@ -1133,9 +1134,40 @@
           {%- endif -%}
         </div>
       {%- endif -%}
-      <div class="featured-content-{{ section.id }}">
-        {% assign slide_blocks = section.blocks | where: 'type', 'slide' %}
 
+      {% if slide_blocks.size > 0 %}
+        <div class="featured-mobile-steps-{{ section.id }}" data-featured-mobile-steps>
+          {% for block in section.blocks %}
+            {% if block.type == 'text' %}
+              <p class="featured-mobile-eyebrow-{{ section.id }}">{{ block.settings.text | strip_html }}</p>
+            {% endif %}
+          {% endfor %}
+
+          {% for block in slide_blocks %}
+            <article
+              class="featured-mobile-step-{{ section.id }}{% if forloop.first %} is-active{% endif %}"
+              data-featured-mobile-step="{{ forloop.index0 }}"
+              {% unless forloop.first %}hidden{% endunless %}
+              aria-label="Application step {{ forloop.index }} of {{ slide_blocks.size }}"
+            >
+              <p class="featured-mobile-step-title-{{ section.id }}">
+                <span class="featured-mobile-step-number-{{ section.id }}">(0{{ forloop.index }})</span>
+                {{ block.settings.title }}
+              </p>
+              <button
+                type="button"
+                class="featured-mobile-step-next-{{ section.id }}"
+                data-featured-mobile-next
+                aria-label="Show application step {% if forloop.last %}1{% else %}{{ forloop.index | plus: 1 }}{% endif %}"
+              >
+                <span aria-hidden="true">→</span>
+              </button>
+            </article>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="featured-content-{{ section.id }}">
         {% if slide_blocks.size > 0 %}
           <div class="featured-thumbnails-{{ section.id }}">
             {% for block in slide_blocks %}
@@ -1426,6 +1458,30 @@
         }
       });
     });
+
+    const mobileStepsRoot = document.querySelector(`.featured-mobile-steps-{{ section.id }}`);
+    if (mobileStepsRoot) {
+      const mobileSteps = Array.from(mobileStepsRoot.querySelectorAll('[data-featured-mobile-step]'));
+      const mobileNextButtons = mobileStepsRoot.querySelectorAll('[data-featured-mobile-next]');
+      let mobileIndex = 0;
+
+      function showMobileStep(index) {
+        mobileIndex = (index + mobileSteps.length) % mobileSteps.length;
+        mobileSteps.forEach((step, stepIndex) => {
+          const active = stepIndex === mobileIndex;
+          step.classList.toggle('is-active', active);
+          step.hidden = !active;
+        });
+        mobileNextButtons.forEach((button) => {
+          const nextStep = (mobileIndex + 1) % mobileSteps.length + 1;
+          button.setAttribute('aria-label', `Show application step ${nextStep}`);
+        });
+      }
+
+      mobileNextButtons.forEach((button) => {
+        button.addEventListener('click', () => showMobileStep(mobileIndex + 1));
+      });
+    }
 
     updateActiveElements(0);
   }

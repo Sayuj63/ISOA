@@ -807,19 +807,18 @@ main#MainContent .rh-benefits__container {
   }
 
   /* 11.05 · Application section mobile layout — Rhode stacks 2 thumbnails
-     + 1 main image ABOVE the APPLICATION eyebrow + step swiper. The
-     per-slide image is hidden on mobile because the imagery is now static
-     above the swiper (see .featured-mobile-static-{id} in the liquid). */
+     + 1 main image above a single self-contained application card. Desktop's
+     original content + Swiper remain intact and are suppressed only here. */
   main#MainContent [class^="featured-mobile-static-"] {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    margin-bottom: 20px;
+    gap: 16px;
+    margin-bottom: 16px;
   }
   main#MainContent [class^="featured-mobile-thumbs-"] {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 16px;
   }
   main#MainContent [class^="featured-mobile-thumb-"] {
     aspect-ratio: 1 / 1;
@@ -834,7 +833,7 @@ main#MainContent .rh-benefits__container {
     display: block;
   }
   main#MainContent [class^="featured-mobile-main-"] {
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1.08 / 1;
     border-radius: 10px;
     overflow: hidden;
     background: #f1f0ed;
@@ -845,21 +844,67 @@ main#MainContent .rh-benefits__container {
     object-fit: cover;
     display: block;
   }
-  /* Hide per-slide image container on mobile (imagery now sits in the
-     static block above; per-slide only needs to hold text + arrow). */
-  main#MainContent [class^="featured-slide-image-"] {
+  main#MainContent [class^="featured-content-"],
+  main#MainContent [class^="featured-image-wrap-"] {
     display: none !important;
   }
 
-  /* 11.1 · APPLICATION eyebrow — desktop rule at line ~462 wasn't scoped for
-     mobile. Match Rhode's 14px w700 with 0.28px letter-spacing on mobile. */
-  main#MainContent [class^="featured-text-"] p,
-  main#MainContent [class*=" featured-text-"] p {
-    margin: 0 0 12px !important;
+  main#MainContent [class^="featured-mobile-steps-"] {
+    position: relative;
+    min-height: 314px;
+    padding: 28px 32px 32px;
+    border-radius: 10px;
+    background: #f1f0ed;
+    color: #67645e;
+  }
+  main#MainContent [class^="featured-mobile-eyebrow-"] {
+    margin: 0 0 56px;
     font-size: 14px !important;
     letter-spacing: 0.3px !important;
     text-transform: uppercase !important;
     color: #67645e !important;
     font-weight: 700 !important;
+  }
+  main#MainContent [class^="featured-mobile-step-"] {
+    margin: 0;
+  }
+  main#MainContent [class^="featured-mobile-step-title-"] {
+    max-width: calc(100% - 70px);
+    margin: 0;
+    font-size: clamp(2rem, 8.2vw, 2.625rem);
+    font-weight: 400;
+    line-height: 1.13;
+    letter-spacing: -0.035em;
+    color: #67645e;
+  }
+  main#MainContent [class^="featured-mobile-step-number-"] {
+    display: inline;
+    margin-right: 8px;
+    font-size: 0.54em;
+    letter-spacing: -0.02em;
+    vertical-align: 0.12em;
+  }
+  main#MainContent [class^="featured-mobile-step-next-"] {
+    position: absolute;
+    right: 32px;
+    bottom: 32px;
+    display: inline-grid;
+    width: 64px;
+    height: 64px;
+    place-items: center;
+    padding: 0;
+    border: 1px solid #67645e;
+    border-radius: 50%;
+    background: transparent;
+    color: #67645e;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 34px;
+    font-weight: 300;
+    line-height: 1;
+  }
+  main#MainContent [class^="featured-mobile-step-next-"]:focus-visible {
+    outline: 2px solid #67645e;
+    outline-offset: 3px;
   }
 }
