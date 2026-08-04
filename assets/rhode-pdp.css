@@ -815,13 +815,15 @@ main#MainContent .rh-benefits__container {
   main#MainContent [class^="featured-mobile-static-"] {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    width: 88%;
+    gap: 12px;
+    margin-inline: auto;
     margin-bottom: 16px;
   }
   main#MainContent [class^="featured-mobile-thumbs-"] {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: 12px;
   }
   main#MainContent [class^="featured-mobile-thumb-"] {
     aspect-ratio: 1 / 1;
@@ -854,14 +856,14 @@ main#MainContent .rh-benefits__container {
 
   main#MainContent [class^="featured-mobile-steps-"] {
     position: relative;
-    min-height: 314px;
-    padding: 28px 32px 32px;
+    min-height: 278px;
+    padding: 26px 28px 28px;
     border-radius: 10px;
     background: #f1f0ed;
     color: #67645e;
   }
   main#MainContent [class^="featured-mobile-eyebrow-"] {
-    margin: 0 0 56px;
+    margin: 0 0 40px;
     font-size: 14px !important;
     letter-spacing: 0.3px !important;
     text-transform: uppercase !important;
@@ -889,11 +891,11 @@ main#MainContent .rh-benefits__container {
   }
   main#MainContent [class^="featured-mobile-step-next-"] {
     position: absolute;
-    right: 32px;
-    bottom: 32px;
+    right: 28px;
+    bottom: 28px;
     display: inline-grid;
-    width: 64px;
-    height: 64px;
+    width: 58px;
+    height: 58px;
     place-items: center;
     padding: 0;
     border: 1px solid #67645e;
