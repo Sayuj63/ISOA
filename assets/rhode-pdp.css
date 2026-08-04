@@ -312,6 +312,16 @@ main#MainContent {
   --rhode-gap: 16px;
 }
 
+/* ss-header-1 is fixed and its global first-section compensation intentionally
+   lands content flush at the header's bottom. The Rhode reference keeps a
+   small white separation between the nav pill and the PDP hero, so restore the
+   shared 10px pill gap here—only on templates that load this PDP stylesheet. */
+@media (min-width: 750px) {
+  body.template-product .content-for-layout > .shopify-section:first-child:not(.hero-wrapper) {
+    margin-top: calc(var(--header-group-height, 0px) + var(--isoa-section-gap, 10px));
+  }
+}
+
 @media (min-width: 750px) {
   /* ─── Width rail — every direct section wrapper snaps to the pill ─── */
 
