@@ -1180,13 +1180,13 @@
         "bullet_1": {
           "type": "bullet",
           "settings": {
-            "text": "PROVIDES ALL-DAY HYDRATION"
+            "text": "CLINICALLY PROVEN TO MINIMIZE THE LOOK OF SPOTS"
           }
         },
         "bullet_2": {
           "type": "bullet",
           "settings": {
-            "text": "REDUCES THE APPEARANCE OF REDNESS OVER TIME"
+            "text": "SWEATPROOF FOR UP TO 30 MINUTES AND WATERPROOF"
           }
         }
       },
@@ -1196,11 +1196,11 @@
       ],
       "settings": {
         "heading": "clinical results",
-        "footnote": "<p>*Based on a 53-subject clinical study after immediate and 12 hours of use.</p>",
+        "footnote": "<p>*Based on a 31-subject clinical study after immediate and 8 hours of use.</p>",
         "tab1_label": "consumer study results",
-        "tab1_content": "<p>Consumer study details go here.</p>",
+        "tab1_content": "<p>Consumer study results.</p>",
         "tab2_label": "clinical results",
-        "tab2_content": "<p>Clinical study details go here.</p>",
+        "tab2_content": "<p>Clinical results.</p>",
         "padding_top": 24,
         "padding_bottom": 24
       }
