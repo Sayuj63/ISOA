@@ -505,6 +505,9 @@ main#MainContent {
   main#MainContent [class^="featured-mobile-static-"] {
     display: none !important;
   }
+  main#MainContent [class^="featured-mobile-steps-"] {
+    display: none !important;
+  }
 }
 
 /* ==========================================================================
