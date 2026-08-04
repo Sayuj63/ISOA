@@ -162,6 +162,55 @@
     display: block;
   }
 
+  .rh-clin-panel-{{ section.id }} { display: none; }
+  .rh-clin-panel-{{ section.id }}.is-active { display: flex; flex: 1; flex-direction: column; }
+  .rh-clin-consumer-label-{{ section.id }} {
+    width: fit-content;
+    margin: 0 0 28px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #918d87;
+    font-size: .875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .rh-clin-stats-{{ section.id }} { display: grid; gap: 22px; }
+  .rh-clin-stat-{{ section.id }} { margin: 0; }
+  .rh-clin-stat-{{ section.id }} strong {
+    display: block;
+    font-family: var(--font-heading--family);
+    font-size: 2.3rem;
+    font-weight: 600;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px #e29fc8;
+  }
+  .rh-clin-stat-{{ section.id }} span {
+    display: block;
+    margin-top: 5px;
+    font-size: .82rem;
+    font-weight: 700;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+  .rh-clin-panel-{{ section.id }} .rh-clin-footnote-{{ section.id }} { margin-top: auto; }
+  .rh-clin-tablist-{{ section.id }} {
+    display: grid;
+    margin-top: 22px;
+    border-top: 1px solid rgba(103, 100, 94, .25);
+  }
+  .rh-clin-tab-{{ section.id }} {
+    border: 0;
+    border-bottom: 1px solid rgba(103, 100, 94, .25);
+    background: transparent;
+    padding: 17px 0;
+    color: #67645e;
+    cursor: pointer;
+    font: 600 1.25rem/1 var(--font-heading--family);
+    text-align: left;
+    text-transform: lowercase;
+  }
+  .rh-clin-tab-{{ section.id }}[aria-selected='true'] { color: #67645e; }
+
   @media (max-width: 749px) {
     .rh-clin-grid-{{ section.id }} {
       grid-template-columns: 1fr;
@@ -189,44 +238,27 @@
   <div class="section-{{ section.id }}-inner">
     <div class="rh-clin-grid-{{ section.id }}">
       <div class="rh-clin-card-{{ section.id }}">
-        <h2 class="rh-clin-heading-{{ section.id }}">{{ section.settings.heading }}</h2>
-
         {%- assign bullet_blocks = section.blocks | where: 'type', 'bullet' -%}
-        {%- if bullet_blocks.size > 0 -%}
+        <div class="rh-clin-panel-{{ section.id }} is-active" data-rh-clin-panel="consumer" role="tabpanel">
+          <p class="rh-clin-consumer-label-{{ section.id }}">After 8 hours</p>
+          <div class="rh-clin-stats-{{ section.id }}">
+            <p class="rh-clin-stat-{{ section.id }}"><strong>100%</strong><span>Agreed the patch stayed on all day and felt comfortable to wear</span></p>
+            <p class="rh-clin-stat-{{ section.id }}"><strong>100%</strong><span>Agreed the patch helped absorb excess oil</span></p>
+            <p class="rh-clin-stat-{{ section.id }}"><strong>94%</strong><span>Agreed the patch helped minimize the look of their spot</span></p>
+            <p class="rh-clin-stat-{{ section.id }}"><strong>90%</strong><span>Agreed their spot looked smaller, flatter, and less red</span></p>
+          </div>
+          <div class="rh-clin-footnote-{{ section.id }}"><p>*Based on a 31-subject consumer perception study after 8 hours of use.</p></div>
+        </div>
+        <div class="rh-clin-panel-{{ section.id }}" data-rh-clin-panel="clinical" role="tabpanel" hidden>
+          <h2 class="rh-clin-heading-{{ section.id }}">{{ section.settings.heading }}</h2>
           <ul class="rh-clin-bullets-{{ section.id }}">
-            {%- for block in bullet_blocks -%}
-              <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
-            {%- endfor -%}
+            {%- for block in bullet_blocks -%}<li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>{%- endfor -%}
           </ul>
-        {%- endif -%}
-
-        {%- if section.settings.footnote != blank -%}
           <div class="rh-clin-footnote-{{ section.id }}">{{ section.settings.footnote }}</div>
-        {%- endif -%}
-
-        <div class="rh-clin-tabs-{{ section.id }}" data-rh-clin-tabs>
-          <div class="rh-clin-row-{{ section.id }}" data-rh-clin-row>
-            <button type="button" class="rh-clin-row-head-{{ section.id }}" data-rh-clin-toggle aria-expanded="false">
-              <span>{{ section.settings.tab1_label }}</span>
-              <span class="rh-clin-row-chevron-{{ section.id }}" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 5l4 4 4-4" stroke="#67645e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-            </button>
-            <div class="rh-clin-row-body-{{ section.id }}">{{ section.settings.tab1_content }}</div>
-          </div>
-          <div class="rh-clin-row-{{ section.id }}" data-rh-clin-row>
-            <button type="button" class="rh-clin-row-head-{{ section.id }}" data-rh-clin-toggle aria-expanded="false">
-              <span>{{ section.settings.tab2_label }}</span>
-              <span class="rh-clin-row-chevron-{{ section.id }}" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 5l4 4 4-4" stroke="#67645e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
-            </button>
-            <div class="rh-clin-row-body-{{ section.id }}">{{ section.settings.tab2_content }}</div>
-          </div>
+        </div>
+        <div class="rh-clin-tablist-{{ section.id }}" role="tablist" aria-label="Study result type">
+          <button class="rh-clin-tab-{{ section.id }}" type="button" role="tab" aria-selected="true" data-rh-clin-tab="consumer">{{ section.settings.tab1_label }}</button>
+          <button class="rh-clin-tab-{{ section.id }}" type="button" role="tab" aria-selected="false" data-rh-clin-tab="clinical">{{ section.settings.tab2_label }}</button>
         </div>
       </div>
 
@@ -238,6 +270,8 @@
             sizes: '(max-width: 749px) 100vw, 50vw',
             alt: section.settings.portrait.alt | default: 'clinical results portrait'
           }}
+        {%- else -%}
+          <img src="{{ 'spotwear-claims.jpg' | asset_url }}" alt="Person applying a Spotwear sticker" loading="lazy" width="220" height="240">
         {%- endif -%}
       </div>
     </div>
@@ -248,13 +282,17 @@
   (function () {
     var scope = document.currentScript.previousElementSibling;
     if (!scope) return;
-    var rows = scope.querySelectorAll('[data-rh-clin-row]');
-    rows.forEach(function (row) {
-      var btn = row.querySelector('[data-rh-clin-toggle]');
-      if (!btn) return;
-      btn.addEventListener('click', function () {
-        var open = row.classList.toggle('is-open');
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    var tabs = scope.querySelectorAll('[data-rh-clin-tab]');
+    var panels = scope.querySelectorAll('[data-rh-clin-panel]');
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var target = tab.getAttribute('data-rh-clin-tab');
+        tabs.forEach(function (item) { item.setAttribute('aria-selected', item === tab ? 'true' : 'false'); });
+        panels.forEach(function (panel) {
+          var active = panel.getAttribute('data-rh-clin-panel') === target;
+          panel.classList.toggle('is-active', active);
+          panel.hidden = !active;
+        });
       });
     });
   })();
