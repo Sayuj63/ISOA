@@ -162,27 +162,6 @@
     display: block;
   }
 
-  /* "what's inside" vertical label — top-left of the portrait, white with a
-     soft dark drop-shadow so it stays readable on any uploaded image. */
-  .rh-wi-label-{{ section.id }} {
-    position: absolute;
-    top: 22px;
-    left: 22px;
-    z-index: 3;
-    color: #fff;
-    font-family: var(--font-heading--family);
-    font-weight: 700;
-    font-size: 16px;
-    letter-spacing: 0.01em;
-    text-transform: lowercase;
-    line-height: 1;
-    white-space: nowrap;
-    writing-mode: vertical-rl;
-    pointer-events: none;
-    filter:
-      drop-shadow(0 0 3px rgba(0, 0, 0, 0.85))
-      drop-shadow(0 1px 2px rgba(0, 0, 0, 0.65));
-  }
 
   .rh-clin-panel-{{ section.id }} { display: none; }
   .rh-clin-panel-{{ section.id }}.is-active { display: flex; flex: 1; flex-direction: column; }
@@ -248,18 +227,6 @@
     .rh-clin-image-{{ section.id }} {
       order: 2;
       aspect-ratio: 4 / 5;
-      border-radius: 10px 10px 0 0;
-      overflow: hidden;
-    }
-    /* Mobile: this image acts as the top of a shared card with the
-       hydrocolloid section below — round top only, drop bottom padding. */
-    .section-{{ section.id }}-inner {
-      padding-bottom: 0 !important;
-    }
-    .rh-wi-label-{{ section.id }} {
-      top: 18px;
-      left: 18px;
-      font-size: 15px;
     }
     .rh-clin-heading-{{ section.id }} {
       font-size: 2rem;
