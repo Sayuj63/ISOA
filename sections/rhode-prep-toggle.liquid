@@ -181,8 +181,32 @@
     margin: 0;
   }
 
+  @media (min-width: 750px) {
+    /* Desktop: image left, card right — 2-col grid. Aspect keeps the image
+       tall enough to feel like a hero product shot next to the card. */
+    .rh-prep-layout-{{ section.id }} {
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .rh-prep-image-viewport-{{ section.id }} {
+      aspect-ratio: auto;
+      align-self: stretch;
+    }
+  }
+
   @media (max-width: 749px) {
-    .rh-prep-{{ section.id }} {
+    /* Mobile merge: image on top (round top only) + card below (round bottom
+       only), zero gap between them — same pattern as the other split
+       sections on the PDP. */
+    .rh-prep-layout-{{ section.id }} {
+      gap: 0;
+    }
+    .rh-prep-image-viewport-{{ section.id }} {
+      border-radius: 10px 10px 0 0;
+      aspect-ratio: 1 / 1;
+    }
+    .rh-prep-card-{{ section.id }} {
+      border-radius: 0 0 10px 10px;
       padding: 24px;
     }
     .rh-prep-circle-{{ section.id }} {
