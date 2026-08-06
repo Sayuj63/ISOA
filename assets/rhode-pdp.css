@@ -805,13 +805,44 @@ main#MainContent .rh-benefits__container {
     line-height: 1.15 !important;
   }
 
-  /* 8 · Hydrocolloid section — the spotwear-ingredients illustration reads
-     as empty grey on mobile because the image is light-on-light and adds no
-     value stacked above the text card. Hide it on mobile; desktop still
-     shows the two-column image + text layout. */
+  /* 8 · Hydrocolloid section — show the image on mobile as the top of a
+     "what's inside" unified card (Rhode reference pattern). Locked to 1:1
+     aspect so the section stays compact; positioned to hold the vertical
+     white label overlay below. */
   main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > .image-block {
-    display: none !important;
+    display: block !important;
+    position: relative !important;
+    aspect-ratio: 1 / 1;
   }
+  main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > .image-block img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    aspect-ratio: unset !important;
+    display: block !important;
+  }
+  /* Vertical "what's inside" label — sits top-left of the image, reads
+     bottom-to-top like the Rhode reference. */
+  main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > .image-block::before {
+    content: "what's inside";
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 2;
+    color: #fff;
+    font-family: var(--font-heading--family);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    text-transform: lowercase;
+    line-height: 1;
+    white-space: nowrap;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    pointer-events: none;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+  }
+
   /* Kill any Horizon phantom class-less div that slips into the flex row on
      mobile — same defensive rule as the desktop counterpart at :374. */
   main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > div:not([class]) {
