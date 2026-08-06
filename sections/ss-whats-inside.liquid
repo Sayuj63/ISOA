@@ -89,6 +89,7 @@ Responsive + Fully Dynamic
 }
 
 .ss-whats-inside-image{
+  position: relative;
   overflow:hidden;
   border-radius: {{ section.settings.image_radius }}px;
 }
@@ -103,14 +104,18 @@ Responsive + Fully Dynamic
 .ss-whats-inside-content{
   background: {{ section.settings.content_bg }};
   border-radius: {{ section.settings.content_radius }}px;
-
   padding: {{ section.settings.content_padding_mobile }}px;
-
-  display:flex;
-  gap: {{ section.settings.side_title_gap_mobile }}px;
 }
 
+/* "what's inside" label — now overlaid on the image top-left, white with a
+   soft dark drop-shadow so it stays legible on any image. Vertical writing
+   direction (reads bottom-to-top after the rotate). */
 .ss-side-title{
+  position: absolute;
+  top: 20px;
+  left: 22px;
+  z-index: 2;
+
   writing-mode: vertical-rl;
   text-orientation: mixed;
 
@@ -118,8 +123,13 @@ Responsive + Fully Dynamic
   font-weight:700;
   line-height:1;
 
-  color: {{ section.settings.side_title_color }};
+  color: #ffffff;
   text-transform: lowercase;
+  white-space: nowrap;
+  pointer-events: none;
+  filter:
+    drop-shadow(0 0 3px rgba(0, 0, 0, 0.7))
+    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.55));
 }
 
 .ss-content-wrap{
