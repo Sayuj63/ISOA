@@ -643,29 +643,30 @@ main#MainContent .rh-benefits__container {
   }
 
   /* 4 · Hydrocolloid section (`section.liquid` with content_direction:row) —
-     force stack on mobile with zero gap, and merge the image + text-card into
-     a single visual container ("what's inside" pattern). Image rounds the top
-     corners only; group card rounds the bottom corners only. A vertical white
-     label overlays the top-left of the image. */
+     force stack on mobile. Image is hidden on mobile (§8 below); this section
+     visually joins onto the clinical-results portrait above (§4.5) so the
+     two together form Rhode's "what's inside" pattern (image top, text below,
+     no gap, rounded top-only on image + rounded bottom-only on this card). */
   main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row {
     display: flex !important;
     flex-direction: column !important;
-    gap: 0 !important;
+    gap: 16px !important;
   }
   main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > .image-block,
   main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > .group-block {
     width: 100% !important;
     flex: 0 0 auto !important;
   }
-  main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > .image-block {
-    border-radius: 10px 10px 0 0 !important;
-    overflow: hidden !important;
+
+  /* 4.5 · The rhode-clinical-results section's portrait sits directly above
+     the Horizon hydrocolloid section on mobile — kill the 32px section gap
+     and clip the hydrocolloid card's top corners so they read as one card. */
+  main#MainContent .shopify-section.rhode-clinical-results + .shopify-section.section-wrapper {
+    margin-top: 0 !important;
   }
-  main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > .image-block img {
-    border-radius: 0 !important;
-  }
-  main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > .group-block {
-    border-radius: 0 0 10px 10px !important;
+  main#MainContent .shopify-section.rhode-clinical-results + .shopify-section.section-wrapper .group-block {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
   }
 
   /* 5 · Hero (product-information) — release the desktop height lock so image
