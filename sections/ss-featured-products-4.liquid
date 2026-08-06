@@ -1473,13 +1473,13 @@
       const mobileNextButtons = mobileStepsRoot.querySelectorAll('[data-featured-mobile-next]');
       let mobileIndex = 0;
 
-      // All step articles stay in the DOM and stack in the same grid cell (see
-      // rhode-pdp.css); we swap them by toggling `.is-active`, which drives an
-      // opacity+translate transition. The `hidden` attribute would kill the
-      // transition (display:none), so we clear it once and never set it again.
-      mobileSteps.forEach((step) => { step.hidden = false; });
+      // The articles sit inside a horizontal flex track. We drive the slide
+      // via a `--rh-active` custom property on `.featured-mobile-steps-*` —
+      // CSS translates the track by `-active * 100/N %`, giving a real
+      // carousel slide (not a fade). Keep `is-active` for a11y/state hooks.
       function showMobileStep(index) {
         mobileIndex = (index + mobileSteps.length) % mobileSteps.length;
+        mobileStepsRoot.style.setProperty('--rh-active', mobileIndex);
         mobileSteps.forEach((step, stepIndex) => {
           step.classList.toggle('is-active', stepIndex === mobileIndex);
         });
