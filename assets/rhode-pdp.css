@@ -809,24 +809,34 @@ main#MainContent .rh-benefits__container {
     font-weight: 400 !important;
   }
 
-  /* 11.05 · Application section mobile layout — Rhode stacks 2 thumbnails
-     + 1 main image above a single self-contained application card. Desktop's
-     original content + Swiper remain intact and are suppressed only here. */
+  /* 11.05 · Application section mobile layout — one unified grey card that
+     holds 2 thumbs + wide main + step text. Outer wrapper carries the beige
+     background + radius; children stay transparent/radius-less so the card
+     reads as a single container. Wide image uses a landscape aspect so the
+     whole section fits in one mobile scroll (~ Rhode's proportions). */
+  main#MainContent [class^="featured-body-"] {
+    display: flex !important;
+    flex-direction: column;
+    gap: 10px !important;
+    background: #f1f0ed;
+    border-radius: 12px;
+    padding: 10px 10px 4px;
+  }
   main#MainContent [class^="featured-mobile-static-"] {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
   main#MainContent [class^="featured-mobile-thumbs-"] {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 10px;
   }
   main#MainContent [class^="featured-mobile-thumb-"] {
     aspect-ratio: 1 / 1;
-    border-radius: 10px;
+    border-radius: 8px;
     overflow: hidden;
-    background: #f1f0ed;
+    background: #e5e3df;
   }
   main#MainContent [class^="featured-mobile-thumb-"] img {
     width: 100%;
@@ -835,10 +845,10 @@ main#MainContent .rh-benefits__container {
     display: block;
   }
   main#MainContent [class^="featured-mobile-main-"] {
-    aspect-ratio: 1.08 / 1;
-    border-radius: 10px;
+    aspect-ratio: 1.55 / 1;
+    border-radius: 8px;
     overflow: hidden;
-    background: #f1f0ed;
+    background: #e5e3df;
   }
   main#MainContent [class^="featured-mobile-main-"] img {
     width: 100%;
@@ -851,17 +861,18 @@ main#MainContent .rh-benefits__container {
     display: none !important;
   }
 
+  /* Step-text card lives inside the wrapper — no bg, no radius of its own. */
   main#MainContent [class^="featured-mobile-steps-"] {
     position: relative;
-    min-height: 278px;
-    padding: 26px 28px 28px;
-    border-radius: 10px;
-    background: #f1f0ed;
+    min-height: 0;
+    padding: 14px 12px 16px;
+    border-radius: 0;
+    background: transparent;
     color: #67645e;
   }
   main#MainContent [class^="featured-mobile-eyebrow-"] {
-    margin: 0 0 40px;
-    font-size: 14px !important;
+    margin: 0 0 12px;
+    font-size: 12px !important;
     letter-spacing: 0.3px !important;
     text-transform: uppercase !important;
     color: #67645e !important;
@@ -871,28 +882,28 @@ main#MainContent .rh-benefits__container {
     margin: 0;
   }
   main#MainContent [class^="featured-mobile-step-title-"] {
-    max-width: calc(100% - 70px);
+    max-width: calc(100% - 56px);
     margin: 0;
-    font-size: clamp(2rem, 8.2vw, 2.625rem);
+    font-size: clamp(1.375rem, 5.6vw, 1.75rem);
     font-weight: 400;
-    line-height: 1.13;
-    letter-spacing: -0.035em;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
     color: #67645e;
   }
   main#MainContent [class^="featured-mobile-step-number-"] {
     display: inline;
-    margin-right: 8px;
-    font-size: 0.54em;
+    margin-right: 6px;
+    font-size: 0.6em;
     letter-spacing: -0.02em;
-    vertical-align: 0.12em;
+    vertical-align: 0.1em;
   }
   main#MainContent [class^="featured-mobile-step-next-"] {
     position: absolute;
-    right: 28px;
-    bottom: 28px;
+    right: 12px;
+    bottom: 12px;
     display: inline-grid;
-    width: 58px;
-    height: 58px;
+    width: 42px;
+    height: 42px;
     place-items: center;
     padding: 0;
     border: 1px solid #67645e;
@@ -901,7 +912,7 @@ main#MainContent .rh-benefits__container {
     color: #67645e;
     cursor: pointer;
     font-family: inherit;
-    font-size: 34px;
+    font-size: 22px;
     font-weight: 300;
     line-height: 1;
   }
