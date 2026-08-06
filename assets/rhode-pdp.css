@@ -806,45 +806,13 @@ main#MainContent .rh-benefits__container {
     line-height: 1.15 !important;
   }
 
-  /* 8 · Hydrocolloid section — show the image on mobile as the top of a
-     "what's inside" unified card (Rhode reference pattern). Locked to 1:1
-     aspect so the section stays compact; positioned to hold the vertical
-     white label overlay below. */
+  /* 8 · Hydrocolloid section — the spotwear-ingredients illustration reads
+     as light-on-light and adds no value on mobile; the clinical-results
+     portrait above serves as the visual anchor for this card. Hide the image
+     on mobile; desktop still shows the two-column image + text layout. */
   main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > .image-block {
-    display: block !important;
-    position: relative !important;
-    aspect-ratio: 1 / 1;
+    display: none !important;
   }
-  main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > .image-block img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    aspect-ratio: unset !important;
-    display: block !important;
-  }
-  /* Vertical "what's inside" label — real span injected by theme.liquid.
-     White text with a dark drop-shadow halo so it stays readable on any
-     image the merchant uploads (light illustration vs. dark portrait). */
-  main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > .image-block .rh-wi-label {
-    position: absolute;
-    top: 22px;
-    left: 22px;
-    z-index: 3;
-    color: #fff;
-    font-family: var(--font-heading--family);
-    font-weight: 700;
-    font-size: 16px;
-    letter-spacing: 0.01em;
-    text-transform: lowercase;
-    line-height: 1;
-    white-space: nowrap;
-    writing-mode: vertical-rl;
-    pointer-events: none;
-    filter:
-      drop-shadow(0 0 3px rgba(0, 0, 0, 0.85))
-      drop-shadow(0 1px 2px rgba(0, 0, 0, 0.65));
-  }
-
   /* Kill any Horizon phantom class-less div that slips into the flex row on
      mobile — same defensive rule as the desktop counterpart at :374. */
   main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > div:not([class]) {
