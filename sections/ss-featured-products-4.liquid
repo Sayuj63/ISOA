@@ -1135,34 +1135,35 @@
       </div>
 
       {% if slide_blocks.size > 0 %}
-        <div class="featured-mobile-steps-{{ section.id }}" data-featured-mobile-steps>
+        <div class="featured-mobile-steps-{{ section.id }}" data-featured-mobile-steps style="--rh-n: {{ slide_blocks.size }};">
           {% for block in section.blocks %}
             {% if block.type == 'text' %}
               <p class="featured-mobile-eyebrow-{{ section.id }}">{{ block.settings.text | strip_html }}</p>
             {% endif %}
           {% endfor %}
 
-          {% for block in slide_blocks %}
-            <article
-              class="featured-mobile-step-{{ section.id }}{% if forloop.first %} is-active{% endif %}"
-              data-featured-mobile-step="{{ forloop.index0 }}"
-              {% unless forloop.first %}hidden{% endunless %}
-              aria-label="Application step {{ forloop.index }} of {{ slide_blocks.size }}"
-            >
-              <p class="featured-mobile-step-title-{{ section.id }}">
-                <span class="featured-mobile-step-number-{{ section.id }}">(0{{ forloop.index }})</span>
-                {{ block.settings.title }}
-              </p>
-              <button
-                type="button"
-                class="featured-mobile-step-next-{{ section.id }}"
-                data-featured-mobile-next
-                aria-label="Show application step {% if forloop.last %}1{% else %}{{ forloop.index | plus: 1 }}{% endif %}"
+          <div class="featured-mobile-track-{{ section.id }}" data-featured-mobile-track>
+            {% for block in slide_blocks %}
+              <article
+                class="featured-mobile-step-{{ section.id }}{% if forloop.first %} is-active{% endif %}"
+                data-featured-mobile-step="{{ forloop.index0 }}"
+                aria-label="Application step {{ forloop.index }} of {{ slide_blocks.size }}"
               >
-                <span aria-hidden="true">→</span>
-              </button>
-            </article>
-          {% endfor %}
+                <p class="featured-mobile-step-title-{{ section.id }}">
+                  <span class="featured-mobile-step-number-{{ section.id }}">(0{{ forloop.index }})</span>
+                  {{ block.settings.title }}
+                </p>
+                <button
+                  type="button"
+                  class="featured-mobile-step-next-{{ section.id }}"
+                  data-featured-mobile-next
+                  aria-label="Show application step {% if forloop.last %}1{% else %}{{ forloop.index | plus: 1 }}{% endif %}"
+                >
+                  <span aria-hidden="true">→</span>
+                </button>
+              </article>
+            {% endfor %}
+          </div>
         </div>
       {% endif %}
 
@@ -1205,16 +1206,18 @@
           {% endfor %}
 
           {% if slide_blocks.size > 0 %}
-            <div class="featured-titles-{{ section.id }}">
-              {% for block in slide_blocks %}
-                <div
-                  class="featured-title-{{ section.id }} featured-title-desktop-{{ section.id }} {% if forloop.first %}active{% endif %}"
-                  data-slide-index="{{ forloop.index0 }}"
-                  data-id="{{ block.id }}"
-                >
-                  {{ block.settings.title }}
-                </div>
-              {% endfor %}
+            <div class="featured-titles-{{ section.id }}" style="--rh-n: {{ slide_blocks.size }};">
+              <div class="featured-titles-track-{{ section.id }}" data-featured-titles-track>
+                {% for block in slide_blocks %}
+                  <div
+                    class="featured-title-{{ section.id }} featured-title-desktop-{{ section.id }} {% if forloop.first %}active{% endif %}"
+                    data-slide-index="{{ forloop.index0 }}"
+                    data-id="{{ block.id }}"
+                  >
+                    {{ block.settings.title }}
+                  </div>
+                {% endfor %}
+              </div>
             </div>
           {% endif %}
 
