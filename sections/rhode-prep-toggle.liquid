@@ -204,16 +204,27 @@
     if (!scope) return;
     var root = scope.querySelector('[data-rh-prep-root]');
     if (!root) return;
-    var buttons = root.querySelectorAll('[data-rh-prep-step]');
-    buttons.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var idx = btn.getAttribute('data-rh-prep-step');
-        root.classList.remove('is-active-1', 'is-active-2');
-        root.classList.add('is-active-' + idx);
-        buttons.forEach(function (b) {
-          b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
-        });
+    var buttons = Array.from(root.querySelectorAll('[data-rh-prep-step]'));
+    var isDesktop = window.matchMedia('(min-width: 750px)');
+
+    function setActive(idx) {
+      root.classList.remove('is-active-1', 'is-active-2');
+      root.classList.add('is-active-' + idx);
+      // Track is 0-indexed; step attr is 1-indexed.
+      root.style.setProperty('--rh-prep-active', String(parseInt(idx, 10) - 1));
+      buttons.forEach(function (b) {
+        b.setAttribute('aria-pressed', b.getAttribute('data-rh-prep-step') === idx ? 'true' : 'false');
       });
+    }
+
+    buttons.forEach(function (btn) {
+      var idx = btn.getAttribute('data-rh-prep-step');
+      // Desktop: hover activates + slides. Mobile: tap fires click.
+      btn.addEventListener('mouseenter', function () {
+        if (isDesktop.matches) setActive(idx);
+      });
+      btn.addEventListener('click', function () { setActive(idx); });
+      btn.addEventListener('focus', function () { setActive(idx); });
     });
   })();
 </script>
