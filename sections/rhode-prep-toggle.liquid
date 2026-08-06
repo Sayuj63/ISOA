@@ -228,40 +228,65 @@
 <section class="section-{{ section.id }}" aria-label="prep toggle">
   <div class="section-{{ section.id }}-inner">
     <div class="rh-prep-{{ section.id }} is-active-1" data-rh-prep-root style="--rh-prep-n: {{ step_blocks.size }}; --rh-prep-active: 0;">
-      <div class="rh-prep-circles-{{ section.id }}">
-        {%- for step in step_blocks -%}
-          <button
-            type="button"
-            class="rh-prep-circle-{{ section.id }}"
-            data-rh-prep-step="{{ step.settings.index }}"
-            aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
-            {{ step.shopify_attributes }}
-          >{{ step.settings.label }}</button>
-        {%- endfor -%}
-      </div>
+      <div class="rh-prep-layout-{{ section.id }}">
 
-      <div class="rh-prep-viewport-{{ section.id }}">
-        <div class="rh-prep-track-{{ section.id }}" data-rh-prep-track>
-          {%- for step in step_blocks -%}
-            {%- assign sidx = step.settings.index -%}
-            <div class="rh-prep-panel-{{ section.id }}" data-rh-prep-panel="{{ sidx }}">
-              <h2 class="rh-prep-title-{{ section.id }}">{{ step.settings.title }}</h2>
-              <p class="rh-prep-subtitle-{{ section.id }}">{{ step.settings.subtitle }}</p>
-              <hr class="rh-prep-divider-{{ section.id }}" />
-
-              <div class="rh-prep-rows-{{ section.id }}">
-                {%- for block in section.blocks -%}
-                  {%- if block.type == 'row' and block.settings.step_index == sidx -%}
-                    <div class="rh-prep-row-{{ section.id }}" {{ block.shopify_attributes }}>
-                      <p class="rh-prep-row-label-{{ section.id }}">{{ block.settings.label }}</p>
-                      <p class="rh-prep-row-content-{{ section.id }}">{{ block.settings.content }}</p>
-                    </div>
-                  {%- endif -%}
-                {%- endfor -%}
+        <!-- Image column: own track, slides in sync with the content track. -->
+        <div class="rh-prep-image-viewport-{{ section.id }}">
+          <div class="rh-prep-image-track-{{ section.id }}">
+            {%- for step in step_blocks -%}
+              <div class="rh-prep-image-slide-{{ section.id }}" data-rh-prep-image="{{ step.settings.index }}">
+                {%- if step.settings.image != blank -%}
+                  {{ step.settings.image | image_url: width: 1600 | image_tag:
+                    loading: 'lazy',
+                    widths: '400,600,800,1000,1200,1400,1600',
+                    sizes: '(min-width: 750px) 50vw, 100vw',
+                    alt: step.settings.image.alt | default: step.settings.title
+                  }}
+                {%- endif -%}
               </div>
-            </div>
-          {%- endfor -%}
+            {%- endfor -%}
+          </div>
         </div>
+
+        <!-- Card column: circles + sliding content track. -->
+        <div class="rh-prep-card-{{ section.id }}">
+          <div class="rh-prep-circles-{{ section.id }}">
+            {%- for step in step_blocks -%}
+              <button
+                type="button"
+                class="rh-prep-circle-{{ section.id }}"
+                data-rh-prep-step="{{ step.settings.index }}"
+                aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
+                {{ step.shopify_attributes }}
+              >{{ step.settings.label }}</button>
+            {%- endfor -%}
+          </div>
+
+          <div class="rh-prep-viewport-{{ section.id }}">
+            <div class="rh-prep-track-{{ section.id }}" data-rh-prep-track>
+              {%- for step in step_blocks -%}
+                {%- assign sidx = step.settings.index -%}
+                <div class="rh-prep-panel-{{ section.id }}" data-rh-prep-panel="{{ sidx }}">
+                  <h2 class="rh-prep-title-{{ section.id }}">{{ step.settings.title }}</h2>
+                  <p class="rh-prep-subtitle-{{ section.id }}">{{ step.settings.subtitle }}</p>
+                  <hr class="rh-prep-divider-{{ section.id }}" />
+
+                  <div class="rh-prep-rows-{{ section.id }}">
+                    {%- for block in section.blocks -%}
+                      {%- if block.type == 'row' and block.settings.step_index == sidx -%}
+                        <div class="rh-prep-row-{{ section.id }}" {{ block.shopify_attributes }}>
+                          <p class="rh-prep-row-label-{{ section.id }}">{{ block.settings.label }}</p>
+                          <p class="rh-prep-row-content-{{ section.id }}">{{ block.settings.content }}</p>
+                        </div>
+                      {%- endif -%}
+                    {%- endfor -%}
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
