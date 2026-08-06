@@ -887,14 +887,12 @@ main#MainContent .rh-benefits__container {
     display: none !important;
   }
 
-  /* Step-text card lives inside the wrapper — no bg, no radius of its own.
-     Uses grid so the eyebrow sits in row 1 and every step article stacks in
-     row 2 (grid-row: 2). Only the `.is-active` article is visible; the rest
-     cross-fade behind it with a 1s cubic-bezier to match the desktop. */
+  /* Step-text card — outer container is the viewport (overflow-hidden), the
+     inner `-track-` div holds every article inline and translates on step
+     change. Full-width carousel slide, matches the desktop pattern. */
   main#MainContent [class^="featured-mobile-steps-"] {
     position: relative;
-    display: grid;
-    grid-template-columns: 1fr;
+    overflow: hidden;
     min-height: 0;
     padding: 14px 12px 16px;
     border-radius: 0;
@@ -902,7 +900,6 @@ main#MainContent .rh-benefits__container {
     color: #67645e;
   }
   main#MainContent [class^="featured-mobile-eyebrow-"] {
-    grid-row: 1;
     margin: 0 0 12px;
     font-size: 12px !important;
     letter-spacing: 0.3px !important;
@@ -910,23 +907,18 @@ main#MainContent .rh-benefits__container {
     color: #67645e !important;
     font-weight: 700 !important;
   }
+  main#MainContent [class^="featured-mobile-track-"] {
+    display: flex;
+    width: calc(var(--rh-n, 1) * 100%);
+    transform: translateX(calc(var(--rh-active, 0) * -100% / var(--rh-n, 1)));
+    transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1);
+    will-change: transform;
+  }
   main#MainContent [data-featured-mobile-step] {
-    grid-row: 2;
-    grid-column: 1;
+    flex: 0 0 calc(100% / var(--rh-n, 1));
+    min-width: 0;
     margin: 0;
-    opacity: 0;
-    transform: translateX(16px);
-    transition: opacity 1s cubic-bezier(0.76, 0, 0.24, 1),
-                transform 1s cubic-bezier(0.76, 0, 0.24, 1);
-    pointer-events: none;
-  }
-  main#MainContent [data-featured-mobile-step].is-active {
-    opacity: 1;
-    transform: translateX(0);
-    pointer-events: auto;
-  }
-  main#MainContent [data-featured-mobile-step][hidden] {
-    display: block; /* keep the DOM in the grid cell so transitions can run */
+    position: relative; /* anchor for the .next button inside */
   }
   main#MainContent [class^="featured-mobile-step-title-"] {
     max-width: calc(100% - 56px);
