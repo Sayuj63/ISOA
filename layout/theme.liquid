@@ -43,6 +43,21 @@
     {%- render 'stylesheets' -%}
     {% if template == 'product.rhode-product-page' %}
       {{ 'rhode-pdp.css' | asset_url | stylesheet_tag }}
+      <script>
+        // Inject the "what's inside" vertical label onto the Hydrocolloid
+        // section's image-block. Horizon's block styles prevent ::before/::after
+        // pseudo-elements from painting here, so we add a real span instead.
+        document.addEventListener('DOMContentLoaded', function () {
+          var imgBlocks = document.querySelectorAll('.section-content-wrapper.layout-panel-flex--row > .image-block');
+          imgBlocks.forEach(function (el) {
+            if (el.querySelector('.rh-wi-label')) return;
+            var span = document.createElement('span');
+            span.className = 'rh-wi-label';
+            span.textContent = "what's inside";
+            el.appendChild(span);
+          });
+        });
+      </script>
     {% endif %}
     {% if template == 'product.rhode-pdp-v2' %}
       {{ 'rhode-pdp-v2.css' | asset_url | stylesheet_tag }}
