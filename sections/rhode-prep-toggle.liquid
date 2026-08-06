@@ -1,0 +1,332 @@
+<style>
+  .section-{{ section.id }} {
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .section-{{ section.id }}-inner {
+    max-width: min(
+      calc(var(--page-width) - var(--page-margin) * 2),
+      calc(100% - var(--page-margin) * 2)
+    );
+    margin-inline: auto;
+    padding-block: {{ section.settings.padding_top }}px {{ section.settings.padding_bottom }}px;
+  }
+
+  .rh-prep-{{ section.id }} {
+    background: #f1f0ed;
+    border-radius: 10px;
+    padding: 40px;
+    color: #67645e;
+  }
+
+  .rh-prep-circles-{{ section.id }} {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .rh-prep-circle-{{ section.id }} {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: transparent;
+    color: #67645e;
+    border: 1px solid #67645e;
+    font-family: var(--font-body--family);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1.1;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .rh-prep-{{ section.id }}.is-active-1 .rh-prep-circle-{{ section.id }}[data-rh-prep-step="1"],
+  .rh-prep-{{ section.id }}.is-active-2 .rh-prep-circle-{{ section.id }}[data-rh-prep-step="2"] {
+    background: #67645e;
+    color: #fff;
+    border-color: #67645e;
+  }
+
+  /* Panels sit in a horizontal flex track that translates by one panel-
+     width per step. Container clips overflow so only the active panel is
+     visible; hover (desktop) or click (mobile) drives the swap. */
+  .rh-prep-viewport-{{ section.id }} {
+    position: relative;
+    overflow: hidden;
+  }
+  .rh-prep-track-{{ section.id }} {
+    display: flex;
+    width: calc(var(--rh-prep-n, 1) * 100%);
+    transform: translateX(calc(var(--rh-prep-active, 0) * -100% / var(--rh-prep-n, 1)));
+    transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1);
+    will-change: transform;
+    align-items: flex-start;
+  }
+  .rh-prep-panel-{{ section.id }} {
+    flex: 0 0 calc(100% / var(--rh-prep-n, 1));
+    min-width: 0;
+  }
+
+  .rh-prep-title-{{ section.id }} {
+    font-family: var(--font-heading--family);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 2.5rem;
+    line-height: 1.05;
+    text-transform: lowercase;
+    margin: 0 0 8px 0;
+    color: #67645e;
+  }
+
+  .rh-prep-subtitle-{{ section.id }} {
+    font-family: var(--font-body--family);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #67645e;
+    margin: 0 0 20px 0;
+  }
+
+  .rh-prep-divider-{{ section.id }} {
+    height: 1px;
+    background: rgba(103, 100, 94, 0.15);
+    margin: 0;
+    border: 0;
+  }
+
+  .rh-prep-rows-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .rh-prep-row-{{ section.id }} {
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(103, 100, 94, 0.15);
+  }
+
+  .rh-prep-row-{{ section.id }}:last-child {
+    border-bottom: 0;
+  }
+
+  .rh-prep-row-label-{{ section.id }} {
+    font-family: var(--font-body--family);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #67645e;
+    margin: 0 0 8px 0;
+  }
+
+  .rh-prep-row-content-{{ section.id }} {
+    font-family: var(--font-body--family);
+    font-size: 15px;
+    line-height: 1.5;
+    color: #67645e;
+    margin: 0;
+  }
+
+  @media (max-width: 749px) {
+    .rh-prep-{{ section.id }} {
+      padding: 24px;
+    }
+    .rh-prep-circle-{{ section.id }} {
+      width: 72px;
+      height: 72px;
+      font-size: 11px;
+    }
+    .rh-prep-title-{{ section.id }} {
+      font-size: 2rem;
+    }
+    .rh-prep-row-content-{{ section.id }} {
+      font-size: 14px;
+    }
+  }
+</style>
+
+{%- assign step_blocks = section.blocks | where: 'type', 'step' | sort: 'settings.index' -%}
+
+<section class="section-{{ section.id }}" aria-label="prep toggle">
+  <div class="section-{{ section.id }}-inner">
+    <div class="rh-prep-{{ section.id }} is-active-1" data-rh-prep-root>
+      <div class="rh-prep-circles-{{ section.id }}">
+        {%- for step in step_blocks -%}
+          <button
+            type="button"
+            class="rh-prep-circle-{{ section.id }}"
+            data-rh-prep-step="{{ step.settings.index }}"
+            aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
+            {{ step.shopify_attributes }}
+          >{{ step.settings.label }}</button>
+        {%- endfor -%}
+      </div>
+
+      {%- for step in step_blocks -%}
+        {%- assign sidx = step.settings.index -%}
+        <div class="rh-prep-panel-{{ section.id }}" data-rh-prep-panel="{{ sidx }}">
+          <h2 class="rh-prep-title-{{ section.id }}">{{ step.settings.title }}</h2>
+          <p class="rh-prep-subtitle-{{ section.id }}">{{ step.settings.subtitle }}</p>
+          <hr class="rh-prep-divider-{{ section.id }}" />
+
+          <div class="rh-prep-rows-{{ section.id }}">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'row' and block.settings.step_index == sidx -%}
+                <div class="rh-prep-row-{{ section.id }}" {{ block.shopify_attributes }}>
+                  <p class="rh-prep-row-label-{{ section.id }}">{{ block.settings.label }}</p>
+                  <p class="rh-prep-row-content-{{ section.id }}">{{ block.settings.content }}</p>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var scope = document.currentScript.previousElementSibling;
+    if (!scope) return;
+    var root = scope.querySelector('[data-rh-prep-root]');
+    if (!root) return;
+    var buttons = root.querySelectorAll('[data-rh-prep-step]');
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var idx = btn.getAttribute('data-rh-prep-step');
+        root.classList.remove('is-active-1', 'is-active-2');
+        root.classList.add('is-active-' + idx);
+        buttons.forEach(function (b) {
+          b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+        });
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Rhode Prep Toggle",
+  "tag": "section",
+  "class": "rhode-prep-toggle",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "select",
+          "id": "index",
+          "label": "Step index",
+          "options": [
+            { "value": "1", "label": "1" },
+            { "value": "2", "label": "2" }
+          ],
+          "default": "1"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Circle label",
+          "default": "HIGHLIGHT"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "highlight milk"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "MULTIPURPOSE LUMINIZER"
+        }
+      ]
+    },
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        {
+          "type": "select",
+          "id": "step_index",
+          "label": "Belongs to step",
+          "options": [
+            { "value": "1", "label": "Step 1" },
+            { "value": "2", "label": "Step 2" }
+          ],
+          "default": "1"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Row label",
+          "default": "WHAT IT IS"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Row content",
+          "default": "A hybrid luminizer that enhances bare skin and makeup with a shimmery, naturally luminous finish."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rhode Prep Toggle",
+      "blocks": [
+        { "type": "step", "settings": { "index": "1", "label": "HIGHLIGHT", "title": "highlight milk", "subtitle": "MULTIPURPOSE LUMINIZER" } },
+        { "type": "step", "settings": { "index": "2", "label": "PREP", "title": "prep hydrator", "subtitle": "HYDRATING SKIN PRIMER" } },
+        { "type": "row", "settings": { "step_index": "1", "label": "WHAT IT IS", "content": "A hybrid luminizer that enhances bare skin and makeup with a shimmery, naturally luminous finish." } },
+        { "type": "row", "settings": { "step_index": "1", "label": "BENEFITS", "content": "• Provides all-day hydration • Leaves skin looking luminous with a soft, pearly finish" } },
+        { "type": "row", "settings": { "step_index": "1", "label": "WHERE IT FITS IN YOUR ROUTINE", "content": "On its own on bare skin, mixed into makeup, or layered with skincare and SPF." } },
+        { "type": "row", "settings": { "step_index": "1", "label": "THE EFFECT", "content": "Hydrated, glowy skin with a pearly finish" } },
+        { "type": "row", "settings": { "step_index": "1", "label": "KEY INGREDIENTS", "content": "Ceramide Trio • Mineral Complex • Vitamin E • Glycerin" } },
+        { "type": "row", "settings": { "step_index": "2", "label": "WHAT IT IS", "content": "A hydrating primer that preps skin with a smooth, dewy base for makeup or skincare." } },
+        { "type": "row", "settings": { "step_index": "2", "label": "BENEFITS", "content": "• Deeply hydrates and plumps • Creates a smooth base that helps makeup wear better" } },
+        { "type": "row", "settings": { "step_index": "2", "label": "WHERE IT FITS IN YOUR ROUTINE", "content": "After cleansing and serums, before SPF and makeup." } },
+        { "type": "row", "settings": { "step_index": "2", "label": "THE EFFECT", "content": "Soft, dewy, primed skin" } },
+        { "type": "row", "settings": { "step_index": "2", "label": "KEY INGREDIENTS", "content": "Hyaluronic Acid • Peptides • Niacinamide • Squalane" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
