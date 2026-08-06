@@ -821,9 +821,10 @@ main#MainContent .rh-benefits__container {
     aspect-ratio: unset !important;
     display: block !important;
   }
-  /* Vertical "what's inside" label — real span injected by theme.liquid
-     (see script there). Positioned top-left of the image, reads bottom-to-top
-     matching the Rhode reference. */
+  /* Vertical "what's inside" label — real span injected by theme.liquid.
+     Reads top-to-bottom, letters rotated clockwise (head-tilt-left to read),
+     matching Rhode's reference. Layered text-shadows carry contrast on light
+     image backgrounds without needing a solid backdrop plate. */
   main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > .image-block .rh-wi-label {
     position: absolute;
     top: 22px;
@@ -832,16 +833,16 @@ main#MainContent .rh-benefits__container {
     color: #fff;
     font-family: var(--font-heading--family);
     font-weight: 700;
-    font-size: 15px;
-    letter-spacing: 0.02em;
+    font-size: 16px;
+    letter-spacing: 0.01em;
     text-transform: lowercase;
     line-height: 1;
     white-space: nowrap;
     writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    transform-origin: center;
     pointer-events: none;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+    text-shadow:
+      0 0 6px rgba(0, 0, 0, 0.55),
+      0 1px 2px rgba(0, 0, 0, 0.7);
   }
 
   /* Kill any Horizon phantom class-less div that slips into the flex row on
