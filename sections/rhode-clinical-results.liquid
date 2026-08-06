@@ -263,6 +263,7 @@
       </div>
 
       <div class="rh-clin-image-{{ section.id }}">
+        <span class="rh-wi-label-{{ section.id }}" aria-hidden="true">what's inside</span>
         {%- if section.settings.portrait != blank -%}
           {{ section.settings.portrait | image_url: width: 1400 | image_tag:
             loading: 'lazy',
