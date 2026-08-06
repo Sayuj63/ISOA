@@ -889,18 +889,22 @@ main#MainContent .rh-benefits__container {
 
   /* Step-text card — outer container is the viewport (overflow-hidden), the
      inner `-track-` div holds every article inline and translates on step
-     change. Full-width carousel slide, matches the desktop pattern. */
+     change. Horizontal padding lives on the children (eyebrow + articles)
+     so the container's overflow-hidden clips at the exact article edge —
+     otherwise the padding-box is wider than one article and the next slide's
+     leading edge peeks through on the right. */
   main#MainContent [class^="featured-mobile-steps-"] {
     position: relative;
     overflow: hidden;
     min-height: 0;
-    padding: 14px 12px 16px;
+    padding: 14px 0 16px;
     border-radius: 0;
     background: transparent;
     color: #67645e;
   }
   main#MainContent [class^="featured-mobile-eyebrow-"] {
     margin: 0 0 12px;
+    padding-inline: 12px;
     font-size: 12px !important;
     letter-spacing: 0.3px !important;
     text-transform: uppercase !important;
@@ -916,6 +920,8 @@ main#MainContent .rh-benefits__container {
   }
   main#MainContent [data-featured-mobile-step] {
     flex: 0 0 calc(100% / var(--rh-n, 1));
+    box-sizing: border-box;
+    padding-inline: 12px;
     min-width: 0;
     margin: 0;
     position: relative; /* anchor for the .next button inside */
