@@ -437,19 +437,23 @@ main#MainContent {
 
   /* Desktop title carousel — same slide feel as the Swiper image on the
      right. Titles sit in a flex track that translates by one slide-width
-     per step; container clips overflow so only the active one is on screen. */
-  main#MainContent [class^="featured-titles-"],
-  main#MainContent [class*=" featured-titles-"] {
-    display: block !important;
-    overflow: hidden;
-  }
+     per step; container clips overflow so only the active one is on screen.
+     The track selector must use `!important` on `display: flex` because the
+     outer-container selector below (`[class^="featured-titles-"]`) matches
+     the track too (its class also starts with `featured-titles-`), and its
+     `display: block !important` would otherwise win. */
   main#MainContent [class^="featured-titles-track-"],
   main#MainContent [class*=" featured-titles-track-"] {
-    display: flex;
-    width: calc(var(--rh-n, 1) * 100%);
+    display: flex !important;
+    width: calc(var(--rh-n, 1) * 100%) !important;
     transform: translateX(calc(var(--rh-active, 0) * -100% / var(--rh-n, 1)));
     transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1);
     will-change: transform;
+  }
+  main#MainContent [class^="featured-titles-"]:not([class*="-track"]),
+  main#MainContent [class*=" featured-titles-"]:not([class*="-track"]) {
+    display: block !important;
+    overflow: hidden;
   }
   main#MainContent [class^="featured-title-desktop-"],
   main#MainContent [class*=" featured-title-desktop-"] {
