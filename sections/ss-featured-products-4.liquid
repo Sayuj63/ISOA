@@ -1395,6 +1395,7 @@
       slidesPerView: 1,
       spaceBetween: 10,
       autoHeight: true,
+      speed: 1000,
       navigation: {
         nextEl: `.featured-slider-{{ section.id }} .featured-btn-next-{{ section.id }}`,
         prevEl: `.featured-slider-{{ section.id }} .featured-btn-prev-{{ section.id }}`,
@@ -1464,12 +1465,15 @@
       const mobileNextButtons = mobileStepsRoot.querySelectorAll('[data-featured-mobile-next]');
       let mobileIndex = 0;
 
+      // All step articles stay in the DOM and stack in the same grid cell (see
+      // rhode-pdp.css); we swap them by toggling `.is-active`, which drives an
+      // opacity+translate transition. The `hidden` attribute would kill the
+      // transition (display:none), so we clear it once and never set it again.
+      mobileSteps.forEach((step) => { step.hidden = false; });
       function showMobileStep(index) {
         mobileIndex = (index + mobileSteps.length) % mobileSteps.length;
         mobileSteps.forEach((step, stepIndex) => {
-          const active = stepIndex === mobileIndex;
-          step.classList.toggle('is-active', active);
-          step.hidden = !active;
+          step.classList.toggle('is-active', stepIndex === mobileIndex);
         });
         mobileNextButtons.forEach((button) => {
           const nextStep = (mobileIndex + 1) % mobileSteps.length + 1;
