@@ -435,33 +435,33 @@ main#MainContent {
      text, no stacked inactive titles.
      ───────────────────────────────────────────────────────────────── */
 
-  /* Stack all desktop titles in the same grid cell and cross-fade on step
-     change. Timing matches the Swiper image slide (1s cubic-bezier) so the
-     text and image transition together instead of the text hard-swapping. */
+  /* Desktop title carousel — same slide feel as the Swiper image on the
+     right. Titles sit in a flex track that translates by one slide-width
+     per step; container clips overflow so only the active one is on screen. */
   main#MainContent [class^="featured-titles-"],
   main#MainContent [class*=" featured-titles-"] {
-    display: grid !important;
-    grid-template-columns: 1fr;
+    display: block !important;
+    overflow: hidden;
+  }
+  main#MainContent [class^="featured-titles-track-"],
+  main#MainContent [class*=" featured-titles-track-"] {
+    display: flex;
+    width: calc(var(--rh-n, 1) * 100%);
+    transform: translateX(calc(var(--rh-active, 0) * -100% / var(--rh-n, 1)));
+    transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1);
+    will-change: transform;
   }
   main#MainContent [class^="featured-title-desktop-"],
   main#MainContent [class*=" featured-title-desktop-"] {
-    grid-column: 1;
-    grid-row: 1;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 1s cubic-bezier(0.76, 0, 0.24, 1),
-                transform 1s cubic-bezier(0.76, 0, 0.24, 1);
-    pointer-events: none;
-  }
-  main#MainContent [class^="featured-title-desktop-"].active,
-  main#MainContent [class*=" featured-title-desktop-"].active {
+    flex: 0 0 calc(100% / var(--rh-n, 1));
+    min-width: 0;
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
     pointer-events: auto;
   }
 
-  /* Swiper's default easing is `linear`, which reads abrupt at 1000ms. Match
-     the title cross-fade curve so image and text ride the same motion. */
+  /* Match Swiper's slide easing to the title track easing so the image and
+     text glide together (Swiper's default `linear` looks abrupt at 1s). */
   main#MainContent [class^="featured-slider-"] .swiper-wrapper,
   main#MainContent [class*=" featured-slider-"] .swiper-wrapper {
     transition-timing-function: cubic-bezier(0.76, 0, 0.24, 1) !important;
