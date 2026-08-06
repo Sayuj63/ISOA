@@ -658,15 +658,17 @@ main#MainContent .rh-benefits__container {
     flex: 0 0 auto !important;
   }
 
-  /* 4.5 · The rhode-clinical-results section's portrait sits directly above
-     the Horizon hydrocolloid section on mobile — kill the 32px section gap
-     and clip the hydrocolloid card's top corners so they read as one card. */
-  main#MainContent .shopify-section.rhode-clinical-results + .shopify-section.section-wrapper {
-    margin-top: 0 !important;
+  /* 4.5 · ss-whats-inside — merge image + card into one unified block on
+     mobile, matching the pattern used elsewhere on the PDP. Image rounds top
+     only, card rounds bottom only, zero gap between them. */
+  main#MainContent .ss-whats-inside-inner {
+    gap: 0 !important;
   }
-  main#MainContent .shopify-section.rhode-clinical-results + .shopify-section.section-wrapper .group-block {
-    border-top-left-radius: 0 !important;
-    border-top-right-radius: 0 !important;
+  main#MainContent .ss-whats-inside-image {
+    border-radius: 10px 10px 0 0 !important;
+  }
+  main#MainContent .ss-whats-inside-content {
+    border-radius: 0 0 10px 10px !important;
   }
 
   /* 5 · Hero (product-information) — release the desktop height lock so image
