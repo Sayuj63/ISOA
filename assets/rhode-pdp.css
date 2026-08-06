@@ -779,13 +779,39 @@ main#MainContent .rh-benefits__container {
   }
 
   /* 7 · rhode-pdp-on-the-go — release the 480px card min-height on mobile;
-     card should size to content when stacked. */
+     card should size to content when stacked. Also merge image + card into
+     one visual unit (image rounds top, card rounds bottom, zero gap). */
   [id^="rh-otg-"] .rh-otg__card {
     min-height: 0 !important;
     padding: 20px !important;
   }
   [id^="rh-otg-"] .rh-otg__body {
     min-height: 100px !important;
+  }
+  [id^="rh-otg-"] .rh-otg__grid {
+    gap: 0 !important;
+  }
+  [id^="rh-otg-"] .rh-otg__media {
+    border-radius: 10px 10px 0 0 !important;
+  }
+  [id^="rh-otg-"] .rh-otg__card {
+    border-radius: 0 0 10px 10px !important;
+  }
+
+  /* 7.1 · ss-image-split-row — same merge pattern on mobile. Image + text
+     card become a single visual block, matching the "what's inside" and
+     "on-the-go" sections. */
+  main#MainContent [class^="feature-grid-"],
+  main#MainContent [class*=" feature-grid-"] {
+    gap: 0 !important;
+  }
+  main#MainContent [class^="feature-image-"],
+  main#MainContent [class*=" feature-image-"] {
+    border-radius: 10px 10px 0 0 !important;
+  }
+  main#MainContent [class^="feature-content-"],
+  main#MainContent [class*=" feature-content-"] {
+    border-radius: 0 0 10px 10px !important;
   }
 
   /* 7.5 · rhode-pdp-on-the-go title — hardcoded 32px in the section liquid.
