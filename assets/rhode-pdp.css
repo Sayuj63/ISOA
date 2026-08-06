@@ -816,7 +816,6 @@ main#MainContent .rh-benefits__container {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    margin-bottom: 16px;
   }
   main#MainContent [class^="featured-mobile-thumbs-"] {
     display: grid;
