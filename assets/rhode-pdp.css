@@ -820,16 +820,15 @@ main#MainContent .rh-benefits__container {
     aspect-ratio: unset !important;
     display: block !important;
   }
-  /* Vertical "what's inside" label — DEBUG: red bg + huge z-index to verify. */
-  main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > .image-block::before {
+  /* Vertical "what's inside" label — using ::after (Horizon reserves ::before
+     on some blocks). Sits top-left of the image, reads top-to-bottom vertical. */
+  main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row > .image-block::after {
     content: "what's inside";
     position: absolute;
     top: 22px;
     left: 22px;
     z-index: 999;
     color: #fff;
-    background: red;
-    padding: 4px;
     font-family: var(--font-heading--family);
     font-weight: 700;
     font-size: 15px;
@@ -839,6 +838,7 @@ main#MainContent .rh-benefits__container {
     white-space: nowrap;
     writing-mode: vertical-rl;
     pointer-events: none;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
   }
 
   /* Kill any Horizon phantom class-less div that slips into the flex row on
