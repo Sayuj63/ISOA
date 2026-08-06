@@ -887,9 +887,14 @@ main#MainContent .rh-benefits__container {
     display: none !important;
   }
 
-  /* Step-text card lives inside the wrapper — no bg, no radius of its own. */
+  /* Step-text card lives inside the wrapper — no bg, no radius of its own.
+     Uses grid so the eyebrow sits in row 1 and every step article stacks in
+     row 2 (grid-row: 2). Only the `.is-active` article is visible; the rest
+     cross-fade behind it with a 1s cubic-bezier to match the desktop. */
   main#MainContent [class^="featured-mobile-steps-"] {
     position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
     min-height: 0;
     padding: 14px 12px 16px;
     border-radius: 0;
@@ -897,6 +902,7 @@ main#MainContent .rh-benefits__container {
     color: #67645e;
   }
   main#MainContent [class^="featured-mobile-eyebrow-"] {
+    grid-row: 1;
     margin: 0 0 12px;
     font-size: 12px !important;
     letter-spacing: 0.3px !important;
@@ -904,8 +910,23 @@ main#MainContent .rh-benefits__container {
     color: #67645e !important;
     font-weight: 700 !important;
   }
-  main#MainContent [class^="featured-mobile-step-"] {
+  main#MainContent [data-featured-mobile-step] {
+    grid-row: 2;
+    grid-column: 1;
     margin: 0;
+    opacity: 0;
+    transform: translateX(16px);
+    transition: opacity 1s cubic-bezier(0.76, 0, 0.24, 1),
+                transform 1s cubic-bezier(0.76, 0, 0.24, 1);
+    pointer-events: none;
+  }
+  main#MainContent [data-featured-mobile-step].is-active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+  main#MainContent [data-featured-mobile-step][hidden] {
+    display: block; /* keep the DOM in the grid cell so transitions can run */
   }
   main#MainContent [class^="featured-mobile-step-title-"] {
     max-width: calc(100% - 56px);
