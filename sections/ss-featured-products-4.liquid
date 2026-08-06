@@ -1431,6 +1431,11 @@
         }
       });
 
+      // Drive the desktop-title track slide via a custom property. CSS reads
+      // `--rh-active` and translates the track by `-active * 100/N %`.
+      const titlesRoot = document.querySelector(`.featured-titles-{{ section.id }}`);
+      if (titlesRoot) titlesRoot.style.setProperty('--rh-active', realIndex);
+
       const shopButton = document.getElementById(`shop-button-{{ section.id }}`);
       if (shopButton && slideData) {
         shopButton.href = slideData.url;
