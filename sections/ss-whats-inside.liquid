@@ -15,6 +15,10 @@ Responsive + Fully Dynamic
   <div class="ss-whats-inside-inner">
 
     <div class="ss-whats-inside-image">
+      <div class="ss-side-title" aria-hidden="true">
+        {{ section.settings.side_title }}
+      </div>
+
       {% if section.settings.image != blank %}
         {{
           section.settings.image
@@ -28,10 +32,6 @@ Responsive + Fully Dynamic
     </div>
 
     <div class="ss-whats-inside-content">
-
-      <div class="ss-side-title">
-        {{ section.settings.side_title }}
-      </div>
 
       <div class="ss-content-wrap">
 
