@@ -606,8 +606,8 @@
         "row_2_5"
       ],
       "settings": {
-        "padding_top": 24,
-        "padding_bottom": 24
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "ss_slider_5_m7VKpN": {
@@ -798,8 +798,9 @@
         "inside_box_padding": 0,
         "inside_box_padding_mobile": 0,
         "content_radius": 10,
+        "image": "shopify://shop_images/16709060-B3DC-4969-9AB6-7E22BE0C7998.png",
         "image_radius": 10,
-        "image_ratio": "square",
+        "image_ratio": "portrait",
         "heading": "<h2>Clinically-proven PATCHES for SPOT CARE on the go.</h2>",
         "heading_size": 28,
         "heading_size_mobile": 22,
@@ -1174,37 +1175,6 @@
         "lazy": true
       }
     },
-    "rhode_clinical_results_new": {
-      "type": "rhode-clinical-results",
-      "blocks": {
-        "bullet_1": {
-          "type": "bullet",
-          "settings": {
-            "text": "CLINICALLY PROVEN TO MINIMIZE THE LOOK OF SPOTS"
-          }
-        },
-        "bullet_2": {
-          "type": "bullet",
-          "settings": {
-            "text": "SWEATPROOF FOR UP TO 30 MINUTES AND WATERPROOF"
-          }
-        }
-      },
-      "block_order": [
-        "bullet_1",
-        "bullet_2"
-      ],
-      "settings": {
-        "heading": "clinical results",
-        "footnote": "<p>*Based on a 31-subject clinical study after immediate and 8 hours of use.</p>",
-        "tab1_label": "consumer study results",
-        "tab1_content": "<p>Consumer study results.</p>",
-        "tab2_label": "clinical results",
-        "tab2_content": "<p>Clinical results.</p>",
-        "padding_top": 24,
-        "padding_bottom": 24
-      }
-    },
     "ss_image_with_text_9EpeQg": {
       "type": "ss-image-with-text",
       "blocks": {
@@ -1313,6 +1283,37 @@
         "border_thickness": 0,
         "section_radius": 0,
         "lazy": true
+      }
+    },
+    "rhode_clinical_results_new": {
+      "type": "rhode-clinical-results",
+      "blocks": {
+        "bullet_1": {
+          "type": "bullet",
+          "settings": {
+            "text": "CLINICALLY PROVEN TO MINIMIZE THE LOOK OF SPOTS"
+          }
+        },
+        "bullet_2": {
+          "type": "bullet",
+          "settings": {
+            "text": "SWEATPROOF FOR UP TO 30 MINUTES AND WATERPROOF"
+          }
+        }
+      },
+      "block_order": [
+        "bullet_1",
+        "bullet_2"
+      ],
+      "settings": {
+        "heading": "clinical results",
+        "footnote": "<p>*Based on a 31-subject clinical study after immediate and 8 hours of use.</p>",
+        "tab1_label": "consumer study results",
+        "tab1_content": "<p>Consumer study results.</p>",
+        "tab2_label": "clinical results",
+        "tab2_content": "<p>Clinical results.</p>",
+        "padding_top": 24,
+        "padding_bottom": 24
       }
     },
     "section_WUmYw7": {
