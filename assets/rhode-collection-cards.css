@@ -243,7 +243,10 @@
     border-radius: 10px;
   }
   .isoa-rc-frame {
-    aspect-ratio: 4 / 5.4;
+    aspect-ratio: 1 / 1;
+  }
+  .isoa-rc-info {
+    padding: 10px 12px 12px;
   }
   .isoa-rc-brand {
     top: 12px;
