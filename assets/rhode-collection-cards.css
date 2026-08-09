@@ -127,7 +127,7 @@
   grid-column: 1;
   margin: 0;
   font-weight: 700;
-  font-size: clamp(15px, 1.2vw, 20px);
+  font-size: var(--isoa-body-lg);
   letter-spacing: 0.03em;
   color: #67645e;
   line-height: 1.2;
@@ -137,7 +137,7 @@
   grid-column: 2;
   margin: 0;
   font-weight: 700;
-  font-size: clamp(15px, 1.2vw, 20px);
+  font-size: var(--isoa-body-lg);
   color: #67645e;
   line-height: 1.2;
   white-space: nowrap;
