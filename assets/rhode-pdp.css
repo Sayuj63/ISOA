@@ -1017,4 +1017,36 @@ main#MainContent .rh-benefits__container {
     outline: 2px solid #67645e;
     outline-offset: 3px;
   }
+
+  /* 12 · Mobile density pass 2 (2026-08-09) — tighten interior padding + inter-
+     element gaps within the top-3 tallest sections on mobile. Section-to-section
+     rhythm (32px .shopify-section + .shopify-section) unchanged. */
+
+  /* 12a · PDP hero — details card. Horizon renders `.product-details >
+     .group-block` with generous 25.2px padding-block from a Horizon token.
+     Slash to 14px on mobile, and reduce the vertical gap between inner
+     group-blocks (BENEFITS / APPLICATION / KEY INGREDIENTS accordion rows). */
+  main#MainContent .product-details > .group-block {
+    padding-block: 14px !important;
+    padding-inline: 14px !important;
+  }
+  main#MainContent .product-details > .group-block > .group-block-content {
+    gap: 10px !important;
+  }
+  main#MainContent .product-details .group-block .group-block {
+    padding-block: 8px !important;
+  }
+
+  /* 12b · ss-whats-inside — tighten heading + text margins per item. Settings
+     drive per-item spacing already (item_spacing_mobile: 10). This trims the
+     dead space inside each item so the ingredient grid gets shorter. */
+  main#MainContent .ss-whats-inside-content .ss-heading {
+    margin-bottom: 6px !important;
+  }
+  main#MainContent .ss-whats-inside-content .ss-top-text {
+    margin-bottom: 10px !important;
+  }
+  main#MainContent .ss-whats-inside-content .ss-text {
+    line-height: 1.5 !important;
+  }
 }
