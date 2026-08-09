@@ -277,23 +277,30 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================================================
-   Hero text block — scale down + single-line on mobile
+   Hero text block — scale down + single-line on mobile (all pages)
    ----------------------------------------------------------------------------
    Every page's hero uses Horizon's `hero` section with a `text` block. The
    editor's `font_size` setting is stored as e.g. `2.75rem` (= 44px) and is
    emitted as an inline `--font-size` CSS variable on the .text-block. On
    mobile the heading was overflowing the card and wrapping to 2-3 lines.
-   Sized to fit the longest current hero string ("IN CASE YOU WERE WONDERING...")
-   on ONE line at 466vw; `white-space: nowrap` guarantees no wrap. `!important`
-   needed to beat inline style; `max-inline-size: none` frees the text block
-   from the block-set max-width so nowrap actually renders full width. */
+
+   Sized to fit the longest current hero string
+   ("We only have ONE FACE (and ONE WORLD) to PROTECT.", 49 chars) on ONE line
+   at 466vw. `!important` beats the inline `--font-size`. `max-inline-size: none`
+   frees the text block from the block-set max-width so nowrap renders full
+   width. Hero `<br>` tags are hidden on mobile — some blocks (Impact, Our
+   Story) have hard `<br/>` line breaks in the setting that would otherwise
+   defeat `nowrap`. */
 @media (max-width: 749px) {
   .hero .text-block.custom-font-size,
   .hero .text-block.custom-font-size > * {
-    font-size: clamp(0.875rem, 3.8vw, 1.125rem) !important;
+    font-size: clamp(0.75rem, 3vw, 0.9375rem) !important;   /* 12–15px */
     line-height: 1.1 !important;
     letter-spacing: -0.02em !important;
     white-space: nowrap !important;
     max-inline-size: none !important;
+  }
+  .hero .text-block.custom-font-size br {
+    display: none !important;
   }
 }
