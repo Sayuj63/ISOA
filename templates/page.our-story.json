@@ -74,7 +74,7 @@
             "alignment": "left",
             "type_preset": "custom",
             "font": "var(--font-heading--family)",
-            "font_size": "1.25rem",
+            "font_size": "2.75rem",
             "line_height": "tight",
             "letter_spacing": "tight",
             "case": "none",
@@ -95,7 +95,7 @@
         "text_aDG9y4"
       ],
       "custom_css": [
-        ".hero {padding: 2vw; border-radius: 24px; overflow: hidden;}",
+        ".hero {padding: 2vw; border-radius: 10px; overflow: hidden;}",
         ".hero img,.hero__media img,.hero__media {border-radius: 10px;}"
       ],
       "name": "t:names.hero",
@@ -289,8 +289,8 @@
         "layout": "content_image",
         "layout_mobile": "image_content",
         "layout_advanced": false,
-        "layout_gap": 32,
-        "layout_gap_mobile": 24,
+        "layout_gap": 16,
+        "layout_gap_mobile": 16,
         "layout_border_thickness": 0,
         "layout_radius": 0,
         "use_shadow": false,
@@ -310,7 +310,7 @@
         "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
         "outer_background_color": "#ffffff",
         "border_color": "#121212",
-        "margin_top": 24,
+        "margin_top": 0,
         "margin_bottom": 0,
         "margin_horizontal": 0,
         "margin_horizontal_mobile": 0,
@@ -338,7 +338,7 @@
             "alignment": "left",
             "type_preset": "custom",
             "font": "var(--font-heading--family)",
-            "font_size": "1.25rem",
+            "font_size": "2.75rem",
             "line_height": "tight",
             "letter_spacing": "tight",
             "case": "none",
@@ -359,7 +359,7 @@
         "text_HhniwP"
       ],
       "custom_css": [
-        ".hero {padding: 2vw; border-radius: 24px; overflow: hidden;}",
+        ".hero {padding: 2vw; border-radius: 10px; overflow: hidden;}",
         ".hero img,.hero__media img,.hero__media {border-radius: 10px;}"
       ],
       "name": "t:names.hero",
@@ -1097,7 +1097,7 @@
             "alignment": "left",
             "type_preset": "custom",
             "font": "var(--font-heading--family)",
-            "font_size": "1.25rem",
+            "font_size": "2.75rem",
             "line_height": "tight",
             "letter_spacing": "tight",
             "case": "none",
@@ -1118,7 +1118,7 @@
         "text_Nj7cxM"
       ],
       "custom_css": [
-        ".hero {padding: 2vw; border-radius: 24px; overflow: hidden;}",
+        ".hero {padding: 2vw; border-radius: 10px; overflow: hidden;}",
         ".hero img,.hero__media img,.hero__media {border-radius: 10px;}"
       ],
       "name": "t:names.hero",
