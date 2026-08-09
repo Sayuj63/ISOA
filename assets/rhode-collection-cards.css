@@ -199,6 +199,11 @@
   margin-left: 2px;
 }
 
+/* Dual-render CTA text: desktop shows "Rs. 1,999", mobile shows "₹1,999" with
+   a smaller "BUY —" lead. Default = desktop; mobile media query swaps them. */
+.isoa-rc-cta-desk { display: inline; }
+.isoa-rc-cta-mob  { display: none; }
+
 /* Desktop hover: image swap + info fade-out + CTA fade-in */
 @media (hover: hover) and (pointer: fine) {
   .isoa-rc-card:hover .isoa-rc-img--primary,
@@ -249,8 +254,11 @@
 }
 
 /* =============================================================================
-   MOBILE layout (< 750px): info + CTA in normal flow, transparent, centered.
-   Standalone price hidden — price only appears in the BUY pill.
+   MOBILE layout (< 750px): info + CTA overlaid absolutely on the image, matching
+   the reference (rhodeskin.com/collections/shop). Card = frame height only —
+   no in-flow content below the image. Stars/review-count/title left-aligned;
+   BUY pill spans the bottom with centered text and a smaller "BUY —" lead.
+   Standalone price hidden — price only appears inside the BUY pill (as ₹).
    ============================================================================= */
 @media (max-width: 749px) {
   .isoa-rc-card {
@@ -270,68 +278,78 @@
     font-size: 10px;
   }
 
-  /* Info: switch from absolute overlay to in-flow centered stack */
+  /* Info: absolutely overlay on the image, bottom-left, transparent */
   .isoa-rc-info {
-    position: static;
-    padding: 10px 12px 4px;
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 44px; /* clears the CTA pill below */
+    z-index: 3;
+    padding: 0;
     display: block;
-    text-align: center;
+    text-align: left;
     background: transparent;
     opacity: 1;
     transition: none;
-    pointer-events: auto;
+    pointer-events: none;
   }
   .isoa-rc-reviews {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     gap: 6px;
     font-size: 11px;
-    margin: 0 0 4px;
+    margin: 0 0 3px;
   }
-  .isoa-rc-stars {
-    font-size: 11px;
-  }
-  .isoa-rc-review-count {
-    font-size: 11px;
-  }
+  .isoa-rc-stars     { font-size: 11px; }
+  .isoa-rc-review-count { font-size: 11px; }
   .isoa-rc-title {
     margin: 0;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.02em;
     text-transform: uppercase;
-    text-align: center;
+    text-align: left;
   }
   /* Standalone price hidden on mobile — only shows inside the BUY pill */
   .isoa-rc-price {
     display: none;
   }
 
-  /* CTA: outlined pill, always visible, in normal flow */
+  /* CTA: absolutely overlaid outlined pill at bottom of image, always visible */
   .isoa-rc-cta {
-    position: static;
-    left: auto;
-    right: auto;
-    bottom: auto;
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 10px;
+    z-index: 4;
     display: block;
-    margin: 6px 10px 10px;
-    padding: 8px 10px;
+    margin: 0;
+    padding: 6px 10px;
     border: 1px solid #67645e;
     border-radius: 999px;
     background: transparent;
     color: #67645e;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 600;
     letter-spacing: 0.02em;
     text-transform: uppercase;
     text-align: center;
-    line-height: 1.1;
+    line-height: 1.15;
     white-space: nowrap;
     opacity: 1;
     transform: none;
     transition: none;
     pointer-events: none;
+  }
+  .isoa-rc-cta-desk { display: none; }
+  .isoa-rc-cta-mob  { display: inline; }
+  /* "BUY —" lead is smaller than the price */
+  .isoa-rc-cta-lead {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    opacity: 0.9;
   }
   .isoa-rc-cta strong {
     font-weight: 700;
