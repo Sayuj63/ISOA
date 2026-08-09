@@ -213,20 +213,26 @@
   .rh-clin-tab-{{ section.id }}[aria-selected='true'] { color: #67645e; }
 
   @media (max-width: 749px) {
+    /* Mobile: image first (top), content card below, gap: 0 so they read as
+       one continuous pill. Only outer corners rounded — image top, card
+       bottom. Mirrors ss-image-with-text-15's mobile pattern. */
     .rh-clin-grid-{{ section.id }} {
       grid-template-columns: 1fr;
+      gap: 0;
     }
     .rh-clin-card-{{ section.id }},
     .rh-clin-image-{{ section.id }} {
       min-height: 0;
     }
     .rh-clin-card-{{ section.id }} {
-      padding: 16px 20px;
-      order: 1;
+      padding: 20px 20px 24px;
+      order: 2;
+      border-radius: 0 0 10px 10px;
     }
     .rh-clin-image-{{ section.id }} {
-      order: 2;
+      order: 1;
       aspect-ratio: 3 / 2;
+      border-radius: 10px 10px 0 0;
     }
     .rh-clin-heading-{{ section.id }} {
       font-size: var(--isoa-display-lg-m);
