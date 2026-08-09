@@ -376,6 +376,43 @@
 }
 
 /* =============================================================================
+   Featured-collection-6 slider overrides (homepage + PDP cross-sell).
+   Cards live inside `.isoa-fc6-slide` (a swiper slide). On mobile the shared
+   card layout hides the standalone price and left-aligns the title; those
+   sections want the desktop-style split-column info (title left / price
+   right) even on mobile. The BUY pill stays visible below.
+   ============================================================================= */
+@media (max-width: 749px) {
+  .isoa-fc6-slide .isoa-rc-info {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 12px;
+    align-items: baseline;
+    text-align: initial;
+  }
+  .isoa-fc6-slide .isoa-rc-reviews {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+  .isoa-fc6-slide .isoa-rc-title {
+    grid-column: 1;
+    text-align: left;
+  }
+  .isoa-fc6-slide .isoa-rc-price {
+    display: block;
+    grid-column: 2;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.2;
+    white-space: nowrap;
+    text-align: right;
+    color: #67645e;
+    align-self: baseline;
+  }
+}
+
+/* =============================================================================
    In-grid promo tile — sits in a `.product-grid__item--promo` slot alongside
    product cards. Same footprint as a card (matches border-radius, aspect-ratio).
    ============================================================================= */
