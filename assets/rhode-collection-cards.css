@@ -1,9 +1,23 @@
 /* ISOA · Rhode-style collection card
-   Loaded on `template contains 'collection'` via layout/theme.liquid.
+   Loaded on `template contains 'collection'` + PDP (xsell) + homepage (featured collection).
    Snippet: snippets/isoa-rhode-card.liquid.
-   All child elements sit inside .isoa-rc-frame so the card is aspect-ratio-
-   locked — all cards share the same height regardless of title line count.
-   Title + price overlay the bottom of the image with transparent background. */
+
+   Card structure (both desktop + mobile):
+     .isoa-rc-card
+       .isoa-rc-link
+         .isoa-rc-frame                — beige square image area (aspect-ratio 1/1)
+           .isoa-rc-img--primary       — default product image
+           .isoa-rc-img--secondary     — hover-only lifestyle image (desktop)
+           .isoa-rc-brand              — category label overlay top-left
+           .isoa-rc-badge              — "new" badge overlay top-right
+         .isoa-rc-info                 — transparent, centered, in normal flow
+           .isoa-rc-reviews            — stars + count on one line
+           .isoa-rc-title              — product name, uppercase
+         .isoa-rc-cta                  — outlined BUY — $price pill, always visible
+
+   Hover (desktop only): primary→secondary image opacity swap 0.7s cubic-bezier.
+   Nothing else animates on hover — CTA is always visible.
+   ============================================================================= */
 
 .isoa-rc-card {
   position: relative;
@@ -22,6 +36,7 @@
   text-decoration: none;
 }
 
+/* ---- Image frame ------------------------------------------------------ */
 .isoa-rc-frame {
   position: relative;
   aspect-ratio: 1 / 1;
@@ -48,7 +63,7 @@
 .isoa-rc-img--secondary {
   opacity: 0;
   visibility: hidden;
-  z-index: 3;
+  z-index: 2;
 }
 
 .isoa-rc-brand {
@@ -83,31 +98,20 @@
   pointer-events: none;
 }
 
+/* ---- Info block (below frame) ----------------------------------------- */
 .isoa-rc-info {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2;
-  padding: 20px 24px 22px;
+  padding: 14px 20px 6px;
   background: transparent;
+  text-align: center;
   color: #67645e;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  column-gap: 12px;
-  row-gap: 2px;
-  align-items: baseline;
-  transition: opacity 0.5s cubic-bezier(0.76, 0, 0.24, 1);
-  pointer-events: none;
 }
 
 .isoa-rc-reviews {
-  grid-column: 1 / -1;
-  grid-row: auto;
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 6px;
-  margin: 0 0 4px;
+  margin: 0 0 6px;
   font-size: 12px;
   line-height: 1.2;
   color: #67645e;
@@ -124,61 +128,34 @@
 }
 
 .isoa-rc-title {
-  grid-column: 1;
   margin: 0;
   font-weight: 700;
   font-size: var(--isoa-body-lg);
   letter-spacing: 0.03em;
   color: #67645e;
   line-height: 1.2;
+  text-transform: uppercase;
 }
 
-.isoa-rc-price {
-  grid-column: 2;
-  margin: 0;
-  font-weight: 700;
-  font-size: var(--isoa-body-lg);
-  color: #67645e;
-  line-height: 1.2;
-  white-space: nowrap;
-  align-self: baseline;
-}
-
-.isoa-rc-subtitle {
-  grid-column: 1 / -1;
-  margin: 4px 0 0;
-  font-weight: 400;
-  font-size: 14px;
-  color: #67645e;
-  opacity: 0.85;
-  line-height: 1.35;
-}
-
+/* ---- Always-visible BUY pill (below info) ----------------------------- */
 .isoa-rc-cta {
-  position: absolute;
-  left: 16px;
-  right: 16px;
-  bottom: 16px;
-  z-index: 4;
   display: block;
-  padding: 14px 16px;
+  margin: 10px 16px 16px;
+  padding: 12px 18px;
+  border: 1px solid #67645e;
   border-radius: 999px;
-  background: #ffffff;
+  background: transparent;
   color: #67645e;
   font-family: var(--font-body--family);
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-align: center;
   line-height: 1.1;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.55s cubic-bezier(0.76, 0, 0.24, 1) 0.15s,
-              transform 0.55s cubic-bezier(0.76, 0, 0.24, 1) 0.15s;
+  transition: background 0.35s cubic-bezier(0.76, 0, 0.24, 1),
+              color 0.35s cubic-bezier(0.76, 0, 0.24, 1);
   pointer-events: none;
 }
 
@@ -187,9 +164,8 @@
   margin-left: 2px;
 }
 
-.isoa-rc-cta__desktop { display: inline; }
-.isoa-rc-cta__mobile { display: none; }
-
+/* Hover: only image swap on desktop. No CTA fade — CTA is always visible.
+   Optional subtle CTA fill on hover for polish. */
 @media (hover: hover) and (pointer: fine) {
   .isoa-rc-card:hover .isoa-rc-img--primary,
   .isoa-rc-card:focus-within .isoa-rc-img--primary {
@@ -200,18 +176,14 @@
     opacity: 1;
     visibility: visible;
   }
-  .isoa-rc-card:hover .isoa-rc-info,
-  .isoa-rc-card:focus-within .isoa-rc-info {
-    opacity: 0;
-  }
   .isoa-rc-card:hover .isoa-rc-cta,
   .isoa-rc-card:focus-within .isoa-rc-cta {
-    opacity: 1;
-    transform: translateY(0);
+    background: #67645e;
+    color: #ffffff;
   }
 }
 
-/* Grid parent — 3 col desktop, 2 col mobile. */
+/* ---- Grid parent ------------------------------------------------------ */
 .isoa-rc-grid,
 .product-grid:has(.isoa-rc-card),
 .product-grid--collection:has(.isoa-rc-card) {
@@ -238,35 +210,10 @@
   }
 }
 
+/* ---- Mobile tuning (info + CTA scaled down; smaller category label) --- */
 @media (max-width: 749px) {
   .isoa-rc-card {
     border-radius: 10px;
-  }
-  /* Frame no longer aspect-ratio-locked as a whole — instead a `::before`
-     spacer creates the 1:1 image area at the top, and the info block
-     (title/rating/price) flows naturally BELOW it in normal flow. Without
-     this, the info sits inside the aspect-ratio box and overlaps the image
-     (image is `position: absolute; inset: 0` so it fills the frame, and
-     info in static flow starts at frame-top too). */
-  .isoa-rc-frame {
-    aspect-ratio: unset;
-    position: relative;
-    overflow: visible;
-  }
-  .isoa-rc-frame::before {
-    content: '';
-    display: block;
-    padding-top: 100%;
-  }
-  /* Images fill just the ::before spacer area (square top of card).
-     `inset` reset must come BEFORE explicit top/left/right, else it
-     overrides them due to later-declaration cascade. */
-  .isoa-rc-img {
-    position: absolute;
-    inset: 0 0 auto 0;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1 / 1;
   }
   .isoa-rc-brand {
     top: 10px;
@@ -281,21 +228,12 @@
     padding: 4px 9px;
     font-size: 10px;
   }
-  /* Info block sits directly under the image inside the frame, centered. */
   .isoa-rc-info {
-    position: static;
-    padding: 8px 10px 4px;
-    grid-template-columns: 1fr;
-    justify-items: center;
-    row-gap: 2px;
-    background: transparent;
-    text-align: center;
-    pointer-events: auto;
+    padding: 10px 12px 4px;
   }
   .isoa-rc-reviews {
-    justify-content: center;
     font-size: 11px;
-    margin: 0 0 2px;
+    margin: 0 0 4px;
   }
   .isoa-rc-stars {
     font-size: 11px;
@@ -304,61 +242,17 @@
     font-size: 11px;
   }
   .isoa-rc-title {
-    grid-column: 1;
     font-size: 12px;
-    font-weight: 700;
-    line-height: 1.25;
     letter-spacing: 0.02em;
-    text-transform: uppercase;
-    text-align: center;
   }
-  .isoa-rc-price {
-    grid-column: 1;
-    grid-row: auto;
-    justify-self: center;
-    font-size: 12px;
-    font-weight: 700;
-  }
-  .isoa-rc-subtitle {
-    display: none;
-  }
-  /* Hide the desktop hover pill entirely on mobile (no hover state exists). */
   .isoa-rc-cta {
-    display: none;
-  }
-  /* Mobile-only outlined BUY pill, always visible under the info block.
-     Sizing tuned so full "BUY — RS. 2,499" fits without ellipsis truncation
-     even in the narrowest card (~155px inner content width at 375vw). */
-  .isoa-rc-cta-mobile {
-    display: block;
-    margin: 6px 8px 10px;
+    margin: 6px 10px 10px;
     padding: 8px 10px;
-    border: 1px solid #67645e;
-    border-radius: 999px;
-    background: transparent;
-    color: #67645e;
     font-size: 11px;
-    font-weight: 600;
     letter-spacing: 0.02em;
-    text-transform: uppercase;
-    text-align: center;
-    line-height: 1.1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
-  .isoa-rc-cta-mobile strong {
-    font-weight: 700;
-    margin-left: 2px;
-  }
+  /* Mobile has no hover state — hide secondary image entirely */
   .isoa-rc-img--secondary {
-    display: none;
-  }
-}
-
-/* Desktop: keep the mobile CTA element out of the flow. */
-@media (min-width: 750px) {
-  .isoa-rc-cta-mobile {
     display: none;
   }
 }
@@ -366,8 +260,6 @@
 /* =============================================================================
    In-grid promo tile — sits in a `.product-grid__item--promo` slot alongside
    product cards. Same footprint as a card (matches border-radius, aspect-ratio).
-   Image fills the frame with an overlay heading (top-left) and outlined
-   button (bottom-centered).
    ============================================================================= */
 .isoa-rc-promo,
 .isoa-rc-promo:visited {
