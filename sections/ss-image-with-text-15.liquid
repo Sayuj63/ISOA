@@ -568,29 +568,30 @@ For inquiries or permissions, contact daniel@section.store
      The image and content card keep their editor-controlled image_radius / content_radius
      (left untouched intentionally — earlier revision forced both to 0, which the client
      asked to revert). -vamshi */
+  /* Section width — align OUTER edges to the header pill (not viewport).
+     The section's grey background should stop at the pill edges, not extend
+     edge-to-edge. Pill formula on the OUTER, inner fills 100% of outer.
+     Zero horizontal margin/padding/border on outer so the pill formula's
+     max-width controls the visible edge. Vertical padding (padding_top /
+     padding_bottom from the editor) is intentionally NOT touched, so the
+     section keeps its top/bottom breathing room. -isoa */
   .section-{{ section.id }} {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    border-left: 0 !important;
-    border-right: 0 !important;
-    border-radius: 0 !important;
-  }
-
-  .section-{{ section.id }}-settings {
     max-width: min(
       calc(var(--page-width) - var(--page-margin) * 2),
       calc(100% - var(--page-margin) * 2)
     ) !important;
     margin-inline: auto !important;
-    /* Zero the inner's HORIZONTAL padding so the visible pill is exactly the formula
-       value (~1840px on a 1920vw viewport), matching the announcement bar / header.
-       Lines 119/249/331/342 of this file set padding-left/right from editor settings,
-       which would otherwise widen the visible box past the formula by up to 96px on
-       desktop with default box-sizing:content-box. Vertical padding (padding_top /
-       padding_bottom from the editor) is intentionally NOT touched, so the section
-       keeps its top/bottom breathing room. -vamshi */
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-radius: 10px !important;
+    overflow: hidden;
+  }
+
+  .section-{{ section.id }}-settings {
+    max-width: 100% !important;
+    margin-inline: 0 !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
   }

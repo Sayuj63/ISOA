@@ -304,3 +304,14 @@ h1, h2, h3, h4, h5, h6 {
     display: none !important;
   }
 }
+
+/* Desktop — trim the same hero heading down from the block's 2.75rem (44px)
+   default so it doesn't overpower the image on wide screens either. */
+@media (min-width: 750px) {
+  .hero .text-block.custom-font-size,
+  .hero .text-block.custom-font-size > * {
+    font-size: clamp(1.75rem, 2.5vw, 2.25rem) !important;  /* 28-36px */
+    letter-spacing: -0.02em !important;
+    line-height: 1.05 !important;
+  }
+}
