@@ -43,6 +43,7 @@
     {%- render 'stylesheets' -%}
     {% if template == 'product.rhode-product-page' %}
       {{ 'rhode-pdp.css' | asset_url | stylesheet_tag }}
+      {{ 'rhode-collection-cards.css' | asset_url | stylesheet_tag }}
     {% endif %}
     {% if template == 'product.rhode-pdp-v2' %}
       {{ 'rhode-pdp-v2.css' | asset_url | stylesheet_tag }}
@@ -59,6 +60,7 @@
     {% endif %}
     {% if template == 'product.spotwear-pdp' %}
       {{ 'rhode-pdp.css' | asset_url | stylesheet_tag }}
+      {{ 'rhode-collection-cards.css' | asset_url | stylesheet_tag }}
     {% endif %}
     {% if template contains 'collection' %}
       {{ 'isoua-collection-mobile.css' | asset_url | stylesheet_tag }}
