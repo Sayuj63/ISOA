@@ -317,7 +317,13 @@
         "padding-inline-end": 0,
         "color_scheme": "scheme-1",
         "padding-block-start": 0,
-        "padding-block-end": 32
+        "padding-block-end": 32,
+        "promo_enable": true,
+        "promo_position": 6,
+        "promo_heading": "A wash of warmth.",
+        "promo_button_label": "SHOP NOW",
+        "promo_button_link": "shopify://collections/all",
+        "promo_text_color": "#ffffff"
       }
     },
     "marquee_4W7nyE": {
