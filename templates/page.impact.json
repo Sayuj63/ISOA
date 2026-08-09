@@ -146,7 +146,7 @@
             "heading_height": 130,
             "heading_mt": 0,
             "heading_mt_mobile": 0,
-            "heading_color": "#67645E"
+            "heading_color": "#67645e"
           }
         },
         "text_zDeTLJ": {
@@ -161,7 +161,7 @@
             "text_height": 150,
             "text_mt": 12,
             "text_mt_mobile": 12,
-            "text_color": "#67645E"
+            "text_color": "#67645e"
           }
         }
       },
@@ -404,7 +404,7 @@
             "heading_height": 130,
             "heading_mt": 0,
             "heading_mt_mobile": 0,
-            "heading_color": "#67645E"
+            "heading_color": "#67645e"
           }
         },
         "text_zwzTqH": {
@@ -417,7 +417,7 @@
             "text_size_mobile": 12,
             "text_mt": 100,
             "text_mt_mobile": 16,
-            "text_color": "#67645E"
+            "text_color": "#67645e"
           }
         },
         "button_NGiCEW": {
@@ -439,7 +439,7 @@
             "button_radius": 100,
             "button_border_thickness": 1,
             "button_style": "outline",
-            "button_color": "#67645E",
+            "button_color": "#67645e",
             "button_hover_color": "#ffffff",
             "button_bg_color": "",
             "button_bg_hover_color": "#000000",
@@ -470,8 +470,8 @@
             "icon_size_mobile": 32,
             "animate_icon": true,
             "hide_icon": false,
-            "text_color": "#67645E",
-            "icon_color": "#67645E"
+            "text_color": "#67645e",
+            "icon_color": "#67645e"
           }
         }
       },
@@ -496,7 +496,7 @@
         "image_position_mobile": "top",
         "image_ratio": "portrait",
         "image_ratio_mobile": "portrait",
-        "background_color": "#f1f0ed",
+        "background_color": "#FFFFFF",
         "background_gradient": "",
         "border_color": "#000000",
         "margin_top": 0,
