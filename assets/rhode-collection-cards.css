@@ -258,14 +258,12 @@
     display: block;
     padding-top: 100%;
   }
-  /* Images fill just the ::before spacer area (square top of card) */
+  /* Images fill just the ::before spacer area (square top of card).
+     `inset` reset must come BEFORE explicit top/left/right, else it
+     overrides them due to later-declaration cascade. */
   .isoa-rc-img {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: auto;
-    inset: unset;
+    inset: 0 0 auto 0;
     width: 100%;
     height: auto;
     aspect-ratio: 1 / 1;
