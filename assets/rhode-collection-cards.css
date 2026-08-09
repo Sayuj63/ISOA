@@ -37,10 +37,14 @@
   text-decoration: none;
 }
 
-/* ---- Image frame (both breakpoints) ----------------------------------- */
+/* ---- Image frame (both breakpoints) -----------------------------------
+   Aspect ratio matches rhodeskin.com/collections/shop:
+     desktop → 440.69 × 534.02 (~441/534, portrait)
+     mobile  → 211.64 × 289    (~211/289, taller portrait)
+   Card height = frame height because info + CTA are absolutely positioned. */
 .isoa-rc-frame {
   position: relative;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 441 / 534;
   width: 100%;
   overflow: hidden;
   background: #f1f0ed;
@@ -264,6 +268,10 @@
   .isoa-rc-card {
     border-radius: 10px;
   }
+  /* Mobile frame ratio matches Rhode's 211.64 × 289 reference */
+  .isoa-rc-frame {
+    aspect-ratio: 211 / 289;
+  }
   .isoa-rc-brand {
     top: 10px;
     left: 12px;
@@ -380,7 +388,7 @@
 
 .isoa-rc-promo__frame {
   position: relative;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 441 / 534;
   width: 100%;
   overflow: hidden;
 }
@@ -443,6 +451,9 @@
 @media (max-width: 749px) {
   .isoa-rc-promo {
     border-radius: 10px;
+  }
+  .isoa-rc-promo__frame {
+    aspect-ratio: 211 / 289;
   }
   .isoa-rc-promo__heading {
     left: 12px;
