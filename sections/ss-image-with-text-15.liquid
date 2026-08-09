@@ -498,7 +498,7 @@ For inquiries or permissions, contact daniel@section.store
 {% if image_ratio_mobile == "portrait" %}
   <style>
     .image-text-image-{{ section.id }} {
-     aspect-ratio: 9.6/12; 
+     aspect-ratio: 12/10; 
     }
   </style>
 {% elsif image_ratio_mobile == "landscape" %}
@@ -510,7 +510,7 @@ For inquiries or permissions, contact daniel@section.store
 {% elsif image_ratio_mobile == "square" %}
   <style>
     .image-text-image-{{ section.id }} {
-     aspect-ratio: 12/12; 
+     aspect-ratio: 12/9; 
     }
   </style>
 {% else %}
@@ -525,7 +525,7 @@ For inquiries or permissions, contact daniel@section.store
   <style>
     @media(min-width: 1024px) {
      .image-text-image-{{ section.id }} {
-       aspect-ratio: 9.6/12; 
+       aspect-ratio: 12/10; 
       } 
     }
   </style>
@@ -541,7 +541,7 @@ For inquiries or permissions, contact daniel@section.store
   <style>
     @media(min-width: 1024px) {
       .image-text-image-{{ section.id }} {
-       aspect-ratio: 12/12;
+       aspect-ratio: 12/9;
       }
     }
   </style>
