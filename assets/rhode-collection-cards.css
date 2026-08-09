@@ -24,7 +24,7 @@
 
 .isoa-rc-frame {
   position: relative;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   width: 100%;
   overflow: hidden;
   background: #f1f0ed;
