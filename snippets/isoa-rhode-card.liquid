@@ -17,15 +17,10 @@
     assign category_label = product.vendor
   endif
 
-  assign subtitle = product.metafields.custom.card_subtitle
-  if subtitle == blank
-    assign subtitle = product.metafields.custom.subtitle
-  endif
-
   assign is_new = true
 
-  assign price_formatted = product.price | money
   assign price_short = product.price | money_without_trailing_zeros
+  assign price_formatted = product.price | money
   assign title_up = product.title | upcase
 
   assign review_count_meta = product.metafields.custom.review_count
@@ -38,7 +33,6 @@
   if review_stars_meta and review_stars_meta.value
     assign review_stars = review_stars_meta.value | times: 1.0
   endif
-  assign show_reviews = true
 -%}
 
 <article class="isoa-rc-card" data-handle="{{ product.handle }}">
@@ -73,35 +67,25 @@
       {%- if is_new -%}
         <span class="isoa-rc-badge">new</span>
       {%- endif -%}
-
-      <div class="isoa-rc-info">
-        {%- if show_reviews -%}
-          <div class="isoa-rc-reviews" aria-label="{{ review_stars }} stars from {{ review_count }} reviews">
-            <span class="isoa-rc-stars" aria-hidden="true">
-              {%- assign full = review_stars | floor -%}
-              {%- assign has_half = false -%}
-              {%- assign fractional = review_stars | minus: full -%}
-              {%- if fractional >= 0.25 and fractional < 0.75 -%}{%- assign has_half = true -%}{%- endif -%}
-              {%- if fractional >= 0.75 -%}{%- assign full = full | plus: 1 -%}{%- endif -%}
-              {%- for i in (1..5) -%}
-                {%- if forloop.index0 < full -%}★{%- elsif has_half and forloop.index0 == full -%}⯪{%- else -%}☆{%- endif -%}
-              {%- endfor -%}
-            </span>
-            <span class="isoa-rc-review-count">({{ review_count }})</span>
-          </div>
-        {%- endif -%}
-        <p class="isoa-rc-title">{{ title_up }}</p>
-        <p class="isoa-rc-price">{{ price_formatted }}</p>
-        {%- if subtitle != blank -%}
-          <p class="isoa-rc-subtitle">{{ subtitle }}</p>
-        {%- endif -%}
-      </div>
-
-      <span class="isoa-rc-cta" aria-hidden="true">
-        <span class="isoa-rc-cta__desktop">BUY — <strong>{{ price_formatted }}</strong></span>
-        <span class="isoa-rc-cta__mobile">BUY — <strong>{{ price_short }}</strong></span>
-      </span>
     </div>
-    <div class="isoa-rc-cta-mobile" aria-hidden="true">BUY — <strong>{{ price_short }}</strong></div>
+
+    <div class="isoa-rc-info">
+      <div class="isoa-rc-reviews" aria-label="{{ review_stars }} stars from {{ review_count }} reviews">
+        <span class="isoa-rc-stars" aria-hidden="true">
+          {%- assign full = review_stars | floor -%}
+          {%- assign has_half = false -%}
+          {%- assign fractional = review_stars | minus: full -%}
+          {%- if fractional >= 0.25 and fractional < 0.75 -%}{%- assign has_half = true -%}{%- endif -%}
+          {%- if fractional >= 0.75 -%}{%- assign full = full | plus: 1 -%}{%- endif -%}
+          {%- for i in (1..5) -%}
+            {%- if forloop.index0 < full -%}★{%- elsif has_half and forloop.index0 == full -%}⯪{%- else -%}☆{%- endif -%}
+          {%- endfor -%}
+        </span>
+        <span class="isoa-rc-review-count">({{ review_count }})</span>
+      </div>
+      <p class="isoa-rc-title">{{ title_up }}</p>
+    </div>
+
+    <div class="isoa-rc-cta" aria-hidden="true">BUY — <strong>{{ price_short }}</strong></div>
   </a>
 </article>
