@@ -554,8 +554,7 @@ main#MainContent {
   main#MainContent > .shopify-section > div,
   main#MainContent > .shopify-section > section:not(.rh-otg),
   main#MainContent [class^="section-"][class$="-settings"],
-  main#MainContent > .shopify-section > .section--page-width > .section-background,
-  main#MainContent [class^="packaging-"]:not(.packaging-wrapper) {
+  main#MainContent > .shopify-section > .section--page-width > .section-background {
     padding-top: 0 !important;
     padding-bottom: 0 !important;
   }
@@ -572,8 +571,7 @@ main#MainContent {
   main#MainContent > .shopify-section > div,
   main#MainContent > .shopify-section > section:not(.rh-otg),
   main#MainContent [class^="section-"][class$="-settings"],
-  main#MainContent > .shopify-section > .section--page-width > .section-background,
-  main#MainContent [class^="packaging-"]:not(.packaging-wrapper) {
+  main#MainContent > .shopify-section > .section--page-width > .section-background {
     padding-top: 0 !important;
     padding-bottom: 0 !important;
   }
