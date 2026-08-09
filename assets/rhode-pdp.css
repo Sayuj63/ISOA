@@ -220,10 +220,12 @@
   /* Join the mobile hero image + details vertically — kill the 16px flex
      row-gap on the product-information grid so the details card sits flush
      against the bottom of the image, matching every other PDP section that
-     joins its image + text content on mobile. Desktop unaffected (that gap
-     is horizontal between columns at min-width 750, controlled by the same
-     `gap: 16px` rule scoped to the horizontal media query at line ~46). */
-  .product-information__grid--half {
+     joins its image + text content on mobile. Desktop unaffected (the
+     16px horizontal gap between columns at min-width 750 comes from the
+     `column-gap: 16px` rule at line ~32, not this shorthand). Selector
+     specificity matches the desktop override above so it wins the cascade. */
+  main#MainContent .product-information__grid--half {
+    gap: 0 !important;
     row-gap: 0 !important;
   }
 
