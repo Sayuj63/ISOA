@@ -489,7 +489,7 @@ main#MainContent {
     content: "(0" counter(rh-step) ")";
     display: inline;
     margin-right: 10px;
-    font-size: 13px;
+    font-size: var(--isoa-eyebrow);
     color: #7b7872;
     vertical-align: 8px;
   }
@@ -512,7 +512,7 @@ main#MainContent {
   main#MainContent [class^="featured-text-"] p,
   main#MainContent [class*=" featured-text-"] p {
     margin: 0 0 12px !important;
-    font-size: 13px !important;
+    font-size: var(--isoa-eyebrow) !important;
     letter-spacing: 1.4px !important;
     text-transform: uppercase;
     color: #67645e !important;
@@ -625,7 +625,7 @@ main#MainContent .rh-benefits__container {
   [id^="rh-otg-"] .rh-otg__circle {
     width: 52px !important;
     height: 52px !important;
-    font-size: 13px !important;
+    font-size: var(--isoa-body-md-m) !important;
   }
 
   /* 3 · rhode-sticky-atc — tighten padding, drop the swatch strip if content
@@ -749,7 +749,7 @@ main#MainContent .rh-benefits__container {
      bold uppercase with 0.3px tracking. `.group-block .group-block` catches
      only the nested-inside-outer case, so the title h1 is unaffected. */
   main#MainContent .product-details .group-block .group-block .text-block > h1 {
-    font-size: 14px !important;
+    font-size: var(--isoa-eyebrow) !important;
     font-weight: 700 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.3px !important;
