@@ -274,13 +274,27 @@
     opacity: 1;
   }
 
+  /* Tighter mobile Q/A rhythm — matches rhodeskin.com/pages/faq (question
+     ~13px bold uppercase, answer ~12px, and less padding around each item
+     so questions don't feel spaced out). */
+  .rhode-faq__item {
+    padding: 12px 0;
+  }
+
   .rhode-faq__q {
     font-size: 13px;
-    gap: 16px;
+    gap: 12px;
+  }
+
+  .rhode-faq__q-icon {
+    width: 18px;
+    height: 18px;
   }
 
   .rhode-faq__a {
     padding-right: 0;
-    font-size: 13px;
+    font-size: 12px;
+    line-height: 1.55;
+    margin-top: 10px;
   }
 }
