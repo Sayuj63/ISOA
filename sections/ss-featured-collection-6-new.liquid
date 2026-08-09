@@ -268,7 +268,9 @@ For inquiries or permissions, contact daniel@section.store
   }
 
   .collection-price-{{ section.id }} {
-    display: flex;
+    /* Hidden on mobile — price only appears in the BUY pill (matches the
+       shared isoa-rc collection card behavior). Restored at >=1024px below. */
+    display: none;
     flex-direction: column;
   }
 
@@ -463,6 +465,10 @@ For inquiries or permissions, contact daniel@section.store
 
     .collection-title-{{ section.id }} {
       font-size: {{ title_size }}px;
+    }
+
+    .collection-price-{{ section.id }} {
+      display: flex;
     }
 
     .collection-price-{{ section.id }} * {
