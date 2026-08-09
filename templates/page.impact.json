@@ -127,8 +127,8 @@
         "gradient_direction": "to top",
         "blurred_reflection": false,
         "reflection_opacity": 75,
-        "padding-block-start": 24,
-        "padding-block-end": 24
+        "padding-block-start": 4,
+        "padding-block-end": 4
       }
     },
     "ss_image_with_text_HiVAhA": {
@@ -174,8 +174,8 @@
         "layout": "content_image",
         "layout_mobile": "image_content",
         "layout_advanced": false,
-        "layout_gap": 100,
-        "layout_gap_mobile": 24,
+        "layout_gap": 16,
+        "layout_gap_mobile": 16,
         "layout_border_thickness": 0,
         "layout_radius": 10,
         "use_shadow": false,
@@ -276,8 +276,8 @@
         "gradient_direction": "to top",
         "blurred_reflection": false,
         "reflection_opacity": 75,
-        "padding-block-start": 24,
-        "padding-block-end": 24
+        "padding-block-start": 4,
+        "padding-block-end": 4
       }
     },
     "ss_image_with_text_15_UzxNhw": {
@@ -580,8 +580,8 @@
         "gradient_direction": "to top",
         "blurred_reflection": false,
         "reflection_opacity": 75,
-        "padding-block-start": 24,
-        "padding-block-end": 24
+        "padding-block-start": 4,
+        "padding-block-end": 4
       }
     }
   },
