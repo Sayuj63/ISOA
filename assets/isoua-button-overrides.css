@@ -34,6 +34,14 @@
   --isoa-display-xl: 44px;   --isoa-display-xl-m: 30px;  /* single hero heading per page */
   --isoa-display-lg: 32px;   --isoa-display-lg-m: 24px;  /* major section headings */
   --isoa-display-md: 24px;   --isoa-display-md-m: 20px;  /* secondary section headings */
+
+  /* Body / UI copy ladder — companion to the display ladder above.
+     Global Horizon paragraph = 14 already fits body-md; use tokens only where
+     a section hardcodes a different size or is served via schema range input. */
+  --isoa-body-lg: 16px;      --isoa-body-lg-m: 15px;     /* key body copy, product description, review text */
+  --isoa-body-md: 14px;      --isoa-body-md-m: 13px;     /* default body, nav links, labels */
+  --isoa-body-sm: 12px;      --isoa-body-sm-m: 12px;     /* captions, footnotes, meta */
+  --isoa-eyebrow: 11px;      --isoa-eyebrow-m: 11px;     /* eyebrows, section labels, tab labels */
 }
 
 /* Terms + Contact + policy pages: move the first content section UP so it
