@@ -650,6 +650,64 @@ For inquiries or permissions, contact daniel@section.store
       margin-top: {{ section.settings.pill_button_mt | default: 28 }}px !important;
     }
   }
+
+  /* ==========================================================================
+     Mobile typography lock-in — every text element in this section uses the
+     site body font, tight rhythm around the heading, consistent scale across
+     heading / body / toggle labels. Overrides the schema-driven per-setting
+     sizes so this section reads the same across every page that uses it
+     (Impact, Our Story, etc.). Uses `!important` because the base rules
+     above emit schema values at higher specificity via {{section.id}}. -isoa
+     ========================================================================== */
+  @media (max-width: 749px) {
+    .image-text-heading-{{ section.id }},
+    .image-text-heading-{{ section.id }} *,
+    .image-text-text-{{ section.id }},
+    .image-text-text-{{ section.id }} *,
+    .image-text-toggle-{{ section.id }},
+    .image-text-toggle-{{ section.id }} * {
+      font-family: var(--font-body--family, 'Inter'), sans-serif !important;
+      letter-spacing: 0 !important;
+    }
+
+    /* Heading — tight top/bottom, bold Inter */
+    .image-text-heading-{{ section.id }} {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .image-text-heading-{{ section.id }} * {
+      margin: 0 !important;
+      padding: 0 !important;
+      font-size: 18px !important;
+      font-weight: 700 !important;
+      line-height: 1.25 !important;
+      text-transform: none !important;
+    }
+
+    /* Body — close to heading, standard body scale */
+    .image-text-text-{{ section.id }} {
+      margin-top: 10px !important;
+    }
+    .image-text-text-{{ section.id }} * {
+      font-size: 13px !important;
+      font-weight: 400 !important;
+      line-height: 1.55 !important;
+    }
+
+    /* Toggle labels — same family/weight as heading so headings + rows read
+       as one type system, just a bit larger for the row labels. */
+    .image-text-toggles-{{ section.id }} {
+      margin-top: 20px !important;
+    }
+    .image-text-toggle-{{ section.id }} {
+      padding: 12px 0 !important;
+    }
+    .image-text-toggle-{{ section.id }} * {
+      font-size: 15px !important;
+      font-weight: 700 !important;
+      line-height: 1.25 !important;
+    }
+  }
 </style>
 
 <div class="section-{{ section.id }} image-text-{{ section.id }}" style="background-color:{{ background_color }}; background-image: {{ background_gradient }};">
