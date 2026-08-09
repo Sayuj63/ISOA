@@ -133,21 +133,22 @@
     --normal-page-width: 120rem;
     --wide-page-width: 150rem;
 
-    /* Section Heights */
-    --section-height-small: 15rem;
-    --section-height-medium: 25rem;
-    --section-height-large: 35rem;
+    /* Section Heights — reduced 2026-08 so sections fit viewport better.
+       Was 15/25/35rem, then 40/55/70svh, then 50/65/80svh. */
+    --section-height-small: 12rem;
+    --section-height-medium: 18rem;
+    --section-height-large: 24rem;
 
     @media screen and (min-width: 40em) {
-      --section-height-small: 40svh;
-      --section-height-medium: 55svh;
-      --section-height-large: 70svh;
+      --section-height-small: 32svh;
+      --section-height-medium: 42svh;
+      --section-height-large: 52svh;
     }
 
     @media screen and (min-width: 60em) {
-      --section-height-small: 50svh;
-      --section-height-medium: 65svh;
-      --section-height-large: 80svh;
+      --section-height-small: 38svh;
+      --section-height-medium: 48svh;
+      --section-height-large: 58svh;
     }
 
     /* Letter spacing */
