@@ -1,0 +1,46 @@
+{%- comment -%}
+  In-grid promo tile that occupies one collection card slot.
+  Reads settings from the parent section (main-collection).
+  Sits inside `.product-grid__item--promo` so grid placement is automatic.
+{%- endcomment -%}
+
+{%- assign promo_image = section.settings.promo_image -%}
+{%- assign promo_heading = section.settings.promo_heading -%}
+{%- assign promo_button_label = section.settings.promo_button_label -%}
+{%- assign promo_button_link = section.settings.promo_button_link -%}
+{%- assign promo_text_color = section.settings.promo_text_color | default: '#ffffff' -%}
+
+{%- if promo_button_link != blank -%}
+  <a class="isoa-rc-promo" href="{{ promo_button_link }}" style="--promo-text: {{ promo_text_color }};">
+{%- else -%}
+  <div class="isoa-rc-promo" style="--promo-text: {{ promo_text_color }};">
+{%- endif -%}
+
+  <div class="isoa-rc-promo__frame">
+    {%- if promo_image != blank -%}
+      <img
+        class="isoa-rc-promo__img"
+        src="{{ promo_image | image_url: width: 1200 }}"
+        srcset="{{ promo_image | image_url: width: 600 }} 600w, {{ promo_image | image_url: width: 900 }} 900w, {{ promo_image | image_url: width: 1200 }} 1200w"
+        sizes="(max-width: 749px) 50vw, 33vw"
+        loading="lazy"
+        decoding="async"
+        alt="{{ promo_image.alt | default: promo_heading | escape }}">
+    {%- else -%}
+      {{ 'image' | placeholder_svg_tag: 'isoa-rc-promo__img' }}
+    {%- endif -%}
+
+    {%- if promo_heading != blank -%}
+      <div class="isoa-rc-promo__heading">{{ promo_heading }}</div>
+    {%- endif -%}
+
+    {%- if promo_button_label != blank -%}
+      <span class="isoa-rc-promo__cta" aria-hidden="true">{{ promo_button_label }}</span>
+    {%- endif -%}
+  </div>
+
+{%- if promo_button_link != blank -%}
+  </a>
+{%- else -%}
+  </div>
+{%- endif -%}
