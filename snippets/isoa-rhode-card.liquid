@@ -20,6 +20,7 @@
   assign is_new = true
 
   assign price_short = product.price | money_without_trailing_zeros
+  assign price_short_inr = price_short | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' | replace: 'INR ', '₹'
   assign price_formatted = product.price | money
   assign title_up = product.title | upcase
 
@@ -87,6 +88,9 @@
       <p class="isoa-rc-price">{{ price_formatted }}</p>
     </div>
 
-    <div class="isoa-rc-cta" aria-hidden="true">BUY — <strong>{{ price_short }}</strong></div>
+    <div class="isoa-rc-cta" aria-hidden="true">
+      <span class="isoa-rc-cta-desk">BUY — <strong>{{ price_short }}</strong></span>
+      <span class="isoa-rc-cta-mob"><span class="isoa-rc-cta-lead">BUY —</span> <strong>{{ price_short_inr }}</strong></span>
+    </div>
   </a>
 </article>
