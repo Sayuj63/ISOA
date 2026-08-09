@@ -1001,6 +1001,12 @@ For inquiries or permissions, contact daniel@section.store
             {% endfor %}
           {% else %}
           {% for block in section.blocks %}
+            {% if block.settings.product != blank %}
+              <div class="collection-slide-{{ section.id }} swiper-slide isoa-fc6-slide">
+                {% render 'isoa-rhode-card', product: block.settings.product %}
+              </div>
+              {% continue %}
+            {% endif %}
             <{% if block.settings.product != blank %}a href="{{ block.settings.product.url }}"{% else %}div{% endif %} class="collection-slide-{{ section.id }} swiper-slide">
               <div class="collection-image-{{ section.id }} {% if block.settings.second_image != blank or block.settings.product.media.size > 1 %}collection-first-image-{{ section.id }}{% endif %}">
                 {% if block.settings.image != blank %}
@@ -1080,6 +1086,32 @@ For inquiries or permissions, contact daniel@section.store
       </div>
     </div>
 </div>
+
+{%- comment -%} isoa-rhode-card slide overrides: strip the legacy slide chrome so the rendered card can lay out cleanly with the shared rhode-collection-cards.css styles. Mirrors section-store-featured-collection-6.liquid. {%- endcomment -%}
+<style>
+  .shopify-section .swiper-wrapper:has(.isoa-fc6-slide) {
+    align-items: stretch;
+  }
+  .shopify-section .isoa-fc6-slide,
+  .shopify-section .swiper-slide.isoa-fc6-slide {
+    aspect-ratio: auto !important;
+    height: auto !important;
+    display: block !important;
+    background: transparent !important;
+    padding: 0 !important;
+    border: 0 !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+  .shopify-section .isoa-fc6-slide::after {
+    display: none !important;
+  }
+  .shopify-section .isoa-fc6-slide .isoa-rc-card {
+    width: 100%;
+    height: auto;
+  }
+</style>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
