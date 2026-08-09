@@ -13,7 +13,9 @@ For inquiries or permissions, contact daniel@section.store
   href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
 />
 
-{%- liquid 
+{{ 'rhode-collection-cards.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
   assign padding_horizontal = section.settings.padding_horizontal
   assign padding_horizontal_mobile = section.settings.padding_horizontal_mobile
   assign padding_top = section.settings.padding_top
@@ -924,6 +926,10 @@ For inquiries or permissions, contact daniel@section.store
         <div class="swiper-wrapper">
           {% if collection != blank %}
             {% for product in collections[collection].products limit: collection_show %}
+              <div class="collection-slide-{{ section.id }} swiper-slide isoa-fc6-slide">
+                {% render 'isoa-rhode-card', product: product %}
+              </div>
+              {% continue %}
               <a href="{{ product.url }}" class="collection-slide-{{ section.id }} swiper-slide">
               <div class="collection-image-{{ section.id }} {% if product.media.size > 1 %}collection-first-image-{{ section.id }}{% endif %}">
                 {% if product.featured_image != blank %}
