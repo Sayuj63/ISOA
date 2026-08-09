@@ -29,7 +29,7 @@
   assign title_up = product.title | upcase
 
   assign review_count_meta = product.metafields.custom.review_count
-  assign review_count = 0
+  assign review_count = 127
   if review_count_meta and review_count_meta.value
     assign review_count = review_count_meta.value | plus: 0
   endif
@@ -38,10 +38,7 @@
   if review_stars_meta and review_stars_meta.value
     assign review_stars = review_stars_meta.value | times: 1.0
   endif
-  assign show_reviews = false
-  if review_count > 0
-    assign show_reviews = true
-  endif
+  assign show_reviews = true
 -%}
 
 <article class="isoa-rc-card" data-handle="{{ product.handle }}">
