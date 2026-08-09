@@ -217,13 +217,14 @@
 }
 
 @media screen and (max-width: 749px) {
-  /* Mobile hero image radius — match desktop's 10px rounding (line 148-152).
-     Both the wrapper AND the child img/video get the radius: the wrapper needs
-     overflow: hidden so the child image can't paint over the rounded corners,
-     and the img itself gets border-radius so if the wrapper's overflow is ever
-     unset elsewhere the corners still render. -vamshi */
+  /* Mobile hero image radius — top corners keep the 10px rounding, bottom
+     corners go square so the image meets the details card below with a
+     seamless flush edge. Both the wrapper AND the child img/video get the
+     radius: wrapper needs overflow: hidden so the child image can't paint
+     over the rounded corners; the img itself gets border-radius so if
+     the wrapper's overflow is ever unset elsewhere the corners still render. */
   .product-information__grid--half .product-information__media {
-    border-radius: 10px !important;
+    border-radius: 10px 10px 0 0 !important;
     overflow: hidden !important;
   }
 
@@ -232,7 +233,14 @@
   .product-information__grid--half .product-information__media .product-media-container video,
   .product-information__grid--half .product-information__media slideshow-slide img,
   .product-information__grid--half .product-information__media slideshow-slide video {
-    border-radius: 10px !important;
+    border-radius: 10px 10px 0 0 !important;
+  }
+
+  /* Details card (`.group-block` inside `.product-details`) mirrors the image:
+     top corners square (joins the image bottom flush), bottom corners keep the
+     10px so the whole image + details reads as ONE rounded pill. */
+  main#MainContent .product-details > .group-block {
+    border-radius: 0 0 10px 10px !important;
   }
 
   .product-information__grid--half .product-information__media slideshow-controls[thumbnails] {
