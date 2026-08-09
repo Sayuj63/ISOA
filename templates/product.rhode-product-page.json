@@ -896,8 +896,8 @@
             "text": "<p>APPLICATION</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
-            "text_size": 11,
-            "text_size_mobile": 11,
+            "text_size": 12,
+            "text_size_mobile": 12,
             "text_height": 130,
             "text_color": "#67645e"
           }
