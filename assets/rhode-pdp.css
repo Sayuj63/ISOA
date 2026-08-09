@@ -481,7 +481,7 @@ main#MainContent {
     counter-increment: rh-step;
     color: #67645e !important;
     font-weight: 400 !important;
-    font-size: 26px !important;
+    font-size: var(--isoa-display-md) !important;
     line-height: 1.25 !important;
   }
   main#MainContent [class^="featured-title-desktop-"]::before,
