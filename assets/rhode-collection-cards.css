@@ -242,13 +242,18 @@
   .isoa-rc-card {
     border-radius: 10px;
   }
+  /* Frame is aspect-ratio-locked for the IMAGE portion only. Overflow visible
+     so the info block that lives inside the frame can render BELOW the image
+     area instead of being clipped. Images stay bounded by `.isoa-rc-img`'s
+     `position: absolute; inset: 0` which pins them to the frame's box. */
   .isoa-rc-frame {
     aspect-ratio: 1 / 1;
+    overflow: visible;
   }
   .isoa-rc-brand {
     top: 10px;
     left: 12px;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
     letter-spacing: 0;
   }
@@ -258,37 +263,42 @@
     padding: 4px 9px;
     font-size: 10px;
   }
-  /* On mobile, info flows below the frame (not overlaying image) so nothing
-     overlaps the product photo and the BUY pill can sit under it. */
+  /* Info block sits directly under the image inside the frame, centered. */
   .isoa-rc-info {
     position: static;
-    padding: 10px 12px 4px;
+    padding: 8px 10px 4px;
     grid-template-columns: 1fr;
-    row-gap: 3px;
+    justify-items: center;
+    row-gap: 2px;
     background: transparent;
+    text-align: center;
+    pointer-events: auto;
   }
   .isoa-rc-reviews {
-    font-size: 12px;
+    justify-content: center;
+    font-size: 11px;
     margin: 0 0 2px;
   }
   .isoa-rc-stars {
-    font-size: 12px;
+    font-size: 11px;
   }
   .isoa-rc-review-count {
-    font-size: 12px;
+    font-size: 11px;
   }
   .isoa-rc-title {
     grid-column: 1;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     line-height: 1.25;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
+    text-align: center;
   }
   .isoa-rc-price {
     grid-column: 1;
     grid-row: auto;
-    justify-self: start;
-    font-size: 13px;
+    justify-self: center;
+    font-size: 12px;
     font-weight: 700;
   }
   .isoa-rc-subtitle {
@@ -298,18 +308,20 @@
   .isoa-rc-cta {
     display: none;
   }
-  /* Mobile-only outlined BUY pill, always visible under the info block. */
+  /* Mobile-only outlined BUY pill, always visible under the info block.
+     Sizing tuned so full "BUY — RS. 2,499" fits without ellipsis truncation
+     even in the narrowest card (~155px inner content width at 375vw). */
   .isoa-rc-cta-mobile {
     display: block;
-    margin: 8px 12px 12px;
-    padding: 10px 16px;
+    margin: 6px 8px 10px;
+    padding: 8px 10px;
     border: 1px solid #67645e;
     border-radius: 999px;
     background: transparent;
     color: #67645e;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
     text-align: center;
     line-height: 1.1;
