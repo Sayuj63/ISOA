@@ -242,13 +242,33 @@
   .isoa-rc-card {
     border-radius: 10px;
   }
-  /* Frame is aspect-ratio-locked for the IMAGE portion only. Overflow visible
-     so the info block that lives inside the frame can render BELOW the image
-     area instead of being clipped. Images stay bounded by `.isoa-rc-img`'s
-     `position: absolute; inset: 0` which pins them to the frame's box. */
+  /* Frame no longer aspect-ratio-locked as a whole — instead a `::before`
+     spacer creates the 1:1 image area at the top, and the info block
+     (title/rating/price) flows naturally BELOW it in normal flow. Without
+     this, the info sits inside the aspect-ratio box and overlaps the image
+     (image is `position: absolute; inset: 0` so it fills the frame, and
+     info in static flow starts at frame-top too). */
   .isoa-rc-frame {
-    aspect-ratio: 1 / 1;
+    aspect-ratio: unset;
+    position: relative;
     overflow: visible;
+  }
+  .isoa-rc-frame::before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
+  /* Images fill just the ::before spacer area (square top of card) */
+  .isoa-rc-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    inset: unset;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
   }
   .isoa-rc-brand {
     top: 10px;
