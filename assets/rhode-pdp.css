@@ -217,6 +217,16 @@
 }
 
 @media screen and (max-width: 749px) {
+  /* Join the mobile hero image + details vertically — kill the 16px flex
+     row-gap on the product-information grid so the details card sits flush
+     against the bottom of the image, matching every other PDP section that
+     joins its image + text content on mobile. Desktop unaffected (that gap
+     is horizontal between columns at min-width 750, controlled by the same
+     `gap: 16px` rule scoped to the horizontal media query at line ~46). */
+  .product-information__grid--half {
+    row-gap: 0 !important;
+  }
+
   /* Mobile hero image radius — match desktop's 10px rounding (line 148-152).
      Both the wrapper AND the child img/video get the radius: the wrapper needs
      overflow: hidden so the child image can't paint over the rounded corners,
