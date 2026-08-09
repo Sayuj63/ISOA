@@ -10,20 +10,20 @@ Cloning `https://www.rhodeskin.com/products/spotwear-daisy` into the ISOUA store
 
 - **Store**: `isoua-2.myshopify.com` (Anthropic-internal short id `bh0tnw-wh` shows up in some Admin URLs — same store).
 - **Primary domain**: `www.isoua.com` (redirects from `isoua-2.myshopify.com`).
-- **Theme**: `VAMSHI`, id `161130643685`, currently **live**.
+- **Theme**: `ISOA/main`, id `163261120741`, currently **live** (as of 2026-08-10). The previous live theme `VAMSHI` #161130643685 is now **unpublished** — verified via `shopify theme list`. All the PDP + collection work now targets `ISOA/main`.
 - **Store is password-protected** ("Launching Soon" splash on both the myshopify domain and the primary domain).
-- **Shopify CLI 4.4.0** is installed at `/opt/homebrew/bin/shopify`.
+- **Shopify CLI 4.6.1** is installed at `/opt/homebrew/bin/shopify`.
 
 ### Push a file
 ```
-shopify theme push --store=isoua-2.myshopify.com --theme=161130643685 \
+shopify theme push --store=isoua-2.myshopify.com --theme=163261120741 \
   --only=path/to/file --nodelete --allow-live
 ```
 `--allow-live` is required because we're pushing to the live theme. Push is non-interactive-friendly with `--allow-live`.
 
 ### Bypass the "Launching Soon" gate for verification
 ```
-nohup shopify theme dev --store=isoua-2.myshopify.com --theme=161130643685 \
+nohup shopify theme dev --store=isoua-2.myshopify.com --theme=163261120741 \
   --host=127.0.0.1 --port=9292 > /tmp/shopify-dev.log 2>&1 &
 ```
 Then hit `http://127.0.0.1:9292/products/spotwear?view=rhode-product-page`. The dev server serves the live theme's files with password auto-bypass. `disown` the process; kill with `pkill -f "shopify theme dev"` or `lsof -ti:9292 | xargs kill -9`.
@@ -155,6 +155,16 @@ Loads template-scoped stylesheets:
 - `rhode-pdp.css` on `product.rhode-product-page`
 - `rhode-pdp-v2.css` on `product.rhode-pdp-v2` (DO NOT WORK ON V2)
 - `rhode-pdp.css` on `product.spotwear-pdp`
+
+### `snippets/isoa-rhode-card.liquid` + `assets/rhode-collection-cards.css`
+Shared "Rhode-style" product card used on the collection page, PDP cross-sell, and homepage featured collection. **Same DOM, two different visual layouts** — desktop vs. mobile — controlled entirely by CSS.
+
+- **DOM order**: `.isoa-rc-frame` (image + brand label + "new" badge) → `.isoa-rc-info` (stars, review count, title, standalone price) → `.isoa-rc-cta` (BUY pill).
+- **Desktop (>= 750px)**: `.isoa-rc-info` and `.isoa-rc-cta` are absolutely positioned over the image frame. Info is a 2-column grid (title left, price right). CTA is opacity:0 by default and fades in on hover with an image swap.
+- **Mobile (< 750px)** — refactored 2026-08-10 to match `rhodeskin.com/collections/shop`: **image-only card, all UI overlaid on the image** (no in-flow content below the image). Info is `position: absolute; bottom: 44px; left:12px; right:12px; text-align: left`, so stars, review count and title are bottom-left overlays. CTA is `position: absolute; bottom: 10px` — an outlined transparent pill spanning the bottom of the image with **centered** text. Card height = frame height = 1:1 aspect.
+- **CTA text is dual-rendered**: a `.isoa-rc-cta-desk` span (default `display: inline`) with `"BUY — Rs. 1,999"` for desktop, and a `.isoa-rc-cta-mob` span (default `display: none`) with `"BUY — ₹1,999"` for mobile. The mobile media query swaps their displays. The `.isoa-rc-cta-lead` span (`"BUY —"`) is 9px on mobile so the price reads bigger than the prefix.
+- **`price_short_inr`**: in the snippet, `product.price | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' | replace: 'INR ', '₹'` — belt-and-suspenders for any of Shopify's INR formatting outputs.
+- **Do not touch desktop styles when tweaking mobile.** All mobile-only rules live inside `@media (max-width: 749px)` at the bottom of the file.
 
 ## Mistakes we made — do not repeat
 
