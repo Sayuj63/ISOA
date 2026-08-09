@@ -50,7 +50,21 @@
 
     {% paginate collection.products by products_per_page %}
       {% capture children %}
+        {%- assign promo_enable = section.settings.promo_enable -%}
+        {%- assign promo_position = section.settings.promo_position | default: 6 -%}
+        {%- assign promo_inserted = false -%}
         {% for product in collection.products %}
+          {%- comment -%}
+            Insert configurable promo tile at `promo_position` (1-indexed). By default
+            slot 6 on a 3-col desktop grid = bottom-right of row 2, matching Rhode's
+            reference. On mobile 2-col it flows as its own tile in the same slot.
+          {%- endcomment -%}
+          {%- if promo_enable and promo_inserted == false and forloop.index == promo_position and paginate.current_page == 1 -%}
+            <li class="product-grid__item product-grid__item--promo isoa-rc-promo-item" data-page="{{ paginate.current_page }}">
+              {% render 'isoa-rhode-promo', section: section %}
+            </li>
+            {%- assign promo_inserted = true -%}
+          {%- endif -%}
           <li
             id="{{ section.id }}-{{ product.id }}"
             class="product-grid__item product-grid__item--{{ forloop.index0 }}"
