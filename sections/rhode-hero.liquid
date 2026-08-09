@@ -123,7 +123,7 @@
 .rhode-hero-{{ sid }} .rh-eyebrow {
   margin: 0;
   font-family: josefin_sans_n4, 'Josefin Sans', sans-serif;
-  font-size: 12px;
+  font-size: var(--isoa-eyebrow);
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -142,24 +142,24 @@
 .rhode-hero-{{ sid }} .rh-rating {
   display: flex; align-items: center; gap: 12px;
   font-family: inherit;
-  font-size: 12px;
+  font-size: var(--isoa-body-sm);
   color: {{ section.settings.text_color }};
   letter-spacing: 0.02em;
 }
 .rhode-hero-{{ sid }} .rh-rating-stars {
   color: {{ section.settings.title_color }};
   letter-spacing: 2px;
-  font-size: 14px;
+  font-size: var(--isoa-body-md);
 }
 .rhode-hero-{{ sid }} .rh-price {
   margin: 0;
-  font-size: 20px;
+  font-size: var(--isoa-body-lg);
   font-weight: 400;
   color: {{ section.settings.price_color }};
 }
 .rhode-hero-{{ sid }} .rh-price s { opacity: 0.6; margin-right: 8px; }
 .rhode-hero-{{ sid }} .rh-desc {
-  font-size: 15px;
+  font-size: var(--isoa-body-lg);
   line-height: 1.65;
   color: {{ section.settings.text_color }};
 }
@@ -170,7 +170,7 @@
 .rhode-hero-{{ sid }} .rh-shapes { display: flex; flex-direction: column; gap: 12px; }
 .rhode-hero-{{ sid }} .rh-shapes-label {
   margin: 0;
-  font-size: 12px; font-weight: 600;
+  font-size: var(--isoa-eyebrow); font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: {{ section.settings.eyebrow_color }};
