@@ -223,11 +223,52 @@ Responsive + Fully Dynamic
     flex-direction:column;
   }
 
+  /* Keep the vertical writing-mode on mobile too — matches the desktop
+     top-left rotated label. */
   .ss-side-title{
-    writing-mode: initial;
-    text-orientation: initial;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
   }
 
+}
+
+/* ============================================================================
+   Width + join-radius overrides — mobile UI parity with ss-image-with-text-15.
+   OUTER `.ss-whats-inside-{id}` = full-bleed (bg extends edge-to-edge if any).
+   INNER `.ss-whats-inside-inner` = pill formula, matching header pill edges.
+   Image + content read as one continuous pill (gap:0 already), with only the
+   OUTER corners rounded on mobile — image top, content bottom.
+   Uses `!important` because the base rules and schema-controlled padding on
+   lines 71-108 would otherwise override us. -isoa
+   ============================================================================ */
+.ss-whats-inside-{{ section.id }}{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-radius: 0 !important;
+}
+
+.ss-whats-inside-{{ section.id }} .ss-whats-inside-inner{
+  max-width: min(
+    calc(var(--page-width) - var(--page-margin) * 2),
+    calc(100% - var(--page-margin) * 2)
+  ) !important;
+  margin-inline: auto !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  gap: 0 !important;
+}
+
+@media screen and (max-width: 767px){
+  .ss-whats-inside-{{ section.id }} .ss-whats-inside-image{
+    border-radius: 10px 10px 0 0 !important;
+  }
+  .ss-whats-inside-{{ section.id }} .ss-whats-inside-content{
+    border-radius: 0 0 10px 10px !important;
+  }
 }
 
 </style>
