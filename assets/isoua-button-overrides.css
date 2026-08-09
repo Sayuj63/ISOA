@@ -26,6 +26,14 @@
 :root {
   --isoa-section-half-gap: 5px;
   --isoa-section-gap: 10px; /* the intended visible gap; = 2 * half-gap */
+
+  /* Display headings ladder — one knob for every SS-/rhode-* section heading.
+     Global Horizon h1..h6 tokens (settings_data.json) stay untouched; these
+     only apply where a section explicitly opts in via var(--isoa-display-*).
+     Rhode's own site sits around 32-52 desktop / 22-34 mobile for display. */
+  --isoa-display-xl: 44px;   --isoa-display-xl-m: 30px;  /* single hero heading per page */
+  --isoa-display-lg: 32px;   --isoa-display-lg-m: 24px;  /* major section headings */
+  --isoa-display-md: 24px;   --isoa-display-md-m: 20px;  /* secondary section headings */
 }
 
 /* Terms + Contact + policy pages: move the first content section UP so it
