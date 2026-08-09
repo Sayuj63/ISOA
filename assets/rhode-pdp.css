@@ -217,18 +217,6 @@
 }
 
 @media screen and (max-width: 749px) {
-  /* Join the mobile hero image + details vertically — kill the 16px flex
-     row-gap on the product-information grid so the details card sits flush
-     against the bottom of the image, matching every other PDP section that
-     joins its image + text content on mobile. Desktop unaffected (the
-     16px horizontal gap between columns at min-width 750 comes from the
-     `column-gap: 16px` rule at line ~32, not this shorthand). Selector
-     specificity matches the desktop override above so it wins the cascade. */
-  main#MainContent .product-information__grid--half {
-    gap: 0 !important;
-    row-gap: 0 !important;
-  }
-
   /* Mobile hero image radius — match desktop's 10px rounding (line 148-152).
      Both the wrapper AND the child img/video get the radius: the wrapper needs
      overflow: hidden so the child image can't paint over the rounded corners,
@@ -718,14 +706,16 @@ main#MainContent .rh-benefits__container {
   /* 5.6 · Escape Horizon's subgrid on mobile. .product-information__grid
      inherits `grid-template-columns: subgrid` from the parent's 3-track
      `16px 326px 16px`, which collapses the media column to 0px. Force flex
-     column so media stacks above details, each at full pill width. */
+     column so media stacks above details, each at full pill width. Gap
+     is 0 so the details card sits flush against the bottom of the image
+     — same "joined image + text" pattern the other PDP sections use. */
   main#MainContent .product-information__grid,
   main#MainContent .product-information__grid--half {
     display: flex !important;
     flex-direction: column !important;
     grid-template-columns: none !important;
     grid-template-rows: none !important;
-    gap: 16px !important;
+    gap: 0 !important;
     align-items: stretch !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
