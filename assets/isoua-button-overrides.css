@@ -227,8 +227,12 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
   .shopify-section [class*="collection-button-"],
   .shopify-section [class*="featured-product-button-"],
   .shopify-section [class*="slider-button-"] {
-    padding: 10px 28px !important;
-    font-size: 13px !important;
+    /* 2026-08-09: buttons were reading oversized on homepage mobile
+       (13px font, 10x28 pad → 35-43px tall). Rhode's mobile pills sit
+       closer to 32-34 tall. Shrink font + pad; leave desktop untouched. */
+    padding: 8px 22px !important;
+    font-size: 11px !important;
+    line-height: 1.2 !important;
   }
 }
 
