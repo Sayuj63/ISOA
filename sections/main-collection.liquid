@@ -81,6 +81,16 @@
             {%- endif -%}
           </li>
         {% endfor %}
+        {%- comment -%}
+          Fallback: if the collection has fewer products than promo_position, the
+          in-loop insertion never fires. Render the promo at the end of page 1
+          so it always shows once when enabled.
+        {%- endcomment -%}
+        {%- if promo_enable and promo_inserted == false and paginate.current_page == 1 -%}
+          <li class="product-grid__item product-grid__item--promo isoa-rc-promo-item" data-page="{{ paginate.current_page }}">
+            {% render 'isoa-rhode-promo', section: section %}
+          </li>
+        {%- endif -%}
       {% endcapture %}
 
       {% render 'product-grid',
