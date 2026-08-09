@@ -735,7 +735,7 @@ main#MainContent .rh-benefits__container {
      not 40px black. Direct .text-block child of the OUTER .group-block content;
      the nested subheading group is deeper so it's excluded by the `>` combinators. */
   main#MainContent .product-details > .group-block > .group-block-content > .text-block > h1 {
-    font-size: 30px !important;
+    font-size: var(--isoa-display-lg-m) !important;
     font-weight: 700 !important;
     line-height: 1.08 !important;
     letter-spacing: -0.4px !important;
@@ -821,7 +821,7 @@ main#MainContent .rh-benefits__container {
   /* 7.5 · rhode-pdp-on-the-go title — hardcoded 32px in the section liquid.
      Match Rhode's 23px Swiss on mobile. */
   [id^="rh-otg-"] .rh-otg__title {
-    font-size: 23px !important;
+    font-size: var(--isoa-display-lg-m) !important;
     font-weight: 400 !important;
     line-height: 1.15 !important;
   }
@@ -971,7 +971,7 @@ main#MainContent .rh-benefits__container {
   main#MainContent [class^="featured-mobile-step-title-"] {
     max-width: calc(100% - 56px);
     margin: 0;
-    font-size: clamp(1.375rem, 5.6vw, 1.75rem);
+    font-size: var(--isoa-display-md-m);
     font-weight: 400;
     line-height: 1.15;
     letter-spacing: -0.02em;
