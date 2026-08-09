@@ -270,6 +270,54 @@
       "step": 1,
       "unit": "px",
       "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Promo tile (in-grid)"
+    },
+    {
+      "type": "checkbox",
+      "id": "promo_enable",
+      "label": "Show promo tile in grid",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "promo_position",
+      "label": "Promo slot (1-indexed)",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 6,
+      "info": "Slot where the promo tile appears in the grid. Default 6 = last of row 2 on a 3-col desktop."
+    },
+    {
+      "type": "image_picker",
+      "id": "promo_image",
+      "label": "Promo image"
+    },
+    {
+      "type": "text",
+      "id": "promo_heading",
+      "label": "Promo heading",
+      "default": "A wash of warmth."
+    },
+    {
+      "type": "text",
+      "id": "promo_button_label",
+      "label": "Promo button label",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "promo_button_link",
+      "label": "Promo button link"
+    },
+    {
+      "type": "color",
+      "id": "promo_text_color",
+      "label": "Promo text color",
+      "default": "#ffffff"
     }
   ],
   "presets": []
