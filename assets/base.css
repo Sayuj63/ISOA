@@ -4208,51 +4208,165 @@ product-recommendations:has([data-has-recommendations='false']) {
     translate: 0px var(--atc-destination, 0px);
   }
 }
-/* ---- Custom pill/outline button override ---- */
-:root {
-  --color-primary-button-background: transparent;
-  --color-primary-button-text: #4a4a4a;
-  --color-primary-button-border: #4a4a4a;
-  --color-primary-button-hover-background: #4a4a4a;
-  --color-primary-button-hover-text: #ffffff;
-  --color-primary-button-hover-border: #4a4a4a;
-  --style-border-radius-buttons-primary: 999px;
-  --style-border-width-primary: 1px;
+/* ================================
+   ISOUA — RHODE STYLE BUTTONS
+   ================================ */
 
+:root {
+  /* Primary */
+  --color-primary-button-background: #4a4a4a;
+  --color-primary-button-text: #fff;
+  --color-primary-button-border: #4a4a4a;
+  --color-primary-button-hover-background: #fff;
+  --color-primary-button-hover-text: #4a4a4a;
+  --color-primary-button-hover-border: #4a4a4a;
+
+  /* Secondary */
   --color-secondary-button-background: transparent;
   --color-secondary-button-text: #4a4a4a;
   --color-secondary-button-border: #4a4a4a;
   --color-secondary-button-hover-background: #4a4a4a;
-  --color-secondary-button-hover-text: #ffffff;
+  --color-secondary-button-hover-text: #fff;
   --color-secondary-button-hover-border: #4a4a4a;
+
+  /* Shape */
+  --style-border-radius-buttons-primary: 999px;
   --style-border-radius-buttons-secondary: 999px;
+  --style-border-width-primary: 1px;
   --style-border-width-secondary: 1px;
 }
 
+
+/* --------------------------------
+   ALL SHOPIFY BUTTONS
+   -------------------------------- */
+
 .button,
-.button-secondary {
-  --button-padding-block: 12px;
-  --button-padding-inline: 28px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-weight: 500;
-  font-size: 13px;
+.button-secondary,
+.shopify-payment-button__button,
+button[type="submit"],
+.shopify-challenge__button,
+.isoua-pill-button {
+  border-radius: 999px !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+
+  min-height: 0 !important;
+  height: auto !important;
+
+  padding: 11px 24px !important;
+
+  font-size: 12px !important;
+  line-height: 1.2 !important;
+  font-weight: 500 !important;
+
+  letter-spacing: 0.01em !important;
+  text-transform: none !important;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.2s ease !important;
 }
 
-.isoua-pill-button {
-  padding-block: 10px !important;
-  padding-inline: 24px !important;
 
+/* --------------------------------
+   PRIMARY BUTTON
+   -------------------------------- */
+
+.button:not(.button--secondary),
+.shopify-payment-button__button {
+  background: #4a4a4a !important;
+  color: #fff !important;
+  border-color: #4a4a4a !important;
+}
+
+
+/* Hover — KEEP ANIMATION */
+.button:not(.button--secondary):hover,
+.shopify-payment-button__button:hover {
+  background: #fff !important;
+  color: #4a4a4a !important;
+  border-color: #4a4a4a !important;
+}
+
+
+/* --------------------------------
+   SECONDARY / OUTLINE BUTTON
+   -------------------------------- */
+
+.button--secondary,
+.button-secondary {
+  background: transparent !important;
+  color: #4a4a4a !important;
+  border-color: #4a4a4a !important;
+}
+
+
+/* Hover — KEEP ANIMATION */
+.button--secondary:hover,
+.button-secondary:hover {
+  background: #4a4a4a !important;
+  color: #fff !important;
+  border-color: #4a4a4a !important;
+}
+
+
+/* --------------------------------
+   YOUR CUSTOM ISOUA PILL BUTTON
+   -------------------------------- */
+
+.isoua-pill-button {
+  padding: 11px 24px !important;
+  font-size: 12px !important;
+  line-height: 1.2 !important;
 
   height: auto !important;
   min-height: 0 !important;
   max-height: none !important;
-  padding-top: 10px !important;
-  padding-bottom: 10px !important;
-  padding-left: 24px !important;
-  padding-right: 24px !important;
-  line-height: normal !important;
-  line-height: normal !important;
-  font-size: 13px !important;
+
+  border-radius: 999px !important;
+  letter-spacing: 0.01em !important;
+  text-transform: none !important;
+}
+
+
+/* --------------------------------
+   CLICK / PRESS FEEDBACK
+   -------------------------------- */
+
+.button:active,
+.button-secondary:active,
+.shopify-payment-button__button:active,
+.isoua-pill-button:active {
+  transform: scale(0.98);
+}
+
+
+/* --------------------------------
+   REMOVE DAWN'S EXTRA INNER SPACING
+   -------------------------------- */
+
+.button::before,
+.button::after,
+.button-secondary::before,
+.button-secondary::after {
+  box-shadow: none !important;
+}
+
+
+/* --------------------------------
+   MOBILE
+   -------------------------------- */
+
+@media screen and (max-width: 749px) {
+  .button,
+  .button-secondary,
+  .shopify-payment-button__button,
+  .isoua-pill-button {
+    padding: 10px 20px !important;
+    font-size: 12px !important;
+  }
 }
 
