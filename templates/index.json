@@ -790,7 +790,7 @@
         "heading_DDArrH": {
           "type": "heading",
           "settings": {
-            "heading": "<p>patch on the go</p>",
+            "heading": "<p><strong>mist your makeup</strong></p>",
             "heading_custom": false,
             "heading_font": "josefin_sans_n4",
             "heading_size": 28,
@@ -805,7 +805,7 @@
         "text_BRGXQR": {
           "type": "text",
           "settings": {
-            "text": "<p>A little something that protects your skin. These discreet micro-dart patches deliver targeted care right where you need it, while the compact design makes them easy to carry and use anytime, anywhere.</p>",
+            "text": "<p>Hydrating essentials for your everyday glam routine, including Highlight Milk, Pocket Bronze, and Little Glazing Mist. </p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
@@ -820,7 +820,7 @@
         "button_9pVLiq": {
           "type": "button",
           "settings": {
-            "button": "GET SPOTWEAR",
+            "button": "GET READY WITH RHODE",
             "url": "",
             "open_in_new_tab": false,
             "button_style": "non_outline",
@@ -865,6 +865,7 @@
         "content_align": "left",
         "content_align_mobile": "left",
         "content_vertical_align": "center",
+        "image": "shopify://shop_images/hp-soft-glam-set_2000x_7797bdeb-bdbe-4faf-89a5-f5e2c277a4e6.png",
         "image_url": "",
         "image_radius": 10,
         "image_border_thickness": 0,
