@@ -4243,9 +4243,9 @@ product-recommendations:has([data-has-recommendations='false']) {
   width: auto !important;
   min-width: 0 !important;
 
-  height: 42px !important;
-  min-height: 42px !important;
-  max-height: 42px !important;
+  height: 21px !important;
+  min-height: 21px !important;
+  max-height: 21px !important;
 
   padding: 0 22px !important;
 
