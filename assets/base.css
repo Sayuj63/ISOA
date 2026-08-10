@@ -4237,5 +4237,15 @@ product-recommendations:has([data-has-recommendations='false']) {
   text-transform: uppercase;
   font-weight: 500;
   font-size: 13px;
+}.isoua-pill-button {
+  padding-block: 10px !important;
+  padding-inline: 24px !important;
+}
+
+.image-with-button-inner-button_9pVLiq {
+  font-size: 13px !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
 }
 
