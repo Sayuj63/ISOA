@@ -4208,5 +4208,31 @@ product-recommendations:has([data-has-recommendations='false']) {
     translate: 0px var(--atc-destination, 0px);
   }
 }
+/* ---- Custom pill/outline button override ---- */
+:root {
+  --color-primary-button-background: transparent;
+  --color-primary-button-text: #4a4a4a;
+  --color-primary-button-border: #4a4a4a;
+  --color-primary-button-hover-background: #4a4a4a;
+  --color-primary-button-hover-text: #ffffff;
+  --color-primary-button-hover-border: #4a4a4a;
+  --style-border-radius-buttons-primary: 999px;
+  --style-border-width-primary: 1px;
 
+  --color-secondary-button-background: transparent;
+  --color-secondary-button-text: #4a4a4a;
+  --color-secondary-button-border: #4a4a4a;
+  --color-secondary-button-hover-background: #4a4a4a;
+  --color-secondary-button-hover-text: #ffffff;
+  --color-secondary-button-hover-border: #4a4a4a;
+  --style-border-radius-buttons-secondary: 999px;
+  --style-border-width-secondary: 1px;
+}
+
+.button,
+.button-secondary {
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 400;
+}
 
