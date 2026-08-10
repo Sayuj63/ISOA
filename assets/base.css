@@ -4255,7 +4255,7 @@ product-recommendations:has([data-has-recommendations='false']) {
   border: 1px solid #4a4a4a !important;
 
   font-size: 12px !important;
-  font-weight: 500 !important;
+  font-weight: 200 !important;
   line-height: 1 !important;
   letter-spacing: 0 !important;
   text-transform: none !important;
