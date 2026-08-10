@@ -4208,94 +4208,57 @@ product-recommendations:has([data-has-recommendations='false']) {
     translate: 0px var(--atc-destination, 0px);
   }
 }
-/* ================================
-   ISOUA — RHODE STYLE BUTTONS
-   ================================ */
+/* ISOUA — RHODE STYLE BUTTONS */
 
 :root {
-  /* Primary */
-  --color-primary-button-background: #4a4a4a;
-  --color-primary-button-text: #fff;
-  --color-primary-button-border: #4a4a4a;
-  --color-primary-button-hover-background: #fff;
-  --color-primary-button-hover-text: #4a4a4a;
-  --color-primary-button-hover-border: #4a4a4a;
-
-  /* Secondary */
-  --color-secondary-button-background: transparent;
-  --color-secondary-button-text: #4a4a4a;
-  --color-secondary-button-border: #4a4a4a;
-  --color-secondary-button-hover-background: #4a4a4a;
-  --color-secondary-button-hover-text: #fff;
-  --color-secondary-button-hover-border: #4a4a4a;
-
-  /* Shape */
   --style-border-radius-buttons-primary: 999px;
   --style-border-radius-buttons-secondary: 999px;
   --style-border-width-primary: 1px;
   --style-border-width-secondary: 1px;
 }
 
-
-/* --------------------------------
-   ALL SHOPIFY BUTTONS
-   -------------------------------- */
-
+/* All Horizon buttons */
+button,
 .button,
 .button-secondary,
-.shopify-payment-button__button,
-button[type="submit"],
-.shopify-challenge__button,
+[class*="button"],
 .isoua-pill-button {
+  min-height: 44px !important;
+  height: 44px !important;
+  min-width: 0 !important;
+
+  padding: 0 22px !important;
+
   border-radius: 999px !important;
   border-width: 1px !important;
-  border-style: solid !important;
-
-  min-height: 0 !important;
-  height: auto !important;
-
-  padding: 11px 24px !important;
 
   font-size: 12px !important;
-  line-height: 1.2 !important;
+  line-height: 1 !important;
   font-weight: 500 !important;
 
-  letter-spacing: 0.01em !important;
+  letter-spacing: 0 !important;
   text-transform: none !important;
 
-  transition:
-    background-color 0.25s ease,
-    color 0.25s ease,
-    border-color 0.25s ease,
-    transform 0.2s ease !important;
+  box-sizing: border-box !important;
 }
 
-
-/* --------------------------------
-   PRIMARY BUTTON
-   -------------------------------- */
-
+/* Dark / primary */
 .button:not(.button--secondary),
-.shopify-payment-button__button {
+.isoua-pill-button {
   background: #4a4a4a !important;
   color: #fff !important;
   border-color: #4a4a4a !important;
 }
 
-
-/* Hover — KEEP ANIMATION */
+/* Primary hover */
 .button:not(.button--secondary):hover,
-.shopify-payment-button__button:hover {
+.isoua-pill-button:hover {
   background: #fff !important;
   color: #4a4a4a !important;
   border-color: #4a4a4a !important;
 }
 
-
-/* --------------------------------
-   SECONDARY / OUTLINE BUTTON
-   -------------------------------- */
-
+/* Outline / secondary */
 .button--secondary,
 .button-secondary {
   background: transparent !important;
@@ -4303,8 +4266,7 @@ button[type="submit"],
   border-color: #4a4a4a !important;
 }
 
-
-/* Hover — KEEP ANIMATION */
+/* Outline hover */
 .button--secondary:hover,
 .button-secondary:hover {
   background: #4a4a4a !important;
@@ -4312,61 +4274,26 @@ button[type="submit"],
   border-color: #4a4a4a !important;
 }
 
-
-/* --------------------------------
-   YOUR CUSTOM ISOUA PILL BUTTON
-   -------------------------------- */
-
-.isoua-pill-button {
-  padding: 11px 24px !important;
-  font-size: 12px !important;
-  line-height: 1.2 !important;
-
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
-
-  border-radius: 999px !important;
-  letter-spacing: 0.01em !important;
-  text-transform: none !important;
-}
-
-
-/* --------------------------------
-   CLICK / PRESS FEEDBACK
-   -------------------------------- */
-
-.button:active,
-.button-secondary:active,
-.shopify-payment-button__button:active,
-.isoua-pill-button:active {
-  transform: scale(0.98);
-}
-
-
-/* --------------------------------
-   REMOVE DAWN'S EXTRA INNER SPACING
-   -------------------------------- */
-
+/* Remove theme-generated button shadows */
 .button::before,
 .button::after,
 .button-secondary::before,
-.button-secondary::after {
+.button-secondary::after,
+.isoua-pill-button::before,
+.isoua-pill-button::after {
   box-shadow: none !important;
 }
 
-
-/* --------------------------------
-   MOBILE
-   -------------------------------- */
-
+/* Mobile */
 @media screen and (max-width: 749px) {
+  button,
   .button,
   .button-secondary,
-  .shopify-payment-button__button,
+  [class*="button"],
   .isoua-pill-button {
-    padding: 10px 20px !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    padding: 0 20px !important;
     font-size: 12px !important;
   }
 }
-
