@@ -4235,123 +4235,54 @@ product-recommendations:has([data-has-recommendations='false']) {
 
 .button,
 .button-secondary,
-.isoua-pill-button {
+.isoua-pill-button .isoua-pill-button {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
 
   width: auto !important;
   min-width: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
 
-  height: 21px !important;
-  min-height: 21px !important;
-  max-height: 21px !important;
-
-  padding: 0 22px !important;
-
+  padding: 10px 24px !important;
   box-sizing: border-box !important;
 
   border-radius: 999px !important;
   border: 1px solid #4a4a4a !important;
-
-  font-size: 12px !important;
-  font-weight: 200 !important;
-  line-height: 1 !important;
-  letter-spacing: 0 !important;
-  text-transform: none !important;
-
-  /* Keep Horizon's smooth interaction */
-  transition:
-    background-color 0.25s ease,
-    color 0.25s ease,
-    border-color 0.25s ease,
-    transform 0.2s ease !important;
-}
-
-
-/* -----------------------------------------
-   PRIMARY BUTTON
-   ----------------------------------------- */
-
-.button:not(.button--secondary),
-.isoua-pill-button {
-  background-color: #4a4a4a !important;
-  color: #fff !important;
-  border-color: #4a4a4a !important;
-}
-
-
-/* Primary hover */
-
-.button:not(.button--secondary):hover,
-.isoua-pill-button:hover {
-  background-color: #fff !important;
-  color: #4a4a4a !important;
-  border-color: #4a4a4a !important;
-}
-
-
-/* -----------------------------------------
-   SECONDARY / OUTLINE BUTTON
-   ----------------------------------------- */
-
-.button--secondary,
-.button-secondary {
   background-color: transparent !important;
-  color: #4a4a4a !important;
-  border-color: #4a4a4a !important;
+
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.2s ease !important;
 }
 
-
-/* Secondary hover */
-
-.button--secondary:hover,
-.button-secondary:hover {
+.isoua-pill-button:hover {
   background-color: #4a4a4a !important;
+}
+
+.isoua-pill-button:hover .image-with-button-inner-button_9pVLiq {
   color: #fff !important;
-  border-color: #4a4a4a !important;
 }
 
-
-/* -----------------------------------------
-   REMOVE EXTRA THEME EFFECTS
-   ----------------------------------------- */
-
-.button::before,
-.button::after,
-.button-secondary::before,
-.button-secondary::after,
-.isoua-pill-button::before,
-.isoua-pill-button::after {
-  box-shadow: none !important;
+.image-with-button-inner-button_9pVLiq {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #4a4a4a !important;
 }
 
-
-/* -----------------------------------------
-   PRESS ANIMATION
-   ----------------------------------------- */
-
-.button:active,
-.button-secondary:active,
 .isoua-pill-button:active {
-  transform: scale(0.98);
+  transform: scale(0.98) !important;
 }
-
-
-/* -----------------------------------------
-   MOBILE
-   ----------------------------------------- */
 
 @media screen and (max-width: 749px) {
-  .button,
-  .button-secondary,
   .isoua-pill-button {
-    height: 20px !important;
-    min-height: 20px !important;
-    max-height: 20px !important;
-
-    padding: 0 20px !important;
-
-    font-size: 12px !important;
+    padding: 9px 20px !important;
+  }
+  .image-with-button-inner-button_9pVLiq {
+    font-size: 11px !important;
   }
 }
