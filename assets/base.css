@@ -4207,116 +4207,65 @@ product-recommendations:has([data-has-recommendations='false']) {
     opacity: var(--atc-opacity, 1);
     translate: 0px var(--atc-destination, 0px);
   }
-}
-/* =========================================
-   ISOUA — RHODE STYLE BUTTONS
-   Horizon Theme
-   ========================================= */
-
-:root {
-  --style-border-radius-buttons-primary: 999px;
-  --style-border-radius-buttons-secondary: 999px;
-  --style-border-width-primary: 1px;
-  --style-border-width-secondary: 1px;
-
-  --color-primary-button-background: #4a4a4a;
-  --color-primary-button-text: #fff;
-  --color-primary-button-border: #4a4a4a;
-
-  --color-secondary-button-background: transparent;
-  --color-secondary-button-text: #4a4a4a;
-  --color-secondary-button-border: #4a4a4a;
-}
-
-
-/* -----------------------------------------
-   BUTTON BASE
-   ----------------------------------------- */
+}/* ===== ISOUA RHODE BUTTON OVERRIDE — ADD AT END ===== */
 
 .button,
 .button-secondary,
 .isoua-pill-button {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-
   width: auto !important;
   min-width: 0 !important;
-
   height: 42px !important;
   min-height: 42px !important;
   max-height: 42px !important;
 
   padding: 0 22px !important;
 
-  box-sizing: border-box !important;
-
   border-radius: 999px !important;
-  border: 1px solid #4a4a4a !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+
+  box-sizing: border-box !important;
 
   font-size: 12px !important;
   font-weight: 500 !important;
   line-height: 1 !important;
   letter-spacing: 0 !important;
   text-transform: none !important;
-
-  /* Keep Horizon's smooth interaction */
-  transition:
-    background-color 0.25s ease,
-    color 0.25s ease,
-    border-color 0.25s ease,
-    transform 0.2s ease !important;
 }
 
-
-/* -----------------------------------------
-   PRIMARY BUTTON
-   ----------------------------------------- */
-
+/* Primary */
 .button:not(.button--secondary),
 .isoua-pill-button {
-  background-color: #4a4a4a !important;
+  background: #4a4a4a !important;
   color: #fff !important;
   border-color: #4a4a4a !important;
 }
-
 
 /* Primary hover */
-
 .button:not(.button--secondary):hover,
 .isoua-pill-button:hover {
-  background-color: #fff !important;
+  background: #fff !important;
   color: #4a4a4a !important;
   border-color: #4a4a4a !important;
 }
 
-
-/* -----------------------------------------
-   SECONDARY / OUTLINE BUTTON
-   ----------------------------------------- */
-
+/* Secondary */
 .button--secondary,
 .button-secondary {
-  background-color: transparent !important;
+  background: transparent !important;
   color: #4a4a4a !important;
   border-color: #4a4a4a !important;
 }
 
-
 /* Secondary hover */
-
 .button--secondary:hover,
 .button-secondary:hover {
-  background-color: #4a4a4a !important;
+  background: #4a4a4a !important;
   color: #fff !important;
   border-color: #4a4a4a !important;
 }
 
-
-/* -----------------------------------------
-   REMOVE EXTRA THEME EFFECTS
-   ----------------------------------------- */
-
+/* Remove conflicting theme visual effects */
 .button::before,
 .button::after,
 .button-secondary::before,
@@ -4326,22 +4275,25 @@ product-recommendations:has([data-has-recommendations='false']) {
   box-shadow: none !important;
 }
 
+/* Keep smooth button interaction */
+.button,
+.button-secondary,
+.isoua-pill-button {
+  transition:
+    background-color .25s ease,
+    color .25s ease,
+    border-color .25s ease,
+    transform .2s ease !important;
+}
 
-/* -----------------------------------------
-   PRESS ANIMATION
-   ----------------------------------------- */
-
+/* Press */
 .button:active,
 .button-secondary:active,
 .isoua-pill-button:active {
-  transform: scale(0.98);
+  transform: scale(.98);
 }
 
-
-/* -----------------------------------------
-   MOBILE
-   ----------------------------------------- */
-
+/* Mobile */
 @media screen and (max-width: 749px) {
   .button,
   .button-secondary,
@@ -4349,9 +4301,7 @@ product-recommendations:has([data-has-recommendations='false']) {
     height: 40px !important;
     min-height: 40px !important;
     max-height: 40px !important;
-
     padding: 0 20px !important;
-
     font-size: 12px !important;
   }
 }
