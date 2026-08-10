@@ -4346,9 +4346,9 @@ product-recommendations:has([data-has-recommendations='false']) {
   .button,
   .button-secondary,
   .isoua-pill-button {
-    height: 40px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
+    height: 20px !important;
+    min-height: 20px !important;
+    max-height: 20px !important;
 
     padding: 0 20px !important;
 
