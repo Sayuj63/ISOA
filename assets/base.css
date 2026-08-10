@@ -4231,8 +4231,11 @@ product-recommendations:has([data-has-recommendations='false']) {
 
 .button,
 .button-secondary {
-  letter-spacing: 0.15em;
+  --button-padding-block: 12px;
+  --button-padding-inline: 28px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  font-weight: 400;
+  font-weight: 500;
+  font-size: 13px;
 }
 
