@@ -4208,73 +4208,115 @@ product-recommendations:has([data-has-recommendations='false']) {
     translate: 0px var(--atc-destination, 0px);
   }
 }
-/* ISOUA — RHODE STYLE BUTTONS */
+/* =========================================
+   ISOUA — RHODE STYLE BUTTONS
+   Horizon Theme
+   ========================================= */
 
 :root {
   --style-border-radius-buttons-primary: 999px;
   --style-border-radius-buttons-secondary: 999px;
   --style-border-width-primary: 1px;
   --style-border-width-secondary: 1px;
+
+  --color-primary-button-background: #4a4a4a;
+  --color-primary-button-text: #fff;
+  --color-primary-button-border: #4a4a4a;
+
+  --color-secondary-button-background: transparent;
+  --color-secondary-button-text: #4a4a4a;
+  --color-secondary-button-border: #4a4a4a;
 }
 
-/* All Horizon buttons */
-button,
+
+/* -----------------------------------------
+   BUTTON BASE
+   ----------------------------------------- */
+
 .button,
 .button-secondary,
-[class*="button"],
 .isoua-pill-button {
-  min-height: 44px !important;
-  height: 44px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  width: auto !important;
   min-width: 0 !important;
+
+  height: 42px !important;
+  min-height: 42px !important;
+  max-height: 42px !important;
 
   padding: 0 22px !important;
 
+  box-sizing: border-box !important;
+
   border-radius: 999px !important;
-  border-width: 1px !important;
+  border: 1px solid #4a4a4a !important;
 
   font-size: 12px !important;
-  line-height: 1 !important;
   font-weight: 500 !important;
-
+  line-height: 1 !important;
   letter-spacing: 0 !important;
   text-transform: none !important;
 
-  box-sizing: border-box !important;
+  /* Keep Horizon's smooth interaction */
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.2s ease !important;
 }
 
-/* Dark / primary */
+
+/* -----------------------------------------
+   PRIMARY BUTTON
+   ----------------------------------------- */
+
 .button:not(.button--secondary),
 .isoua-pill-button {
-  background: #4a4a4a !important;
+  background-color: #4a4a4a !important;
   color: #fff !important;
   border-color: #4a4a4a !important;
 }
+
 
 /* Primary hover */
+
 .button:not(.button--secondary):hover,
 .isoua-pill-button:hover {
-  background: #fff !important;
+  background-color: #fff !important;
   color: #4a4a4a !important;
   border-color: #4a4a4a !important;
 }
 
-/* Outline / secondary */
+
+/* -----------------------------------------
+   SECONDARY / OUTLINE BUTTON
+   ----------------------------------------- */
+
 .button--secondary,
 .button-secondary {
-  background: transparent !important;
+  background-color: transparent !important;
   color: #4a4a4a !important;
   border-color: #4a4a4a !important;
 }
 
-/* Outline hover */
+
+/* Secondary hover */
+
 .button--secondary:hover,
 .button-secondary:hover {
-  background: #4a4a4a !important;
+  background-color: #4a4a4a !important;
   color: #fff !important;
   border-color: #4a4a4a !important;
 }
 
-/* Remove theme-generated button shadows */
+
+/* -----------------------------------------
+   REMOVE EXTRA THEME EFFECTS
+   ----------------------------------------- */
+
 .button::before,
 .button::after,
 .button-secondary::before,
@@ -4284,16 +4326,32 @@ button,
   box-shadow: none !important;
 }
 
-/* Mobile */
+
+/* -----------------------------------------
+   PRESS ANIMATION
+   ----------------------------------------- */
+
+.button:active,
+.button-secondary:active,
+.isoua-pill-button:active {
+  transform: scale(0.98);
+}
+
+
+/* -----------------------------------------
+   MOBILE
+   ----------------------------------------- */
+
 @media screen and (max-width: 749px) {
-  button,
   .button,
   .button-secondary,
-  [class*="button"],
   .isoua-pill-button {
-    height: 42px !important;
-    min-height: 42px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+
     padding: 0 20px !important;
+
     font-size: 12px !important;
   }
 }
