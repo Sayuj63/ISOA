@@ -4243,9 +4243,9 @@ product-recommendations:has([data-has-recommendations='false']) {
   width: auto !important;
   min-width: 0 !important;
 
-  height: 21px !important;
-  min-height: 21px !important;
-  max-height: 21px !important;
+  height: 30px !important;
+  min-height: 30px !important;
+  max-height: 30px !important;
 
   padding: 0 22px !important;
 
@@ -4254,8 +4254,8 @@ product-recommendations:has([data-has-recommendations='false']) {
   border-radius: 999px !important;
   border: 1px solid #4a4a4a !important;
 
-  font-size: 12px !important;
-  font-weight: 200 !important;
+  font-size: 14px !important;
+  font-weight: 100 !important;
   line-height: 1 !important;
   letter-spacing: 0 !important;
   text-transform: none !important;
@@ -4347,11 +4347,11 @@ product-recommendations:has([data-has-recommendations='false']) {
   .button-secondary,
   .isoua-pill-button {
     height: 20px !important;
-    min-height: 20px !important;
-    max-height: 20px !important;
+    min-height: 30px !important;
+    max-height: 30px !important;
 
     padding: 0 20px !important;
 
-    font-size: 12px !important;
+    font-size: 13px !important;
   }
 }
