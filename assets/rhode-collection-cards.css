@@ -23,7 +23,7 @@
 .isoa-rc-card {
   position: relative;
   display: block;
-  background: #F1F0ED;
+  background: #F5F5F5;
   border-radius: 12px;
   overflow: hidden;
   isolation: isolate;
@@ -53,7 +53,7 @@
   aspect-ratio: 6 / 7;
   width: 100%;
   overflow: hidden;
-  background: #F1F0ED;
+  background: #F5F5F5;
 }
 
 .isoa-rc-img {
@@ -481,6 +481,24 @@
   /* CTA text: swap short → full on the homepage swiper */
   .isoa-fc6-slide .isoa-rc-cta-mob--short { display: none; }
   .isoa-fc6-slide .isoa-rc-cta-mob--full  { display: inline; }
+
+  /* Fill the entire tile with the product image on the homepage swiper
+     (2026-08-12 client ask). Collection-page cards keep `contain` so the
+     bottle isn't cropped; here we crop to eliminate the empty grey chrome
+     around the bottle. `object-position: center` keeps the bottle centered
+     as it fills the tile. */
+  .isoa-fc6-slide .isoa-rc-img {
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+/* Desktop homepage swiper — same fill treatment as mobile. */
+@media (min-width: 750px) {
+  .isoa-fc6-slide .isoa-rc-img {
+    object-fit: cover;
+    object-position: center;
+  }
 }
 
 /* =============================================================================
@@ -493,7 +511,7 @@
   display: block;
   border-radius: 12px;
   overflow: hidden;
-  background: #F1F0ED;
+  background: #F5F5F5;
   color: var(--promo-text, #ffffff);
   text-decoration: none;
   isolation: isolate;
