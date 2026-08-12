@@ -23,7 +23,7 @@
 .isoa-rc-card {
   position: relative;
   display: block;
-  background: #f1f0ed;
+  background: #EEF3F6;
   border-radius: 12px;
   overflow: hidden;
   isolation: isolate;
@@ -53,7 +53,7 @@
   aspect-ratio: 6 / 7;
   width: 100%;
   overflow: hidden;
-  background: #f1f0ed;
+  background: #EEF3F6;
 }
 
 .isoa-rc-img {
@@ -292,18 +292,20 @@
   /* 2026-08-12: was 14px/700 — read as a tiny tag, nothing like Rhode's
      prominent lowercase brand label. Bump to 28px/800 with tight tracking so
      "isoua" reads at the same visual weight as Rhode's "highlight" wordmark
-     across both the homepage swiper card and the collection-page grid card. */
+     across both the homepage swiper card and the collection-page grid card.
+     2026-08-12 (later): top pulled from 14/10 → 22 so both the brand and
+     the badge sit further from the card corners for breathing room. */
   .isoa-rc-brand {
-    top: 14px;
-    left: 14px;
+    top: 22px;
+    left: 18px;
     font-size: 28px;
     font-weight: 800;
     letter-spacing: -0.02em;
     line-height: 1;
   }
   .isoa-rc-badge {
-    top: 10px;
-    right: 10px;
+    top: 22px;
+    right: 18px;
     padding: 4px 9px;
     font-size: 10px;
   }
@@ -491,7 +493,7 @@
   display: block;
   border-radius: 12px;
   overflow: hidden;
-  background: #f1f0ed;
+  background: #EEF3F6;
   color: var(--promo-text, #ffffff);
   text-decoration: none;
   isolation: isolate;

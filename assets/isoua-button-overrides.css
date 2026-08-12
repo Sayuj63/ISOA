@@ -127,7 +127,7 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 .shopify-section [class*="ai-contact-form-submit-"],
 .shopify-section .rh-cta,
 .shopify-section .rs-cta {
-  padding: 8px 36px !important;
+  padding: 10px 36px !important;
   border: 1px solid #67645e !important;
   border-radius: 999px !important;
   /* 2026-08-12: was `transparent` → pills disappeared into busy hero photos
@@ -382,7 +382,7 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
        200px → forces the pill to span roughly 55% of a 360vw card even when
        the label is short ("SHOP ALL"). Matches the visual proportions of
        the "GET SPOTWEAR" section CTA the client pointed at. */
-    padding: 4px 24px !important;
+    padding: 7px 24px !important;
     min-width: 200px !important;
     font-size: 11px !important;
     font-weight: 400 !important;
