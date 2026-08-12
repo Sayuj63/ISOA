@@ -329,7 +329,12 @@
     display: none;
   }
 
-  /* CTA: absolutely overlaid outlined pill at bottom of image, always visible */
+  /* CTA: absolutely overlaid outlined pill at bottom of image, always visible.
+     2026-08-12: brought in line with site-wide thin pill spec (7x22 / 11px /
+     weight 500 / ls 0.04em) so every mobile button on the site — hero, section
+     CTAs, editorial "Shop now", pill button on ss-image-with-text-15, and this
+     product-card BUY pill — reads identical. Matches Rhode's own mobile pill
+     footprint of ~30px tall (measured 466vw). -vamshi */
   .isoa-rc-cta {
     position: absolute;
     left: 12px;
@@ -338,17 +343,17 @@
     z-index: 4;
     display: block;
     margin: 0;
-    padding: 6px 10px;
+    padding: 7px 22px;
     border: 1px solid #67645e;
     border-radius: 999px;
     background: transparent;
     color: #67645e;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     text-align: center;
-    line-height: 1.15;
+    line-height: 1.2;
     white-space: nowrap;
     opacity: 1;
     transform: none;
@@ -357,15 +362,15 @@
   }
   .isoa-rc-cta-desk { display: none; }
   .isoa-rc-cta-mob  { display: inline; }
-  /* "BUY —" lead is smaller than the price */
+  /* "BUY —" lead is 1px lighter than the price (parity with parent weight 500) */
   .isoa-rc-cta-lead {
-    font-size: 9px;
+    font-size: 10px;
     font-weight: 500;
     letter-spacing: 0.04em;
     opacity: 0.9;
   }
   .isoa-rc-cta strong {
-    font-weight: 700;
+    font-weight: 600;
     margin-left: 2px;
   }
 
