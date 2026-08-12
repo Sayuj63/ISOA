@@ -164,7 +164,8 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 .shopify-section a[class*="image-with-button-"] svg path,
 .shopify-section [class*="collection-button-"] svg path,
 .shopify-section [class*="featured-product-button-"] svg path,
-.shopify-section [class*="slider-button-"] svg path {
+.shopify-section [class*="slider-button-"] svg path,
+.shopify-section .isoua-pill-button svg path {
   fill: #67645e !important;
   transition: fill 0.3s ease !important;
 }
@@ -177,7 +178,8 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 .shopify-section a[class*="image-with-button-"]:hover,
 .shopify-section [class*="collection-button-"]:hover,
 .shopify-section [class*="featured-product-button-"]:hover,
-.shopify-section [class*="slider-button-"]:hover {
+.shopify-section [class*="slider-button-"]:hover,
+.shopify-section .isoua-pill-button:hover {
   background-color: #67645e !important;
   background-image: none !important;
   color: #ffffff !important;
@@ -190,7 +192,8 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 .shopify-section a[class*="image-with-button-"]:hover svg path,
 .shopify-section [class*="collection-button-"]:hover svg path,
 .shopify-section [class*="featured-product-button-"]:hover svg path,
-.shopify-section [class*="slider-button-"]:hover svg path {
+.shopify-section [class*="slider-button-"]:hover svg path,
+.shopify-section .isoua-pill-button:hover svg path {
   fill: #ffffff !important;
 }
 
