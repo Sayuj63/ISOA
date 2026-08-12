@@ -396,7 +396,10 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
   body .shopify-section .isoua-pill-button,
   body .shopify-section [class*="ai-contact-form-submit-"],
   body .shopify-section .rh-cta,
-  body .shopify-section .rs-cta {
+  body .shopify-section .rs-cta,
+  body .shopify-section .shopify-payment-button__button,
+  body .shopify-section .shopify-payment-button__button--unbranded,
+  body .shopify-section .product-information .add-to-cart-button {
     /* 2026-08-12: LONG-and-THIN spec. Was 7x22 → ~30px tall / ~100px wide
        for short-text buttons. New: 4px vertical → ~22-24px tall, min-width
        200px → forces the pill to span roughly 55% of a 360vw card even when
@@ -419,7 +422,9 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
   body .shopify-section .isoua-pill-button > *,
   body .shopify-section [class*="ai-contact-form-submit-"] *,
   body .shopify-section .rh-cta > *,
-  body .shopify-section .rs-cta > * {
+  body .shopify-section .rs-cta > *,
+  body .shopify-section .shopify-payment-button__button > *,
+  body .shopify-section .product-information .add-to-cart-button > * {
     font-weight: 400 !important;
     letter-spacing: 0.04em !important;
     font-size: inherit !important;
