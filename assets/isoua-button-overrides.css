@@ -126,7 +126,10 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 .shopify-section .isoua-pill-button,
 .shopify-section [class*="ai-contact-form-submit-"],
 .shopify-section .rh-cta,
-.shopify-section .rs-cta {
+.shopify-section .rs-cta,
+.shopify-section .shopify-payment-button__button,
+.shopify-section .shopify-payment-button__button--unbranded,
+.shopify-section .product-information .add-to-cart-button {
   padding: 10px 36px !important;
   border: 1px solid #67645e !important;
   border-radius: 999px !important;
@@ -223,7 +226,10 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 .shopify-section .isoua-pill-button,
 .shopify-section [class*="ai-contact-form-submit-"],
 .shopify-section .rh-cta,
-.shopify-section .rs-cta {
+.shopify-section .rs-cta,
+.shopify-section .shopify-payment-button__button,
+.shopify-section .shopify-payment-button__button--unbranded,
+.shopify-section .product-information .add-to-cart-button {
   position: relative !important;
   overflow: hidden !important;
   isolation: isolate;
