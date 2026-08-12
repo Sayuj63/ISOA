@@ -34,6 +34,23 @@
   if review_stars_meta and review_stars_meta.value
     assign review_stars = review_stars_meta.value | times: 1.0
   endif
+
+  # Rhode-style CTA: BUY <SHORT_NAME> - <PRICE>. Short name comes from a
+  # per-product metafield so the client can override the full product title
+  # with a punchier label (e.g. "HIGHLIGHT MILK" instead of the full title).
+  # Namespace/key: custom.card_short_name (single-line text).
+  # Fallback: product.title uppercased.
+  assign short_name = product.metafields.custom.card_short_name
+  if short_name == blank
+    assign short_name = title_up
+  else
+    assign short_name = short_name | upcase
+  endif
+
+  # Optional subtitle under the title — Rhode uses lines like "Multipurpose
+  # luminizer" or "Long-wear tint". Namespace/key: custom.card_subtitle
+  # (single-line text). Rendered only if the metafield is set.
+  assign subtitle = product.metafields.custom.card_subtitle
 -%}
 
 <article class="isoa-rc-card" data-handle="{{ product.handle }}">
@@ -86,11 +103,14 @@
       </div>
       <p class="isoa-rc-title">{{ title_up }}</p>
       <p class="isoa-rc-price">{{ price_formatted }}</p>
+      {%- if subtitle != blank -%}
+        <p class="isoa-rc-subtitle">{{ subtitle }}</p>
+      {%- endif -%}
     </div>
 
     <div class="isoa-rc-cta" aria-hidden="true">
-      <span class="isoa-rc-cta-desk">BUY — <strong>{{ price_short }}</strong></span>
-      <span class="isoa-rc-cta-mob"><span class="isoa-rc-cta-lead">BUY —</span> <strong>{{ price_short_inr }}</strong></span>
+      <span class="isoa-rc-cta-desk">BUY {{ short_name }} — <strong>{{ price_short }}</strong></span>
+      <span class="isoa-rc-cta-mob"><span class="isoa-rc-cta-lead">BUY {{ short_name }} —</span> <strong>{{ price_short_inr }}</strong></span>
     </div>
   </a>
 </article>
