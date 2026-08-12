@@ -1154,10 +1154,10 @@
         "padding-block-end": 4
       }
     },
-    "ss_featured_collection_6_new_VVBnr6": {
-      "type": "ss-featured-collection-6-new",
+    "ss_featured_collection_6_cFEgN8": {
+      "type": "ss-featured-collection-6",
       "blocks": {
-        "slide_XCtMVK": {
+        "slide_tRz4QD": {
           "type": "slide",
           "settings": {
             "product": "",
@@ -1165,7 +1165,7 @@
             "button_text": "SHOP NOW"
           }
         },
-        "slide_9MPzLB": {
+        "slide_FUjijk": {
           "type": "slide",
           "settings": {
             "product": "",
@@ -1173,7 +1173,7 @@
             "button_text": "SHOP NOW"
           }
         },
-        "slide_Vn9BgY": {
+        "slide_nYp6eF": {
           "type": "slide",
           "settings": {
             "product": "",
@@ -1181,7 +1181,7 @@
             "button_text": "SHOP NOW"
           }
         },
-        "slide_rxmQz8": {
+        "slide_NqzMRQ": {
           "type": "slide",
           "settings": {
             "product": "",
@@ -1191,19 +1191,19 @@
         }
       },
       "block_order": [
-        "slide_XCtMVK",
-        "slide_9MPzLB",
-        "slide_Vn9BgY",
-        "slide_rxmQz8"
+        "slide_tRz4QD",
+        "slide_FUjijk",
+        "slide_nYp6eF",
+        "slide_NqzMRQ"
       ],
-      "name": "SECTION STORE - Featured Collection #6",
+      "name": "SS - Featured Collection #6",
       "settings": {
-        "collection": "frontpage",
-        "collection_show": 4,
-        "slider_view": 2.4,
+        "collection": "",
+        "collection_show": 10,
+        "slider_view": 3,
         "slider_view_mobile": 1.2,
-        "slider_gap": 24,
-        "slider_gap_mobile": 12,
+        "slider_gap": 40,
+        "slider_gap_mobile": 20,
         "slide_padding_vertical": 28,
         "slide_padding_vertical_mobile": 16,
         "slide_padding_horizontal": 16,
@@ -1295,7 +1295,7 @@
         "margin_horizontal_mobile": 0,
         "padding_top": 24,
         "padding_bottom": 24,
-        "padding_horizontal": 2,
+        "padding_horizontal": 4,
         "padding_horizontal_mobile": 1.5,
         "full_width": true,
         "content_width": 120,
@@ -1315,6 +1315,6 @@
     "section_NKG9AC",
     "section_RKjyxn",
     "hero_aVBdBQ",
-    "ss_featured_collection_6_new_VVBnr6"
+    "ss_featured_collection_6_cFEgN8"
   ]
 }
