@@ -400,7 +400,11 @@
     background: #ffffff;
     color: #67645e;
     font-size: 11px;
-    font-weight: 500;
+    /* 2026-08-12: client said "not bold, smaller" for button interior text.
+       Weight 400 matches Rhode SHOP THE COLLECTION reference (Image #14).
+       The <strong> inside for the price still renders bold — mixed weight
+       matches Rhode's BUY HIGHLIGHT MILK - $28.00 pattern. */
+    font-weight: 400;
     letter-spacing: 0.04em;
     text-transform: uppercase;
     text-align: center;
