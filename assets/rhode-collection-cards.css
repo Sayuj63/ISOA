@@ -401,7 +401,13 @@
     pointer-events: none;
   }
   .isoa-rc-cta-desk { display: none; }
-  .isoa-rc-cta-mob  { display: inline; }
+  /* 2026-08-12: variant classes replaced the single .isoa-rc-cta-mob toggle.
+     The `--short` (BUY — price) is the collection-page default; the `--full`
+     (BUY <name> — price) is switched on inside `.isoa-fc6-slide` further
+     down. Both rules live here so they beat the base .isoa-rc-cta-mob{...}
+     that lands earlier in the file. */
+  .isoa-rc-cta-mob--short { display: inline; }
+  .isoa-rc-cta-mob--full  { display: none; }
   /* "BUY —" lead is 1px lighter than the price (parity with parent weight 500) */
   .isoa-rc-cta-lead {
     font-size: 10px;
