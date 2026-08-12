@@ -286,12 +286,17 @@
   .isoa-rc-frame {
     aspect-ratio: 4 / 5;
   }
+  /* 2026-08-12: was 14px/700 — read as a tiny tag, nothing like Rhode's
+     prominent lowercase brand label. Bump to 28px/800 with tight tracking so
+     "isoua" reads at the same visual weight as Rhode's "highlight" wordmark
+     across both the homepage swiper card and the collection-page grid card. */
   .isoa-rc-brand {
-    top: 10px;
-    left: 12px;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0;
+    top: 14px;
+    left: 14px;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
   }
   .isoa-rc-badge {
     top: 10px;
