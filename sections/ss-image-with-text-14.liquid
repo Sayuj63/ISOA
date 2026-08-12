@@ -104,6 +104,13 @@ For inquiries or permissions, contact daniel@section.store
     align-items: {{ content_horizontal_align_mobile }};
   }
 
+  /* 2026-08-12: image was rendering with sharp corners while the rest of
+     the site uses 10px pill rounding — matched. */
+  .image-text-image-{{ section.id }} {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
   .image-text-image-{{ section.id }} img,
   .image-text-image-{{ section.id }} svg {
     display: block;

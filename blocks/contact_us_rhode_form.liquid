@@ -213,18 +213,27 @@ contact-form-{{ ai_gen_id }} {
 }
 
 .ai-contact-form-submit-{{ ai_gen_id }} {
-  width: 100%;
-  height: 46px;
+  /* 2026-08-12: was 100% wide × 46 tall — much bigger than the site's
+     standard long-thin pill. Aligned with the isoua-button-overrides.css
+     spec so the SEND button reads at the same footprint as GET SPOTWEAR /
+     SHOP ALL / OUR VALUES etc. (min-width 200 mobile / 240 desktop, ~28px
+     tall from padding). */
+  width: auto;
+  min-width: 240px;
+  height: auto;
+  padding: 10px 36px;
   border-radius: 999px;
-  border: 1px solid #6d6963;
-  background: transparent;
-  color: #5e5a55;
+  border: 1px solid #67645e;
+  background: #ffffff;
+  color: #67645e;
   font-size: 14px;
-  letter-spacing: 0.06em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.25s ease;
   margin-top: 8px;
+  align-self: center;
 }
 
 .ai-contact-form-submit-{{ ai_gen_id }}:hover {
@@ -293,11 +302,24 @@ contact-form-{{ ai_gen_id }} {
   .ai-contact-form-input-{{ ai_gen_id }},
   .ai-contact-form-select-{{ ai_gen_id }},
   .ai-contact-form-textarea-{{ ai_gen_id }},
-  .ai-contact-form-file-upload-{{ ai_gen_id }},
-  .ai-contact-form-submit-{{ ai_gen_id }} {
+  .ai-contact-form-file-upload-{{ ai_gen_id }} {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+  }
+
+  /* SEND button: shrunk to the site-standard long-thin pill footprint,
+     centered on its row (2026-08-12). */
+  .ai-contact-form-submit-{{ ai_gen_id }} {
+    width: auto;
+    min-width: 200px;
+    padding: 7px 24px;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .ai-contact-form-input-{{ ai_gen_id }},

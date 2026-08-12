@@ -257,6 +257,10 @@
     border-radius: 999px;
     padding: 7px 14px;
     font-size: 11px;
+    /* 2026-08-12: inherited 700 from base rule → read as bold on mobile.
+       Matched the homepage button spec — 400 for the same "not bold"
+       interior text weight the client asked for site-wide. */
+    font-weight: 400;
     letter-spacing: 0.04em;
     line-height: 1;
     text-decoration: none;
