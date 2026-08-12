@@ -273,9 +273,12 @@
   .isoa-rc-card {
     border-radius: 10px;
   }
-  /* Mobile frame ratio matches Rhode's 211.64 × 289 reference */
+  /* Mobile frame ratio — 2026-08-12: was 211/289 (0.730, quite tall); reduced
+     to 4/5 (0.800) at client request to shrink the visible grey chrome below
+     the BUY pill. Cards drop from ~493 → ~450 tall at 360 wide, matching the
+     more compact height ratio on the Rhode reference card. */
   .isoa-rc-frame {
-    aspect-ratio: 211 / 289;
+    aspect-ratio: 4 / 5;
   }
   .isoa-rc-brand {
     top: 10px;
