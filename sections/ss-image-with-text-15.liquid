@@ -633,21 +633,30 @@ For inquiries or permissions, contact daniel@section.store
 
   /* Heading / body / toggle font sizes are NOT overridden here — they flow from the section schema (heading_size, heading_size_mobile, text_size, text_size_mobile, toggle_text_size, toggle_text_size_mobile) so the client can edit them in the theme editor. -vamshi */
 
-  /* Pill button: only structural changes (1px border, transparent bg, pill shape via 999px radius). Sizing comes from new schema settings (Pill button font size / padding / margin top) so client controls without code. Scoped to this section so other .isoua-pill-button instances on the site are untouched. -vamshi */
+  /* Pill button: structural (1px border, transparent bg, pill radius). Mobile sizing
+     is HARDCODED to Rhode-parity thin (7x22 / 11px / weight 500 → ~28px tall) so it
+     matches every other section pill site-wide — schema range settings still control
+     desktop + margin-top only. Was: font-size + padding driven by schema mobile
+     values, which drifted the button up to 30-33px tall against Rhode's ~30px thin
+     reference. Locking mobile in code kills the drift. -vamshi (2026-08-12) */
   .section-{{ section.id }} .isoua-pill-button {
     background-color: transparent !important;
     border-width: 1px !important;
     border-radius: 999px !important;
-    font-size: {{ section.settings.pill_button_size_mobile | default: 13 }}px !important;
-    padding: {{ section.settings.pill_button_padding_vertical_mobile | default: 10 }}px {{ section.settings.pill_button_padding_horizontal_mobile | default: 28 }}px !important;
+    font-size: 11px !important;
+    padding: 7px 22px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.04em !important;
+    line-height: 1.2 !important;
     margin-top: {{ section.settings.pill_button_mt_mobile | default: 20 }}px !important;
-    letter-spacing: 0.05em !important;
   }
 
   @media(min-width: 1024px) {
     .section-{{ section.id }} .isoua-pill-button {
       font-size: {{ section.settings.pill_button_size | default: 14 }}px !important;
       padding: {{ section.settings.pill_button_padding_vertical | default: 12 }}px {{ section.settings.pill_button_padding_horizontal | default: 32 }}px !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.05em !important;
       margin-top: {{ section.settings.pill_button_mt | default: 28 }}px !important;
     }
   }
