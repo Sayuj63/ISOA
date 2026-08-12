@@ -464,12 +464,18 @@ For inquiries or permissions, contact daniel@section.store
     z-index: 1 !important;
   }
 
-  /* Mobile sizing — slightly tighter than desktop, matching .isoua-pill-button. */
+  /* Mobile sizing — Rhode-parity thin pill (2026-08-12).
+     Old value (12x24 / 13px) was reading oversized against Rhode's mobile
+     reference; new value matches the site-wide standard in
+     assets/isoua-button-overrides.css @media (max-width:768px). */
   @media screen and (max-width: 768px) {
     .shopify-section .image-with-content-{{ section.id }} a[class*="image-with-button-"],
     .shopify-section .image-with-content-{{ section.id }} div[class*="image-with-button-"] {
-      padding: 12px 24px !important;
-      font-size: 13px !important;
+      padding: 7px 22px !important;
+      font-size: 11px !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.04em !important;
+      line-height: 1.2 !important;
     }
   }
 
