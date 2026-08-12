@@ -644,7 +644,8 @@ For inquiries or permissions, contact daniel@section.store
     border-width: 1px !important;
     border-radius: 999px !important;
     font-size: 11px !important;
-    padding: 7px 22px !important;
+    padding: 4px 24px !important;
+    min-width: 200px !important;
     font-weight: 400 !important;
     letter-spacing: 0.04em !important;
     line-height: 1.2 !important;
@@ -654,7 +655,8 @@ For inquiries or permissions, contact daniel@section.store
   @media(min-width: 1024px) {
     .section-{{ section.id }} .isoua-pill-button {
       font-size: {{ section.settings.pill_button_size | default: 14 }}px !important;
-      padding: {{ section.settings.pill_button_padding_vertical | default: 12 }}px {{ section.settings.pill_button_padding_horizontal | default: 32 }}px !important;
+      padding: 8px 36px !important;
+      min-width: 240px !important;
       font-weight: 500 !important;
       letter-spacing: 0.05em !important;
       margin-top: {{ section.settings.pill_button_mt | default: 28 }}px !important;
