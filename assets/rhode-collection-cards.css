@@ -280,34 +280,34 @@
    ============================================================================= */
 @media (max-width: 749px) {
   .isoa-rc-card {
-    border-radius: 10px;
+    /* 2026-08-12: 10px → 12px to match Rhode's collection card corner radius. */
+    border-radius: 12px;
   }
-  /* Mobile frame ratio — 2026-08-12: was 211/289 (0.730, quite tall); reduced
-     to 4/5 (0.800) at client request to shrink the visible grey chrome below
-     the BUY pill. Cards drop from ~493 → ~450 tall at 360 wide, matching the
-     more compact height ratio on the Rhode reference card. */
+  /* 2026-08-12: was 4/5 (0.800). Rhode's collection cards at rhodeskin.com/
+     collections/featured render at 194 × 289 = **2:3 (0.672)** on mobile, so
+     switching to 2/3 makes our tiles taller — 195 wide → 293 tall — which
+     gives the info + BUY pill room to sit under the bottle image without
+     overlapping. Cards are ~50px taller than before. */
   .isoa-rc-frame {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 2 / 3;
   }
-  /* 2026-08-12: was 14px/700 — read as a tiny tag, nothing like Rhode's
-     prominent lowercase brand label. Bump to 28px/800 with tight tracking so
-     "isoua" reads at the same visual weight as Rhode's "highlight" wordmark
-     across both the homepage swiper card and the collection-page grid card.
-     2026-08-12 (later): top pulled from 14/10 → 22 so both the brand and
-     the badge sit further from the card corners for breathing room. */
+  /* 2026-08-12: sized down to match Rhode's "highlight" wordmark — was 28px,
+     now 18px so the label reads as a subtle brand tag, not a headline.
+     Position 16/12 mirrors Rhode's card padding. */
   .isoa-rc-brand {
-    top: 22px;
-    left: 18px;
-    font-size: 28px;
+    top: 16px;
+    left: 12px;
+    font-size: 18px;
     font-weight: 800;
     letter-spacing: -0.02em;
     line-height: 1;
   }
   .isoa-rc-badge {
-    top: 22px;
-    right: 18px;
-    padding: 4px 9px;
+    top: 16px;
+    right: 12px;
+    padding: 4px 8px;
     font-size: 10px;
+    border-radius: 10px;
   }
 
   /* ------------------------------------------------------------------
