@@ -125,8 +125,13 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
   padding: 12px 32px !important;
   border: 1px solid #67645e !important;
   border-radius: 999px !important;
-  background: transparent !important;
-  background-color: transparent !important;
+  /* 2026-08-12: was `transparent` → pills disappeared into busy hero photos
+     and let the grey card background bleed through card CTAs. `#ffffff` gives
+     every outlined pill a clean solid fill, matching Rhode's card CTA at
+     rhodeskin.com. Hover still flips to filled brown via the :hover block
+     below. -vamshi */
+  background: #ffffff !important;
+  background-color: #ffffff !important;
   background-image: none !important;
   color: #67645e !important;
   font-size: 14px !important;
