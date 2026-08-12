@@ -308,12 +308,14 @@
     font-size: 10px;
   }
 
-  /* Info block — Rhode-style layout:
-       row 1: stars + review count (full width)
-       row 2: TITLE (left) + PRICE (right)     ← grid with 2 columns
-       row 3: subtitle line (full width, optional)
-     Absolutely overlaid on the image bottom so the frame height stays
-     driven by aspect-ratio alone. */
+  /* ------------------------------------------------------------------
+     DEFAULT MOBILE INFO — collection-page style (matches Rhode's
+     rhodeskin.com/collections/shop card). Simple single-column layout:
+       row 1: stars + count
+       row 2: TITLE only (no price on the right, no subtitle)
+     The homepage swiper card gets the fuller three-line grid via the
+     `.isoa-fc6-slide` overrides further down. -vamshi 2026-08-12
+     ------------------------------------------------------------------ */
   .isoa-rc-info {
     position: absolute;
     left: 12px;
@@ -321,10 +323,7 @@
     bottom: 48px; /* clears the CTA pill below */
     z-index: 3;
     padding: 0;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    column-gap: 12px;
-    align-items: baseline;
+    display: block;
     text-align: left;
     background: transparent;
     opacity: 1;
@@ -332,7 +331,6 @@
     pointer-events: none;
   }
   .isoa-rc-reviews {
-    grid-column: 1 / -1;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -343,7 +341,6 @@
   .isoa-rc-stars     { font-size: 11px; }
   .isoa-rc-review-count { font-size: 11px; }
   .isoa-rc-title {
-    grid-column: 1;
     margin: 0;
     font-size: 11px;
     font-weight: 700;
@@ -351,33 +348,18 @@
     text-transform: uppercase;
     text-align: left;
   }
-  /* Standalone price shown on the right of the title (Rhode-style row) */
-  .isoa-rc-price {
-    display: block;
-    grid-column: 2;
-    margin: 0;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 1.2;
-    white-space: nowrap;
-    text-align: right;
-    color: #67645e;
-    align-self: baseline;
-  }
-  /* Optional subtitle line under the title. Rhode uses this for descriptor
-     like "Multipurpose luminizer" — light weight, sentence-case, muted. */
+  /* Standalone price + subtitle hidden on the collection-page card. Both
+     get switched back on inside the homepage swiper — see the
+     `.isoa-fc6-slide` block near the end of this file. */
+  .isoa-rc-price,
   .isoa-rc-subtitle {
-    grid-column: 1 / -1;
-    margin: 3px 0 0;
-    font-size: 11px;
-    font-weight: 400;
-    line-height: 1.25;
-    letter-spacing: 0;
-    color: #67645e;
-    opacity: 0.85;
-    text-transform: none;
-    text-align: left;
+    display: none;
   }
+
+  /* Mobile CTA variants: default is the SHORT "BUY — price" (collection
+     card). The FULL "BUY <name> — price" is homepage-swiper-only. */
+  .isoa-rc-cta-mob--short { display: inline; }
+  .isoa-rc-cta-mob--full  { display: none; }
 
   /* CTA: absolutely overlaid outlined pill at bottom of image, always visible.
      2026-08-12: brought in line with site-wide thin pill spec (7x22 / 11px /
@@ -439,18 +421,59 @@
 }
 
 /* =============================================================================
-   Featured-collection-6 slider — inherit the shared mobile card layout.
+   Featured-collection-6 homepage swiper — FULL card layout on mobile.
    -----------------------------------------------------------------------------
-   Removed 2026-08-12: prior overrides forced this slider to render a
-   desktop-style split-column info block (title left / price right) even on
-   mobile. Client (Sayuj) asked for the featured-collection tiles to be
-   VISUALLY IDENTICAL to the collection-page cards — stars + title bottom-left
-   overlay, standalone price hidden, price shown only inside the BUY pill.
-   That's exactly what the shared @media (max-width: 749px) block on
-   .isoa-rc-info and .isoa-rc-price already produces, so we just let it apply.
-   Card FRAME height/aspect stays 211/289 (untouched) — only the info-block
-   micro-layout changes. -vamshi
+   Client (2026-08-12) wants two DIFFERENT mobile card layouts:
+     • Collection-page grid card = simple (title only, "BUY — price")
+     • Homepage swiper tile      = full (title left / price right / subtitle
+                                    line / "BUY <name> — price")
+   Default mobile CSS above renders the collection-page style. This block
+   overrides only for cards inside `.isoa-fc6-slide` (the homepage swiper
+   slide wrapper) to bring back the fuller three-line grid + full-text CTA.
+   Rhode's actual site follows the same split.
    ============================================================================= */
+@media (max-width: 749px) {
+  .isoa-fc6-slide .isoa-rc-info {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 12px;
+    align-items: baseline;
+  }
+  .isoa-fc6-slide .isoa-rc-reviews {
+    grid-column: 1 / -1;
+  }
+  .isoa-fc6-slide .isoa-rc-title {
+    grid-column: 1;
+  }
+  .isoa-fc6-slide .isoa-rc-price {
+    display: block;
+    grid-column: 2;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.2;
+    white-space: nowrap;
+    text-align: right;
+    color: #67645e;
+    align-self: baseline;
+  }
+  .isoa-fc6-slide .isoa-rc-subtitle {
+    display: block;
+    grid-column: 1 / -1;
+    margin: 3px 0 0;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: 0;
+    color: #67645e;
+    opacity: 0.85;
+    text-transform: none;
+    text-align: left;
+  }
+  /* CTA text: swap short → full on the homepage swiper */
+  .isoa-fc6-slide .isoa-rc-cta-mob--short { display: none; }
+  .isoa-fc6-slide .isoa-rc-cta-mob--full  { display: inline; }
+}
 
 /* =============================================================================
    In-grid promo tile — sits in a `.product-grid__item--promo` slot alongside

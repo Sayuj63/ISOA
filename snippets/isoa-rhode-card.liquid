@@ -110,7 +110,19 @@
 
     <div class="isoa-rc-cta" aria-hidden="true">
       <span class="isoa-rc-cta-desk">BUY {{ short_name }} — <strong>{{ price_short }}</strong></span>
-      <span class="isoa-rc-cta-mob"><span class="isoa-rc-cta-lead">BUY {{ short_name }} —</span> <strong>{{ price_short_inr }}</strong></span>
+      {%- comment -%}
+        Two mobile CTA variants. Default (used on the collection page card) is
+        the short "BUY — price" — Rhode's collection cards read this way.
+        Homepage swiper tiles (.isoa-fc6-slide parent) swap to the full
+        "BUY <short_name> — price" via the CSS override in
+        rhode-collection-cards.css. Two spans, one shown at a time.
+      {%- endcomment -%}
+      <span class="isoa-rc-cta-mob isoa-rc-cta-mob--short">
+        <span class="isoa-rc-cta-lead">BUY —</span> <strong>{{ price_short_inr }}</strong>
+      </span>
+      <span class="isoa-rc-cta-mob isoa-rc-cta-mob--full">
+        <span class="isoa-rc-cta-lead">BUY {{ short_name }} —</span> <strong>{{ price_short_inr }}</strong>
+      </span>
     </div>
   </a>
 </article>
