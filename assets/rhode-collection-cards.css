@@ -305,15 +305,23 @@
     font-size: 10px;
   }
 
-  /* Info: absolutely overlay on the image, bottom-left, transparent */
+  /* Info block — Rhode-style layout:
+       row 1: stars + review count (full width)
+       row 2: TITLE (left) + PRICE (right)     ← grid with 2 columns
+       row 3: subtitle line (full width, optional)
+     Absolutely overlaid on the image bottom so the frame height stays
+     driven by aspect-ratio alone. */
   .isoa-rc-info {
     position: absolute;
     left: 12px;
     right: 12px;
-    bottom: 44px; /* clears the CTA pill below */
+    bottom: 48px; /* clears the CTA pill below */
     z-index: 3;
     padding: 0;
-    display: block;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 12px;
+    align-items: baseline;
     text-align: left;
     background: transparent;
     opacity: 1;
@@ -321,6 +329,7 @@
     pointer-events: none;
   }
   .isoa-rc-reviews {
+    grid-column: 1 / -1;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -331,6 +340,7 @@
   .isoa-rc-stars     { font-size: 11px; }
   .isoa-rc-review-count { font-size: 11px; }
   .isoa-rc-title {
+    grid-column: 1;
     margin: 0;
     font-size: 11px;
     font-weight: 700;
@@ -338,9 +348,32 @@
     text-transform: uppercase;
     text-align: left;
   }
-  /* Standalone price hidden on mobile — only shows inside the BUY pill */
+  /* Standalone price shown on the right of the title (Rhode-style row) */
   .isoa-rc-price {
-    display: none;
+    display: block;
+    grid-column: 2;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.2;
+    white-space: nowrap;
+    text-align: right;
+    color: #67645e;
+    align-self: baseline;
+  }
+  /* Optional subtitle line under the title. Rhode uses this for descriptor
+     like "Multipurpose luminizer" — light weight, sentence-case, muted. */
+  .isoa-rc-subtitle {
+    grid-column: 1 / -1;
+    margin: 3px 0 0;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: 0;
+    color: #67645e;
+    opacity: 0.85;
+    text-transform: none;
+    text-align: left;
   }
 
   /* CTA: absolutely overlaid outlined pill at bottom of image, always visible.
