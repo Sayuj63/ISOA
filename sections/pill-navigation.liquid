@@ -135,12 +135,15 @@
       justify-content: flex-start;
       padding-left: 16px;
       padding-right: 16px;
-      gap: 11px;
+      gap: 8px;
     }
 
+    /* 2026-08-12: shrunk on mobile at client request. Was padding 8×15, 12px
+       font → 32px tall pills. Now 6×12 with 11px → 27px tall pills that read
+       lighter and match Rhode's collection-page filter tier. */
     #{{ section_id }} .pill-navigation__item {
-      padding: 8px 15px;
-      font-size: 12px;
+      padding: 6px 12px;
+      font-size: 11px;
       line-height: 1.2;
       letter-spacing: 0.024em;
     }
