@@ -122,6 +122,31 @@ body.page-our-story .text-block.custom-font-size > * {
   body.page-our-story .group-block .placeholder-image {
     border-radius: 0 !important;
   }
+
+  /* -----------------------------------------------------------------------
+     Merge the "MEET THE ADVISORY BOARD" intro card into the FIRST advisor
+     card below it. Two adjacent Horizon sections currently render as two
+     grey rounded cards with a visible gap; flatten the joining edges and
+     zero the gap so they read as ONE continuous card.
+     Uses attribute selectors on the block IDs from templates/page.our-story.json
+     so it's resilient to the theme-render template numeric prefix.
+     ----------------------------------------------------------------------- */
+  body.page-our-story .shopify-section[id*="section_NKG9AC"] .text-block,
+  body.page-our-story .shopify-section[id*="section_NKG9AC"] .section {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  body.page-our-story .shopify-section[id*="section_RKjyxn"] {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  body.page-our-story .shopify-section[id*="section_RKjyxn"] .group-block:first-child {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    margin-top: 0 !important;
+  }
 }
 
 /* Terms + Contact + policy pages: move the first content section UP so it
