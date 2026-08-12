@@ -548,59 +548,15 @@ main#MainContent {
   }
 }
 
-/* ==========================================================================
-   SECTION GAP UNIFICATION — every visible section-to-section transition on
-   the PDP renders with the SAME visual gap. Each section wrapper gets its
-   top+bottom padding zeroed so all vertical spacing is driven by a single
-   margin-top rule on `.shopify-section + .shopify-section`.
-
-   Excluded automatically: the hero (uses `.product-information`, not
-   `.section-*-settings`) and the sticky ATC (position: fixed, out of flow).
-   ========================================================================== */
-
-@media (min-width: 750px) {
-  main#MainContent > .shopify-section > div,
-  main#MainContent > .shopify-section > section:not(.rh-otg),
-  main#MainContent [class^="section-"][class$="-settings"],
-  main#MainContent > .shopify-section > .section--page-width > .section-background {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-  }
-  main#MainContent > .shopify-section {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-  }
-  main#MainContent > .shopify-section + .shopify-section {
-    margin-top: 48px !important;
-  }
-}
-
-@media (max-width: 749px) {
-  main#MainContent > .shopify-section > div,
-  main#MainContent > .shopify-section > section:not(.rh-otg),
-  main#MainContent [class^="section-"][class$="-settings"],
-  main#MainContent > .shopify-section > .section--page-width > .section-background {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-  }
-  main#MainContent > .shopify-section {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-  }
-  main#MainContent > .shopify-section + .shopify-section {
-    margin-top: 32px !important;
-  }
-}
-
-/* Canonical internal top/bot padding for the two grey (#f1f0ed) pill sections.
-   Reasserts a uniform 32px after the zero-out above neutralizes per-section
-   padding-block. ss-slider-5 already declares 32 in its liquid (line 800-806)
-   but was being zeroed; ss-targetting-animation was rendering at 8. Both now
-   match. Left/right left to each section (columns require different insets). */
-main#MainContent [class*="ss_slider_5"][class$="-settings"],
-main#MainContent .rh-benefits__container {
-  padding-block: 32px !important;
-}
+/* SECTION GAP UNIFICATION — REMOVED 2026-08-12
+   The prior block zeroed every section's internal padding-block on PDPs and
+   forced a fixed 48px (desktop) / 32px (mobile) margin between adjacent
+   `.shopify-section` elements. That worked as visual polish but blocked the
+   client from editing per-section spacing from the theme editor (the schema's
+   `padding_block_start` / `padding_block_end` values were being overridden
+   with `!important`). Removed at client request so PDP section spacing is
+   now fully controlled by each section's schema settings in the admin.
+   -vamshi 2026-08-12 */
 
 /* ==========================================================================
    MOBILE polish — PDP layout below 750px.
