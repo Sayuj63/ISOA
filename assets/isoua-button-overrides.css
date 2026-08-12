@@ -135,7 +135,10 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
   background-image: none !important;
   color: #67645e !important;
   font-size: 14px !important;
-  font-weight: 600 !important;
+  /* 2026-08-12: was `600` — client said the button text reads too bold
+     versus the Rhode SHOP THE COLLECTION reference (Image #14). Weight 500
+     desktop / 400 mobile (in the @media block below) is Rhode-parity. */
+  font-weight: 500 !important;
   letter-spacing: 0.05em !important;
   text-transform: uppercase !important;
   text-decoration: none !important;
@@ -251,19 +254,19 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
   body .shopify-section .isoua-pill-button {
     padding: 7px 22px !important;
     font-size: 11px !important;
-    font-weight: 500 !important;
+    /* 2026-08-12: 500 → 400. Client asked for interior text to read NOT BOLD,
+       matching Rhode's SHOP THE COLLECTION reference. */
+    font-weight: 400 !important;
     letter-spacing: 0.04em !important;
     line-height: 1.2 !important;
     border-width: 1px !important;
   }
-  /* Inner text spans must also carry the thinned weight — several section
-     stylesheets set weight on the inner <span>/<p>. */
   body .shopify-section a[class*="image-with-button-"] *,
   body .shopify-section [class*="collection-button-"] *,
   body .shopify-section [class*="featured-product-button-"] *,
   body .shopify-section [class*="slider-button-"] *,
   body .shopify-section .isoua-pill-button > * {
-    font-weight: 500 !important;
+    font-weight: 400 !important;
     letter-spacing: 0.04em !important;
     font-size: inherit !important;
   }
