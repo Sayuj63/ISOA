@@ -39,12 +39,15 @@
 
 /* ---- Image frame (both breakpoints) -----------------------------------
    Aspect ratio matches rhodeskin.com/collections/shop:
-     desktop → 440.69 × 534.02 (~441/534, portrait)
-     mobile  → 211.64 × 289    (~211/289, taller portrait)
+     desktop → was 441/534 (0.826, tall) — 2026-08-12 client asked to shrink
+                the empty grey chrome under the title/price row. Now 4/5 (0.800)
+                to match mobile, ~4% shorter cards on desktop.
+     mobile  → was 211/289 (0.730) — now 4/5 (0.800) too (see mobile override
+                block below). Single ratio site-wide keeps the grid tidy.
    Card height = frame height because info + CTA are absolutely positioned. */
 .isoa-rc-frame {
   position: relative;
-  aspect-ratio: 441 / 534;
+  aspect-ratio: 4 / 5;
   width: 100%;
   overflow: hidden;
   background: #f1f0ed;
@@ -349,7 +352,11 @@
     padding: 7px 22px;
     border: 1px solid #67645e;
     border-radius: 999px;
-    background: transparent;
+    /* 2026-08-12: was `transparent` → the grey card background bled through
+       the pill, reading as a grey "gap" around the BUY text. `#ffffff` gives
+       the pill the same solid-white fill as the desktop hover state
+       (line 187) and matches Rhode's card CTA on their mobile site. */
+    background: #ffffff;
     color: #67645e;
     font-size: 11px;
     font-weight: 500;
