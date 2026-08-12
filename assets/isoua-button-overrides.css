@@ -44,6 +44,86 @@
   --isoa-eyebrow: 11px;      --isoa-eyebrow-m: 11px;     /* eyebrows, section labels, tab labels */
 }
 
+/* =============================================================================
+   About Us / Our Story page — mobile polish (2026-08-12)
+   -----------------------------------------------------------------------------
+   Client audit findings:
+     • Founder placeholder image had border-radius: 0 (schema-driven from JSON).
+     • Multiple text blocks use type_preset: h1 → 22px/800 for what are really
+       eyebrow labels ("A NOTE FROM OUR FOUNDER", "MEET THE ADVISORY BOARD",
+       "DR. XXX" names). Feels oversized on mobile.
+     • Advisor board cards were 3 stacked images + naked text — no shared
+       card wrapper, so images floated with rounded corners over unstyled text.
+     • Advisor description body copy was 11px — too small under a 22px name.
+   Fixed with scoped CSS overrides so the JSON stays untouched.
+   ============================================================================= */
+body.page-our-story {
+  /* Downgrade oversized "h1 eyebrow" text blocks — every visible text block
+     using type_preset: h1 on this page is really a short eyebrow label. */
+  .text-block[data-testid="text-block"],
+  .text-block h1,
+  .text-block h2,
+  .text-block p {
+    /* baseline safety — most already inherit ok */
+  }
+}
+body.page-our-story .text-block.custom-font-size,
+body.page-our-story .text-block.custom-font-size > * {
+  /* If the block declares font-size 2.75rem+ (44px+) inline via type_preset
+     h1, clamp it down to 16-18px on mobile so it reads as an eyebrow. */
+}
+@media (max-width: 749px) {
+  /* Cap oversized preset-h1 text blocks to eyebrow-sized (15px 700). */
+  body.page-our-story .text-block.custom-font-size,
+  body.page-our-story .text-block.custom-font-size > *,
+  body.page-our-story .text-block.custom-font-size p,
+  body.page-our-story .text-block h1,
+  body.page-our-story .text-block h2 {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    line-height: 1.25 !important;
+    letter-spacing: 0.02em !important;
+  }
+  /* Bump the tiny description body copy up from 11px so it's legible under
+     the advisor names. */
+  body.page-our-story .text-block p,
+  body.page-our-story .rte p,
+  body.page-our-story rte-formatter p {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    font-weight: 400 !important;
+    letter-spacing: normal !important;
+  }
+  /* Give the founder placeholder image the site's 10px radius. */
+  body.page-our-story .image-block__image,
+  body.page-our-story .placeholder-image {
+    border-radius: 10px !important;
+    overflow: hidden !important;
+  }
+  /* Advisor board — wrap each stacked group as a proper merged card.
+     The group-block gets a grey background, 10px radius, and clip so the
+     inner image top corners come from the parent (no double-rounding). */
+  body.page-our-story .group-block {
+    background: #f5f5f5 !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+    padding: 0 0 16px !important;
+    margin-bottom: 16px !important;
+  }
+  body.page-our-story .group-block > .text-block {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  body.page-our-story .group-block .image-block {
+    padding: 0 !important;
+    margin: 0 0 12px !important;
+  }
+  body.page-our-story .group-block .image-block__image,
+  body.page-our-story .group-block .placeholder-image {
+    border-radius: 0 !important;
+  }
+}
+
 /* Terms + Contact + policy pages: move the first content section UP so it
    overlaps the header pill area. The header stays fixed with its own white
    wrapper — but the section-bg (grey #f1f0ed on these pages, per main.css
