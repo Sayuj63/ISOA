@@ -120,7 +120,8 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 .shopify-section a[class*="image-with-button-"],
 .shopify-section [class*="collection-button-"],
 .shopify-section [class*="featured-product-button-"],
-.shopify-section [class*="slider-button-"] {
+.shopify-section [class*="slider-button-"],
+.shopify-section .isoua-pill-button {
   padding: 12px 32px !important;
   border: 1px solid #67645e !important;
   border-radius: 999px !important;
@@ -147,7 +148,8 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 .shopify-section a[class*="image-with-button-"] *,
 .shopify-section [class*="collection-button-"] *,
 .shopify-section [class*="featured-product-button-"] *,
-.shopify-section [class*="slider-button-"] span {
+.shopify-section [class*="slider-button-"] span,
+.shopify-section .isoua-pill-button > * {
   color: inherit !important;
   font-size: inherit !important;
   font-weight: inherit !important;
