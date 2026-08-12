@@ -175,7 +175,9 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 .shopify-section .isoua-pill-button > *,
 .shopify-section [class*="ai-contact-form-submit-"] *,
 .shopify-section .rh-cta > *,
-.shopify-section .rs-cta > * {
+.shopify-section .rs-cta > *,
+.shopify-section .shopify-payment-button__button > *,
+.shopify-section .product-information .add-to-cart-button > * {
   color: inherit !important;
   font-size: inherit !important;
   font-weight: inherit !important;
@@ -196,7 +198,9 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 .shopify-section .isoua-pill-button svg path,
 .shopify-section [class*="ai-contact-form-submit-"] svg path,
 .shopify-section .rh-cta svg path,
-.shopify-section .rs-cta svg path {
+.shopify-section .rs-cta svg path,
+.shopify-section .shopify-payment-button__button svg path,
+.shopify-section .product-information .add-to-cart-button svg path {
   fill: #67645e !important;
   transition: fill 0.3s ease !important;
 }
@@ -247,7 +251,9 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 .shopify-section .isoua-pill-button::before,
 .shopify-section [class*="ai-contact-form-submit-"]::before,
 .shopify-section .rh-cta::before,
-.shopify-section .rs-cta::before {
+.shopify-section .rs-cta::before,
+.shopify-section .shopify-payment-button__button::before,
+.shopify-section .product-information .add-to-cart-button::before {
   content: '' !important;
   position: absolute !important;
   inset: 0 !important;
@@ -272,7 +278,9 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 .shopify-section .isoua-pill-button:hover::before,
 .shopify-section [class*="ai-contact-form-submit-"]:hover::before,
 .shopify-section .rh-cta:hover::before,
-.shopify-section .rs-cta:hover::before {
+.shopify-section .rs-cta:hover::before,
+.shopify-section .shopify-payment-button__button:hover::before,
+.shopify-section .product-information .add-to-cart-button:hover::before {
   transform: translate(0, 0);
 }
 
@@ -288,7 +296,9 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 .shopify-section .isoua-pill-button > *,
 .shopify-section [class*="ai-contact-form-submit-"] > *,
 .shopify-section .rh-cta > *,
-.shopify-section .rs-cta > * {
+.shopify-section .rs-cta > *,
+.shopify-section .shopify-payment-button__button > *,
+.shopify-section .product-information .add-to-cart-button > * {
   position: relative !important;
   z-index: 1 !important;
 }
@@ -306,7 +316,9 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 .shopify-section .isoua-pill-button:hover,
 .shopify-section [class*="ai-contact-form-submit-"]:hover,
 .shopify-section .rh-cta:hover,
-.shopify-section .rs-cta:hover {
+.shopify-section .rs-cta:hover,
+.shopify-section .shopify-payment-button__button:hover,
+.shopify-section .product-information .add-to-cart-button:hover {
   background-color: #ffffff !important;
   background-image: none !important;
   color: #ffffff !important;
@@ -327,7 +339,9 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 .shopify-section .isoua-pill-button:hover svg path,
 .shopify-section [class*="ai-contact-form-submit-"]:hover svg path,
 .shopify-section .rh-cta:hover svg path,
-.shopify-section .rs-cta:hover svg path {
+.shopify-section .rs-cta:hover svg path,
+.shopify-section .shopify-payment-button__button:hover svg path,
+.shopify-section .product-information .add-to-cart-button:hover svg path {
   fill: #ffffff !important;
 }
 
