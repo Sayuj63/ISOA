@@ -603,10 +603,14 @@
 
 @media (max-width: 749px) {
   .isoa-rc-promo {
-    border-radius: 10px;
+    /* 12px radius to match .isoa-rc-card */
+    border-radius: 12px;
   }
+  /* 2026-08-12: switched to 2/3 so the editorial/content tile matches the
+     product card height exactly on mobile — Rhode does the same and the
+     tiles land at identical row heights in the grid. */
   .isoa-rc-promo__frame {
-    aspect-ratio: 211 / 289;
+    aspect-ratio: 2 / 3;
   }
   .isoa-rc-promo__heading {
     left: 12px;
