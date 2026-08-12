@@ -381,41 +381,18 @@
 }
 
 /* =============================================================================
-   Featured-collection-6 slider overrides (homepage + PDP cross-sell).
-   Cards live inside `.isoa-fc6-slide` (a swiper slide). On mobile the shared
-   card layout hides the standalone price and left-aligns the title; those
-   sections want the desktop-style split-column info (title left / price
-   right) even on mobile. The BUY pill stays visible below.
+   Featured-collection-6 slider — inherit the shared mobile card layout.
+   -----------------------------------------------------------------------------
+   Removed 2026-08-12: prior overrides forced this slider to render a
+   desktop-style split-column info block (title left / price right) even on
+   mobile. Client (Sayuj) asked for the featured-collection tiles to be
+   VISUALLY IDENTICAL to the collection-page cards — stars + title bottom-left
+   overlay, standalone price hidden, price shown only inside the BUY pill.
+   That's exactly what the shared @media (max-width: 749px) block on
+   .isoa-rc-info and .isoa-rc-price already produces, so we just let it apply.
+   Card FRAME height/aspect stays 211/289 (untouched) — only the info-block
+   micro-layout changes. -vamshi
    ============================================================================= */
-@media (max-width: 749px) {
-  .isoa-fc6-slide .isoa-rc-info {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    column-gap: 12px;
-    align-items: baseline;
-    text-align: initial;
-  }
-  .isoa-fc6-slide .isoa-rc-reviews {
-    grid-column: 1 / -1;
-    justify-content: flex-start;
-  }
-  .isoa-fc6-slide .isoa-rc-title {
-    grid-column: 1;
-    text-align: left;
-  }
-  .isoa-fc6-slide .isoa-rc-price {
-    display: block;
-    grid-column: 2;
-    margin: 0;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 1.2;
-    white-space: nowrap;
-    text-align: right;
-    color: #67645e;
-    align-self: baseline;
-  }
-}
 
 /* =============================================================================
    In-grid promo tile — sits in a `.product-grid__item--promo` slot alongside
