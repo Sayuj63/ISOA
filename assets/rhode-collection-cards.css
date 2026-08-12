@@ -23,7 +23,7 @@
 .isoa-rc-card {
   position: relative;
   display: block;
-  background: #EEF3F6;
+  background: #F1F0ED;
   border-radius: 12px;
   overflow: hidden;
   isolation: isolate;
@@ -53,7 +53,7 @@
   aspect-ratio: 6 / 7;
   width: 100%;
   overflow: hidden;
-  background: #EEF3F6;
+  background: #F1F0ED;
 }
 
 .isoa-rc-img {
@@ -493,7 +493,7 @@
   display: block;
   border-radius: 12px;
   overflow: hidden;
-  background: #EEF3F6;
+  background: #F1F0ED;
   color: var(--promo-text, #ffffff);
   text-decoration: none;
   isolation: isolate;
