@@ -212,7 +212,13 @@
     .rh-prep-circle-{{ section.id }} {
       width: 60px;
       height: 60px;
-      font-size: var(--isoa-eyebrow-m);
+      /* 2026-08-12: was --isoa-eyebrow-m (11px) → long labels like
+         "HIGHLIGHT" (9 chars @ 0.06em letter-spacing) overflowed the 60px
+         circle boundary. 9px font + tighter letter-spacing 0.02em keeps
+         the widest label ("HIGHLIGHT" ~48px) comfortably inside the circle. */
+      font-size: 9px;
+      letter-spacing: 0.02em;
+      padding: 0 6px;
     }
     .rh-prep-circles-{{ section.id }} {
       margin-bottom: 12px;
