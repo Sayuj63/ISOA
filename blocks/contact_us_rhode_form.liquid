@@ -354,16 +354,15 @@ contact-form-{{ ai_gen_id }} {
   margin: 0 auto;
 }
 
-/* Rhode's submit button: full-width outlined pill, brand foreground. */
+/* 2026-08-12: was full-width 48px pill — client asked for the site's
+   standard long-thin pill on Contact SEND. Sizing now delegated to the
+   isoua-button-overrides.css spec applied to `[class*="ai-contact-form-submit-"]`;
+   this block only carries the shared visual style. */
 .ai-contact-form-submit-{{ ai_gen_id }} {
-  width: 100%;
-  height: 48px;
   border-radius: 999px;
   border: 1px solid #67645e;
-  background: transparent;
+  background: #ffffff;
   color: #67645e;
-  font-size: 13px;
-  letter-spacing: 0.12em;
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.25s ease;
@@ -423,8 +422,7 @@ contact-form-{{ ai_gen_id }} {
 .ai-contact-form-input-{{ ai_gen_id }},
 .ai-contact-form-select-{{ ai_gen_id }},
 .ai-contact-form-textarea-{{ ai_gen_id }},
-.ai-contact-form-file-upload-{{ ai_gen_id }},
-.ai-contact-form-submit-{{ ai_gen_id }} {
+.ai-contact-form-file-upload-{{ ai_gen_id }} {
   width: 100% !important;
   max-width: 100% !important;
   min-width: 0 !important;
