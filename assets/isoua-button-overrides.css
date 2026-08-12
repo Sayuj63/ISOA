@@ -179,8 +179,76 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 }
 
 /* -------------------------------------------------------------------
-   Hover — flip to filled brown with white text
+   Hover — Rhode/ss-image-with-text slide-in fill.
+   -----------------------------------------------------------------------------
+   The `::before` pseudo-element sits absolutely inside every pill, painted
+   solid brown, offset below the button (translateY(101%)). On :hover it
+   slides up into place — the pill appears to fill with brown from the bottom
+   while the text simultaneously flips to white. Same visual language as the
+   "GET SPOTWEAR" / "GET READY WITH RHODE" buttons in ss-image-with-text and
+   the "OUR VALUES" pill in ss-image-with-text-15, now applied site-wide via
+   this override. Simplified from those sections' full 4-direction JS variant
+   to always-from-bottom — no JS needed, works everywhere. -vamshi 2026-08-12
    ------------------------------------------------------------------- */
+
+/* Position context + clip for the fill layer */
+.shopify-section .hero a.button,
+.shopify-section .hero a.button-secondary,
+.shopify-section a[class*="image-with-button-"],
+.shopify-section [class*="collection-button-"],
+.shopify-section [class*="featured-product-button-"],
+.shopify-section [class*="slider-button-"],
+.shopify-section .isoua-pill-button {
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate;
+}
+
+/* Fill layer */
+.shopify-section .hero a.button::before,
+.shopify-section .hero a.button-secondary::before,
+.shopify-section a[class*="image-with-button-"]::before,
+.shopify-section [class*="collection-button-"]::before,
+.shopify-section [class*="featured-product-button-"]::before,
+.shopify-section [class*="slider-button-"]::before,
+.shopify-section .isoua-pill-button::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: #67645e !important;
+  border-radius: inherit !important;
+  transform: translateY(101%);
+  transition: transform 0.45s cubic-bezier(.76, 0, .24, 1) !important;
+  z-index: 0 !important;
+  will-change: transform;
+  pointer-events: none !important;
+}
+
+/* Slide the fill in on hover */
+.shopify-section .hero a.button:hover::before,
+.shopify-section .hero a.button-secondary:hover::before,
+.shopify-section a[class*="image-with-button-"]:hover::before,
+.shopify-section [class*="collection-button-"]:hover::before,
+.shopify-section [class*="featured-product-button-"]:hover::before,
+.shopify-section [class*="slider-button-"]:hover::before,
+.shopify-section .isoua-pill-button:hover::before {
+  transform: translate(0, 0);
+}
+
+/* Keep every inner element above the fill layer */
+.shopify-section .hero a.button > *,
+.shopify-section .hero a.button-secondary > *,
+.shopify-section a[class*="image-with-button-"] > *,
+.shopify-section [class*="collection-button-"] > *,
+.shopify-section [class*="featured-product-button-"] > *,
+.shopify-section [class*="slider-button-"] > *,
+.shopify-section .isoua-pill-button > * {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Hover-state colour flip. Keep background WHITE — the visible brown comes
+   from the ::before layer sliding in. Only text + border colour change here. */
 .shopify-section .hero a.button:hover,
 .shopify-section .hero a.button-secondary:hover,
 .shopify-section a[class*="image-with-button-"]:hover,
@@ -188,10 +256,12 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 .shopify-section [class*="featured-product-button-"]:hover,
 .shopify-section [class*="slider-button-"]:hover,
 .shopify-section .isoua-pill-button:hover {
-  background-color: #67645e !important;
+  background-color: #ffffff !important;
   background-image: none !important;
   color: #ffffff !important;
   border-color: #67645e !important;
+  /* Delay the text colour so it flips roughly when the fill reaches centre */
+  transition: color 0.15s ease 0.2s, border-color 0.3s ease !important;
 }
 
 /* Also flip SVG arrow on hover */
