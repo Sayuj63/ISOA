@@ -40,6 +40,18 @@
     {% endif %}
 
     {%- render 'meta-tags' -%}
+
+    {% comment %}
+      Rhode-style display font for the product-card brand label.
+      Rhode's site uses Rektorat (paid); the closest free Google Fonts
+      alternative is DM Sans at 800 — modern bold sans with a similar
+      wide/geometric feel. Loaded once here (used only on cards, so
+      display=swap keeps the LCP clean). -vamshi 2026-08-12
+    {% endcomment %}
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,800&display=swap">
+
     {%- render 'stylesheets' -%}
     {% if template == 'product.rhode-product-page' %}
       {{ 'rhode-pdp.css' | asset_url | stylesheet_tag }}
