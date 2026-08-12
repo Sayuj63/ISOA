@@ -87,11 +87,14 @@
   top: 20px;
   left: 24px;
   z-index: 5;
-  font-family: var(--font-heading--family, var(--font-body--family));
+  /* Rhode uses Rektorat (paid) for the wordmark on cards. DM Sans 800 is
+     the closest free Google Fonts substitute — modern bold sans with a
+     similar wide/geometric feel. Loaded via layout/theme.liquid head. */
+  font-family: 'DM Sans', var(--font-heading--family, var(--font-body--family));
   font-size: var(--isoa-display-xl);
   font-weight: 800;
   line-height: 1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   text-transform: lowercase;
   color: #67645e;
   pointer-events: none;
