@@ -309,17 +309,18 @@ contact-form-{{ ai_gen_id }} {
   }
 
   /* SEND button: shrunk to the site-standard long-thin pill footprint,
-     centered on its row (2026-08-12). */
+     centered on its row (2026-08-12). `display: block; margin: 0 auto`
+     is the only reliable way to horizontally centre a <button> — inline
+     margin-auto doesn't work because <button> is inline-block by default. */
   .ai-contact-form-submit-{{ ai_gen_id }} {
+    display: block !important;
     width: auto;
     min-width: 200px;
     padding: 7px 24px;
     font-size: 11px;
     font-weight: 400;
     letter-spacing: 0.04em;
-    align-self: center;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 8px auto 0 !important;
   }
 
   .ai-contact-form-input-{{ ai_gen_id }},
