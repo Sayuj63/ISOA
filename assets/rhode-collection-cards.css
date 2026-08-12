@@ -491,6 +491,28 @@
     object-fit: cover;
     object-position: center;
   }
+
+  /* HOMEPAGE-ONLY REVERT — 2026-08-12: the base collection-card CSS above
+     was shrunk to match Rhode's collection page (18px brand, 2/3 aspect,
+     10px badge radius, tight top/left insets). Homepage swiper tiles should
+     keep the fuller earlier layout the client already approved — bump
+     brand back to 28px, aspect to 4/5, and push both header elements down
+     from the corners. */
+  .isoa-fc6-slide .isoa-rc-frame {
+    aspect-ratio: 4 / 5;
+  }
+  .isoa-fc6-slide .isoa-rc-brand {
+    top: 22px;
+    left: 18px;
+    font-size: 28px;
+    letter-spacing: -0.02em;
+  }
+  .isoa-fc6-slide .isoa-rc-badge {
+    top: 22px;
+    right: 18px;
+    padding: 4px 9px;
+    border-radius: 999px;
+  }
 }
 
 /* Desktop homepage swiper — same fill treatment as mobile. */
