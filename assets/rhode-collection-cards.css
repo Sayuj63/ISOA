@@ -39,15 +39,18 @@
 
 /* ---- Image frame (both breakpoints) -----------------------------------
    Aspect ratio matches rhodeskin.com/collections/shop:
-     desktop → was 441/534 (0.826, tall) — 2026-08-12 client asked to shrink
-                the empty grey chrome under the title/price row. Now 4/5 (0.800)
-                to match mobile, ~4% shorter cards on desktop.
-     mobile  → was 211/289 (0.730) — now 4/5 (0.800) too (see mobile override
-                block below). Single ratio site-wide keeps the grid tidy.
+     desktop → was 441/534 (0.826, portrait) — 2026-08-12 client wanted less
+                grey chrome under the title/price row. `6/7` (0.857) makes the
+                card ~4% shorter (553 wide → 645 tall instead of 670). Enough
+                to visibly kill the grey gap.
+     mobile  → was 211/289 (0.730, tall) — now `4/5` (0.800) via the mobile
+                media-query override below. Distinct from desktop because
+                mobile cards live in a swiper at ~1.2 per view and need to
+                stay usably tall for the product bottle at 360 wide.
    Card height = frame height because info + CTA are absolutely positioned. */
 .isoa-rc-frame {
   position: relative;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 6 / 7;
   width: 100%;
   overflow: hidden;
   background: #f1f0ed;
@@ -422,7 +425,7 @@
 
 .isoa-rc-promo__frame {
   position: relative;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 6 / 7;
   width: 100%;
   overflow: hidden;
 }
