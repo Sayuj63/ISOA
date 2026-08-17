@@ -778,8 +778,8 @@
         "bullseye_color": "#ffffff",
         "color_scheme": "scheme-1",
         "product_title_gap": 8,
-        "product_title_preset": "",
-        "product_price_preset": "",
+        "product_title_preset": "h4",
+        "product_price_preset": "paragraph",
         "padding-block-start": 0,
         "padding-block-end": 0
       }
