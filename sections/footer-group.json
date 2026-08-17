@@ -11,6 +11,18 @@
   "type": "footer",
   "name": "Footer",
   "sections": {
+    "wsp_cQb3th": {
+      "type": "wsp",
+      "custom_css": [
+        ".wsp-whatsapp {bottom: 50px !important;}"
+      ],
+      "name": "WSP - Whatsapp Button",
+      "settings": {
+        "show_whatsapp": true,
+        "whatsapp_number": "919650046100",
+        "whatsapp_msg": "Hi, ISOUA!"
+      }
+    },
     "ss_footer_7_MGqMrt": {
       "type": "ss-footer-7",
       "blocks": {
@@ -216,6 +228,7 @@
     }
   },
   "order": [
+    "wsp_cQb3th",
     "ss_footer_7_MGqMrt"
   ]
 }
