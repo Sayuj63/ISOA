@@ -66,7 +66,6 @@
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
-        "image_1": "shopify://shop_images/image_b86ad320-eb99-4d51-9373-41e94e1c8aec.png",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": true,
@@ -865,7 +864,6 @@
         "content_align": "left",
         "content_align_mobile": "left",
         "content_vertical_align": "center",
-        "image": "shopify://shop_images/hp-soft-glam-set_2000x_7797bdeb-bdbe-4faf-89a5-f5e2c277a4e6.png",
         "image_url": "",
         "image_radius": 10,
         "image_border_thickness": 0,
