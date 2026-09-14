@@ -217,6 +217,17 @@
 }
 
 @media screen and (max-width: 749px) {
+  /* Mobile hero slideshow — force each slide to fill the viewport-width media
+     column so only ONE slide is visible at a time (matches Rhode's mobile PDP
+     which shows one slide + dots below). Without this Horizon's default lets
+     slides content-size, producing a ~90% slide + ~35% peek of the next slide
+     inside a scroll-snap x mandatory scroller. -vamshi 2026-09-15 */
+  .product-information__media slideshow-slide {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    min-width: 100% !important;
+  }
+
   /* Mobile hero image radius — top corners keep the 10px rounding, bottom
      corners go square so the image meets the details card below with a
      seamless flush edge. Both the wrapper AND the child img/video get the
