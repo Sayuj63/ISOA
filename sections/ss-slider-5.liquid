@@ -647,14 +647,14 @@ For inquiries or permissions, contact daniel@section.store
     background-image: {{ background_gradient }} !important;
     {%- endif -%}
     border-radius: 10px !important;
-    /* Inner section padding — 20/16 mobile / 32px desktop (overridden in @media).
-       Mobile bumped 2026-09-15 from 10px flat: Rhode's mobile PDP shows 15px top+left
-       inside the pill and 24/16 on the homepage. 20/16 sits between the two and gives
-       the heading real breathing room from the pill edge. Cards still peek beyond the
-       right padding via overflow:visible on .slider-slider, clipped at the inner pill
-       right by overflow-x: clip. -vamshi */
+    /* Inner section padding — pill inner on mobile. Heading needs 20px top +
+       16px sides (Rhode reference). Bottom bumped to 24px 2026-09-15 to make
+       the visible gap between this section and the one below match the 40px
+       target (announcement→header gap) — 24 bottom + 16 top of next = 40.
+       Cards still peek beyond the right padding via overflow:visible clipped
+       at pill right by overflow-x: clip. -vamshi */
     padding-top: 20px !important;
-    padding-bottom: 16px !important;
+    padding-bottom: 24px !important;
     padding-left: 16px !important;
     padding-right: 16px !important;
   }
