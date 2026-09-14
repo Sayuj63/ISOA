@@ -647,16 +647,16 @@ For inquiries or permissions, contact daniel@section.store
     background-image: {{ background_gradient }} !important;
     {%- endif -%}
     border-radius: 10px !important;
-    /* Inner section padding — 10px mobile / 32px desktop (overridden in @media) — so
-       the heading no longer touches the bg left edge, and so the first/last cards sit
-       INSIDE the bg with the rounded corners visible around them (matches the Rhode
-       reference image 14 / 18). The carousel peek effect still works: the cards
-       extend past the right padding via overflow:visible on .slider-slider, clipped
-       at the inner pill's right edge by overflow-x: clip. -vamshi */
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
-    padding-left: 10px !important;
-    padding-right: 10px !important;
+    /* Inner section padding — 20/16 mobile / 32px desktop (overridden in @media).
+       Mobile bumped 2026-09-15 from 10px flat: Rhode's mobile PDP shows 15px top+left
+       inside the pill and 24/16 on the homepage. 20/16 sits between the two and gives
+       the heading real breathing room from the pill edge. Cards still peek beyond the
+       right padding via overflow:visible on .slider-slider, clipped at the inner pill
+       right by overflow-x: clip. -vamshi */
+    padding-top: 20px !important;
+    padding-bottom: 16px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
   }
 
   /* --- Navigation row: pagination grows, arrows pinned right ---------------------- */
