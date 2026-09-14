@@ -1,0 +1,64 @@
+/* =============================================================================
+   ISOUA — Subtle scroll-triggered zoom for every image site-wide.
+   -----------------------------------------------------------------------------
+   Single source of truth for the "images breathe as you scroll" effect.
+   Tweak the CSS variables at the top and every image on the site updates.
+
+   How it works:
+     - assets/isoa-image-zoom.js attaches to every <img> (and any element with
+       [data-isoa-zoom-target]) via IntersectionObserver, setting one of three
+       data-isoa-zoom states: "entering" | "visible" | "leaving".
+     - This CSS reads that state and applies a scale + transition.
+     - When the user scrolls in reverse, IntersectionObserver flips the state
+       back, and the transition reverses automatically. No JS re-implementation.
+
+   Opt out per image by adding `data-no-zoom` on the <img> (or its ancestor).
+   ============================================================================= */
+
+:root {
+  /* --- Tweak these to change the animation everywhere on the site ---------- */
+  --isoa-zoom-scale-off: 1.03;     /* zoomed-in scale — subtle */
+  --isoa-zoom-scale-on: 1;         /* resting scale */
+  --isoa-zoom-duration: 900ms;     /* animation length */
+  --isoa-zoom-easing: cubic-bezier(0.4, 0, 0.2, 1); /* ease in/out */
+}
+
+/* Any element the JS attached to. Default (before observer fires) = resting.
+   `!important` on transition because Horizon's lazy-load rules set their own
+   `transition: opacity ...` on <img>, which suppresses transform easing here.
+   The `!important` is on the transition only — not on transform — so other
+   rules can still add composing transforms if they need to. */
+[data-isoa-zoom] {
+  transform: scale(var(--isoa-zoom-scale-on));
+  transition: transform var(--isoa-zoom-duration) var(--isoa-zoom-easing) !important;
+  transform-origin: center center;
+  will-change: transform;
+  backface-visibility: hidden; /* smoother compositing on mobile */
+}
+
+/* Entering from below OR leaving out the top — start/end zoomed-in state. */
+[data-isoa-zoom="entering"],
+[data-isoa-zoom="leaving"] {
+  transform: scale(var(--isoa-zoom-scale-off)) !important;
+}
+
+/* Fully in view — resting scale. */
+[data-isoa-zoom="visible"] {
+  transform: scale(var(--isoa-zoom-scale-on)) !important;
+}
+
+/* Respect prefers-reduced-motion — no scaling for users who ask for less. */
+@media (prefers-reduced-motion: reduce) {
+  [data-isoa-zoom] {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* Opt-out escape hatch — anything with data-no-zoom, or inside one, won't
+   receive the effect at all. */
+[data-no-zoom],
+[data-no-zoom] * {
+  transform: none !important;
+  transition: none !important;
+}
