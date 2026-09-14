@@ -510,13 +510,14 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
   body .shopify-section .shopify-payment-button__button,
   body .shopify-section .shopify-payment-button__button--unbranded,
   body .shopify-section .product-information .add-to-cart-button {
-    /* 2026-08-12: LONG-and-THIN spec. Was 7x22 → ~30px tall / ~100px wide
-       for short-text buttons. New: 4px vertical → ~22-24px tall, min-width
-       200px → forces the pill to span roughly 55% of a 360vw card even when
-       the label is short ("SHOP ALL"). Matches the visual proportions of
-       the "GET SPOTWEAR" section CTA the client pointed at. */
-    padding: 7px 24px !important;
-    min-width: 200px !important;
+    /* 2026-09-15 revision — was min-width 200 / padding 7x24 (LONG-and-THIN spec
+       from 2026-08-12). Client feedback (mobile audit): buttons look "very long"
+       compared to rhodeskin.com's tighter mobile pills. Dropped min-width to 140
+       (~35 pt of a 360vw card) and shaved 1px vertical padding for a compact
+       Rhode-style secondary pill. Desktop button-unification (line 243-273) is
+       untouched — desktop dimensions still match the earlier LONG-and-THIN look. */
+    padding: 6px 20px !important;
+    min-width: 140px !important;
     font-size: 11px !important;
     font-weight: 400 !important;
     letter-spacing: 0.04em !important;
