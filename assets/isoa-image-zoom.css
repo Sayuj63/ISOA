@@ -62,3 +62,22 @@
   transform: none !important;
   transition: none !important;
 }
+
+/* =============================================================================
+   Footer logo — DRAMATIC scale override.
+   -----------------------------------------------------------------------------
+   The site-wide 1.03 scale is intentionally subtle. The big footer logo is a
+   punctuation element (like Rhode's massive wordmark) and reads better with a
+   pronounced zoom that feels like it's "breathing". Uses the SAME state model
+   (entering / visible / leaving) via the SAME IntersectionObserver — only the
+   scale values are overridden here. Duration is stretched a bit so the larger
+   travel doesn't look snappy. -vamshi 2026-09-15
+   ============================================================================= */
+
+[class*="footer-logo-image-"] img[data-isoa-zoom] {
+  --isoa-zoom-scale-off: 1.18;      /* zoomed in — clearly larger than 1.03 default */
+  --isoa-zoom-scale-on: 1;
+  --isoa-zoom-duration: 1300ms;     /* slower so the bigger travel feels smooth */
+  transform-origin: center center;
+}
+
