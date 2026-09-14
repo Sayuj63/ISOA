@@ -641,7 +641,7 @@
                 "text_LHkHKF": {
                   "type": "text",
                   "settings": {
-                    "text": "<h5><em>“I've dealt with cystic acne my whole life, and I've learned that sticking to my routine and being gentle with my skin gives me reale results.”</em></h5>",
+                    "text": "<h5><em>\u201cI've dealt with cystic acne my whole life, and I've learned that sticking to my routine and being gentle with my skin gives me reale results.\u201d</em></h5>",
                     "width": "fit-content",
                     "max_width": "narrow",
                     "alignment": "left",
@@ -793,7 +793,7 @@
             "heading_custom": false,
             "heading_font": "josefin_sans_n4",
             "heading_size": 28,
-            "heading_size_mobile": 24,
+            "heading_size_mobile": 22,
             "heading_advanced": false,
             "heading_height": 130,
             "heading_mt": 0,
@@ -804,7 +804,7 @@
         "text_BRGXQR": {
           "type": "text",
           "settings": {
-            "text": "<p>Hydrating essentials for your everyday glam routine, including Highlight Milk, Pocket Bronze, and Little Glazing Mist. </p>",
+            "text": "<p>Hydrating essentials for your everyday glam routine, including Highlight Milk, Pocket Bronze, and Little Glazing Mist.\u00a0</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
@@ -902,7 +902,7 @@
             "heading_custom": false,
             "heading_font": "josefin_sans_n4",
             "heading_size": 28,
-            "heading_size_mobile": 24,
+            "heading_size_mobile": 22,
             "heading_advanced": false,
             "heading_height": 130,
             "heading_mt": 0,
@@ -1058,7 +1058,7 @@
         "heading_custom": false,
         "heading_font": "josefin_sans_n4",
         "heading_size": 30,
-        "heading_size_mobile": 20,
+        "heading_size_mobile": 22,
         "heading_height": 130,
         "heading_align": "left",
         "heading_align_mobile": "left",
