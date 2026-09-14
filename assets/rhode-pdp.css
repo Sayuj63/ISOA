@@ -228,6 +228,16 @@
     min-width: 100% !important;
   }
 
+  /* Hide the WhatsApp floating bubble on the PDP mobile view — it overlaps
+     the details card's review stars/BUY IT NOW pill at scroll=0 and collides
+     with the sticky ATC bar once it appears. Rhode's PDP has no such widget.
+     Scoped to the PDP template via this CSS file's conditional load in
+     theme.liquid — bubble still renders on every other page.
+     -vamshi 2026-09-15 */
+  .wsp-whatsapp {
+    display: none !important;
+  }
+
   /* Mobile hero image radius — top corners keep the 10px rounding, bottom
      corners go square so the image meets the details card below with a
      seamless flush edge. Both the wrapper AND the child img/video get the
