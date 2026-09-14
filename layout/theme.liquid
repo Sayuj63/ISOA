@@ -89,6 +89,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       {{ 'isoua-collection-mobile.css' | asset_url | stylesheet_tag }}
       {{ 'rhode-collection-cards.css' | asset_url | stylesheet_tag }}
     {% endif %}
+
+    {{ 'isoa-image-zoom.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'isoa-image-zoom.js' | asset_url }}" defer></script>
+
     {%- render 'fonts' -%}
     {%- render 'scripts' -%}
     {%- render 'theme-styles-variables' -%}
