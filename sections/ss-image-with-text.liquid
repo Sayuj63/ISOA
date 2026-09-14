@@ -538,7 +538,11 @@ For inquiries or permissions, contact daniel@section.store
           line-height: {{ block.settings.heading_height }}%;
           text-transform: unset;
           word-break: break-word;
-          font-weight: 700;
+          /* 2026-09-15: was font-weight: 700 (hard-coded bold). Removed so the
+             heading_font's own weight wins (josefin_sans_n4 = 400) — this brings
+             ss-image-with-text headings ("mist your makeup", "patch on the go")
+             into visual parity with ss-slider-5's "isoua + you" which renders
+             lighter. Client asked for cross-section heading symmetry on mobile. */
         }
 
         @media(min-width: 1024px) {
