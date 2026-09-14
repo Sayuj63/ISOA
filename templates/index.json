@@ -48,8 +48,8 @@
             "style_class": "button-secondary",
             "width": "custom",
             "custom_width": 100,
-            "width_mobile": "custom",
-            "custom_width_mobile": 100
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 55
           },
           "blocks": {}
         }
