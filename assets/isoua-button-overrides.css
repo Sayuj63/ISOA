@@ -316,19 +316,21 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 }
 
 /* -------------------------------------------------------------------
-   Hover — Rhode/ss-image-with-text slide-in fill.
+   Hover — simple bg + text colour flip (Rhode-style).
    -----------------------------------------------------------------------------
-   The `::before` pseudo-element sits absolutely inside every pill, painted
-   solid brown, offset below the button (translateY(101%)). On :hover it
-   slides up into place — the pill appears to fill with brown from the bottom
-   while the text simultaneously flips to white. Same visual language as the
-   "GET SPOTWEAR" / "GET READY WITH RHODE" buttons in ss-image-with-text and
-   the "OUR VALUES" pill in ss-image-with-text-15, now applied site-wide via
-   this override. Simplified from those sections' full 4-direction JS variant
-   to always-from-bottom — no JS needed, works everywhere. -vamshi 2026-08-12
+   Rewritten 2026-09-15. The previous slide-in ::before approach painted a
+   dark fill layer at z-index: 0 above the button's bare text (Horizon renders
+   button blocks as `<a>Shop all</a>` — no inner span for stacking), making the
+   text invisible on hover. Additionally the hover triggered on mobile touch
+   and stayed stuck until the user tapped elsewhere.
+
+   Solution: (1) plain background-color transition — no pseudo-element gymnastics
+   so bare text stays visible. (2) hover styles gated by `@media (hover: hover)`
+   so mobile touch never enters hover state. (3) `:active` handles the tap
+   feedback on mobile with a brief dim.
    ------------------------------------------------------------------- */
 
-/* Position context + clip for the fill layer */
+/* Base — smooth transition for the flip. */
 .shopify-section .hero a.button,
 .shopify-section .hero a.button-secondary,
 .shopify-section a[class*="image-with-button-"],
@@ -344,115 +346,69 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 .shopify-section .shopify-payment-button__button,
 .shopify-section .shopify-payment-button__button--unbranded,
 .shopify-section .product-information .add-to-cart-button {
-  position: relative !important;
-  overflow: hidden !important;
-  isolation: isolate;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
 }
 
-/* Fill layer */
-.shopify-section .hero a.button::before,
-.shopify-section .hero a.button-secondary::before,
-.shopify-section a[class*="image-with-button-"]::before,
-.shopify-section a[class*="image-text-button-"]::before,
-.shopify-section [class*="collection-button-"]::before,
-.shopify-section [class*="featured-product-button-"]::before,
-.shopify-section a[class*="featured-button-"]::before,
-.shopify-section [class*="slider-button-"]::before,
-.shopify-section .isoua-pill-button::before,
-.shopify-section [class*="ai-contact-form-submit-"]::before,
-.shopify-section .rh-cta::before,
-.shopify-section .rs-cta::before,
-.shopify-section .shopify-payment-button__button::before,
-.shopify-section .product-information .add-to-cart-button::before {
-  content: '' !important;
-  position: absolute !important;
-  inset: 0 !important;
-  background: #67645e !important;
-  border-radius: inherit !important;
-  transform: translateY(101%);
-  transition: transform 0.45s cubic-bezier(.76, 0, .24, 1) !important;
-  z-index: 0 !important;
-  will-change: transform;
-  pointer-events: none !important;
+/* Hover — desktop only (pointer device with true hover capability). */
+@media (hover: hover) and (pointer: fine) {
+  .shopify-section .hero a.button:hover,
+  .shopify-section .hero a.button-secondary:hover,
+  .shopify-section a[class*="image-with-button-"]:hover,
+  .shopify-section a[class*="image-text-button-"]:hover,
+  .shopify-section [class*="collection-button-"]:hover,
+  .shopify-section [class*="featured-product-button-"]:hover,
+  .shopify-section a[class*="featured-button-"]:hover,
+  .shopify-section [class*="slider-button-"]:hover,
+  .shopify-section .isoua-pill-button:hover,
+  .shopify-section [class*="ai-contact-form-submit-"]:hover,
+  .shopify-section .rh-cta:hover,
+  .shopify-section .rs-cta:hover,
+  .shopify-section .shopify-payment-button__button:hover,
+  .shopify-section .product-information .add-to-cart-button:hover {
+    background-color: #67645e !important;
+    background-image: none !important;
+    color: #ffffff !important;
+    border-color: #67645e !important;
+  }
+
+  /* SVG arrows flip white too */
+  .shopify-section .hero a.button:hover svg path,
+  .shopify-section .hero a.button-secondary:hover svg path,
+  .shopify-section a[class*="image-with-button-"]:hover svg path,
+  .shopify-section a[class*="image-text-button-"]:hover svg path,
+  .shopify-section [class*="collection-button-"]:hover svg path,
+  .shopify-section [class*="featured-product-button-"]:hover svg path,
+  .shopify-section a[class*="featured-button-"]:hover svg path,
+  .shopify-section [class*="slider-button-"]:hover svg path,
+  .shopify-section .isoua-pill-button:hover svg path,
+  .shopify-section [class*="ai-contact-form-submit-"]:hover svg path,
+  .shopify-section .rh-cta:hover svg path,
+  .shopify-section .rs-cta:hover svg path,
+  .shopify-section .shopify-payment-button__button:hover svg path,
+  .shopify-section .product-information .add-to-cart-button:hover svg path {
+    fill: #ffffff !important;
+  }
 }
 
-/* Slide the fill in on hover */
-.shopify-section .hero a.button:hover::before,
-.shopify-section .hero a.button-secondary:hover::before,
-.shopify-section a[class*="image-with-button-"]:hover::before,
-.shopify-section a[class*="image-text-button-"]:hover::before,
-.shopify-section [class*="collection-button-"]:hover::before,
-.shopify-section [class*="featured-product-button-"]:hover::before,
-.shopify-section a[class*="featured-button-"]:hover::before,
-.shopify-section [class*="slider-button-"]:hover::before,
-.shopify-section .isoua-pill-button:hover::before,
-.shopify-section [class*="ai-contact-form-submit-"]:hover::before,
-.shopify-section .rh-cta:hover::before,
-.shopify-section .rs-cta:hover::before,
-.shopify-section .shopify-payment-button__button:hover::before,
-.shopify-section .product-information .add-to-cart-button:hover::before {
-  transform: translate(0, 0);
-}
-
-/* Keep every inner element above the fill layer */
-.shopify-section .hero a.button > *,
-.shopify-section .hero a.button-secondary > *,
-.shopify-section a[class*="image-with-button-"] > *,
-.shopify-section a[class*="image-text-button-"] > *,
-.shopify-section [class*="collection-button-"] > *,
-.shopify-section [class*="featured-product-button-"] > *,
-.shopify-section a[class*="featured-button-"] > *,
-.shopify-section [class*="slider-button-"] > *,
-.shopify-section .isoua-pill-button > *,
-.shopify-section [class*="ai-contact-form-submit-"] > *,
-.shopify-section .rh-cta > *,
-.shopify-section .rs-cta > *,
-.shopify-section .shopify-payment-button__button > *,
-.shopify-section .product-information .add-to-cart-button > * {
-  position: relative !important;
-  z-index: 1 !important;
-}
-
-/* Hover-state colour flip. Keep background WHITE — the visible brown comes
-   from the ::before layer sliding in. Only text + border colour change here. */
-.shopify-section .hero a.button:hover,
-.shopify-section .hero a.button-secondary:hover,
-.shopify-section a[class*="image-with-button-"]:hover,
-.shopify-section a[class*="image-text-button-"]:hover,
-.shopify-section [class*="collection-button-"]:hover,
-.shopify-section [class*="featured-product-button-"]:hover,
-.shopify-section a[class*="featured-button-"]:hover,
-.shopify-section [class*="slider-button-"]:hover,
-.shopify-section .isoua-pill-button:hover,
-.shopify-section [class*="ai-contact-form-submit-"]:hover,
-.shopify-section .rh-cta:hover,
-.shopify-section .rs-cta:hover,
-.shopify-section .shopify-payment-button__button:hover,
-.shopify-section .product-information .add-to-cart-button:hover {
-  background-color: #ffffff !important;
-  background-image: none !important;
-  color: #ffffff !important;
-  border-color: #67645e !important;
-  /* Delay the text colour so it flips roughly when the fill reaches centre */
-  transition: color 0.15s ease 0.2s, border-color 0.3s ease !important;
-}
-
-/* Also flip SVG arrow on hover */
-.shopify-section .hero a.button:hover svg path,
-.shopify-section .hero a.button-secondary:hover svg path,
-.shopify-section a[class*="image-with-button-"]:hover svg path,
-.shopify-section a[class*="image-text-button-"]:hover svg path,
-.shopify-section [class*="collection-button-"]:hover svg path,
-.shopify-section [class*="featured-product-button-"]:hover svg path,
-.shopify-section a[class*="featured-button-"]:hover svg path,
-.shopify-section [class*="slider-button-"]:hover svg path,
-.shopify-section .isoua-pill-button:hover svg path,
-.shopify-section [class*="ai-contact-form-submit-"]:hover svg path,
-.shopify-section .rh-cta:hover svg path,
-.shopify-section .rs-cta:hover svg path,
-.shopify-section .shopify-payment-button__button:hover svg path,
-.shopify-section .product-information .add-to-cart-button:hover svg path {
-  fill: #ffffff !important;
+/* Mobile tap feedback — brief press-down look (100ms), doesn't stick. */
+@media (hover: none) {
+  .shopify-section .hero a.button:active,
+  .shopify-section .hero a.button-secondary:active,
+  .shopify-section a[class*="image-with-button-"]:active,
+  .shopify-section a[class*="image-text-button-"]:active,
+  .shopify-section [class*="collection-button-"]:active,
+  .shopify-section [class*="featured-product-button-"]:active,
+  .shopify-section a[class*="featured-button-"]:active,
+  .shopify-section [class*="slider-button-"]:active,
+  .shopify-section .isoua-pill-button:active,
+  .shopify-section [class*="ai-contact-form-submit-"]:active,
+  .shopify-section .rh-cta:active,
+  .shopify-section .rs-cta:active,
+  .shopify-section .shopify-payment-button__button:active,
+  .shopify-section .product-information .add-to-cart-button:active {
+    background-color: #f1f0ed !important;
+    transition: background-color 0.1s ease !important;
+  }
 }
 
 /* Hover state inner text on collection-6's hover-revealed SHOP NOW button —
