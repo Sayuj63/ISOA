@@ -61,7 +61,8 @@
       "custom_css": [
         ".hero {padding: 1.5vw; padding-top: 0; overflow: hidden;}",
         ".hero img,.hero__media img,.hero__media {border-radius: 10px;}",
-        "@media screen and (max-width: 749px) {.hero {margin-top: 0; position: relative; z-index: 0; }}"
+        "@media screen and (max-width: 749px) {.hero {margin-top: 0; position: relative; z-index: 0; }}",
+        "@media screen and (max-width: 749px) {.hero a.button, .hero a.button-secondary, .hero .button, .hero .button-secondary {min-height: 26px !important; max-height: 26px !important; height: 26px !important; padding: 0 16px !important; font-size: 10px !important; letter-spacing: 0.08em !important; text-transform: uppercase !important;}}"
       ],
       "name": "t:names.hero",
       "settings": {
