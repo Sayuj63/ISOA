@@ -217,7 +217,7 @@
         "background_color": "#f1f0ed",
         "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
         "border_color": "#000000",
-        "margin_top": 52,
+        "margin_top": 44,
         "margin_top_other": 52,
         "margin_horizontal": 3,
         "margin_horizontal_mobile": 2,
