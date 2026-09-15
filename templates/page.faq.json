@@ -50,7 +50,6 @@
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
-        "image_1": "shopify://shop_images/AEQEA_BANNER_IMAGE.png",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": true,
@@ -69,7 +68,7 @@
         "gap": 14,
         "section_width": "page-width",
         "section_height": "custom",
-        "section_height_custom": 70,
+        "section_height_custom": 65,
         "color_scheme": "scheme-1",
         "toggle_overlay": false,
         "overlay_color": "#00000026",
