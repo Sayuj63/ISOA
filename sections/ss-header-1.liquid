@@ -708,11 +708,14 @@
     transition: left .3s cubic-bezier(.76,0,.24,1), width .3s cubic-bezier(.76,0,.24,1);
   }
 
-  /* Panels — one per tab, laid side by side and translated into view. */
+  /* Panels — one per tab, laid side by side and translated into view.
+     overflow:hidden clips the off-screen panels; without it the next panel
+     bleeds a sliver into the inner's side padding. */
   .header-mm-panels-{{ section.id }} {
     display: flex;
     align-items: flex-start;
     width: 100%;
+    overflow: hidden;
     transition: transform .5s cubic-bezier(.76,0,.24,1);
   }
 
@@ -2509,6 +2512,35 @@ if (Shopify.designMode) {
       "label": "Lazy load",
       "info": "Lazy load images for speed optimisation",
       "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "mobile_tab",
+      "name": "Mobile menu tab",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_label",
+          "label": "Tab label",
+          "default": "FEATURED"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "range",
+          "id": "product_limit",
+          "min": 3,
+          "max": 10,
+          "step": 1,
+          "label": "Products shown",
+          "default": 5
+        }
+      ]
     }
   ],
   "presets": [
