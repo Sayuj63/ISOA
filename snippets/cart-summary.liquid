@@ -276,7 +276,7 @@
       class="cart-totals__item cart-totals__total"
       role="status"
     >
-      <span class="cart-totals__total-label cart-primary-typography">{{ 'content.cart_estimated_total' | t }}</span>
+      <span class="cart-totals__total-label cart-primary-typography">{{ 'content.cart_subtotal' | t }}</span>
       <text-component
         ref="cartTotal"
         value="{{ total_price | strip_html }}"
@@ -312,8 +312,9 @@
     {% endif %}
     form="cart-form"
   >
+    {% # The reference button reads one word; the locale string is "Check out". # %}
     <span class="button-text">
-      {{ 'content.checkout' | t }}
+      Checkout
     </span>
   </button>
 
