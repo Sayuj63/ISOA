@@ -372,6 +372,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
+  margin-block-start: 4px;
 }
 
 .isoa-cd__item-title {
@@ -472,7 +473,7 @@
 .isoa-cd__upsell-name {
   font-size: 18px;
   font-weight: 700;
-  line-height: 1.4;
+  line-height: 1.5;
   letter-spacing: 0.36px;
   text-transform: uppercase;
 }
