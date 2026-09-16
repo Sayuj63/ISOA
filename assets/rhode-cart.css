@@ -187,13 +187,42 @@ body.template-cart .cart-page__summary .cart__checkout-button:hover,
 
 /* --------------------------------------------------------- line items ---- */
 
+/* Horizon declares `grid-template-areas` here but never assigns `grid-area` to
+   the cells, so the areas were inert and the four cells auto-flowed into one
+   row. Naming them explicitly gives the reference layout: image left, title +
+   variant beside it with the line price flush right, stepper underneath. */
 body.template-cart .cart-items__table-row {
   grid-template-columns: 110px minmax(0, 1fr) auto;
+  grid-template-areas:
+    'media details price'
+    'media quantity quantity'
+    'media error error';
   column-gap: 24px;
   row-gap: 12px;
-  align-items: center;
+  align-items: start;
   padding-block-end: 24px;
   margin-block-end: 24px;
+}
+
+body.template-cart .cart-items__media {
+  grid-area: media;
+  align-self: stretch;
+}
+
+body.template-cart .cart-items__details {
+  grid-area: details;
+}
+
+body.template-cart .cart-items__quantity {
+  grid-area: quantity;
+}
+
+body.template-cart .cart-items__price {
+  grid-area: price;
+}
+
+body.template-cart .cart-items__error {
+  grid-area: error;
 }
 
 body.template-cart .cart-items__media-container {
