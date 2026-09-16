@@ -238,11 +238,16 @@
   .isoa-rc-card:hover .isoa-rc-img--primary,
   .isoa-rc-card:focus-within .isoa-rc-img--primary {
     opacity: 0;
+    /* Outgoing image pushes away as it fades — mirror of the incoming zoom.
+       Same magnitude in the opposite direction gives the swap depth without
+       either image ever feeling "still". */
+    transform: scale(1.06);
   }
   .isoa-rc-card:hover .isoa-rc-img--secondary,
   .isoa-rc-card:focus-within .isoa-rc-img--secondary {
     opacity: 1;
     visibility: visible;
+    transform: scale(1);
   }
   .isoa-rc-card:hover .isoa-rc-info,
   .isoa-rc-card:focus-within .isoa-rc-info {
