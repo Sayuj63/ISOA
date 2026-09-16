@@ -1819,6 +1819,30 @@
         "step": 1,
         "unit": "px",
         "default": 0
+      },
+      {
+        "type": "header",
+        "content": "Free shipping progress"
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_free_shipping_enabled",
+        "label": "Show free shipping progress bar",
+        "info": "Shown in the cart summary on both the cart page and the cart drawer.",
+        "default": true
+      },
+      {
+        "type": "number",
+        "id": "cart_free_shipping_threshold",
+        "label": "Free shipping threshold",
+        "info": "Order subtotal that unlocks free shipping, in store currency (not subunits).",
+        "default": 1999
+      },
+      {
+        "type": "text",
+        "id": "cart_free_shipping_label",
+        "label": "Free shipping label",
+        "default": "FREE SHIPPING"
       }
     ]
   },
