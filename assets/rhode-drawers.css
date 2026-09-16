@@ -596,7 +596,8 @@
 .isoa-cd__qty .quantity-selector input {
   flex: 1 1 auto;
   min-width: 0;
-  padding: 11px 0;
+  height: 40px;
+  padding: 0;
   border: none;
   background: none;
   color: var(--rhode-drawer-ink);
@@ -650,8 +651,15 @@
     letter-spacing: 0.32px;
   }
 
+  .isoa-cd__close {
+    inset-block-start: 16px;
+    inset-inline-end: 16px;
+    width: 16px;
+    height: 16px;
+  }
+
   .isoa-cd__progress {
-    padding: 0 16px;
+    padding: 0 16px 16px;
   }
 
   .isoa-cd__label--above {
@@ -665,7 +673,7 @@
 
   .isoa-cd__item-image a {
     width: 65.6px;
-    height: 83px;
+    height: 82px;
   }
 
   .isoa-cd__item-title,
@@ -680,7 +688,7 @@
   }
 
   .isoa-cd__upsell-title {
-    margin-block-end: 16px;
+    margin-block-end: 8px;
     font-size: 16px;
     letter-spacing: 0.32px;
   }
@@ -689,9 +697,14 @@
     gap: 16px;
   }
 
+  .isoa-cd__upsell-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .isoa-cd__upsell-image {
     width: 65.6px;
-    height: 83px;
+    height: 82px;
   }
 
   .isoa-cd__upsell-name {
@@ -708,15 +721,12 @@
     font-size: 16px;
   }
 
+  /* The reference keeps the desktop padding on mobile and only steps the
+     type down, so the pills keep their 46.2 / 30.2 heights. */
   .isoa-cd__checkout,
   .isoa-cd__add {
-    padding: 14px 24px !important;
     font-size: 14.78px !important;
     letter-spacing: 0.2956px !important;
-  }
-
-  .isoa-cd__checkout {
-    margin-block-start: 16px;
   }
 }
 
