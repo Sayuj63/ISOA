@@ -242,6 +242,18 @@
 
 /* ------------------------------------------------------------ cart drawer -- */
 
+/* `.cart-items-component` (base.css:2997 + snippets/cart-items-component.liquid)
+   is Horizon's own layout rule for the cart body: width/height 100% and a flex
+   column. The drawer opts into that class instead of restating it, and this
+   sizes the wrapper it sits in — without a definite height here, the child's
+   `height: 100%` resolves against `auto` and the foot never reaches the bottom. */
+.isoa-cd__inner {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
 .isoa-cd__head {
   position: relative;
   flex: 0 0 auto;
@@ -499,6 +511,7 @@
   justify-content: space-between;
   gap: 16px;
   padding-block-start: 17.6px;
+  line-height: 1.5;
 }
 
 .isoa-cd__summary-label {
