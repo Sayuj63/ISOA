@@ -31,18 +31,34 @@ body.template-cart .section-background:has(+ .section .cart-page) {
 
 /* ----------------------------------------------------------- two column -- */
 
+/* Rhode's own page rail is `body { padding: 15px 32.4px 32.4px }` — its header,
+   nav and `.Cart` all measure 32 → 1408. Ours is the theme's 40px pill rail, so
+   the page edges differ by 7.6px a side and that is deliberate: every other
+   section on the site is on the 40px rail.
+
+   Inside that rail the *content* is inset a further 32.4px so the columns land
+   where the reference's do. The reference's `.Cart` is 1375 wide with
+   `padding: 79.2px 40px 0`, so its item column starts at x=72.4 and its grid
+   resolves to `792px 423.219px` in a 1295px content box. Ours: 40 (rail) + 32.4
+   = 72.4, and 1360 - 64.8 = 1295.2 — the same content box, hence the same
+   792 / 80 / 423 split, with the summary card flush to the content edge in both.
+
+   `minmax(0, 792px)` rather than a bare `792px` so the column can shrink between
+   the 749px mobile breakpoint and the ~880px viewport where 792 + 80 + a usable
+   summary no longer fits. */
 body.template-cart .cart-page {
   position: relative;
   min-height: 540px;
-  grid-template-columns: minmax(0, 1fr) min(423px, 34%);
+  grid-template-columns: minmax(0, 792px) minmax(0, 1fr);
   column-gap: 80px;
   row-gap: 0;
   padding-block-start: 79px;
+  padding-inline: 32.4px;
 }
 
 body.template-cart .section--page-width .cart-page:has(.cart-summary--extend) {
   grid-column: 2;
-  grid-template-columns: minmax(0, 1fr) min(423px, 34%);
+  grid-template-columns: minmax(0, 792px) minmax(0, 1fr);
 }
 
 /* Horizon pins the summary to `grid-row: 1 / -1`, so the row it shares with the
@@ -360,6 +376,11 @@ body.template-cart .cart-items__remove svg {
     grid-template-columns: 1fr;
     column-gap: 0;
     padding-block-start: 24px;
+    /* The desktop inset exists only to reproduce the reference's 1295px content
+       box inside our wider rail. At this width the reference's own body padding
+       collapses to the same 16px our rail uses, so there is nothing left to
+       match — content fills the rail. */
+    padding-inline: 0;
   }
 
   body.template-cart .cart-page__summary,
