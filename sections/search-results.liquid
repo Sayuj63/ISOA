@@ -19,46 +19,84 @@
   <div
     class="collection-wrapper grid gap-style"
   >
-    {% assign products_per_page = 24 %}
+    {%- if search.performed -%}
+      {% paginate search.results by 12 %}
+        {%- if search.results_count > 0 -%}
+          {%- comment -%}
+            Same infinite-scroll contract `snippets/product-grid.liquid` uses
+            (`[ref=viewMoreNext]`, `[ref=grid]`, `data-last-page`), so
+            `results-list` keeps appending pages the way the reference does —
+            it has no visible pagination control either.
+          {%- endcomment -%}
+          {%- if section.settings.enable_infinite_scroll -%}
+            <span ref="viewMorePrevious"></span>
+          {%- endif -%}
 
-    {% if section.settings.enable_infinite_scroll == false %}
-      {% assign products_per_page = section.settings.products_per_page %}
-    {% endif %}
-
-    {% paginate search.results by products_per_page %}
-      {% if search.results_count > 0 %}
-        {% content_for 'block', type: 'filters', id: 'filters', results: search, results_size: search.results_count %}
-        {% assign products = search.results | where: 'object_type', 'product' %}
-      {% else %}
-        {% assign collection = settings.empty_state_collection | default: collections.all %}
-        {% assign default_title = 'content.search_results_resource_products' | t %}
-        {% assign title = settings.empty_state_collection.title | default: default_title %}
-        {% assign products = collection.products %}
-      {% endif %}
-
-      {% capture children %}
-        {% for product in products %}
-          <li
-            id="{{ section.id }}-{{ product.id }}"
-            class="product-grid__item product-grid__item--{{ forloop.index0 }}"
-            data-page="{{ paginate.current_page }}"
-            data-product-id="{{ product.id }}"
-            ref="cards[]"
+          <ul
+            class="search-results-list"
+            ref="grid"
+            role="list"
+            data-last-page="{{ paginate.pages }}"
           >
-            {% content_for 'block', type: '_product-card', id: 'product-card', closest.product: product %}
-          </li>
-        {% endfor %}
-      {% endcapture %}
+            {%- for item in search.results -%}
+              {%- case item.object_type -%}
+                {%- when 'article' -%}
+                  {%- assign result_image = item.image -%}
+                  {%- assign result_body = item.excerpt_or_content -%}
+                {%- when 'page' -%}
+                  {%- assign result_image = '' -%}
+                  {%- assign result_body = item.content -%}
+                {%- else -%}
+                  {%- assign result_image = item.featured_image -%}
+                  {%- assign result_body = item.description -%}
+              {%- endcase -%}
+              {%- assign result_text = result_body | strip_html | strip -%}
 
-      {% render 'product-grid',
-        section: section,
-        children: children,
-        products: products,
-        paginate: paginate,
-        enable_infinite_scroll: section.settings.enable_infinite_scroll,
-        title: title
-      %}
-    {% endpaginate %}
+              <li
+                id="{{ section.id }}-{{ item.id }}"
+                class="search-result"
+                ref="cards[]"
+              >
+                <a
+                  class="search-result__link"
+                  href="{{ item.url }}"
+                >
+                  {%- if result_image != blank -%}
+                    <span class="search-result__media">
+                      <img
+                        src="{{ result_image | image_url: width: 480 }}"
+                        alt="{{ result_image.alt | default: item.title | escape }}"
+                        width="{{ result_image.width }}"
+                        height="{{ result_image.height }}"
+                        loading="lazy"
+                      >
+                    </span>
+                  {%- endif -%}
+
+                  <span class="search-result__info">
+                    <span class="search-result__title">{{ item.title }}</span>
+                    {%- if result_text != blank -%}
+                      <span class="search-result__excerpt">{{ result_text | truncatewords: 50 }}</span>
+                    {%- endif -%}
+                  </span>
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+
+          {%- if section.settings.enable_infinite_scroll -%}
+            <span ref="viewMoreNext"></span>
+          {%- elsif paginate.next -%}
+            <a
+              class="search-results__more"
+              href="{{ paginate.next.url }}"
+            >
+              Show more
+            </a>
+          {%- endif -%}
+        {%- endif -%}
+      {% endpaginate %}
+    {%- endif -%}
   </div>
 </results-list>
 
