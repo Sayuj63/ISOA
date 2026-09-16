@@ -1,0 +1,226 @@
+/*
+  rhode-search.css — Rhode-style restyle of the Horizon search page.
+
+  Scoped to `body.template-search`. Horizon injects its section
+  `{% stylesheet %}` blocks through `content_for_header`, which lands *after*
+  this file in the head, so every rule carries the scope in its selector
+  rather than relying on source order.
+
+  Reference values measured from rhodeskin.com/search?q=lip on 2026-09-17 at
+  1440 and 390.
+*/
+
+:root {
+  --rhode-search-ink: #67645e;
+  --rhode-search-rule: #f1f0ed;
+  --rhode-search-field: #dddedc;
+  --rhode-search-accent: #e81818;
+  --rhode-search-accent-hover: #cf000f;
+}
+
+/* ------------------------------------------------------------- column -- */
+
+/* Both the header and the results sit in Horizon's page grid, which puts them
+   at the 1360px pill. Rhode centres a 640px column inside that, so the column
+   is applied to the *children* rather than the grid items themselves. */
+body.template-search .search-page__header > *,
+body.template-search .collection-wrapper {
+  width: 100%;
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+body.template-search .collection-wrapper {
+  display: block;
+}
+
+/* ------------------------------------------------------------ heading -- */
+
+body.template-search .search-page__header > .text-block {
+  margin-block-end: 8px;
+}
+
+body.template-search .search-page__header h3 {
+  margin: 0;
+  font-size: 31px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--rhode-search-ink);
+}
+
+/* --------------------------------------------------------------- form -- */
+
+body.template-search .search-page-input__parent {
+  align-items: stretch;
+}
+
+/* The reference field is a bare underlined input — no magnifier, no reset —
+   so the theme's two absolutely-positioned icons are taken out of the box and
+   the padding collapses to the reference's flat 8px. */
+body.template-search search-page-input-component {
+  margin: 0 0 16px;
+  max-width: 100%;
+  display: block;
+}
+
+body.template-search search-page-input-component .search__icon,
+body.template-search search-page-input-component .search__reset-button {
+  display: none;
+}
+
+body.template-search .search-page-input {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-bottom: 2px solid var(--rhode-search-field);
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--rhode-search-ink);
+  font-size: 16px;
+  line-height: 1.15;
+}
+
+body.template-search .search-page-input::placeholder {
+  color: var(--rhode-search-ink);
+  opacity: 1;
+}
+
+body.template-search .search-page-input__submit {
+  align-self: flex-start;
+  width: auto;
+  margin: 0 0 20px;
+  padding: 15px 32px;
+  border: 2px solid var(--rhode-search-accent);
+  border-radius: 4px;
+  background-color: var(--rhode-search-accent);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 1;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+body.template-search .search-page-input__submit:hover,
+body.template-search .search-page-input__submit:focus-visible {
+  background-color: var(--rhode-search-accent-hover);
+  border-color: var(--rhode-search-accent-hover);
+  outline: none;
+}
+
+/* ------------------------------------------------------------ results -- */
+
+body.template-search .search-results-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+body.template-search .search-result {
+  padding: 16px;
+  margin-block-end: 16px;
+  border-block-end: 1px solid var(--rhode-search-rule);
+}
+
+body.template-search .search-result__link {
+  display: flex;
+  align-items: center;
+  color: var(--rhode-search-ink);
+  text-decoration: none;
+}
+
+body.template-search .search-result__media {
+  flex: 0 0 182px;
+  width: 182px;
+  height: 150px;
+}
+
+body.template-search .search-result__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+body.template-search .search-result__info {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+body.template-search .search-result__title {
+  display: block;
+  margin-block-end: 6.25px;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--rhode-search-ink);
+}
+
+body.template-search .search-result__excerpt {
+  display: block;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--rhode-search-ink);
+}
+
+/* Pages have no image, so their text would otherwise start at the row edge
+   while every other row's text starts 182px in. */
+body.template-search .search-result__link:not(:has(.search-result__media)) .search-result__info {
+  padding-inline-start: 0;
+}
+
+body.template-search .search-results__more {
+  display: block;
+  width: fit-content;
+  margin: 32px auto 0;
+  padding: 12px 40px;
+  border: 1px solid var(--rhode-search-ink);
+  border-radius: 40px;
+  color: var(--rhode-search-ink);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+/* ------------------------------------------------------------- mobile -- */
+
+@media screen and (max-width: 749px) {
+  /* The reference insets its 640 column 10px further than the page margin on
+     mobile, so the rows sit at x=26 in a 390 viewport rather than x=16. */
+  body.template-search .search-page__header > *,
+  body.template-search .collection-wrapper {
+    padding-inline: 10px;
+  }
+
+  body.template-search .search-page__header h3 {
+    font-size: 20px;
+    line-height: 1.4;
+  }
+
+  /* Image stacks above the text and centres. */
+  body.template-search .search-result__link {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  body.template-search .search-result__media {
+    align-self: center;
+    flex: 0 0 auto;
+    width: 240px;
+    height: 208px;
+  }
+
+  body.template-search .search-result__title {
+    margin-block-end: 4.5px;
+    font-size: 18px;
+  }
+
+  body.template-search .search-page-input__submit {
+    width: 100%;
+    padding: 15px 24px;
+  }
+}
