@@ -629,7 +629,12 @@
     border-radius: var(--mm-radius);
     padding-bottom: 16px;
     overflow: hidden;
-    transition: all .5s cubic-bezier(.76,0,.24,1);
+    /* Rhode's drawer opens over 1s. `transition: all` used to make the shell
+       re-check every animatable property each frame; listing the two that
+       actually move keeps the reveal smooth. */
+    transition:
+      height 1s cubic-bezier(.76,0,.24,1),
+      opacity 1s cubic-bezier(.76,0,.24,1);
     z-index: 2;
     opacity: 0;
     pointer-events: none;
@@ -639,7 +644,6 @@
     height: 95vh;
     opacity: 1;
     pointer-events: all;
-    transition: all .5s cubic-bezier(.76,0,.24,1);
   }
 
   .header-menu-mobile-inner-{{ section.id }} {
@@ -655,6 +659,10 @@
     overflow-y: auto;
     overflow-x: hidden;
     scrollbar-width: none;
+    /* Keeps the panel on its own compositor layer so the shell's height
+       animation doesn't repaint the cards on every frame. */
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   .header-menu-mobile-inner-{{ section.id }}::-webkit-scrollbar {
