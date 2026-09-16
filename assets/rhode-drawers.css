@@ -1,0 +1,756 @@
+/*
+  rhode-drawers.css — Rhode-style right-side drawers (search + cart).
+
+  Both are native <dialog> elements. Being in the browser's top layer is what
+  gives them "above everything" stacking and the dimmed page behind them, so
+  neither needs a z-index and the dimmer is the dialog's own ::backdrop.
+
+  Loaded from theme.liquid *before* {{ content_for_header }}, which is where
+  Horizon injects section {% stylesheet %} blocks — so these rules beat
+  base.css on source order at equal specificity, the same contract
+  rhode-cart.css and rhode-search.css use.
+
+  Reference values measured from rhodeskin.com on 2026-09-17 at 1440 and 390.
+  The reference keeps both drawers in one fixed aside (`.Offcanvas--right`,
+  680.4x900, z-index 9999) with a separate full-viewport dimmer
+  (`.Offcanvas-bgDimmer`, rgba(0,0,0,.75), z-index 9999).
+*/
+
+:root {
+  --rhode-drawer-bg: #f1f0ed;
+  --rhode-drawer-ink: #67645e;
+  --rhode-drawer-rule: #dbdad9;
+  --rhode-drawer-track: #84827e;
+  --rhode-drawer-field: #bfbebe;
+  --rhode-drawer-dim: rgb(0 0 0 / 0.75);
+}
+
+/* ------------------------------------------------------------- the shell -- */
+
+.isoa-drawer {
+  /* The reference animates transform + visibility over 0.3s ease-in-out.
+     Horizon's .dialog-drawer keyframes read these two vars. */
+  --animation-speed: 0.3s;
+  --animation-easing: ease-in-out;
+
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  width: 680px;
+  max-width: 680px;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0 0 0 auto;
+  padding: 0;
+  overflow: hidden;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: var(--rhode-drawer-bg);
+  color: var(--rhode-drawer-ink);
+}
+
+/* Author `display` outranks the UA stylesheet, whose whole job for a closed
+   dialog is `dialog:not([open]) { display: none }`. Setting `display: flex`
+   above silently cancelled that, so both closed drawers stayed laid out and
+   painted their 680px panel across the right-hand side of every template — a
+   grey slab over the cart summary card, and hit-testable through it. Restore
+   the contract. Horizon keeps `[open]` on the element for the whole close
+   animation and only clears it at the end of `closeDialog`, so this hides it
+   exactly when it is meant to be gone. */
+.isoa-drawer:not([open]) {
+  display: none;
+}
+
+.isoa-drawer::backdrop {
+  background: var(--rhode-drawer-dim);
+}
+
+@media screen and (max-width: 749px) {
+  /* The reference insets the panel 16px on all four sides and rounds it to
+     12px, leaving the dimmer visible as a frame around it. */
+  .isoa-drawer {
+    width: calc(100dvw - 32px);
+    max-width: calc(100dvw - 32px);
+    height: calc(100dvh - 32px);
+    max-height: calc(100dvh - 32px);
+    margin: 16px;
+    border-radius: 12px;
+  }
+}
+
+/* ---------------------------------------------------------- search drawer -- */
+
+.isoa-sd__head {
+  position: relative;
+  flex: 0 0 auto;
+  padding: 20px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.isoa-sd__title {
+  margin: 0;
+  font: inherit;
+  text-transform: lowercase;
+}
+
+.isoa-sd__close {
+  position: absolute;
+  inset-block-start: 21.6px;
+  inset-inline-end: 21.6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  color: var(--rhode-drawer-ink);
+  cursor: pointer;
+}
+
+.isoa-sd__close svg {
+  width: 100%;
+  height: 100%;
+}
+
+.isoa-sd__form {
+  flex: 0 0 auto;
+  padding: 0 36px;
+}
+
+/* The extra `.isoa-drawer` is load-bearing, not decoration. base.css:1320 is
+   `textarea, input:not([type='checkbox'], [type='radio'])` — specificity
+   0,1,1 — and it sets `background-color: var(--color-input-background)`,
+   which the theme's scheme resolves to #ffffffc7 (78% white). A bare
+   `.isoa-sd__input` (0,1,0) loses that fight; `.isoa-drawer .isoa-sd__input`
+   (0,2,0) wins it. The reference field is opaque #fff. */
+.isoa-drawer .isoa-sd__input {
+  display: block;
+  width: 100%;
+  height: 59px;
+  padding: 16px 13px;
+  appearance: none;
+  border: none;
+  border-radius: 10px;
+  background-color: #ffffff;
+  color: var(--rhode-drawer-ink);
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.isoa-sd__input::placeholder {
+  color: var(--rhode-drawer-field);
+  opacity: 1;
+}
+
+/* Safari/Chrome draw their own clear affordance on type=search. */
+.isoa-sd__input::-webkit-search-cancel-button,
+.isoa-sd__input::-webkit-search-decoration {
+  display: none;
+}
+
+.isoa-sd__rule {
+  flex: 0 0 auto;
+  height: 1px;
+  margin: 27px 36px 0;
+  background-color: var(--rhode-drawer-rule);
+}
+
+.isoa-sd__products {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  display: grid;
+  gap: 15px;
+  align-content: start;
+  margin: 0;
+  padding: 20px 36px 18px;
+  list-style: none;
+}
+
+/* The reference row is `grid-template-columns: 123px 1fr; gap: 43px` with the
+   text at the top of the row, not centred in it — `.SearchMini-prodDefTxt`
+   measures 19px tall inside a 123px row. Flex + `align-items: start` is the
+   same geometry with one less property to keep in sync. */
+.isoa-sd__product {
+  display: flex;
+  align-items: flex-start;
+  gap: 43px;
+  color: var(--rhode-drawer-ink);
+  text-decoration: none;
+}
+
+.isoa-sd__product-image {
+  flex: 0 0 auto;
+  display: block;
+  width: 123px;
+  height: 123px;
+  overflow: hidden;
+}
+
+.isoa-sd__product-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.isoa-sd__product-title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19.2px;
+  letter-spacing: 0.324px;
+  text-transform: uppercase;
+}
+
+@media screen and (max-width: 749px) {
+  .isoa-sd__head {
+    padding: 18px 20px 16px;
+    font-size: 16px;
+  }
+
+  .isoa-sd__close {
+    inset-block-start: 20px;
+    inset-inline-end: 16px;
+    width: 15px;
+    height: 15px;
+  }
+
+  .isoa-sd__form {
+    padding: 0 17px;
+  }
+
+  .isoa-drawer .isoa-sd__input {
+    height: 51px;
+    font-size: 16px;
+  }
+
+  .isoa-sd__rule {
+    margin-inline: 17px;
+  }
+
+  .isoa-sd__products {
+    padding: 20px 18px 18px;
+  }
+
+  .isoa-sd__product {
+    gap: 5px;
+  }
+
+  .isoa-sd__product-image {
+    width: 66px;
+    height: 66px;
+  }
+
+  .isoa-sd__product-title {
+    font-size: 14px;
+    line-height: 16.8px;
+    letter-spacing: 0.2796px;
+  }
+}
+
+/* ------------------------------------------------------------ cart drawer -- */
+
+/* `.cart-items-component` (base.css:2997 + snippets/cart-items-component.liquid)
+   is Horizon's own layout rule for the cart body: width/height 100% and a flex
+   column. The drawer opts into that class instead of restating it, and this
+   sizes the wrapper it sits in — without a definite height here, the child's
+   `height: 100%` resolves against `auto` and the foot never reaches the bottom. */
+.isoa-cd__inner {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.isoa-cd__head {
+  position: relative;
+  flex: 0 0 auto;
+  padding: 20.16px 32px 8px;
+  text-align: center;
+}
+
+.isoa-cd__title {
+  margin: 0;
+  font-size: 19.2px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.384px;
+  color: var(--rhode-drawer-ink);
+}
+
+.isoa-cd__close {
+  position: absolute;
+  inset-block-start: 21.6px;
+  inset-inline-end: 21.6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 21.6px;
+  height: 21.6px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  color: var(--rhode-drawer-ink);
+  cursor: pointer;
+}
+
+.isoa-cd__close svg {
+  width: 100%;
+  height: 100%;
+}
+
+.isoa-cd__progress {
+  flex: 0 0 auto;
+  padding: 0 32px 16px;
+}
+
+/* The reference outlines the track rather than filling it with a tint, and
+   the fill is the same ink as the outline. */
+.isoa-cd__track {
+  width: 480.8px;
+  max-width: 100%;
+  height: 10px;
+  margin-inline: auto;
+  overflow: hidden;
+  border: 1px solid var(--rhode-drawer-track);
+  border-radius: 5px;
+  background-color: transparent;
+}
+
+.isoa-cd__fill {
+  height: 100%;
+  border-radius: 5px;
+  background-color: var(--rhode-drawer-track);
+  transition: width 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* Same label, two slots: below the bar on desktop, above it on mobile. */
+.isoa-cd__label {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0 5px;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: 0.24px;
+}
+
+.isoa-cd__label--below {
+  padding-block-start: 8px;
+}
+
+.isoa-cd__items {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0 32px;
+  list-style: none;
+}
+
+.isoa-cd__item {
+  display: flex;
+  padding: 16px 0 8px;
+  border-block-start: 1px solid rgb(103 100 94 / 0.15);
+}
+
+.isoa-cd__item:first-child {
+  border-block-start: none;
+}
+
+.isoa-cd__item-image {
+  flex: 0 0 auto;
+  padding: 0 4px;
+}
+
+.isoa-cd__item-image a {
+  display: block;
+  width: 74px;
+  height: 92.5px;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: #ffffff;
+}
+
+.isoa-cd__item-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.isoa-cd__item-info {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0 4px 0 16px;
+}
+
+.isoa-cd__item-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-block-start: 4px;
+}
+
+.isoa-cd__item-title {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 27px;
+  letter-spacing: 0.36px;
+  color: var(--rhode-drawer-ink);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.isoa-cd__item-price {
+  flex: 0 0 auto;
+  font-size: 18px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.isoa-cd__item-variant {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.isoa-cd__item-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.isoa-cd__error {
+  font-size: 14px;
+  color: #c0392b;
+}
+
+/* The foot's own bottom padding is what keeps the CHECKOUT pill off the panel
+   edge. 21.6px was tight on desktop (pill visually flush with the panel) and
+   catastrophic on iOS Safari, where the home indicator eats ~34px and the
+   pill's bottom half sits under it. `max(...)` uses the larger of the design
+   inset and the physical safe-area inset, so devices without a safe area
+   still get the design value. */
+.isoa-cd__foot {
+  flex: 0 0 auto;
+  padding: 21.6px 21.6px max(32px, env(safe-area-inset-bottom, 0px) + 16px);
+  background-color: var(--rhode-drawer-bg);
+}
+
+.isoa-cd__upsell-title {
+  margin: 0 0 8px;
+  font-size: 21.6px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.432px;
+  text-align: center;
+}
+
+.isoa-cd__upsell-title strong {
+  font-weight: 700;
+}
+
+.isoa-cd__upsell {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 0 0 17.6px;
+  padding: 8px;
+  border-radius: 24px;
+  background-color: #ffffff;
+}
+
+.isoa-cd__upsell-image {
+  flex: 0 0 auto;
+  display: block;
+  width: 74px;
+  height: 92.5px;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: var(--rhode-drawer-bg);
+}
+
+.isoa-cd__upsell-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The reference puts the ADD pill to the right of the name on desktop and
+   stacks it under the name on mobile, so the two live in one flex container
+   rather than as siblings of the image. */
+.isoa-cd__upsell-info {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 4px;
+}
+
+.isoa-cd__upsell-detail {
+  min-width: 0;
+}
+
+.isoa-cd__upsell-name {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.36px;
+  text-transform: uppercase;
+}
+
+/* The reference uses a row of variant chips; a native select keeps the same
+   picker without a second custom element. Only rendered for multi-variant
+   upsells. */
+.isoa-cd__upsell-select {
+  width: 100%;
+  max-width: 160px;
+  margin-block-start: 4px;
+  padding: 4px 6px;
+  border: 1px solid rgb(103 100 94 / 0.35);
+  border-radius: 999px;
+  background-color: transparent;
+  color: var(--rhode-drawer-ink);
+  font-size: 12px;
+}
+
+.isoa-cd__summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  line-height: 1.5;
+}
+
+.isoa-cd__summary-label {
+  font-size: 18.72px;
+  font-weight: 400;
+  text-transform: lowercase;
+}
+
+.isoa-cd__summary-value {
+  font-size: 18.72px;
+  font-weight: 700;
+}
+
+.isoa-cd__tax-note {
+  margin: 8px 0 12px;
+  font-size: 12.4px;
+  line-height: 1.5;
+  letter-spacing: 0.248px;
+}
+
+/* base.css:4230-4305 hard-codes the `.button` box with `!important` on every
+   property (30px tall, 999px radius, #4a4a4a fill). `!important` here is the
+   only way past it without restyling every button on the site; scoped to the
+   drawer so nothing else moves. Same fight rhode-cart.css fights. */
+.isoa-cd__checkout,
+.isoa-cd__add,
+.isoa-cd__qty .quantity-minus,
+.isoa-cd__qty .quantity-plus {
+  min-height: 0 !important;
+  max-height: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.isoa-cd__checkout,
+.isoa-cd__add {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  padding: 12.8px 30.4px 11.2px !important;
+  border-radius: 40px !important;
+  background-color: var(--rhode-drawer-ink) !important;
+  color: #ffffff !important;
+  font-size: 16.88px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.3376px !important;
+  line-height: 1.5 !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.isoa-cd__add {
+  width: auto !important;
+  flex: 0 0 auto;
+  padding: 4.8px 30.4px 3.2px !important;
+}
+
+.isoa-cd__checkout:hover,
+.isoa-cd__add:hover {
+  background-color: #4f4c47 !important;
+}
+
+.isoa-cd__qty {
+  width: 122px;
+}
+
+.isoa-cd__qty .quantity-selector-wrapper {
+  display: block;
+}
+
+.isoa-cd__qty .quantity-selector {
+  display: flex;
+  align-items: center;
+  width: 122px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid var(--rhode-drawer-ink);
+  border-radius: 40px;
+  background-color: transparent;
+}
+
+.isoa-cd__qty .quantity-minus,
+.isoa-cd__qty .quantity-plus {
+  width: 40px !important;
+  min-width: 0 !important;
+  height: 40px !important;
+  padding: 0 !important;
+  border-radius: 40px !important;
+  background-color: transparent !important;
+  color: var(--rhode-drawer-ink) !important;
+}
+
+.isoa-cd__qty .quantity-selector input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 40px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--rhode-drawer-ink);
+  font-size: 14px;
+  text-align: center;
+}
+
+/* The theme hides the number input's spinners globally; the reference stepper
+   shows only the +/- controls either way. */
+.isoa-cd__qty .quantity-selector input::-webkit-outer-spin-button,
+.isoa-cd__qty .quantity-selector input::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+.isoa-cd__empty {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  padding: 0 32px 32px;
+  text-align: center;
+}
+
+@media screen and (max-width: 749px) {
+  /* No bottom padding: the reference runs the shipping label straight under
+     the title, and the gap under the bar belongs to .isoa-cd__progress. */
+  .isoa-cd__head {
+    padding: 16px 16px 0;
+  }
+
+  .isoa-cd__title {
+    font-size: 16px;
+    letter-spacing: 0.32px;
+  }
+
+  .isoa-cd__close {
+    inset-block-start: 16px;
+    inset-inline-end: 16px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .isoa-cd__progress {
+    padding: 0 16px 24px;
+  }
+
+  .isoa-cd__label--above {
+    display: flex;
+    padding-block-end: 5px;
+  }
+
+  .isoa-cd__items {
+    padding: 0 16px 16px;
+  }
+
+  .isoa-cd__item-image a {
+    width: 65.6px;
+    height: 82px;
+  }
+
+  .isoa-cd__item-title,
+  .isoa-cd__item-price {
+    font-size: 14px;
+    line-height: 21px;
+    letter-spacing: 0.2796px;
+  }
+
+  .isoa-cd__foot {
+    padding: 16px 16px max(24px, env(safe-area-inset-bottom, 0px) + 12px);
+  }
+
+  .isoa-cd__upsell-title {
+    margin-block-end: 8px;
+    font-size: 16px;
+    letter-spacing: 0.32px;
+  }
+
+  .isoa-cd__upsell {
+    gap: 20px;
+  }
+
+  .isoa-cd__upsell-info {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .isoa-cd__upsell-image {
+    width: 65.6px;
+    height: 82px;
+  }
+
+  .isoa-cd__upsell-name {
+    font-size: 14px;
+    letter-spacing: 0.2796px;
+  }
+
+  .isoa-cd__summary-label,
+  .isoa-cd__summary-value {
+    font-size: 16px;
+  }
+
+  /* The reference keeps the desktop padding on mobile and only steps the
+     type down, so the pills keep their 46.2 / 30.2 heights. */
+  .isoa-cd__checkout,
+  .isoa-cd__add {
+    font-size: 14.78px !important;
+    letter-spacing: 0.2956px !important;
+  }
+}
+
+/* The mobile label sits above the bar, the desktop one below it. */
+@media screen and (min-width: 750px) {
+  .isoa-cd__label--below {
+    display: flex;
+    font-size: 16px;
+    letter-spacing: 0.324px;
+  }
+}
