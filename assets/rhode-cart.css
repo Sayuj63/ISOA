@@ -71,14 +71,20 @@ body.template-cart .section--page-width .cart-page:has(.cart-summary--extend) {
    heading → items with nothing in between.
 
    An out-of-flow grid child is contained by its *grid area*, not the grid box,
-   so `inset-block-start: 0` already lands below the container's top padding and
-   `width: 100%` picks up the column width. `min-height` is the reference's own
-   guard against the card outgrowing a cart with only one or two items in it. */
+   so `inset-block-start: 0` already lands below the container's top padding.
+   `min-height` is the reference's own guard against the card outgrowing a cart
+   with only one or two items in it.
+
+   The horizontal insets are not symmetric by accident. `__summary` is not
+   explicitly placed, so its containing block runs from the second column's
+   start edge to the container's *padding-box* end edge — a box 32.4px wider
+   than the column. `inset-inline-end` hands that gutter back, or the card
+   renders 456px where the reference's is 423. */
 body.template-cart .cart-page__summary {
   position: absolute;
   inset-block-start: 0;
-  inset-inline-end: 0;
-  width: 100%;
+  inset-inline: 0 var(--rhode-cart-gutter);
+  width: auto;
 }
 
 /* With the summary out of flow the auto-placer would drop the first item into
