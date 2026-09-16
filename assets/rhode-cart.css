@@ -32,15 +32,40 @@ body.template-cart .section-background:has(+ .section .cart-page) {
 /* ----------------------------------------------------------- two column -- */
 
 body.template-cart .cart-page {
+  --rhode-cart-top: 79px;
+  position: relative;
+  min-height: 540px;
   grid-template-columns: minmax(0, 1fr) min(423px, 34%);
   column-gap: 80px;
   row-gap: 0;
-  padding-block-start: 79px;
+  padding-block-start: var(--rhode-cart-top);
 }
 
 body.template-cart .section--page-width .cart-page:has(.cart-summary--extend) {
   grid-column: 2;
   grid-template-columns: minmax(0, 1fr) min(423px, 34%);
+}
+
+/* Horizon pins the summary to `grid-row: 1 / -1`, so the row it shares with the
+   heading has to be tall enough to hold the whole card. That inflated the
+   heading's cell to the card's 335px and dropped the first line item ~300px
+   down the page. The reference treats the card as a sidebar the left column
+   knows nothing about, so take it out of grid flow — the left column then runs
+   heading → items with nothing in between. `min-height` is the reference's own
+   guard against the card outgrowing a short cart. */
+body.template-cart .cart-page__summary {
+  position: absolute;
+  inset-block-start: var(--rhode-cart-top);
+  inset-inline-end: 0;
+  width: min(423px, 34%);
+}
+
+/* With the summary out of flow the auto-placer would drop the first item into
+   column 2, underneath the card, so the left column is pinned explicitly. */
+body.template-cart .cart-page__title,
+body.template-cart .cart-page__items,
+body.template-cart .cart-page__more-blocks {
+  grid-column: 1;
 }
 
 body.template-cart .cart-title h1 {
