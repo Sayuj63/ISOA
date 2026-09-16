@@ -89,6 +89,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       {{ 'isoua-collection-mobile.css' | asset_url | stylesheet_tag }}
       {{ 'rhode-collection-cards.css' | asset_url | stylesheet_tag }}
     {% endif %}
+    {% if template == 'cart' or settings.cart_type == 'drawer' %}
+      {{ 'rhode-cart.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+    {% if template == 'search' %}
+      {{ 'rhode-search.css' | asset_url | stylesheet_tag }}
+    {% endif %}
 
     {{ 'isoa-image-zoom.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'isoa-image-zoom.js' | asset_url }}" defer></script>

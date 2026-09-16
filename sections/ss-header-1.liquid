@@ -1318,15 +1318,12 @@
   </style>
 {% endif %}
 
-{% comment %} FOR FREE THEMES{% endcomment %}
+{% comment %} Cart drawer styles. The five component-*.css files this used to
+  reference do not exist in this theme (they are Dawn free-theme leftovers), so
+  the requests were 404ing. rhode-cart.css is the one cart stylesheet that does. {% endcomment %}
 {%- if settings.cart_type == 'drawer' -%}
-  {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
-  {{ 'component-cart.css' | asset_url | stylesheet_tag }}
-  {{ 'component-totals.css' | asset_url | stylesheet_tag }}
-  {{ 'component-price.css' | asset_url | stylesheet_tag }}
-  {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+  {{ 'rhode-cart.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
-{% comment %} FOR FREE THEMES{% endcomment %}
 
 <div
   class="section-{{ section.id }} header-{{ section.id }} {% if is_transparent %}transparent{% endif %} {% if show_type == "always" %}fixed{% elsif show_type == "scroll_up" %}scroll fixed{% else %}top{% endif %}"
