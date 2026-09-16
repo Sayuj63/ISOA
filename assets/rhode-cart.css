@@ -15,6 +15,8 @@
   --rhode-cart-ink: #67645e;
   --rhode-cart-card: #84827e;
   --rhode-cart-ease: cubic-bezier(0.76, 0, 0.24, 1);
+  /* Rhode insets its page rail by 32.4px; see the `.cart-page` rule below. */
+  --rhode-cart-gutter: 32.4px;
 }
 
 /* ---------------------------------------------------------------- shell -- */
@@ -53,7 +55,7 @@ body.template-cart .cart-page {
   column-gap: 80px;
   row-gap: 0;
   padding-block-start: 79px;
-  padding-inline: 32.4px;
+  padding-inline: var(--rhode-cart-gutter);
 }
 
 body.template-cart .section--page-width .cart-page:has(.cart-summary--extend) {
