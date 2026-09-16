@@ -51,11 +51,24 @@
       endif
     endif
 
+    # With no product picked in the editor, fall back to the first available
+    # product that is not already in the cart so the card still renders.
     assign upsell = section.settings.upsell_product
+    if upsell == blank
+      assign cart_variant_ids = cart.items | map: 'variant_id'
+      for candidate in collections.all.products
+        assign candidate_variant = candidate.selected_or_first_available_variant
+        if candidate_variant != blank and cart_variant_ids contains candidate_variant.id
+          continue
+        endif
+        assign upsell = candidate
+        break
+      endfor
+    endif
     if upsell != blank
       assign upsell_variant = upsell.selected_or_first_available_variant
+      assign upsell_variants = upsell.variants | where: 'available'
     endif
-    assign upsell_variants = upsell.variants | where: 'available'
   -%}
 
   <cart-drawer-component
