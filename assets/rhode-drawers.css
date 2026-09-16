@@ -656,8 +656,10 @@
 }
 
 @media screen and (max-width: 749px) {
+  /* No bottom padding: the reference runs the shipping label straight under
+     the title, and the gap under the bar belongs to .isoa-cd__progress. */
   .isoa-cd__head {
-    padding: 16px;
+    padding: 16px 16px 0;
   }
 
   .isoa-cd__title {
@@ -673,12 +675,12 @@
   }
 
   .isoa-cd__progress {
-    padding: 0 16px 16px;
+    padding: 0 16px 24px;
   }
 
   .isoa-cd__label--above {
     display: flex;
-    padding-block-end: 8px;
+    padding-block-end: 5px;
   }
 
   .isoa-cd__items {
