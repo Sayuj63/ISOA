@@ -247,43 +247,45 @@
                     {%- endif -%}
                   </a>
                   <div class="isoa-cd__upsell-info">
-                    <div class="isoa-cd__upsell-name">{{ upsell.title }}</div>
-                    {%- if upsell_variants.size > 1 -%}
-                      <label class="visually-hidden" for="isoa-cd-upsell-variant">
-                        {{ 'content.variant' | t | default: 'Variant' }}
-                      </label>
-                      <select id="isoa-cd-upsell-variant" name="id" class="isoa-cd__upsell-select">
-                        {%- for variant in upsell_variants -%}
-                          <option value="{{ variant.id }}" {% if variant.id == upsell_variant.id %}selected{% endif %}>
-                            {{ variant.title }}
-                          </option>
-                        {%- endfor -%}
-                      </select>
-                    {%- else -%}
-                      <input type="hidden" name="id" value="{{ upsell_variant.id }}">
-                    {%- endif -%}
+                    <div class="isoa-cd__upsell-detail">
+                      <div class="isoa-cd__upsell-name">{{ upsell.title }}</div>
+                      {%- if upsell_variants.size > 1 -%}
+                        <label class="visually-hidden" for="isoa-cd-upsell-variant">
+                          {{ 'content.variant' | t | default: 'Variant' }}
+                        </label>
+                        <select id="isoa-cd-upsell-variant" name="id" class="isoa-cd__upsell-select">
+                          {%- for variant in upsell_variants -%}
+                            <option value="{{ variant.id }}" {% if variant.id == upsell_variant.id %}selected{% endif %}>
+                              {{ variant.title }}
+                            </option>
+                          {%- endfor -%}
+                        </select>
+                      {%- else -%}
+                        <input type="hidden" name="id" value="{{ upsell_variant.id }}">
+                      {%- endif -%}
+                    </div>
+                    <button
+                      type="submit"
+                      class="isoa-cd__add"
+                      {% unless upsell_variant.available %}disabled{% endunless %}
+                    >
+                      Add - {{ upsell_variant.price | money }}
+                    </button>
                   </div>
-                  <button
-                    type="submit"
-                    class="isoa-cd__add"
-                    {% unless upsell_variant.available %}disabled{% endunless %}
-                  >
-                    Add &ndash; {{ upsell_variant.price | money }}
-                  </button>
                 </form>
               {%- endif -%}
 
               <div class="isoa-cd__summary">
-                <span class="isoa-cd__summary-label">{{ 'content.subtotal' | t | default: 'Subtotal' }}</span>
+                <span class="isoa-cd__summary-label">{{ 'content.cart_subtotal' | t }}</span>
                 <span class="isoa-cd__summary-value">{{ cart.total_price | money }}</span>
               </div>
               <p class="isoa-cd__tax-note">
-                *{{ 'content.taxes_and_shipping_at_checkout' | t | default: 'Shipping, taxes, and discounts calculated at checkout.' }}
+                *shipping, taxes, and discounts calculated at checkout.
               </p>
 
               <form action="{{ routes.cart_url }}" method="post">
                 <button type="submit" name="checkout" class="isoa-cd__checkout">
-                  {{ 'content.checkout' | t }}
+                  Checkout
                 </button>
               </form>
             </div>
