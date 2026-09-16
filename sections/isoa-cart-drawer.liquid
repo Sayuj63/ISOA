@@ -12,6 +12,9 @@
   from it, so quantity changes and removals behave the same.
 
   Reference: rhodeskin.com `.Offcanvas--right .CartDrawer`, measured 2026-09-17.
+
+  The <dialog> carries `dialog-drawer` but NOT `dialog-modal` — see the note in
+  isoa-search-drawer.liquid for why.
 {% enddoc %}
 
 {%- if settings.cart_type == 'drawer' and template.name != 'cart' -%}
@@ -81,7 +84,7 @@
   >
     <dialog
       ref="dialog"
-      class="isoa-cd__panel isoa-drawer dialog-modal dialog-drawer"
+      class="isoa-cd__panel isoa-drawer dialog-drawer"
       scroll-lock
       aria-labelledby="isoa-cart-drawer-title"
       on:click="/closeDialogOnClickOutside"

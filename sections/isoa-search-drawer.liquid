@@ -10,6 +10,14 @@
   that block is deliberately omitted here (the product recommendations are the
   part that was asked for).
 
+  The <dialog> carries `dialog-drawer` but NOT `dialog-modal`. Horizon's
+  predictive-search stylesheet ships a global `.dialog-modal[open]` rule that
+  forces `border-radius: 0` below 750px; it is injected through
+  `content_for_header`, so it lands after rhode-drawers.css and at specificity
+  0,2,0 it beats anything we can reach without `!important`. The class only
+  affects presentation — dialog.js toggles `dialog-closing` and nothing else —
+  so leaving it off is cheaper than fighting it.
+
   @example
   {% section 'isoa-search-drawer' %}
 {% enddoc %}
@@ -31,7 +39,7 @@
 >
   <dialog
     ref="dialog"
-    class="isoa-sd__panel isoa-drawer dialog-modal dialog-drawer"
+    class="isoa-sd__panel isoa-drawer dialog-drawer"
     scroll-lock
     aria-labelledby="isoa-search-drawer-title"
     on:click="/closeDialogOnClickOutside"
