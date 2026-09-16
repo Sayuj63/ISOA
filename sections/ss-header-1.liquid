@@ -650,7 +650,12 @@
 
   .header-menu-mobile-inner-{{ section.id }} {
     width: 100%;
-    height: 100%;
+    /* Fixed to the shell's *open* box on purpose. At `height: 100%` the panel is
+       a percentage of the shell's animating height, so the flex column re-lays
+       out its tabs, every card and the links row on each of the ~60 frames of
+       the reveal. Pinning it means the shell's growing height only clips a
+       static panel, and the compositor does all the work. */
+    height: calc(var(--mm-open-height) - var(--mm-shell-pad));
     padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
     padding-left: {{ padding_horizontal_mobile }}rem;
     padding-right: {{ padding_horizontal_mobile }}rem;
