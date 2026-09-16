@@ -219,10 +219,13 @@ body.template-cart .cart-page__summary .cart-totals,
   gap: 0;
 }
 
+/* Label and value are the same size in the reference — only the weight differs
+   (400 vs 700). Rhode tracks every size at 2%, hence 18.72 → 0.374. */
 body.template-cart .cart-page__summary .cart-totals__total-label,
 .cart-drawer__summary .cart-totals__total-label {
-  font-size: 16px;
-  letter-spacing: 0.324px;
+  font-size: 18.72px;
+  font-weight: 400;
+  letter-spacing: 0.374px;
 }
 
 body.template-cart .cart-page__summary .cart-totals__total-value,
@@ -233,12 +236,16 @@ body.template-cart .cart-page__summary .cart-totals__total-value,
 
 body.template-cart .cart-page__summary .cart-totals__tax-note,
 .cart-drawer__summary .cart-totals__tax-note {
+  margin-block-start: 8px;
+  font-size: 12.4px;
+  line-height: 1.5;
+  letter-spacing: 0.248px;
   color: rgb(255 255 255 / 0.75);
 }
 
 body.template-cart .cart-page__summary .cart__ctas,
 .cart-drawer__summary .cart__ctas {
-  margin-block-start: 20px;
+  margin-block-start: 11px;
 }
 
 /* base.css:4230-4305 hard-codes the `.button` box (30px tall, 999px radius,
@@ -486,7 +493,11 @@ body.template-cart .cart-items__remove svg {
     color: var(--rhode-cart-ink);
   }
 
+  /* The desktop card is gone at this width, so the outlined track loses its
+     white outline and the ink/white roles swap: a tinted track with an ink fill
+     instead of a white fill on a transparent track. */
   body.template-cart .cart-shipping-bar__track {
+    border-color: var(--rhode-cart-ink);
     background-color: rgb(103 100 94 / 0.25);
   }
 
@@ -494,17 +505,22 @@ body.template-cart .cart-items__remove svg {
     background-color: var(--rhode-cart-ink);
   }
 
-  body.template-cart .cart-totals {
-    border-block-start: 1px solid rgb(103 100 94 / 0.25);
-    padding-block-start: 16px;
+  /* The reference steps the same component down at this width: heading 19.2 → 16,
+     shipping label 16 → 12, and the subtotal row to a flat 16 for label and value
+     alike (losing the desktop label/value size split). */
+  body.template-cart .cart-shipping-bar__count {
+    font-size: 16px;
+    letter-spacing: 0.32px;
   }
 
-  body.template-cart .cart-totals__total-label {
-    font-size: 14px;
+  body.template-cart .cart-shipping-bar__label {
+    font-size: 12px;
+    letter-spacing: 0.24px;
   }
 
+  body.template-cart .cart-totals__total-label,
   body.template-cart .cart-totals__total-value {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   body.template-cart .cart-page__summary .cart__checkout-button {
