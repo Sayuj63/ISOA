@@ -67,15 +67,13 @@
      background for the info + CTA overlays. Matches rhodeskin.com. */
   object-fit: contain;
   object-position: center top;
-  /* 1.1s + a heavier S-curve (0.85/0.15) is the "slow at both ends, quick in
-     the middle" the intensified crossfade needs — reads as a deliberate reveal
-     instead of a snap. `will-change` opts both images into their own composite
-     layer so opacity + transform animate on the GPU, keeping the swap smooth
-     across a whole grid of cards on hover. */
-  will-change: opacity, transform;
-  transform-origin: center top;
+  /* 1.1s + a heavier S-curve (0.85/0.15) — "slow at both ends, quick in the
+     middle" — so the primary→secondary crossfade reads as a deliberate reveal
+     rather than a snap. Only opacity/visibility are transitioned here because
+     `assets/isoa-image-zoom.css` owns `transform` on every <img> site-wide
+     (with `!important`) — layering another `transform` transition would fight
+     it instead of composing. */
   transition: opacity 1.1s cubic-bezier(0.85, 0, 0.15, 1),
-              transform 1.1s cubic-bezier(0.85, 0, 0.15, 1),
               visibility 1.1s cubic-bezier(0.85, 0, 0.15, 1);
 }
 
@@ -88,9 +86,6 @@
   opacity: 0;
   visibility: hidden;
   z-index: 2;
-  /* Incoming image sits pre-zoomed so the hover state can *relax* it to 1 —
-     visually reads as the product "coming closer" rather than a still swap. */
-  transform: scale(1.06);
 }
 
 .isoa-rc-brand {
