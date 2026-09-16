@@ -163,9 +163,13 @@
   list-style: none;
 }
 
+/* The reference row is `grid-template-columns: 123px 1fr; gap: 43px` with the
+   text at the top of the row, not centred in it — `.SearchMini-prodDefTxt`
+   measures 19px tall inside a 123px row. Flex + `align-items: start` is the
+   same geometry with one less property to keep in sync. */
 .isoa-sd__product {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 43px;
   color: var(--rhode-drawer-ink);
   text-decoration: none;
