@@ -280,16 +280,37 @@ body.template-cart .cart-items__quantity .quantity-selector {
   border-radius: 40px;
 }
 
-/* The +/- and the remove control all carry `.button`, so base.css:4230-4305
-   (the same `!important` block the checkout fights) paints them #4a4a4a.
-   Rhode's stepper is a plain outlined pill and the remove is a bare icon, so
-   the fills are reset inside the cart scope only. */
+/* The +/- and the remove control all carry `.button`, so base.css:4236-4261
+   (the same `!important` block the checkout fights) paints them #4a4a4a at
+   `padding: 0 22px` — which also made them 64px wide and pushed the `+` out of
+   the 105px pill, on top of the remove icon. Rhode's stepper is a plain
+   outlined pill with bare icons, so both the fill and the box are reset here,
+   inside the cart scope only. */
 body.template-cart .cart-items__quantity .quantity-minus,
-body.template-cart .cart-items__quantity .quantity-plus,
-body.template-cart .cart-items__remove {
+body.template-cart .cart-items__quantity .quantity-plus {
+  width: 28px !important;
+  min-width: 0 !important;
+  height: 28px !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 999px !important;
   background-color: transparent !important;
   color: var(--rhode-cart-ink) !important;
+  box-shadow: none !important;
+}
+
+body.template-cart .cart-items__remove {
+  width: 26px !important;
+  min-width: 0 !important;
+  height: 26px !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  padding: 0 !important;
   border: none !important;
+  background-color: transparent !important;
+  color: var(--rhode-cart-ink) !important;
   box-shadow: none !important;
 }
 
