@@ -51,6 +51,18 @@
   color: var(--rhode-drawer-ink);
 }
 
+/* Author `display` outranks the UA stylesheet, whose whole job for a closed
+   dialog is `dialog:not([open]) { display: none }`. Setting `display: flex`
+   above silently cancelled that, so both closed drawers stayed laid out and
+   painted their 680px panel across the right-hand side of every template — a
+   grey slab over the cart summary card, and hit-testable through it. Restore
+   the contract. Horizon keeps `[open]` on the element for the whole close
+   animation and only clears it at the end of `closeDialog`, so this hides it
+   exactly when it is meant to be gone. */
+.isoa-drawer:not([open]) {
+  display: none;
+}
+
 .isoa-drawer::backdrop {
   background: var(--rhode-drawer-dim);
 }
