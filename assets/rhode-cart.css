@@ -32,13 +32,12 @@ body.template-cart .section-background:has(+ .section .cart-page) {
 /* ----------------------------------------------------------- two column -- */
 
 body.template-cart .cart-page {
-  --rhode-cart-top: 79px;
   position: relative;
   min-height: 540px;
   grid-template-columns: minmax(0, 1fr) min(423px, 34%);
   column-gap: 80px;
   row-gap: 0;
-  padding-block-start: var(--rhode-cart-top);
+  padding-block-start: 79px;
 }
 
 body.template-cart .section--page-width .cart-page:has(.cart-summary--extend) {
@@ -51,13 +50,17 @@ body.template-cart .section--page-width .cart-page:has(.cart-summary--extend) {
    heading's cell to the card's 335px and dropped the first line item ~300px
    down the page. The reference treats the card as a sidebar the left column
    knows nothing about, so take it out of grid flow — the left column then runs
-   heading → items with nothing in between. `min-height` is the reference's own
-   guard against the card outgrowing a short cart. */
+   heading → items with nothing in between.
+
+   An out-of-flow grid child is contained by its *grid area*, not the grid box,
+   so `inset-block-start: 0` already lands below the container's top padding and
+   `width: 100%` picks up the column width. `min-height` is the reference's own
+   guard against the card outgrowing a cart with only one or two items in it. */
 body.template-cart .cart-page__summary {
   position: absolute;
-  inset-block-start: var(--rhode-cart-top);
+  inset-block-start: 0;
   inset-inline-end: 0;
-  width: min(423px, 34%);
+  width: 100%;
 }
 
 /* With the summary out of flow the auto-placer would drop the first item into
