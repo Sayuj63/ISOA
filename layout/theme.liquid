@@ -92,6 +92,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {% if template == 'cart' or settings.cart_type == 'drawer' %}
       {{ 'rhode-cart.css' | asset_url | stylesheet_tag }}
     {% endif %}
+    {{ 'rhode-drawers.css' | asset_url | stylesheet_tag }}
     {% if template == 'search' %}
       {{ 'rhode-search.css' | asset_url | stylesheet_tag }}
     {% endif %}
@@ -207,6 +208,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       {% sections 'footer-group' %}
     </footer>
 
+    {% section 'isoa-search-drawer' %}
+    {% section 'isoa-cart-drawer' %}
     {% render 'search-modal' %}
 
     {% if settings.quick_add or settings.mobile_quick_add %}
