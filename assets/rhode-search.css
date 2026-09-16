@@ -190,10 +190,17 @@ body.template-search .search-results__more {
 
 @media screen and (max-width: 749px) {
   /* The reference insets its 640 column 10px further than the page margin on
-     mobile, so the rows sit at x=26 in a 390 viewport rather than x=16. */
-  body.template-search .search-page__header > *,
-  body.template-search .collection-wrapper {
+     mobile, so the rows sit at x=26 in a 390 viewport rather than x=16. The two
+     selectors need different values to land on the same x, because they live in
+     different grids: the header children are already inside `.section--page-width`
+     (x=16), while `.collection-wrapper` is the full-bleed child of `results-list`
+     (x=0), so it has to carry the page margin itself. */
+  body.template-search .search-page__header > * {
     padding-inline: 10px;
+  }
+
+  body.template-search .collection-wrapper {
+    padding-inline: 26px;
   }
 
   body.template-search .search-page__header h3 {
