@@ -187,6 +187,15 @@ body.template-cart .cart-page__summary .cart__checkout-button:hover,
 
 /* --------------------------------------------------------- line items ---- */
 
+/* The rows are CSS grids, but a `<tr>` inside table layout gets no width of its
+   own — the `1fr` track collapsed to 0 and the cells only *looked* right because
+   they overflowed. Dropping the table box model gives each row the full column
+   width; the markup carries explicit ARIA roles, so the a11y tree is unchanged. */
+body.template-cart .cart-items__table,
+body.template-cart .cart-items__table > tbody {
+  display: block;
+}
+
 /* Horizon declares `grid-template-areas` here but never assigns `grid-area` to
    the cells, so the areas were inert and the four cells auto-flowed into one
    row. Naming them explicitly gives the reference layout: image left, title +
