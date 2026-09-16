@@ -1680,11 +1680,21 @@
     let headerBody = header.querySelector('.header-body-{{ section.id }}');
     let headerMobileInner = header.querySelector('.header-menu-mobile-inner-{{ section.id }}');
     let headerMegaMenus = header.querySelectorAll('.header-mega-menu-{{ section.id }}');
-    
+
+    // The panel starts below the header bar. This used to be written inside the
+    // click handler, which forced a layout read on the same frame as the class
+    // toggle and made the first frame of the reveal the slow one. Settle it up
+    // front and on resize instead.
+    function setMobileInnerOffset() {
+      if (headerMobileInner && headerBody) {
+        headerMobileInner.style.paddingTop = headerBody.clientHeight + {{ padding_top | times: 3 }} - 25 + "px";
+      }
+    }
+    setMobileInnerOffset();
+
     if(burger_icon) {
       burger_icon.addEventListener('click', () => {
         header.classList.toggle('open');
-        headerMobileInner.style.paddingTop = headerBody.clientHeight + {{ padding_top | times: 3 }} - 25 + "px";
         if(header.classList.contains('open')) {
           document.body.style.overflow = 'hidden';
         } else {
@@ -1692,6 +1702,24 @@
         }
       })
     }
+
+    // The header icons open the Rhode drawers instead of navigating. The drawer
+    // sections render at the end of <body>, after this script, so the element is
+    // looked up on click rather than at init.
+    function wireDrawer(triggerSelector, drawerId) {
+      const trigger = header.querySelector(triggerSelector);
+      if (!trigger || trigger.dataset.drawerWired) return;
+      trigger.dataset.drawerWired = 'true';
+      trigger.addEventListener('click', (event) => {
+        const drawer = document.getElementById(drawerId);
+        if (!drawer || typeof drawer.showDialog !== 'function') return;
+        event.preventDefault();
+        drawer.showDialog();
+      });
+    }
+
+    wireDrawer('.header-search-{{ section.id }}', 'isoa-search-drawer');
+    wireDrawer('.header-cart-{{ section.id }}', 'isoa-cart-drawer');
 
     if(headerMegaMenus) {
       headerMegaMenus.forEach(el => {
@@ -1742,6 +1770,7 @@
     let resizeTimer;
     window.addEventListener('resize', () => {
       updateHeaderTopOffset();
+      setMobileInnerOffset();
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
         const current = header.querySelector('.header-mm-tab-{{ section.id }}.is-current');
