@@ -148,14 +148,28 @@ body.template-cart .cart-page__summary .cart-summary__inner {
 
 /* ------------------------------------------------------- shipping bar ---- */
 
+/* Reference `.Cart-side-content > .CartDrawer-container`, measured 2026-09-17 at
+   1440: 20.16px above the heading, 8px between every row, 16px under the label,
+   everything centred. On desktop the order is heading → track → label; on mobile
+   the label rides above the track instead, so that swap is done with `order`
+   rather than by duplicating the markup. */
 .cart-shipping-bar {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding-block-end: 20px;
+  align-items: center;
+  gap: 8px;
+  padding: 20.16px 0 16px;
 }
 
-.cart-shipping-bar__count,
+/* The reference's `.CartDrawer-titleLink` — the "N items" line. */
+.cart-shipping-bar__count {
+  margin: 0;
+  font-size: 19.2px;
+  line-height: 1.4;
+  letter-spacing: 0.384px;
+  color: inherit;
+}
+
 .cart-shipping-bar__label {
   margin: 0;
   font-size: 16px;
@@ -164,16 +178,33 @@ body.template-cart .cart-page__summary .cart-summary__inner {
   color: inherit;
 }
 
+@media screen and (min-width: 750px) {
+  .cart-shipping-bar__count {
+    order: 1;
+  }
+
+  .cart-shipping-bar__track {
+    order: 2;
+  }
+
+  .cart-shipping-bar__label {
+    order: 3;
+  }
+}
+
+/* The reference outlines the track and fills it white, and the track spans only
+   65% of the column (249 of 383) rather than the full width. */
 .cart-shipping-bar__track {
-  width: 100%;
+  width: 65%;
   height: 10px;
-  border-radius: 5px;
-  background-color: rgb(255 255 255 / 0.32);
   overflow: hidden;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  background-color: transparent;
 }
 
 .cart-shipping-bar__fill {
-  height: 10px;
+  height: 100%;
   border-radius: 5px;
   background-color: #ffffff;
   transition: width 0.4s var(--rhode-cart-ease);
@@ -181,11 +212,11 @@ body.template-cart .cart-page__summary .cart-summary__inner {
 
 /* ------------------------------------------------------------- totals ---- */
 
+/* The reference runs the progress block straight into the subtotal row — the
+   card is flat white-on-grey throughout, with no rule above the totals. */
 body.template-cart .cart-page__summary .cart-totals,
 .cart-drawer__summary .cart-totals {
-  gap: 12px;
-  border-block-start: 1px solid rgb(255 255 255 / 0.35);
-  padding-block-start: 20px;
+  gap: 0;
 }
 
 body.template-cart .cart-page__summary .cart-totals__total-label,
