@@ -201,6 +201,7 @@ body.template-cart .cart-items__table > tbody {
    row. Naming them explicitly gives the reference layout: image left, title +
    variant beside it with the line price flush right, stepper underneath. */
 body.template-cart .cart-items__table-row {
+  width: 100%;
   grid-template-columns: 110px minmax(0, 1fr) auto;
   grid-template-areas:
     'media details price'
@@ -369,7 +370,7 @@ body.template-cart .cart-items__remove svg {
     font-size: 18px;
   }
 
-  body.template-cart .cart__checkout-button {
+  body.template-cart .cart-page__summary .cart__checkout-button {
     background-color: var(--rhode-cart-ink) !important;
     color: #ffffff !important;
     border-radius: 40px !important;
