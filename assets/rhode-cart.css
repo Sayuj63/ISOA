@@ -280,6 +280,19 @@ body.template-cart .cart-items__quantity .quantity-selector {
   border-radius: 40px;
 }
 
+/* The +/- and the remove control all carry `.button`, so base.css:4230-4305
+   (the same `!important` block the checkout fights) paints them #4a4a4a.
+   Rhode's stepper is a plain outlined pill and the remove is a bare icon, so
+   the fills are reset inside the cart scope only. */
+body.template-cart .cart-items__quantity .quantity-minus,
+body.template-cart .cart-items__quantity .quantity-plus,
+body.template-cart .cart-items__remove {
+  background-color: transparent !important;
+  color: var(--rhode-cart-ink) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
 body.template-cart .cart-items__remove svg {
   width: 16px;
   height: 16px;
