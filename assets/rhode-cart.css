@@ -387,12 +387,14 @@ body.template-cart .cart-items__remove svg {
     order: 7;
   }
 
-  /* The dark card is desktop-only; on mobile everything sits on the page grey. */
-  body.template-cart .cart-shipping-bar__count,
-  body.template-cart .cart-shipping-bar__label,
-  body.template-cart .cart-totals__total-label,
-  body.template-cart .cart-totals__total-value,
-  body.template-cart .cart-totals__tax-note {
+  /* The dark card is desktop-only; on mobile everything sits on the page grey.
+     Prefixed with `.cart-page__summary` so these beat the equally-scoped white
+     rules the dark card uses (a media query adds no specificity on its own). */
+  body.template-cart .cart-page__summary .cart-shipping-bar__count,
+  body.template-cart .cart-page__summary .cart-shipping-bar__label,
+  body.template-cart .cart-page__summary .cart-totals__total-label,
+  body.template-cart .cart-page__summary .cart-totals__total-value,
+  body.template-cart .cart-page__summary .cart-totals__tax-note {
     color: var(--rhode-cart-ink);
   }
 
