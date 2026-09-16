@@ -619,6 +619,8 @@
     --mm-card-height: 84px;
     --mm-thumb: 60px;
     --mm-radius: 12px;
+    --mm-shell-pad: 16px;
+    --mm-open-height: 95vh;
 
     position: absolute;
     top: 5px;
@@ -627,21 +629,21 @@
     height: 0px;
     background-color: #ffffff;
     border-radius: var(--mm-radius);
-    padding-bottom: 16px;
+    padding-bottom: var(--mm-shell-pad);
     overflow: hidden;
-    /* Rhode's drawer opens over 1s. `transition: all` used to make the shell
-       re-check every animatable property each frame; listing the two that
-       actually move keeps the reveal smooth. */
+    /* Rhode's drawer opens over 1s. The easing is deliberately softer than the
+       .76/.24 curve used elsewhere in this header: that curve spends its first
+       ~300ms barely moving, so a 1s open read as "nothing, then a lurch". */
     transition:
-      height 1s cubic-bezier(.76,0,.24,1),
-      opacity 1s cubic-bezier(.76,0,.24,1);
+      height 1s cubic-bezier(.4,0,.2,1),
+      opacity 1s cubic-bezier(.4,0,.2,1);
     z-index: 2;
     opacity: 0;
     pointer-events: none;
   }
 
   .header-{{ section.id }}.open .header-menu-mobile-{{ section.id }} {
-    height: 95vh;
+    height: var(--mm-open-height);
     opacity: 1;
     pointer-events: all;
   }
