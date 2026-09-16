@@ -248,6 +248,13 @@ body.template-cart .cart-page__summary .cart-totals__tax-note,
   color: rgb(255 255 255 / 0.75);
 }
 
+/* The tax note's own 8px top margin is the whole gap in the reference; the
+   base stylesheet's row-gap would stack on top of it. */
+body.template-cart .cart-page__summary .cart-totals__container,
+.cart-drawer__summary .cart-totals__container {
+  row-gap: 0;
+}
+
 body.template-cart .cart-page__summary .cart__ctas,
 .cart-drawer__summary .cart__ctas {
   margin-block-start: 11px;
