@@ -157,35 +157,12 @@
       "type": "ss-header-1",
       "custom_css": [],
       "name": "SS - Header #1",
-      "blocks": {
-        "mm_tab_shop": {
-          "type": "mobile_tab",
-          "settings": {
-            "tab_label": "SHOP",
-            "collection": "frontpage",
-            "product_limit": 5
-          }
-        },
-        "mm_tab_all": {
-          "type": "mobile_tab",
-          "settings": {
-            "tab_label": "ALL",
-            "collection": "all",
-            "product_limit": 5
-          }
-        }
-      },
-      "block_order": [
-        "mm_tab_shop",
-        "mm_tab_all"
-      ],
       "settings": {
         "show_type": "scroll_up",
         "transparent_bg": "home",
         "body_gap": 40,
         "body_gap_mobile": 12,
         "menu": "main-menu",
-        "mobile_links_menu": "main-menu",
         "mega_menu_radius": 10,
         "mega_menu_radius_top": 10,
         "mega_menu_margin_top": 10,
