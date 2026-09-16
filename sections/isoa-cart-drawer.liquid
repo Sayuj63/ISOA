@@ -99,17 +99,21 @@
           data-section-id="{{ section.id }}"
         >
           <div class="isoa-cd__head">
-            <a
-              id="isoa-cart-drawer-title"
-              class="isoa-cd__title"
-              href="{{ routes.cart_url }}"
-            >
+            <p id="isoa-cart-drawer-title" class="isoa-cd__title">
               {%- if cart.empty? -%}
                 Your cart is currently empty
               {%- else -%}
                 {{ cart.item_count }} {% if cart.item_count == 1 %}item{% else %}items{% endif %}
               {%- endif -%}
-            </a>
+            </p>
+            <button
+              type="button"
+              class="isoa-cd__close"
+              aria-label="{{ 'accessibility.close' | t }}"
+              on:click="/closeDialog"
+            >
+              {{- 'icon-close.svg' | inline_asset_content -}}
+            </button>
           </div>
 
           {%- if cart.empty? -%}
@@ -123,12 +127,11 @@
               <div class="isoa-cd__progress">
                 {%- if fs_remaining > 0 -%}
                   <p class="isoa-cd__label isoa-cd__label--above">
-                    Add {{ fs_remaining | money }} more for
-                    {{ settings.cart_free_shipping_label | default: 'FREE SHIPPING' }}
+                    add {{ fs_remaining | money }} more for {{ settings.cart_free_shipping_label | default: 'FREE shipping' }}
                   </p>
                 {%- else -%}
                   <p class="isoa-cd__label isoa-cd__label--above">
-                    You've unlocked {{ settings.cart_free_shipping_label | default: 'FREE SHIPPING' }}
+                    Free standard shipping unlocked
                   </p>
                 {%- endif -%}
 
@@ -144,12 +147,11 @@
 
                 {%- if fs_remaining > 0 -%}
                   <p class="isoa-cd__label isoa-cd__label--below">
-                    Add {{ fs_remaining | money }} more for
-                    {{ settings.cart_free_shipping_label | default: 'FREE SHIPPING' }}
+                    add {{ fs_remaining | money }} more for {{ settings.cart_free_shipping_label | default: 'FREE shipping' }}
                   </p>
                 {%- else -%}
                   <p class="isoa-cd__label isoa-cd__label--below">
-                    You've unlocked {{ settings.cart_free_shipping_label | default: 'FREE SHIPPING' }}
+                    Free standard shipping unlocked
                   </p>
                 {%- endif -%}
               </div>
