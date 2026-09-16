@@ -38,7 +38,7 @@
           "type": "_search-input",
           "static": true,
           "settings": {
-            "width": "custom",
+            "width": "fill",
             "custom_width": 50,
             "inherit_color_scheme": true,
             "color_scheme": ""
@@ -60,14 +60,14 @@
           "type": "filters",
           "static": true,
           "settings": {
-            "enable_filtering": true,
+            "enable_filtering": false,
             "filter_style": "horizontal",
             "filter_width": "centered",
             "text_label_case": "default",
             "show_swatch_label": false,
             "show_filter_label": false,
-            "enable_sorting": true,
-            "enable_grid_density": true,
+            "enable_sorting": false,
+            "enable_grid_density": false,
             "inherit_color_scheme": true,
             "color_scheme": "",
             "padding-block-start": 8,
