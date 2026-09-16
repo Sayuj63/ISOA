@@ -343,11 +343,13 @@ body.template-cart .cart-items__remove svg {
     padding: 0;
   }
 
-  /* The dark card is gone at this width, so the white text tokens have to go
-     with it — otherwise the accordion labels and the tax note stay white on
-     grey. `display: contents` still inherits, so this reaches every child. */
+  /* The dark card is gone at this width, so its white text has to go with it —
+     otherwise the accordion labels and the tax note stay white on grey. The
+     card's `color` is a literal #fff (not the token), so it needs resetting
+     directly as well as the token. `display: contents` still inherits. */
   body.template-cart .cart-page__summary,
   body.template-cart .cart-page__summary .cart-summary {
+    color: var(--rhode-cart-ink);
     --color-foreground: var(--rhode-cart-ink);
     --color-foreground-rgb: 103, 100, 94;
     --color-border: rgb(103 100 94 / 0.25);
