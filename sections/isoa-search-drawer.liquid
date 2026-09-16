@@ -20,7 +20,7 @@
 ></script>
 
 {%- liquid
-  assign rec_collection = section.settings.collection
+  assign rec_collection = section.settings.collection | default: collections.all
   assign rec_limit = section.settings.products_limit
 -%}
 
