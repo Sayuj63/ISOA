@@ -8,8 +8,12 @@
   because that snippet emits `id="cart-form"` / `id="checkout"`, which would
   collide with the cart page's own copy on /cart. The row hooks the JS needs
   (`cart-items-component[data-section-id]`, `ref="cartItemRows[]"`,
-  `ref="quantitySelectors[]"`, `on:click="/onLineItemRemove/N"`) are mirrored
-  from it, so quantity changes and removals behave the same.
+  `ref="quantitySelectors[]"`) are mirrored from it, so quantity changes behave
+  the same.
+
+  There is deliberately no remove button — the reference drawer has none; its
+  minus control deletes the line once quantity is 1. See the `data-drawer`
+  branch in assets/component-cart-quantity-selector.js.
 
   Reference: rhodeskin.com `.Offcanvas--right .CartDrawer`, measured 2026-09-17.
 
@@ -161,7 +165,6 @@
               {%- for item in cart.items -%}
                 {%- liquid
                   assign can_update_quantity = item.instructions.can_update_quantity | default: true, allow_false: true
-                  assign can_remove = item.instructions.can_remove | default: true, allow_false: true
                 -%}
                 <li
                   class="isoa-cd__item"
@@ -203,17 +206,6 @@
                           can_update_quantity: can_update_quantity
                         %}
                       </div>
-                      <button
-                        class="isoa-cd__remove"
-                        type="button"
-                        aria-label="{{ 'accessibility.remove_item' | t: title: item.title | escape }}"
-                        on:click="/onLineItemRemove/{{ item.index | plus: 1 }}"
-                        {% if can_remove == false %}
-                          hidden
-                        {% endif %}
-                      >
-                        {{- 'icon-delete.svg' | inline_asset_content -}}
-                      </button>
                     </div>
 
                     <div

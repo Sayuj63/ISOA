@@ -539,8 +539,7 @@
 .isoa-cd__checkout,
 .isoa-cd__add,
 .isoa-cd__qty .quantity-minus,
-.isoa-cd__qty .quantity-plus,
-.isoa-cd__remove {
+.isoa-cd__qty .quantity-plus {
   min-height: 0 !important;
   max-height: none !important;
   border: none !important;
@@ -625,24 +624,6 @@
 .isoa-cd__qty .quantity-selector input::-webkit-inner-spin-button {
   appearance: none;
   margin: 0;
-}
-
-.isoa-cd__remove {
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  width: 24px !important;
-  height: 24px !important;
-  padding: 0 !important;
-  border-radius: 999px !important;
-  background-color: transparent !important;
-  color: var(--rhode-drawer-ink) !important;
-  cursor: pointer;
-}
-
-.isoa-cd__remove svg {
-  width: 16px;
-  height: 16px;
 }
 
 .isoa-cd__empty {
