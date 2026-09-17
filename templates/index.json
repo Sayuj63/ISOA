@@ -66,6 +66,7 @@
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
+        "image_1": "shopify://shop_images/image_2e11c137-08e1-4b7e-9a5c-08d01a8d93ee.png",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": true,
@@ -641,7 +642,7 @@
                 "text_LHkHKF": {
                   "type": "text",
                   "settings": {
-                    "text": "<h5><em>\u201cI've dealt with cystic acne my whole life, and I've learned that sticking to my routine and being gentle with my skin gives me reale results.\u201d</em></h5>",
+                    "text": "<h5><em>“I've dealt with cystic acne my whole life, and I've learned that sticking to my routine and being gentle with my skin gives me reale results.”</em></h5>",
                     "width": "fit-content",
                     "max_width": "narrow",
                     "alignment": "left",
@@ -694,7 +695,7 @@
       },
       "custom_css": [
         ".media-block {border-radius: 10px;}",
-        "@media(max-width:749px){[class*=\"image-block--\"][class*=\"__image_KJFRBf\"] img{max-width:85%;margin-left:auto;margin-right:auto;display:block;height:auto;}}"
+        "@media (max-width: 749px) {[class*=\"image-block--\"][class*=\"__image_KJFRBf\"] img {max-width: 85%; margin-left: auto; margin-right: auto; display: block; height: auto; }}"
       ],
       "name": "t:names.editorial",
       "settings": {
@@ -805,7 +806,7 @@
         "text_BRGXQR": {
           "type": "text",
           "settings": {
-            "text": "<p>Hydrating essentials for your everyday glam routine, including Highlight Milk, Pocket Bronze, and Little Glazing Mist.\u00a0</p>",
+            "text": "<p>Hydrating essentials for your everyday glam routine, including Highlight Milk, Pocket Bronze, and Little Glazing Mist. </p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
