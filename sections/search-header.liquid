@@ -9,22 +9,15 @@
       {% render 'spacing-style', settings: section.settings %}
     "
   >
-    {%- comment -%}
-      Rhode's heading is the search-results line itself ("Your search for "x"
-      revealed the following:"). Inlined rather than keyed off a locale string
-      so the copy and the curly quotes match the reference exactly.
-    {%- endcomment -%}
-    {%- capture heading_text -%}
-      <h3>
-        {%- if search.performed and search.terms != blank -%}
-          Your search for &ldquo;{{ search.terms | escape }}&rdquo; revealed the following:
-        {%- elsif search.performed -%}
-          {{ 'content.search_results' | t }}
-        {%- else -%}
-          {{ 'content.search' | t }}
-        {%- endif -%}
-      </h3>
-    {%- endcapture -%}
+    {% assign heading_text = 'content.search' | t %}
+
+    {% if search.performed %}
+      {% assign heading_text = 'content.search_results' | t %}
+    {% endif %}
+
+    {% capture heading_text %}
+      <h3>{{ heading_text }}</h3>
+    {% endcapture %}
 
     {% content_for 'block', id: 'heading', type: '_heading', text: heading_text %}
     {% content_for 'block', id: 'search', type: '_search-input' %}

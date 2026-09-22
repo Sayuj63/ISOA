@@ -17,13 +17,9 @@
 
 :root {
   /* --- Tweak these to change the animation everywhere on the site ---------- */
-  /* 1.03 was intentionally subtle — one or two pixels of travel on a typical
-     card, easy to miss. 1.09 makes the scroll-in "breathe" clearly readable;
-     duration stretches with the larger travel so the pace stays considered
-     rather than snappy. Ease curve keeps the Material `ease-in-out`. */
-  --isoa-zoom-scale-off: 1.09;     /* zoomed-in scale — pronounced */
+  --isoa-zoom-scale-off: 1.03;     /* zoomed-in scale — subtle */
   --isoa-zoom-scale-on: 1;         /* resting scale */
-  --isoa-zoom-duration: 1200ms;    /* animation length */
+  --isoa-zoom-duration: 900ms;     /* animation length */
   --isoa-zoom-easing: cubic-bezier(0.4, 0, 0.2, 1); /* ease in/out */
 }
 

@@ -6,50 +6,6 @@
 {%- enddoc -%}
 
 <div class="cart-totals">
-  {%- if settings.cart_free_shipping_enabled and cart.item_count > 0 -%}
-    {%- liquid
-      # cart.total_price is in subunits (paise), so the threshold converts up.
-      assign fs_threshold = settings.cart_free_shipping_threshold | times: 100
-      if fs_threshold > 0
-        assign fs_remaining = fs_threshold | minus: cart.total_price
-        assign fs_percent = cart.total_price | times: 100 | divided_by: fs_threshold
-        if fs_percent > 100
-          assign fs_percent = 100
-        endif
-        if fs_percent < 3
-          assign fs_percent = 3
-        endif
-      endif
-    -%}
-    {%- if fs_threshold > 0 -%}
-      <div class="cart-shipping-bar" role="status">
-        <p class="cart-shipping-bar__count">
-          {{ cart.item_count }}
-          {% if cart.item_count == 1 %}item{% else %}items{% endif %}
-        </p>
-        {%- if fs_remaining > 0 -%}
-          <p class="cart-shipping-bar__label">
-            Add {{ fs_remaining | money }} more for
-            {{ settings.cart_free_shipping_label | default: 'FREE SHIPPING' }}
-          </p>
-        {%- else -%}
-          <p class="cart-shipping-bar__label">
-            You've unlocked {{ settings.cart_free_shipping_label | default: 'FREE SHIPPING' }}
-          </p>
-        {%- endif -%}
-        <div
-          class="cart-shipping-bar__track"
-          role="progressbar"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          aria-valuenow="{{ fs_percent }}"
-        >
-          <div class="cart-shipping-bar__fill" style="width: {{ fs_percent }}%;"></div>
-        </div>
-      </div>
-    {%- endif -%}
-  {%- endif -%}
-
   {% # We need to keep this node in place to allow morphing to work properly # %}
   <div class="cart-totals__original-container cart-primary-typography">
     {%- if cart.cart_level_discount_applications.size > 0 -%}
@@ -276,7 +232,7 @@
       class="cart-totals__item cart-totals__total"
       role="status"
     >
-      <span class="cart-totals__total-label cart-primary-typography">{{ 'content.cart_subtotal' | t }}</span>
+      <span class="cart-totals__total-label cart-primary-typography">{{ 'content.cart_estimated_total' | t }}</span>
       <text-component
         ref="cartTotal"
         value="{{ total_price | strip_html }}"
@@ -296,10 +252,7 @@
       </span>
     {% endif %}
     <div class="cart-totals__item cart-totals__tax-note cart-primary-typography">
-      {% # The reference prints this one fixed line rather than the platform's
-          # tax-info copy, which reads "Taxes included. Discounts and shipping
-          # calculated at checkout." on this store. # %}
-      *shipping, taxes, and discounts calculated at checkout.
+      {% render 'tax-info', has_discounts_enabled: settings.show_add_discount_code %}
     </div>
   </div>
 </div>
@@ -315,9 +268,8 @@
     {% endif %}
     form="cart-form"
   >
-    {% # The reference button reads one word; the locale string is "Check out". # %}
     <span class="button-text">
-      Checkout
+      {{ 'content.checkout' | t }}
     </span>
   </button>
 

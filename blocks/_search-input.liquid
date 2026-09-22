@@ -32,6 +32,11 @@
       {{ 'icon-search.svg' | inline_asset_content }}
     </span>
     <input
+      name="type"
+      value="product"
+      type="hidden"
+    >
+    <input
       class="search-page-input{{ color_scheme }}"
       id="SearchPageInput--{{ block.id }}"
       type="search"
@@ -39,10 +44,10 @@
       ref="searchPageInput"
       on:keydown="/handleKeyDown"
       value="{{ search.terms | escape }}"
-      placeholder="Type here"
+      placeholder="{{ 'content.search_input_placeholder' | t }}"
     >
     <a
-      href="{{ routes.search_url }}?q="
+      href="{{ routes.search_url }}?type=product&q="
       class="search__reset-button{{ color_scheme }}"
       aria-label="{{ 'accessibility.reset_search' | t }}"
     >
@@ -54,17 +59,6 @@
       </span>
     </a>
   </search-page-input-component>
-
-  {%- comment -%}
-    Rhode's form has an explicit submit beside the field. The theme submits on
-    Enter only, so this is the reference's button, not a replacement for that.
-  {%- endcomment -%}
-  <button
-    type="submit"
-    class="search-page-input__submit"
-  >
-    {{ 'content.search' | t }}
-  </button>
 
   {% if search.results.size == 0 and search.terms != blank %}
     <div class="search-results__no-results">
