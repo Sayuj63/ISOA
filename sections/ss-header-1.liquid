@@ -266,13 +266,6 @@
     list-style: none;
   }
 
-  .header-menu-mobile-{{ section.id }} .header-menu-list-{{ section.id }} {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    margin-top:15px;
-  }
-
   .header-menu-item-{{ section.id }} {
     line-height: 100%;
   }
@@ -614,93 +607,224 @@
     height: fit-content;
   }
 
+  /* ── Rhode-style mobile drawer ──────────────────────────────────────────────
+     White shell with a 12px radius and a 16px bottom lip; the grey panel sits
+     inside it and slides out from behind the header bar (z-index 2 vs the
+     header body's 3). Category tabs translate a row of product cards, then a
+     row of page links sits below. Values measured from rhodeskin.com at
+     390x844 — the --mm-* vars are the single place to tune them. */
   .header-menu-mobile-{{ section.id }} {
+    --mm-text: 14px;
+    --mm-card-gap: 10px;
+    --mm-card-height: 84px;
+    --mm-thumb: 60px;
+    --mm-radius: 12px;
+    --mm-shell-pad: 16px;
+    --mm-open-height: 95vh;
+
     position: absolute;
     top: 5px;
     left: var(--ss-header-left);
     width: var(--ss-header-width);
     height: 0px;
-    background-color: {{ mobile_menu_bg_color }};
-    transition: all .5s cubic-bezier(.76,0,.24,1);
+    background-color: #ffffff;
+    border-radius: var(--mm-radius);
+    padding-bottom: var(--mm-shell-pad);
+    overflow: hidden;
+    /* Rhode's drawer opens over 1s. The easing is deliberately softer than the
+       .76/.24 curve used elsewhere in this header: that curve spends its first
+       ~300ms barely moving, so a 1s open read as "nothing, then a lurch". */
+    transition:
+      height 1s cubic-bezier(.4,0,.2,1),
+      opacity 1s cubic-bezier(.4,0,.2,1);
     z-index: 2;
     opacity: 0;
     pointer-events: none;
   }
 
   .header-{{ section.id }}.open .header-menu-mobile-{{ section.id }} {
-    height: 95vh;
+    height: var(--mm-open-height);
     opacity: 1;
     pointer-events: all;
-    transition: all .5s cubic-bezier(.76,0,.24,1);
   }
 
   .header-menu-mobile-inner-{{ section.id }} {
     width: 100%;
-    height: 100%;
+    /* Fixed to the shell's *open* box on purpose. At `height: 100%` the panel is
+       a percentage of the shell's animating height, so the flex column re-lays
+       out its tabs, every card and the links row on each of the ~60 frames of
+       the reveal. Pinning it means the shell's growing height only clips a
+       static panel, and the compositor does all the work. */
+    height: calc(var(--mm-open-height) - var(--mm-shell-pad));
     padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
     padding-left: {{ padding_horizontal_mobile }}rem;
     padding-right: {{ padding_horizontal_mobile }}rem;
+    background-color: {{ mobile_menu_bg_color }};
+    border-radius: var(--mm-radius);
+    display: flex;
+    flex-direction: column;
     overflow-y: auto;
+    overflow-x: hidden;
     scrollbar-width: none;
+    /* Keeps the panel on its own compositor layer so the shell's height
+       animation doesn't repaint the cards on every frame. */
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   .header-menu-mobile-inner-{{ section.id }}::-webkit-scrollbar {
     display: none;
   }
 
-  .header-menu-mobile-inner-{{ section.id }} .header-menu-item-{{ section.id }} {
-    display: flex;
-    flex-direction: column;
-    gap: {{ list_gap_mobile | times: 0.5 }}px;
-  }
-
-  .header-tab-{{ section.id }} {
-    width: 100%;
-  }
-
-  .header-tab-toggle-{{ section.id }} {
-    background-color: transparent;
-    border: 0px;
-    box-shadow: none;
+  /* Category tabs — horizontal scroll, 1px underline that slides to the active tab. */
+  .header-mm-tabs-{{ section.id }} {
+    position: relative;
+    flex: 0 0 auto;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    width: 100%;
+    padding-bottom: 5px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .header-mm-tabs-{{ section.id }}::-webkit-scrollbar {
+    display: none;
+  }
+
+  .header-mm-tab-{{ section.id }} {
+    flex: 0 0 auto;
+    padding: 0;
+    margin-right: 34px;
+    background: none;
+    border: 0;
+    font-family: inherit;
+    font-size: var(--mm-text);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: {{ link_color }};
+    opacity: 0.5;
     cursor: pointer;
+    transition: opacity .3s ease;
   }
 
-  .header-tab-toggle-left-{{ section.id }} {
+  .header-mm-tab-{{ section.id }}.is-current {
+    opacity: 1;
+  }
+
+  .header-mm-indicator-{{ section.id }} {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    background-color: {{ link_color }};
+    transition: left .3s cubic-bezier(.76,0,.24,1), width .3s cubic-bezier(.76,0,.24,1);
+  }
+
+  /* Panels — one per tab, laid side by side and translated into view.
+     overflow:hidden clips the off-screen panels; without it the next panel
+     bleeds a sliver into the inner's side padding. */
+  .header-mm-panels-{{ section.id }} {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    overflow: hidden;
+    transition: transform .5s cubic-bezier(.76,0,.24,1);
+  }
+
+  .header-mm-panel-{{ section.id }} {
+    flex: 0 0 100%;
+    width: 100%;
+    padding-top: 24px;
+  }
+
+  .header-mm-card-{{ section.id }} {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 10px;
-    flex: 1 1 auto;
+    gap: 16px;
+    height: var(--mm-card-height);
+    padding-left: 8px;
+    margin-bottom: var(--mm-card-gap);
+    background-color: #ffffff;
+    border-radius: 8px;
+    text-decoration: none;
   }
 
-  .header-tab-toggle-arrow-{{ section.id }} {
-    flex: 0 0 15px;
-    height: 15px;
-    transition: all 0.3s ease 0s;
-    transform: rotate(var(--rotate));
-  }
-
-  .header-tab-toggle-arrow-{{ section.id }} path {
-    fill: {{ link_color }};
-  }
-
-  .header-tab-text-{{ section.id }} {
-    transition: all 0.3s ease-in-out;
+  .header-mm-card-img-{{ section.id }} {
+    flex: 0 0 var(--mm-thumb);
+    width: var(--mm-thumb);
+    height: var(--mm-thumb);
     overflow: hidden;
   }
 
-  .header-tab-height-cal-{{ section.id }} {
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-    position: absolute;
-    top: 0;
-    left: 0;
+  .header-mm-card-img-{{ section.id }} img {
+    display: block;
     width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .header-mm-card-body-{{ section.id }} {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding-right: 8px;
+  }
+
+  .header-mm-card-title-{{ section.id }} {
+    font-size: var(--mm-text);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: {{ link_color }};
+  }
+
+  .header-mm-card-sub-{{ section.id }} {
+    font-size: var(--mm-text);
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    color: {{ link_color }};
+  }
+
+  .header-mm-card-badge-{{ section.id }} {
+    position: absolute;
+    top: 6.7px;
+    right: 8px;
+    padding: 4px 6px;
+    border-radius: 10px;
+    background-color: {{ link_color }};
+    color: #ffffff;
+    font-size: 10px;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    text-transform: lowercase;
+  }
+
+  .header-mm-links-{{ section.id }} {
+    flex: 0 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #c4c4c4;
+  }
+
+  .header-mm-links-{{ section.id }} h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .header-mm-links-{{ section.id }} a {
+    color: {{ link_color }};
+    text-decoration: none;
   }
 
   .header-mega-menu-{{ section.id }} {
@@ -1209,15 +1333,12 @@
   </style>
 {% endif %}
 
-{% comment %} FOR FREE THEMES{% endcomment %}
+{% comment %} Cart drawer styles. The five component-*.css files this used to
+  reference do not exist in this theme (they are Dawn free-theme leftovers), so
+  the requests were 404ing. rhode-cart.css is the one cart stylesheet that does. {% endcomment %}
 {%- if settings.cart_type == 'drawer' -%}
-  {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
-  {{ 'component-cart.css' | asset_url | stylesheet_tag }}
-  {{ 'component-totals.css' | asset_url | stylesheet_tag }}
-  {{ 'component-price.css' | asset_url | stylesheet_tag }}
-  {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+  {{ 'rhode-cart.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
-{% comment %} FOR FREE THEMES{% endcomment %}
 
 <div
   class="section-{{ section.id }} header-{{ section.id }} {% if is_transparent %}transparent{% endif %} {% if show_type == "always" %}fixed{% elsif show_type == "scroll_up" %}scroll fixed{% else %}top{% endif %}"
@@ -1276,86 +1397,75 @@
 
           <div class="header-menu-mobile-{{ section.id }}">
             <div class="header-menu-mobile-inner-{{ section.id }}">
-              <div class="header-menu-list-{{ section.id }}">
-                {% for link in menu.links %}
-                  {% if link.links.size > 0 %}
-                    <div class="header-tab-{{ section.id }}">
-                      <div class="header-tab-toggle-{{ section.id }}">
-                        <div class="header-tab-toggle-left-{{ section.id }}">
-                          <a href="{{ link.url }}" class="header-menu-link-{{ section.id }}">{{ link.title }}</a>
-                        </div>
-                        <svg
-                          class="header-tab-toggle-arrow-{{ section.id }}"
-                          xmlns="http://www.w3.org/2000/svg"
-                          version="1.0"
-                          viewBox="0 0 143.000000 83.000000"
-                          preserveAspectRatio="xMidYMid meet"
-                        >
-                          <g transform="translate(0.000000,83.000000) scale(0.100000,-0.100000)" fill="" stroke="none">
-                          <path d="M57 772 l-57 -57 360 -360 360 -360 357 357 358 358 -63 62 -62 63 -298 -298 -297 -297 -295 295 c-162 162 -297 295 -300 295 -3 0 -31 -26 -63 -58z"></path>
-                          </g>
-                        </svg>
-                      </div>
-                      <div
-                        class="header-tab-text-{{ section.id }}"
-                        style="display: none; height: 0px; padding-top: 0px; padding-bottom: 0px;padding-left:5px;"
-                      >
-                        <ul class="header-menu-list-{{ section.id }}">
-                          {% for child_link in link.links %}
-                            <li class="header-menu-item-{{ section.id }}">
-                              <a href="{{ child_link.url }}" class="header-menu-link-{{ section.id }}">
-                                {{- child_link.title -}}
-                              </a>
-                              {% if child_link.links.size > 0 %}
-                                {% for child_child_link in child_link.links %}
-                                  <a
-                                    href="{{ child_child_link.url }}"
-                                    class="header-menu-link-{{ section.id }} header-menu-child-link-{{ section.id }}"
-                                  >
-                                    {{- child_child_link.title -}}
-                                  </a>
-                                {% endfor %}
-                              {% endif %}
-                            </li>
-                          {% endfor %}
-                        </ul>
-                      </div>
+              {%- if section.blocks.size > 0 -%}
+                <div class="header-mm-tabs-{{ section.id }}">
+                  {%- for block in section.blocks -%}
+                    <button
+                      type="button"
+                      class="header-mm-tab-{{ section.id }}{% if forloop.first %} is-current{% endif %}"
+                      data-mm-tab="{{ forloop.index0 }}"
+                      {{ block.shopify_attributes }}
+                    >
+                      {{ block.settings.tab_label }}
+                    </button>
+                  {%- endfor -%}
+                  <span class="header-mm-indicator-{{ section.id }}"></span>
+                </div>
+
+                <div class="header-mm-panels-{{ section.id }}">
+                  {%- for block in section.blocks -%}
+                    <div class="header-mm-panel-{{ section.id }}" data-mm-panel="{{ forloop.index0 }}">
+                      {%- assign mm_products = block.settings.collection.products -%}
+                      {%- if mm_products.size > 0 -%}
+                        {%- assign mm_limit = block.settings.product_limit | default: 5 -%}
+                        {%- for card in mm_products limit: mm_limit -%}
+                          {%- assign mm_short = card.metafields.custom.card_short_name -%}
+                          {%- if mm_short == blank -%}{%- assign mm_short = card.title -%}{%- endif -%}
+                          {%- assign mm_sub = card.metafields.custom.card_subtitle -%}
+                          {%- if mm_sub == blank -%}{%- assign mm_sub = card.type -%}{%- endif -%}
+                          {%- assign mm_badge = card.metafields.custom.tag -%}
+                          <a class="header-mm-card-{{ section.id }}" href="{{ card.url }}">
+                            <span class="header-mm-card-img-{{ section.id }}">
+                              {%- if card.featured_image -%}
+                                <img
+                                  src="{{ card.featured_image | image_url: width: 120 }}"
+                                  alt="{{ card.title | escape }}"
+                                  width="60"
+                                  height="60"
+                                  loading="lazy"
+                                >
+                              {%- endif -%}
+                            </span>
+                            <span class="header-mm-card-body-{{ section.id }}">
+                              <span class="header-mm-card-title-{{ section.id }}">{{ mm_short | upcase }}</span>
+                              {%- if mm_sub != blank -%}
+                                <span class="header-mm-card-sub-{{ section.id }}">{{ mm_sub }}</span>
+                              {%- endif -%}
+                            </span>
+                            {%- if mm_badge != blank -%}
+                              <span class="header-mm-card-badge-{{ section.id }}">{{ mm_badge }}</span>
+                            {%- endif -%}
+                          </a>
+                        {%- endfor -%}
+                      {%- endif -%}
                     </div>
-                    {% comment %} Only for calculating height: {% endcomment %}
-                    <div class="header-tab-height-cal-{{ section.id }}">
-                      <ul class="header-menu-list-{{ section.id }}">
-                        {% for child_link in link.links %}
-                          <li class="header-menu-item-{{ section.id }}">
-                            <a href="{{ child_link.url }}" class="header-menu-link-{{ section.id }}">
-                              {{- child_link.title -}}
-                            </a>
-                            {% if child_link.links.size > 0 %}
-                              {% for child_child_link in child_link.links %}
-                                <a href="{{ child_child_link.url }}" class="header-menu-link-{{ section.id }}">
-                                  {{- child_child_link.title -}}
-                                </a>
-                              {% endfor %}
-                            {% endif %}
-                          </li>
-                        {% endfor %}
-                      </ul>
-                    </div>
-                  {% else %}
-                    <div class="header-menu-item-{{ section.id }}">
-                      <a href="{{ link.url }}" class="header-menu-link-{{ section.id }}">{{ link.title }}</a>
-                    </div>
-                  {% endif %}
-                {% endfor %}
-                {% if use_search and search_menu_mobile %}
-                  <div class="header-menu-item-{{ section.id }}">
-                    <a href="{{ routes.search_url }}" class="header-menu-link-{{ section.id }}">{{ search_text }}</a>
-                  </div>
-                {% endif %}
-                {% if use_account and account_menu_mobile %}
-                  <div class="header-menu-item-{{ section.id }}">
-                    <a href="{{ routes.account_url }}" class="header-menu-link-{{ section.id }}">{{ account_text }}</a>
-                  </div>
-                {% endif %}
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+
+              <div class="header-mm-links-{{ section.id }}">
+                {%- assign mm_links = section.settings.mobile_links_menu -%}
+                {%- if mm_links != blank -%}
+                  {%- for link in mm_links.links -%}
+                    <h3><a href="{{ link.url }}">{{ link.title }}</a></h3>
+                  {%- endfor -%}
+                {%- endif -%}
+                {%- if use_search and search_menu_mobile -%}
+                  <h3><a href="{{ routes.search_url }}">{{ search_text }}</a></h3>
+                {%- endif -%}
+                {%- if use_account and account_menu_mobile -%}
+                  <h3><a href="{{ routes.account_url }}">{{ account_text }}</a></h3>
+                {%- endif -%}
               </div>
             </div>
           </div>
@@ -1577,11 +1687,21 @@
     let headerBody = header.querySelector('.header-body-{{ section.id }}');
     let headerMobileInner = header.querySelector('.header-menu-mobile-inner-{{ section.id }}');
     let headerMegaMenus = header.querySelectorAll('.header-mega-menu-{{ section.id }}');
-    
+
+    // The panel starts below the header bar. This used to be written inside the
+    // click handler, which forced a layout read on the same frame as the class
+    // toggle and made the first frame of the reveal the slow one. Settle it up
+    // front and on resize instead.
+    function setMobileInnerOffset() {
+      if (headerMobileInner && headerBody) {
+        headerMobileInner.style.paddingTop = headerBody.clientHeight + {{ padding_top | times: 3 }} - 25 + "px";
+      }
+    }
+    setMobileInnerOffset();
+
     if(burger_icon) {
       burger_icon.addEventListener('click', () => {
         header.classList.toggle('open');
-        headerMobileInner.style.paddingTop = headerBody.clientHeight + {{ padding_top | times: 3 }} - 25 + "px";
         if(header.classList.contains('open')) {
           document.body.style.overflow = 'hidden';
         } else {
@@ -1590,96 +1710,82 @@
       })
     }
 
+    // The header icons open the Rhode drawers instead of navigating. The drawer
+    // sections render at the end of <body>, after this script, so the element is
+    // looked up on click rather than at init.
+    function wireDrawer(triggerSelector, drawerId) {
+      const trigger = header.querySelector(triggerSelector);
+      if (!trigger || trigger.dataset.drawerWired) return;
+      trigger.dataset.drawerWired = 'true';
+      trigger.addEventListener('click', (event) => {
+        const drawer = document.getElementById(drawerId);
+        if (!drawer || typeof drawer.showDialog !== 'function') return;
+        event.preventDefault();
+        drawer.showDialog();
+      });
+    }
+
+    wireDrawer('.header-search-{{ section.id }}', 'isoa-search-drawer');
+    wireDrawer('.header-cart-{{ section.id }}', 'isoa-cart-drawer');
+
     if(headerMegaMenus) {
       headerMegaMenus.forEach(el => {
         el.style.paddingTop = headerBody.clientHeight + {{ padding_top | times: 3.2 }} - 25 + "px";
       })
     }
 
-    const answerPaddingTop = 30;
-    const answerPaddingBottom = 0;
+    // Mobile drawer: category tabs translate a row of product-card panels.
+    // The indicator tracks the active tab by offsetLeft/offsetWidth so it
+    // stays aligned without hardcoding any widths.
+    const mmTabs = header.querySelectorAll('.header-mm-tab-{{ section.id }}');
+    const mmPanels = header.querySelector('.header-mm-panels-{{ section.id }}');
+    const mmIndicator = header.querySelector('.header-mm-indicator-{{ section.id }}');
 
-    const faqs = document.querySelectorAll(
-      '.header-tab-{{ section.id }}'
-    );
-    const buttons = document.querySelectorAll(
-      '.header-tab-toggle-{{ section.id }}'
-    );
-    const answers = document.querySelectorAll(
-      '.header-tab-text-{{ section.id }}'
-    );
-    const answersHeightCalElements = document.querySelectorAll(
-      '.header-tab-height-cal-{{ section.id }}'
-    );
-    const icons = document.querySelectorAll(
-      '.header-tab-toggle-arrow-{{ section.id }}'
-    );
+    function moveIndicator(tab) {
+      if (!mmIndicator || !tab) return;
+      mmIndicator.style.left = tab.offsetLeft + 'px';
+      mmIndicator.style.width = tab.offsetWidth + 'px';
+    }
 
-    let activeIndex = -1;
-
-    function openAnswer(index) {
-      const height = answersHeightCalElements[index].offsetHeight;
-
-      answers[index].style.display = 'block';
-      setTimeout(() => {
-        answers[index].style.paddingTop = `${answerPaddingTop}px`;
-        answers[index].style.paddingBottom = `${answerPaddingBottom}px`;
-        answers[index].style.height = `${height + 30}px`;
-        icons[index].style.setProperty('--rotate', '180deg');
+    function selectTab(index) {
+      mmTabs.forEach((tab, i) => {
+        tab.classList.toggle('is-current', i === index);
       });
+      if (mmPanels) {
+        mmPanels.style.transform = 'translate3d(-' + index * 100 + '%, 0, 0)';
+      }
+      moveIndicator(mmTabs[index]);
     }
-    
-    function closeAnswer(index) {
-      answers[index].style.paddingTop = 0;
-      answers[index].style.paddingBottom = 0;
-      answers[index].style.height = 0;
-      icons[index].style.setProperty('--rotate', '0deg');
 
-      setTimeout(() => {
-        answers[index].style.display = 'none';
-      }, 300);
-    }
-    
-    function toggleAnswer(index) {
-      if (answers[index].style.display === 'none') {
-        openAnswer(index);
-        activeIndex = index;
-      } else {
-        closeAnswer(index);
-        activeIndex = -1;
+    mmTabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => selectTab(index));
+    });
+
+    // The indicator is width:0 until JS paints it, so settle it on load and
+    // again whenever the panel geometry changes.
+    if (mmTabs.length) {
+      requestAnimationFrame(() => selectTab(0));
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => {
+          const current = header.querySelector('.header-mm-tab-{{ section.id }}.is-current');
+          moveIndicator(current);
+        });
       }
     }
-    
-    function closeAllAnswerBut(index) {
-      answers.forEach((answer, i) => {
-        if (i !== index) {
-          closeAnswer(i);
-        }
-      });
-    }
-
-    // When clicked, toggle the answer, animate the answer's height:
-    buttons.forEach((button, index) => {
-      button.addEventListener('click', () => {
-        toggleAnswer(index);
-        closeAllAnswerBut(index);
-      });
-    });
 
     // When the window is resized, debounce the answer's height:
     let resizeTimer;
     window.addEventListener('resize', () => {
       updateHeaderTopOffset();
+      setMobileInnerOffset();
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
-        if (activeIndex !== -1) {
-          const height = answersHeightCalElements[activeIndex].offsetHeight;
-          answers[activeIndex].style.height = `${height}px`;
-        }
+        const current = header.querySelector('.header-mm-tab-{{ section.id }}.is-current');
+        moveIndicator(current);
       }, 250);
     });
-  }  
-}  
+  }
+}
 
 document.addEventListener('DOMContentLoaded', initHeader);
 
@@ -1770,6 +1876,19 @@ if (Shopify.designMode) {
       "id": "menu",
       "label": "Menu",
       "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": "Mobile menu"
+    },
+    {
+      "type": "paragraph",
+      "content": "Add a 'Mobile menu tab' block per category. Each tab shows the products of the collection you pick. The links row sits under the tabs."
+    },
+    {
+      "type": "link_list",
+      "id": "mobile_links_menu",
+      "label": "Links row"
     },
     {
       "type": "header",
@@ -2434,6 +2553,35 @@ if (Shopify.designMode) {
       "label": "Lazy load",
       "info": "Lazy load images for speed optimisation",
       "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "mobile_tab",
+      "name": "Mobile menu tab",
+      "limit": 8,
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_label",
+          "label": "Tab label",
+          "default": "FEATURED"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "range",
+          "id": "product_limit",
+          "min": 3,
+          "max": 10,
+          "step": 1,
+          "label": "Products shown",
+          "default": 5
+        }
+      ]
     }
   ],
   "presets": [

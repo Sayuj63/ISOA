@@ -19,6 +19,36 @@ class CartQuantitySelectorComponent extends QuantitySelectorComponent {
   }
 
   /**
+   * In the drawer, decrementing past 1 removes the line instead of clamping at
+   * the rule minimum.
+   *
+   * The reference cart drawer has no separate remove control, so this is the
+   * only way to delete an item from it. `cart-items-component` already treats a
+   * dispatched quantity of 0 as a removal (component-cart-items.js:63) — it just
+   * never receives one, because updateQuantity() clamps to `min`.
+   *
+   * Scoped to `cart-items-component[data-drawer]`: the cart page keeps its own
+   * remove button and its clamping behaviour.
+   *
+   * @param {Event} event
+   */
+  decreaseQuantity(event) {
+    if (!(event.target instanceof HTMLElement)) return;
+    event.preventDefault();
+
+    const { quantityInput } = this.refs;
+    const { min, value } = this.getCurrentValues();
+
+    if (this.closest('cart-items-component[data-drawer]') && value <= min) {
+      quantityInput.value = '0';
+      this.onQuantityChange();
+      return;
+    }
+
+    super.decreaseQuantity(event);
+  }
+
+  /**
    * Updates button states based on current value and limits
    * Cart buttons are always managed client-side, never server-disabled
    */
@@ -28,7 +58,10 @@ class CartQuantitySelectorComponent extends QuantitySelectorComponent {
     const effectiveMax = this.getEffectiveMax();
 
     // Cart buttons are always dynamically managed
-    minusButton.disabled = value <= min;
+    // In the drawer the minus stays live at the minimum, where it removes the
+    // line (see decreaseQuantity above) rather than sitting disabled.
+    minusButton.disabled =
+      this.closest('cart-items-component[data-drawer]') ? false : value <= min;
     plusButton.disabled = effectiveMax !== null && value >= effectiveMax;
   }
 }
