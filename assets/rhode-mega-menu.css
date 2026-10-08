@@ -1,0 +1,518 @@
+/* ==========================================================================
+   Rhode-style desktop mega menu — used by sections/ss-header-1.liquid
+   --------------------------------------------------------------------------
+   Structure and layout live here. Every value a merchant can edit is passed
+   in from the header section's inline <style> block as a custom property:
+     --rhode-mm-bg           panel + pill background
+     --rhode-mm-text         primary text / badge / button colour
+     --rhode-mm-pad          side gutter
+     --rhode-mm-content      max content width
+   The panel is square on all four corners — no radius variables are consumed.
+   The panel is absolutely positioned against the header section wrapper and
+   anchored by JS to the bottom of the header bar (see assets/rhode-mega-menu.js).
+   ========================================================================== */
+
+.rhode-mm {
+  --rhode-mm-gap: 16px;
+  --rhode-mm-card-radius: 20px;
+  /* How far the panel pulls in from each edge of the header bar. 0 lines the
+     panel up edge to edge with the navbar; a small value like 5px shaves that
+     much off both sides while keeping the panel centred on the bar. */
+  --rhode-mm-inset: 0px;
+  --rhode-mm-visible: 4;
+  /* Shared curve for the small inner micro-interactions (tab hover, arrows,
+     buttons). The panel itself uses --rhode-mm-panel-ease below instead. */
+  --rhode-mm-ease: cubic-bezier(.4, 0, .2, 1);
+  /* Panel open/close. Slower than the inner transitions on purpose — the sheet
+     travels further than a hover state does, and a longer curve is what makes
+     it read as smooth rather than snapping in. */
+  --rhode-mm-duration: .9s;
+  /* Hover intent. The pointer has to rest on "Shop" for this long before the
+     sheet starts coming down, so merely crossing the nav doesn't flash it open.
+     A tenth of a second: barely more than a formality. Long enough to swallow a
+     stray pointer event, short enough to read as instant on a deliberate hover.
+     Note this is only the wait *before* the open — how long the sheet then takes
+     to travel is --rhode-mm-duration below. Keyboard opens carry
+     .is-open--instant and skip this wait entirely; a delay after pressing a key
+     reads as a broken control. */
+  --rhode-mm-delay: .1s;
+  /* Ease-out only, no overshoot: most of the travel happens early, then it
+     settles gently. Suits a large surface far better than ease-in-out, which
+     would start slow and make the panel feel unresponsive to the hover. */
+  --rhode-mm-panel-ease: cubic-bezier(.22, 1, .36, 1);
+
+  /* Fixed rather than absolute: the nav <li> is position:relative and its width
+     is just the "Shop" link (~40px), so an absolutely positioned panel would
+     take that box as its containing block and collapse. Fixed resolves against
+     the header section instead, which is what makes the two variables below
+     usable — they are the same ones the header bar itself is built from. */
+  position: fixed;
+  /* 100% of the containing block = the header section's bottom edge, so the
+     panel hangs exactly off the header bar. */
+  top: 100%;
+  /* The panel tracks the header bar's box, pulled in by the inset above on both
+     sides, so the dropdown is exactly as wide as the navbar and aligned with it.
+     Both values are the ones the bar itself is built from (ss-header-1.liquid).
+     At an inset of 0 the panel's edges sit flush under the bar's; a few px would
+     leave a hairline of the bar visible down each side instead. */
+  left: calc(var(--ss-header-left) + var(--rhode-mm-inset));
+  width: calc(var(--ss-header-width) - var(--rhode-mm-inset) * 2);
+  /* A tall sheet scrolls instead of running off the bottom of the window. `100%`
+     here is the header element's own height — this panel is fixed against the
+     header (see position: fixed above) — so the cap works out as "the rest of
+     the viewport below the bar" without hard-coding a bar height. */
+  max-height: calc(100vh - 100%);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  z-index: 2;
+  box-sizing: border-box;
+  background-color: var(--rhode-mm-bg);
+  /* Square on all four corners. The header bar's bottom edge is square on
+     desktop, and the client asked for the panel's bottom corners squared to
+     match, so the bar and the sheet read as one slab with no rounding at all.
+     --rhode-mm-radius is therefore no longer consumed here. */
+  border-radius: 0;
+  color: var(--rhode-mm-text);
+  /* The nav <li> this panel lives in sets line-height: 100%; reset it. */
+  line-height: 1.3;
+  opacity: 0;
+  visibility: hidden;
+  /* The panel rises as it fades. The overlap with the bar is invisible because
+     both share --rhode-mm-bg, and the panel's top 72px is bare background
+     (its content starts below --rhode-mm-top-gap), so nothing is occluded. */
+  transform: translateY(-28px);
+  /* Visibility rides the same duration so the panel stays on screen for the
+     whole fade and only flips to hidden at the end. */
+  transition:
+    opacity var(--rhode-mm-duration) var(--rhode-mm-panel-ease),
+    transform var(--rhode-mm-duration) var(--rhode-mm-panel-ease),
+    visibility var(--rhode-mm-duration);
+  pointer-events: none;
+}
+
+.rhode-mm.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+  /* The delay lives here, not on the base rule above, because the transition
+     that plays on open is the one declared by the state being moved *to*. Put
+     it on the base rule instead and the close would wait the same delay. */
+  transition-delay: var(--rhode-mm-delay);
+}
+
+/* Keyboard and scripted opens (focus on a nav item, ArrowDown on the trigger)
+   go straight down — the hover-intent wait is only for the pointer. */
+.rhode-mm.is-open.is-open--instant {
+  transition-delay: 0s;
+}
+
+/* The header's own mobile drawer takes over below the desktop breakpoint. */
+@media (max-width: 1023px) {
+  .rhode-mm {
+    display: none;
+  }
+}
+
+.rhode-mm__inner {
+  max-width: var(--rhode-mm-content, 1400px);
+  margin: 0 auto;
+  /* Top gap is the panel's own padding now that it hangs off the header bar,
+     so the merchant's "gap" setting reads as the space under the nav. */
+  padding: var(--rhode-mm-top-gap, 72px) var(--rhode-mm-pad, 24px) 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 24px;
+  align-items: center;
+}
+
+.rhode-mm__main {
+  min-width: 0;
+  /* The gap above the promo banner — and, when there is no promo set, the
+     panel's bottom breathing room. */
+  padding-bottom: 40px;
+}
+
+.rhode-mm :focus-visible {
+  outline: 2px solid var(--rhode-mm-text);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Tab row ─────────────────────────────────────────────────────────────── */
+
+.rhode-mm__tabs {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 34px;
+}
+
+.rhode-mm__tablist {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+  padding-bottom: 14px;
+}
+
+.rhode-mm__tab {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+  /* Inactive tabs are muted; the underline marks the active one. Matches the
+     opacity convention the header's mobile drawer already uses. */
+  opacity: .45;
+  transition: opacity .2s var(--rhode-mm-ease);
+}
+
+.rhode-mm__tab:hover,
+.rhode-mm__tab.is-current {
+  opacity: 1;
+}
+
+.rhode-mm__indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--rhode-mm-text);
+  transition:
+    left .3s var(--rhode-mm-ease),
+    width .3s var(--rhode-mm-ease);
+}
+
+/* ── Card carousel ───────────────────────────────────────────────────────── */
+
+.rhode-mm__viewport {
+  overflow: hidden;
+}
+
+.rhode-mm__track {
+  display: flex;
+  align-items: flex-start;
+  transition: transform .4s var(--rhode-mm-ease);
+}
+
+.rhode-mm__panel {
+  flex: 0 0 100%;
+  width: 100%;
+  min-width: 0;
+}
+
+.rhode-mm__row {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc(
+    (100% - (var(--rhode-mm-visible) - 1) * var(--rhode-mm-gap)) / var(--rhode-mm-visible)
+  );
+  gap: var(--rhode-mm-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /* A tab holding fewer products than there are slots would otherwise sit hard
+     left and leave the rest of the row empty on the right. `safe` keeps the
+     overflow case honest: centre the cards while they fit, and fall back to
+     starting them once they do not, so the first card can never end up
+     scrolled out of reach. */
+  justify-content: safe center;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.rhode-mm__row::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 1279px) {
+  .rhode-mm {
+    --rhode-mm-visible: 3;
+  }
+}
+
+.rhode-mm-card {
+  scroll-snap-align: start;
+  min-width: 0;
+}
+
+.rhode-mm-card__link {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: 4 / 5;
+  min-height: 280px;
+  padding: 18px 18px 22px;
+  border-radius: var(--rhode-mm-card-radius);
+  background-color: #ffffff;
+  color: var(--rhode-mm-text);
+  text-decoration: none;
+}
+
+.rhode-mm-card__media {
+  /* Containing block for the award seal below, which is pinned to the image
+     rather than to the card so it can clear the badge in the top-right. */
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rhode-mm-card__media img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.rhode-mm-card__body {
+  flex: 0 0 auto;
+  margin-top: 16px;
+}
+
+.rhode-mm-card__title {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.rhode-mm-card__sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+  opacity: .72;
+}
+
+/* Corner word, top-left — the same mark the homepage cards carry (see
+   .isoa-rc-brand in assets/rhode-collection-cards.css, which this copies).
+   Lowercase and much heavier than the card title below it, which is what makes
+   it read as a wordmark rather than as another label. DM Sans 800 is loaded by
+   layout/theme.liquid for exactly this mark. */
+.rhode-mm-card__brand {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 1;
+  font-family: 'DM Sans', var(--font-heading--family, var(--font-body--family));
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-transform: lowercase;
+  color: var(--rhode-mm-text);
+  pointer-events: none;
+}
+
+/* "new" pill, top-right — opposite corner from the wordmark, and inside the
+   card's 18px padding so it lines up with it. */
+.rhode-mm-card__badge {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 1;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background-color: var(--rhode-mm-text);
+  color: #ffffff;
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: lowercase;
+}
+
+/* Award seal, bottom-right of the image. Only rendered when the product has
+   custom.award_badge set; the slot is styled either way so setting the metafield
+   is all it takes to make it appear. */
+.rhode-mm-card__award {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 1;
+  width: 58px;
+  height: 58px;
+}
+
+.rhode-mm-card__award img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ── Carousel arrow ──────────────────────────────────────────────────────── */
+
+.rhode-mm__next {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: var(--rhode-mm-text);
+  cursor: pointer;
+  transition: opacity .2s var(--rhode-mm-ease);
+}
+
+.rhode-mm__next[hidden] {
+  display: none;
+}
+
+.rhode-mm__next.is-at-end {
+  opacity: .4;
+}
+
+.rhode-mm__next svg {
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+/* ── Collection button ───────────────────────────────────────────────────── */
+
+.rhode-mm__cta-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.rhode-mm__cta {
+  display: inline-block;
+  padding: 13px 34px;
+  border: 1px solid var(--rhode-mm-text);
+  border-radius: 999px;
+  color: var(--rhode-mm-text);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    background-color .2s var(--rhode-mm-ease),
+    color .2s var(--rhode-mm-ease);
+}
+
+.rhode-mm__cta:hover {
+  background-color: var(--rhode-mm-text);
+  color: #ffffff;
+}
+
+/* ── Promo banner ────────────────────────────────────────────────────────── */
+
+.rhode-mm__promo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* Spacing above comes from .rhode-mm__main's padding-bottom. */
+  margin-top: 0;
+  /* Squared to match the panel, which is square at the bottom now — a rounded
+     image card sitting flush against a square panel edge would read as a bug. */
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.rhode-mm__promo-col {
+  position: relative;
+  display: block;
+  aspect-ratio: 12 / 5;
+  min-height: 200px;
+  overflow: hidden;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.rhode-mm__promo-media,
+.rhode-mm__promo-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.rhode-mm__promo-media img {
+  object-fit: cover;
+}
+
+.rhode-mm__promo-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 18px;
+  padding: 32px;
+  text-align: right;
+}
+
+.rhode-mm__promo-heading {
+  margin: 0;
+  max-width: 20ch;
+  font-size: clamp(20px, 2vw, 30px);
+  font-weight: 400;
+  line-height: 1.15;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, .28);
+}
+
+.rhode-mm__promo-button {
+  display: inline-block;
+  padding: 12px 28px;
+  border: 1px solid #ffffff;
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    background-color .2s var(--rhode-mm-ease),
+    color .2s var(--rhode-mm-ease);
+}
+
+.rhode-mm__promo-button:hover {
+  background-color: #ffffff;
+  color: #1a1a1a;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rhode-mm,
+  .rhode-mm__track,
+  .rhode-mm__indicator,
+  .rhode-mm__tab,
+  .rhode-mm__cta,
+  .rhode-mm__promo-button,
+  .rhode-mm__next {
+    transition: none;
+  }
+
+  .rhode-mm {
+    transform: none;
+  }
+
+  .rhode-mm__row {
+    scroll-behavior: auto;
+  }
+}

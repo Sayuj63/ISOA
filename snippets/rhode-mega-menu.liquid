@@ -1,0 +1,293 @@
+{%- doc -%}
+  Rhode-style desktop mega menu panel.
+
+  Rendered by the header section for the nav item whose title matches the
+  configured trigger (default "Shop"). Tabs come from the section's existing
+  `mobile_tab` blocks — the same blocks that drive the header's mobile drawer —
+  so categories are configured once. Product cards reuse the header's metafield
+  conventions: custom.card_short_name, custom.card_subtitle, custom.tag,
+  custom.card_category and custom.award_badge. The two corner marks on each card
+  mirror the homepage card's: the category word top-left and the "new" pill
+  top-right when the metafields are unset, plus the award seal bottom-right when
+  custom.award_badge holds an image.
+
+  @param {object} section - The header section, for blocks and promo settings.
+  @param {string} id - Header section id, used to build unique element ids.
+  @param {string} cta_prefix - Prefix for the collection button label.
+
+  @example
+  {% render 'rhode-mega-menu', section: section, id: section.id, cta_prefix: 'SHOP' %}
+{%- enddoc -%}
+
+{%- liquid
+  assign promo_left = section.settings.mega_menu_promo_left_image
+  assign promo_right = section.settings.mega_menu_promo_right_image
+  assign promo_left_link = section.settings.mega_menu_promo_left_link
+  assign promo_right_link = section.settings.mega_menu_promo_right_link
+  assign promo_heading = section.settings.mega_menu_promo_heading
+  assign promo_button_label = section.settings.mega_menu_promo_button_label
+  assign promo_button_link = section.settings.mega_menu_promo_button_link
+  assign cta_prefix = cta_prefix | default: 'SHOP'
+
+  # Which tab starts active, matched by label rather than index so reordering or
+  # inserting tabs in the theme editor doesn't silently move the default. Falls
+  # back to the first tab when nothing matches.
+  assign default_tab_label = section.settings.mega_menu_default_tab | default: 'AWARD WINNERS' | strip | upcase
+  assign active_index = 0
+  assign tab_cursor = 0
+  for block in section.blocks
+    if block.type == 'mobile_tab' and block.settings.collection.products.size > 0
+      assign block_label = block.settings.tab_label | strip | upcase
+      if block_label == default_tab_label
+        assign active_index = tab_cursor
+      endif
+      assign tab_cursor = tab_cursor | plus: 1
+    endif
+  endfor
+-%}
+
+<div
+  id="rhode-mm-panel-{{ id }}"
+  class="rhode-mm"
+  data-rhode-mm-panel
+  aria-hidden="true"
+>
+  <div class="rhode-mm__inner">
+    <div class="rhode-mm__main">
+      <div class="rhode-mm__tabs">
+        <div class="rhode-mm__tablist" role="tablist" aria-label="Shop categories">
+          {%- assign tab_index = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type != 'mobile_tab' -%}{%- continue -%}{%- endif -%}
+            {%- assign tab_collection = block.settings.collection -%}
+            {%- if tab_collection == blank or tab_collection.products.size == 0 -%}{%- continue -%}{%- endif -%}
+            {%- assign tab_label = block.settings.tab_label | strip -%}
+            {%- assign is_active = false -%}
+            {%- if tab_index == active_index -%}{%- assign is_active = true -%}{%- endif -%}
+            <button
+              type="button"
+              class="rhode-mm__tab{% if is_active %} is-current{% endif %}"
+              id="rhode-mm-tab-{{ id }}-{{ tab_index }}"
+              role="tab"
+              aria-controls="rhode-mm-tabpanel-{{ id }}-{{ tab_index }}"
+              aria-selected="{{ is_active }}"
+              tabindex="{% if is_active %}0{% else %}-1{% endif %}"
+              data-rhode-mm-tab="{{ tab_index }}"
+              {{ block.shopify_attributes }}
+            >
+              {{ tab_label | upcase }}
+            </button>
+            {%- assign tab_index = tab_index | plus: 1 -%}
+          {%- endfor -%}
+        </div>
+        <span class="rhode-mm__indicator" data-rhode-mm-indicator aria-hidden="true"></span>
+      </div>
+
+      <div class="rhode-mm__viewport">
+        <div class="rhode-mm__track" data-rhode-mm-track>
+          {%- assign tab_index = 0 -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type != 'mobile_tab' -%}{%- continue -%}{%- endif -%}
+            {%- assign tab_collection = block.settings.collection -%}
+            {%- assign tab_products = tab_collection.products -%}
+            {%- if tab_collection == blank or tab_products.size == 0 -%}{%- continue -%}{%- endif -%}
+            {%- assign tab_label = block.settings.tab_label | strip -%}
+            {%- assign is_active = false -%}
+            {%- if tab_index == active_index -%}{%- assign is_active = true -%}{%- endif -%}
+            {%- assign tab_limit = block.settings.product_limit | default: 8 -%}
+
+            <div
+              class="rhode-mm__panel{% if is_active %} is-current{% endif %}"
+              id="rhode-mm-tabpanel-{{ id }}-{{ tab_index }}"
+              role="tabpanel"
+              aria-labelledby="rhode-mm-tab-{{ id }}-{{ tab_index }}"
+              data-rhode-mm-tabpanel="{{ tab_index }}"
+              {%- unless is_active %} inert aria-hidden="true"{% endunless %}
+            >
+              <ul class="rhode-mm__row" data-rhode-mm-row>
+                {%- for card in tab_products limit: tab_limit -%}
+                  {%- liquid
+                    assign card_short = card.metafields.custom.card_short_name
+                    if card_short == blank
+                      assign card_short = card.title
+                    endif
+                    assign card_sub = card.metafields.custom.card_subtitle
+                    if card_sub == blank
+                      assign card_sub = card.type
+                    endif
+                    comment
+                      Corner word, mirroring the homepage card
+                      (snippets/isoa-rhode-card.liquid → .isoa-rc-brand): the same
+                      custom.card_category → type → vendor fallback chain, so a
+                      dropdown card carries the same wordmark as that product's
+                      card on the homepage.
+                    endcomment
+                    assign card_brand = card.metafields.custom.card_category
+                    if card_brand == blank
+                      assign card_brand = card.type
+                    endif
+                    if card_brand == blank
+                      assign card_brand = card.vendor
+                    endif
+                    comment
+                      custom.tag wins when set; otherwise fall back to "new", the
+                      pill the homepage card shows unconditionally, rather than
+                      rendering no pill at all.
+                    endcomment
+                    assign card_badge = card.metafields.custom.tag
+                    if card_badge == blank
+                      assign card_badge = 'new'
+                    endif
+                    assign card_award = card.metafields.custom.award_badge.value
+                  -%}
+                  <li class="rhode-mm-card">
+                    <a class="rhode-mm-card__link" href="{{ card.url }}">
+                      {%- if card_brand != blank -%}
+                        <span class="rhode-mm-card__brand">{{ card_brand | downcase }}</span>
+                      {%- endif -%}
+
+                      {%- if card_badge != blank -%}
+                        <span class="rhode-mm-card__badge">{{ card_badge }}</span>
+                      {%- endif -%}
+
+                      <span class="rhode-mm-card__media">
+                        {%- comment -%}
+                          The award seal sits inside the media box rather than
+                          beside the badge, so the two corner marks can share the
+                          card without overlapping: pill top-right, seal
+                          bottom-right of the image.
+                        {%- endcomment -%}
+                        {%- if card_award != blank -%}
+                          <span class="rhode-mm-card__award">
+                            {{
+                              card_award
+                              | image_url: width: 120
+                              | image_tag: loading: 'lazy', width: 58, height: 58, alt: card_short
+                            }}
+                          </span>
+                        {%- endif -%}
+                        {%- if card.featured_image -%}
+                          {{
+                            card.featured_image
+                            | image_url: width: 400
+                            | image_tag:
+                              loading: 'lazy',
+                              widths: '160, 240, 320, 400, 560',
+                              sizes: '(min-width: 1280px) 22vw, (min-width: 1024px) 30vw, 45vw',
+                              alt: card_short
+                          }}
+                        {%- endif -%}
+                      </span>
+
+                      <span class="rhode-mm-card__body">
+                        <span class="rhode-mm-card__title">{{ card_short | upcase }}</span>
+                        {%- if card_sub != blank -%}
+                          <span class="rhode-mm-card__sub">{{ card_sub }}</span>
+                        {%- endif -%}
+                      </span>
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+
+              <div class="rhode-mm__cta-row">
+                {%- liquid
+                  # A tab already called "Shop" would otherwise render as
+                  # "SHOP SHOP", so only prepend the prefix when the tab label
+                  # doesn't already start with it.
+                  assign cta_label = tab_label | upcase
+                  assign cta_prefix_up = cta_prefix | upcase
+                  unless cta_label contains cta_prefix_up
+                    assign cta_label = cta_prefix_up | append: ' ' | append: cta_label
+                  endunless
+                -%}
+                <a class="rhode-mm__cta" href="{{ tab_collection.url }}">
+                  {{- cta_label -}}
+                </a>
+              </div>
+            </div>
+
+            {%- assign tab_index = tab_index | plus: 1 -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="rhode-mm__next" data-rhode-mm-next aria-label="Show more products">
+      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M4.5 1.5 9.5 7l-5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+  {%- if promo_left != blank or promo_right != blank -%}
+    <div class="rhode-mm__promo">
+      <div class="rhode-mm__promo-col">
+        {%- if promo_left_link != blank -%}
+          <a class="rhode-mm__promo-media" href="{{ promo_left_link }}" tabindex="-1" aria-hidden="true">
+        {%- else -%}
+          <span class="rhode-mm__promo-media">
+        {%- endif -%}
+          {%- if promo_left != blank -%}
+            {%- assign promo_left_height = promo_left.height | times: 600 | divided_by: promo_left.width | default: 250 -%}
+            {{
+              promo_left
+              | image_url: width: 600
+              | image_tag:
+                loading: 'lazy',
+                width: 600,
+                height: promo_left_height,
+                widths: '400, 600, 800, 1200',
+                sizes: '(min-width: 1024px) 50vw, 100vw',
+                alt: promo_left.alt
+            }}
+          {%- endif -%}
+        {%- if promo_left_link != blank -%}
+          </a>
+        {%- else -%}
+          </span>
+        {%- endif -%}
+      </div>
+
+      <div class="rhode-mm__promo-col">
+        {%- if promo_right != blank -%}
+          {%- if promo_right_link != blank -%}
+            <a class="rhode-mm__promo-media" href="{{ promo_right_link }}" tabindex="-1" aria-hidden="true">
+          {%- else -%}
+            <span class="rhode-mm__promo-media">
+          {%- endif -%}
+            {%- assign promo_right_height = promo_right.height | times: 600 | divided_by: promo_right.width | default: 250 -%}
+            {{
+              promo_right
+              | image_url: width: 600
+              | image_tag:
+                loading: 'lazy',
+                width: 600,
+                height: promo_right_height,
+                widths: '400, 600, 800, 1200',
+                sizes: '(min-width: 1024px) 50vw, 100vw',
+                alt: promo_right.alt
+            }}
+          {%- if promo_right_link != blank -%}
+            </a>
+          {%- else -%}
+            </span>
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- if promo_heading != blank or promo_button_label != blank -%}
+          <div class="rhode-mm__promo-content">
+            {%- if promo_heading != blank -%}
+              <p class="rhode-mm__promo-heading">{{ promo_heading }}</p>
+            {%- endif -%}
+            {%- if promo_button_label != blank and promo_button_link != blank -%}
+              <a class="rhode-mm__promo-button" href="{{ promo_button_link }}">
+                {{- promo_button_label -}}
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+</div>

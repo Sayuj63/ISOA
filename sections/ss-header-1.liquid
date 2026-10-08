@@ -107,6 +107,26 @@
 
   assign cart_text = section.settings.cart_text
   assign cart_icon_desktop = section.settings.cart_icon_desktop
+
+  # Rhode-style desktop mega menu: which nav item opens the hover panel. The
+  # panel itself — tabs, cards, promo banner — lives in
+  # snippets/rhode-mega-menu.liquid. A tab only counts when its collection has
+  # products, so if none qualify the nav item keeps the plain linklist mega menu
+  # it would otherwise get.
+  assign mega_menu_trigger = section.settings.mega_menu_trigger | default: 'Shop' | strip | downcase
+  assign mega_menu_cta_prefix = section.settings.mega_menu_cta_prefix | default: 'SHOP' | strip
+
+  assign mega_menu_tab_count = 0
+  for block in section.blocks
+    if block.type == 'mobile_tab' and block.settings.collection.products.size > 0
+      assign mega_menu_tab_count = mega_menu_tab_count | plus: 1
+    endif
+  endfor
+
+  assign has_mega_menu = section.settings.enable_mega_menu
+  if mega_menu_tab_count == 0
+    assign has_mega_menu = false
+  endif
 -%}
 
 {%- style -%}
@@ -212,6 +232,38 @@
     /* Custom - vamshi: only mobile needs an offset so the transparent header sits below header-group sections above it. */
     .header-{{ section.id }}.transparent.fixed:not(.onscroll) {
       top: var(--ss-header-top-offset, 0px);
+    }
+  }
+
+  /* Custom - sayuj 2026-10-07: the transparent homepage header is placed by the
+     `margin_top` design offset — a fixed number that knows nothing about how tall
+     the announcement bar above it is — so its nav pill lands 1px under the bar.
+     Every other page sits the header at the bottom of the announcement section
+     instead (`--ss-header-bar-height`, set by initHeader), which leaves 22px. The
+     homepage only shows the collision once the mega menu opens and paints the pill
+     `--ss-header-pill-background`, the same colour as the bar, so the two merge
+     into one slab. Give the transparent header the same offset on desktop.
+     Mobile keeps --ss-header-top-offset above, which deliberately tucks the header
+     up over the hero. -sayuj */
+  @media(min-width: 1024px) {
+    .header-{{ section.id }}.transparent.fixed:not(.onscroll) {
+      margin-top: var(--ss-header-bar-height, {{ margin_top }}px);
+    }
+  }
+
+  /* Custom - sayuj 2026-10-08: lift the nav onto the top of the banner.
+     The shell (`.section-...-settings`) carries `padding_top * 0.3` (~10px here)
+     above the nav pill, so on the transparent homepage header — where the banner
+     starts at the header's own top edge — the nav visually began ~10px down into
+     the banner instead of at its start. Dropping that strip on desktop puts the
+     pill's top edge exactly on the banner's top edge. Nothing is added above the
+     header, so the announcement bar stays untouched (which matters: the nav links
+     are white at rest on the homepage and would vanish against the white bar).
+     Desktop only — below 1024px the mobile drawer's deliberate tuck-up over the
+     hero (--ss-header-top-offset) is left exactly as it is. -sayuj */
+  @media(min-width: 1024px) {
+    .header-{{ section.id }}.transparent:not(.onscroll) .section-{{ section.id }}-settings {
+      padding-top: 0;
     }
   }
 
@@ -1340,6 +1392,56 @@
   {{ 'rhode-cart.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
 
+{%- comment -%} Rhode-style desktop mega menu. Layout lives in the asset; the
+  merchant-editable values ride in as custom properties below. {%- endcomment -%}
+{%- if has_mega_menu -%}
+  {{ 'rhode-mega-menu.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'rhode-mega-menu.js' | asset_url }}" defer></script>
+
+  <style>
+    .rhode-mm {
+      /* Taken from the header bar's own variable so the panel can never drift
+         from the navbar colour. A gradient can't be a background-color, so fall
+         back to the bar's solid colour in that case. */
+      --rhode-mm-bg: {% if background_style == 'gradient' %}{{ background_color }}{% else %}var(--ss-header-pill-background, {{ background_color }}){% endif %};
+      --rhode-mm-text: {{ link_color }};
+      --rhode-mm-radius: {{ mega_menu_radius }}px;
+      --rhode-mm-pad: {{ section.settings.mega_menu_gutter | default: 24 }}px;
+      --rhode-mm-content: {% if width == 'custom' %}{{ content_width }}px{% else %}var(--page-content-width, 1400px){%- endif -%};
+      /* The panel hangs off the bar's bottom edge, so the bar has to stop being
+         see-through while it is open — otherwise the hero shows through the nav
+         and the two halves read as separate blocks. More specific than the
+         theme's own `.transparent:not(.onscroll)` rule, so it wins. */
+      --rhode-mm-top-gap: {{ section.settings.mega_menu_gap | default: 72 }}px;
+    }
+
+    .header-{{ section.id }}.open.transparent:not(.onscroll) .header-body-{{ section.id }} {
+      background-color: {{ background_color }};
+    }
+
+    /* Custom - 2026-10-08: painting the pill alone leaves a sliver of hero above
+       the nav. The shell (`.section-...-settings`) carries ~10px of padding-top
+       that sits inside the header's box but outside the pill, and on a
+       transparent homepage header that strip is see-through — so the top of the
+       banner showed between the announcement bar and the nav bar, which is what
+       you could see peeking above the navbar whenever the sheet was open.
+       Painting the shell closes it.
+       The shell, not the whole header box: the shell is exactly
+       `--ss-header-width`, the same width the hero's container clips the banner
+       image to, so the painted strip is the same width as the banner and flush
+       with it. Painting the full-width section instead leaves a band wider than
+       the banner across the top. Desktop only, because below 1024px the same
+       `.open` flag belongs to the mobile drawer, which wants the header left
+       exactly as it is. No !important needed: the theme's `transparent` rule
+       targets the section element, not the shell inside it. */
+    @media (min-width: 1024px) {
+      .header-{{ section.id }}.open.transparent:not(.onscroll) .section-{{ section.id }}-settings {
+        background-color: {{ background_color }};
+      }
+    }
+  </style>
+{%- endif -%}
+
 <div
   class="section-{{ section.id }} header-{{ section.id }} {% if is_transparent %}transparent{% endif %} {% if show_type == "always" %}fixed{% elsif show_type == "scroll_up" %}scroll fixed{% else %}top{% endif %}"
   {% if background_style == 'solid' %}
@@ -1361,10 +1463,30 @@
           </span>
           <ul class="header-menu-list-{{ section.id }}">
             {% for link in menu.links %}
-              <li class="header-menu-item-{{ section.id }} {% if link.links.size > 0 %}header-menu-item-parent-{{ section.id }}{% endif %}">
-                <a href="{{ link.url }}" class="header-menu-link-{{ section.id }}">{{ link.title }}</a>
+              {%- liquid
+                assign link_title_key = link.title | strip | downcase
+                assign is_mega_menu_link = false
+                if has_mega_menu and link_title_key == mega_menu_trigger
+                  assign is_mega_menu_link = true
+                endif
+              -%}
+              <li
+                class="header-menu-item-{{ section.id }} {% if link.links.size > 0 %}header-menu-item-parent-{{ section.id }}{% endif %}{% if is_mega_menu_link %} rhode-mm-item-{{ section.id }}{% endif %}"
+                {% if is_mega_menu_link %}data-rhode-mm data-rhode-mm-header-class="header-{{ section.id }}"{% endif %}
+              >
+                <a
+                  href="{{ link.url }}"
+                  class="header-menu-link-{{ section.id }}"
+                  {% if is_mega_menu_link %}data-rhode-mm-trigger aria-expanded="false" aria-controls="rhode-mm-panel-{{ section.id }}"{% endif %}
+                >{{ link.title }}</a>
 
-                {% if link.links.size > 0 %}
+                {%- if is_mega_menu_link -%}
+                  {% render 'rhode-mega-menu',
+                    section: section,
+                    id: section.id,
+                    cta_prefix: mega_menu_cta_prefix
+                  %}
+                {%- elsif link.links.size > 0 -%}
                   <div class="header-mega-menu-{{ section.id }} header-menu-list-{{ section.id }}">
                     <div class="{% for child_link in link.links %}{% if child_link.links.size > 0 %} header-mega-menu-container-row-{{ section.id }}{% endif %}{% endfor %} header-mega-menu-container-{{ section.id }}">
                       {% for child_link in link.links %}
@@ -1390,7 +1512,7 @@
                       {% endfor %}
                     </div>
                   </div>
-                {% endif %}
+                {%- endif -%}
               </li>
             {% endfor %}
           </ul>
@@ -1579,13 +1701,16 @@
             </svg>
           </span>
           <span class="header-cart-text-{{ section.id }}">{{ cart_text }}</span>
-          {%- if cart != empty -%}
-            <div class="cart-count-bubble">
-              {%- if cart.item_count < 100 -%}
-                <span aria-hidden="true">{{ cart.item_count }}</span>
-              {%- endif -%}
-            </div>
-          {%- endif -%}
+          {%- comment -%}
+            Rendered even on an empty cart so the AJAX drawer can reveal it —
+            the `cart:update` listener below is what toggles `visually-hidden`.
+          {%- endcomment -%}
+          <div
+            class="cart-count-bubble{% if cart == empty %} visually-hidden{% endif %}"
+            data-cart-count-bubble
+          >
+            <span aria-hidden="true" data-cart-count>{{ cart.item_count }}</span>
+          </div>
         </a>
       </div>
     </nav>
@@ -1727,6 +1852,23 @@
 
     wireDrawer('.header-search-{{ section.id }}', 'isoa-search-drawer');
     wireDrawer('.header-cart-{{ section.id }}', 'isoa-cart-drawer');
+
+    // Keep the header count in step with the drawer's AJAX cart updates.
+    // Horizon does this with a <cart-icon> custom element that reads
+    // `cart:update`; this header has no such element, so the same event is read
+    // here. `resource.item_count` is the newly returned cart, but the add
+    // endpoint answers without a cart object, so `itemCount` stands in there.
+    const cartBubble = header.querySelector('[data-cart-count-bubble]');
+    const cartCount = header.querySelector('[data-cart-count]');
+    if (cartBubble && cartCount && !header.dataset.cartCountWired) {
+      header.dataset.cartCountWired = 'true';
+      document.addEventListener('cart:update', (event) => {
+        const count = event.detail?.resource?.item_count ?? event.detail?.data?.itemCount;
+        if (typeof count !== 'number') return;
+        cartCount.textContent = count < 100 ? String(count) : '';
+        cartBubble.classList.toggle('visually-hidden', count === 0);
+      });
+    }
 
     if(headerMegaMenus) {
       headerMegaMenus.forEach(el => {
@@ -1883,12 +2025,108 @@ if (Shopify.designMode) {
     },
     {
       "type": "paragraph",
-      "content": "Add a 'Mobile menu tab' block per category. Each tab shows the products of the collection you pick. The links row sits under the tabs."
+      "content": "Add a 'Menu tab' block per category. Each tab shows the products of the collection you pick — the same tabs drive the desktop shop mega menu below. The links row sits under the tabs on mobile."
     },
     {
       "type": "link_list",
       "id": "mobile_links_menu",
       "label": "Links row"
+    },
+    {
+      "type": "header",
+      "content": "Shop mega menu"
+    },
+    {
+      "type": "paragraph",
+      "content": "Adds a hover panel to the nav item named below. Tabs come from the 'Menu tab' blocks, so each one needs a collection that has products — empty or unset collections are skipped, and if none qualify the nav item falls back to the plain menu. Cards read the custom.card_short_name, custom.card_subtitle, custom.tag and custom.award_badge product metafields."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mega_menu",
+      "label": "Enable shop mega menu",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "mega_menu_trigger",
+      "label": "Menu item",
+      "info": "Nav item title that opens this panel. Must match your menu exactly (not case sensitive).",
+      "default": "Shop"
+    },
+    {
+      "type": "text",
+      "id": "mega_menu_default_tab",
+      "label": "Default tab",
+      "info": "Tab label that starts active. Falls back to the first tab when it isn't found.",
+      "default": "AWARD WINNERS"
+    },
+    {
+      "type": "text",
+      "id": "mega_menu_cta_prefix",
+      "label": "Button prefix",
+      "info": "The button reads '<prefix> <tab label>' and links to that tab's collection.",
+      "default": "SHOP"
+    },
+    {
+      "type": "range",
+      "id": "mega_menu_gap",
+      "min": 16,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "label": "Space below header bar",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "mega_menu_gutter",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Side gutters",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Shop mega menu promo banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "mega_menu_promo_left_image",
+      "label": "Left image"
+    },
+    {
+      "type": "url",
+      "id": "mega_menu_promo_left_link",
+      "label": "Left image link"
+    },
+    {
+      "type": "image_picker",
+      "id": "mega_menu_promo_right_image",
+      "label": "Right image"
+    },
+    {
+      "type": "url",
+      "id": "mega_menu_promo_right_link",
+      "label": "Right image link"
+    },
+    {
+      "type": "text",
+      "id": "mega_menu_promo_heading",
+      "label": "Overlay heading",
+      "default": "Salty, sweet, here to stay."
+    },
+    {
+      "type": "text",
+      "id": "mega_menu_promo_button_label",
+      "label": "Button label",
+      "default": "PRETZEL IS BACK"
+    },
+    {
+      "type": "url",
+      "id": "mega_menu_promo_button_link",
+      "label": "Button link"
     },
     {
       "type": "header",
@@ -2558,7 +2796,7 @@ if (Shopify.designMode) {
   "blocks": [
     {
       "type": "mobile_tab",
-      "name": "Mobile menu tab",
+      "name": "Menu tab",
       "limit": 8,
       "settings": [
         {
@@ -2579,6 +2817,7 @@ if (Shopify.designMode) {
           "max": 10,
           "step": 1,
           "label": "Products shown",
+          "info": "Also sets how many cards the desktop shop mega menu holds. 4 are visible at a time; the rest scroll.",
           "default": 5
         }
       ]
