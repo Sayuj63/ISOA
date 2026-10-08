@@ -69,7 +69,7 @@
           <div class="rh-cyr__info">
             <div class="rh-cyr__row">
               <a class="rh-cyr__title" href="{{ p.url }}">{{ p.title | upcase }}</a>
-              <label class="rh-cyr__check" aria-label="Select {{ p.title | escape }}">
+              <label class="rh-cyr__check" aria-label="Select {{ p.title | escape }}" data-rh-cyr-check-slot>
                 <input
                   type="checkbox"
                   class="rh-cyr__check-input"
@@ -79,6 +79,18 @@
                 >
                 <span class="rh-cyr__check-box" aria-hidden="true"></span>
               </label>
+              {%- comment -%}
+                Quantity stepper — hidden until JS flags this card as `in-cart`
+                (either because the variant is already in cart on page load or
+                because the shopper just added it from this block). +/− fire
+                /cart/change.js directly, so the shopper can tune the line
+                quantity without ever leaving the PDP.
+              {%- endcomment -%}
+              <div class="rh-cyr__qty" data-rh-cyr-qty hidden>
+                <button type="button" class="rh-cyr__qty-btn" data-rh-cyr-dec aria-label="Decrease quantity">−</button>
+                <span class="rh-cyr__qty-count" data-rh-cyr-count>1</span>
+                <button type="button" class="rh-cyr__qty-btn" data-rh-cyr-inc aria-label="Increase quantity">+</button>
+              </div>
             </div>
 
             {%- if desc_text != blank -%}
@@ -86,7 +98,10 @@
             {%- endif -%}
 
             <div class="rh-cyr__row rh-cyr__row--bottom">
-              <span class="rh-cyr__price">{{ v.price | money_without_trailing_zeros }}</span>
+              <span class="rh-cyr__price">
+                {{ v.price | money_without_trailing_zeros }}
+                <span class="rh-cyr__in-cart-pill" data-rh-cyr-pill hidden>In cart</span>
+              </span>
               {%- if has_variants -%}
                 <label class="rh-cyr__variant-wrap">
                   <span class="visually-hidden">{{ p.title }} variant</span>
