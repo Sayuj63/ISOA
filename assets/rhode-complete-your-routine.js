@@ -76,9 +76,15 @@
 
       this._onCartSync = () => this.syncAllCards();
       document.addEventListener('rh-cyr:cart-synced', this._onCartSync);
-      // Also pick up cart changes made elsewhere (header cart drawer, etc.).
-      this._onCartUpdated = () => fetchCart();
-      document.addEventListener('cart:updated', this._onCartUpdated);
+      // Pick up cart changes made elsewhere (header cart drawer, product form,
+      // native quick-add). Horizon's event name is 'cart:update'. Guard against
+      // re-entrant loops: when WE dispatched the event (source='rhode-cyr'),
+      // our cart cache is already fresh, so skip the extra fetch.
+      this._onCartUpdated = (e) => {
+        if (e && e.detail && e.detail.data && e.detail.data.source === 'rhode-cyr') return;
+        fetchCart();
+      };
+      document.addEventListener('cart:update', this._onCartUpdated);
 
       this.addEventListener('change', (e) => {
         var t = e.target;
@@ -114,7 +120,7 @@
 
     disconnectedCallback() {
       document.removeEventListener('rh-cyr:cart-synced', this._onCartSync);
-      document.removeEventListener('cart:updated', this._onCartUpdated);
+      document.removeEventListener('cart:update', this._onCartUpdated);
     }
 
     // --- card-level sync -------------------------------------------------
@@ -220,10 +226,31 @@
     }
 
     notifyCartChanged() {
-      document.dispatchEvent(new CustomEvent('cart:updated', { bubbles: true }));
+      // Horizon's cart-icon.js and cart-items-component.js both listen for
+      // 'cart:update' (NOT 'cart:updated' which nothing listens for). The
+      // event detail MUST carry { resource: cart, sourceId, data: { itemCount,
+      // source } } — cart-icon.js reads itemCount, cart-items-component reads
+      // sections[sectionId] (we omit sections so it falls through to a fresh
+      // sectionRenderer.renderSection() call that re-fetches the drawer HTML).
+      var cart = cartState.cart || { items: [], item_count: 0 };
+      var drawerSectionId = document.querySelector('#isoa-cart-drawer cart-items-component')?.dataset?.sectionId
+        || document.querySelector('cart-items-component')?.dataset?.sectionId
+        || 'rhode-cyr';
+      var evt = new CustomEvent('cart:update', {
+        bubbles: true,
+        detail: {
+          resource: cart,
+          sourceId: drawerSectionId,
+          data: {
+            itemCount: cart.item_count || 0,
+            source: 'rhode-cyr'
+          }
+        }
+      });
+      document.dispatchEvent(evt);
+
       // Only auto-open the drawer on explicit adds, not on every +/−, so the
       // shopper can rapidly adjust quantity without the drawer slamming open.
-      // Guarded by a short window after handleAdd() runs.
       var drawer = document.querySelector('#isoa-cart-drawer');
       if (drawer && this.addBtn.classList.contains('is-added')) {
         drawer.classList.add('is-open');
