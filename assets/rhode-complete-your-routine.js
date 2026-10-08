@@ -20,20 +20,23 @@
 
   // Shared cart cache so multiple <rhode-cyr> instances (and quick re-renders
   // during section hot-reload) share one fetch and one source of truth.
-  var cartState = { lines: new Map(), ready: false, inflight: null };
+  var cartState = { lines: new Map(), itemCount: 0, cart: null, ready: false, inflight: null };
 
   function fetchCart() {
     if (cartState.inflight) return cartState.inflight;
     cartState.inflight = fetch('/cart.js', { headers: { 'Accept': 'application/json' } })
-      .then(function (r) { return r.ok ? r.json() : { items: [] }; })
+      .then(function (r) { return r.ok ? r.json() : { items: [], item_count: 0 }; })
       .then(function (cart) {
         cartState.lines.clear();
         (cart.items || []).forEach(function (it) {
           cartState.lines.set(String(it.variant_id), it.quantity);
         });
+        cartState.cart = cart;
+        cartState.itemCount = cart.item_count || 0;
         cartState.ready = true;
         cartState.inflight = null;
         document.dispatchEvent(new CustomEvent('rh-cyr:cart-synced'));
+        return cart;
       })
       .catch(function () { cartState.inflight = null; });
     return cartState.inflight;
