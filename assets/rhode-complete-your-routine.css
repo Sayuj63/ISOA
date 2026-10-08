@@ -1,0 +1,279 @@
+/* ============================================================================
+   Rhode-style "Complete Your Routine" PDP block
+   ----------------------------------------------------------------------------
+   Fixed-width container (fills its parent column), fixed max-height, inner
+   list scrolls when more products than fit. Cards are a 2-column grid on
+   desktop that collapses to 1 column at narrow widths. Bulk-add via the
+   SELECT ITEMS button at the bottom; checkbox on each card drives selection.
+   ============================================================================ */
+
+rhode-cyr.rh-cyr {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  color: #67645e;
+  font-family: var(--font-body--family, inherit);
+}
+
+.rh-cyr__divider {
+  height: 1px;
+  background: #e5e3df;
+  margin: 0 0 22px;
+}
+
+.rh-cyr__heading {
+  margin: 0 0 14px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #67645e;
+}
+
+/* Fixed-height scroll container. The max-height is driven by the --rh-cyr-max-h
+   CSS var set inline from the block schema setting, so merchants can tune it
+   per instance from the theme editor. */
+.rh-cyr__scroll {
+  max-height: var(--rh-cyr-max-h, 420px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 4px; /* breathing room so the scrollbar never hugs card edges */
+}
+
+/* Thin, subtle scrollbar — matches the quiet ISOUA palette. */
+.rh-cyr__scroll::-webkit-scrollbar { width: 6px; }
+.rh-cyr__scroll::-webkit-scrollbar-track { background: transparent; }
+.rh-cyr__scroll::-webkit-scrollbar-thumb {
+  background: #d8d5cf;
+  border-radius: 3px;
+}
+.rh-cyr__scroll::-webkit-scrollbar-thumb:hover { background: #b9b6b0; }
+.rh-cyr__scroll { scrollbar-width: thin; scrollbar-color: #d8d5cf transparent; }
+
+/* Card grid: 2 columns on desktop (matches Rhode screenshot), 1 on narrow. */
+.rh-cyr__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+@media (max-width: 640px) {
+  .rh-cyr__list { grid-template-columns: 1fr; }
+}
+
+.rh-cyr__card {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  column-gap: 10px;
+  padding: 10px;
+  background: #ffffff;
+  border: 1px solid #e9e7e2;
+  border-radius: var(--rh-cyr-card-radius, 10px);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  min-height: 76px;
+}
+.rh-cyr__card:has(.rh-cyr__check-input:checked) {
+  border-color: #67645e;
+  box-shadow: 0 0 0 1px #67645e inset;
+}
+
+.rh-cyr__link {
+  display: block;
+  width: 56px;
+  height: 56px;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #f1f0ed;
+  text-decoration: none;
+}
+
+.rh-cyr__thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.rh-cyr__thumb--placeholder {
+  background: #e5e3df;
+}
+
+.rh-cyr__info {
+  min-width: 0; /* lets children shrink inside the grid cell */
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rh-cyr__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+}
+.rh-cyr__row--bottom { margin-top: auto; }
+
+.rh-cyr__title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #67645e;
+  text-decoration: none;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.rh-cyr__title:hover { text-decoration: underline; }
+
+.rh-cyr__desc {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.3;
+  color: #8a877f;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.rh-cyr__price {
+  font-size: 12px;
+  font-weight: 600;
+  color: #67645e;
+  line-height: 1;
+}
+
+/* Checkbox — custom-drawn so it reads clean against the card bg instead of
+   the browser's default sunken checkbox UI. */
+.rh-cyr__check {
+  display: inline-flex;
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  position: relative;
+}
+.rh-cyr__check-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+.rh-cyr__check-box {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #c8c5bf;
+  border-radius: 4px;
+  background: #ffffff;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  position: relative;
+}
+.rh-cyr__check-input:checked + .rh-cyr__check-box {
+  background: #67645e;
+  border-color: #67645e;
+}
+.rh-cyr__check-input:checked + .rh-cyr__check-box::after {
+  content: '';
+  position: absolute;
+  left: 4px; top: 1px;
+  width: 5px; height: 9px;
+  border: solid #ffffff;
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg);
+}
+.rh-cyr__check-input:focus-visible + .rh-cyr__check-box {
+  outline: 2px solid #67645e;
+  outline-offset: 2px;
+}
+
+/* Variant dropdown — styled to feel like the Rhode "bake ▾" affordance. */
+.rh-cyr__variant-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+.rh-cyr__variant {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  font-size: 11px;
+  color: #67645e;
+  padding: 0 14px 0 0;
+  cursor: pointer;
+  text-transform: lowercase;
+  border-bottom: 1px solid #67645e;
+  line-height: 1.4;
+  max-width: 70px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.rh-cyr__variant:focus { outline: none; border-bottom-color: #000; }
+.rh-cyr__variant-caret {
+  position: absolute;
+  right: 2px;
+  top: 50%;
+  transform: translateY(-55%);
+  font-size: 10px;
+  pointer-events: none;
+  color: #67645e;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Footer — SELECT ITEMS pill, right-aligned to match Rhode's screenshot. */
+.rh-cyr__footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.rh-cyr__select-btn {
+  appearance: none;
+  background: transparent;
+  color: #67645e;
+  border: 1px solid #c8c5bf;
+  border-radius: 999px;
+  padding: 10px 24px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, opacity 0.25s ease;
+}
+.rh-cyr__select-btn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.rh-cyr__select-btn:not([disabled]) {
+  border-color: #67645e;
+}
+.rh-cyr__select-btn:not([disabled]):hover,
+.rh-cyr__select-btn.is-adding {
+  background-color: #67645e;
+  color: #ffffff;
+}
+.rh-cyr__select-btn.is-added {
+  background-color: #67645e;
+  color: #ffffff;
+  border-color: #67645e;
+}
