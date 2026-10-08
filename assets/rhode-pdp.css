@@ -217,15 +217,47 @@
 }
 
 @media screen and (max-width: 749px) {
-  /* Mobile hero slideshow — force each slide to fill the viewport-width media
-     column so only ONE slide is visible at a time (matches Rhode's mobile PDP
-     which shows one slide + dots below). Without this Horizon's default lets
-     slides content-size, producing a ~90% slide + ~35% peek of the next slide
-     inside a scroll-snap x mandatory scroller. -vamshi 2026-09-15 */
+  /* Mobile hero slideshow — give each slide ~88% of the viewport width so a
+     ~12% peek of the next slide is visible on the right edge, telling the
+     shopper there's more to swipe. The thin progress bar below (added by
+     the rhode-pdp-mobile-gallery.js inline script in product-media-gallery-
+     content.liquid) reflects which slide is active.
+     2026-10-08 revision from "force 100% width + dots" to "peek + progress
+     bar" per client ask. */
   .product-information__media slideshow-slide {
-    flex: 0 0 100% !important;
-    width: 100% !important;
-    min-width: 100% !important;
+    flex: 0 0 88% !important;
+    width: 88% !important;
+    min-width: 88% !important;
+  }
+
+  /* Progress-bar track + fill rendered by the mobile-gallery script. Positioned
+     INSIDE .product-information__media so it inherits the gallery's horizontal
+     bounds and sits flush against the image's bottom edge. */
+  .product-information__media .rh-mob-progress {
+    position: relative;
+    height: 2px;
+    margin: 10px 12px 0;
+    background: rgba(103, 100, 94, 0.18);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .product-information__media .rh-mob-progress__fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 0%;
+    background: #67645e;
+    border-radius: inherit;
+    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  /* Hide the dot/thumbnail controls on mobile — progress bar replaces them. */
+  .product-information__media slideshow-controls[dots],
+  .product-information__media slideshow-controls[thumbnails] {
+    display: none !important;
+  }
+  /* Keep arrows if they were on, but hidden on mobile — swipe + peek + bar
+     is the full interaction model. */
+  .product-information__media slideshow-controls[arrows] {
+    display: none !important;
   }
 
   /* Hide the WhatsApp floating bubble on the PDP mobile view — it overlaps
