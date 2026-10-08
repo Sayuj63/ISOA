@@ -11,64 +11,6 @@
   "sections": {
     "hero_gVmLGg": {
       "type": "hero",
-      "blocks": {
-        "text_L3yV9a": {
-          "type": "text",
-          "name": "t:names.heading",
-          "settings": {
-            "text": "<p>Browse our latest products</p>",
-            "width": "fit-content",
-            "max_width": "narrow",
-            "alignment": "left",
-            "type_preset": "custom",
-            "font": "var(--font-body--family)",
-            "font_size": "0.875rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground-heading)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "button_HVXXHH": {
-          "type": "button",
-          "name": "t:names.button",
-          "settings": {
-            "label": "Shop all",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button-secondary",
-            "width": "custom",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 55
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "text_L3yV9a",
-        "button_HVXXHH"
-      ],
-      "custom_css": [
-        ".hero {padding: 1.5vw; padding-top: 0; overflow: hidden;}",
-        /* Homepage banner geometry. Written per section rather than in a global
-           stylesheet on purpose: these rules are emitted scoped to this
-           section's id, so they shape this banner and nothing else — the other
-           hero section on this page keeps its own height and corners. */
-        ".hero {box-sizing: content-box;}",
-        ".hero, .hero__container {height: 40vh; min-height: 40vh;}",
-        ".hero__container, .hero img, .hero__media, .hero__media img {border-radius: 16px;}",
-        "@media screen and (max-width: 749px) {.hero {margin-top: 0; position: relative; z-index: 0;} .hero, .hero__container {height: 60vh; min-height: 60vh;}}"
-      ],
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
@@ -89,8 +31,8 @@
         "vertical_alignment_flex_direction_column": "flex-end",
         "gap": 10,
         "section_width": "page-width",
-        "section_height": "large",
-        "section_height_custom": 50,
+        "section_height": "custom",
+        "section_height_custom": 30,
         "color_scheme": "scheme-1",
         "toggle_overlay": false,
         "overlay_color": "#12121266",
