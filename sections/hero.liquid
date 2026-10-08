@@ -862,7 +862,19 @@
      `#shopify-section-…`, one id deep, which outranks anything written in this
      plain stylesheet — and the live theme's copy of index.json still carries the
      old 100vh values, which these rules have to beat. */
-  body.template-index .hero-wrapper .hero,
+  body.template-index .hero-wrapper .hero {
+    height: 40vh !important;
+    min-height: 40vh !important;
+    /* The hero box itself may carry padding — the copy of index.json on the live
+       theme sets 1.5vw on it, while this working copy sets none. Under the
+       global border-box (assets/base.css) that padding would eat 1.5vw out of
+       the 40vh rather than sit outside it, and the 40vh container below would
+       then overflow the hero and be clipped by its overflow: hidden, cutting off
+       the rounded bottom corners this file just added. Content-box makes the
+       40vh mean the banner itself on either copy, whatever padding is around it. */
+    box-sizing: content-box !important;
+  }
+
   body.template-index .hero-wrapper .hero__container {
     height: 40vh !important;
     min-height: 40vh !important;
