@@ -5,7 +5,7 @@
    script via snippets/scripts.liquid.
 
    Detects which edge of a button the cursor crossed and sets --dh-tx / --dh-ty
-   CSS custom properties so the ::before fill parks fully off-canvas on that
+   CSS custom properties so the ::after fill parks fully off-canvas on that
    edge. Then toggles .dh-active to animate the fill in. On mouseout the exit
    edge drives the vars so the fill slides OUT toward the exit edge.
 
