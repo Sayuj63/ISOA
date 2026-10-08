@@ -1,4 +1,43 @@
 /* =============================================================================
+   ISOUA — Equal horizontal padding across every section (floating-card pass)
+   -----------------------------------------------------------------------------
+   Most ISOUA sections render their content inset to the pill rail (40→1400 at
+   1440vw, 16→374 at 390vw) via `grid-column: 2` on `.section--page-width`.
+   But their OUTER `.shopify-section` wrapper (and the `.section-background`
+   colored band inside it) still spans the full viewport, so sections with a
+   visible background band read as "touching the edge."
+
+   This block constrains the outer wrappers of the four homepage sections
+   that were full-bleed into floating cards:
+       hero_gVmLGg + hero_hLYCmb  — .shopify-section.hero-wrapper
+       media-with-content          — .shopify-section:has(> .media-with-content)
+       product-hotspots            — .shopify-section:has(> .section-product-hotspots)
+
+   40px of air on each side at desktop, 16px at mobile — same gutter the
+   pill-rail content already uses, so the whole page shares one rhythm.
+   Internal grid columns inside each section still work; they just divide
+   a slightly narrower box.
+   ========================================================================== */
+.shopify-section.hero-wrapper,
+.shopify-section:has(> .section.media-with-content),
+.shopify-section:has(> .section-background + .section.media-with-content),
+.shopify-section:has(> .section.section-product-hotspots),
+.shopify-section:has(> .section-background + .section.section-product-hotspots) {
+  max-width: calc(100% - 80px);
+  margin-inline: auto;
+}
+
+@media (max-width: 749px) {
+  .shopify-section.hero-wrapper,
+  .shopify-section:has(> .section.media-with-content),
+  .shopify-section:has(> .section-background + .section.media-with-content),
+  .shopify-section:has(> .section.section-product-hotspots),
+  .shopify-section:has(> .section-background + .section.section-product-hotspots) {
+    max-width: calc(100% - 32px);
+  }
+}
+
+/* =============================================================================
    ISOUA — Vertical rhythm system
    -----------------------------------------------------------------------------
    Single source of truth for section-to-section spacing. Every section's
