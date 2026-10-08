@@ -1,0 +1,184 @@
+{%- doc -%}
+  Rhode-style "Complete Your Routine" block for the PDP right column.
+
+  Sits between the Buy button and the ingredient accordion. Shows a merchant-
+  picked list of complementary products inside a fixed-height scrollable
+  container; each card has a checkbox + variant dropdown; a bottom
+  "SELECT ITEMS" button bulk-adds checked items via /cart/add.js.
+
+  Falls back to Shopify's recommendations.products when no products are picked
+  via the theme editor, so a merchant-less installation still shows something.
+{%- enddoc -%}
+
+{%- liquid
+  assign heading     = block.settings.heading | default: 'COMPLETE YOUR ROUTINE'
+  assign cta_label   = block.settings.cta_label | default: 'SELECT ITEMS'
+  assign cta_label_single = block.settings.cta_label_single | default: 'ADD TO CART'
+  assign max_height  = block.settings.max_height | default: 420
+  assign card_radius = block.settings.card_radius | default: 10
+  assign items       = block.settings.products
+  # Fallback 1: pull from the current product's first collection minus itself.
+  if items == blank or items.size == 0
+    assign cp = closest.product
+    if cp != blank and cp.collections.size > 0
+      assign items = cp.collections[0].products | where: 'available', true | reject: 'id', cp.id
+    endif
+  endif
+  # Fallback 2: last-resort pull from the all-products collection.
+  if items == blank or items.size == 0
+    assign items = collections.all.products | where: 'available', true | reject: 'id', closest.product.id
+  endif
+-%}
+
+<rhode-cyr
+  class="rh-cyr"
+  data-section-id="{{ section.id }}"
+  data-block-id="{{ block.id }}"
+  style="--rh-cyr-max-h: {{ max_height }}px; --rh-cyr-card-radius: {{ card_radius }}px;"
+  {{ block.shopify_attributes }}
+>
+  <div class="rh-cyr__divider" aria-hidden="true"></div>
+
+  <h3 class="rh-cyr__heading">{{ heading }}</h3>
+
+  <div class="rh-cyr__scroll" data-rh-cyr-scroll>
+    <ul class="rh-cyr__list" role="list">
+      {%- for p in items limit: 6 -%}
+        {%- liquid
+          assign v = p.selected_or_first_available_variant | default: p.variants.first
+          assign thumb = v.featured_image | default: p.featured_image
+          # Short description: strip tags + collapse to one line, then truncate.
+          assign desc_raw = p.metafields.custom.short_description.value | default: p.description
+          assign desc_text = desc_raw | strip_html | strip_newlines | truncate: 42
+          assign has_variants = false
+          if p.variants.size > 1
+            assign has_variants = true
+          endif
+        -%}
+        <li class="rh-cyr__card">
+          <a class="rh-cyr__link" href="{{ p.url }}" aria-label="{{ p.title | escape }}">
+            {%- if thumb -%}
+              {{- thumb
+                | image_url: width: 160
+                | image_tag: loading: 'lazy', widths: '80,120,160,240', class: 'rh-cyr__thumb', alt: p.title | escape -}}
+            {%- else -%}
+              <div class="rh-cyr__thumb rh-cyr__thumb--placeholder"></div>
+            {%- endif -%}
+          </a>
+
+          <div class="rh-cyr__info">
+            <div class="rh-cyr__row">
+              <a class="rh-cyr__title" href="{{ p.url }}">{{ p.title | upcase }}</a>
+              <label class="rh-cyr__check" aria-label="Select {{ p.title | escape }}">
+                <input
+                  type="checkbox"
+                  class="rh-cyr__check-input"
+                  data-rh-cyr-check
+                  data-variant-id="{{ v.id }}"
+                  data-has-variants="{{ has_variants }}"
+                >
+                <span class="rh-cyr__check-box" aria-hidden="true"></span>
+              </label>
+            </div>
+
+            {%- if desc_text != blank -%}
+              <p class="rh-cyr__desc">{{ desc_text }}</p>
+            {%- endif -%}
+
+            <div class="rh-cyr__row rh-cyr__row--bottom">
+              <span class="rh-cyr__price">{{ v.price | money_without_trailing_zeros }}</span>
+              {%- if has_variants -%}
+                <label class="rh-cyr__variant-wrap">
+                  <span class="visually-hidden">{{ p.title }} variant</span>
+                  <select class="rh-cyr__variant" data-rh-cyr-variant>
+                    {%- for variant in p.variants -%}
+                      <option
+                        value="{{ variant.id }}"
+                        {% if variant.available == false %}disabled{% endif %}
+                        {% if variant == v %}selected{% endif %}
+                      >
+                        {{- variant.title | downcase -}}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                  <span class="rh-cyr__variant-caret" aria-hidden="true">▾</span>
+                </label>
+              {%- endif -%}
+            </div>
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+
+  <div class="rh-cyr__footer">
+    <button
+      type="button"
+      class="rh-cyr__select-btn"
+      data-rh-cyr-add
+      data-label-default="{{ cta_label }}"
+      data-label-single="{{ cta_label_single }}"
+      disabled
+    >
+      {{ cta_label }}
+    </button>
+  </div>
+</rhode-cyr>
+
+{{ 'rhode-complete-your-routine.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'rhode-complete-your-routine.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Complete Your Routine",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "COMPLETE YOUR ROUTINE"
+    },
+    {
+      "type": "product_list",
+      "id": "products",
+      "label": "Routine products",
+      "limit": 6
+    },
+    {
+      "type": "range",
+      "id": "max_height",
+      "label": "Scroll container height (px)",
+      "min": 240,
+      "max": 640,
+      "step": 20,
+      "default": 420
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card corner radius (px)",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "default": 10
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label (multi-item)",
+      "default": "SELECT ITEMS"
+    },
+    {
+      "type": "text",
+      "id": "cta_label_single",
+      "label": "Button label (single-item)",
+      "default": "ADD TO CART"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Complete Your Routine"
+    }
+  ]
+}
+{% endschema %}
