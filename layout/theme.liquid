@@ -7,18 +7,319 @@
 >
 {% if template.name == "index" %}
   <style>
+    /* Global consistent padding throughout the app */
+    :root {
+      --global-padding-vertical: 48px;
+      --global-padding-horizontal: 24px;
+      --global-padding-mobile-vertical: 32px;
+      --global-padding-mobile-horizontal: 16px;
+    }
+    
+    /* Apply consistent padding to all major sections */
+    .featured-products-grid {
+      padding: var(--global-padding-vertical) var(--global-padding-horizontal) !important;
+    }
+    
+    .product-categories {
+      padding: var(--global-padding-vertical) var(--global-padding-horizontal) !important;
+    }
+    
+    /* Full-width banner - stretched and extended */
+    .hero-wrapper {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100vw !important;
+      position: relative !important;
+      left: 50% !important;
+      right: 50% !important;
+      margin-left: -50vw !important;
+      margin-right: -50vw !important;
+    }
+    
+    .hero {
+      width: 100% !important;
+      height: 100vh !important;
+      min-height: 100vh !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    
+    .hero__container {
+      width: 100% !important;
+      height: 100% !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    
+    .hero__media-grid {
+      width: 100% !important;
+      height: 100% !important;
+    }
+    
+    .hero__media {
+      width: 100% !important;
+      height: 100% !important;
+      border-radius: 0 !important;
+    }
+    
+    /* Homepage Hero Styling */
     .header {
       position: absolute !important;
       width: 100% !important;
       max-width: 100% !important;
-      background-color: transparent !important;
+      background: linear-gradient(90deg, rgba(255, 157, 168, 0.8) 0%, rgba(255, 157, 168, 0.4) 50%, rgba(200, 200, 200, 0.3) 100%) !important;
+      z-index: 10 !important;
+      transition: all 0.3s ease-in-out !important;
     }
-    .header * {
-      color: white !important; 
+    
+    .header--sticky-navbar {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      width: 100% !important;
+      background: #f5f5f5 !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+      z-index: 999 !important;
+    }
+    
+    .header--sticky-navbar .header__row--top {
+      background: transparent !important;
+      padding: 20px 32px !important;
+    }
+    
+    .header--sticky-navbar a,
+    .header--sticky-navbar button,
+    .header--sticky-navbar span {
+      color: #333 !important;
+    }
+    
+    .header--sticky-navbar .header-menu__link {
+      color: #666 !important;
+      font-weight: 500 !important;
+      padding: 0 12px !important;
+    }
+    
+    .header--sticky-navbar .header-menu__link:hover {
+      color: #000 !important;
+    }
+    
+    /* Main navbar padding */
+    .header__row--top {
+      padding: 20px 32px !important;
+    }
+    
+    .header__row--top {
+      background: transparent !important;
+    }
+    
+    .header a,
+    .header button,
+    .header span {
+      color: #ffffff !important;
+    }
+    
+    .header-menu,
+    .header-menu__item,
+    .header-menu__link {
+      color: #ffffff !important;
+    }
+    
+    .header-menu__link {
+      padding: 0 12px !important;
+    }
+    
+    .header-menu__link:hover {
+      opacity: 0.8 !important;
+    }
+    
+    /* Hero Section - Full Height Split Layout */
+    .hero-wrapper {
+      margin-top: 0 !important;
+    }
+    
+    .hero {
+      height: 100vh !important;
+      min-height: 100vh !important;
+    }
+    
+    .hero__container {
+      height: 100% !important;
+    }
+    
+    .hero__media-grid {
+      height: 100% !important;
+    }
+    
+    /* Mega Menu Styling */
+    .menu-list__item:has(+ .submenu) {
+      position: relative !important;
+    }
+    
+    .mega-menu {
+      background: white !important;
+      border-top: 1px solid #e5e5e5 !important;
+      padding: 32px !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+    }
+    
+    /* SS Header mega menu - Make visible for debugging */
+    .header-mega-menu {
+      opacity: 1 !important;
+      pointer-events: all !important;
+      visibility: visible !important;
+      display: block !important;
+    }
+    
+    .header-mega-menu__column {
+      padding: 0 16px !important;
+    }
+    
+    .header-mega-menu__link {
+      color: #666 !important;
+      font-size: 13px !important;
+      font-weight: 500 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.5px !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      padding: 12px 0 !important;
+      transition: color 0.2s ease !important;
+    }
+    
+    .header-mega-menu__link:hover {
+      color: #000 !important;
+    }
+    
+    .header-mega-menu__link--parent {
+      font-weight: 600 !important;
+      color: #333 !important;
+      font-size: 14px !important;
+    }
+    
+    .header-mega-menu__list {
+      display: grid !important;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+      gap: 32px !important;
+    }
+    
+    .header-mega-menu__list li {
+      margin-bottom: 0 !important;
+    }
+    
+    .header-mega-menu__list a {
+      display: block !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    
+    /* Product card styling in mega menu */
+    .header-mega-menu__link-image {
+      width: 100% !important;
+      aspect-ratio: 3/4 !important;
+      object-fit: cover !important;
+      margin-bottom: 12px !important;
+      border-radius: 6px !important;
+    }
+
+    @media (max-width: 749px) {
+      .hero {
+        height: 60vh !important;
+        min-height: 60vh !important;
+      }
+      
+      .hero__container {
+        height: 60vh !important;
+      }
+      
+      .hero__media-grid {
+        height: 60vh !important;
+      }
+      
+      .header-mega-menu {
+        padding: 16px !important;
+      }
+      
+      .header-mega-menu__list {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 16px !important;
+      }
     }
   </style>
-{% endif %}
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const header = document.querySelector('header-component');
+      const hero = document.querySelector('.hero-wrapper');
+      let lastScrollY = 0;
+      let isScrollingDown = false;
+      let heroHeight = 0;
+      
+      if (hero) {
+        heroHeight = hero.offsetHeight || window.innerHeight;
+      }
+      
+      // Enhance mega menu visibility
+      const menuLinks = document.querySelectorAll('.menu-list__link[aria-haspopup="true"]');
+      menuLinks.forEach(link => {
+        link.addEventListener('mouseenter', function() {
+          const submenu = this.nextElementSibling;
+          if (submenu) {
+            submenu.style.display = 'block';
+            submenu.style.visibility = 'visible';
+            submenu.style.opacity = '1';
+          }
+        });
+        
+        link.addEventListener('mouseleave', function() {
+          const submenu = this.nextElementSibling;
+          if (submenu) {
+            submenu.style.display = 'none';
+            submenu.style.visibility = 'hidden';
+            submenu.style.opacity = '0';
+          }
+        });
+      });
 
+      // (SHOP mega menu is now handled by the standalone script block further below)
+
+      
+      function handleScroll() {
+        const currentScrollY = window.scrollY;
+        const scrollDelta = currentScrollY - lastScrollY;
+        
+        // Check if we've scrolled past the hero section
+        const pastHero = currentScrollY > heroHeight - 100;
+        
+        // Determine scroll direction
+        if (scrollDelta > 0) {
+          // Scrolling down
+          isScrollingDown = true;
+        } else if (scrollDelta < 0) {
+          // Scrolling up
+          isScrollingDown = false;
+        }
+        
+        // Apply sticky navbar class based on scroll position and direction
+        if (pastHero && isScrollingDown) {
+          header?.classList.add('header--sticky-navbar');
+        } else if (!pastHero || !isScrollingDown) {
+          header?.classList.remove('header--sticky-navbar');
+        }
+        
+        lastScrollY = currentScrollY;
+      }
+      
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      window.addEventListener('resize', function() {
+        if (hero) {
+          heroHeight = hero.offsetHeight || window.innerHeight;
+        }
+      });
+    });
+  </script>
+{% endif %}
 
   <head>
     <meta name="google-site-verification" content="7JPairUoXsJQ4-4AX8O-PN-Y58LaUVCdHkqJftTfSEc" />
