@@ -50,7 +50,9 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-color: #67645e;
+    /* Fill color = the button's own resting text color (captured by JS as
+       --dh-fill). Falls back to the ISOUA brown. */
+    background-color: var(--dh-fill, #67645e);
     /* --dh-tx / --dh-ty default to "off-canvas left" so the first paint of
        a never-hovered button has no visible fill. JS overwrites these on
        every mouseover/mouseout before (and respectively after) the active

@@ -196,6 +196,7 @@
       if (el.classList.contains(OPT_OUT))  continue;
       if (el.closest('.' + OPT_OUT))       continue;
       el.classList.add(CLS_MARK);
+      captureColors(el);
     }
   }
 
@@ -219,6 +220,7 @@
           // Tag the node itself if it matches, plus any matching descendants.
           if (n.matches && n.matches(SELECTOR) && !n.classList.contains(OPT_OUT)) {
             n.classList.add(CLS_MARK);
+            captureColors(n);
           }
           tag(n);
         }
