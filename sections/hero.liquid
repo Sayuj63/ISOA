@@ -847,54 +847,6 @@
       }
     }
   }
-  /* ── Homepage banner geometry ─────────────────────────────────────────────
-     The homepage banner's height and its rounded corners live here rather than
-     in the homepage template's per-section custom_css, deliberately: that field
-     is part of templates/index.json, and the copy of that file on the live theme
-     carries homepage sections this working copy does not, so that file cannot be
-     pushed as it stands. Written here, the values travel with the section, on a
-     file that can be pushed on its own.
-
-     `body.template-index` keeps every other page's hero exactly as it was —
-     those templates set their own height and radius in their own custom_css.
-
-     !important is load-bearing, not lazy: the template's custom_css is scoped
-     `#shopify-section-…`, one id deep, which outranks anything written in this
-     plain stylesheet — and the live theme's copy of index.json still carries the
-     old 100vh values, which these rules have to beat. */
-  body.template-index .hero-wrapper .hero {
-    height: 40vh !important;
-    min-height: 40vh !important;
-    /* The hero box itself may carry padding — the copy of index.json on the live
-       theme sets 1.5vw on it, while this working copy sets none. Under the
-       global border-box (assets/base.css) that padding would eat 1.5vw out of
-       the 40vh rather than sit outside it, and the 40vh container below would
-       then overflow the hero and be clipped by its overflow: hidden, cutting off
-       the rounded bottom corners this file just added. Content-box makes the
-       40vh mean the banner itself on either copy, whatever padding is around it. */
-    box-sizing: content-box !important;
-  }
-
-  body.template-index .hero-wrapper .hero__container {
-    height: 40vh !important;
-    min-height: 40vh !important;
-  }
-
-  body.template-index .hero-wrapper .hero__container,
-  body.template-index .hero-wrapper .hero img,
-  body.template-index .hero-wrapper .hero__media,
-  body.template-index .hero-wrapper .hero__media img {
-    border-radius: 16px !important;
-  }
-
-  /* Phones keep the taller banner they already had. */
-  @media screen and (max-width: 749px) {
-    body.template-index .hero-wrapper .hero,
-    body.template-index .hero-wrapper .hero__container {
-      height: 60vh !important;
-      min-height: 60vh !important;
-    }
-  }
 {% endstylesheet %}
 
 {% schema %}
