@@ -196,6 +196,73 @@ rhode-cyr.rh-cyr {
   outline-offset: 2px;
 }
 
+/* -- Quantity stepper (shown only when card.in-cart) ------------------------ */
+.rh-cyr__qty {
+  display: none;
+  align-items: center;
+  gap: 2px;
+  border: 1px solid #67645e;
+  border-radius: 999px;
+  padding: 2px;
+  background: #ffffff;
+  flex: 0 0 auto;
+}
+.rh-cyr__qty-btn {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: #67645e;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.rh-cyr__qty-btn:hover { background: #67645e; color: #ffffff; }
+.rh-cyr__qty-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: transparent;
+  color: #67645e;
+}
+.rh-cyr__qty-count {
+  min-width: 18px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #67645e;
+  line-height: 1;
+  user-select: none;
+}
+
+/* -- "In cart" pill next to price ------------------------------------------- */
+.rh-cyr__in-cart-pill {
+  display: none;
+  margin-left: 8px;
+  padding: 2px 8px;
+  background: #67645e;
+  color: #ffffff;
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+/* -- Swap: when a card is marked in-cart, hide the checkbox and show the
+   quantity stepper + "In cart" pill. */
+.rh-cyr__card.in-cart .rh-cyr__check { display: none; }
+.rh-cyr__card.in-cart .rh-cyr__qty { display: inline-flex; }
+.rh-cyr__card.in-cart .rh-cyr__in-cart-pill { display: inline-block; }
+.rh-cyr__card.in-cart { border-color: #67645e; }
+
 /* Variant dropdown — styled to feel like the Rhode "bake ▾" affordance. */
 .rh-cyr__variant-wrap {
   position: relative;
