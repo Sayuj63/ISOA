@@ -107,6 +107,39 @@
   }
 }
 
+/* ============================================================================
+   Product card BUY pill — enable direct hover + text-white flip
+   ----------------------------------------------------------------------------
+   The pill (.isoa-rc-cta) is pointer-events:none and opacity:0 at rest, and
+   is faded in by .isoa-rc-card:hover (rhode-collection-cards.css:246). To
+   let the user hover the pill DIRECTLY (not via a card-proxy, which would
+   fire on any card hover), we flip pointer-events to auto while the card
+   is hovered. Clicking the pill still bubbles up to the parent anchor so
+   navigation is unchanged.
+
+   isoua-button-overrides.css does NOT include .isoa-rc-cta in its hover
+   text-flip whitelist (the pill was never a primary CTA), so the pill text
+   stays grey on hover by default. We flip it to white here so it reads
+   correctly over the brown fill that slides in from the cursor's edge.
+   ============================================================================ */
+@media (hover: hover) and (pointer: fine) {
+  .isoa-rc-card:hover .isoa-rc-cta.direction-hover,
+  .isoa-rc-card:focus-within .isoa-rc-cta.direction-hover {
+    pointer-events: auto;
+  }
+
+  /* Text flip — on direct hover of the pill, OR while the directional fill
+     is active (.dh-active lingers through the slide-out transition too, so
+     text stays white until the fill clears). */
+  .isoa-rc-cta.direction-hover:hover,
+  .isoa-rc-cta.direction-hover.dh-active,
+  .isoa-rc-cta.direction-hover:hover strong,
+  .isoa-rc-cta.direction-hover.dh-active strong {
+    color: #ffffff !important;
+    transition: color 0.2s ease !important;
+  }
+}
+
 /* Reduced motion — suppress the fill entirely and let the base file's
    instant background-color flip provide the hover feedback. */
 @media (prefers-reduced-motion: reduce) {
