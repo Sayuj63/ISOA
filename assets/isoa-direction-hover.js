@@ -143,6 +143,29 @@
     onLeave(ev, btn);
   });
 
+  // --- Proxy: product card CTAs ------------------------------------------
+  // .isoa-rc-cta is a decorative visual pill with pointer-events: none at
+  // rest AND on hover (the whole card is one anchor — see rhode-collection-
+  // cards.css:218). It never receives its own mouseover events, so route
+  // the parent card's mouseover/mouseout to it. nearestEdge projects the
+  // cursor coords onto the CTA's rect, so direction stays per-pill accurate
+  // (cursor entering the card from the left still fires `left` on the CTA).
+  var CARD_SEL = '.isoa-rc-link, .isoa-rc-card';
+  document.addEventListener('mouseover', function (ev) {
+    var card = ev.target.closest(CARD_SEL);
+    if (!card) return;
+    if (ev.relatedTarget && card.contains(ev.relatedTarget)) return;
+    var cta = card.querySelector('.isoa-rc-cta.' + CLS_MARK);
+    if (cta) onEnter(ev, cta);
+  });
+  document.addEventListener('mouseout', function (ev) {
+    var card = ev.target.closest(CARD_SEL);
+    if (!card) return;
+    if (ev.relatedTarget && card.contains(ev.relatedTarget)) return;
+    var cta = card.querySelector('.isoa-rc-cta.' + CLS_MARK);
+    if (cta) onLeave(ev, cta);
+  });
+
   // --- Discovery ---------------------------------------------------------
   function tag(root) {
     var scope = root || document;
