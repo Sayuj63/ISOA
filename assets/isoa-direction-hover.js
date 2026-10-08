@@ -49,6 +49,15 @@
     '.shopify-section .shopify-payment-button__button',
     '.shopify-section .shopify-payment-button__button--unbranded',
     '.shopify-section .product-information .add-to-cart-button',
+    // Product card BUY pill — homepage featured collection, PDP cross-sell,
+    // collection grid. Always visible on mobile; desktop fades it in on card
+    // hover, after which the directional fill triggers on the pill itself.
+    '.isoa-rc-cta',
+    // Quick-add "Add" / "Choose" buttons on product grid cards.
+    '.quick-add__button',
+    // PDP sticky add-to-cart bar's ATC button (separate from the
+    // product-information ATC and from .rs-cta which is already covered).
+    '.sticky-add-to-cart__button',
     '.direction-hover'
   ].join(',');
 

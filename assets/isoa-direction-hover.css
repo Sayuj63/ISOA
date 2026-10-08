@@ -87,7 +87,12 @@
   .shopify-section .rs-cta.direction-hover:hover,
   .shopify-section .shopify-payment-button__button.direction-hover:hover,
   .shopify-section .shopify-payment-button__button--unbranded.direction-hover:hover,
-  .shopify-section .product-information .add-to-cart-button.direction-hover:hover {
+  .shopify-section .product-information .add-to-cart-button.direction-hover:hover,
+  /* Added for product cards + PDP: wash the hover canvas so the ::after
+     fill is the only paint, matching the behaviour of the primary CTAs. */
+  .isoa-rc-cta.direction-hover:hover,
+  .quick-add__button.direction-hover:hover,
+  .sticky-add-to-cart__button.direction-hover:hover {
     background-color: #ffffff !important;
     background-image: none !important;
   }
