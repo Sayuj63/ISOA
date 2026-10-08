@@ -10,19 +10,19 @@
         AJAX cart, section rerender) is picked up by the MutationObserver.
      2. On mouseover the JS finds the nearest edge the cursor crossed (left /
         right / top / bottom) and writes --dh-tx / --dh-ty on the button so
-        the ::before fill parks fully off-canvas on that edge. It then adds
-        .dh-active, which flips the ::before target to translate(0, 0). The
+        the ::after fill parks fully off-canvas on that edge. It then adds
+        .dh-active, which flips the ::after target to translate(0, 0). The
         CSS transition on transform animates the fill in from the entry edge.
      3. On mouseout the JS re-detects the edge the cursor is leaving from and
         writes the matching off-canvas vars BEFORE removing .dh-active. The
-        ::before transitions from (0, 0) outward toward the exit edge.
-     4. The ::before sits at z-index: -1 inside an isolated stacking context,
+        ::after transitions from (0, 0) outward toward the exit edge.
+     4. The ::after sits at z-index: -1 inside an isolated stacking context,
         so it is painted below text/icons without needing an inner <span> —
         this avoids the bare <a>Shop all</a> text-hiding bug the prior slide
         attempt hit (see isoua-button-overrides.css header comment, 2026-09-15).
 
    REDUCED MOTION / TOUCH
-     On (hover: none) or prefers-reduced-motion, the ::before stays hidden
+     On (hover: none) or prefers-reduced-motion, the ::after stays hidden
      and the plain color-flip hover from isoua-button-overrides.css is left
      in charge. The JS additionally short-circuits in those environments so
      no listeners are attached.
@@ -30,7 +30,7 @@
 
 @media (hover: hover) and (pointer: fine) {
 
-  /* Base: establish an isolated stacking context so the fill ::before (z:-1)
+  /* Base: establish an isolated stacking context so the fill ::after (z:-1)
      renders between the button's own background and its text/icons without
      requiring a wrapper element. overflow:hidden clips the slide to the
      existing pill border-radius so no fill escapes the button's shape. */
@@ -40,7 +40,7 @@
     overflow: hidden;
   }
 
-  .direction-hover::before {
+  .direction-hover::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -61,7 +61,7 @@
     border-radius: inherit;
   }
 
-  .direction-hover.dh-active::before {
+  .direction-hover.dh-active::after {
     transform: translate(0, 0);
   }
 
@@ -69,7 +69,7 @@
      :hover rule in isoua-button-overrides.css flips background-color to
      brown instantly, which would wash out the directional slide (the fill
      target color is the same brown, so by t=0.3s the entire backdrop is
-     already filled regardless of ::before progress). Repeating the full
+     already filled regardless of ::after progress). Repeating the full
      whitelist from isoua-button-overrides.css at matching specificity so
      this file (loaded later) wins on source order. Text/svg color flip in
      the base file still runs, so the text goes white as the fill arrives. */
@@ -96,7 +96,7 @@
      there's no cursor path) + the existing text/color flip from the base
      file. We force .dh-active-equivalent styling on focus so keyboard users
      get the same brown fill the mouse users see at rest-on-hover. */
-  .direction-hover:focus-visible::before {
+  .direction-hover:focus-visible::after {
     transform: translate(0, 0);
     transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -105,5 +105,5 @@
 /* Reduced motion — suppress the fill entirely and let the base file's
    instant background-color flip provide the hover feedback. */
 @media (prefers-reduced-motion: reduce) {
-  .direction-hover::before { display: none !important; }
+  .direction-hover::after { display: none !important; }
 }
