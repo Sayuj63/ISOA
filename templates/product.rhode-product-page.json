@@ -278,6 +278,16 @@
               },
               "block_order": []
             },
+            "rhode_cyr_pdp": {
+              "type": "rhode-complete-your-routine",
+              "settings": {
+                "heading": "COMPLETE YOUR ROUTINE",
+                "max_height": 420,
+                "card_radius": 10,
+                "cta_label": "SELECT ITEMS",
+                "cta_label_single": "ADD TO CART"
+              }
+            },
             "accordion_XKk6GG": {
               "type": "accordion",
               "name": "t:names.accordion",
@@ -469,6 +479,7 @@
             "text_aEtTtq",
             "price_pe7BCR",
             "buy_buttons_eYQEYi",
+            "rhode_cyr_pdp",
             "accordion_XKk6GG"
           ]
         }
