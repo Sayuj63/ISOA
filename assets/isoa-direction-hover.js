@@ -147,23 +147,42 @@
   // .isoa-rc-cta is a decorative visual pill with pointer-events: none at
   // rest AND on hover (the whole card is one anchor — see rhode-collection-
   // cards.css:218). It never receives its own mouseover events, so route
-  // the parent card's mouseover/mouseout to it. nearestEdge projects the
-  // cursor coords onto the CTA's rect, so direction stays per-pill accurate
-  // (cursor entering the card from the left still fires `left` on the CTA).
+  // the parent card's mouseover/mouseout to it.
+  //
+  // Direction uses the CARD'S edges, not the CTA's — the pill is a tiny
+  // strip at the bottom of a tall card; "I entered the card from the left"
+  // is a natural fill direction for the pill, "the cursor is far above the
+  // pill so nearest edge of the pill is top" is not.
   var CARD_SEL = '.isoa-rc-link, .isoa-rc-card';
+
+  function proxyEnter(ev, card, cta) {
+    var edge = nearestEdge(ev, card);
+    cta.style.setProperty('--dh-transition', 'none');
+    setEdgeVars(cta, edge);
+    void cta.offsetWidth;
+    cta.style.removeProperty('--dh-transition');
+    cta.classList.add(CLS_ACTIVE);
+  }
+
+  function proxyLeave(ev, card, cta) {
+    var edge = nearestEdge(ev, card);
+    setEdgeVars(cta, edge);
+    cta.classList.remove(CLS_ACTIVE);
+  }
+
   document.addEventListener('mouseover', function (ev) {
     var card = ev.target.closest(CARD_SEL);
     if (!card) return;
     if (ev.relatedTarget && card.contains(ev.relatedTarget)) return;
     var cta = card.querySelector('.isoa-rc-cta.' + CLS_MARK);
-    if (cta) onEnter(ev, cta);
+    if (cta) proxyEnter(ev, card, cta);
   });
   document.addEventListener('mouseout', function (ev) {
     var card = ev.target.closest(CARD_SEL);
     if (!card) return;
     if (ev.relatedTarget && card.contains(ev.relatedTarget)) return;
     var cta = card.querySelector('.isoa-rc-cta.' + CLS_MARK);
-    if (cta) onLeave(ev, cta);
+    if (cta) proxyLeave(ev, card, cta);
   });
 
   // --- Discovery ---------------------------------------------------------
