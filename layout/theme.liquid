@@ -369,6 +369,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {% if template == 'product.rhode-product-page' %}
       {{ 'rhode-pdp.css' | asset_url | stylesheet_tag }}
       {{ 'rhode-collection-cards.css' | asset_url | stylesheet_tag }}
+      <script src="{{ 'rhode-pdp-mobile-gallery.js' | asset_url }}" defer></script>
     {% endif %}
     {% if template == 'product.rhode-pdp-v2' %}
       {{ 'rhode-pdp-v2.css' | asset_url | stylesheet_tag }}
