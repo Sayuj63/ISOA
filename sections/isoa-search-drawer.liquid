@@ -1,0 +1,190 @@
+{% doc %}
+  Rhode-style right-side search drawer.
+
+  Opens from the header search icon instead of navigating to /search. The form
+  is a plain GET to routes.search_url, so pressing Enter still runs a real
+  search — the drawer only replaces the landing page, not the search itself.
+
+  Idle, it lists every product in a curated collection (the section setting,
+  falling back through `search-featured` and `best-sellers` to the whole
+  catalog). Typing swaps that list for predictive results fetched through the
+  Section Rendering API — see assets/isoa-search-drawer.js. Both states render
+  the same row, from snippets/isoa-search-drawer-product.liquid.
+
+  Reference: rhodeskin.com `.Offcanvas--right .SearchMini`, measured 2026-10-07
+  at 1440x900 and 390x844. The panel, gutters, type and control sizes here are
+  the reference's. Rhode also renders a "suggestions:" list of text links above
+  the products; that block is deliberately omitted, as asked.
+
+  The <dialog> carries `dialog-drawer` but NOT `dialog-modal`. Horizon's
+  predictive-search stylesheet ships a global `.dialog-modal[open]` rule that
+  forces `border-radius: 0` below 750px; it is injected through
+  `content_for_header`, so it lands after rhode-drawers.css and at specificity
+  0,2,0 it beats anything we can reach without `!important`. The class only
+  affects presentation — dialog.js toggles `dialog-closing` and nothing else —
+  so leaving it off is cheaper than fighting it.
+
+  @example
+  {% section 'isoa-search-drawer' %}
+{% enddoc %}
+
+<script
+  src="{{ 'dialog.js' | asset_url }}"
+  type="module"
+></script>
+<script
+  src="{{ 'isoa-search-drawer.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
+{%- liquid
+  # The idle list. A picked collection wins; otherwise fall back through the
+  # two handles the reference uses, ending at the whole catalog so a fresh
+  # install still has something to show.
+  assign rec_collection = section.settings.collection
+  if rec_collection == blank
+    assign rec_collection = collections['search-featured']
+  endif
+  if rec_collection == blank
+    assign rec_collection = collections['best-sellers']
+  endif
+  if rec_collection == blank
+    assign rec_collection = collections.all
+  endif
+
+  # Predictive results. assets/isoa-search-drawer.js re-requests this same
+  # section from /search/suggest?q=…&section_id=…, and it is that request
+  # which populates `predictive_search` — so this branch only ever runs for
+  # the morph, never for the first paint.
+  assign predictive_results = predictive_search.resources.products
+-%}
+
+<isoa-search-drawer-component
+  id="isoa-search-drawer"
+  class="isoa-sd"
+  data-section-id="{{ section.id }}"
+  data-status-results="{{ 'accessibility.search_results_count' | t: count: '__count__', query: '__query__' }}"
+  data-status-empty="{{ 'accessibility.search_results_no_results' | t: query: '__query__' }}"
+  {{ section.shopify_attributes }}
+>
+  <dialog
+    ref="dialog"
+    class="isoa-sd__panel isoa-drawer dialog-drawer"
+    scroll-lock
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="isoa-search-drawer-title"
+    on:click="/closeDialogOnClickOutside"
+    on:keydown="/closeDialogOnEscapePress"
+  >
+    <div class="isoa-sd__head">
+      <h2
+        id="isoa-search-drawer-title"
+        class="isoa-sd__title"
+      >
+        {{ 'content.search' | t }}
+      </h2>
+      <button
+        type="button"
+        class="isoa-sd__close"
+        aria-label="{{ 'accessibility.close_dialog' | t }}"
+        on:click="/closeDialog"
+      >
+        {{- 'icon-close.svg' | inline_asset_content -}}
+      </button>
+    </div>
+
+    <form
+      class="isoa-sd__form"
+      action="{{ routes.search_url }}"
+      method="get"
+      role="search"
+    >
+      <label
+        for="isoa-search-drawer-input"
+        class="visually-hidden"
+      >
+        {{ 'content.search_input_label' | t }}
+      </label>
+      <input
+        id="isoa-search-drawer-input"
+        class="isoa-sd__input"
+        ref="searchInput"
+        type="search"
+        name="q"
+        value="{{ search.terms | escape }}"
+        placeholder="Type here"
+        autocomplete="off"
+      >
+    </form>
+
+    <div class="isoa-sd__rule"></div>
+
+    {%- comment -%}
+      The live region sits outside the keyed region below on purpose. morph
+      replaces that subtree wholesale, and a role="status" node that is itself
+      replaced is not reliably announced — so this one stays put and the JS
+      writes the count into it after each render instead.
+    {%- endcomment -%}
+    <span
+      class="visually-hidden"
+      role="status"
+      aria-live="polite"
+      ref="searchStatus"
+    ></span>
+
+    <div
+      class="isoa-sd__results"
+      data-hydration-key="isoa-sd-results"
+      ref="searchResults"
+    >
+      {%- if predictive_search.performed -%}
+        {%- if predictive_results.size > 0 -%}
+          <ul class="isoa-sd__products" role="list">
+            {%- for product in predictive_results -%}
+              <li data-search-result>
+                {% render 'isoa-search-drawer-product', product: product %}
+              </li>
+            {%- endfor -%}
+          </ul>
+
+          <a
+            class="isoa-sd__view-all"
+            href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}"
+          >
+            {{ 'content.search_results_view_all' | t }}
+            <span class="visually-hidden">{{ predictive_search.terms | escape }}</span>
+          </a>
+        {%- else -%}
+          <p class="isoa-sd__empty">
+            {{ 'content.search_results_no_results' | t: terms: predictive_search.terms }}
+          </p>
+        {%- endif -%}
+      {%- elsif rec_collection != blank and rec_collection.products_count > 0 -%}
+        <ul class="isoa-sd__products" role="list">
+          {%- for product in rec_collection.products -%}
+            <li>
+              {% render 'isoa-search-drawer-product', product: product %}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </dialog>
+</isoa-search-drawer-component>
+
+{% schema %}
+{
+  "name": "Search drawer",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Recommended products",
+      "info": "Shown before anything is typed. Leave empty to try the search-featured then best-sellers collections, falling back to all products."
+    }
+  ],
+  "presets": []
+}
+{% endschema %}

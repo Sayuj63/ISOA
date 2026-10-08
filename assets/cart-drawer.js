@@ -1,6 +1,7 @@
 import { DialogComponent, DialogOpenEvent, DialogCloseEvent } from '@theme/dialog';
-import { CartAddEvent } from '@theme/events';
-import { isMobileBreakpoint } from '@theme/utilities';
+import { CartAddEvent, CartUpdateEvent } from '@theme/events';
+import { fetchConfig, isMobileBreakpoint } from '@theme/utilities';
+import { morphSection } from '@theme/section-renderer';
 
 /**
  * A custom element that manages a cart drawer.
@@ -24,6 +25,11 @@ class CartDrawerComponent extends DialogComponent {
     this.addEventListener(DialogOpenEvent.eventName, this.#updateStickyState);
     this.addEventListener(DialogOpenEvent.eventName, this.#handleHistoryOpen);
     this.addEventListener(DialogCloseEvent.eventName, this.#handleHistoryClose);
+    // Delegated from the host rather than bound to the controls themselves:
+    // every cart update re-renders the drawer body, so the select and button
+    // are replaced nodes. The host survives.
+    this.addEventListener('change', this.#handleUpsellVariantChange);
+    this.addEventListener('submit', this.#handleUpsellSubmit);
 
     if (history.state?.cartDrawerOpen) {
       history.replaceState(null, '');
@@ -36,8 +42,88 @@ class CartDrawerComponent extends DialogComponent {
     this.removeEventListener(DialogOpenEvent.eventName, this.#updateStickyState);
     this.removeEventListener(DialogOpenEvent.eventName, this.#handleHistoryOpen);
     this.removeEventListener(DialogCloseEvent.eventName, this.#handleHistoryClose);
+    this.removeEventListener('change', this.#handleUpsellVariantChange);
+    this.removeEventListener('submit', this.#handleUpsellSubmit);
     this.#historyAbortController?.abort();
   }
+
+  /**
+   * Repoints the ADD button at the newly selected upsell variant. Each option
+   * carries its own pre-formatted price from Liquid (`| money`), so switching
+   * is a text swap and no formatting rule is duplicated in JS.
+   * @param {Event} event
+   */
+  #handleUpsellVariantChange = (event) => {
+    const select = event.target;
+
+    if (!(select instanceof HTMLSelectElement) || !select.hasAttribute('data-upsell-select')) return;
+
+    const button = select.closest('.isoa-cd__upsell')?.querySelector('[data-upsell-add]');
+    const price = select.selectedOptions[0]?.dataset.price;
+
+    if (button && price) button.textContent = `${button.dataset.labelPrefix ?? ''}${price}`;
+  };
+
+  /**
+   * Adds the upsell through the Cart AJAX API and re-renders the drawer in
+   * place. Left alone, the form's native POST navigates to /cart — the page
+   * reload the drawer exists to avoid.
+   * @param {Event} event
+   */
+  #handleUpsellSubmit = async (event) => {
+    const form = event.target;
+
+    if (!(form instanceof HTMLFormElement) || !form.hasAttribute('data-upsell-form')) return;
+
+    event.preventDefault();
+
+    const sectionId = this.querySelector('cart-items-component')?.dataset.sectionId;
+    const variantId = new FormData(form).get('id');
+    const button = form.querySelector('[data-upsell-add]');
+
+    if (!sectionId || !variantId || button?.disabled) return;
+
+    if (button) button.disabled = true;
+
+    try {
+      const response = await fetch(
+        Theme.routes.cart_add_url,
+        fetchConfig('json', {
+          body: JSON.stringify({
+            items: [{ id: Number(variantId), quantity: 1 }],
+            sections: sectionId,
+            sections_url: window.location.pathname,
+          }),
+        })
+      );
+      const cart = await response.json();
+
+      // /cart/add.js reports failures in the body rather than through the status.
+      if (cart.status) throw new Error(cart.description ?? cart.message);
+
+      const html = cart.sections?.[sectionId];
+      if (html) await morphSection(sectionId, html, 'hydration', { injectStylesheet: true });
+
+      // /cart/add.js answers with `{items, sections}` only — no cart object — so
+      // the new count is read back off the markup the morph just installed, the
+      // same hidden `cartItemCount` ref cart-items-component reads.
+      const itemCount = Number(this.querySelector('[ref="cartItemCount"]')?.textContent ?? 0);
+
+      // Dispatched from the items component so its own document-level
+      // `cart:update` handler ignores it — it only acts on other sources —
+      // while the header's cart count still picks the event up.
+      this.querySelector('cart-items-component')?.dispatchEvent(
+        new CartUpdateEvent(cart, sectionId, {
+          itemCount,
+          source: 'cart-drawer-upsell',
+          sections: cart.sections,
+        })
+      );
+    } catch (error) {
+      console.error(error);
+      if (button) button.disabled = false;
+    }
+  };
 
   #handleHistoryOpen = () => {
     if (!isMobileBreakpoint()) return;
@@ -74,7 +160,7 @@ class CartDrawerComponent extends DialogComponent {
       this.showDialog();
     }
 
-    this.#announceCartCount(event.detail.resource?.item_count);
+    this.#announceCartCount(event.detail.resource?.item_count ?? event.detail.data?.itemCount);
   };
 
   /**

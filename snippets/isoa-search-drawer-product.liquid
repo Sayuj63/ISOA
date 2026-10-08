@@ -1,0 +1,34 @@
+{% doc %}
+  One product row in the search drawer — thumbnail plus uppercase title.
+
+  Rendered from both branches of sections/isoa-search-drawer.liquid: the idle
+  "recommended" list and the predictive results list. The reference uses one
+  row design for both states, so the markup lives here rather than being
+  written out twice and left to drift.
+
+  The image box is a fixed square that the artwork is fitted into rather than
+  cropped to (`object-fit: contain` in rhode-drawers.css) — the reference
+  renders its thumbnails the same way, via `background-size: contain` on a
+  lazysizes padding box.
+
+  @param {product} product - The product to render.
+
+  @example
+  {% render 'isoa-search-drawer-product', product: product %}
+{% enddoc %}
+
+<a class="isoa-sd__product" href="{{ product.url }}">
+  {%- if product.featured_image != blank -%}
+    <span class="isoa-sd__product-image">
+      <img
+        src="{{ product.featured_image | image_url: width: 246 }}"
+        alt="{{ product.featured_image.alt | default: product.title | escape }}"
+        width="123"
+        height="123"
+        loading="lazy"
+        decoding="async"
+      >
+    </span>
+  {%- endif -%}
+  <span class="isoa-sd__product-title">{{ product.title }}</span>
+</a>
