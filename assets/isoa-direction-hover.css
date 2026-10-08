@@ -100,9 +100,34 @@
      fill is the only paint, matching the behaviour of the primary CTAs. */
   .isoa-rc-cta.direction-hover:hover,
   .quick-add__button.direction-hover:hover,
-  .sticky-add-to-cart__button.direction-hover:hover {
-    background-color: #ffffff !important;
+  .sticky-add-to-cart__button.direction-hover:hover,
+  /* Store-wide pass (2026-10-08): same hover-wash for the newly-added CTAs. */
+  .rhode-mm__cta.direction-hover:hover,
+  [class*="footer-newsletter-submit"].direction-hover:hover,
+  a.button-secondary.direction-hover:hover,
+  .cart-items__empty-button.direction-hover:hover {
+    background-color: var(--dh-text, #ffffff) !important;
     background-image: none !important;
+  }
+
+  /* Generic hover-text flip for every direction-hover element. The var
+     --dh-text is captured per-button by JS as the button's resting bg
+     color, so each button becomes a photo-negative of itself on hover
+     (dark text on light bg flips to light text on dark bg, and the
+     reverse). Fallback is white. */
+  .direction-hover:hover,
+  .direction-hover.dh-active {
+    color: var(--dh-text, #ffffff) !important;
+    transition: color 0.3s ease !important;
+  }
+  .direction-hover:hover *:not(svg):not(path),
+  .direction-hover.dh-active *:not(svg):not(path) {
+    color: inherit !important;
+  }
+  .direction-hover:hover svg path,
+  .direction-hover.dh-active svg path {
+    fill: var(--dh-text, #ffffff) !important;
+    transition: fill 0.3s ease !important;
   }
 
   /* Keyboard focus-visible still gets the plain fill (no direction, since
