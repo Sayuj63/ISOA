@@ -1,0 +1,109 @@
+/* ============================================================================
+   ISOUA — Direction-aware button hover
+   ----------------------------------------------------------------------------
+   Loads AFTER isoua-button-overrides.css. Paired with isoa-direction-hover.js.
+
+   HOW IT WORKS
+     1. The JS whitelists the same CTA set as isoua-button-overrides.css, adds
+        .direction-hover to each one, and listens for mouseover/mouseout via
+        document-level delegation. Any dynamically rendered CTA (quick-add,
+        AJAX cart, section rerender) is picked up by the MutationObserver.
+     2. On mouseover the JS finds the nearest edge the cursor crossed (left /
+        right / top / bottom) and writes --dh-tx / --dh-ty on the button so
+        the ::before fill parks fully off-canvas on that edge. It then adds
+        .dh-active, which flips the ::before target to translate(0, 0). The
+        CSS transition on transform animates the fill in from the entry edge.
+     3. On mouseout the JS re-detects the edge the cursor is leaving from and
+        writes the matching off-canvas vars BEFORE removing .dh-active. The
+        ::before transitions from (0, 0) outward toward the exit edge.
+     4. The ::before sits at z-index: -1 inside an isolated stacking context,
+        so it is painted below text/icons without needing an inner <span> —
+        this avoids the bare <a>Shop all</a> text-hiding bug the prior slide
+        attempt hit (see isoua-button-overrides.css header comment, 2026-09-15).
+
+   REDUCED MOTION / TOUCH
+     On (hover: none) or prefers-reduced-motion, the ::before stays hidden
+     and the plain color-flip hover from isoua-button-overrides.css is left
+     in charge. The JS additionally short-circuits in those environments so
+     no listeners are attached.
+   ============================================================================ */
+
+@media (hover: hover) and (pointer: fine) {
+
+  /* Base: establish an isolated stacking context so the fill ::before (z:-1)
+     renders between the button's own background and its text/icons without
+     requiring a wrapper element. overflow:hidden clips the slide to the
+     existing pill border-radius so no fill escapes the button's shape. */
+  .direction-hover {
+    position: relative !important;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .direction-hover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: #67645e;
+    /* --dh-tx / --dh-ty default to "off-canvas left" so the first paint of
+       a never-hovered button has no visible fill. JS overwrites these on
+       every mouseover/mouseout before (and respectively after) the active
+       class toggle. The var() fallbacks keep the layer safe pre-JS. */
+    transform: translate(var(--dh-tx, -101%), var(--dh-ty, 0%));
+    /* --dh-transition is cleared on hover; JS temporarily sets it to `none`
+       for one frame when parking the layer at a new entry edge, so the var
+       update doesn't accidentally transition across the visible area. */
+    transition: var(--dh-transition, transform 0.42s cubic-bezier(0.4, 0, 0.2, 1));
+    z-index: -1;
+    pointer-events: none;
+    will-change: transform;
+    /* Prevent subpixel seams where the fill meets the pill border. */
+    border-radius: inherit;
+  }
+
+  .direction-hover.dh-active::before {
+    transform: translate(0, 0);
+  }
+
+  /* Keep the button canvas white while the fill is in flight. The existing
+     :hover rule in isoua-button-overrides.css flips background-color to
+     brown instantly, which would wash out the directional slide (the fill
+     target color is the same brown, so by t=0.3s the entire backdrop is
+     already filled regardless of ::before progress). Repeating the full
+     whitelist from isoua-button-overrides.css at matching specificity so
+     this file (loaded later) wins on source order. Text/svg color flip in
+     the base file still runs, so the text goes white as the fill arrives. */
+  .shopify-section .hero a.button.direction-hover:hover,
+  .shopify-section .hero a.button-secondary.direction-hover:hover,
+  .shopify-section a[class*="image-with-button-"].direction-hover:hover,
+  .shopify-section a[class*="image-text-button-"].direction-hover:hover,
+  .shopify-section [class*="collection-button-"].direction-hover:hover,
+  .shopify-section [class*="featured-product-button-"].direction-hover:hover,
+  .shopify-section a[class*="featured-button-"].direction-hover:hover,
+  .shopify-section [class*="slider-button-"].direction-hover:hover,
+  .shopify-section .isoua-pill-button.direction-hover:hover,
+  .shopify-section [class*="ai-contact-form-submit-"].direction-hover:hover,
+  .shopify-section .rh-cta.direction-hover:hover,
+  .shopify-section .rs-cta.direction-hover:hover,
+  .shopify-section .shopify-payment-button__button.direction-hover:hover,
+  .shopify-section .shopify-payment-button__button--unbranded.direction-hover:hover,
+  .shopify-section .product-information .add-to-cart-button.direction-hover:hover {
+    background-color: #ffffff !important;
+    background-image: none !important;
+  }
+
+  /* Keyboard focus-visible still gets the plain fill (no direction, since
+     there's no cursor path) + the existing text/color flip from the base
+     file. We force .dh-active-equivalent styling on focus so keyboard users
+     get the same brown fill the mouse users see at rest-on-hover. */
+  .direction-hover:focus-visible::before {
+    transform: translate(0, 0);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* Reduced motion — suppress the fill entirely and let the base file's
+   instant background-color flip provide the hover feedback. */
+@media (prefers-reduced-motion: reduce) {
+  .direction-hover::before { display: none !important; }
+}
