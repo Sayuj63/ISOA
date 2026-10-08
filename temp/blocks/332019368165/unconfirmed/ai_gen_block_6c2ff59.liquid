@@ -1,6 +1,100 @@
+{% doc %}
+  @prompt
+    A magazine-style editorial layout
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-editorial-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    color: #24231f;
+    background: #f7f6f2;
+    padding: clamp(28px, 5vw, 72px) clamp(20px, 5vw, 80px);
+    box-sizing: border-box;
+  }
+  .ai-editorial-{{ ai_gen_id }}__inner { width: {{ block.settings.desktop_width_percent }}%; max-width: 100%; margin: 0 auto; }
+  .ai-editorial-{{ ai_gen_id }}__eyebrow { margin: 0 0 14px; font-size: 11px; line-height: 1.4; letter-spacing: .16em; text-transform: uppercase; }
+  .ai-editorial-{{ ai_gen_id }}__title { margin: 0; max-width: 850px; font-family: var(--font-heading--family, Georgia, serif); font-size: clamp(42px, 8vw, 100px); line-height: .98; font-weight: 400; letter-spacing: -.045em; }
+  .ai-editorial-{{ ai_gen_id }}__deck { max-width: 540px; margin: 22px 0 0; font-size: 15px; line-height: 1.7; }
+  .ai-editorial-{{ ai_gen_id }}__image { margin: 38px 0 0; width: 100%; overflow: hidden; background: #e8e6df; }
+  .ai-editorial-{{ ai_gen_id }}__image img { display: block; width: 100%; height: auto; max-height: 680px; object-fit: cover; }
+  .ai-editorial-{{ ai_gen_id }}__placeholder { position: relative; min-height: 260px; aspect-ratio: 16 / 7; display: grid; place-items: center; }
+  .ai-editorial-{{ ai_gen_id }}__placeholder svg { width: 100%; height: 100%; position: absolute; inset: 0; }
+  .ai-editorial-{{ ai_gen_id }}__empty { position: absolute; z-index: 1; bottom: 16px; left: 16px; color: #36342f; font-size: 12px; }
+  .ai-editorial-{{ ai_gen_id }}__caption { margin: 9px 0 0; font-size: 11px; line-height: 1.5; color: #514f49; }
+  .ai-editorial-{{ ai_gen_id }}__rule { margin: 42px 0 28px; border: 0; border-top: 1px solid #c9c7c0; }
+  .ai-editorial-{{ ai_gen_id }}__body { display: grid; grid-template-columns: minmax(150px, .65fr) minmax(0, 1.35fr); gap: clamp(28px, 8vw, 120px); align-items: start; }
+  .ai-editorial-{{ ai_gen_id }}__side { position: sticky; top: 24px; }
+  .ai-editorial-{{ ai_gen_id }}__side-label { margin: 0 0 16px; font-size: 11px; letter-spacing: .13em; text-transform: uppercase; }
+  .ai-editorial-{{ ai_gen_id }}__nav { display: flex; flex-direction: column; gap: 5px; }
+  .ai-editorial-{{ ai_gen_id }}__nav a { color: #34322e; text-decoration: none; border-bottom: 1px solid #d8d6cf; padding: 11px 0; font-size: 13px; line-height: 1.4; }
+  .ai-editorial-{{ ai_gen_id }}__nav a:hover, .ai-editorial-{{ ai_gen_id }}__nav a:focus-visible { color: #000; text-decoration: underline; text-underline-offset: 4px; }
+  .ai-editorial-{{ ai_gen_id }}__content { min-width: 0; }
+  .ai-editorial-{{ ai_gen_id }}__section { scroll-margin-top: 30px; padding: 0 0 32px; margin: 0 0 32px; border-bottom: 1px solid #c9c7c0; }
+  .ai-editorial-{{ ai_gen_id }}__section:last-child { border-bottom: 0; }
+  .ai-editorial-{{ ai_gen_id }}__section h2 { margin: 0 0 16px; font-family: var(--font-heading--family, Georgia, serif); font-weight: 400; font-size: clamp(25px, 3.5vw, 42px); line-height: 1.1; }
+  .ai-editorial-{{ ai_gen_id }}__copy { font-size: 14px; line-height: 1.8; }
+  .ai-editorial-{{ ai_gen_id }}__copy p { margin: 0 0 12px; }
+  .ai-editorial-{{ ai_gen_id }}__copy p:last-child { margin-bottom: 0; }
+  @media (max-width: 749px) {
+    .ai-editorial-{{ ai_gen_id }} { padding: 30px 18px; }
+    .ai-editorial-{{ ai_gen_id }}__inner { width: 100%; }
+    .ai-editorial-{{ ai_gen_id }}__body { display: block; }
+    .ai-editorial-{{ ai_gen_id }}__side { position: static; margin: 0 -18px 30px; padding: 0 18px 12px; border-bottom: 1px solid #c9c7c0; }
+    .ai-editorial-{{ ai_gen_id }}__nav { flex-direction: row; overflow-x: auto; gap: 8px; padding-bottom: 5px; scrollbar-width: thin; }
+    .ai-editorial-{{ ai_gen_id }}__nav a { flex: 0 0 auto; border: 1px solid #b8b6af; border-radius: 999px; padding: 9px 14px; white-space: nowrap; }
+    .ai-editorial-{{ ai_gen_id }}__image { margin-top: 28px; }
+    .ai-editorial-{{ ai_gen_id }}__placeholder { min-height: 220px; aspect-ratio: 4 / 3; }
+  }
+{% endstyle %}
+
+<div class="ai-editorial-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-editorial-{{ ai_gen_id }}__inner">
+    {% if block.settings.eyebrow != blank %}<p class="ai-editorial-{{ ai_gen_id }}__eyebrow">{{ block.settings.eyebrow | escape }}</p>{% endif %}
+    <h1 class="ai-editorial-{{ ai_gen_id }}__title">{{ block.settings.title | escape }}</h1>
+    {% if block.settings.introduction != blank %}<div class="ai-editorial-{{ ai_gen_id }}__deck">{{ block.settings.introduction }}</div>{% endif %}
+    {% if block.settings.image != blank %}
+      <figure class="ai-editorial-{{ ai_gen_id }}__image"><img src="{{ block.settings.image | image_url: width: 2400 }}" alt="{{ block.settings.image.alt | escape }}" loading="lazy" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}">{% if block.settings.image_caption != blank %}<figcaption class="ai-editorial-{{ ai_gen_id }}__caption">{{ block.settings.image_caption | escape }}</figcaption>{% endif %}</figure>
+    {% else %}
+      <div class="ai-editorial-{{ ai_gen_id }}__image ai-editorial-{{ ai_gen_id }}__placeholder">{{ 'image' | placeholder_svg_tag }}<span class="ai-editorial-{{ ai_gen_id }}__empty">Add an editorial image to complete this layout.</span></div>
+    {% endif %}
+    <hr class="ai-editorial-{{ ai_gen_id }}__rule">
+    <div class="ai-editorial-{{ ai_gen_id }}__body">
+      <aside class="ai-editorial-{{ ai_gen_id }}__side"><p class="ai-editorial-{{ ai_gen_id }}__side-label">{{ block.settings.navigation_label | escape }}</p><nav class="ai-editorial-{{ ai_gen_id }}__nav" aria-label="{{ block.settings.navigation_label | escape }}">
+        {% for i in (1..4) %}{% assign heading_key = 'section_' | append: i | append: '_heading' %}{% assign heading_value = block.settings[heading_key] %}{% if heading_value != blank %}<a href="#ai-editorial-{{ ai_gen_id }}-section-{{ i }}">{{ heading_value | escape }}</a>{% endif %}{% endfor %}
+      </nav></aside>
+      <div class="ai-editorial-{{ ai_gen_id }}__content">
+        {% for i in (1..4) %}{% assign heading_key = 'section_' | append: i | append: '_heading' %}{% assign copy_key = 'section_' | append: i | append: '_copy' %}{% assign heading_value = block.settings[heading_key] %}{% assign copy_value = block.settings[copy_key] %}{% if heading_value != blank %}<section class="ai-editorial-{{ ai_gen_id }}__section" id="ai-editorial-{{ ai_gen_id }}-section-{{ i }}"><h2>{{ heading_value | escape }}</h2><div class="ai-editorial-{{ ai_gen_id }}__copy">{{ copy_value }}</div></section>{% endif %}{% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Editorial layout",
+  "settings": [
+    { "type": "range", "id": "desktop_width_percent", "label": "Desktop width", "min": 50, "max": 100, "step": 5, "unit": "%", "default": 100 },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The ISOUA journal" },
+    { "type": "text", "id": "title", "label": "Headline", "default": "A considered approach to skin" },
+    { "type": "richtext", "id": "introduction", "label": "Introduction", "default": "<p>Thoughtful rituals, considered ingredients, and a little space to return to yourself.</p>" },
+    { "type": "image_picker", "id": "image", "label": "Editorial image" },
+    { "type": "text", "id": "image_caption", "label": "Image caption" },
+    { "type": "text", "id": "navigation_label", "label": "Navigation label", "default": "In this story" },
+    { "type": "header", "content": "Story sections" },
+    { "type": "text", "id": "section_1_heading", "label": "Section 1 heading", "default": "The daily ritual" },
+    { "type": "richtext", "id": "section_1_copy", "label": "Section 1 text", "default": "<p>Build a routine around consistency and care. Begin with clean skin, layer products from lightest to richest, and make each step a moment of attention.</p>" },
+    { "type": "text", "id": "section_2_heading", "label": "Section 2 heading", "default": "Ingredients with intention" },
+    { "type": "richtext", "id": "section_2_copy", "label": "Section 2 text", "default": "<p>Every formula has a purpose. Explore ingredient lists, follow product directions, and introduce new products gradually so your skin has time to respond.</p>" },
+    { "type": "text", "id": "section_3_heading", "label": "Section 3 heading", "default": "A routine that fits you" },
+    { "type": "richtext", "id": "section_3_copy", "label": "Section 3 text", "default": "<p>Skin needs can change with seasons and circumstance. Keep your routine comfortable and uncomplicated, and seek professional advice for persistent concerns.</p>" },
+    { "type": "text", "id": "section_4_heading", "label": "Section 4 heading", "default": "Make room for care" },
+    { "type": "richtext", "id": "section_4_copy", "label": "Section 4 text", "default": "<p>Care is not about doing more. It is about finding a few considered steps you can return to, day after day.</p>" }
+  ],
+  "presets": [{ "name": "Editorial layout" }],
+  "tag": null,
+  "class": "editorial-layout-block"
+}
 {% endschema %}
