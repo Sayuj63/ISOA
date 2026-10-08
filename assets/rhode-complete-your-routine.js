@@ -1,42 +1,153 @@
 /* ============================================================================
-   Rhode-style "Complete Your Routine" PDP block — bulk add-to-cart
+   Rhode-style "Complete Your Routine" PDP block — cart-aware
    ----------------------------------------------------------------------------
-   Scoped to <rhode-cyr> custom elements. Tracks per-card checkbox state and
-   variant-dropdown selections; the footer "SELECT ITEMS" button bulk-POSTs
-   checked items to /cart/add.js in a single request. Falls back to adding
-   items one at a time if the bulk endpoint rejects the payload (e.g.
-   inventory errors on one item).
+   Scoped to <rhode-cyr> custom elements. Each card has two possible states:
+
+     NOT in cart  → checkbox visible. SELECT ITEMS counts checked boxes and
+                    bulk-POSTs them to /cart/add.js.
+     IN cart      → checkbox hidden, quantity stepper visible with the current
+                    line quantity. +/− fire /cart/change.js and update the
+                    stepper in place.
+
+   State is hydrated from /cart.js on connect, and re-hydrated on every
+   `cart:updated` event (dispatched after every add / change in this block,
+   and anywhere else the theme updates the cart).
    ============================================================================ */
 (function () {
   'use strict';
 
   if (customElements.get('rhode-cyr')) return;
 
+  // Shared cart cache so multiple <rhode-cyr> instances (and quick re-renders
+  // during section hot-reload) share one fetch and one source of truth.
+  var cartState = { lines: new Map(), ready: false, inflight: null };
+
+  function fetchCart() {
+    if (cartState.inflight) return cartState.inflight;
+    cartState.inflight = fetch('/cart.js', { headers: { 'Accept': 'application/json' } })
+      .then(function (r) { return r.ok ? r.json() : { items: [] }; })
+      .then(function (cart) {
+        cartState.lines.clear();
+        (cart.items || []).forEach(function (it) {
+          cartState.lines.set(String(it.variant_id), it.quantity);
+        });
+        cartState.ready = true;
+        cartState.inflight = null;
+        document.dispatchEvent(new CustomEvent('rh-cyr:cart-synced'));
+      })
+      .catch(function () { cartState.inflight = null; });
+    return cartState.inflight;
+  }
+
+  function qtyFor(variantId) {
+    return cartState.lines.get(String(variantId)) || 0;
+  }
+
+  async function changeLine(variantId, newQty) {
+    // Shopify's /cart/change.js supports update-by-variant-id via `id:` key.
+    // Setting quantity: 0 removes the line.
+    var resp = await fetch('/cart/change.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ id: String(variantId), quantity: newQty })
+    });
+    if (!resp.ok) throw new Error('change failed: ' + resp.status);
+    return resp.json();
+  }
+
+  async function bulkAdd(items) {
+    var resp = await fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ items: items })
+    });
+    if (!resp.ok) throw new Error('add failed: ' + resp.status);
+    return resp.json();
+  }
+
   class RhodeCyr extends HTMLElement {
     connectedCallback() {
       this.addBtn = this.querySelector('[data-rh-cyr-add]');
+      this.cards  = this.querySelectorAll('.rh-cyr__card');
       if (!this.addBtn) return;
-      // When a card's variant dropdown changes, overwrite that card's
-      // checkbox data-variant-id so SELECT ITEMS adds the chosen variant.
+
+      this._onCartSync = () => this.syncAllCards();
+      document.addEventListener('rh-cyr:cart-synced', this._onCartSync);
+      // Also pick up cart changes made elsewhere (header cart drawer, etc.).
+      this._onCartUpdated = () => fetchCart();
+      document.addEventListener('cart:updated', this._onCartUpdated);
+
       this.addEventListener('change', (e) => {
         var t = e.target;
         if (!(t instanceof HTMLElement)) return;
         if (t.matches('[data-rh-cyr-variant]')) {
+          // Variant switch: update the card's variant id, re-sync in case the
+          // newly selected variant is (or isn't) already in cart.
           var card = t.closest('.rh-cyr__card');
           var check = card && card.querySelector('[data-rh-cyr-check]');
           if (check) check.dataset.variantId = t.value;
+          this.syncCard(card);
         }
         if (t.matches('[data-rh-cyr-check]')) {
           this.refreshButtonState();
         }
       });
+
+      // Delegate +/− clicks for every card in this element.
+      this.addEventListener('click', (e) => {
+        var inc = e.target.closest('[data-rh-cyr-inc]');
+        var dec = e.target.closest('[data-rh-cyr-dec]');
+        if (inc) return this.handleStep(inc.closest('.rh-cyr__card'), +1);
+        if (dec) return this.handleStep(dec.closest('.rh-cyr__card'), -1);
+      });
+
       this.addBtn.addEventListener('click', () => this.handleAdd());
+
+      // Initial hydrate.
+      if (cartState.ready) this.syncAllCards();
+      else fetchCart();
       this.refreshButtonState();
     }
 
+    disconnectedCallback() {
+      document.removeEventListener('rh-cyr:cart-synced', this._onCartSync);
+      document.removeEventListener('cart:updated', this._onCartUpdated);
+    }
+
+    // --- card-level sync -------------------------------------------------
+    syncCard(card) {
+      if (!card) return;
+      var check = card.querySelector('[data-rh-cyr-check]');
+      if (!check) return;
+      var vid = check.dataset.variantId;
+      var qty = qtyFor(vid);
+      var qtyBox = card.querySelector('[data-rh-cyr-qty]');
+      var count  = card.querySelector('[data-rh-cyr-count]');
+      var pill   = card.querySelector('[data-rh-cyr-pill]');
+      if (qty > 0) {
+        card.classList.add('in-cart');
+        if (qtyBox) qtyBox.hidden = false;
+        if (count)  count.textContent = String(qty);
+        if (pill)   pill.hidden = false;
+        // In-cart cards shouldn't contribute to SELECT ITEMS; uncheck them.
+        if (check.checked) check.checked = false;
+      } else {
+        card.classList.remove('in-cart');
+        if (qtyBox) qtyBox.hidden = true;
+        if (pill)   pill.hidden = true;
+      }
+    }
+
+    syncAllCards() {
+      this.cards.forEach((c) => this.syncCard(c));
+      this.refreshButtonState();
+    }
+
+    // --- SELECT ITEMS footer button --------------------------------------
     getCheckedItems() {
+      // Only count cards NOT in cart; in-cart cards use the stepper instead.
       var out = [];
-      this.querySelectorAll('[data-rh-cyr-check]:checked').forEach(function (el) {
+      this.querySelectorAll('.rh-cyr__card:not(.in-cart) [data-rh-cyr-check]:checked').forEach(function (el) {
         var id = parseInt(el.dataset.variantId, 10);
         if (id) out.push({ id: id, quantity: 1 });
       });
@@ -47,8 +158,6 @@
       var items = this.getCheckedItems();
       var n = items.length;
       this.addBtn.disabled = n === 0;
-      // Label swap: "SELECT ITEMS" when 0 or many, "ADD TO CART" when exactly 1
-      // (matches shopper expectation that a single checkbox + add reads naturally).
       var fallback = this.addBtn.dataset.labelDefault || 'SELECT ITEMS';
       var single   = this.addBtn.dataset.labelSingle  || 'ADD TO CART';
       this.addBtn.textContent = n === 1 ? single : (n > 1 ? ('ADD ' + n + ' ITEMS') : fallback);
@@ -61,25 +170,19 @@
       btn.disabled = true;
       btn.classList.add('is-adding');
       try {
-        var resp = await fetch('/cart/add.js', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({ items: items })
-        });
-        if (!resp.ok) throw new Error('bulk add failed: ' + resp.status);
-        // Success feedback.
+        await bulkAdd(items);
         btn.classList.remove('is-adding');
         btn.classList.add('is-added');
         btn.textContent = 'ADDED ✓';
-        // Uncheck all so the user can select another round if they want.
+        // Clear checkboxes before re-sync; the newly-added items will swap
+        // to the stepper via syncCard().
         this.querySelectorAll('[data-rh-cyr-check]:checked').forEach(function (el) { el.checked = false; });
-        // Hand off to the store's cart drawer / count updates. If the ISOA
-        // cart drawer custom element is on the page, trigger it to re-render.
+        await fetchCart(); // re-hydrates and dispatches rh-cyr:cart-synced
         this.notifyCartChanged();
         setTimeout(() => {
           btn.classList.remove('is-added');
           this.refreshButtonState();
-        }, 1600);
+        }, 1400);
       } catch (err) {
         btn.classList.remove('is-adding');
         btn.textContent = 'ERROR — RETRY';
@@ -88,14 +191,38 @@
       }
     }
 
+    // --- +/− stepper handler --------------------------------------------
+    async handleStep(card, delta) {
+      if (!card) return;
+      var check = card.querySelector('[data-rh-cyr-check]');
+      var count = card.querySelector('[data-rh-cyr-count]');
+      if (!check || !count) return;
+      var vid     = check.dataset.variantId;
+      var current = qtyFor(vid);
+      var next    = Math.max(0, current + delta);
+      // Optimistic UI — the stepper updates immediately; a failed server call
+      // re-syncs from the authoritative cart.js so the count snaps back.
+      count.textContent = String(next);
+      card.dataset.rhBusy = '1';
+      try {
+        await changeLine(vid, next);
+        await fetchCart();
+        this.notifyCartChanged();
+      } catch (err) {
+        console.warn('[rhode-cyr] change failed:', err);
+        await fetchCart();
+      } finally {
+        delete card.dataset.rhBusy;
+      }
+    }
+
     notifyCartChanged() {
-      // Fire a generic event the rest of the theme's cart UI listens for.
-      // The ISOA cart drawer (isoa-cart-drawer.liquid) listens on
-      // 'cart:updated' as part of its auto-open flow.
       document.dispatchEvent(new CustomEvent('cart:updated', { bubbles: true }));
-      // Also open the cart drawer if available so the user sees the add.
+      // Only auto-open the drawer on explicit adds, not on every +/−, so the
+      // shopper can rapidly adjust quantity without the drawer slamming open.
+      // Guarded by a short window after handleAdd() runs.
       var drawer = document.querySelector('#isoa-cart-drawer');
-      if (drawer) {
+      if (drawer && this.addBtn.classList.contains('is-added')) {
         drawer.classList.add('is-open');
         document.body.classList.add('isoa-cd-open');
       }
