@@ -33,9 +33,15 @@
   /* Base: establish an isolated stacking context so the fill ::after (z:-1)
      renders between the button's own background and its text/icons without
      requiring a wrapper element. overflow:hidden clips the slide to the
-     existing pill border-radius so no fill escapes the button's shape. */
+     existing pill border-radius so no fill escapes the button's shape.
+
+     position: relative is set WITHOUT !important so elements that already
+     have their own positioning scheme (e.g. .isoa-rc-cta uses position:
+     absolute with left:16; right:16 to inset itself inside the product
+     card) keep their layout intact — the ::after still finds a positioned
+     ancestor to anchor to, which is all the fill math needs. */
   .direction-hover {
-    position: relative !important;
+    position: relative;
     isolation: isolate;
     overflow: hidden;
   }
