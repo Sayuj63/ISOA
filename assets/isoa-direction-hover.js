@@ -58,6 +58,14 @@
     // PDP sticky add-to-cart bar's ATC button (separate from the
     // product-information ATC and from .rs-cta which is already covered).
     '.sticky-add-to-cart__button',
+    // Store-wide CTA pass (2026-10-08): mega-menu SHOP, footer SUBSCRIBE,
+    // generic button-secondary outside the hero (Shop now, Continue shopping),
+    // and the empty-cart Continue Shopping button. Deliberately NOT included:
+    // skip-to-content, slider arrows, PDP tab circles, PDP text-swap buttons.
+    '.rhode-mm__cta',
+    '[class*="footer-newsletter-submit"]',
+    'a.button-secondary:not(.skip-to-content-link)',
+    '.cart-items__empty-button',
     '.direction-hover'
   ].join(',');
 
@@ -94,6 +102,32 @@
     var e = EDGE[edge];
     el.style.setProperty('--dh-tx', e.tx);
     el.style.setProperty('--dh-ty', e.ty);
+  }
+
+  // --- Color inversion ----------------------------------------------------
+  // Read the button's RESTING color + background, then expose them as CSS
+  // vars the fill rule uses:
+  //   --dh-fill  = original text color   (becomes the ::after fill color)
+  //   --dh-text  = original bg color     (becomes the hover text color)
+  // Net effect: on hover the button looks like a photo-negative of itself —
+  // dark-on-light flips to light-on-dark, and vice versa, with no hardcoded
+  // palette. Walks up the ancestor tree if the button's own bg is transparent.
+  var TRANSPARENT = /^(rgba\(0, ?0, ?0, ?0\)|transparent)$/;
+  function captureColors(el) {
+    var cs = getComputedStyle(el);
+    var fill = cs.color;
+    var text = cs.backgroundColor;
+    if (TRANSPARENT.test(text)) {
+      var p = el.parentElement;
+      while (p && p !== document.body) {
+        var pbg = getComputedStyle(p).backgroundColor;
+        if (!TRANSPARENT.test(pbg)) { text = pbg; break; }
+        p = p.parentElement;
+      }
+      if (TRANSPARENT.test(text)) text = '#ffffff'; // ultimate fallback
+    }
+    el.style.setProperty('--dh-fill', fill);
+    el.style.setProperty('--dh-text', text);
   }
 
   // --- Enter / leave handlers --------------------------------------------
