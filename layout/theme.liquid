@@ -24,16 +24,13 @@
       padding: var(--global-padding-vertical) var(--global-padding-horizontal) !important;
     }
     
-    /* Full-width banner - stretched and extended */
+    /* Hero wrapper — sits within the normal page container (pill rail)
+       so all homepage sections share the same 40px desktop / 16px mobile
+       horizontal gutter. The previous `width: 100vw; margin-left: -50vw`
+       trick stretched the hero edge-to-edge, breaking that consistency. */
     .hero-wrapper {
       margin: 0 !important;
       padding: 0 !important;
-      width: 100vw !important;
-      position: relative !important;
-      left: 50% !important;
-      right: 50% !important;
-      margin-left: -50vw !important;
-      margin-right: -50vw !important;
     }
     
     .hero {
