@@ -82,9 +82,14 @@
        hover ::after fill still works because we pin --dh-fill and --dh-text
        here (JS captureColors would otherwise read a transparent bg and
        degrade to the white default). On hover: ::after slides in white from
-       the cursor edge, text flips to dark brown — classic invert. */
-    [id*="hero_gVmLGg"] .hero__content-wrapper a.button,
-    [id*="hero_gVmLGg"] .hero__content-wrapper a.button-secondary {
+       the cursor edge, text flips to dark brown — classic invert.
+
+       Selector carries both `.shopify-section.hero-wrapper` to beat the
+       4-class specificity of isoua-button-overrides.css's `.shopify-section
+       .hero a.button:hover`, since this file loads BEFORE isoua-button-
+       overrides.css and would otherwise lose equal-specificity ties. */
+    .shopify-section.hero-wrapper[id*="hero_gVmLGg"] .hero__content-wrapper a.button,
+    .shopify-section.hero-wrapper[id*="hero_gVmLGg"] .hero__content-wrapper a.button-secondary {
       padding: 14px 48px !important;
       min-width: 280px !important;
       font-size: 15px !important;
@@ -103,8 +108,8 @@
        --dh-text var (dark brown) via isoa-direction-hover.css's generic
        .direction-hover:hover rule, so the pill reads as "white fill, dark
        text" at the end of the slide. */
-    [id*="hero_gVmLGg"] .hero__content-wrapper a.button:hover,
-    [id*="hero_gVmLGg"] .hero__content-wrapper a.button-secondary:hover {
+    .shopify-section.hero-wrapper[id*="hero_gVmLGg"] .hero__content-wrapper a.button:hover,
+    .shopify-section.hero-wrapper[id*="hero_gVmLGg"] .hero__content-wrapper a.button-secondary:hover {
       background: transparent !important;
       background-color: transparent !important;
       border-color: #ffffff !important;
@@ -139,8 +144,8 @@
         white-space: normal !important;
         font-weight: 500 !important;
       }
-      [id*="hero_gVmLGg"] .hero__content-wrapper a.button,
-      [id*="hero_gVmLGg"] .hero__content-wrapper a.button-secondary {
+      .shopify-section.hero-wrapper[id*="hero_gVmLGg"] .hero__content-wrapper a.button,
+      .shopify-section.hero-wrapper[id*="hero_gVmLGg"] .hero__content-wrapper a.button-secondary {
         padding: 10px 32px !important;
         min-width: 200px !important;
         font-size: 12px !important;
