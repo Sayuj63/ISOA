@@ -100,8 +100,11 @@
       background-image: none !important;
       color: #ffffff !important;
       border: 1.5px solid #ffffff !important;
-      --dh-fill: #ffffff;
-      --dh-text: #67645e;
+      /* !important so these beat JS's inline captureColors — the auto-detect
+         sees a transparent bg and walks up looking for a real colour, which
+         for a white page returns #ffffff and makes hover text invisible. */
+      --dh-fill: #ffffff !important;
+      --dh-text: #67645e !important;
     }
     /* On hover: suppress the base isoua-button-overrides color flip so the
        directional ::after fill is the only visible paint. Text flips to the
