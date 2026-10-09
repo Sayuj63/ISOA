@@ -90,16 +90,19 @@
        overrides.css and would otherwise lose equal-specificity ties. */
     .shopify-section.hero-wrapper[id*="hero_gVmLGg"] .hero__content-wrapper a.button,
     .shopify-section.hero-wrapper[id*="hero_gVmLGg"] .hero__content-wrapper a.button-secondary {
-      padding: 14px 48px !important;
-      min-width: 280px !important;
-      font-size: 15px !important;
-      font-weight: 500 !important;
-      letter-spacing: 0.08em !important;
+      /* Scaled up to hold weight against the 90vh hero (previous 200x30 pill
+         read too small against a 1360x810 image). Current: ~260x48 pill. */
+      padding: 16px 40px !important;
+      min-width: 260px !important;
+      font-size: 13px !important;
+      font-weight: 400 !important;
+      letter-spacing: 0.12em !important;
+      line-height: 1.3 !important;
       background: transparent !important;
       background-color: transparent !important;
       background-image: none !important;
       color: #ffffff !important;
-      border: 1.5px solid #ffffff !important;
+      border: 1px solid #ffffff !important;
       /* !important so these beat JS's inline captureColors — the auto-detect
          sees a transparent bg and walks up looking for a real colour, which
          for a white page returns #ffffff and makes hover text invisible. */
@@ -156,8 +159,8 @@
       }
       .shopify-section.hero-wrapper[id*="hero_gVmLGg"] .hero__content-wrapper a.button,
       .shopify-section.hero-wrapper[id*="hero_gVmLGg"] .hero__content-wrapper a.button-secondary {
-        padding: 10px 32px !important;
-        min-width: 200px !important;
+        padding: 13px 30px !important;
+        min-width: 220px !important;
         font-size: 12px !important;
       }
     }
