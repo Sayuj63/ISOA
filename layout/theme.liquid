@@ -49,12 +49,11 @@
     }
     [id*="hero_gVmLGg"] .hero__content-wrapper {
       position: absolute !important;
-      /* Smaller left inset pulls both tagline + button closer to the image's
-         left edge; keep the bigger bottom-right padding so the stack still
-         feels anchored. */
+      /* Matches Rhode reference: ~56px inset-left, bottom-left anchor, tight
+         gap between tagline and button. */
       inset: 0 !important;
-      padding: 48px 48px 56px 28px !important;
-      gap: 24px !important;
+      padding: 48px 48px 56px 56px !important;
+      gap: 12px !important;
       display: flex !important;
       flex-direction: column !important;
       justify-content: flex-end !important;
@@ -64,18 +63,19 @@
     }
     [id*="hero_gVmLGg"] .hero__content-wrapper > * { pointer-events: auto; }
     [id*="hero_gVmLGg"] .hero__content-wrapper .text-block {
-      max-width: min(620px, 92%);
-      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
+      max-width: min(720px, 94%);
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
     }
     /* Font-size override — the block JSON sets 1.125rem via custom-font-size
        inline var; we beat it with !important on both the wrapper and its
-       descendants so paragraphs inside the <p> inherit correctly. */
+       descendants so paragraphs inside the <p> inherit correctly. Rhode's
+       tagline reads around 30-32px on their desktop PDP — matching here. */
     [id*="hero_gVmLGg"] .hero__content-wrapper .text-block.custom-font-size,
     [id*="hero_gVmLGg"] .hero__content-wrapper .text-block.custom-font-size > * {
-      font-size: 1.5rem !important;      /* 24px, up from 18px */
-      line-height: 1.2 !important;
-      letter-spacing: 0.005em !important;
-      font-weight: 500 !important;
+      font-size: 2rem !important;         /* 32px to match reference */
+      line-height: 1.1 !important;
+      letter-spacing: 0 !important;
+      font-weight: 400 !important;
     }
 
     /* ROUTINE button — transparent bg, white outline, bigger. The direction-
