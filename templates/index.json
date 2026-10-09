@@ -42,7 +42,54 @@
         "reflection_opacity": 75,
         "padding-block-start": 20,
         "padding-block-end": 20
-      }
+      },
+      "blocks": {
+        "hero_tagline_text": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>Edited, efficacious, intentional.</p>",
+            "width": "fit-content",
+            "max_width": "narrow",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-body--family)",
+            "font_size": "1.125rem",
+            "line_height": "1.3",
+            "letter_spacing": "0.01em",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "#ffffff",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "hero_routine_button": {
+          "type": "button",
+          "name": "t:names.button",
+          "settings": {
+            "label": "ISOUA ROUTINE",
+            "link": "shopify://collections/all",
+            "open_in_new_tab": false,
+            "style_class": "button",
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "hero_tagline_text",
+        "hero_routine_button"
+      ]
     },
     "ss_featured_collection_6_new_FjMQdk": {
       "type": "ss-featured-collection-6-new",
