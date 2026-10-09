@@ -111,11 +111,18 @@
        --dh-text var (dark brown) via isoa-direction-hover.css's generic
        .direction-hover:hover rule, so the pill reads as "white fill, dark
        text" at the end of the slide. */
+    /* Hover state — pins text colour to the --dh-text var (dark brown) since
+       the base rule's `color: #ffffff !important` has higher specificity than
+       the generic .direction-hover:hover rule in isoa-direction-hover.css
+       and would otherwise keep text white (= invisible on the white fill). */
     .shopify-section.hero-wrapper[id*="hero_gVmLGg"] .hero__content-wrapper a.button:hover,
-    .shopify-section.hero-wrapper[id*="hero_gVmLGg"] .hero__content-wrapper a.button-secondary:hover {
+    .shopify-section.hero-wrapper[id*="hero_gVmLGg"] .hero__content-wrapper a.button-secondary:hover,
+    .shopify-section.hero-wrapper[id*="hero_gVmLGg"] .hero__content-wrapper a.button.dh-active,
+    .shopify-section.hero-wrapper[id*="hero_gVmLGg"] .hero__content-wrapper a.button-secondary.dh-active {
       background: transparent !important;
       background-color: transparent !important;
       border-color: #ffffff !important;
+      color: var(--dh-text, #67645e) !important;
     }
     [id*="hero_gVmLGg"] .hero__media-grid { position: relative; }
     /* Soft bottom-left vignette so white text stays readable without a
