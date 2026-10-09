@@ -49,9 +49,12 @@
     }
     [id*="hero_gVmLGg"] .hero__content-wrapper {
       position: absolute !important;
+      /* Smaller left inset pulls both tagline + button closer to the image's
+         left edge; keep the bigger bottom-right padding so the stack still
+         feels anchored. */
       inset: 0 !important;
-      padding: 48px !important;
-      gap: 20px !important;
+      padding: 48px 48px 56px 28px !important;
+      gap: 24px !important;
       display: flex !important;
       flex-direction: column !important;
       justify-content: flex-end !important;
@@ -61,8 +64,50 @@
     }
     [id*="hero_gVmLGg"] .hero__content-wrapper > * { pointer-events: auto; }
     [id*="hero_gVmLGg"] .hero__content-wrapper .text-block {
-      max-width: min(540px, 90%);
-      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+      max-width: min(620px, 92%);
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
+    }
+    /* Font-size override — the block JSON sets 1.125rem via custom-font-size
+       inline var; we beat it with !important on both the wrapper and its
+       descendants so paragraphs inside the <p> inherit correctly. */
+    [id*="hero_gVmLGg"] .hero__content-wrapper .text-block.custom-font-size,
+    [id*="hero_gVmLGg"] .hero__content-wrapper .text-block.custom-font-size > * {
+      font-size: 1.5rem !important;      /* 24px, up from 18px */
+      line-height: 1.2 !important;
+      letter-spacing: 0.005em !important;
+      font-weight: 500 !important;
+    }
+
+    /* ROUTINE button — transparent bg, white outline, bigger. The direction-
+       hover ::after fill still works because we pin --dh-fill and --dh-text
+       here (JS captureColors would otherwise read a transparent bg and
+       degrade to the white default). On hover: ::after slides in white from
+       the cursor edge, text flips to dark brown — classic invert. */
+    [id*="hero_gVmLGg"] .hero__content-wrapper a.button,
+    [id*="hero_gVmLGg"] .hero__content-wrapper a.button-secondary {
+      padding: 14px 48px !important;
+      min-width: 280px !important;
+      font-size: 15px !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.08em !important;
+      background: transparent !important;
+      background-color: transparent !important;
+      background-image: none !important;
+      color: #ffffff !important;
+      border: 1.5px solid #ffffff !important;
+      --dh-fill: #ffffff;
+      --dh-text: #67645e;
+    }
+    /* On hover: suppress the base isoua-button-overrides color flip so the
+       directional ::after fill is the only visible paint. Text flips to the
+       --dh-text var (dark brown) via isoa-direction-hover.css's generic
+       .direction-hover:hover rule, so the pill reads as "white fill, dark
+       text" at the end of the slide. */
+    [id*="hero_gVmLGg"] .hero__content-wrapper a.button:hover,
+    [id*="hero_gVmLGg"] .hero__content-wrapper a.button-secondary:hover {
+      background: transparent !important;
+      background-color: transparent !important;
+      border-color: #ffffff !important;
     }
     [id*="hero_gVmLGg"] .hero__media-grid { position: relative; }
     /* Soft bottom-left vignette so white text stays readable without a
@@ -83,15 +128,22 @@
     }
     @media (max-width: 749px) {
       [id*="hero_gVmLGg"] .hero__content-wrapper {
-        padding: 24px !important;
+        padding: 20px 20px 28px 16px !important;
         gap: 14px !important;
       }
       [id*="hero_gVmLGg"] .hero__content-wrapper .text-block.custom-font-size,
       [id*="hero_gVmLGg"] .hero__content-wrapper .text-block.custom-font-size > * {
-        font-size: 14px !important;
+        font-size: 17px !important;
         letter-spacing: 0.01em !important;
-        line-height: 1.3 !important;
+        line-height: 1.25 !important;
         white-space: normal !important;
+        font-weight: 500 !important;
+      }
+      [id*="hero_gVmLGg"] .hero__content-wrapper a.button,
+      [id*="hero_gVmLGg"] .hero__content-wrapper a.button-secondary {
+        padding: 10px 32px !important;
+        min-width: 200px !important;
+        font-size: 12px !important;
       }
     }
     
