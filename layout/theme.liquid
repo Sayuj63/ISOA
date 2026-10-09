@@ -37,23 +37,36 @@
     }
 
     /* Top homepage hero (`hero_gVmLGg`) overlay — tagline + ROUTINE button
-       sit over the image at bottom-left with a soft gradient scrim so the
-       white text stays readable regardless of what the photo is doing.
-       Scoped to this specific hero by section id so the second hero
-       (`hero_hLYCmb`, orange SHOP ALL) is unaffected. */
-    [id*="hero_gVmLGg"] .hero__content-wrapper {
-      padding: 48px !important;
-      gap: 20px;
+       sit ON TOP of the image at bottom-left with a soft gradient scrim so
+       the white text stays readable regardless of what the photo is doing.
+       Horizon's default `content_direction: column` stacks media + content
+       as siblings (content below image); we absolute-position the content
+       wrapper to overlay it. Scoped to this specific hero by section id so
+       the second hero (`hero_hLYCmb`, orange SHOP ALL) is unaffected. */
+    [id*="hero_gVmLGg"] .hero__container,
+    [id*="hero_gVmLGg"] .hero {
       position: relative;
-      z-index: 2;
     }
+    [id*="hero_gVmLGg"] .hero__content-wrapper {
+      position: absolute !important;
+      inset: 0 !important;
+      padding: 48px !important;
+      gap: 20px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-end !important;
+      align-items: flex-start !important;
+      z-index: 3;
+      pointer-events: none; /* lets through except on text/button */
+    }
+    [id*="hero_gVmLGg"] .hero__content-wrapper > * { pointer-events: auto; }
     [id*="hero_gVmLGg"] .hero__content-wrapper .text-block {
       max-width: min(540px, 90%);
       text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
     }
     [id*="hero_gVmLGg"] .hero__media-grid { position: relative; }
-    /* Thin dark gradient on the bottom-left quadrant to anchor the overlay
-       without heavy-handing the full image. */
+    /* Soft bottom-left vignette so white text stays readable without a
+       heavy wash over the whole image. */
     [id*="hero_gVmLGg"] .hero__media-grid::after {
       content: '';
       position: absolute;
@@ -61,8 +74,8 @@
       pointer-events: none;
       background: linear-gradient(
         135deg,
-        rgba(0, 0, 0, 0.35) 0%,
-        rgba(0, 0, 0, 0.15) 35%,
+        rgba(0, 0, 0, 0.45) 0%,
+        rgba(0, 0, 0, 0.20) 35%,
         rgba(0, 0, 0, 0) 60%
       );
       border-radius: inherit;
@@ -71,7 +84,7 @@
     @media (max-width: 749px) {
       [id*="hero_gVmLGg"] .hero__content-wrapper {
         padding: 24px !important;
-        gap: 14px;
+        gap: 14px !important;
       }
       [id*="hero_gVmLGg"] .hero__content-wrapper .text-block.custom-font-size,
       [id*="hero_gVmLGg"] .hero__content-wrapper .text-block.custom-font-size > * {
