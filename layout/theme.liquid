@@ -90,14 +90,19 @@
        overrides.css and would otherwise lose equal-specificity ties. */
     .shopify-section.hero-wrapper[id*="hero_gVmLGg"] .hero__content-wrapper a.button,
     .shopify-section.hero-wrapper[id*="hero_gVmLGg"] .hero__content-wrapper a.button-secondary {
-      /* Scaled up to hold weight against the 90vh hero (previous 200x30 pill
-         read too small against a 1360x810 image). Current: ~260x48 pill. */
-      padding: 16px 40px !important;
-      min-width: 260px !important;
+      /* Scaled up to hold weight against the 90vh hero. base.css:4236-4248
+         locks every .button to height: 30px !important — we unlock it here
+         (height: auto + max-height: none) so our 16×40 padding actually
+         produces a ~56px-tall pill, not a 30px pill with clipped padding. */
+      height: auto !important;
+      min-height: 52px !important;
+      max-height: none !important;
+      padding: 18px 42px !important;
+      min-width: 280px !important;
       font-size: 13px !important;
       font-weight: 400 !important;
       letter-spacing: 0.12em !important;
-      line-height: 1.3 !important;
+      line-height: 1.2 !important;
       background: transparent !important;
       background-color: transparent !important;
       background-image: none !important;
@@ -159,7 +164,10 @@
       }
       .shopify-section.hero-wrapper[id*="hero_gVmLGg"] .hero__content-wrapper a.button,
       .shopify-section.hero-wrapper[id*="hero_gVmLGg"] .hero__content-wrapper a.button-secondary {
-        padding: 13px 30px !important;
+        height: auto !important;
+        min-height: 44px !important;
+        max-height: none !important;
+        padding: 14px 32px !important;
         min-width: 220px !important;
         font-size: 12px !important;
       }
