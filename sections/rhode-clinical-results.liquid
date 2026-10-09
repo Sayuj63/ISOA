@@ -174,24 +174,30 @@
     font-weight: 700;
     text-transform: uppercase;
   }
-  .rh-clin-stats-{{ section.id }} { display: grid; gap: 22px; }
+  .rh-clin-stats-{{ section.id }} { display: grid; gap: 28px; }
   .rh-clin-stat-{{ section.id }} { margin: 0; }
+  /* Percentage digit — solid filled pink (matches Rhode reference), bumped
+     from the outlined 24px look to a proper display size that reads at a
+     distance. Previously `color: transparent + -webkit-text-stroke: 1px`
+     produced the hollow outline look the client wanted replaced. */
   .rh-clin-stat-{{ section.id }} strong {
     display: block;
     font-family: var(--font-heading--family);
-    font-size: var(--isoa-display-md);
-    font-weight: 600;
+    font-size: 3rem;              /* 48px — big display stat */
+    font-weight: 700;
     line-height: 1;
-    color: transparent;
-    -webkit-text-stroke: 1px #e29fc8;
+    color: #e29fc8;               /* solid pink fill */
+    letter-spacing: -0.01em;
   }
   .rh-clin-stat-{{ section.id }} span {
     display: block;
-    margin-top: 5px;
-    font-size: var(--isoa-body-sm);
+    margin-top: 8px;
+    font-size: 1rem;              /* 16px, up from 12px */
     font-weight: 700;
     line-height: 1.4;
     text-transform: uppercase;
+    color: #67645e;
+    letter-spacing: 0.02em;
   }
   .rh-clin-panel-{{ section.id }} .rh-clin-footnote-{{ section.id }} { margin-top: auto; }
   .rh-clin-tablist-{{ section.id }} {
@@ -238,7 +244,9 @@
       font-size: var(--isoa-display-lg-m);
       margin-bottom: 16px;
     }
-    .rh-clin-stats-{{ section.id }} { gap: 14px; }
+    .rh-clin-stats-{{ section.id }} { gap: 22px; }
+    .rh-clin-stat-{{ section.id }} strong { font-size: 2.25rem; }  /* 36px on mobile */
+    .rh-clin-stat-{{ section.id }} span { font-size: 0.9375rem; }   /* 15px on mobile */
     .rh-clin-bullets-{{ section.id }} { gap: 12px; }
     .rh-clin-panel-{{ section.id }} .rh-clin-footnote-{{ section.id }} { margin-top: 14px; padding-top: 12px; }
     .rh-clin-tab-{{ section.id }} { padding: 10px 0; font-size: 1rem; }
