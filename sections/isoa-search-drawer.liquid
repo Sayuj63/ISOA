@@ -14,7 +14,7 @@
   Reference: rhodeskin.com `.Offcanvas--right .SearchMini`, measured 2026-10-07
   at 1440x900 and 390x844. The panel, gutters, type and control sizes here are
   the reference's. Rhode also renders a "suggestions:" list of text links above
-  the products; that block is deliberately omitted, as asked.
+  the products; that list is rendered from the same collection, names only.
 
   The <dialog> carries `dialog-drawer` but NOT `dialog-modal`. Horizon's
   predictive-search stylesheet ships a global `.dialog-modal[open]` rule that
@@ -119,6 +119,25 @@
       >
     </form>
 
+    {%- comment -%}
+      Rhode's "suggestions:" list — product names only, lowercased, linking
+      straight to each product. Same collection as the idle rows below, so the
+      merchant curates both from one setting. Outside the morph region, so it
+      stays put while the rows below swap to predictive results.
+    {%- endcomment -%}
+    {%- if rec_collection != blank and rec_collection.products_count > 0 -%}
+      <nav class="isoa-sd__suggestions" aria-labelledby="isoa-search-drawer-suggestions">
+        <p id="isoa-search-drawer-suggestions" class="isoa-sd__suggestions-title">suggestions:</p>
+        <ul class="isoa-sd__suggestions-list" role="list">
+          {%- for product in rec_collection.products limit: section.settings.suggestions_limit -%}
+            <li>
+              <a class="isoa-sd__suggestion" href="{{ product.url }}">{{ product.title | downcase }}</a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+
     <div class="isoa-sd__rule"></div>
 
     {%- comment -%}
@@ -183,6 +202,15 @@
       "id": "collection",
       "label": "Recommended products",
       "info": "Shown before anything is typed. Leave empty to try the search-featured then best-sellers collections, falling back to all products."
+    },
+    {
+      "type": "range",
+      "id": "suggestions_limit",
+      "label": "Suggestions shown",
+      "min": 3,
+      "max": 15,
+      "step": 1,
+      "default": 11
     }
   ],
   "presets": []

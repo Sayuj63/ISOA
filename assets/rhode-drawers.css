@@ -164,6 +164,36 @@
   display: none;
 }
 
+/* Reference: 22px type on a 33px line, bold label, ~20px below the field.
+   Fixed-height (flex: 0 0 auto) so the product rows below are what shrink
+   and scroll, not this list. */
+.isoa-sd__suggestions {
+  flex: 0 0 auto;
+  padding: 20px 36px 0;
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+.isoa-sd__suggestions-title {
+  margin: 0;
+  font-weight: 700;
+}
+
+.isoa-sd__suggestions-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.isoa-sd__suggestion {
+  color: var(--rhode-drawer-ink);
+  text-decoration: none;
+}
+
+.isoa-sd__suggestion:hover {
+  text-decoration: underline;
+}
+
 .isoa-sd__rule {
   flex: 0 0 auto;
   height: 1px;
@@ -306,6 +336,7 @@
 .isoa-drawer .isoa-sd__input:focus-visible,
 .isoa-sd__close:focus-visible,
 .isoa-sd__product:focus-visible,
+.isoa-sd__suggestion:focus-visible,
 .isoa-sd__view-all:focus-visible {
   outline: 2px solid var(--rhode-drawer-ink);
   outline-offset: 2px;
@@ -330,6 +361,11 @@
 
   .isoa-drawer .isoa-sd__input {
     height: 51px;
+    font-size: 16px;
+  }
+
+  .isoa-sd__suggestions {
+    padding: 16px 17px 0;
     font-size: 16px;
   }
 
