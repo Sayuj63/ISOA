@@ -1238,6 +1238,11 @@ For inquiries or permissions, contact daniel@section.store
       update(event.target);
     }, { passive: true });
 
+    // Pointer left the window entirely.
+    document.addEventListener('pointerout', (event) => {
+      if (!event.relatedTarget) cursor.classList.remove('is-visible');
+    });
+
     // Scrolling moves the cards under a mouse that has not moved, and the
     // browser sends no pointer event for that — re-check what is under it.
     window.addEventListener('scroll', () => {
