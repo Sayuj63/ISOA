@@ -1,0 +1,239 @@
+{% doc %}
+  Full-bleed image banner with centred copy — Rhode's homepage
+  `mod_banner` ("one of everything really good"), measured on
+  rhodeskin.com 2026-10-11 at 375 / 390 / 768 / 1024 / 1280 / 1440 / 1920.
+
+  Two things make it hold up at every width, and both are copied from the
+  reference:
+
+  - Art direction, not cropping. Rhode ships a wide desktop photo and a tall
+    mobile photo and swaps them at 821px (820 renders mobile, 825 desktop).
+    A single image cover-cropped into both shapes is what made the old hero
+    look wrong.
+  - The box takes the photo's own aspect ratio (desktop 2474x1166, mobile
+    1376x2136), so its height follows its width and the frame never crops
+    the subject differently from one screen to the next.
+
+  Each image is served through a srcset so the browser fetches the width it
+  needs. Merchant uploads in the image pickers win; with none set it falls
+  back to the two files bundled in assets/.
+{% enddoc %}
+
+{%- liquid
+  assign widths = '480,640,800,960,1280,1440,1800,2000,2480' | split: ','
+
+  if section.settings.image_desktop != blank
+    assign desktop_ratio = section.settings.image_desktop.aspect_ratio
+  else
+    assign desktop_ratio = 2.1218
+  endif
+  if section.settings.image_mobile != blank
+    assign mobile_ratio = section.settings.image_mobile.aspect_ratio
+  else
+    assign mobile_ratio = 0.6442
+  endif
+-%}
+
+{%- capture desktop_srcset -%}
+  {%- for w in widths -%}
+    {%- assign px = w | plus: 0 -%}
+    {%- assign size = w | append: 'x' -%}
+    {%- if section.settings.image_desktop != blank -%}
+      {{ section.settings.image_desktop | image_url: width: px }} {{ w }}w
+    {%- else -%}
+      {{ 'isoa-banner-bubbles-desktop.png' | asset_img_url: size }} {{ w }}w
+    {%- endif -%}
+    {%- unless forloop.last %}, {% endunless -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- capture mobile_srcset -%}
+  {%- for w in widths limit: 6 -%}
+    {%- assign px = w | plus: 0 -%}
+    {%- assign size = w | append: 'x' -%}
+    {%- if section.settings.image_mobile != blank -%}
+      {{ section.settings.image_mobile | image_url: width: px }} {{ w }}w
+    {%- else -%}
+      {{ 'isoa-banner-bubbles-mobile.png' | asset_img_url: size }} {{ w }}w
+    {%- endif -%}
+    {%- unless forloop.last %}, {% endunless -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+<section class="isoa-banner isoa-banner-{{ section.id }}">
+  <div class="isoa-banner__inner">
+    <picture class="isoa-banner__media">
+      <source
+        media="(min-width: 821px)"
+        srcset="{{ desktop_srcset | strip }}"
+        sizes="calc(100vw - 80px)"
+      >
+      <img
+        srcset="{{ mobile_srcset | strip }}"
+        src="{% if section.settings.image_mobile != blank %}{{ section.settings.image_mobile | image_url: width: 800 }}{% else %}{{ 'isoa-banner-bubbles-mobile.png' | asset_img_url: '800x' }}{% endif %}"
+        sizes="calc(100vw - 32px)"
+        alt="{{ section.settings.image_alt | escape }}"
+        loading="lazy"
+        decoding="async"
+        data-no-zoom
+      >
+    </picture>
+
+    <div class="isoa-banner__content">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="isoa-banner__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="isoa-banner__text">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <a class="isoa-banner__button isoua-pill-button" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">
+          {{- section.settings.button_label -}}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% style %}
+  .isoa-banner-{{ section.id }} {
+    --isoa-banner-ratio: {{ mobile_ratio }};
+  }
+  @media screen and (min-width: 821px) {
+    .isoa-banner-{{ section.id }} {
+      --isoa-banner-ratio: {{ desktop_ratio }};
+    }
+  }
+{% endstyle %}
+
+<style>
+  /* Full-bleed outer, pill-rail inner — the same pattern as
+     ss-image-with-text-15, so the banner lines up with the header pill. */
+  .isoa-banner {
+    padding-block: var(--isoa-section-half-gap, 5px);
+  }
+
+  .isoa-banner__inner {
+    position: relative;
+    max-width: min(
+      calc(var(--page-width) - var(--page-margin) * 2),
+      calc(100% - var(--page-margin) * 2)
+    );
+    margin-inline: auto;
+    aspect-ratio: var(--isoa-banner-ratio);
+    overflow: hidden;
+    /* Matches the rounded homepage hero above it. */
+    border-radius: 20px;
+    background-color: #f8f8fa;
+  }
+
+  .isoa-banner__media,
+  .isoa-banner__media img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .isoa-banner__media img {
+    object-fit: cover;
+    object-position: 50% 50%;
+  }
+
+  .isoa-banner__content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 24px 34px;
+    color: #67645e;
+    text-align: center;
+  }
+
+  /* Reference type: heading 24px until wide screens, 32px at 1920; body
+     scales at 1.125vw with a 12.8px floor (16.2px at 1440). */
+  .isoa-banner__heading {
+    margin: 0;
+    font-family: var(--font-body--family);
+    font-size: clamp(24px, 1.667vw, 32px);
+    font-weight: 700;
+    line-height: 1.4;
+    color: inherit;
+  }
+
+  .isoa-banner__text {
+    max-width: 40em;
+    font-size: max(12.8px, 1.125vw);
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+  }
+
+  .isoa-banner__text p {
+    margin: 0;
+  }
+
+  @media screen and (max-width: 820px) {
+    .isoa-banner__text {
+      font-size: 14px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "ISOA banner",
+  "class": "isoa-banner-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Desktop image",
+      "info": "Shown from 821px up. Wide, about 2:1. Leave empty for the bundled bubbles image."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile image",
+      "info": "Shown below 821px. Tall, about 2:3. Leave empty for the bundled bubbles image."
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image description",
+      "default": "Drops of serum beside an open bottle"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "one of everything really good"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>At isoua, our philosophy is to make one of everything really good. To us, that means a collection of intentional, high-performance essentials you reach for every day — the ones you love, rely on, and always come back to.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "SHOP ISOUA"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "ISOA banner"
+    }
+  ]
+}
+{% endschema %}
