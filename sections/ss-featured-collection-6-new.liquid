@@ -1148,11 +1148,113 @@ For inquiries or permissions, contact daniel@section.store
   }
 
   document.addEventListener('DOMContentLoaded', initScrollingProducts);
-  
+
   if (Shopify.designMode) {
      document.addEventListener('shopify:section:unload', initScrollingProducts);
      document.addEventListener('shopify:section:load', initScrollingProducts);
   }
+</script>
+
+{%- comment -%}
+  Rhode's "swipe" cursor: over the product slider the pointer becomes a
+  frosted circle that trails the mouse. Mouse/trackpad only — touch has no
+  cursor. It hands back the normal pointer over the BUY pill and the arrows,
+  where a click target needs to be seen.
+{%- endcomment -%}
+<style>
+  @media (hover: hover) and (pointer: fine) {
+    .collection-slider-{{ section.id }}.has-swipe-cursor,
+    .collection-slider-{{ section.id }}.has-swipe-cursor a {
+      cursor: none;
+    }
+    .collection-slider-{{ section.id }}.has-swipe-cursor .isoa-rc-cta,
+    .collection-slider-{{ section.id }}.has-swipe-cursor .isoa-rc-cta *,
+    .collection-slider-{{ section.id }}.has-swipe-cursor button {
+      cursor: pointer;
+    }
+  }
+
+  .isoa-swipe-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 110px;
+    height: 110px;
+    margin: -55px 0 0 -55px;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.6);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    color: #67645e;
+    font-family: 'DM Sans', var(--font-heading--family, var(--font-body--family));
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    pointer-events: none;
+    opacity: 0;
+    scale: 0.4;
+    transition: opacity 0.25s ease, scale 0.35s cubic-bezier(.76, 0, .24, 1);
+  }
+
+  .isoa-swipe-cursor.is-visible {
+    opacity: 1;
+    scale: 1;
+  }
+</style>
+
+<script>
+  (() => {
+    if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    const slider = document.querySelector('.collection-slider-{{ section.id }}');
+    if (!slider || slider.dataset.swipeCursor) return;
+    slider.dataset.swipeCursor = 'true';
+    slider.classList.add('has-swipe-cursor');
+
+    // On <body>, not in the section, so no transformed ancestor can turn
+    // position: fixed into position: absolute.
+    const cursor = document.createElement('div');
+    cursor.className = 'isoa-swipe-cursor';
+    cursor.setAttribute('aria-hidden', 'true');
+    cursor.textContent = 'swipe';
+    document.body.append(cursor);
+
+    // The circle eases toward the pointer instead of snapping to it — that
+    // trail is what makes it read as Rhode's. Reduced motion snaps.
+    const ease = matchMedia('(prefers-reduced-motion: reduce)').matches ? 1 : 0.2;
+    let x = 0, y = 0, cx = 0, cy = 0, frame = 0;
+
+    const tick = () => {
+      cx += (x - cx) * ease;
+      cy += (y - cy) * ease;
+      cursor.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
+      frame = Math.abs(x - cx) + Math.abs(y - cy) > 0.1 ? requestAnimationFrame(tick) : 0;
+    };
+
+    slider.addEventListener('pointerenter', (event) => {
+      // Start on the pointer so the circle grows in place rather than
+      // flying in from wherever it was last left.
+      x = cx = event.clientX;
+      y = cy = event.clientY;
+      cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    });
+
+    slider.addEventListener('pointermove', (event) => {
+      x = event.clientX;
+      y = event.clientY;
+      const overControl = event.target.closest('.isoa-rc-cta, button');
+      cursor.classList.toggle('is-visible', !overControl);
+      if (!frame) frame = requestAnimationFrame(tick);
+    });
+
+    slider.addEventListener('pointerleave', () => {
+      cursor.classList.remove('is-visible');
+    });
+  })();
 </script>
 
 {% schema %}
