@@ -49,10 +49,14 @@
     }
     [id*="hero_gVmLGg"] .hero__content-wrapper {
       position: absolute !important;
-      /* Matches Rhode reference: ~56px inset-left, bottom-left anchor, tight
-         gap between tagline and button. */
+      /* .hero__container is Horizon's page-width grid, and an absolute child of
+         a grid is laid out against its grid area (the centre column, 40px in)
+         rather than the whole box — so span every column first. The 48px left
+         padding then puts the tagline on the same x as the nav's SHOP link,
+         as on Rhode. */
+      grid-column: 1 / -1 !important;
       inset: 0 !important;
-      padding: 48px 48px 56px 56px !important;
+      padding: 48px 48px 56px 48px !important;
       gap: 12px !important;
       display: flex !important;
       flex-direction: column !important;
@@ -68,12 +72,10 @@
     }
     /* Font-size override — the block JSON sets 1.125rem via custom-font-size
        inline var; we beat it with !important on both the wrapper and its
-       descendants so paragraphs inside the <p> inherit correctly. Scaled up
-       to display-weight so the tagline reads balanced with the 280×54 pill
-       beneath it (rather than looking stranded next to a chunkier button). */
+       descendants so paragraphs inside the <p> inherit correctly. */
     [id*="hero_gVmLGg"] .hero__content-wrapper .text-block.custom-font-size,
     [id*="hero_gVmLGg"] .hero__content-wrapper .text-block.custom-font-size > * {
-      font-size: 2.75rem !important;      /* 44px — big display tagline */
+      font-size: 2.25rem !important;      /* 36px */
       line-height: 1.08 !important;
       letter-spacing: -0.005em !important;
       font-weight: 400 !important;
@@ -91,19 +93,8 @@
        overrides.css and would otherwise lose equal-specificity ties. */
     .shopify-section.hero-wrapper[id*="hero_gVmLGg"] .hero__content-wrapper a.button,
     .shopify-section.hero-wrapper[id*="hero_gVmLGg"] .hero__content-wrapper a.button-secondary {
-      /* Scaled up to hold weight against the 90vh hero. base.css:4236-4248
-         locks every .button to height: 30px !important — we unlock it here
-         (height: auto + max-height: none) so our 16×40 padding actually
-         produces a ~56px-tall pill, not a 30px pill with clipped padding. */
-      height: auto !important;
-      min-height: 52px !important;
-      max-height: none !important;
-      padding: 18px 42px !important;
-      min-width: 280px !important;
-      font-size: 13px !important;
-      font-weight: 400 !important;
-      letter-spacing: 0.12em !important;
-      line-height: 1.2 !important;
+      /* Size comes from the shared button tokens in isoua-button-overrides.css;
+         only the white-on-photo palette is specific to this hero. */
       background: transparent !important;
       background-color: transparent !important;
       background-image: none !important;
@@ -157,20 +148,11 @@
       }
       [id*="hero_gVmLGg"] .hero__content-wrapper .text-block.custom-font-size,
       [id*="hero_gVmLGg"] .hero__content-wrapper .text-block.custom-font-size > * {
-        font-size: 24px !important;
+        font-size: 20px !important;
         letter-spacing: -0.005em !important;
         line-height: 1.1 !important;
         white-space: normal !important;
         font-weight: 400 !important;
-      }
-      .shopify-section.hero-wrapper[id*="hero_gVmLGg"] .hero__content-wrapper a.button,
-      .shopify-section.hero-wrapper[id*="hero_gVmLGg"] .hero__content-wrapper a.button-secondary {
-        height: auto !important;
-        min-height: 44px !important;
-        max-height: none !important;
-        padding: 14px 32px !important;
-        min-width: 220px !important;
-        font-size: 12px !important;
       }
     }
     
