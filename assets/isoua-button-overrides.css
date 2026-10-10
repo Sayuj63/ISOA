@@ -45,15 +45,16 @@
 
   /* Universal pill button. Height is fixed; width is the text plus padding,
      and the padding is in em so it tracks the font size — change the font
-     and the pill rescales with it. Consumed by the pill rule further down. */
-  --isoa-btn-height: 40px;
+     and the pill rescales with it. Consumed by the pill rule further down,
+     the product-card BUY pill and the Shop dropdown button. */
+  --isoa-btn-height: 34px;
   --isoa-btn-font: 13px;
   --isoa-btn-pad-x: 2.5em;
 }
 
 @media screen and (max-width: 768px) {
   :root {
-    --isoa-btn-height: 32px;
+    --isoa-btn-height: 28px;
     --isoa-btn-font: 11px;
   }
 }
