@@ -20,6 +20,10 @@
      much off both sides while keeping the panel centred on the bar. */
   --rhode-mm-inset: 0px;
   --rhode-mm-visible: 4;
+  /* Card width is fixed and the row is sized to fit exactly
+     --rhode-mm-visible of them, so four cards fill the row and any more
+     scroll behind the arrow. 243px is Rhode's card at 1440. */
+  --rhode-mm-card-w: 243px;
   /* Shared curve for the small inner micro-interactions (tab hover, arrows,
      buttons). The panel itself uses --rhode-mm-panel-ease below instead. */
   --rhode-mm-ease: cubic-bezier(.4, 0, .2, 1);
@@ -115,15 +119,25 @@
 }
 
 .rhode-mm__inner {
-  max-width: var(--rhode-mm-content, 1400px);
+  max-width: calc(
+    var(--rhode-mm-visible) * var(--rhode-mm-card-w)
+    + (var(--rhode-mm-visible) - 1) * var(--rhode-mm-gap)
+    + 2 * var(--rhode-mm-pad, 24px)
+  );
   margin: 0 auto;
   /* Top gap is the panel's own padding now that it hangs off the header bar,
      so the merchant's "gap" setting reads as the space under the nav. */
   padding: var(--rhode-mm-top-gap, 72px) var(--rhode-mm-pad, 24px) 0;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  column-gap: 24px;
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
+}
+
+/* The arrow shares the row's grid cell and is pushed out past its right edge,
+   so the cards stay centred under the tabs whether or not it is showing. */
+.rhode-mm__main,
+.rhode-mm__next {
+  grid-area: 1 / 1;
 }
 
 .rhode-mm__main {
@@ -252,10 +266,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  /* Square rather than 4/5 keeps the open panel short enough that the hero
-     still shows beneath it. */
-  aspect-ratio: 1 / 1;
-  min-height: 240px;
+  /* Rhode's dropdown card: 243 x 334 at 1440. */
+  aspect-ratio: 243 / 334;
   padding: 18px 18px 22px;
   border-radius: var(--rhode-mm-card-radius);
   background-color: #ffffff;
@@ -365,6 +377,10 @@
 /* ── Carousel arrow ──────────────────────────────────────────────────────── */
 
 .rhode-mm__next {
+  position: relative;
+  z-index: 1;
+  justify-self: end;
+  margin-inline-end: -69px;
   display: grid;
   place-items: center;
   width: 48px;

@@ -1158,8 +1158,8 @@ For inquiries or permissions, contact daniel@section.store
 {%- comment -%}
   Rhode's "swipe" cursor: over the product slider the pointer becomes a
   frosted circle that trails the mouse. Mouse/trackpad only — touch has no
-  cursor. It hands back the normal pointer over the BUY pill and the arrows,
-  where a click target needs to be seen.
+  cursor. It stays on over the BUY pill too, as on Rhode; only the slider
+  arrows get the normal pointer back.
 {%- endcomment -%}
 <style>
   @media (hover: hover) and (pointer: fine) {
@@ -1167,8 +1167,6 @@ For inquiries or permissions, contact daniel@section.store
     .collection-slider-{{ section.id }}.has-swipe-cursor a {
       cursor: none;
     }
-    .collection-slider-{{ section.id }}.has-swipe-cursor .isoa-rc-cta,
-    .collection-slider-{{ section.id }}.has-swipe-cursor .isoa-rc-cta *,
     .collection-slider-{{ section.id }}.has-swipe-cursor button {
       cursor: pointer;
     }
@@ -1229,7 +1227,7 @@ For inquiries or permissions, contact daniel@section.store
     const update = (target) => {
       cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`;
       const onSlider = target instanceof Element && slider.contains(target);
-      cursor.classList.toggle('is-visible', onSlider && !target.closest('.isoa-rc-cta, button'));
+      cursor.classList.toggle('is-visible', onSlider && !target.closest('button'));
     };
 
     document.addEventListener('pointermove', (event) => {
