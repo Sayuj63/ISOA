@@ -196,12 +196,11 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
    (`.isoua-pill-button` defined at ss-image-with-text-15.liquid:293-327).
 
    Reference style (taken verbatim from that file):
-     padding:        14px 32px        desktop / 12px 24px mobile
+     size:           --isoa-btn-height / --isoa-btn-font / --isoa-btn-pad-x (see :root)
      border:         1px solid #67645e
      border-radius:  999px            (full pill)
      background:     transparent      → #67645e on :hover
      color:          #67645e          → #ffffff on :hover
-     font-size:      14px desktop     / 13px mobile
      font-weight:    600
      letter-spacing: 1px
      text-transform: uppercase
@@ -456,7 +455,7 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 /* -------------------------------------------------------------------
    Mobile (max-width: 768px) — Rhode-parity thin pill.
    -----------------------------------------------------------------------------
-   Target: 28-29px tall, 11px medium-weight text with tight letter-spacing.
+   Size comes from the --isoa-btn-* tokens; this block only thins the type.
    Rhode's own mobile pill (measured 2026-08-12 at 466vw): 30px tall,
    ~15px @ weight 400, padding 4.8/30.4/3.2, radius 40px, white fill.
    We keep the ISOA outlined brown pill palette (client brand) but match
