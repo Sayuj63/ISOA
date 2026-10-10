@@ -1196,13 +1196,11 @@ For inquiries or permissions, contact daniel@section.store
     letter-spacing: -0.01em;
     pointer-events: none;
     opacity: 0;
-    scale: 0.4;
-    transition: opacity 0.25s ease, scale 0.35s cubic-bezier(.76, 0, .24, 1);
+    transition: opacity 0.1s linear;
   }
 
   .isoa-swipe-cursor.is-visible {
     opacity: 1;
-    scale: 1;
   }
 </style>
 
@@ -1223,37 +1221,28 @@ For inquiries or permissions, contact daniel@section.store
     cursor.textContent = 'swipe';
     document.body.append(cursor);
 
-    // The circle eases toward the pointer instead of snapping to it — that
-    // trail is what makes it read as Rhode's. Reduced motion snaps.
-    const ease = matchMedia('(prefers-reduced-motion: reduce)').matches ? 1 : 0.2;
-    let x = 0, y = 0, cx = 0, cy = 0, frame = 0;
+    // Pinned to the pointer, no easing. An eased trail started from wherever
+    // the circle was last left, so it visibly flew in from the side before
+    // settling under the mouse.
+    let x = -1, y = -1;
 
-    const tick = () => {
-      cx += (x - cx) * ease;
-      cy += (y - cy) * ease;
-      cursor.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
-      frame = Math.abs(x - cx) + Math.abs(y - cy) > 0.1 ? requestAnimationFrame(tick) : 0;
+    const update = (target) => {
+      cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      const onSlider = target instanceof Element && slider.contains(target);
+      cursor.classList.toggle('is-visible', onSlider && !target.closest('.isoa-rc-cta, button'));
     };
 
-    slider.addEventListener('pointerenter', (event) => {
-      // Start on the pointer so the circle grows in place rather than
-      // flying in from wherever it was last left.
-      x = cx = event.clientX;
-      y = cy = event.clientY;
-      cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-    });
-
-    slider.addEventListener('pointermove', (event) => {
+    document.addEventListener('pointermove', (event) => {
       x = event.clientX;
       y = event.clientY;
-      const overControl = event.target.closest('.isoa-rc-cta, button');
-      cursor.classList.toggle('is-visible', !overControl);
-      if (!frame) frame = requestAnimationFrame(tick);
-    });
+      update(event.target);
+    }, { passive: true });
 
-    slider.addEventListener('pointerleave', () => {
-      cursor.classList.remove('is-visible');
-    });
+    // Scrolling moves the cards under a mouse that has not moved, and the
+    // browser sends no pointer event for that — re-check what is under it.
+    window.addEventListener('scroll', () => {
+      if (x >= 0) update(document.elementFromPoint(x, y));
+    }, { passive: true });
   })();
 </script>
 
