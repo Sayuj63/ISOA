@@ -290,6 +290,12 @@
      (assets/isoa-direction-hover.css). This section used to run its own
      slide-up ::before as well; its z-index painted over the bare label text,
      so the button went blank brown on hover. */
+  .media-with-content a.size-style:hover,
+  .media-with-content a.size-style.dh-active {
+    /* The resting rule above pins the label brown with !important, which
+       outranks the shared hover flip — restate the flip here. */
+    color: #ffffff !important;
+  }
 
   @media screen and (max-width: 768px) {
     .media-with-content a.size-style {

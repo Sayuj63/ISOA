@@ -474,41 +474,10 @@ For inquiries or permissions, contact daniel@section.store
     }
   }
 
-  /* Direction-based fill hover */
-  .shopify-section .image-with-content-{{ section.id }} a[class*="image-with-button-"],
-  .shopify-section .image-with-content-{{ section.id }} div[class*="image-with-button-"] {
-    position: relative !important;
-    overflow: hidden !important;
-    transition: color 0.15s ease 0.2s, border-color 0.3s ease !important;
-  }
-
-  .shopify-section .image-with-content-{{ section.id }} a[class*="image-with-button-"]::before,
-  .shopify-section .image-with-content-{{ section.id }} div[class*="image-with-button-"]::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: #67645e;
-    border-radius: inherit;
-    transform: translateY(101%);
-    transition: transform 0.45s cubic-bezier(.76, 0, .24, 1);
-    z-index: 0;
-    will-change: transform;
-    pointer-events: none;
-  }
-
-  .shopify-section .image-with-content-{{ section.id }} a[class*="image-with-button-"][data-dir="top"]::before,
-  .shopify-section .image-with-content-{{ section.id }} div[class*="image-with-button-"][data-dir="top"]::before    { transform: translateY(-101%); }
-  .shopify-section .image-with-content-{{ section.id }} a[class*="image-with-button-"][data-dir="bottom"]::before,
-  .shopify-section .image-with-content-{{ section.id }} div[class*="image-with-button-"][data-dir="bottom"]::before { transform: translateY(101%);  }
-  .shopify-section .image-with-content-{{ section.id }} a[class*="image-with-button-"][data-dir="left"]::before,
-  .shopify-section .image-with-content-{{ section.id }} div[class*="image-with-button-"][data-dir="left"]::before   { transform: translateX(-101%); }
-  .shopify-section .image-with-content-{{ section.id }} a[class*="image-with-button-"][data-dir="right"]::before,
-  .shopify-section .image-with-content-{{ section.id }} div[class*="image-with-button-"][data-dir="right"]::before  { transform: translateX(101%);  }
-
-  .shopify-section .image-with-content-{{ section.id }} a[class*="image-with-button-"]:hover::before,
-  .shopify-section .image-with-content-{{ section.id }} div[class*="image-with-button-"]:hover::before {
-    transform: translate(0, 0);
-  }
+  /* The hover fill is the shared direction-hover effect
+     (assets/isoa-direction-hover.css). This section used to run a second
+     ::before fill of its own, which slid in out of step with the shared one
+     and washed the label out mid-hover. */
 </style>
 
 {% for block in section.blocks %}
