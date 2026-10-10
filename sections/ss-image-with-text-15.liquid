@@ -317,27 +317,9 @@ For inquiries or permissions, contact daniel@section.store
   transition: color 0.15s ease 0.2s, border-color 0.3s ease;
 }
 
-/* sliding fill layer — starts offscreen in the entry direction (JS sets data-dir on mouseenter/mouseleave) */
-.section-{{ section.id }} .isoua-pill-button::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: #67645e;
-  border-radius: inherit;
-  transform: translateY(101%);
-  transition: transform 0.45s cubic-bezier(.76, 0, .24, 1);
-  z-index: 0;
-  will-change: transform;
-  pointer-events: none;
-}
-
-.section-{{ section.id }} .isoua-pill-button[data-dir="top"]::before    { transform: translateY(-101%); }
-.section-{{ section.id }} .isoua-pill-button[data-dir="bottom"]::before { transform: translateY(101%);  }
-.section-{{ section.id }} .isoua-pill-button[data-dir="left"]::before   { transform: translateX(-101%); }
-.section-{{ section.id }} .isoua-pill-button[data-dir="right"]::before  { transform: translateX(101%);  }
-
-/* fill slides to center on hover */
-.section-{{ section.id }} .isoua-pill-button:hover::before { transform: translate(0, 0); }
+/* Hover fill: the shared direction-hover effect (assets/isoa-direction-hover.css).
+   The section's own ::before fill was removed — running both drew a second
+   shape out of step with the first. */
 
 /* label span sits above fill */
 .isoua-pill-button > span {

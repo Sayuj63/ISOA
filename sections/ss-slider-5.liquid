@@ -765,25 +765,9 @@ For inquiries or permissions, contact daniel@section.store
     transition: color 0.15s ease 0.2s, border-color 0.3s ease !important;
   }
 
-  .slider-button-{{ section.id }}::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: #67645e;
-    border-radius: inherit;
-    transform: translateY(101%);
-    transition: transform 0.45s cubic-bezier(.76, 0, .24, 1);
-    z-index: 0;
-    will-change: transform;
-    pointer-events: none;
-  }
-
-  .slider-button-{{ section.id }}[data-dir="top"]::before    { transform: translateY(-101%); }
-  .slider-button-{{ section.id }}[data-dir="bottom"]::before { transform: translateY(101%);  }
-  .slider-button-{{ section.id }}[data-dir="left"]::before   { transform: translateX(-101%); }
-  .slider-button-{{ section.id }}[data-dir="right"]::before  { transform: translateX(101%);  }
-
-  .slider-button-{{ section.id }}:hover::before { transform: translate(0, 0); }
+  /* Hover fill: the shared direction-hover effect (assets/isoa-direction-hover.css).
+     The section's own ::before fill was removed — running both drew a second
+     shape out of step with the first. */
 
   .slider-button-{{ section.id }} > span {
     position: relative !important;
