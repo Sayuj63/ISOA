@@ -286,39 +286,10 @@
     text-shadow: none !important;
   }
 
-  /* Slide-in brown fill on hover — matches the ss-image-with-text
-     "GET SPOTWEAR" button hover animation (2026-08-12 client ask). */
-  .media-with-content a.size-style {
-    position: relative !important;
-    overflow: hidden !important;
-    isolation: isolate;
-  }
-  .media-with-content a.size-style::before {
-    content: '' !important;
-    position: absolute !important;
-    inset: 0 !important;
-    background: #67645e !important;
-    border-radius: inherit !important;
-    transform: translateY(101%);
-    transition: transform 0.45s cubic-bezier(.76, 0, .24, 1) !important;
-    z-index: 0 !important;
-    will-change: transform;
-    pointer-events: none !important;
-  }
-  .media-with-content a.size-style:hover::before {
-    transform: translate(0, 0);
-  }
-  .media-with-content a.size-style > * {
-    position: relative !important;
-    z-index: 1 !important;
-  }
-  .media-with-content a.size-style:hover {
-    background-color: transparent !important;
-    background-image: none !important;
-    color: #ffffff !important;
-    border-color: #67645e !important;
-    transition: color 0.15s ease 0.2s, border-color 0.3s ease !important;
-  }
+  /* Hover fill comes from the shared direction-hover effect
+     (assets/isoa-direction-hover.css). This section used to run its own
+     slide-up ::before as well; its z-index painted over the bare label text,
+     so the button went blank brown on hover. */
 
   @media screen and (max-width: 768px) {
     .media-with-content a.size-style {
