@@ -42,6 +42,20 @@
   --isoa-body-md: 14px;      --isoa-body-md-m: 13px;     /* default body, nav links, labels */
   --isoa-body-sm: 12px;      --isoa-body-sm-m: 12px;     /* captions, footnotes, meta */
   --isoa-eyebrow: 11px;      --isoa-eyebrow-m: 11px;     /* eyebrows, section labels, tab labels */
+
+  /* Universal pill button. Height is fixed; width is the text plus padding,
+     and the padding is in em so it tracks the font size — change the font
+     and the pill rescales with it. Consumed by the pill rule further down. */
+  --isoa-btn-height: 40px;
+  --isoa-btn-font: 13px;
+  --isoa-btn-pad-x: 2.5em;
+}
+
+@media screen and (max-width: 768px) {
+  :root {
+    --isoa-btn-height: 32px;
+    --isoa-btn-font: 11px;
+  }
 }
 
 /* =============================================================================
@@ -240,7 +254,17 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 .shopify-section .shopify-payment-button__button,
 .shopify-section .shopify-payment-button__button--unbranded,
 .shopify-section .product-information .add-to-cart-button {
-  padding: 10px 36px !important;
+  /* Fixed height + content width. line-height = inner height centres the
+     label whatever `display` the section gives the button, and overrides
+     base.css's `.button { height: 30px !important }`. */
+  box-sizing: border-box !important;
+  height: var(--isoa-btn-height) !important;
+  min-height: var(--isoa-btn-height) !important;
+  max-height: var(--isoa-btn-height) !important;
+  line-height: calc(var(--isoa-btn-height) - 2px) !important;
+  padding: 0 var(--isoa-btn-pad-x) !important;
+  min-width: 0 !important;
+  white-space: nowrap !important;
   border: 1px solid #67645e !important;
   border-radius: 999px !important;
   /* 2026-08-12: was `transparent` → pills disappeared into busy hero photos
@@ -252,17 +276,12 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
   background-color: #ffffff !important;
   background-image: none !important;
   color: #67645e !important;
-  font-size: 14px !important;
+  font-size: var(--isoa-btn-font) !important;
   /* 2026-08-12: was `600` — client said the button text reads too bold
      versus the Rhode SHOP THE COLLECTION reference (Image #14). Weight 500
      desktop / 400 mobile (in the @media block below) is Rhode-parity. */
   font-weight: 500 !important;
   letter-spacing: 0.05em !important;
-  /* 2026-08-12: LONG-and-THIN sizing per client. min-width forces even
-     short-text buttons like "SHOP ALL" to render at the same wide footprint
-     as the "GET SPOTWEAR" / "GET READY WITH RHODE" reference; shorter
-     vertical padding shrinks height without touching typography. */
-  min-width: 240px !important;
   text-transform: uppercase !important;
   text-decoration: none !important;
   text-decoration-color: transparent !important;
@@ -466,18 +485,10 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
   body .shopify-section .shopify-payment-button__button,
   body .shopify-section .shopify-payment-button__button--unbranded,
   body .shopify-section .product-information .add-to-cart-button {
-    /* 2026-09-15 revision — was min-width 200 / padding 7x24 (LONG-and-THIN spec
-       from 2026-08-12). Client feedback (mobile audit): buttons look "very long"
-       compared to rhodeskin.com's tighter mobile pills. Dropped min-width to 140
-       (~35 pt of a 360vw card) and shaved 1px vertical padding for a compact
-       Rhode-style secondary pill. Desktop button-unification (line 243-273) is
-       untouched — desktop dimensions still match the earlier LONG-and-THIN look. */
-    padding: 6px 20px !important;
-    min-width: 140px !important;
-    font-size: 11px !important;
+    /* Height, padding and font size come from the --isoa-btn-* tokens, which
+       switch values at this same breakpoint — only weight/tracking differ. */
     font-weight: 400 !important;
     letter-spacing: 0.04em !important;
-    line-height: 1.2 !important;
     border-width: 1px !important;
   }
   body .shopify-section a[class*="image-with-button-"] *,
