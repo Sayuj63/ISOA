@@ -418,14 +418,16 @@
 
 .rhode-mm__cta {
   display: inline-block;
-  padding: 13px 34px;
+  box-sizing: border-box;
+  height: var(--isoa-btn-height, 34px);
+  padding: 0 34px;
   border: 1px solid var(--rhode-mm-text);
   border-radius: 999px;
   color: var(--rhode-mm-text);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: .02em;
-  line-height: 1.2;
+  line-height: calc(var(--isoa-btn-height, 34px) - 2px);
   text-transform: uppercase;
   text-decoration: none;
   transition:

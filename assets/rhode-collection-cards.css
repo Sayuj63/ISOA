@@ -203,7 +203,11 @@
   bottom: 16px;
   z-index: 4;
   display: block;
-  padding: 14px 16px;
+  /* Height is the shared --isoa-btn-height (isoua-button-overrides.css), so
+     this pill matches every other button on the site. */
+  box-sizing: border-box;
+  height: var(--isoa-btn-height, 34px);
+  padding: 0 16px;
   border-radius: 999px;
   background: #ffffff;
   color: #67645e;
@@ -213,7 +217,7 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-align: center;
-  line-height: 1.1;
+  line-height: var(--isoa-btn-height, 34px);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -389,7 +393,8 @@
     z-index: 4;
     display: block;
     margin: 0;
-    padding: 7px 22px;
+    height: var(--isoa-btn-height, 28px);
+    padding: 0 22px;
     border: 1px solid #67645e;
     border-radius: 999px;
     /* 2026-08-12: was `transparent` → the grey card background bled through
@@ -407,7 +412,8 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
     text-align: center;
-    line-height: 1.2;
+    /* Inner height (minus the 1px borders) centres the label. */
+    line-height: calc(var(--isoa-btn-height, 28px) - 2px);
     white-space: nowrap;
     opacity: 1;
     transform: none;
