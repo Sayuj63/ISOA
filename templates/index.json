@@ -11,38 +11,6 @@
   "sections": {
     "hero_gVmLGg": {
       "type": "hero",
-      "name": "t:names.hero",
-      "settings": {
-        "media_type_1": "image",
-        "image_1": "shopify://shop_images/woman-applying-lipstick.jpg",
-        "media_type_2": "image",
-        "stack_media_on_mobile": false,
-        "custom_mobile_media": true,
-        "media_type_1_mobile": "image",
-        "media_type_2_mobile": "image",
-        "link": "",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": false,
-        "horizontal_alignment": "space-between",
-        "vertical_alignment": "flex-end",
-        "align_baseline": true,
-        "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 10,
-        "section_width": "page-width",
-        "section_height": "custom",
-        "section_height_custom": 30,
-        "color_scheme": "scheme-1",
-        "toggle_overlay": false,
-        "overlay_color": "#12121266",
-        "overlay_style": "solid",
-        "gradient_direction": "to bottom",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 20,
-        "padding-block-end": 20
-      },
       "blocks": {
         "hero_tagline_text": {
           "type": "text",
@@ -54,9 +22,9 @@
             "alignment": "left",
             "type_preset": "custom",
             "font": "var(--font-body--family)",
-            "font_size": "1.125rem",
-            "line_height": "1.3",
-            "letter_spacing": "0.01em",
+            "font_size": "1rem",
+            "line_height": "tight",
+            "letter_spacing": "tight",
             "case": "none",
             "wrap": "pretty",
             "color": "#ffffff",
@@ -89,7 +57,40 @@
       "block_order": [
         "hero_tagline_text",
         "hero_routine_button"
-      ]
+      ],
+      "name": "t:names.hero",
+      "settings": {
+        "media_type_1": "video",
+        "image_1": "shopify://shop_images/woman-applying-lipstick.jpg",
+        "video_1": "shopify://files/videos/a2294662d590415a8fea780ab209443f.mp4",
+        "media_type_2": "image",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": true,
+        "media_type_1_mobile": "image",
+        "media_type_2_mobile": "image",
+        "link": "",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": false,
+        "horizontal_alignment": "space-between",
+        "vertical_alignment": "flex-end",
+        "align_baseline": true,
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "flex-end",
+        "gap": 10,
+        "section_width": "page-width",
+        "section_height": "custom",
+        "section_height_custom": 30,
+        "color_scheme": "scheme-1",
+        "toggle_overlay": false,
+        "overlay_color": "#12121266",
+        "overlay_style": "solid",
+        "gradient_direction": "to bottom",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 20,
+        "padding-block-end": 20
+      }
     },
     "ss_featured_collection_6_new_FjMQdk": {
       "type": "ss-featured-collection-6-new",
@@ -243,80 +244,6 @@
     },
     "hero_hLYCmb": {
       "type": "hero",
-      "blocks": {
-        "text_4Jj7nY": {
-          "type": "text",
-          "name": "t:names.heading",
-          "settings": {
-            "text": "<p>xs</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h2",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground-heading)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "text_Ba84VL": {
-          "type": "text",
-          "name": "t:names.text",
-          "settings": {
-            "text": "<p>We make things that work better and last longer. Our products solve real problems with clean design and honest materials.</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "rte",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "button_g6FqbH": {
-          "type": "button",
-          "name": "t:names.button",
-          "settings": {
-            "label": "Shop all",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button-secondary",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "text_4Jj7nY",
-        "text_Ba84VL",
-        "button_g6FqbH"
-      ],
       "custom_css": [
         ".hero {padding: 1.5vw; overflow: hidden;}",
         ".hero img,.hero__media img,.hero__media {border-radius: 10px;}"
@@ -325,6 +252,7 @@
       "settings": {
         "media_type_1": "image",
         "media_type_2": "image",
+        "image_2": "shopify://shop_images/HP-full-bleed-pretzel-mobile_1024x_8b74e355-b8e0-4698-bfd1-f9751b09ce5f.webp",
         "stack_media_on_mobile": false,
         "custom_mobile_media": false,
         "media_type_1_mobile": "image",
@@ -502,7 +430,7 @@
           "static": true,
           "settings": {
             "media_type": "image",
-            "image": "shopify://shop_images/Frame_1430103561_-_V8_5e27aaa7-5794-4d58-bb21-95d965160f39.png",
+            "image": "shopify://shop_images/hp-spotwear-tertiary-1_2480x_5d7e866c-ba83-44ba-8d8b-b0f19032a6fa.webp",
             "link": "",
             "video_loop": true,
             "video_autoplay": false,
@@ -758,6 +686,7 @@
         "hotspot_product_eMhpWh",
         "hotspot_product_cMazmc"
       ],
+      "disabled": true,
       "custom_css": [
         ".section-product-hotspots__content {border-radius: 10px;}"
       ],
@@ -861,6 +790,7 @@
         "content_align": "left",
         "content_align_mobile": "left",
         "content_vertical_align": "center",
+        "image": "shopify://shop_images/hp-spotwear-secondary_2480x_cd704dbe-6009-4400-b708-eb400752b901.webp",
         "image_url": "",
         "image_radius": 10,
         "image_border_thickness": 0,
@@ -957,6 +887,7 @@
         "text_HFgCpp",
         "button_GaxKpM"
       ],
+      "disabled": true,
       "name": "SS - Image with text #1",
       "settings": {
         "layout": "image_content",
@@ -1004,6 +935,7 @@
         "slide_w3iFEY": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/hp-strawberry-ugc-1_2480x_0f1e45ae-0d81-4434-b496-4a11455d2ead.webp",
             "image_url": "",
             "text": "<p>Collection title</p>",
             "url": ""
@@ -1012,6 +944,7 @@
         "slide_rYNQLB": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/hp-strawberry-ugc-3_2480x_a7255253-7fc6-4e61-8cb5-115cd4066886.webp",
             "image_url": "",
             "text": "<p>Collection title</p>",
             "url": ""
@@ -1020,6 +953,7 @@
         "slide_nJND8b": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/hp-strawberry-ugc-4_2480x_908c3c46-168e-49d8-9ea2-2adf955f14ae.webp",
             "image_url": "",
             "text": "<p>Collection title</p>",
             "url": ""
@@ -1028,6 +962,16 @@
         "slide_LwPWA7": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/hp-strawberry-ugc-5_2480x_c2196d17-b951-4809-9fe6-0cd682d06aaa.webp",
+            "image_url": "",
+            "text": "<p>Collection title</p>",
+            "url": ""
+          }
+        },
+        "slide_dW96nF": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/hp-strawberry-ugc-6_2480x_eaa0fbf2-dfd0-439a-b956-ddbcda9d1cb6.webp",
             "image_url": "",
             "text": "<p>Collection title</p>",
             "url": ""
@@ -1036,6 +980,7 @@
         "slide_WY6PMD": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/hp-pretzel-carousel-6_2480x_b74cc15d-ca4d-4a40-b012-ecd2cd2b67a4.webp",
             "image_url": "",
             "text": "<p>Collection title</p>",
             "url": ""
@@ -1047,6 +992,7 @@
         "slide_rYNQLB",
         "slide_nJND8b",
         "slide_LwPWA7",
+        "slide_dW96nF",
         "slide_WY6PMD"
       ],
       "name": "SS - Slider #5",
@@ -1173,6 +1119,7 @@
       "settings": {
         "body_gap": 24,
         "body_gap_mobile": 12,
+        "image": "shopify://shop_images/hp-spotwear-footer_2480x_5a4e6c5e-67a4-4400-9bea-3739962f4d15.webp",
         "image_url": "",
         "image_position": "right",
         "image_position_mobile": "top",
