@@ -208,8 +208,9 @@
   box-sizing: border-box;
   height: var(--isoa-btn-height, 34px);
   padding: 0 16px;
+  border: 1px solid #67645e;
   border-radius: 999px;
-  background: #ffffff;
+  background: transparent;
   color: #67645e;
   font-family: var(--font-body--family);
   font-size: 13px;
@@ -217,7 +218,7 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-align: center;
-  line-height: var(--isoa-btn-height, 34px);
+  line-height: calc(var(--isoa-btn-height, 30px) - 2px);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -397,11 +398,8 @@
     padding: 0 22px;
     border: 1px solid #67645e;
     border-radius: 999px;
-    /* 2026-08-12: was `transparent` → the grey card background bled through
-       the pill, reading as a grey "gap" around the BUY text. `#ffffff` gives
-       the pill the same solid-white fill as the desktop hover state
-       (line 187) and matches Rhode's card CTA on their mobile site. */
-    background: #ffffff;
+    /* Outline-only, like every other button on the site. */
+    background: transparent;
     color: #67645e;
     font-size: 11px;
     /* 2026-08-12: client said "not bold, smaller" for button interior text.

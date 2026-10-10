@@ -47,14 +47,14 @@
      and the padding is in em so it tracks the font size — change the font
      and the pill rescales with it. Consumed by the pill rule further down,
      the product-card BUY pill and the Shop dropdown button. */
-  --isoa-btn-height: 34px;
+  --isoa-btn-height: 30px;
   --isoa-btn-font: 13px;
-  --isoa-btn-pad-x: 2.5em;
+  --isoa-btn-pad-x: 3.5em;
 }
 
 @media screen and (max-width: 768px) {
   :root {
-    --isoa-btn-height: 28px;
+    --isoa-btn-height: 26px;
     --isoa-btn-font: 11px;
   }
 }
@@ -267,13 +267,10 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
   white-space: nowrap !important;
   border: 1px solid #67645e !important;
   border-radius: 999px !important;
-  /* 2026-08-12: was `transparent` → pills disappeared into busy hero photos
-     and let the grey card background bleed through card CTAs. `#ffffff` gives
-     every outlined pill a clean solid fill, matching Rhode's card CTA at
-     rhodeskin.com. Hover still flips to filled brown via the :hover block
-     below. -vamshi */
-  background: #ffffff !important;
-  background-color: #ffffff !important;
+  /* Outline-only pill: transparent fill, brown border and text. Hover fills
+     it brown (see the :hover block below and isoa-direction-hover.css). */
+  background: transparent !important;
+  background-color: transparent !important;
   background-image: none !important;
   color: #67645e !important;
   font-size: var(--isoa-btn-font) !important;
