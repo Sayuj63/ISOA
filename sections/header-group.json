@@ -189,6 +189,7 @@
         "mega_menu_radius": 10,
         "mega_menu_radius_top": 10,
         "mega_menu_margin_top": 10,
+        "mega_menu_gap": 48,
         "list_gap": 30,
         "list_gap_mobile": 24,
         "link_custom": false,

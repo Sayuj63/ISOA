@@ -130,7 +130,7 @@
   min-width: 0;
   /* The gap above the promo banner — and, when there is no promo set, the
      panel's bottom breathing room. */
-  padding-bottom: 40px;
+  padding-bottom: 28px;
 }
 
 .rhode-mm :focus-visible {
@@ -252,8 +252,10 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  aspect-ratio: 4 / 5;
-  min-height: 280px;
+  /* Square rather than 4/5 keeps the open panel short enough that the hero
+     still shows beneath it. */
+  aspect-ratio: 1 / 1;
+  min-height: 240px;
   padding: 18px 18px 22px;
   border-radius: var(--rhode-mm-card-radius);
   background-color: #ffffff;
@@ -395,7 +397,7 @@
 .rhode-mm__cta-row {
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .rhode-mm__cta {
