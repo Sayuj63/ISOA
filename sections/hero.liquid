@@ -574,9 +574,14 @@
     min-height: 600px;
   }
 
+  /* The radius lives on the clipping box, not just the media: the media is
+     often taller or scaled past the container (parallax / zoom), so its own
+     rounded corners get clipped square. 20px matches .hero__media in
+     layout/theme.liquid. */
   .hero__container {
     position: relative;
     overflow: hidden;
+    border-radius: 20px;
     border: var(--hero-border-width) var(--hero-border-style) rgb(var(--color-border-rgb) / var(--hero-border-opacity));
     min-height: inherit;
     align-items: var(--vertical-alignment-mobile);
