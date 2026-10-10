@@ -242,8 +242,17 @@
         "lazy": true
       }
     },
+    "isoa_banner_bubbles": {
+      "type": "isoa-banner",
+      "settings": {
+        "heading": "one of everything really good",
+        "button_label": "SHOP ISOUA",
+        "button_link": "shopify://collections/all"
+      }
+    },
     "hero_hLYCmb": {
       "type": "hero",
+      "disabled": true,
       "custom_css": [
         ".hero {padding: 1.5vw; overflow: hidden;}",
         ".hero img,.hero__media img,.hero__media {border-radius: 10px;}"
@@ -1191,6 +1200,7 @@
   "order": [
     "hero_gVmLGg",
     "ss_featured_collection_6_new_FjMQdk",
+    "isoa_banner_bubbles",
     "hero_hLYCmb",
     "ss_featured_collection_13_mbQxXN",
     "media_with_content_6PehFB",
