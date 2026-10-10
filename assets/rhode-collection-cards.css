@@ -380,8 +380,8 @@
   .isoa-rc-cta-mob--full  { display: none; }
 
   /* CTA: absolutely overlaid outlined pill at bottom of image, always visible.
-     2026-08-12: brought in line with site-wide thin pill spec (7x22 / 11px /
-     weight 500 / ls 0.04em) so every mobile button on the site — hero, section
+     Height follows the shared --isoa-btn-height token; type is 11px /
+     ls 0.04em so every mobile button on the site — hero, section
      CTAs, editorial "Shop now", pill button on ss-image-with-text-15, and this
      product-card BUY pill — reads identical. Matches Rhode's own mobile pill
      footprint of ~30px tall (measured 466vw). -vamshi */
