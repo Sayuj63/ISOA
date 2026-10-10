@@ -633,12 +633,8 @@ For inquiries or permissions, contact daniel@section.store
 
   /* Heading / body / toggle font sizes are NOT overridden here — they flow from the section schema (heading_size, heading_size_mobile, text_size, text_size_mobile, toggle_text_size, toggle_text_size_mobile) so the client can edit them in the theme editor. -vamshi */
 
-  /* Pill button: structural (1px border, transparent bg, pill radius). Mobile sizing
-     is HARDCODED to Rhode-parity thin (7x22 / 11px / weight 500 → ~28px tall) so it
-     matches every other section pill site-wide — schema range settings still control
-     desktop + margin-top only. Was: font-size + padding driven by schema mobile
-     values, which drifted the button up to 30-33px tall against Rhode's ~30px thin
-     reference. Locking mobile in code kills the drift. -vamshi (2026-08-12) */
+  /* Pill button: palette + spacing only. Height, padding and font size come
+     from the shared --isoa-btn-* tokens in assets/isoua-button-overrides.css. */
   .section-{{ section.id }} .isoua-pill-button {
     background-color: #ffffff !important;
     border-width: 1px !important;
