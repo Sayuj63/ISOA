@@ -678,6 +678,10 @@ body.page-our-story .shopify-section[id*="ss_image_with_text_15_VLxknD"] [class$
   overflow: hidden !important;
 }
 
+body.page-our-story .shopify-section[id*="ss_image_with_text_bwqzNC"] > div {
+  padding-top: 0 !important;
+}
+
 body.page-our-story .shopify-section[id*="ss_image_with_text_bwqzNC"] [class*="image-with-image-"],
 body.page-our-story .shopify-section[id*="ss_image_with_text_bwqzNC"] [class*="image-with-content-"],
 body.page-our-story .shopify-section[id*="ss_image_with_text_15_VLxknD"] [class*="image-text-image-"],
@@ -723,6 +727,10 @@ body.page-our-story .shopify-section[id*="section_RKjyxn"] .section {
   overflow: hidden !important;
 }
 
+body.page-our-story .shopify-section[id*="ss_featured_collection_6_new_ppPVk9"] [class$="-settings"] {
+  border-radius: var(--isoa-story-radius) !important;
+}
+
 @media screen and (max-width: 749px) {
   body.page-our-story {
     --isoa-story-gutter: 16px;
@@ -734,6 +742,12 @@ body.page-our-story .shopify-section[id*="section_RKjyxn"] .section {
 
   body.page-our-story [id*="hero_bxzGJg"] .hero {
     --hero-min-height: clamp(460px, 68svh, 560px) !important;
+  }
+
+  body.page-our-story [id*="hero_bxzGJg"] .text-block.custom-font-size,
+  body.page-our-story [id*="hero_bxzGJg"] .text-block.custom-font-size > * {
+    font-size: 14px !important;
+    line-height: 1.2 !important;
   }
 
   body.page-our-story .shopify-section[id*="section_NKG9AC"] .section {
