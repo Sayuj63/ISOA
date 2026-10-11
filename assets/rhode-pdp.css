@@ -292,14 +292,19 @@
     display: none !important;
   }
 
-  /* Mobile hero image radius — top corners keep the 10px rounding, bottom
-     corners go square so the image meets the details card below with a
-     seamless flush edge. Both the wrapper AND the child img/video get the
-     radius: wrapper needs overflow: hidden so the child image can't paint
-     over the rounded corners; the img itself gets border-radius so if
-     the wrapper's overflow is ever unset elsewhere the corners still render. */
+  /* Mobile hero joins the header: Rhode's mobile PDP runs the header bar
+     straight into the product gallery with no gap and square corners where
+     they meet, so header, gallery and details read as one card. The
+     section's 16px top padding is desktop-only breathing room; on mobile it
+     is dropped so the gallery starts right at the header's bottom edge.
+     Bottom corners stay square too — the details card below closes the pill.
+     The wrapper keeps overflow: hidden so slides can't paint outside it. */
+  main#MainContent > .shopify-section > .product-information {
+    padding-top: 0 !important;
+  }
+
   .product-information__grid--half .product-information__media {
-    border-radius: 10px 10px 0 0 !important;
+    border-radius: 0 !important;
     overflow: hidden !important;
   }
 
@@ -308,7 +313,7 @@
   .product-information__grid--half .product-information__media .product-media-container video,
   .product-information__grid--half .product-information__media slideshow-slide img,
   .product-information__grid--half .product-information__media slideshow-slide video {
-    border-radius: 10px 10px 0 0 !important;
+    border-radius: 0 !important;
   }
 
   /* Details card (`.group-block` inside `.product-details`) mirrors the image:
