@@ -1457,6 +1457,16 @@
       }
     });
 
+    // Fit the step-text window to the active step (steps differ in length),
+    // so the label above and the arrow beside it hug the text that's showing.
+    function sizeTitles(realIndex) {
+      const root = document.querySelector(`.featured-titles-{{ section.id }}`);
+      const active = document.querySelectorAll(`.featured-title-desktop-{{ section.id }}`)[realIndex];
+      if (!root || !active || !active.offsetHeight) return;
+      root.style.height = active.offsetHeight + 'px';
+    }
+    window.addEventListener('resize', () => sizeTitles(swiper.realIndex));
+
     function updateActiveElements(realIndex) {
       const slideData = slidesData[realIndex];
       
@@ -1482,6 +1492,7 @@
       // `--rh-active` and translates the track by `-active * 100/N %`.
       const titlesRoot = document.querySelector(`.featured-titles-{{ section.id }}`);
       if (titlesRoot) titlesRoot.style.setProperty('--rh-active', realIndex);
+      sizeTitles(realIndex);
 
       const shopButton = document.getElementById(`shop-button-{{ section.id }}`);
       if (shopButton && slideData) {

@@ -638,11 +638,17 @@ main#MainContent {
     box-sizing: border-box;
     padding-right: 96px;
   }
-  /* Steps differ in length; bottom-align them so every step's last line sits
-     level with the arrow. */
+  /* Steps differ in length. Each step keeps its own height (top-aligned) and
+     the section script sizes the clipping window to the active step, so the
+     APPLICATION label always sits right above the text and the arrow stays
+     level with its last line. The window's height eases with the slide. */
   main#MainContent [class^="featured-titles-track-"],
   main#MainContent [class*=" featured-titles-track-"] {
-    align-items: flex-end;
+    align-items: flex-start;
+  }
+  main#MainContent [class^="featured-titles-"]:not([class*="-track"]),
+  main#MainContent [class*=" featured-titles-"]:not([class*="-track"]) {
+    transition: height 1s cubic-bezier(0.76, 0, 0.24, 1);
   }
   main#MainContent [class^="featured-step-next-"],
   main#MainContent [class*=" featured-step-next-"] {
