@@ -1,16 +1,10 @@
 {% doc %}
-  Direct-buy pill for the PDP: one button carrying the product and its price,
-  "BUY SPOTWEAR — RS. 1,999", which goes straight to checkout with only this
-  item. Rhode's PDP button, styled like the homepage product-card BUY pill
-  (assets/rhode-collection-cards.css .isoa-rc-cta): solid white, no outline.
-
-  It replaces Shopify's accelerated "Buy it now" button, whose label is drawn
-  by Shopify and can't carry the product name or price. The link is a cart
-  permalink (/cart/<variant>:<qty>), which opens checkout with just that
-  line — no JavaScript, and it doesn't touch the shopper's existing cart.
+  PDP add-to-cart pill carrying the product name and price. It uses Horizon's
+  native product-form component so the item is added with AJAX, the header
+  count updates, and the cart drawer opens without leaving the product page.
 
   Rendered from the selected variant; Horizon's variant picker re-renders the
-  product section on change, so the label and link follow the selection.
+  product section on change, so the label and submitted variant stay current.
 
   @example
   {% content_for 'block', type: 'isoa-direct-buy', id: 'direct-buy' %}
@@ -20,17 +14,43 @@
   assign product = closest.product
   assign variant = product.selected_or_first_available_variant
   assign name = product.metafields.custom.card_short_name | default: product.title
+  assign product_form_id = 'IsoaDirectBuy-ProductForm-' | append: section.id | append: '-' | append: block.id
 -%}
 
 <div class="isoa-direct-buy" {{ block.shopify_attributes }}>
   {%- if variant.available -%}
-    <a class="isoa-direct-buy__button" href="{{ routes.cart_url }}/{{ variant.id }}:1">
-      {{- 'BUY ' | append: name | upcase }} — <strong>{{ variant.price | money_without_trailing_zeros }}</strong>
-    </a>
+    <product-form-component
+      data-section-id="{{ section.id }}"
+      data-product-id="{{ product.id }}"
+      data-product-url="{{ product.url }}"
+      data-quantity-default="1"
+      on:submit="/handleSubmit"
+    >
+      <div class="visually-hidden" aria-live="assertive" role="status" aria-atomic="true" ref="liveRegion"></div>
+      {%- form 'product', product, id: product_form_id, data-type: 'add-to-cart-form' -%}
+        <input type="hidden" name="id" ref="variantId" value="{{ variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <span class="isoa-direct-buy__error hidden" ref="addToCartTextError"></span>
+        <add-to-cart-component ref="addToCartButtonContainer">
+          <button
+            class="isoa-direct-buy__button"
+            type="submit"
+            name="add"
+            ref="addToCartButton"
+            on:click="/handleClick"
+            aria-label="Add {{ product.title | escape }} to cart"
+          >
+            <span class="isoa-direct-buy__label">
+              {{- 'BUY ' | append: name | upcase }} — <strong>{{ variant.price | money_without_trailing_zeros }}</strong>
+            </span>
+          </button>
+        </add-to-cart-component>
+      {%- endform -%}
+    </product-form-component>
   {%- else -%}
-    <span class="isoa-direct-buy__button isoa-direct-buy__button--sold-out" aria-disabled="true">
+    <button class="isoa-direct-buy__button isoa-direct-buy__button--sold-out" type="button" disabled>
       {{- 'products.product.sold_out' | t -}}
-    </span>
+    </button>
   {%- endif -%}
 </div>
 
@@ -45,7 +65,14 @@
     margin-bottom: 6px;
   }
 
-  /* Desktop: 48px / 17px, Rhode's PDP button measured at 1440. */
+  .isoa-direct-buy product-form-component,
+  .isoa-direct-buy form,
+  .isoa-direct-buy add-to-cart-component {
+    display: block;
+    width: 100%;
+  }
+
+  /* Compact PDP action: distinct brown fill, still comfortably tappable. */
   .isoa-direct-buy__button {
     display: flex;
     align-items: center;
@@ -53,56 +80,70 @@
     gap: 0.3em;
     box-sizing: border-box;
     width: 100%;
-    height: 48px;
+    height: 44px;
     padding: 0 20px;
+    border: 0;
     border-radius: 999px;
-    background-color: #ffffff;
-    color: #67645e;
+    background-color: #4b342c;
+    color: #ffffff;
     font-family: var(--font-body--family);
-    font-size: 17px;
+    font-size: 14px;
     font-weight: 400;
     letter-spacing: 0.02em;
     line-height: 1;
     text-transform: uppercase;
     text-decoration: none;
     white-space: nowrap;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    appearance: none;
+    cursor: pointer;
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.15s ease;
   }
 
   .isoa-direct-buy__button strong {
     font-weight: 700;
   }
 
-  .isoa-direct-buy__button:hover {
-    background-color: #67645e;
-    color: #ffffff;
+  .isoa-direct-buy__button:hover:not(:disabled) {
+    background-color: #36231d;
+  }
+
+  .isoa-direct-buy__button:active:not(:disabled) {
+    background-color: #2e201b;
+    transform: translateY(1px);
   }
 
   .isoa-direct-buy__button:focus-visible {
-    outline: 2px solid #67645e;
+    outline: 2px solid #4b342c;
     outline-offset: 2px;
   }
 
   .isoa-direct-buy__button--sold-out {
-    color: #b0aeab;
+    background-color: #c9c2be;
+    color: #4b4542;
     cursor: not-allowed;
   }
 
-  .isoa-direct-buy__button--sold-out:hover {
-    background-color: #ffffff;
-    color: #b0aeab;
+  .isoa-direct-buy__error {
+    display: block;
+    margin: 0 0 6px;
+    color: #7a2620;
+    font-size: 11px;
+    line-height: 1.35;
   }
 
-  /* Mobile: 40px / 14px, Rhode's mobile PDP button. */
+  .isoa-direct-buy__error.hidden {
+    display: none;
+  }
+
   @media screen and (max-width: 749px) {
     .isoa-direct-buy {
       margin-top: 18px;
     }
 
     .isoa-direct-buy__button {
-      height: 40px;
+      height: 36px;
       padding: 0 16px;
-      font-size: 14px;
+      font-size: 12px;
     }
   }
 {% endstylesheet %}
