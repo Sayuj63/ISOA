@@ -306,9 +306,10 @@ assign inside_box_padding_mobile = section.settings.inside_box_padding_mobile
   }
 
   @media screen and (max-width: 1023px) {
-    /* Taller than the landscape setting so the subject fills the frame. */
+    /* Square — taller than the landscape setting so the subject fills the
+       frame on a phone. */
     .feature-image-{{ section.id }} {
-      aspect-ratio: 8 / 7;
+      aspect-ratio: 1 / 1;
     }
   }
 
