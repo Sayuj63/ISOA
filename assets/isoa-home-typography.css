@@ -159,6 +159,10 @@ body.template-index [class*="collection-btn-"] {
 body.template-index [class*="slider-btn-"] {
   width: 32px !important;
   height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+  max-width: 32px !important;
+  max-height: 32px !important;
 }
 
 /* Values / accordion editorial block. */
@@ -329,5 +333,9 @@ body.template-index footer [class*="footer-newsletter-submit-"] {
   body.template-index [class*="slider-btn-"] {
     width: 28px !important;
     height: 28px !important;
+    min-width: 28px !important;
+    min-height: 28px !important;
+    max-width: 28px !important;
+    max-height: 28px !important;
   }
 }
