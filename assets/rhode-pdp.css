@@ -1287,3 +1287,53 @@ main#MainContent .ss-side-title--on-image {
   }
 }
 
+/* ── Cross-sell cards (section-store-featured-collection-6) ─────────────
+   Rhode's PDP cards: a big heavy corner wordmark, the "new" pill in the same
+   display face, then name + price bold at one size with a plain subtitle
+   underneath — no star row. PDP only; the shared card on the homepage and
+   collection page is unchanged. */
+[id$="__section_store_featured_collection_6_hnPVwp"] .isoa-rc-brand {
+  font-size: 58px;
+  letter-spacing: -0.04em;
+}
+[id$="__section_store_featured_collection_6_hnPVwp"] .isoa-rc-badge {
+  padding: 6px 11px 7px;
+  font-family: 'DM Sans', var(--font-heading--family);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+[id$="__section_store_featured_collection_6_hnPVwp"] .isoa-rc-reviews {
+  display: none;
+}
+[id$="__section_store_featured_collection_6_hnPVwp"] .isoa-rc-info {
+  padding: 20px 28px 28px;
+  row-gap: 6px;
+}
+[id$="__section_store_featured_collection_6_hnPVwp"] .isoa-rc-title,
+[id$="__section_store_featured_collection_6_hnPVwp"] .isoa-rc-price {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+[id$="__section_store_featured_collection_6_hnPVwp"] .isoa-rc-subtitle {
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+@media screen and (max-width: 749px) {
+  [id$="__section_store_featured_collection_6_hnPVwp"] .isoa-rc-brand {
+    font-size: 40px;
+  }
+  [id$="__section_store_featured_collection_6_hnPVwp"] .isoa-rc-badge {
+    font-size: 12px;
+  }
+  [id$="__section_store_featured_collection_6_hnPVwp"] .isoa-rc-title,
+  [id$="__section_store_featured_collection_6_hnPVwp"] .isoa-rc-price {
+    font-size: 15px;
+  }
+  [id$="__section_store_featured_collection_6_hnPVwp"] .isoa-rc-subtitle {
+    font-size: 14px;
+  }
+}
+
