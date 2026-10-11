@@ -1247,9 +1247,10 @@ main#MainContent .product-details .accordion .icon-plus path {
 }
 
 /* ── What's inside (ss-whats-inside) ─────────────────────────────────────
-   Rhode's layout: the photo keeps its own proportions (so it shows at its
-   native resolution instead of being upscaled to fill a taller box), and the
-   text card carries the vertical "what's inside" label at its top-left with
+   Rhode's layout: same row height as the other PDP splits (--rhode-pdp-h);
+   the photo covers its half and is served from a srcset sized to that half
+   (sizes="50vw"), so the browser picks the full-resolution file. The text
+   card carries the vertical "what's inside" label at its top-left with
    the copy indented ~30% and anchored to the bottom. Headings use the PDP
    display face (DM Sans 800, same as the product name). */
 main#MainContent .ss-whats-inside-content .ss-side-title,
@@ -1263,8 +1264,8 @@ main#MainContent .ss-whats-inside-content .ss-heading {
   line-height: 1.1;
 }
 @media screen and (min-width: 768px) {
-  main#MainContent .ss-whats-inside-image {
-    aspect-ratio: var(--wi-ratio, 1);
+  main#MainContent .ss-whats-inside-inner {
+    min-height: var(--rhode-pdp-h, 720px);
   }
   main#MainContent .ss-whats-inside-content {
     display: flex;
@@ -1291,6 +1292,16 @@ main#MainContent .ss-whats-inside-content .ss-heading {
   main#MainContent [class^="featured-body-"],
   main#MainContent [class*=" featured-body-"] {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  }
+}
+
+/* What's inside, mobile: there's no side gutter for the vertical label, so
+   it sits horizontally above the copy instead of over it. */
+@media screen and (max-width: 767px) {
+  main#MainContent .ss-whats-inside-content .ss-side-title {
+    position: static;
+    writing-mode: horizontal-tb;
+    margin-bottom: 18px;
   }
 }
 
