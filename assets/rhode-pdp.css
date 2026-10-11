@@ -594,22 +594,67 @@ main#MainContent {
   main#MainContent [class*=" featured-titles-"] {
     counter-reset: rh-step;
   }
+  /* Rhode's step text: large and light (~40px / 300 at 1440), with the
+     "(01)" index small and low beside the first line. */
   main#MainContent [class^="featured-title-desktop-"],
   main#MainContent [class*=" featured-title-desktop-"] {
     counter-increment: rh-step;
     color: #67645e !important;
-    font-weight: 400 !important;
-    font-size: var(--isoa-display-md) !important;
-    line-height: 1.25 !important;
+    font-weight: 300 !important;
+    font-size: 40px !important;
+    line-height: 1.3 !important;
+    letter-spacing: -0.01em;
   }
   main#MainContent [class^="featured-title-desktop-"]::before,
   main#MainContent [class*=" featured-title-desktop-"]::before {
     content: "(0" counter(rh-step) ")";
     display: inline;
-    margin-right: 10px;
-    font-size: var(--isoa-eyebrow);
-    color: #7b7872;
-    vertical-align: 8px;
+    margin-right: 14px;
+    font-size: 16px;
+    letter-spacing: 0;
+    color: #67645e;
+    vertical-align: 0.3em;
+  }
+
+  /* The circular next arrow sits at the bottom-right of the text column,
+     level with the last line of the step; the step text keeps clear of it. */
+  main#MainContent [class^="featured-bottom-content-"],
+  main#MainContent [class*=" featured-bottom-content-"] {
+    position: relative;
+  }
+  main#MainContent [class^="featured-titles-"]:not([class*="-track"]),
+  main#MainContent [class*=" featured-titles-"]:not([class*="-track"]) {
+    padding-right: 96px;
+  }
+  main#MainContent [class^="featured-step-next-"],
+  main#MainContent [class*=" featured-step-next-"] {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  /* Thumbnails span the column in equal cells (Rhode: three across, a touch
+     wider than tall), instead of fixed 140px squares. */
+  main#MainContent [class^="featured-thumbnails-"],
+  main#MainContent [class*=" featured-thumbnails-"] {
+    display: grid !important;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    gap: 16px !important;
+    width: 100%;
+  }
+  main#MainContent [class^="featured-thumbnail-"],
+  main#MainContent [class*=" featured-thumbnail-"] {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1.1 / 1 !important;
+  }
+
+  /* The arrow now lives in the text column; drop the small prev/next pair
+     that Swiper draws over the photo. */
+  main#MainContent [class^="featured-slider-controls-"],
+  main#MainContent [class*=" featured-slider-controls-"] {
+    display: none !important;
   }
 
   /* Hide the numeric pagination text ("1/3") on the image column — Rhode uses
@@ -637,15 +682,11 @@ main#MainContent {
     font-weight: 700 !important;
   }
 
-  /* Move the arrow prev/next controls next to the title text on the left,
-     out of the bottom-of-image slider-controls row. */
+  /* The buttons row only ever held the hidden Shop / Explore buttons; left
+     in place it added a 20px empty strip under the step text. */
   main#MainContent [class^="featured-buttons-"],
   main#MainContent [class*=" featured-buttons-"] {
-    display: flex !important;
-    gap: 12px !important;
-    align-items: center !important;
-    margin-top: 20px !important;
-    justify-content: flex-start !important;
+    display: none !important;
   }
 
   /* Mobile static-images block is mobile-only. Suppress on desktop; the
@@ -1052,8 +1093,8 @@ main#MainContent {
   main#MainContent [class^="featured-mobile-step-title-"] {
     max-width: calc(100% - 56px);
     margin: 0;
-    font-size: var(--isoa-display-md-m);
-    font-weight: 400;
+    font-size: 26px;
+    font-weight: 300;
     line-height: 1.15;
     letter-spacing: -0.02em;
     color: #67645e;

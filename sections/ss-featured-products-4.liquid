@@ -196,6 +196,40 @@
     text-align: {{ content_align_mobile }};
   }
 
+  /* Hollow-circle "next step" arrow under the step text (Rhode's desktop
+     control). Mobile has its own inside the step carousel, so this one is
+     desktop-only. Cycles back to step 1 after the last. */
+  .featured-step-next-{{ section.id }} {
+    display: none;
+  }
+  @media screen and (min-width: 750px) {
+    .featured-step-next-{{ section.id }} {
+      display: inline-grid;
+      place-items: center;
+      width: 64px;
+      height: 64px;
+      padding: 0;
+      border: 1px solid #67645e;
+      border-radius: 50%;
+      background: transparent;
+      color: #67645e;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .featured-step-next-{{ section.id }}:hover {
+      background-color: #67645e;
+      color: #ffffff;
+    }
+    .featured-step-next-{{ section.id }}:focus-visible {
+      outline: 2px solid #67645e;
+      outline-offset: 3px;
+    }
+    .featured-step-next-{{ section.id }} svg {
+      width: 26px;
+      height: 14px;
+    }
+  }
+
   .featured-image-wrap-{{ section.id }} {
     grid-area: image;
     height: 100%;
@@ -1219,6 +1253,19 @@
                 {% endfor %}
               </div>
             </div>
+
+            {%- if slide_blocks.size > 1 -%}
+              <button
+                type="button"
+                class="featured-step-next-{{ section.id }}"
+                data-featured-step-next
+                aria-label="Next application step"
+              >
+                <svg viewBox="0 0 28 14" fill="none" aria-hidden="true">
+                  <path d="M0 7h26M20 1l6 6-6 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            {%- endif -%}
           {% endif %}
 
           <div class="featured-buttons-{{ section.id }}">
@@ -1466,6 +1513,13 @@
         }
       });
     });
+
+    const stepNext = document.querySelector(`.featured-step-next-{{ section.id }}`);
+    if (stepNext) {
+      stepNext.addEventListener('click', () => {
+        swiper.slideTo((swiper.realIndex + 1) % slidesData.length);
+      });
+    }
 
     const mobileStepsRoot = document.querySelector(`.featured-mobile-steps-{{ section.id }}`);
     if (mobileStepsRoot) {
