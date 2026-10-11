@@ -1100,7 +1100,7 @@ main#MainContent .product-details .add-to-cart-button {
 
 /* ── Accordion (BENEFITS / APPLICATION / KEY INGREDIENTS) ────────────────
    Rhode's rows: 16px bold uppercase labels, a filled grey circle with a white
-   plus, warm-grey hairlines between rows. The block's own settings carry the
+   plus, warm-grey hairlines between rows only. The block's own settings carry the
    paragraph type preset and the colour scheme's navy border, so the look is
    set here for this template only. The first row has no top rule — the
    Complete Your Routine block above already closes with one. */
@@ -1109,6 +1109,9 @@ main#MainContent .product-details .accordion .details {
 }
 main#MainContent .product-details .accordion accordion-custom:first-child .details {
   border-top: 0;
+}
+main#MainContent .product-details .accordion accordion-custom:last-child .details {
+  border-bottom: 0;
 }
 main#MainContent .product-details .accordion .details__header {
   min-height: 52px;
