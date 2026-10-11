@@ -395,13 +395,15 @@
     display: block;
     margin: 0;
     height: var(--isoa-btn-height, 28px);
-    padding: 0 22px;
+    padding: 0 14px;
     border: 1px solid #67645e;
     border-radius: 999px;
     /* Outline-only, like every other button on the site. */
     background: transparent;
     color: #67645e;
-    font-size: var(--isoa-btn-font, 12px);
+    /* 2px under the shared size: the card is a fixed width and the full
+       "BUY <NAME> — ₹price" label has to fit on one line. */
+    font-size: calc(var(--isoa-btn-font, 14px) - 2px);
     /* 2026-08-12: client said "not bold, smaller" for button interior text.
        Weight 400 matches Rhode SHOP THE COLLECTION reference (Image #14).
        The <strong> inside for the price still renders bold — mixed weight
@@ -428,7 +430,7 @@
   .isoa-rc-cta-mob--full  { display: none; }
   /* "BUY —" lead is 1px lighter than the price (parity with parent weight 500) */
   .isoa-rc-cta-lead {
-    font-size: calc(var(--isoa-btn-font, 12px) - 1px);
+    font-size: 0.92em;
     font-weight: 500;
     letter-spacing: 0.04em;
     opacity: 0.9;
