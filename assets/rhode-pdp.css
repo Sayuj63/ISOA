@@ -1,10 +1,11 @@
 /* Rhode PDP — equal-height columns + thumbnail-overlay.
    Loaded on product.rhode-product-page and product.spotwear-pdp via theme.liquid. */
 
-.product-information {
-  /* Row height. Below the header height, viewport-relative, but clamped so it
-     never grows past 820 or shrinks under 560. spotwear-pdp overrides this via
-     section custom_css. */
+main#MainContent {
+  /* Row height of the hero — and of the split sections below it, so the PDP
+     keeps one rhythm. Below the header height, viewport-relative, but clamped
+     so it never grows past 820 or shrinks under 560. spotwear-pdp overrides
+     this via section custom_css. */
   --rhode-pdp-h: clamp(560px, calc(100vh - var(--header-height, 96px) - 120px), 820px);
 }
 

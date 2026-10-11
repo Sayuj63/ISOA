@@ -289,21 +289,47 @@ assign inside_box_padding_mobile = section.settings.inside_box_padding_mobile
   .feature-heading-{{ section.id }} p {
     font-style: normal;
   }
+  /* Rhode's version of this section (rhodeskin.com spotwear PDP): the photo
+     is shown whole — fitted, never cropped — on white, so a cut-out like the
+     basketball keeps its top and its reflection. */
+  .feature-image-{{ section.id }} {
+    background: #ffffff;
+  }
+  .feature-image-{{ section.id }} img {
+    object-fit: contain;
+  }
+
+  @media screen and (max-width: 1023px) {
+    /* Taller than the landscape setting so the subject fills the frame. */
+    .feature-image-{{ section.id }} {
+      aspect-ratio: 8 / 7;
+    }
+  }
+
   @media screen and (min-width: 1024px) {
+    /* Same height as the PDP hero above (--rhode-pdp-h, rhode-pdp.css), with
+       the copy anchored to the bottom of the card as on Rhode. The image
+       column fills that height instead of following its aspect ratio. */
+    .feature-grid-{{ section.id }} {
+      min-height: var(--rhode-pdp-h, 720px);
+    }
     .feature-content-{{ section.id }} {
       justify-content: flex-end;
       align-items: flex-start;
     }
     .feature-image-{{ section.id }} {
-      background: #f1f0ed;
+      aspect-ratio: auto;
     }
     .feature-image-{{ section.id }} svg {
       background: #f1f0ed;
     }
-    .feature-image-{{ section.id }} img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    /* Rhode wraps the heading after "PATCHES for"; ~14em is that measure. */
+    .feature-heading-{{ section.id }} {
+      margin-bottom: 56px;
+    }
+    .feature-heading-{{ section.id }} * {
+      max-width: 14em;
+      letter-spacing: -0.01em;
     }
   }
 {%- endif -%}
