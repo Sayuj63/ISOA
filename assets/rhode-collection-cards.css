@@ -198,27 +198,30 @@
    On mobile this element is re-styled to be an always-visible outlined pill. */
 .isoa-rc-cta {
   position: absolute;
-  left: 16px;
-  right: 16px;
+  left: 12px;
+  right: 12px;
   bottom: 16px;
   z-index: 4;
   display: block;
-  /* Height is the shared --isoa-btn-height (isoua-button-overrides.css), so
-     this pill matches every other button on the site. */
+  /* Rhode's card BUY pill, measured off rhodeskin.com: a big solid-white
+     pill, no outline, ~48px tall with ~17px regular-weight type and the
+     price in bold. Deliberately larger than the site's outline buttons —
+     it sits on a photo and has to read as the card's one action. The
+     mobile pill further down keeps the outline style. */
   box-sizing: border-box;
-  height: var(--isoa-btn-height, 34px);
-  padding: 0 16px;
-  border: 1px solid #67645e;
+  height: 48px;
+  padding: 0 20px;
+  border: 0;
   border-radius: 999px;
-  background: transparent;
+  background: #ffffff;
   color: #67645e;
   font-family: var(--font-body--family);
-  font-size: var(--isoa-btn-font, 14px);
-  font-weight: 500;
-  letter-spacing: 0.06em;
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   text-align: center;
-  line-height: calc(var(--isoa-btn-height, 30px) - 2px);
+  line-height: 48px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
