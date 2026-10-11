@@ -731,20 +731,21 @@
         "item_qB8tpU": {
           "type": "item",
           "settings": {
+            "image": "shopify://shop_images/spotwear-benefits-1_2480x_4ca5e71e-9381-4dbc-bc8b-7909bf5f32aa.jpg",
             "heading": "smaller"
           }
         },
         "item_QcFhYc": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/spotwear-benefits-1_2480x_4ca5e71e-9381-4dbc-bc8b-7909bf5f32aa.jpg",
+            "image": "shopify://shop_images/spotwear-benefits-2_2480x_9ab8ef0a-1b63-49be-ac58-7cee57eaa8ed.jpg",
             "heading": "flatter"
           }
         },
         "item_GFb3Qe": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/spotwear-benefits-1_2480x_4ca5e71e-9381-4dbc-bc8b-7909bf5f32aa.jpg",
+            "image": "shopify://shop_images/spotwear-carousel-2_dab78fe9-5ca9-45a3-b458-4862d9ade80e_med.jpg",
             "heading": "less red"
           }
         }
