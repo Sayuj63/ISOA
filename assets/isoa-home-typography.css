@@ -41,6 +41,10 @@ body .shopify-section :where(
   font-family: var(--isoa-site-font) !important;
 }
 
+body > .skip-to-content-link {
+  font-family: var(--isoa-site-font) !important;
+}
+
 /* Header and announcement bar. */
 body [class*="ai-announcement-bar-text-"] {
   font-size: 10px !important;
