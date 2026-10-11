@@ -213,7 +213,7 @@
   background: transparent;
   color: #67645e;
   font-family: var(--font-body--family);
-  font-size: 13px;
+  font-size: var(--isoa-btn-font, 14px);
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -401,7 +401,7 @@
     /* Outline-only, like every other button on the site. */
     background: transparent;
     color: #67645e;
-    font-size: 11px;
+    font-size: var(--isoa-btn-font, 12px);
     /* 2026-08-12: client said "not bold, smaller" for button interior text.
        Weight 400 matches Rhode SHOP THE COLLECTION reference (Image #14).
        The <strong> inside for the price still renders bold — mixed weight
@@ -428,7 +428,7 @@
   .isoa-rc-cta-mob--full  { display: none; }
   /* "BUY —" lead is 1px lighter than the price (parity with parent weight 500) */
   .isoa-rc-cta-lead {
-    font-size: 10px;
+    font-size: calc(var(--isoa-btn-font, 12px) - 1px);
     font-weight: 500;
     letter-spacing: 0.04em;
     opacity: 0.9;

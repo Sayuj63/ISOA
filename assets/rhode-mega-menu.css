@@ -424,7 +424,7 @@
   border: 1px solid var(--rhode-mm-text);
   border-radius: 999px;
   color: var(--rhode-mm-text);
-  font-size: 13px;
+  font-size: var(--isoa-btn-font, 14px);
   font-weight: 700;
   letter-spacing: .02em;
   line-height: calc(var(--isoa-btn-height, 34px) - 2px);
