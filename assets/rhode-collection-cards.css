@@ -28,6 +28,8 @@
   overflow: hidden;
   isolation: isolate;
   color: #67645e;
+  /* Lets the BUY pill size itself off the card's width (cqi units). */
+  container-type: inline-size;
 }
 
 .isoa-rc-link,
@@ -207,21 +209,25 @@
      pill, no outline, ~48px tall with ~17px regular-weight type and the
      price in bold. Deliberately larger than the site's outline buttons —
      it sits on a photo and has to read as the card's one action. The
-     mobile pill further down keeps the outline style. */
+     mobile pill further down keeps the outline style.
+     Sized in cqi so it scales with the card: 17px type / 48px tall on a
+     427px card (1440 wide), shrinking in proportion on narrower cards so
+     the full label still fits on one line. */
+  --isoa-rc-cta-h: clamp(36px, 11.24cqi, 48px);
   box-sizing: border-box;
-  height: 48px;
-  padding: 0 20px;
+  height: var(--isoa-rc-cta-h);
+  padding: 0 clamp(12px, 3.75cqi, 16px);
   border: 0;
   border-radius: 999px;
   background: #ffffff;
   color: #67645e;
   font-family: var(--font-body--family);
-  font-size: 17px;
+  font-size: clamp(12px, 3.98cqi, 17px);
   font-weight: 400;
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
   text-transform: uppercase;
   text-align: center;
-  line-height: 48px;
+  line-height: var(--isoa-rc-cta-h);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
