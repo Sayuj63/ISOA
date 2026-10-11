@@ -24,7 +24,7 @@ main#MainContent > .shopify-section + .shopify-section:not([id$="__rhode_sticky_
 }
 /* Footer pill: its own 12px top margin (a site-wide footer setting) gives
    way to the PDP rhythm on this template only. */
-.shopify-section-group-footer-group > [id*="__ss_footer_7_"] > div[class^="section-"] {
+.shopify-section-group-footer-group[id*="__ss_footer_7_"] > div[class^="section-"] {
   margin-top: var(--rhode-pdp-gap);
 }
 
