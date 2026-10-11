@@ -382,6 +382,11 @@ scale(calc(var(--text-scale) / 100));}
     background: transparent !important;
     padding: 0 !important;
     overflow: visible !important;
+    /* One clock for the word fill and the image slide, so they move as a
+       pair (Rhode's easing). The image starts a beat after the colour. */
+    --rh-dur: 1.2s;
+    --rh-ease: cubic-bezier(.76,0,.24,1);
+    --rh-img-delay: 0.12s;
   }
 
   /* Grey pill wrapper matches SS-header-1 pill edges. No inner padding: as on
@@ -418,23 +423,53 @@ scale(calc(var(--text-scale) / 100));}
     overflow: hidden !important;
   }
 
+  /* Images move like a vertical slider tied to the word list: picking a word
+     further down slides the new image up into frame and pushes the old one
+     out the top; going back up (or autoplay wrapping) slides them down. The
+     script sets data-from / data-to and the is-parking / is-leaving classes;
+     only the incoming and outgoing images are ever visible. */
+  /* Idle images sit hidden and off-frame with no transition, so one that
+     just finished leaving never sweeps back across the frame. */
   #benefits-{{ section.id }} .rh-media__item{
-    opacity: 0;
-    transform: translateY(24px);
+    opacity: 1;
+    visibility: hidden;
+    transform: translateY(100%);
+    transition: none;
+  }
+  #benefits-{{ section.id }} .rh-media__item.is-active,
+  #benefits-{{ section.id }} .rh-media__item.is-leaving{
+    visibility: visible;
     transition:
-      opacity 1s cubic-bezier(.76,0,.24,1),
-      transform 1s cubic-bezier(.76,0,.24,1);
+      transform var(--rh-dur) var(--rh-ease) var(--rh-img-delay),
+      visibility 0s;
   }
   #benefits-{{ section.id }} .rh-media__item.is-active{
-    opacity: 1;
     transform: translateY(0);
+    z-index: 2;
   }
-  /* Alternate slide direction — index 1 slides down from top, others rise from bottom. */
-  #benefits-{{ section.id }} .rh-media__item[data-index="1"]{
-    transform: translateY(-24px);
+  #benefits-{{ section.id }} .rh-media__item.is-leaving{
+    transform: translateY(-100%);
+    z-index: 1;
   }
-  #benefits-{{ section.id }} .rh-media__item[data-index="1"].is-active{
-    transform: translateY(0);
+  #benefits-{{ section.id }} .rh-media__item.is-leaving[data-to="below"]{
+    transform: translateY(100%);
+  }
+  /* Parked just off-frame on the side it will enter from, with no transition,
+     for the one frame before it becomes active. */
+  #benefits-{{ section.id }} .rh-media__item.is-parking{
+    transition: none !important;
+  }
+  #benefits-{{ section.id }} .rh-media__item.is-parking[data-from="below"]{
+    transform: translateY(100%);
+  }
+  #benefits-{{ section.id }} .rh-media__item.is-parking[data-from="above"]{
+    transform: translateY(-100%);
+  }
+  @media (prefers-reduced-motion: reduce){
+    #benefits-{{ section.id }}{
+      --rh-dur: 0.01s;
+      --rh-img-delay: 0s;
+    }
   }
 
   /* Center the text block horizontally + vertically in its column. */
@@ -489,8 +524,8 @@ scale(calc(var(--text-scale) / 100));}
   }
 
   /* Pink secondary layer — "strong font" look via 1.5px text-stroke; slides in L→R
-     via clip-path, slides out R→L (right-clip grows) — both simultaneously with
-     matched 1s cubic-bezier easing. */
+     via clip-path, slides out R→L (right-clip grows) — both simultaneously, on
+     the shared --rh-dur / --rh-ease clock. */
   #benefits-{{ section.id }} .rh-text-inner--secondary{
     display: inline-block;
     position: absolute;
@@ -503,8 +538,8 @@ scale(calc(var(--text-scale) / 100));}
     clip-path: inset(0 100% 0 0);
     -webkit-clip-path: inset(0 100% 0 0);
     transition:
-      clip-path 1s cubic-bezier(.76,0,.24,1),
-      -webkit-clip-path 1s cubic-bezier(.76,0,.24,1);
+      clip-path var(--rh-dur) var(--rh-ease),
+      -webkit-clip-path var(--rh-dur) var(--rh-ease);
     pointer-events: none;
     white-space: nowrap;
   }
@@ -566,13 +601,33 @@ document.addEventListener('DOMContentLoaded', function(){
   /* Rhode-style hover: swap classes immediately on every hover — no
      `isAnimating` guard, no setTimeout between text and image. The CSS
      clip-path transition on `.rh-text-inner--secondary` handles the
-     L→R fill (incoming) and R→L unfill (outgoing) in parallel, at the
-     same duration, so both directions animate simultaneously. The image
-     crossfade fires on the same tick — feels responsive, no delay. */
+     L→R fill (incoming) and R→L unfill (outgoing) in parallel. The image
+     slide starts on the same tick; its small lag comes from the CSS
+     transition-delay, not from script timers. */
 
   function activateSlide(index){
     index = Number(index);
     if(index === activeIndex) return;
+
+    // A word further down the list slides the images up; back up, down.
+    const down = index < activeIndex;
+    const incoming = imageItems[index];
+    const outgoing = imageItems[activeIndex];
+
+    imageItems.forEach((el) => el.classList.remove('is-leaving'));
+
+    // Park the incoming image off-frame on the side it enters from, then
+    // let the next style pass animate it into place.
+    if(incoming){
+      incoming.dataset.from = down ? 'above' : 'below';
+      incoming.classList.add('is-parking');
+      void incoming.offsetHeight;
+      incoming.classList.remove('is-parking');
+    }
+    if(outgoing){
+      outgoing.dataset.to = down ? 'below' : 'above';
+      outgoing.classList.add('is-leaving');
+    }
 
     textItems.forEach((el, i) => el.classList.toggle('is-active', i === index));
     imageItems.forEach((el, i) => el.classList.toggle('is-active', i === index));
