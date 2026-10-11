@@ -50,6 +50,7 @@
     if settings.cart_free_shipping_enabled and fs_threshold > 0
       assign fs_enabled = true
       assign fs_remaining = fs_threshold | minus: cart.total_price
+      assign fs_remaining_compact = fs_remaining | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' | replace: 'INR ', '₹'
       assign fs_percent = cart.total_price | times: 100 | divided_by: fs_threshold
       if fs_percent > 100
         assign fs_percent = 100
@@ -80,6 +81,15 @@
     if upsell != blank
       assign upsell_variant = upsell.selected_or_first_available_variant
       assign upsell_variants = upsell.variants | where: 'available'
+      assign upsell_subtitle = upsell.metafields.custom.card_subtitle.value | default: upsell.metafields.custom.card_subtitle
+      if upsell_subtitle == blank
+        assign upsell_subtitle = upsell.metafields.custom.short_description.value | default: upsell.metafields.custom.short_description
+      endif
+      if upsell_subtitle == blank
+        assign upsell_subtitle = upsell.description | replace: '<', ' <' | strip_html | strip_newlines | split: ' ' | join: ' ' | truncatewords: 5
+      endif
+      assign upsell_price = upsell_variant.price | money_without_trailing_zeros
+      assign upsell_price_compact = upsell_price | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' | replace: 'INR ', '₹'
     endif
   -%}
 
@@ -143,7 +153,8 @@
 
               <p class="isoa-cd__label">
                 {%- if fs_remaining > 0 -%}
-                  add {{ fs_remaining | money }} more for <strong>FREE</strong> shipping
+                  <span class="isoa-cd__copy--desktop">add {{ fs_remaining | money }} more for <strong>FREE</strong> shipping</span>
+                  <span class="isoa-cd__copy--mobile">add {{ fs_remaining_compact }} more for <strong>FREE</strong> shipping</span>
                 {%- else -%}
                   You've unlocked <strong>FREE</strong> shipping
                 {%- endif -%}
@@ -155,6 +166,8 @@
             {%- for item in cart.items -%}
               {%- liquid
                 assign can_update_quantity = item.instructions.can_update_quantity | default: true, allow_false: true
+                assign item_price = item.final_line_price | money
+                assign item_price_compact = item.final_line_price | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' | replace: 'INR ', '₹'
               -%}
               <li
                 class="isoa-cd__item"
@@ -177,8 +190,9 @@
                 <div class="isoa-cd__item-info">
                   <div class="isoa-cd__item-head">
                     <a class="isoa-cd__item-title" href="{{ item.url }}">{{ item.product.title }}</a>
-                    <text-component class="isoa-cd__item-price" value="{{ item.final_line_price | money | strip_html }}">
-                      {{- item.final_line_price | money -}}
+                    <text-component class="isoa-cd__item-price" value="{{ item_price | strip_html }}">
+                      <span class="isoa-cd__copy--desktop">{{- item_price -}}</span>
+                      <span class="isoa-cd__copy--mobile">{{- item_price_compact -}}</span>
                     </text-component>
                   </div>
 
@@ -212,7 +226,11 @@
           <div class="isoa-cd__foot">
             {%- if upsell != blank -%}
               <p class="isoa-cd__upsell-title">
-                {{ section.settings.upsell_title | default: 'Complete your rhode' }}
+                {%- assign upsell_heading = section.settings.upsell_title | default: 'Complete your isoua' -%}
+                {%- if upsell_heading == 'Complete your rhode' -%}
+                  {%- assign upsell_heading = 'Complete your isoua' -%}
+                {%- endif -%}
+                {{ upsell_heading }}
                 <strong>{{ section.settings.upsell_emphasis | default: 'ROUTINE' }}</strong>
               </p>
 
@@ -247,9 +265,14 @@
                         data-upsell-select
                       >
                         {%- for variant in upsell_variants -%}
+                          {%- liquid
+                            assign variant_price = variant.price | money_without_trailing_zeros
+                            assign variant_price_compact = variant_price | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' | replace: 'INR ', '₹'
+                          -%}
                           <option
                             value="{{ variant.id }}"
-                            data-price="{{ variant.price | money_without_trailing_zeros | strip_html | escape }}"
+                            data-price="{{ variant_price | strip_html | escape }}"
+                            data-price-mobile="{{ variant_price_compact | strip_html | escape }}"
                             {% if variant.id == upsell_variant.id %}
                               selected
                             {% endif %}
@@ -260,6 +283,9 @@
                       </select>
                     {%- else -%}
                       <input type="hidden" name="id" value="{{ upsell_variant.id }}">
+                      {%- if upsell_subtitle != blank -%}
+                        <div class="isoa-cd__upsell-subtitle">{{ upsell_subtitle }}</div>
+                      {%- endif -%}
                     {%- endif -%}
                   </div>
                   <button
@@ -269,7 +295,8 @@
                     data-label-prefix="ADD - "
                     {% unless upsell_variant.available %}disabled{% endunless %}
                   >
-                    ADD - {{ upsell_variant.price | money_without_trailing_zeros }}
+                    <span class="isoa-cd__copy--desktop" data-upsell-label-desktop>ADD - {{ upsell_price }}</span>
+                    <span class="isoa-cd__copy--mobile" data-upsell-label-mobile>ADD - {{ upsell_price_compact }}</span>
                   </button>
                 </div>
               </form>
@@ -277,7 +304,11 @@
 
             <div class="isoa-cd__summary">
               <span class="isoa-cd__summary-label">{{ 'content.cart_subtotal' | t }}</span>
-              <span class="isoa-cd__summary-value">{{ cart.total_price | money }}</span>
+              {%- assign subtotal_compact = cart.total_price | money_without_trailing_zeros | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' | replace: 'INR ', '₹' -%}
+              <span class="isoa-cd__summary-value">
+                <span class="isoa-cd__copy--desktop">{{ cart.total_price | money }}</span>
+                <span class="isoa-cd__copy--mobile">{{ subtotal_compact }}</span>
+              </span>
             </div>
             <p class="isoa-cd__tax-note">
               {{ section.settings.tax_note | default: '*shipping, taxes, and discounts calculated at checkout.' }}
@@ -335,7 +366,7 @@
       "type": "text",
       "id": "upsell_title",
       "label": "Upsell heading",
-      "default": "Complete your rhode"
+      "default": "Complete your isoua"
     },
     {
       "type": "text",

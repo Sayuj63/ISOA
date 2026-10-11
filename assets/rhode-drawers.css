@@ -507,6 +507,10 @@
   font-weight: 700;
 }
 
+.isoa-cd__copy--mobile {
+  display: none;
+}
+
 .isoa-cd__items {
   flex: 1 1 auto;
   min-height: 0;
@@ -709,6 +713,17 @@
   outline-offset: 2px;
 }
 
+.isoa-cd__upsell-subtitle {
+  max-width: 160px;
+  margin-block-start: 2px;
+  overflow: hidden;
+  border-block-end: 1px solid rgb(103 100 94 / 0.45);
+  font-size: 13px;
+  line-height: 1.5;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .isoa-cd__summary {
   display: flex;
   align-items: baseline;
@@ -863,6 +878,17 @@
     height: 16px;
   }
 
+  .isoa-cd__close svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  @media (hover: none) {
+    .isoa-cd__close:focus {
+      outline: none;
+    }
+  }
+
   .isoa-cd__progress {
     display: flex;
     flex-direction: column;
@@ -890,6 +916,18 @@
     letter-spacing: 0.2796px;
   }
 
+  .isoa-cd__item-head {
+    gap: 8px;
+  }
+
+  .isoa-cd__copy--desktop {
+    display: none;
+  }
+
+  .isoa-cd__copy--mobile {
+    display: inline;
+  }
+
   .isoa-cd__foot {
     padding: 16px 16px max(16px, env(safe-area-inset-bottom, 0px));
   }
@@ -902,12 +940,17 @@
 
   .isoa-cd__upsell {
     gap: 20px;
+    box-sizing: border-box;
+    min-height: 99px;
   }
 
   .isoa-cd__upsell-info {
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: flex-start;
+    align-self: stretch;
+    gap: 0;
+    padding-block: 0;
   }
 
   .isoa-cd__upsell-image {
@@ -917,7 +960,20 @@
 
   .isoa-cd__upsell-name {
     font-size: 14px;
+    line-height: 21px;
     letter-spacing: 0.2796px;
+  }
+
+  .isoa-cd__upsell-select,
+  .isoa-cd__upsell-subtitle {
+    max-width: 152px;
+    margin-block-start: 0;
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .isoa-cd__upsell-detail {
+    width: 100%;
   }
 
   .isoa-cd__summary-label,
@@ -941,10 +997,12 @@
   }
 
   .isoa-cd__add {
-    height: 28px !important;
-    padding: 0 18px !important;
-    font-size: 14px !important;
-    line-height: 28px !important;
+    width: 152px !important;
+    height: 30px !important;
+    margin-block-start: 8px;
+    padding: 0 14px !important;
+    font-size: 14.78px !important;
+    line-height: 30px !important;
   }
 
   .isoa-cd__upsell {

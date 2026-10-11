@@ -59,9 +59,21 @@ class CartDrawerComponent extends DialogComponent {
     if (!(select instanceof HTMLSelectElement) || !select.hasAttribute('data-upsell-select')) return;
 
     const button = select.closest('.isoa-cd__upsell')?.querySelector('[data-upsell-add]');
-    const price = select.selectedOptions[0]?.dataset.price;
+    const option = select.selectedOptions[0];
+    const price = option?.dataset.price;
+    const mobilePrice = option?.dataset.priceMobile ?? price;
+    const prefix = button?.dataset.labelPrefix ?? '';
 
-    if (button && price) button.textContent = `${button.dataset.labelPrefix ?? ''}${price}`;
+    if (!button || !price) return;
+
+    const desktopLabel = button.querySelector('[data-upsell-label-desktop]');
+    const mobileLabel = button.querySelector('[data-upsell-label-mobile]');
+
+    if (desktopLabel) desktopLabel.textContent = `${prefix}${price}`;
+    if (mobileLabel) mobileLabel.textContent = `${prefix}${mobilePrice}`;
+
+    // Compatibility with older section markup cached by Shopify's editor.
+    if (!desktopLabel && !mobileLabel) button.textContent = `${prefix}${price}`;
   };
 
   /**
