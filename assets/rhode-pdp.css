@@ -1097,6 +1097,14 @@ main#MainContent .product-details .add-to-cart-button {
   letter-spacing: 0.02em !important;
   line-height: 48px !important;
 }
+/* The id selector above also outranks the shared hover's white text, so the
+   label went brown-on-brown. Restate it for the hover / sliding-fill state. */
+main#MainContent .product-details .shopify-payment-button__button:hover,
+main#MainContent .product-details .shopify-payment-button__button.dh-active,
+main#MainContent .product-details .add-to-cart-button:hover,
+main#MainContent .product-details .add-to-cart-button.dh-active {
+  color: #ffffff !important;
+}
 
 /* ── Accordion (BENEFITS / APPLICATION / KEY INGREDIENTS) ────────────────
    Rhode's rows: 16px bold uppercase labels, a filled grey circle with a white
