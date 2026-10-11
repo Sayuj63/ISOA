@@ -572,6 +572,10 @@ main#MainContent {
   main#MainContent [class*=" featured-titles-"]:not([class*="-track"]) {
     display: block !important;
     overflow: hidden;
+    /* Exactly the text column's width — left to size itself, it grows to its
+       track's content and pushes the steps and arrow past the column. */
+    width: 100%;
+    min-width: 0;
   }
   main#MainContent [class^="featured-title-desktop-"],
   main#MainContent [class*=" featured-title-desktop-"] {
