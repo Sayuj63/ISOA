@@ -6,17 +6,25 @@
    pill and the next, and the gap between the two columns of every split
    section (hero, split rows, sliders, card grids). Sections carry no outer
    padding of their own on this template (their padding settings are 0), so
-   this margin is the only thing between pills. 32px matches Rhode's column
-   gap at 1440; mobile uses the 16px page margin. */
-main#MainContent {
+   this margin is the only thing between pills — down to the footer, too.
+   32px matches Rhode's column gap at 1440; mobile uses the 16px page margin.
+   Set on body (this file only loads on the PDP) so the footer can read it. */
+body {
   --rhode-pdp-gap: 32px;
 }
 @media screen and (max-width: 749px) {
-  main#MainContent {
+  body {
     --rhode-pdp-gap: 16px;
   }
 }
-main#MainContent > .shopify-section + .shopify-section {
+/* The sticky add-to-cart section is position: fixed inside a zero-height
+   wrapper; spacing that wrapper would only add dead space above the footer. */
+main#MainContent > .shopify-section + .shopify-section:not([id$="__rhode_sticky_atc"]) {
+  margin-top: var(--rhode-pdp-gap);
+}
+/* Footer pill: its own 12px top margin (a site-wide footer setting) gives
+   way to the PDP rhythm on this template only. */
+.shopify-section-group-footer-group > [id*="__ss_footer_7_"] > div[class^="section-"] {
   margin-top: var(--rhode-pdp-gap);
 }
 
