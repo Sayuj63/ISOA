@@ -596,3 +596,151 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.05 !important;
   }
 }
+
+/* =============================================================================
+   Our Story — shared page geometry
+   -----------------------------------------------------------------------------
+   The template mixed full-width wrappers, 3.1vw offsets, doubled mobile
+   gutters, and radii from 0–20px. Keep the content intact, but put every
+   visible panel on the same grid as the homepage/PDP: 40px desktop gutters,
+   16px phone gutters, 12px section rhythm, and one 10px corner system.
+   The advisory intro and advisor cards intentionally remain one joined panel.
+   ============================================================================= */
+body.page-our-story {
+  --isoa-story-gutter: 40px;
+  --isoa-story-gap: 12px;
+  --isoa-story-radius: 10px;
+}
+
+body.page-our-story .content-for-layout > .shopify-section + .shopify-section {
+  margin-block-start: var(--isoa-story-gap) !important;
+}
+
+/* The advisory heading and its cards are two Shopify sections, but one visual
+   story panel. Do not insert the standard inter-section gap between them. */
+body.page-our-story .content-for-layout > .shopify-section[id*="section_NKG9AC"]
+  + .shopify-section[id*="section_RKjyxn"] {
+  margin-block-start: 0 !important;
+}
+
+/* Hero wrappers already use the theme's page-width grid. Remove the template's
+   extra 2vw padding, clip the media once at 10px, and give overlay copy a safe
+   inset so it never rides the photo edge. */
+body.page-our-story .content-for-layout .hero {
+  padding: 0 !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+}
+
+body.page-our-story .content-for-layout .hero__container,
+body.page-our-story .content-for-layout .hero__media-grid,
+body.page-our-story .content-for-layout .hero__media-wrapper,
+body.page-our-story .content-for-layout .hero__media {
+  border-radius: var(--isoa-story-radius) !important;
+}
+
+body.page-our-story .content-for-layout .hero__container {
+  overflow: hidden !important;
+}
+
+body.page-our-story .content-for-layout .hero__content-wrapper {
+  box-sizing: border-box;
+  padding: 32px !important;
+}
+
+/* 100svh made the portrait hero 900px tall even on a 390px phone. This keeps
+   it editorial and prominent without swallowing the whole first screen. */
+body.page-our-story [id*="hero_bxzGJg"] .hero {
+  --hero-min-height: clamp(560px, 70svh, 720px) !important;
+}
+
+/* Founder card: its background is a positioned sibling, so round and clip the
+   Shopify section wrapper as well as the configured section elements. */
+body.page-our-story .shopify-section[id*="section_qNCadN"],
+body.page-our-story .shopify-section[id*="section_qNCadN"] .section-background,
+body.page-our-story .shopify-section[id*="section_qNCadN"] .section,
+body.page-our-story .shopify-section[id*="section_qNCadN"] .custom-section-content {
+  border-radius: var(--isoa-story-radius) !important;
+  overflow: hidden !important;
+}
+
+body.page-our-story .shopify-section[id*="section_qNCadN"] .image-block__image,
+body.page-our-story .shopify-section[id*="section_qNCadN"] .placeholder-image {
+  border-radius: var(--isoa-story-radius) !important;
+  overflow: hidden !important;
+}
+
+/* The two image/text features are single joined cards. Their parent owns the
+   outer corners; flattening child corners removes the uneven double rounding. */
+body.page-our-story .shopify-section[id*="ss_image_with_text_bwqzNC"] [class$="-settings"],
+body.page-our-story .shopify-section[id*="ss_image_with_text_15_VLxknD"] [class$="-settings"] {
+  border-radius: var(--isoa-story-radius) !important;
+  overflow: hidden !important;
+}
+
+body.page-our-story .shopify-section[id*="ss_image_with_text_bwqzNC"] [class*="image-with-image-"],
+body.page-our-story .shopify-section[id*="ss_image_with_text_bwqzNC"] [class*="image-with-content-"],
+body.page-our-story .shopify-section[id*="ss_image_with_text_15_VLxknD"] [class*="image-text-image-"],
+body.page-our-story .shopify-section[id*="ss_image_with_text_15_VLxknD"] [class*="image-text-content-"] {
+  border-radius: 0 !important;
+}
+
+/* Remove the template's 3.1vw margin plus 2vw padding. Those values produced
+   44.6px outer edges and 73.4px inner edges on desktop, then doubled the phone
+   gutter to 32px. The normal site grid now owns both sections. */
+body.page-our-story .shopify-section[id*="section_NKG9AC"],
+body.page-our-story .shopify-section[id*="section_RKjyxn"] {
+  margin-inline: var(--isoa-story-gutter) !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+body.page-our-story .shopify-section[id*="section_NKG9AC"] {
+  border-radius: var(--isoa-story-radius) var(--isoa-story-radius) 0 0 !important;
+}
+
+body.page-our-story .shopify-section[id*="section_RKjyxn"] {
+  border-radius: 0 0 var(--isoa-story-radius) var(--isoa-story-radius) !important;
+}
+
+body.page-our-story .shopify-section[id*="section_NKG9AC"] .section-background,
+body.page-our-story .shopify-section[id*="section_NKG9AC"] .section {
+  border-radius: var(--isoa-story-radius) var(--isoa-story-radius) 0 0 !important;
+}
+
+body.page-our-story .shopify-section[id*="section_RKjyxn"] .section-background,
+body.page-our-story .shopify-section[id*="section_RKjyxn"] .section {
+  border-radius: 0 0 var(--isoa-story-radius) var(--isoa-story-radius) !important;
+}
+
+body.page-our-story .shopify-section[id*="section_NKG9AC"] .section {
+  padding: 28px 0 20px !important;
+  overflow: hidden !important;
+}
+
+body.page-our-story .shopify-section[id*="section_RKjyxn"] .section {
+  padding: 0 0 28px !important;
+  overflow: hidden !important;
+}
+
+@media screen and (max-width: 749px) {
+  body.page-our-story {
+    --isoa-story-gutter: 16px;
+  }
+
+  body.page-our-story .content-for-layout .hero__content-wrapper {
+    padding: 20px !important;
+  }
+
+  body.page-our-story [id*="hero_bxzGJg"] .hero {
+    --hero-min-height: clamp(460px, 68svh, 560px) !important;
+  }
+
+  body.page-our-story .shopify-section[id*="section_NKG9AC"] .section {
+    padding: 24px 0 16px !important;
+  }
+
+  body.page-our-story .shopify-section[id*="section_RKjyxn"] .section {
+    padding: 0 0 16px !important;
+  }
+}
