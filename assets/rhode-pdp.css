@@ -625,6 +625,11 @@ main#MainContent {
   main#MainContent [class^="featured-bottom-content-"],
   main#MainContent [class*=" featured-bottom-content-"] {
     position: relative;
+    /* Its column aligns items to the start, so without these it sizes to its
+       content — the whole step track — and runs past the column edge. */
+    align-self: stretch;
+    width: 100%;
+    min-width: 0;
   }
   /* Room for the arrow goes on each step, not on the clipping container —
      padding there widens the visible window and lets the next step peek in. */
