@@ -1247,8 +1247,9 @@ main#MainContent .product-details .accordion .icon-plus path {
 }
 
 /* ── What's inside (ss-whats-inside) ─────────────────────────────────────
-   Rhode's layout: same row height as the other PDP splits (--rhode-pdp-h);
-   the photo covers its half and is served from a srcset sized to that half
+   Rhode's layout: shorter than the other PDP splits — the row takes the
+   photo's own proportions (~578px at 1440 for a 1320x1150 image, matching
+   rhodeskin.com); the photo covers its half and is served from a srcset sized to that half
    (sizes="50vw"), so the browser picks the full-resolution file. The text
    card carries the vertical "what's inside" label at its top-left with
    the copy indented ~30% and anchored to the bottom. Headings use the PDP
@@ -1264,8 +1265,8 @@ main#MainContent .ss-whats-inside-content .ss-heading {
   line-height: 1.1;
 }
 @media screen and (min-width: 768px) {
-  main#MainContent .ss-whats-inside-inner {
-    min-height: var(--rhode-pdp-h, 720px);
+  main#MainContent .ss-whats-inside-image {
+    aspect-ratio: var(--wi-ratio, 1.15);
   }
   main#MainContent .ss-whats-inside-content {
     display: flex;
