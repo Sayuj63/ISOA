@@ -517,4 +517,59 @@
     font-size:{{ section.settings.vertical_text_size_mobile }}px;
   }
 }
+
+{%- if template == 'product.rhode-product-page' -%}
+/* PDP: Rhode's layout for this card (rhodeskin.com spotwear PDP at 1440).
+   Copy sits at the bottom-left, tight label/value pairs, and the side tab
+   uses the PDP display face anchored to its bottom. Card size unchanged. */
+.packaging-{{ section.id }} .packaging-left{
+  align-self:end;
+  padding-bottom:20px;
+}
+.packaging-{{ section.id }} .packaging-content{
+  padding-left:40px;
+}
+.packaging-{{ section.id }} h2{
+  line-height:1.15;
+  letter-spacing:0.01em;
+}
+.packaging-{{ section.id }} .packaging-description{
+  margin-top:24px;
+}
+.packaging-{{ section.id }} .packaging-material{
+  margin-top:24px;
+}
+.packaging-{{ section.id }} .packaging-material h4{
+  margin:0 0 4px;
+}
+.packaging-{{ section.id }} .packaging-side-text{
+  align-items:flex-end;
+  padding:28px 0;
+}
+.packaging-{{ section.id }} .packaging-side-text span{
+  font-family:'DM Sans', var(--font-heading--family);
+  font-weight:800;
+  letter-spacing:-0.03em;
+}
+@media screen and (max-width: 989px){
+  .packaging-{{ section.id }} .packaging-left{
+    align-self:start;
+    padding-bottom:0;
+  }
+  .packaging-{{ section.id }} .packaging-content{
+    padding:28px 24px 24px;
+  }
+  .packaging-{{ section.id }} .packaging-description{
+    margin-top:20px;
+  }
+  .packaging-{{ section.id }} .packaging-material{
+    margin-top:18px;
+  }
+  .packaging-{{ section.id }} .packaging-side-text{
+    justify-content:flex-start;
+    align-items:center;
+    padding:0 24px;
+  }
+}
+{%- endif -%}
 </style>
