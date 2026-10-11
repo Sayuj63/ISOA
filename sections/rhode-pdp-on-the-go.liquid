@@ -109,8 +109,10 @@
      `min(page-width - margin*2, 100% - margin*2)` formula on the inner would
      apply a SECOND 40px inset per side (measured 80→1360 inside a 40→1400
      outer). So the outer just gets vertical padding, and the inner fills 100%. */
+  /* No vertical padding — the PDP's section rhythm (--rhode-pdp-gap in
+     rhode-pdp.css) spaces this pill from its neighbours. */
   #rh-otg-{{ sid }}{
-    padding: 24px 0;
+    padding: 0;
   }
   #rh-otg-{{ sid }} .rh-otg__pill{
     max-width: 100%;
@@ -285,7 +287,7 @@
   @media (min-width: 750px){
     #rh-otg-{{ sid }} .rh-otg__grid{
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      gap: var(--rhode-pdp-gap, 16px);
     }
     #rh-otg-{{ sid }} .rh-otg__media{
       aspect-ratio: 4 / 3;

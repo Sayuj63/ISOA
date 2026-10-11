@@ -1,6 +1,25 @@
 /* Rhode PDP — equal-height columns + thumbnail-overlay.
    Loaded on product.rhode-product-page and product.spotwear-pdp via theme.liquid. */
 
+/* ── PDP spacing rhythm ────────────────────────────────────────────────────
+   One value spaces the whole template: the gap between one section's visible
+   pill and the next, and the gap between the two columns of every split
+   section (hero, split rows, sliders, card grids). Sections carry no outer
+   padding of their own on this template (their padding settings are 0), so
+   this margin is the only thing between pills. 32px matches Rhode's column
+   gap at 1440; mobile uses the 16px page margin. */
+main#MainContent {
+  --rhode-pdp-gap: 32px;
+}
+@media screen and (max-width: 749px) {
+  main#MainContent {
+    --rhode-pdp-gap: 16px;
+  }
+}
+main#MainContent > .shopify-section + .shopify-section {
+  margin-top: var(--rhode-pdp-gap);
+}
+
 main#MainContent {
   /* Row height of the hero — and of the split sections below it, so the PDP
      keeps one rhythm. Below the header height, viewport-relative, but clamped
@@ -30,7 +49,7 @@ main#MainContent {
   main#MainContent .product-information__grid--half {
     grid-column: 1 / -1;
     grid-template-columns: 1fr 1fr;
-    column-gap: 16px;
+    column-gap: var(--rhode-pdp-gap);
   }
 
   main#MainContent .product-information__grid--half .product-information__media,
