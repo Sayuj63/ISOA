@@ -1074,38 +1074,6 @@ main#MainContent {
   }
 }
 
-/* ── Buy button ───────────────────────────────────────────────────────────
-   Same pill as the homepage product-card BUY button (rhode-collection-cards
-   .isoa-rc-cta): solid white, no outline, 48px tall, 17px regular type.
-   isoua-button-overrides.css styles every CTA as the thin outline pill with
-   !important at 0,2,0; the #MainContent id is what lets this one differ.
-   Hover still runs the shared direction-hover fill (brown, white text). */
-main#MainContent .product-details .shopify-payment-button__button,
-main#MainContent .product-details .add-to-cart-button {
-  box-sizing: border-box !important;
-  height: 48px !important;
-  min-height: 48px !important;
-  max-height: 48px !important;
-  padding: 0 20px !important;
-  border: 0 !important;
-  border-radius: 999px !important;
-  background: #ffffff !important;
-  background-color: #ffffff !important;
-  color: #67645e !important;
-  font-size: 17px !important;
-  font-weight: 400 !important;
-  letter-spacing: 0.02em !important;
-  line-height: 48px !important;
-}
-/* The id selector above also outranks the shared hover's white text, so the
-   label went brown-on-brown. Restate it for the hover / sliding-fill state. */
-main#MainContent .product-details .shopify-payment-button__button:hover,
-main#MainContent .product-details .shopify-payment-button__button.dh-active,
-main#MainContent .product-details .add-to-cart-button:hover,
-main#MainContent .product-details .add-to-cart-button.dh-active {
-  color: #ffffff !important;
-}
-
 /* ── Accordion (BENEFITS / APPLICATION / KEY INGREDIENTS) ────────────────
    Rhode's rows: 16px bold uppercase labels, a filled grey circle with a white
    plus, warm-grey hairlines between rows only. The block's own settings carry the

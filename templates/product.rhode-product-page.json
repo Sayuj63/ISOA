@@ -89,8 +89,8 @@
                 "corner_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
-                "padding-inline-start": 10,
-                "padding-inline-end": 10
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
             },
@@ -155,8 +155,8 @@
                     "corner_radius": 0,
                     "padding-block-start": 0,
                     "padding-block-end": 0,
-                    "padding-inline-start": 10,
-                    "padding-inline-end": 10
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 },
@@ -181,8 +181,8 @@
                     "corner_radius": 0,
                     "padding-block-start": 0,
                     "padding-block-end": 0,
-                    "padding-inline-start": 10,
-                    "padding-inline-end": 10
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 }
@@ -213,8 +213,8 @@
                 "corner_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
-                "padding-inline-start": 10,
-                "padding-inline-end": 10
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
             },
@@ -236,10 +236,14 @@
                 "color": "var(--color-foreground)",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
-                "padding-inline-start": 10,
-                "padding-inline-end": 10
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "isoa_direct_buy": {
+              "type": "isoa-direct-buy",
+              "settings": {}
             },
             "buy_buttons_eYQEYi": {
               "type": "buy-buttons",
@@ -276,7 +280,8 @@
                   "blocks": {}
                 }
               },
-              "block_order": []
+              "block_order": [],
+              "disabled": true
             },
             "rhode_cyr_pdp": {
               "type": "rhode-complete-your-routine",
@@ -477,6 +482,7 @@
             "group_tGCQbn",
             "text_aEtTtq",
             "price_pe7BCR",
+            "isoa_direct_buy",
             "buy_buttons_eYQEYi",
             "rhode_cyr_pdp",
             "accordion_XKk6GG"
