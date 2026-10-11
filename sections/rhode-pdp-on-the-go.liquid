@@ -1,10 +1,22 @@
 {%- comment -%}
-  Rhode PDP — "Take your rhode ON THE GO" 5-tab slider.
-  Left: swappable portrait image. Right: grey pill card with title, subtitle,
-  active product name + description + graphic, and 5 numbered circle tabs at
-  the bottom. Circle 01-05: active gets `#e29fc8` fill; label under the active
-  circle stays visible. Click / tap on any circle swaps every element.
-  -vamshi
+  Rhode PDP — "Take your rhode ON THE GO" 5-tab slider, cloned from
+  rhodeskin.com's spotwear PDP (Slider-with-navigation), measured at 1440:
+  photo left | card right, same 720px row as the other PDP splits.
+
+  Card: title (36px) + subtitle (16px), then a 384px "stage" where each
+  slide shows its product swatch art (cropped wide, cover) with the product
+  name, a rule ending in a dot, and the description at 38% down / 50% wide.
+  Five 79px circles below; the active one fills pink and its label rises
+  in underneath.
+
+  Motion — no fades anywhere:
+  - photo and stage are vertical strips: each slide sits (index - active)
+    frames away, so picking a later circle slides everything up and an
+    earlier one slides down; a hover mid-slide just retargets the motion;
+  - the rule draws left-to-right once its slide lands;
+  - the label slides up out of a mask under its circle.
+  Hover activates on desktop; tap on touch. Blocks without their own
+  images fall back to the bundled isoa-otg-* assets for slides 1-4.
 {%- endcomment -%}
 
 {%- liquid
@@ -14,319 +26,364 @@
   assign active_color = section.settings.active_circle_color | default: '#e29fc8'
 -%}
 
-<section class="rh-otg" id="rh-otg-{{ sid }}" data-rh-otg>
-  <div class="rh-otg__pill">
-    <div class="rh-otg__grid">
-      <div class="rh-otg__media">
+<section class="rh-otg" id="rh-otg-{{ sid }}" data-rh-otg style="--rh-otg-active: 0;">
+  <div class="rh-otg__grid">
+    <div class="rh-otg__media">
+      {%- for block in section.blocks -%}
+        <div class="rh-otg__slide" style="--i: {{ forloop.index0 }};" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank -%}
+            {{
+              block.settings.image
+              | image_url: width: 1600
+              | image_tag:
+                loading: 'lazy',
+                widths: '400,600,800,1000,1200,1400,1600',
+                sizes: '(min-width: 750px) 50vw, 100vw',
+                alt: block.settings.image.alt
+            }}
+          {%- elsif forloop.index <= 4 -%}
+            {%- assign fallback = 'isoa-otg-photo-' | append: forloop.index | append: '.jpg' -%}
+            <img
+              src="{{ fallback | asset_img_url: '1320x' }}"
+              srcset="{{ fallback | asset_img_url: '660x' }} 660w, {{ fallback | asset_img_url: '1000x' }} 1000w, {{ fallback | asset_img_url: '1320x' }} 1320w"
+              sizes="(min-width: 750px) 50vw, 100vw"
+              width="1320" height="1440" loading="lazy"
+              alt="{{ block.settings.product_name | escape }}"
+            >
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="rh-otg__card">
+      <div class="rh-otg__head">
+        <h2 class="rh-otg__title">{{ section.settings.title }}</h2>
+        {%- if section.settings.subtitle != blank -%}
+          <p class="rh-otg__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="rh-otg__stage">
         {%- for block in section.blocks -%}
-          <div
-            class="rh-otg__slide {% if forloop.first %}is-active{% endif %}"
-            data-slide="{{ forloop.index0 }}"
-            {{ block.shopify_attributes }}
-          >
-            {%- if block.settings.image != blank -%}
+          <div class="rh-otg__item{% if forloop.first %} is-active{% endif %}" style="--i: {{ forloop.index0 }};">
+            {%- if block.settings.graphic != blank -%}
               {{
-                block.settings.image
-                | image_url: width: 1600
+                block.settings.graphic
+                | image_url: width: 1200
                 | image_tag:
                   loading: 'lazy',
-                  widths: '400,600,800,1000,1200,1400,1600',
-                  sizes: '(min-width: 750px) 50vw, 100vw',
-                  alt: block.settings.image.alt
+                  widths: '600,900,1200',
+                  sizes: '(min-width: 750px) 45vw, 100vw',
+                  class: 'rh-otg__swatch',
+                  alt: ''
               }}
-            {%- else -%}
-              {{ 'image' | placeholder_svg_tag: 'rh-otg__placeholder' }}
+            {%- elsif forloop.index <= 4 -%}
+              {%- assign swatch = 'isoa-otg-swatch-' | append: forloop.index | append: '.png' -%}
+              <img class="rh-otg__swatch" src="{{ swatch | asset_img_url: '1200x' }}" width="1200" height="1200" loading="lazy" alt="">
             {%- endif -%}
+            <div class="rh-otg__copy">
+              <p class="rh-otg__product">{{ block.settings.product_name }}</p>
+              <span class="rh-otg__rule" aria-hidden="true"></span>
+              {%- if block.settings.description != blank -%}
+                <p class="rh-otg__desc">{{ block.settings.description }}</p>
+              {%- endif -%}
+            </div>
           </div>
         {%- endfor -%}
       </div>
 
-      <div class="rh-otg__card">
-        <div class="rh-otg__head">
-          <h2 class="rh-otg__title">{{ section.settings.title }}</h2>
-          {%- if section.settings.subtitle != blank -%}
-            <p class="rh-otg__subtitle">{{ section.settings.subtitle }}</p>
-          {%- endif -%}
-        </div>
-
-        <div class="rh-otg__body">
-          {%- for block in section.blocks -%}
-            <div
-              class="rh-otg__item {% if forloop.first %}is-active{% endif %}"
-              data-slide="{{ forloop.index0 }}"
-            >
-              <div class="rh-otg__item-text">
-                <div class="rh-otg__product">{{ block.settings.product_name }}</div>
-                {%- if block.settings.description != blank -%}
-                  <p class="rh-otg__desc">{{ block.settings.description }}</p>
-                {%- endif -%}
-              </div>
-              {%- if block.settings.graphic != blank -%}
-                <div class="rh-otg__graphic">
-                  {{
-                    block.settings.graphic
-                    | image_url: width: 400
-                    | image_tag:
-                      loading: 'lazy',
-                      widths: '150,250,400',
-                      alt: block.settings.product_name
-                  }}
-                </div>
-              {%- endif -%}
-            </div>
-          {%- endfor -%}
-        </div>
-
-        <div class="rh-otg__nav">
-          {%- for block in section.blocks -%}
-            <button
-              type="button"
-              class="rh-otg__circle {% if forloop.first %}is-active{% endif %}"
-              data-slide="{{ forloop.index0 }}"
-              aria-label="{{ block.settings.label | default: block.settings.product_name }}"
-            >
-              <span class="rh-otg__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
-            </button>
-          {%- endfor -%}
-        </div>
-
-        <div class="rh-otg__label-row" aria-hidden="true">
-          {%- for block in section.blocks -%}
-            <span
-              class="rh-otg__label {% if forloop.first %}is-active{% endif %}"
-              data-slide="{{ forloop.index0 }}"
-            >{{ block.settings.label }}</span>
-          {%- endfor -%}
-        </div>
+      <div class="rh-otg__nav">
+        {%- for block in section.blocks -%}
+          <button
+            type="button"
+            class="rh-otg__circle{% if forloop.first %} is-active{% endif %}"
+            data-slide="{{ forloop.index0 }}"
+            aria-label="{{ block.settings.product_name | escape }}"
+            aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}"
+          >
+            <span class="rh-otg__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+            {%- if block.settings.label != blank -%}
+              <span class="rh-otg__label-mask" aria-hidden="true"><span class="rh-otg__label">{{ block.settings.label }}</span></span>
+            {%- endif -%}
+          </button>
+        {%- endfor -%}
       </div>
     </div>
   </div>
 </section>
 
 <style>
-  /* Width rail. Horizon's subgrid places `.section` (which this section renders
-     inside) at `grid-column: 2`, i.e. already pill-flush. Applying the
-     `min(page-width - margin*2, 100% - margin*2)` formula on the inner would
-     apply a SECOND 40px inset per side (measured 80→1360 inside a 40→1400
-     outer). So the outer just gets vertical padding, and the inner fills 100%. */
-  /* No vertical padding — the PDP's section rhythm (--rhode-pdp-gap in
-     rhode-pdp.css) spaces this pill from its neighbours. */
-  #rh-otg-{{ sid }}{
+  #rh-otg-{{ sid }} {
+    --rh-otg-ease: cubic-bezier(.76, 0, .24, 1);
+    --rh-otg-dur: 0.9s;
+    --rh-otg-ink: #67645e;
+    --rh-otg-ring: #84827e;
     padding: 0;
   }
-  #rh-otg-{{ sid }} .rh-otg__pill{
-    max-width: 100%;
-    margin-inline: 0;
-  }
-  #rh-otg-{{ sid }} .rh-otg__grid{
+
+  #rh-otg-{{ sid }} .rh-otg__grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 16px;
   }
-  #rh-otg-{{ sid }} .rh-otg__media{
+
+  /* ── Photo strip ── */
+  #rh-otg-{{ sid }} .rh-otg__media {
     position: relative;
-    aspect-ratio: 4 / 3;
-    border-radius: 10px;
     overflow: hidden;
+    aspect-ratio: 4 / 3;
+    border-radius: 10px 10px 0 0;
     background: {{ image_bg }};
   }
-  #rh-otg-{{ sid }} .rh-otg__slide{
+  #rh-otg-{{ sid }} .rh-otg__slide {
     position: absolute;
     inset: 0;
-    opacity: 0;
-    transform: scale(1.02);
-    transition:
-      opacity .9s cubic-bezier(.76,0,.24,1),
-      transform 1s cubic-bezier(.76,0,.24,1);
+    transform: translateY(calc((var(--i) - var(--rh-otg-active)) * 100%));
+    transition: transform var(--rh-otg-dur) var(--rh-otg-ease);
   }
-  #rh-otg-{{ sid }} .rh-otg__slide.is-active{
-    opacity: 1;
-    transform: scale(1);
-  }
-  #rh-otg-{{ sid }} .rh-otg__slide img,
-  #rh-otg-{{ sid }} .rh-otg__slide svg{
+  #rh-otg-{{ sid }} .rh-otg__slide img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
-  }
-  #rh-otg-{{ sid }} .rh-otg__card{
-    position: relative;
-    background: {{ card_bg }};
-    border-radius: 10px;
-    padding: 28px;
-    display: flex;
-    flex-direction: column;
-    min-height: 360px;
-  }
-  #rh-otg-{{ sid }} .rh-otg__title{
-    margin: 0 0 8px;
-    font-size: var(--isoa-display-lg);
-    font-weight: 400;
-    line-height: 1.1;
-    letter-spacing: -0.5px;
-    color: #67645e;
-    font-style: normal;
-  }
-  #rh-otg-{{ sid }} .rh-otg__subtitle{
-    margin: 0;
-    font-size: var(--isoa-body-md);
-    color: #7b7872;
-    line-height: 1.4;
-  }
-  #rh-otg-{{ sid }} .rh-otg__body{
-    position: relative;
-    flex: 1 1 auto;
-    display: flex;
-    align-items: center;
-    margin: 24px 0;
-    min-height: 120px;
-  }
-  #rh-otg-{{ sid }} .rh-otg__item{
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity .5s cubic-bezier(.76,0,.24,1), visibility 0s linear .5s;
-  }
-  #rh-otg-{{ sid }} .rh-otg__item.is-active{
-    opacity: 1;
-    visibility: visible;
-    transition: opacity .5s cubic-bezier(.76,0,.24,1), visibility 0s linear 0s;
-  }
-  #rh-otg-{{ sid }} .rh-otg__item-text{
-    flex: 1 1 auto;
-    max-width: 60%;
-  }
-  #rh-otg-{{ sid }} .rh-otg__product{
-    font-weight: 700;
-    font-size: var(--isoa-body-md);
-    color: #67645e;
-    padding-bottom: 6px;
-    border-bottom: 1px solid #67645e;
-    display: inline-block;
-    min-width: 60%;
-    margin-bottom: 8px;
-  }
-  #rh-otg-{{ sid }} .rh-otg__desc{
-    margin: 0;
-    font-size: var(--isoa-body-md);
-    line-height: 1.5;
-    color: #67645e;
-  }
-  #rh-otg-{{ sid }} .rh-otg__graphic{
-    flex: 0 0 auto;
-    width: 140px;
-    max-width: 40%;
-  }
-  #rh-otg-{{ sid }} .rh-otg__graphic img{
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  #rh-otg-{{ sid }} .rh-otg__nav{
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
-    margin-top: auto;
-  }
-  #rh-otg-{{ sid }} .rh-otg__circle{
-    width: 88px;
-    height: 88px;
-    border-radius: 50%;
-    border: 1px solid #67645e;
-    background: transparent;
-    color: #67645e;
-    font-size: var(--isoa-body-md);
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    transition: background .35s cubic-bezier(.76,0,.24,1),
-                color .35s cubic-bezier(.76,0,.24,1),
-                border-color .35s cubic-bezier(.76,0,.24,1);
-  }
-  #rh-otg-{{ sid }} .rh-otg__circle:hover{
-    border-color: {{ active_color }};
-  }
-  #rh-otg-{{ sid }} .rh-otg__circle.is-active{
-    background: {{ active_color }};
-    border-color: {{ active_color }};
-    color: #ffffff;
-  }
-  #rh-otg-{{ sid }} .rh-otg__label-row{
-    position: relative;
-    height: 20px;
-    margin-top: 10px;
-    text-align: center;
-  }
-  #rh-otg-{{ sid }} .rh-otg__label{
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    font-size: var(--isoa-eyebrow);
-    font-weight: 700;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    color: #67645e;
-    opacity: 0;
-    transition: opacity .35s cubic-bezier(.76,0,.24,1);
-  }
-  #rh-otg-{{ sid }} .rh-otg__label.is-active{
-    opacity: 1;
   }
 
-  @media (min-width: 750px){
-    #rh-otg-{{ sid }} .rh-otg__grid{
+  /* ── Card ── */
+  #rh-otg-{{ sid }} .rh-otg__card {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 0 0 10px 10px;
+    background: {{ card_bg }};
+    color: var(--rh-otg-ink);
+  }
+  #rh-otg-{{ sid }} .rh-otg__title {
+    margin: 0;
+    font-family: var(--font-body--family);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    color: var(--rh-otg-ink);
+  }
+  #rh-otg-{{ sid }} .rh-otg__subtitle {
+    margin: 8px 0 0;
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── Stage: swatch art + copy, also a vertical strip ── */
+  #rh-otg-{{ sid }} .rh-otg__stage {
+    position: relative;
+    overflow: hidden;
+    height: 220px;
+    margin: 16px 0;
+  }
+  #rh-otg-{{ sid }} .rh-otg__item {
+    position: absolute;
+    inset: 0;
+    transform: translateY(calc((var(--i) - var(--rh-otg-active)) * 100%));
+    transition: transform var(--rh-otg-dur) var(--rh-otg-ease);
+  }
+  #rh-otg-{{ sid }} .rh-otg__swatch {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+  #rh-otg-{{ sid }} .rh-otg__copy {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 50%;
+    transform: translateY(-38%);
+  }
+  #rh-otg-{{ sid }} .rh-otg__product {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+  }
+  /* The rule + its end dot draw left-to-right once the slide has landed;
+     on the way out it simply rides off with its slide. */
+  #rh-otg-{{ sid }} .rh-otg__rule {
+    position: relative;
+    display: block;
+    height: 8px;
+    margin: 0 0 2px;
+    clip-path: inset(0 100% 0 0);
+  }
+  #rh-otg-{{ sid }} .rh-otg__rule::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 4px;
+    top: 50%;
+    height: 1px;
+    background: var(--rh-otg-ink);
+  }
+  #rh-otg-{{ sid }} .rh-otg__rule::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--rh-otg-ink);
+  }
+  #rh-otg-{{ sid }} .rh-otg__item.is-active .rh-otg__rule {
+    clip-path: inset(0 0 0 0);
+    transition: clip-path 0.8s var(--rh-otg-ease) 0.45s;
+  }
+  #rh-otg-{{ sid }} .rh-otg__desc {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── Circles ── */
+  #rh-otg-{{ sid }} .rh-otg__nav {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 28px;
+  }
+  #rh-otg-{{ sid }} .rh-otg__circle {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 52px;
+    height: 52px;
+    padding: 0;
+    border: 1px solid var(--rh-otg-ring);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--rh-otg-ink);
+    font-family: var(--font-body--family);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.7s var(--rh-otg-ease), color 0.7s var(--rh-otg-ease);
+  }
+  #rh-otg-{{ sid }} .rh-otg__circle.is-active {
+    background: {{ active_color }};
+    color: #ffffff;
+  }
+  #rh-otg-{{ sid }} .rh-otg__circle:focus-visible {
+    outline: 2px solid var(--rh-otg-ink);
+    outline-offset: 3px;
+  }
+  /* Label: rises out of a mask under its circle — a slide, not a fade. */
+  #rh-otg-{{ sid }} .rh-otg__label-mask {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    pointer-events: none;
+  }
+  #rh-otg-{{ sid }} .rh-otg__label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--rh-otg-ring);
+    white-space: nowrap;
+    transform: translateY(105%);
+    transition: transform 0.7s var(--rh-otg-ease);
+  }
+  #rh-otg-{{ sid }} .rh-otg__circle.is-active .rh-otg__label {
+    transform: translateY(0);
+  }
+
+  @media (min-width: 750px) {
+    #rh-otg-{{ sid }} .rh-otg__grid {
       grid-template-columns: 1fr 1fr;
-      gap: var(--rhode-pdp-gap, 16px);
+      gap: var(--rhode-pdp-gap, 32px);
+      height: var(--rhode-pdp-h, 720px);
     }
-    #rh-otg-{{ sid }} .rh-otg__media{
-      aspect-ratio: 4 / 3;
+    #rh-otg-{{ sid }} .rh-otg__media {
+      aspect-ratio: auto;
+      height: 100%;
+      border-radius: 10px;
     }
-    #rh-otg-{{ sid }} .rh-otg__card{
-      padding: 36px 40px;
-      min-height: 0;
+    #rh-otg-{{ sid }} .rh-otg__card {
+      padding: 32px;
+      border-radius: 10px;
     }
-    #rh-otg-{{ sid }} .rh-otg__title{
-      font-size: var(--isoa-display-lg);
+    #rh-otg-{{ sid }} .rh-otg__title {
+      font-size: 36px;
+    }
+    #rh-otg-{{ sid }} .rh-otg__subtitle {
+      font-size: 16px;
+    }
+    #rh-otg-{{ sid }} .rh-otg__stage {
+      flex: 1 1 auto;
+      height: auto;
+      max-height: 384px;
+      margin: 16px 0 auto;
+    }
+    #rh-otg-{{ sid }} .rh-otg__copy {
+      top: 38%;
+    }
+    #rh-otg-{{ sid }} .rh-otg__desc {
+      font-size: 15px;
+    }
+    #rh-otg-{{ sid }} .rh-otg__nav {
+      justify-content: space-around;
+      padding-bottom: 40px;
+    }
+    #rh-otg-{{ sid }} .rh-otg__circle {
+      width: 79px;
+      height: 79px;
+      font-size: 16px;
+    }
+    #rh-otg-{{ sid }} .rh-otg__label {
+      font-size: 14px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #rh-otg-{{ sid }} {
+      --rh-otg-dur: 0.01s;
+    }
+    #rh-otg-{{ sid }} .rh-otg__item.is-active .rh-otg__rule,
+    #rh-otg-{{ sid }} .rh-otg__label,
+    #rh-otg-{{ sid }} .rh-otg__circle {
+      transition-duration: 0.01s;
+      transition-delay: 0s;
     }
   }
 </style>
 
 <script>
-  (function(){
+  (function () {
     var root = document.getElementById('rh-otg-{{ sid }}');
-    if(!root) return;
-
+    if (!root) return;
     var circles = root.querySelectorAll('.rh-otg__circle');
-    var slides  = root.querySelectorAll('.rh-otg__slide');
-    var items   = root.querySelectorAll('.rh-otg__item');
-    var labels  = root.querySelectorAll('.rh-otg__label');
+    var items = root.querySelectorAll('.rh-otg__item');
+    var active = 0;
 
-    function activate(index){
-      [circles, slides, items, labels].forEach(function(group){
-        group.forEach(function(el){
-          el.classList.toggle('is-active', Number(el.dataset.slide) === index);
-        });
+    function activate(index) {
+      if (index === active) return;
+      active = index;
+      root.style.setProperty('--rh-otg-active', index);
+      circles.forEach(function (el, i) {
+        el.classList.toggle('is-active', i === index);
+        el.setAttribute('aria-pressed', i === index ? 'true' : 'false');
       });
+      items.forEach(function (el, i) { el.classList.toggle('is-active', i === index); });
     }
 
-    circles.forEach(function(el){
-      var idx = Number(el.dataset.slide);
-      // Hover activates the slide (desktop only — mobile still uses tap).
-      el.addEventListener('mouseenter', function(){
-        if (window.matchMedia('(min-width: 750px)').matches) activate(idx);
-      });
-      el.addEventListener('click', function(){ activate(idx); });
+    var canHover = window.matchMedia('(hover: hover) and (pointer: fine)');
+    circles.forEach(function (el, i) {
+      el.addEventListener('mouseenter', function () { if (canHover.matches) activate(i); });
+      el.addEventListener('click', function () { activate(i); });
     });
   })();
 </script>

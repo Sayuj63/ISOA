@@ -754,16 +754,6 @@ main#MainContent {
     overflow-x: clip;
   }
 
-  /* 2 · rhode-pdp-on-the-go — the 88px nav circles at 20px gap don't fit five
-     across 390px viewport (5×88 + 4×20 = 520px). Shrink and tighten on mobile. */
-  [id^="rh-otg-"] .rh-otg__nav {
-    gap: 10px !important;
-  }
-  [id^="rh-otg-"] .rh-otg__circle {
-    width: 52px !important;
-    height: 52px !important;
-    font-size: var(--isoa-body-md-m) !important;
-  }
 
   /* 3 · rhode-sticky-atc — tighten padding, drop the swatch strip if content
      starts to wrap. Title font already shrinks (11px) via the section's own
@@ -926,25 +916,7 @@ main#MainContent {
     display: none !important;
   }
 
-  /* 7 · rhode-pdp-on-the-go — release the 480px card min-height on mobile;
-     card should size to content when stacked. Also merge image + card into
-     one visual unit (image rounds top, card rounds bottom, zero gap). */
-  [id^="rh-otg-"] .rh-otg__card {
-    min-height: 0 !important;
-    padding: 20px !important;
-  }
-  [id^="rh-otg-"] .rh-otg__body {
-    min-height: 100px !important;
-  }
-  [id^="rh-otg-"] .rh-otg__grid {
-    gap: 0 !important;
-  }
-  [id^="rh-otg-"] .rh-otg__media {
-    border-radius: 10px 10px 0 0 !important;
-  }
-  [id^="rh-otg-"] .rh-otg__card {
-    border-radius: 0 0 10px 10px !important;
-  }
+  /* 7 · rhode-pdp-on-the-go — mobile layout lives in the section itself. */
 
   /* 7.1 · ss-image-split-row — same merge pattern on mobile. Image + text
      card become a single visual block, matching the "what's inside" and
@@ -962,13 +934,6 @@ main#MainContent {
     border-radius: 0 0 10px 10px !important;
   }
 
-  /* 7.5 · rhode-pdp-on-the-go title — hardcoded 32px in the section liquid.
-     Match Rhode's 23px Swiss on mobile. */
-  [id^="rh-otg-"] .rh-otg__title {
-    font-size: var(--isoa-display-lg-m) !important;
-    font-weight: 400 !important;
-    line-height: 1.15 !important;
-  }
 
   /* 7.6 · Hydrocolloid section (`section.liquid` inside a Horizon section--
      page-width). Its heading blocks render as h1/h2/h3 at Horizon's default
