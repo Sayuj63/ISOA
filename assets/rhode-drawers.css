@@ -1027,3 +1027,11 @@
     letter-spacing: 0.324px;
   }
 }
+
+/* Preserve Rhode's one-line checkout note on the narrower 360/375px phones. */
+@media screen and (max-width: 379px) {
+  .isoa-cd__tax-note {
+    font-size: 11px;
+    letter-spacing: 0.15px;
+  }
+}
