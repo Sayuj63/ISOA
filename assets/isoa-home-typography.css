@@ -3,8 +3,8 @@
    -----------------------------------------------------------------------------
    Homepage only. Apple devices render San Francisco through -apple-system;
    other platforms use the metrically close system UI fallback. The scale is
-   intentionally restrained: 10px metadata, 11–12px copy, compact 10–11px
-   buttons, and 14–18px only where a real heading still needs hierarchy.
+   intentionally restrained: 9–10px metadata, 12–14px reading copy, compact
+   10–11px buttons, and 15–20px where a real heading needs hierarchy.
    ============================================================================= */
 
 body.template-index {
@@ -51,7 +51,7 @@ body.template-index [class*="header-menu-child-link-"] {
 /* Top hero: a quiet editorial caption rather than a display headline. */
 body.template-index [id*="hero_gVmLGg"] .hero__content-wrapper .text-block.custom-font-size,
 body.template-index [id*="hero_gVmLGg"] .hero__content-wrapper .text-block.custom-font-size > * {
-  font-size: 16px !important;
+  font-size: 18px !important;
   line-height: 1.25 !important;
   letter-spacing: 0.005em !important;
   font-weight: 400 !important;
@@ -73,12 +73,12 @@ body.template-index .isoa-fc6-slide .isoa-rc-review-count {
 
 body.template-index .isoa-fc6-slide .isoa-rc-title,
 body.template-index .isoa-fc6-slide .isoa-rc-price {
-  font-size: 12px !important;
+  font-size: 14px !important;
   line-height: 1.25 !important;
 }
 
 body.template-index .isoa-fc6-slide .isoa-rc-subtitle {
-  font-size: 10px !important;
+  font-size: 12px !important;
   line-height: 1.35 !important;
 }
 
@@ -93,14 +93,14 @@ body.template-index .isoa-fc6-slide .isoa-rc-cta {
 
 /* Philosophy banner. */
 body.template-index .isoa-banner__heading {
-  font-size: 18px !important;
+  font-size: 20px !important;
   line-height: 1.3 !important;
   letter-spacing: -0.01em !important;
 }
 
 body.template-index .isoa-banner__text {
   max-width: 46em;
-  font-size: 12px !important;
+  font-size: 14px !important;
   line-height: 1.5 !important;
   letter-spacing: 0.01em !important;
 }
@@ -108,14 +108,14 @@ body.template-index .isoa-banner__text {
 /* Editorial media section. */
 body.template-index [id*="media_with_content_6PehFB"] .text-block,
 body.template-index [id*="media_with_content_6PehFB"] .text-block > * {
-  font-size: 12px !important;
+  font-size: 14px !important;
   line-height: 1.45 !important;
 }
 
 body.template-index [id*="media_with_content_6PehFB"] .text-block h1,
 body.template-index [id*="media_with_content_6PehFB"] .text-block h2,
 body.template-index [id*="media_with_content_6PehFB"] .text-block h3 {
-  font-size: 14px !important;
+  font-size: 16px !important;
   line-height: 1.3 !important;
   letter-spacing: -0.005em !important;
 }
@@ -132,7 +132,7 @@ body.template-index [id*="ss_image_with_text_KKFA76"] [class*="image-with-headin
 body.template-index [id*="ss_image_with_text_KKFA76"] h1,
 body.template-index [id*="ss_image_with_text_KKFA76"] h2,
 body.template-index [id*="ss_image_with_text_KKFA76"] h3 {
-  font-size: 16px !important;
+  font-size: 18px !important;
   line-height: 1.25 !important;
   letter-spacing: -0.01em !important;
 }
@@ -140,14 +140,14 @@ body.template-index [id*="ss_image_with_text_KKFA76"] h3 {
 body.template-index [id*="ss_image_with_text_KKFA76"] [class*="image-with-text-"] *,
 body.template-index [id*="ss_image_with_text_KKFA76"] .rte,
 body.template-index [id*="ss_image_with_text_KKFA76"] .rte * {
-  font-size: 11px !important;
+  font-size: 13px !important;
   line-height: 1.5 !important;
 }
 
 /* Social gallery. */
 body.template-index [id*="ss_slider_5_4PzGG9"] [class*="slider-heading-"] *,
 body.template-index [id*="ss_slider_5_4PzGG9"] [class*="slider-text-"] * {
-  font-size: 11px !important;
+  font-size: 13px !important;
   line-height: 1.35 !important;
 }
 
@@ -169,7 +169,7 @@ body.template-index [class*="slider-btn-"] {
 body.template-index [id*="ss_image_with_text_15_aE3G3D"] h1,
 body.template-index [id*="ss_image_with_text_15_aE3G3D"] h2,
 body.template-index [id*="ss_image_with_text_15_aE3G3D"] h3 {
-  font-size: 18px !important;
+  font-size: 20px !important;
   line-height: 1.3 !important;
   letter-spacing: -0.01em !important;
 }
@@ -177,17 +177,17 @@ body.template-index [id*="ss_image_with_text_15_aE3G3D"] h3 {
 body.template-index [id*="ss_image_with_text_15_aE3G3D"] [class*="image-text-text-"] *,
 body.template-index [id*="ss_image_with_text_15_aE3G3D"] .rte,
 body.template-index [id*="ss_image_with_text_15_aE3G3D"] .rte * {
-  font-size: 12px !important;
+  font-size: 14px !important;
   line-height: 1.5 !important;
 }
 
 body.template-index [id*="ss_image_with_text_15_aE3G3D"] [class*="image-text-toggle-text-"] {
-  font-size: 14px !important;
+  font-size: 16px !important;
   line-height: 1.35 !important;
   letter-spacing: 0 !important;
 }
 
-/* Footer: 10px labels, 12px reading copy, and a shorter newsletter field. */
+/* Footer: 10px labels, 12–14px reading copy, and a shorter newsletter field. */
 body.template-index footer [class*="footer-column-heading-"] {
   font-size: 10px !important;
   line-height: 1.3 !important;
@@ -198,12 +198,12 @@ body.template-index footer [class*="footer-menu-link-"],
 body.template-index footer [class*="footer-social-link-"],
 body.template-index footer [class*="footer-text-"] *,
 body.template-index footer [class*="footer-column-text-"] *:not([class*="footer-column-heading-"]) {
-  font-size: 12px !important;
+  font-size: 14px !important;
   line-height: 1.45 !important;
 }
 
 body.template-index footer [class*="footer-privacy-text-"] * {
-  font-size: 10px !important;
+  font-size: 12px !important;
   line-height: 1.4 !important;
 }
 
@@ -235,7 +235,7 @@ body.template-index footer [class*="footer-newsletter-submit-"] {
 
   body.template-index [id*="hero_gVmLGg"] .hero__content-wrapper .text-block.custom-font-size,
   body.template-index [id*="hero_gVmLGg"] .hero__content-wrapper .text-block.custom-font-size > * {
-    font-size: 12px !important;
+    font-size: 14px !important;
     line-height: 1.35 !important;
   }
 
@@ -252,7 +252,7 @@ body.template-index footer [class*="footer-newsletter-submit-"] {
   body.template-index .isoa-fc6-slide .isoa-rc-title,
   body.template-index .isoa-fc6-slide .isoa-rc-price,
   body.template-index .isoa-fc6-slide .isoa-rc-subtitle {
-    font-size: 10px !important;
+    font-size: 12px !important;
   }
 
   body.template-index .isoa-fc6-slide .isoa-rc-cta {
@@ -269,11 +269,11 @@ body.template-index footer [class*="footer-newsletter-submit-"] {
   }
 
   body.template-index .isoa-banner__heading {
-    font-size: 14px !important;
+    font-size: 16px !important;
   }
 
   body.template-index .isoa-banner__text {
-    font-size: 11px !important;
+    font-size: 13px !important;
     line-height: 1.45 !important;
   }
 
@@ -284,7 +284,7 @@ body.template-index footer [class*="footer-newsletter-submit-"] {
   body.template-index [id*="ss_image_with_text_KKFA76"] h1,
   body.template-index [id*="ss_image_with_text_KKFA76"] h2,
   body.template-index [id*="ss_image_with_text_KKFA76"] h3 {
-    font-size: 13px !important;
+    font-size: 15px !important;
   }
 
   body.template-index [id*="media_with_content_6PehFB"] .text-block,
@@ -295,28 +295,28 @@ body.template-index footer [class*="footer-newsletter-submit-"] {
   body.template-index [id*="ss_image_with_text_15_aE3G3D"] [class*="image-text-text-"] *,
   body.template-index [id*="ss_image_with_text_15_aE3G3D"] .rte,
   body.template-index [id*="ss_image_with_text_15_aE3G3D"] .rte * {
-    font-size: 11px !important;
+    font-size: 13px !important;
   }
 
   body.template-index [id*="ss_image_with_text_15_aE3G3D"] h1,
   body.template-index [id*="ss_image_with_text_15_aE3G3D"] h2,
   body.template-index [id*="ss_image_with_text_15_aE3G3D"] h3 {
-    font-size: 14px !important;
+    font-size: 16px !important;
   }
 
   body.template-index [id*="ss_image_with_text_15_aE3G3D"] [class*="image-text-toggle-text-"] {
-    font-size: 12px !important;
+    font-size: 14px !important;
   }
 
   body.template-index footer [class*="footer-menu-link-"],
   body.template-index footer [class*="footer-social-link-"] {
-    font-size: 10px !important;
+    font-size: 12px !important;
     line-height: 1.3 !important;
   }
 
   body.template-index footer [class*="footer-text-"] *,
   body.template-index footer [class*="footer-column-text-"] *:not([class*="footer-column-heading-"]) {
-    font-size: 11px !important;
+    font-size: 13px !important;
   }
 
   body.template-index footer [class*="footer-newsletter-row-"],
