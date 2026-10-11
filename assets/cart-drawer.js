@@ -49,8 +49,8 @@ class CartDrawerComponent extends DialogComponent {
 
   /**
    * Repoints the ADD button at the newly selected upsell variant. Each option
-   * carries its own pre-formatted price from Liquid (`| money`), so switching
-   * is a text swap and no formatting rule is duplicated in JS.
+   * carries its own compact, pre-formatted price from Liquid, so switching is
+   * a text swap and no currency-formatting rule is duplicated in JS.
    * @param {Event} event
    */
   #handleUpsellVariantChange = (event) => {

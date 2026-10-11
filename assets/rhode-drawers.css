@@ -488,8 +488,8 @@
   transition: width 0.4s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
-/* A single label sits below the bar at every width; the reference doesn't
-   move it above on mobile. */
+/* One label serves both layouts: below the bar on desktop, then flex-ordered
+   above it at the mobile breakpoint to match Rhode's compact drawer. */
 .isoa-cd__label {
   display: flex;
   align-items: center;
@@ -603,12 +603,8 @@
   color: #c0392b;
 }
 
-/* The foot's own bottom padding is what keeps the CHECKOUT pill off the panel
-   edge. 21.6px was tight on desktop (pill visually flush with the panel) and
-   catastrophic on iOS Safari, where the home indicator eats ~34px and the
-   pill's bottom half sits under it. `max(...)` uses the larger of the design
-   inset and the physical safe-area inset, so devices without a safe area
-   still get the design value. */
+/* Keep the checkout pill 21.6px off the desktop edge, while allowing devices
+   with a larger physical safe area to increase that inset. */
 .isoa-cd__foot {
   flex: 0 0 auto;
   padding: 21.6px 21.6px max(21.6px, env(safe-area-inset-bottom, 0px));
