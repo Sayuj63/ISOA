@@ -239,7 +239,8 @@
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
-              "blocks": {}
+              "blocks": {},
+              "disabled": true
             },
             "isoa_direct_buy": {
               "type": "isoa-direct-buy",

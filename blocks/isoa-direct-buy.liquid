@@ -35,8 +35,14 @@
 </div>
 
 {% stylesheet %}
+  /* Breathing room above and below — the details column's flex gap is 22px
+     on desktop and 10px on mobile; these margins top it up to 36px above
+     the button and 48px to the Complete Your Routine divider below
+     (28px / 36px on mobile). */
   .isoa-direct-buy {
     width: 100%;
+    margin-top: 14px;
+    margin-bottom: 6px;
   }
 
   /* Desktop: 48px / 17px, Rhode's PDP button measured at 1440. */
@@ -89,6 +95,10 @@
 
   /* Mobile: 40px / 14px, Rhode's mobile PDP button. */
   @media screen and (max-width: 749px) {
+    .isoa-direct-buy {
+      margin-top: 18px;
+    }
+
     .isoa-direct-buy__button {
       height: 40px;
       padding: 0 16px;
