@@ -50,23 +50,7 @@ rhode-cyr.rh-cyr {
   .rh-cyr__list { grid-template-columns: 1fr; }
 }
 
-/* Mobile: one card per row, so the description always fits one line and the
-   fixed 124px height left a dead gap above the price. Size cards to their
-   content instead — clamping the description to one line keeps every card
-   the same height. */
-@media (max-width: 640px) {
-  .rh-cyr__card {
-    height: auto;
-    min-height: 0;
-  }
-  .rh-cyr__desc {
-    -webkit-line-clamp: 1;
-  }
-  .rh-cyr__row--bottom {
-    margin-top: 0;
-    padding-top: 8px;
-  }
-}
+
 
 .rh-cyr__card {
   position: relative;
@@ -359,4 +343,22 @@ rhode-cyr.rh-cyr {
   background-color: #67645e;
   color: #ffffff;
   border-color: #67645e;
+}
+
+/* Mobile: one card per row, so the description always fits one line and the
+   fixed 124px height left a dead gap above the price. Size cards to their
+   content instead — clamping the description to one line keeps every card
+   the same height. Kept at the end so it outranks the base card rules. */
+@media (max-width: 640px) {
+  .rh-cyr__card {
+    height: auto;
+    min-height: 0;
+  }
+  .rh-cyr__desc {
+    -webkit-line-clamp: 1;
+  }
+  .rh-cyr__row--bottom {
+    margin-top: 0;
+    padding-top: 8px;
+  }
 }
