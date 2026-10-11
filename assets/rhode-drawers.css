@@ -929,6 +929,13 @@
     font-size: 16px;
   }
 
+  /* Inter is slightly wider than Rhode's body face. This optical adjustment
+     keeps the checkout note on one line at 390px, matching the reference. */
+  .isoa-cd__tax-note {
+    font-size: 12px;
+    letter-spacing: 0.2px;
+  }
+
   /* The reference keeps the desktop padding on mobile and only steps the
      type down, so the pills keep their 46.2 / 30.2 heights. */
   .isoa-cd__checkout,

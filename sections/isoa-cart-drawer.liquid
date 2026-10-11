@@ -43,11 +43,11 @@
   ></script>
 
   {%- liquid
-    # The threshold is a section setting in cents — the same unit as
-    # cart.total_price — so the two compare directly.
-    assign fs_threshold = section.settings.free_shipping_threshold
+    # Theme settings store the merchant-facing threshold in major currency
+    # units; Shopify cart totals use subunits (paise/cents).
+    assign fs_threshold = settings.cart_free_shipping_threshold | times: 100
     assign fs_enabled = false
-    if section.settings.free_shipping_enabled and fs_threshold > 0
+    if settings.cart_free_shipping_enabled and fs_threshold > 0
       assign fs_enabled = true
       assign fs_remaining = fs_threshold | minus: cart.total_price
       assign fs_percent = cart.total_price | times: 100 | divided_by: fs_threshold
@@ -320,23 +320,6 @@
       "id": "auto_open",
       "label": "Open when a product is added",
       "default": true
-    },
-    {
-      "type": "header",
-      "content": "Free shipping bar"
-    },
-    {
-      "type": "checkbox",
-      "id": "free_shipping_enabled",
-      "label": "Show free shipping bar",
-      "default": true
-    },
-    {
-      "type": "number",
-      "id": "free_shipping_threshold",
-      "label": "Free shipping threshold (in cents)",
-      "info": "4500 = $45.00. Compared against the cart subtotal.",
-      "default": 4500
     },
     {
       "type": "header",
