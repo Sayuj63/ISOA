@@ -159,6 +159,7 @@
     line-height: 0.92;
     writing-mode: vertical-rl;
     text-orientation: mixed;
+    white-space: nowrap;
   }
 
   .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__body {
@@ -309,7 +310,7 @@
 
     .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__grid {
       display: flex;
-      height: 669px;
+      height: clamp(666px, calc(642.6px + 6vw), 669px);
       max-width: none;
       flex-direction: column;
       gap: 8px;
@@ -353,6 +354,7 @@
       line-height: 1;
       writing-mode: vertical-rl;
       text-orientation: mixed;
+      white-space: nowrap;
     }
 
     .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__body {
