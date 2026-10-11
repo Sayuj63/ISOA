@@ -653,3 +653,104 @@
     font-size: 11px;
   }
 }
+
+/* =============================================================================
+   Collection page — Rhode's /collections/shop card, measured at 1440 and 390
+   (2026-10-11). Taller frame than the shared card (432 × 523 desktop,
+   175 × 289 phone), 28px inset on desktop, wordmark 50px, name + price 18px
+   bold, subtitle 16px. Scoped to the collection template so the homepage
+   slider and PDP cross-sell keep their own sizing.
+   ============================================================================= */
+body.template-collection .product-grid .isoa-rc-frame {
+  aspect-ratio: 432 / 523;
+}
+body.template-collection .product-grid .isoa-rc-brand {
+  top: 28px;
+  left: 28px;
+  font-size: 50px;
+  letter-spacing: -0.04em;
+}
+body.template-collection .product-grid .isoa-rc-badge {
+  top: 39px;
+  right: 21px;
+  padding: 4px 8px;
+  font-family: 'DM Sans', var(--font-heading--family, var(--font-body--family));
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+body.template-collection .product-grid .isoa-rc-info {
+  padding: 0 28px 28px;
+  row-gap: 0;
+}
+body.template-collection .product-grid .isoa-rc-reviews {
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+body.template-collection .product-grid .isoa-rc-stars,
+body.template-collection .product-grid .isoa-rc-review-count {
+  font-size: 16px;
+}
+body.template-collection .product-grid .isoa-rc-title,
+body.template-collection .product-grid .isoa-rc-price {
+  font-size: 18px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+body.template-collection .product-grid .isoa-rc-subtitle {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 749px) {
+  body.template-collection .product-grid .isoa-rc-frame {
+    aspect-ratio: 175 / 289;
+  }
+  body.template-collection .product-grid .isoa-rc-brand {
+    top: 16px;
+    left: 12px;
+    font-size: 18px;
+  }
+  body.template-collection .product-grid .isoa-rc-badge {
+    top: 16px;
+    right: 12px;
+    padding: 4px 8px;
+    font-size: 8px;
+  }
+  body.template-collection .product-grid .isoa-rc-info {
+    padding: 0;
+    bottom: 51px;
+  }
+  body.template-collection .product-grid .isoa-rc-reviews {
+    margin-bottom: 4px;
+  }
+  body.template-collection .product-grid .isoa-rc-stars,
+  body.template-collection .product-grid .isoa-rc-review-count {
+    font-size: 12px;
+  }
+  body.template-collection .product-grid .isoa-rc-title {
+    font-size: 12px;
+    line-height: 1.2;
+  }
+  body.template-collection .product-grid .isoa-rc-cta {
+    bottom: 16px;
+  }
+}
+
+/* Toolbar text (filters, item count, sort) — 16px like Rhode's
+   "Sort: Featured" / "37 products"; 14px on phones. */
+body.template-collection .facets__label,
+body.template-collection .products-count-wrapper,
+body.template-collection .products-count-wrapper * {
+  font-size: 16px;
+}
+@media (max-width: 749px) {
+  body.template-collection .facets__label,
+  body.template-collection .products-count-wrapper,
+  body.template-collection .products-count-wrapper * {
+    font-size: 14px;
+  }
+}
+
