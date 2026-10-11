@@ -47,15 +47,15 @@
      and the padding is in em so it tracks the font size — change the font
      and the pill rescales with it. Consumed by the pill rule further down,
      the product-card BUY pill and the Shop dropdown button. */
-  --isoa-btn-height: 30px;
-  --isoa-btn-font: 14px;
+  --isoa-btn-height: 24px;
+  --isoa-btn-font: 18px;
   --isoa-btn-pad-x: 3.5em;
 }
 
 @media screen and (max-width: 768px) {
   :root {
-    --isoa-btn-height: 26px;
-    --isoa-btn-font: 12px;
+    --isoa-btn-height: 20px;
+    --isoa-btn-font: 14px;
   }
 }
 
