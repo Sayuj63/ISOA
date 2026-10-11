@@ -55,7 +55,9 @@
             assign desc_text = p.metafields.custom.short_description.value | default: p.metafields.custom.short_description
           endif
           if desc_text == blank
-            assign desc_text = p.description | strip_html | strip_newlines | truncatewords: 6
+            # Pad tags with a space first: strip_html alone glues adjacent
+            # paragraphs together ("…MaskDesigned with…").
+            assign desc_text = p.description | replace: '<', ' <' | strip_html | strip_newlines | split: ' ' | join: ' ' | truncatewords: 5
           endif
           assign has_variants = false
           if p.variants.size > 1

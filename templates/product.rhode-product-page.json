@@ -249,8 +249,8 @@
                 "gift_card_form": true,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
-                "padding-inline-start": 20,
-                "padding-inline-end": 20
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {
                 "quantity": {
@@ -302,8 +302,8 @@
                 "border_radius": 10,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
-                "padding-inline-start": 20,
-                "padding-inline-end": 20
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {
                 "accordion_row_T8EC9a": {

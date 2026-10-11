@@ -1098,3 +1098,43 @@ main#MainContent .product-details .add-to-cart-button {
   line-height: 48px !important;
 }
 
+/* ── Accordion (BENEFITS / APPLICATION / KEY INGREDIENTS) ────────────────
+   Rhode's rows: 16px bold uppercase labels, a filled grey circle with a white
+   plus, warm-grey hairlines between rows. The block's own settings carry the
+   paragraph type preset and the colour scheme's navy border, so the look is
+   set here for this template only. The first row has no top rule — the
+   Complete Your Routine block above already closes with one. */
+main#MainContent .product-details .accordion .details {
+  border-color: #d4d2ce;
+}
+main#MainContent .product-details .accordion accordion-custom:first-child .details {
+  border-top: 0;
+}
+main#MainContent .product-details .accordion .details__header {
+  min-height: 52px;
+  padding-block: 14px;
+  color: #67645e;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+main#MainContent .product-details .accordion .icon-plus {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #67645e;
+  color: #ffffff;
+}
+main#MainContent .product-details .accordion .icon-plus svg {
+  width: 11px;
+  height: 11px;
+  stroke-width: 2.2;
+}
+main#MainContent .product-details .accordion .icon-plus path {
+  stroke-width: 2.2;
+}
+
