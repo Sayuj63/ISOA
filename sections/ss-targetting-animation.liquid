@@ -384,8 +384,9 @@ scale(calc(var(--text-scale) / 100));}
     overflow: visible !important;
   }
 
-  /* Grey pill wrapper matches SS-header-1 pill edges. Very thin padding around the
-     image so the media fills nearly the whole left half of the pill. -vamshi */
+  /* Grey pill wrapper matches SS-header-1 pill edges. No inner padding: as on
+     Rhode, the image runs flush to the pill's edges and the pill's own radius
+     + overflow: hidden rounds its outer corners. */
   #benefits-{{ section.id }} .rh-benefits__container{
     max-width: min(
       calc(var(--page-width) - var(--page-margin) * 2),
@@ -395,22 +396,24 @@ scale(calc(var(--text-scale) / 100));}
     background: #f1f0ed !important;
     border-radius: 10px !important;
     overflow: hidden !important;
-    padding: 8px !important;
+    padding: 0 !important;
     box-sizing: border-box;
   }
 
   #benefits-{{ section.id }} .rh-benefits__grid{
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
     align-items: stretch !important;
-    gap: 16px !important;
-    min-height: 480px;
+    gap: 0 !important;
+    /* Same height as the PDP hero and the split section above it
+       (--rhode-pdp-h, rhode-pdp.css). */
+    min-height: var(--rhode-pdp-h, 720px);
   }
 
   #benefits-{{ section.id }} .rh-media{
-    border-radius: 8px !important;
+    border-radius: 0 !important;
     background: #e5e3df !important;
     height: 100% !important;
-    min-height: 480px !important;
+    min-height: 0 !important;
     align-self: stretch !important;
     overflow: hidden !important;
   }
@@ -445,14 +448,14 @@ scale(calc(var(--text-scale) / 100));}
   }
 
   #benefits-{{ section.id }} .rh-top-heading{
-    margin-bottom: 24px !important;
+    margin-bottom: 20px !important;
     color: #67645e !important;
-    letter-spacing: 1.4px !important;
+    letter-spacing: 0.02em !important;
     text-align: center !important;
   }
 
   #benefits-{{ section.id }} .rh-text-list{
-    gap: 8px !important;
+    gap: 24px !important;
     align-items: center !important;
   }
 
@@ -465,13 +468,17 @@ scale(calc(var(--text-scale) / 100));}
     line-height: 1 !important;
   }
 
+  /* Same display face as the PDP product name (rhode-pdp.css 5.7): DM Sans
+     800, Rhode's heavy wordmark stand-in. Applies to both layers so the pink
+     overlay stays registered over the grey word. */
   #benefits-{{ section.id }} .rh-text-inner{
     display: inline-block;
-    color: #b7b4ae !important;
+    font-family: 'DM Sans', var(--font-heading--family) !important;
+    color: #7d7a74 !important;
     opacity: 1 !important;
     transform: none !important;
-    font-weight: 700 !important;
-    letter-spacing: -0.02em;
+    font-weight: 800 !important;
+    letter-spacing: -0.03em;
     text-transform: lowercase;
     line-height: 1 !important;
   }
@@ -492,7 +499,7 @@ scale(calc(var(--text-scale) / 100));}
     -webkit-text-stroke: 1.5px #67645e;
     text-stroke: 1.5px #67645e;
     paint-order: stroke fill;
-    font-weight: 700 !important;
+    font-weight: 800 !important;
     clip-path: inset(0 100% 0 0);
     -webkit-clip-path: inset(0 100% 0 0);
     transition:
@@ -508,7 +515,7 @@ scale(calc(var(--text-scale) / 100));}
   }
 
   #benefits-{{ section.id }} .rh-text-item.is-active .rh-text-inner--primary{
-    color: #b7b4ae !important;
+    color: #7d7a74 !important;
   }
 
   /* Kill leftover dot indicator on PDP. */
@@ -517,17 +524,25 @@ scale(calc(var(--text-scale) / 100));}
     display: none !important;
   }
 
+  /* Mobile: image flush across the top of the pill as a square (same as the
+     split section above), copy below with its own padding. */
   @media screen and (max-width: 768px){
-    #benefits-{{ section.id }} .rh-benefits__container{
-      padding: 20px !important;
-    }
     #benefits-{{ section.id }} .rh-benefits__grid{
       grid-template-columns: 1fr !important;
       min-height: 0;
-      gap: 20px !important;
     }
     #benefits-{{ section.id }} .rh-media{
-      min-height: 340px !important;
+      height: auto !important;
+      aspect-ratio: 1 / 1;
+    }
+    #benefits-{{ section.id }} .rh-content{
+      padding: 32px 20px 40px !important;
+    }
+    #benefits-{{ section.id }} .rh-top-heading{
+      margin-bottom: 16px !important;
+    }
+    #benefits-{{ section.id }} .rh-text-list{
+      gap: 14px !important;
     }
   }
 {% endif %}
