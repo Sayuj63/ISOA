@@ -622,9 +622,18 @@ main#MainContent {
   main#MainContent [class*=" featured-bottom-content-"] {
     position: relative;
   }
-  main#MainContent [class^="featured-titles-"]:not([class*="-track"]),
-  main#MainContent [class*=" featured-titles-"]:not([class*="-track"]) {
+  /* Room for the arrow goes on each step, not on the clipping container —
+     padding there widens the visible window and lets the next step peek in. */
+  main#MainContent [class^="featured-title-desktop-"],
+  main#MainContent [class*=" featured-title-desktop-"] {
+    box-sizing: border-box;
     padding-right: 96px;
+  }
+  /* Steps differ in length; bottom-align them so every step's last line sits
+     level with the arrow. */
+  main#MainContent [class^="featured-titles-track-"],
+  main#MainContent [class*=" featured-titles-track-"] {
+    align-items: flex-end;
   }
   main#MainContent [class^="featured-step-next-"],
   main#MainContent [class*=" featured-step-next-"] {
@@ -699,15 +708,11 @@ main#MainContent {
   }
 }
 
-/* SECTION GAP UNIFICATION — REMOVED 2026-08-12
-   The prior block zeroed every section's internal padding-block on PDPs and
-   forced a fixed 48px (desktop) / 32px (mobile) margin between adjacent
-   `.shopify-section` elements. That worked as visual polish but blocked the
-   client from editing per-section spacing from the theme editor (the schema's
-   `padding_block_start` / `padding_block_end` values were being overridden
-   with `!important`). Removed at client request so PDP section spacing is
-   now fully controlled by each section's schema settings in the admin.
-   -vamshi 2026-08-12 */
+/* SECTION GAP UNIFICATION — the 2026-08-12 version (which forced spacing
+   with !important over each section's padding settings) is gone. Spacing is
+   now the --rhode-pdp-gap rhythm at the top of this file: a plain margin
+   between sections, with their padding settings at 0 in the template — so
+   the theme editor can still add padding to any one section. */
 
 /* ==========================================================================
    MOBILE polish — PDP layout below 750px.
@@ -1060,6 +1065,10 @@ main#MainContent {
   main#MainContent [class^="featured-mobile-steps-"] {
     position: relative;
     overflow: hidden;
+    /* Held to the card width: as a grid/flex item it otherwise grows to its
+       track's content and the step text + arrow spill past the card edges. */
+    min-width: 0;
+    max-width: 100%;
     min-height: 0;
     padding: 14px 0 16px;
     border-radius: 0;
