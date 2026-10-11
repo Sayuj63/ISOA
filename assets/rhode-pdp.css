@@ -244,6 +244,14 @@
     min-width: 88% !important;
   }
 
+  /* The gallery's bottom strip (the progress bar's 10px top margin + the
+     2px bar) takes the details card's colour, so image, bar and content read
+     as one connected card — Rhode's bar sits inside its grey card. Matches
+     the card's colour-scheme background (scheme-1, 80% #edeceb). */
+  .product-information__media {
+    background-color: rgba(237, 236, 235, 0.8);
+  }
+
   /* Progress-bar track + fill rendered by the mobile-gallery script. Positioned
      INSIDE .product-information__media so it inherits the gallery's horizontal
      bounds and sits flush against the image's bottom edge. */
@@ -764,17 +772,22 @@ main#MainContent {
     grid-column: auto !important;
   }
 
-  /* 5.7 · Product title h1 — Rhode's spotwear on mobile reads ~30px greyish,
-     not 40px black. Direct .text-block child of the OUTER .group-block content;
-     the nested subheading group is deeper so it's excluded by the `>` combinators. */
+  /* 5.7 · Product title h1 — Rhode's heavy display wordmark ("spotwear"),
+     ~38px on mobile, 32px below the gallery's progress bar. DM Sans 800 is
+     the free stand-in for Rhode's Rektorat, already loaded by theme.liquid
+     for the product-card wordmark. Direct .text-block child of the OUTER
+     .group-block content; the nested subheading group is deeper so it's
+     excluded by the `>` combinators. */
   main#MainContent .product-details > .group-block > .group-block-content > .text-block > h1 {
-    font-size: var(--isoa-display-lg-m) !important;
-    font-weight: 700 !important;
-    line-height: 1.08 !important;
-    letter-spacing: -0.4px !important;
+    font-family: 'DM Sans', var(--font-heading--family) !important;
+    font-size: 38px !important;
+    font-weight: 800 !important;
+    line-height: 1.05 !important;
+    letter-spacing: -0.03em !important;
     color: #67645e !important;
-    margin-bottom: 6px !important;
-    text-transform: none !important;
+    margin-top: 18px !important;
+    margin-bottom: 10px !important;
+    text-transform: lowercase !important;
   }
 
   /* 5.8 · Subheading h1 "Designed with Justin Bieber" — sits inside a
@@ -1115,5 +1128,19 @@ main#MainContent .product-details .accordion .icon-plus svg {
 }
 main#MainContent .product-details .accordion .icon-plus path {
   stroke-width: 2.2;
+}
+
+/* ── Product title, desktop ───────────────────────────────────────────────
+   Same display wordmark as mobile (5.7), at Rhode's desktop size (~52px). */
+@media screen and (min-width: 750px) {
+  main#MainContent .product-details > .group-block > .group-block-content > .text-block > h1 {
+    font-family: 'DM Sans', var(--font-heading--family) !important;
+    font-size: 52px !important;
+    font-weight: 800 !important;
+    line-height: 1.05 !important;
+    letter-spacing: -0.03em !important;
+    color: #67645e !important;
+    text-transform: lowercase !important;
+  }
 }
 
