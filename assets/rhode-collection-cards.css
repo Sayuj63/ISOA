@@ -222,7 +222,7 @@
   background: #ffffff;
   color: #67645e;
   font-family: var(--font-body--family);
-  font-size: clamp(12px, 3.98cqi, 17px);
+  font-size: clamp(11px, 3.98cqi, 17px);
   font-weight: 400;
   letter-spacing: 0;
   text-transform: uppercase;
