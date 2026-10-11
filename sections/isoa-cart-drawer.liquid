@@ -81,12 +81,18 @@
     if upsell != blank
       assign upsell_variant = upsell.selected_or_first_available_variant
       assign upsell_variants = upsell.variants | where: 'available'
-      assign upsell_subtitle = upsell.metafields.custom.card_subtitle.value | default: upsell.metafields.custom.card_subtitle
+      assign upsell_subtitle = blank
+      unless upsell_variant.title contains 'Default Title'
+        assign upsell_subtitle = upsell_variant.title
+      endunless
+      if upsell_subtitle == blank
+        assign upsell_subtitle = upsell.metafields.custom.card_subtitle.value | default: upsell.metafields.custom.card_subtitle
+      endif
       if upsell_subtitle == blank
         assign upsell_subtitle = upsell.metafields.custom.short_description.value | default: upsell.metafields.custom.short_description
       endif
       if upsell_subtitle == blank
-        assign upsell_subtitle = upsell.description | replace: '<', ' <' | strip_html | strip_newlines | split: ' ' | join: ' ' | truncatewords: 5
+        assign upsell_subtitle = upsell.type
       endif
       assign upsell_price = upsell_variant.price | money_without_trailing_zeros
       assign upsell_price_compact = upsell_price | replace: 'Rs. ', '₹' | replace: 'Rs.', '₹' | replace: 'INR ', '₹'
