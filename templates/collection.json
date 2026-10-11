@@ -9,6 +9,19 @@
  */
 {
   "sections": {
+    "isoa_collection_hero": {
+      "type": "isoa-banner",
+      "settings": {
+        "bundled": "collection",
+        "style": "overlay",
+        "radius": 12,
+        "image_alt": "Woman smiling, holding two isoua bottles up to her face",
+        "heading": "One of EVERYTHING really good.",
+        "text": "",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
     "hero_3LDdHX": {
       "type": "hero",
       "blocks": {
@@ -94,7 +107,8 @@
         "reflection_opacity": 75,
         "padding-block-start": 24,
         "padding-block-end": 24
-      }
+      },
+      "disabled": true
     },
     "pill_navigation_qUQQgf": {
       "type": "pill-navigation",
@@ -179,13 +193,13 @@
         "padding_vertical": 10,
         "border_radius": 50,
         "border_width": 1,
-        "font_size": 16,
+        "font_size": 18,
         "background_color": "#ffffff",
-        "text_color": "#686762",
-        "border_color": "#686762",
-        "active_background_color": "#686762",
+        "text_color": "#67645e",
+        "border_color": "#67645e",
+        "active_background_color": "#67645e",
         "active_text_color": "#ffffff",
-        "active_border_color": "#686762",
+        "active_border_color": "#67645e",
         "padding_top": 12,
         "padding_bottom": 12
       }
@@ -373,6 +387,7 @@
     }
   },
   "order": [
+    "isoa_collection_hero",
     "hero_3LDdHX",
     "pill_navigation_qUQQgf",
     "main",
