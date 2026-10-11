@@ -1,50 +1,60 @@
 /* =============================================================================
-   ISOUA homepage — compact San Francisco typography system
+   ISOUA — compact San Francisco typography system
    -----------------------------------------------------------------------------
-   Homepage only. Apple devices render San Francisco through -apple-system;
-   other platforms use the metrically close system UI fallback. The scale is
-   intentionally restrained: 9–10px metadata, 12–14px reading copy, compact
-   10–11px buttons, and 15–20px where a real heading needs hierarchy.
+   Site-wide. Apple devices render San Francisco through -apple-system; other
+   platforms use the metrically close system UI fallback. Shared navigation,
+   cards, controls and footer copy use the same restrained scale everywhere;
+   homepage editorial selectors below retain their section-specific hierarchy.
    ============================================================================= */
 
-body.template-index {
-  --isoa-home-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-  --font-body--family: var(--isoa-home-font);
-  --font-heading--family: var(--isoa-home-font);
-  --font-paragraph--family: var(--isoa-home-font);
-  --font-h1--family: var(--isoa-home-font);
-  --font-h2--family: var(--isoa-home-font);
-  --font-h3--family: var(--isoa-home-font);
+body {
+  --isoa-site-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  --font-body--family: var(--isoa-site-font);
+  --font-heading--family: var(--isoa-site-font);
+  --font-paragraph--family: var(--isoa-site-font);
+  --font-h1--family: var(--isoa-site-font);
+  --font-h2--family: var(--isoa-site-font);
+  --font-h3--family: var(--isoa-site-font);
+  --font-h4--family: var(--isoa-site-font);
+  --font-h5--family: var(--isoa-site-font);
+  --font-h6--family: var(--isoa-site-font);
+  --font-paragraph--size: 12px;
+  --font-h1--size: 20px;
+  --font-h2--size: 18px;
+  --font-h3--size: 16px;
+  --font-h4--size: 15px;
+  --font-h5--size: 13px;
+  --font-h6--size: 12px;
   --isoa-btn-height: 26px;
   --isoa-btn-font: 11px;
   --isoa-btn-pad-x: 1.45em;
-  font-family: var(--isoa-home-font) !important;
+  font-family: var(--isoa-site-font) !important;
   font-size: 12px;
 }
 
 /* Section CSS frequently pins Inter/Josefin/DM Sans directly. Keep this list
    to textual controls so icon SVGs and image artwork are untouched. */
-body.template-index .shopify-section :where(
+body .shopify-section :where(
   h1, h2, h3, h4, h5, h6, p, a, button, label, input, textarea, select,
   option, small, strong, em, b, span
 ) {
-  font-family: var(--isoa-home-font) !important;
+  font-family: var(--isoa-site-font) !important;
 }
 
 /* Header and announcement bar. */
-body.template-index [class*="ai-announcement-bar-text-"] {
+body [class*="ai-announcement-bar-text-"] {
   font-size: 10px !important;
   line-height: 1.3 !important;
   letter-spacing: 0.015em !important;
 }
 
-body.template-index [class*="header-menu-link-"] {
+body [class*="header-menu-link-"] {
   font-size: 11px !important;
   line-height: 1.3 !important;
   letter-spacing: 0.035em !important;
 }
 
-body.template-index [class*="header-menu-child-link-"] {
+body [class*="header-menu-child-link-"] {
   font-size: 10px !important;
 }
 
@@ -59,30 +69,30 @@ body.template-index [id*="hero_gVmLGg"] .hero__content-wrapper .text-block.custo
 
 /* Product carousel. Retain a little scale in the corner wordmark, while the
    functional information follows the 10–12px homepage system. */
-body.template-index .isoa-fc6-slide .isoa-rc-brand {
+body .isoa-fc6-slide .isoa-rc-brand {
   font-size: 30px !important;
   line-height: 1 !important;
   letter-spacing: -0.025em !important;
 }
 
-body.template-index .isoa-fc6-slide .isoa-rc-badge,
-body.template-index .isoa-fc6-slide .isoa-rc-stars,
-body.template-index .isoa-fc6-slide .isoa-rc-review-count {
+body .isoa-fc6-slide .isoa-rc-badge,
+body .isoa-fc6-slide .isoa-rc-stars,
+body .isoa-fc6-slide .isoa-rc-review-count {
   font-size: 10px !important;
 }
 
-body.template-index .isoa-fc6-slide .isoa-rc-title,
-body.template-index .isoa-fc6-slide .isoa-rc-price {
+body .isoa-fc6-slide .isoa-rc-title,
+body .isoa-fc6-slide .isoa-rc-price {
   font-size: 14px !important;
   line-height: 1.25 !important;
 }
 
-body.template-index .isoa-fc6-slide .isoa-rc-subtitle {
+body .isoa-fc6-slide .isoa-rc-subtitle {
   font-size: 12px !important;
   line-height: 1.35 !important;
 }
 
-body.template-index .isoa-fc6-slide .isoa-rc-cta {
+body .isoa-fc6-slide .isoa-rc-cta {
   --isoa-rc-cta-h: 34px;
   bottom: 12px;
   height: var(--isoa-rc-cta-h) !important;
@@ -92,13 +102,13 @@ body.template-index .isoa-fc6-slide .isoa-rc-cta {
 }
 
 /* Philosophy banner. */
-body.template-index .isoa-banner__heading {
+body .isoa-banner__heading {
   font-size: 20px !important;
   line-height: 1.3 !important;
   letter-spacing: -0.01em !important;
 }
 
-body.template-index .isoa-banner__text {
+body .isoa-banner__text {
   max-width: 46em;
   font-size: 14px !important;
   line-height: 1.5 !important;
@@ -151,12 +161,12 @@ body.template-index [id*="ss_slider_5_4PzGG9"] [class*="slider-text-"] * {
   line-height: 1.35 !important;
 }
 
-body.template-index [class*="collection-btn-"] {
+body [class*="collection-btn-"] {
   width: 36px !important;
   height: 36px !important;
 }
 
-body.template-index [class*="slider-btn-"] {
+body [class*="slider-btn-"] {
   width: 32px !important;
   height: 32px !important;
   min-width: 32px !important;
@@ -188,37 +198,37 @@ body.template-index [id*="ss_image_with_text_15_aE3G3D"] [class*="image-text-tog
 }
 
 /* Footer: 10px labels, 12–14px reading copy, and a shorter newsletter field. */
-body.template-index footer [class*="footer-column-heading-"] {
+body footer [class*="footer-column-heading-"] {
   font-size: 10px !important;
   line-height: 1.3 !important;
   letter-spacing: 0.04em !important;
 }
 
-body.template-index footer [class*="footer-menu-link-"],
-body.template-index footer [class*="footer-social-link-"],
-body.template-index footer [class*="footer-text-"] *,
-body.template-index footer [class*="footer-column-text-"] *:not([class*="footer-column-heading-"]) {
+body footer [class*="footer-menu-link-"],
+body footer [class*="footer-social-link-"],
+body footer [class*="footer-text-"] *,
+body footer [class*="footer-column-text-"] *:not([class*="footer-column-heading-"]) {
   font-size: 14px !important;
   line-height: 1.45 !important;
 }
 
-body.template-index footer [class*="footer-privacy-text-"] * {
+body footer [class*="footer-privacy-text-"] * {
   font-size: 12px !important;
   line-height: 1.4 !important;
 }
 
-body.template-index footer [class*="footer-newsletter-row-"] {
+body footer [class*="footer-newsletter-row-"] {
   min-height: 32px !important;
 }
 
-body.template-index footer [class*="footer-newsletter-input-"] {
+body footer [class*="footer-newsletter-input-"] {
   min-height: 32px !important;
   padding: 0 12px !important;
   font-size: 10px !important;
   line-height: 30px !important;
 }
 
-body.template-index footer [class*="footer-newsletter-submit-"] {
+body footer [class*="footer-newsletter-submit-"] {
   min-height: 32px !important;
   padding: 0 14px !important;
   font-size: 10px !important;
@@ -226,7 +236,14 @@ body.template-index footer [class*="footer-newsletter-submit-"] {
 }
 
 @media screen and (max-width: 749px) {
-  body.template-index {
+  body {
+    --font-paragraph--size: 11px;
+    --font-h1--size: 18px;
+    --font-h2--size: 16px;
+    --font-h3--size: 15px;
+    --font-h4--size: 14px;
+    --font-h5--size: 12px;
+    --font-h6--size: 12px;
     --isoa-btn-height: 24px;
     --isoa-btn-font: 10px;
     --isoa-btn-pad-x: 1.4em;
@@ -239,23 +256,23 @@ body.template-index footer [class*="footer-newsletter-submit-"] {
     line-height: 1.35 !important;
   }
 
-  body.template-index .isoa-fc6-slide .isoa-rc-brand {
+  body .isoa-fc6-slide .isoa-rc-brand {
     font-size: 22px !important;
   }
 
-  body.template-index .isoa-fc6-slide .isoa-rc-badge,
-  body.template-index .isoa-fc6-slide .isoa-rc-stars,
-  body.template-index .isoa-fc6-slide .isoa-rc-review-count {
+  body .isoa-fc6-slide .isoa-rc-badge,
+  body .isoa-fc6-slide .isoa-rc-stars,
+  body .isoa-fc6-slide .isoa-rc-review-count {
     font-size: 9px !important;
   }
 
-  body.template-index .isoa-fc6-slide .isoa-rc-title,
-  body.template-index .isoa-fc6-slide .isoa-rc-price,
-  body.template-index .isoa-fc6-slide .isoa-rc-subtitle {
+  body .isoa-fc6-slide .isoa-rc-title,
+  body .isoa-fc6-slide .isoa-rc-price,
+  body .isoa-fc6-slide .isoa-rc-subtitle {
     font-size: 12px !important;
   }
 
-  body.template-index .isoa-fc6-slide .isoa-rc-cta {
+  body .isoa-fc6-slide .isoa-rc-cta {
     --isoa-rc-cta-h: 24px;
     bottom: 8px;
     height: var(--isoa-rc-cta-h) !important;
@@ -264,15 +281,15 @@ body.template-index footer [class*="footer-newsletter-submit-"] {
     line-height: calc(var(--isoa-rc-cta-h) - 2px) !important;
   }
 
-  body.template-index .isoa-fc6-slide .isoa-rc-info {
+  body .isoa-fc6-slide .isoa-rc-info {
     bottom: 40px;
   }
 
-  body.template-index .isoa-banner__heading {
+  body .isoa-banner__heading {
     font-size: 16px !important;
   }
 
-  body.template-index .isoa-banner__text {
+  body .isoa-banner__text {
     font-size: 13px !important;
     line-height: 1.45 !important;
   }
@@ -308,29 +325,29 @@ body.template-index footer [class*="footer-newsletter-submit-"] {
     font-size: 14px !important;
   }
 
-  body.template-index footer [class*="footer-menu-link-"],
-  body.template-index footer [class*="footer-social-link-"] {
+  body footer [class*="footer-menu-link-"],
+  body footer [class*="footer-social-link-"] {
     font-size: 12px !important;
     line-height: 1.3 !important;
   }
 
-  body.template-index footer [class*="footer-text-"] *,
-  body.template-index footer [class*="footer-column-text-"] *:not([class*="footer-column-heading-"]) {
+  body footer [class*="footer-text-"] *,
+  body footer [class*="footer-column-text-"] *:not([class*="footer-column-heading-"]) {
     font-size: 13px !important;
   }
 
-  body.template-index footer [class*="footer-newsletter-row-"],
-  body.template-index footer [class*="footer-newsletter-input-"],
-  body.template-index footer [class*="footer-newsletter-submit-"] {
+  body footer [class*="footer-newsletter-row-"],
+  body footer [class*="footer-newsletter-input-"],
+  body footer [class*="footer-newsletter-submit-"] {
     min-height: 30px !important;
   }
 
-  body.template-index footer [class*="footer-newsletter-input-"],
-  body.template-index footer [class*="footer-newsletter-submit-"] {
+  body footer [class*="footer-newsletter-input-"],
+  body footer [class*="footer-newsletter-submit-"] {
     line-height: 28px !important;
   }
 
-  body.template-index [class*="slider-btn-"] {
+  body [class*="slider-btn-"] {
     width: 28px !important;
     height: 28px !important;
     min-width: 28px !important;
