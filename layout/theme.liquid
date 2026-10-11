@@ -486,6 +486,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,800&display=swap">
 
     {%- render 'stylesheets' -%}
+    {%- if template.name == 'index' -%}
+      {{ 'isoa-home-typography.css' | asset_url | stylesheet_tag }}
+    {%- endif -%}
     {% if template == 'product.rhode-product-page' %}
       {{ 'rhode-pdp.css' | asset_url | stylesheet_tag }}
       {{ 'rhode-collection-cards.css' | asset_url | stylesheet_tag }}
