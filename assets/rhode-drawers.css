@@ -800,7 +800,7 @@
 }
 
 .isoa-cd__qty {
-  width: 122px;
+  width: 100px;
 }
 
 .isoa-cd__qty .quantity-selector-wrapper {
@@ -810,29 +810,31 @@
 .isoa-cd__qty .quantity-selector {
   display: flex;
   align-items: center;
-  width: 122px;
-  height: 42px;
+  width: 100px;
+  height: 34px;
   padding: 0;
   border: 1px solid var(--rhode-drawer-ink);
   border-radius: 40px;
   background-color: transparent;
+  font-family: var(--isoa-site-font, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif);
+  font-variant-numeric: tabular-nums;
 }
 
 .isoa-cd__qty .quantity-minus,
 .isoa-cd__qty .quantity-plus {
-  width: 40px !important;
+  width: 32px !important;
   min-width: 0 !important;
-  height: 40px !important;
+  height: 32px !important;
   padding: 0 !important;
   border-radius: 40px !important;
-  background: radial-gradient(circle at center, var(--rhode-drawer-ink) 9px, transparent 9.5px) !important;
+  background: radial-gradient(circle at center, var(--rhode-drawer-ink) 7px, transparent 7.5px) !important;
   color: #ffffff !important;
 }
 
 .isoa-cd__qty .quantity-minus svg,
 .isoa-cd__qty .quantity-plus svg {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 
 .isoa-cd__qty .quantity-minus:disabled {
@@ -842,12 +844,15 @@
 .isoa-cd__qty .quantity-selector input {
   flex: 1 1 auto;
   min-width: 0;
-  height: 40px;
+  height: 32px;
   padding: 0;
   border: none;
   background: none;
   color: var(--rhode-drawer-ink);
-  font-size: 14px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
   text-align: center;
 }
 
@@ -1017,6 +1022,33 @@
 
   .isoa-cd__upsell {
     padding-right: 12px;
+  }
+
+  .isoa-cd__qty,
+  .isoa-cd__qty .quantity-selector {
+    width: 92px;
+  }
+
+  .isoa-cd__qty .quantity-selector {
+    height: 30px;
+  }
+
+  .isoa-cd__qty .quantity-minus,
+  .isoa-cd__qty .quantity-plus {
+    width: 28px !important;
+    height: 28px !important;
+    background: radial-gradient(circle at center, var(--rhode-drawer-ink) 6.5px, transparent 7px) !important;
+  }
+
+  .isoa-cd__qty .quantity-minus svg,
+  .isoa-cd__qty .quantity-plus svg {
+    width: 7px;
+    height: 7px;
+  }
+
+  .isoa-cd__qty .quantity-selector input {
+    height: 28px;
+    font-size: 11px;
   }
 }
 
