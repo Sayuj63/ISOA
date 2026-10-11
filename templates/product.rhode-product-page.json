@@ -788,7 +788,7 @@
         "top_heading_size_mobile": 11,
         "text_gap_desktop": 1,
         "text_gap_mobile": 1,
-        "animation_speed": 1000,
+        "animation_speed": 850,
         "active_scale": 100,
         "enable_autoplay": true,
         "autoplay_speed": 2500
