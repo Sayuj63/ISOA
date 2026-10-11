@@ -293,9 +293,15 @@ assign inside_box_padding_mobile = section.settings.inside_box_padding_mobile
      is shown whole — fitted, never cropped — on white, so a cut-out like the
      basketball keeps its top and its reflection. */
   .feature-image-{{ section.id }} {
+    position: relative;
     background: #ffffff;
   }
+  /* Out of flow: the photo fills whatever box the layout gives it instead of
+     sizing that box. In flow, a portrait photo's own proportions pushed the
+     desktop row to ~840px, past the hero height it should match. */
   .feature-image-{{ section.id }} img {
+    position: absolute;
+    inset: 0;
     object-fit: contain;
   }
 
