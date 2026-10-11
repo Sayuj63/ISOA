@@ -1277,6 +1277,11 @@ main#MainContent .ss-whats-inside-content .ss-heading {
     top: 30px;
     left: 34px;
   }
+  /* The section gives this wrapper flex: 1, which filled the card and held
+     the copy at the top; let it size to its content so it sits at the bottom. */
+  main#MainContent .ss-whats-inside-content .ss-content-wrap {
+    flex: 0 0 auto;
+  }
   main#MainContent .ss-whats-inside-content .ss-heading {
     margin: 0 0 24px;
   }
