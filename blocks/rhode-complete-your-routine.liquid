@@ -77,7 +77,10 @@
 
           <div class="rh-cyr__info">
             <div class="rh-cyr__row">
-              <a class="rh-cyr__title" href="{{ p.url }}">{{ p.title | upcase }}</a>
+              {%- comment -%} One line, so prefer the short name the homepage card uses. {%- endcomment -%}
+              <a class="rh-cyr__title" href="{{ p.url }}" title="{{ p.title | escape }}">
+                {{- p.metafields.custom.card_short_name | default: p.title | upcase -}}
+              </a>
               <label class="rh-cyr__check" aria-label="Select {{ p.title | escape }}" data-rh-cyr-check-slot>
                 <input
                   type="checkbox"
