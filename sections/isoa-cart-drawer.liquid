@@ -116,7 +116,7 @@
               {%- if cart.empty? -%}
                 Your cart is currently empty
               {%- else -%}
-                Your cart ({{ cart.item_count }})
+                {{ cart.item_count }} {% if cart.item_count == 1 %}item{% else %}items{% endif %}
               {%- endif -%}
             </p>
             <button
@@ -249,7 +249,7 @@
                         {%- for variant in upsell_variants -%}
                           <option
                             value="{{ variant.id }}"
-                            data-price="{{ variant.price | money | strip_html | escape }}"
+                            data-price="{{ variant.price | money_without_trailing_zeros | strip_html | escape }}"
                             {% if variant.id == upsell_variant.id %}
                               selected
                             {% endif %}
@@ -266,10 +266,10 @@
                     type="submit"
                     class="isoa-cd__add"
                     data-upsell-add
-                    data-label-prefix="Add - "
+                    data-label-prefix="ADD - "
                     {% unless upsell_variant.available %}disabled{% endunless %}
                   >
-                    Add - {{ upsell_variant.price | money }}
+                    ADD - {{ upsell_variant.price | money_without_trailing_zeros }}
                   </button>
                 </div>
               </form>
@@ -299,7 +299,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       const closeBtn = document.getElementById('cart-drawer-close-btn-{{ section.id }}');
       const cartDrawer = document.querySelector('cart-drawer-component');
-      
+
       if (closeBtn && cartDrawer) {
         closeBtn.addEventListener('click', function(e) {
           e.preventDefault();
