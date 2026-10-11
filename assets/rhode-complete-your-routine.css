@@ -55,7 +55,10 @@ rhode-cyr.rh-cyr {
   display: grid;
   grid-template-columns: 80px minmax(0, 1fr);
   column-gap: 14px;
-  min-height: 100px;
+  /* Fixed, not min-height: every card is the same size whatever its text,
+     cart state or variant picker. The text slots below are sized to fit:
+     one-line title, two-line description, price pinned to the bottom. */
+  height: 124px;
   padding: 16px 14px 16px 10px;
   background: #ffffff;
   border-radius: var(--rh-cyr-card-radius, 12px);
@@ -94,9 +97,11 @@ rhode-cyr.rh-cyr {
 
 .rh-cyr__info {
   min-width: 0; /* lets children shrink inside the grid cell */
+  min-height: 0;
   display: flex;
   flex-direction: column;
   gap: 4px;
+  overflow: hidden;
 }
 
 .rh-cyr__row {
@@ -122,6 +127,9 @@ rhode-cyr.rh-cyr {
   line-height: 1.25;
   min-width: 0;
   flex: 1 1 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .rh-cyr__title:hover { text-decoration: underline; }
 
@@ -193,13 +201,18 @@ rhode-cyr.rh-cyr {
 /* -- Quantity stepper (shown only when card.in-cart) ------------------------ */
 .rh-cyr__qty {
   display: none;
+  /* Pinned to the card's bottom-right (the variant picker's spot) rather than
+     sitting in the title row, where its width squeezed the title into
+     wrapping and changed the card height. */
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
   align-items: center;
   gap: 2px;
   border: 1px solid #67645e;
   border-radius: 999px;
   padding: 2px;
   background: #ffffff;
-  flex: 0 0 auto;
 }
 .rh-cyr__qty-btn {
   appearance: none;
@@ -235,26 +248,14 @@ rhode-cyr.rh-cyr {
   user-select: none;
 }
 
-/* -- "In cart" pill next to price ------------------------------------------- */
-.rh-cyr__in-cart-pill {
-  display: none;
-  margin-left: 8px;
-  padding: 2px 8px;
-  background: #67645e;
-  color: #ffffff;
-  border-radius: 999px;
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  vertical-align: middle;
-}
-
-/* -- Swap: when a card is marked in-cart, hide the checkbox and show the
-   quantity stepper + "In cart" pill. */
-.rh-cyr__card.in-cart .rh-cyr__check { display: none; }
+/* -- Swap: when a card is in the cart, the stepper takes over. The checkbox
+   keeps its slot (visibility, not display) so the title's width — and with
+   it the card's layout — doesn't change. The variant picker steps aside for
+   the stepper. No "In cart" pill: price + pill + stepper don't fit one line,
+   and the stepper and outline already say it. */
+.rh-cyr__card.in-cart .rh-cyr__check { visibility: hidden; }
 .rh-cyr__card.in-cart .rh-cyr__qty { display: inline-flex; }
-.rh-cyr__card.in-cart .rh-cyr__in-cart-pill { display: inline-block; }
+.rh-cyr__card.in-cart .rh-cyr__variant-wrap { display: none; }
 .rh-cyr__card.in-cart { box-shadow: 0 0 0 1px #67645e inset; }
 
 /* Variant dropdown — styled to feel like the Rhode "bake ▾" affordance. */

@@ -132,18 +132,15 @@
       var qty = qtyFor(vid);
       var qtyBox = card.querySelector('[data-rh-cyr-qty]');
       var count  = card.querySelector('[data-rh-cyr-count]');
-      var pill   = card.querySelector('[data-rh-cyr-pill]');
       if (qty > 0) {
         card.classList.add('in-cart');
         if (qtyBox) qtyBox.hidden = false;
         if (count)  count.textContent = String(qty);
-        if (pill)   pill.hidden = false;
         // In-cart cards shouldn't contribute to SELECT ITEMS; uncheck them.
         if (check.checked) check.checked = false;
       } else {
         card.classList.remove('in-cart');
         if (qtyBox) qtyBox.hidden = true;
-        if (pill)   pill.hidden = true;
       }
     }
 

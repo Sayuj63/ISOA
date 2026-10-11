@@ -107,10 +107,7 @@
             {%- endif -%}
 
             <div class="rh-cyr__row rh-cyr__row--bottom">
-              <span class="rh-cyr__price">
-                {{ v.price | money_without_trailing_zeros }}
-                <span class="rh-cyr__in-cart-pill" data-rh-cyr-pill hidden>In cart</span>
-              </span>
+              <span class="rh-cyr__price">{{ v.price | money_without_trailing_zeros }}</span>
               {%- if has_variants -%}
                 <label class="rh-cyr__variant-wrap">
                   <span class="visually-hidden">{{ p.title }} variant</span>
