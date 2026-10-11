@@ -692,9 +692,9 @@ main#MainContent {
      above the step title as a small caps eyebrow. */
   main#MainContent [class^="featured-text-"] p,
   main#MainContent [class*=" featured-text-"] p {
-    margin: 0 0 12px !important;
-    font-size: var(--isoa-eyebrow) !important;
-    letter-spacing: 1.4px !important;
+    margin: 0 0 20px !important;
+    font-size: 16px !important;
+    letter-spacing: 0.02em !important;
     text-transform: uppercase;
     color: #67645e !important;
     font-weight: 700 !important;
