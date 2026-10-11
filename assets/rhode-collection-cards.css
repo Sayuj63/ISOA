@@ -216,13 +216,13 @@
   --isoa-rc-cta-h: clamp(36px, 11.24cqi, 48px);
   box-sizing: border-box;
   height: var(--isoa-rc-cta-h);
-  padding: 0 clamp(12px, 3.75cqi, 16px);
+  padding: 0 clamp(10px, 3.75cqi, 16px);
   border: 0;
   border-radius: 999px;
   background: #ffffff;
   color: #67645e;
   font-family: var(--font-body--family);
-  font-size: clamp(11px, 3.98cqi, 17px);
+  font-size: clamp(11px, 3.85cqi, 17px);
   font-weight: 400;
   letter-spacing: 0;
   text-transform: uppercase;
