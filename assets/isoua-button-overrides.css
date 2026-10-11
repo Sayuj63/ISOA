@@ -654,6 +654,12 @@ body.page-our-story [id*="hero_bxzGJg"] .hero {
   --hero-min-height: clamp(560px, 70svh, 720px) !important;
 }
 
+/* The site header floats over the first hero. Keep the photo beneath it, but
+   start the copy below the 68px navigation pill so the two never collide. */
+body.page-our-story [id*="hero_bxzGJg"] .hero__content-wrapper {
+  padding: 80px 32px 32px !important;
+}
+
 /* Founder card: its background is a positioned sibling, so round and clip the
    Shopify section wrapper as well as the configured section elements. */
 body.page-our-story .shopify-section[id*="section_qNCadN"],
@@ -742,6 +748,10 @@ body.page-our-story .shopify-section[id*="ss_featured_collection_6_new_ppPVk9"] 
 
   body.page-our-story [id*="hero_bxzGJg"] .hero {
     --hero-min-height: clamp(460px, 68svh, 560px) !important;
+  }
+
+  body.page-our-story [id*="hero_bxzGJg"] .hero__content-wrapper {
+    padding: 72px 20px 20px !important;
   }
 
   body.page-our-story [id*="hero_bxzGJg"] .text-block.custom-font-size,
