@@ -1301,13 +1301,24 @@ main#MainContent .ss-whats-inside-content .ss-heading {
   }
 }
 
-/* What's inside, mobile: there's no side gutter for the vertical label, so
-   it sits horizontally above the copy instead of over it. */
+/* What's inside label: in the text card on desktop; on mobile, where the
+   card has no side gutter, it sits vertically on the photo in white. */
+main#MainContent .ss-side-title--on-image {
+  display: none;
+}
 @media screen and (max-width: 767px) {
-  main#MainContent .ss-whats-inside-content .ss-side-title {
-    position: static;
-    writing-mode: horizontal-tb;
-    margin-bottom: 18px;
+  main#MainContent .ss-side-title--in-card {
+    display: none;
+  }
+  main#MainContent .ss-side-title--on-image {
+    display: block;
+    top: 20px;
+    left: 20px;
+    font-family: 'DM Sans', var(--font-heading--family);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.35));
   }
 }
 

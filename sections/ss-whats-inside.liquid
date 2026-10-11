@@ -15,6 +15,10 @@ Responsive + Fully Dynamic
   <div class="ss-whats-inside-inner">
 
     <div class="ss-whats-inside-image"{% if section.settings.image != blank %} style="--wi-ratio: {{ section.settings.image.aspect_ratio }};"{% endif %}>
+      {%- comment -%} Mobile copy of the label, white on the photo; the desktop one lives in the text card. {%- endcomment -%}
+      <div class="ss-side-title ss-side-title--on-image" aria-hidden="true">
+        {{ section.settings.side_title }}
+      </div>
       {% if section.settings.image != blank %}
         {{
           section.settings.image
@@ -30,7 +34,7 @@ Responsive + Fully Dynamic
 
     <div class="ss-whats-inside-content">
 
-      <div class="ss-side-title" aria-hidden="true">
+      <div class="ss-side-title ss-side-title--in-card" aria-hidden="true">
         {{ section.settings.side_title }}
       </div>
 

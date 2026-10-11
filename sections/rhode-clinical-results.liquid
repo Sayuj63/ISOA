@@ -81,10 +81,8 @@
 
   .rh-clin-footnote-{{ section.id }} {
     margin-top: 24px;
-    font-size: var(--isoa-body-sm);
+    font-size: 13px;
     color: #67645e;
-    opacity: 0.75;
-    font-style: italic;
     line-height: 1.5;
   }
 
@@ -165,33 +163,35 @@
 
   .rh-clin-panel-{{ section.id }} { display: none; }
   .rh-clin-panel-{{ section.id }}.is-active { display: flex; flex: 1; flex-direction: column; }
+  /* Sizes below follow rhodeskin.com's spotwear PDP at 1440. */
   .rh-clin-consumer-label-{{ section.id }} {
     width: fit-content;
-    margin: 0 0 28px;
+    margin: 0 0 40px;
     padding-bottom: 8px;
-    border-bottom: 2px solid #918d87;
-    font-size: var(--isoa-eyebrow);
+    border-bottom: 1px solid #67645e;
+    font-size: 16px;
     font-weight: 700;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
   }
-  .rh-clin-stats-{{ section.id }} { display: grid; gap: 28px; }
+  .rh-clin-stats-{{ section.id }} { display: grid; gap: 40px; }
   .rh-clin-stat-{{ section.id }} { margin: 0; }
-  /* Percentage digit — solid filled pink (matches Rhode reference), bumped
-     from the outlined 24px look to a proper display size that reads at a
-     distance. Previously `color: transparent + -webkit-text-stroke: 1px`
-     produced the hollow outline look the client wanted replaced. */
+  /* Percentage — pink fill with a thin dark outline, as on Rhode. The
+     stroke is painted under the fill (paint-order) so it stays 1px thin. */
   .rh-clin-stat-{{ section.id }} strong {
     display: block;
     font-family: var(--font-heading--family);
-    font-size: 3rem;              /* 48px — big display stat */
+    font-size: 36px;
     font-weight: 700;
     line-height: 1;
-    color: #e29fc8;               /* solid pink fill */
+    color: #e29fc8;
+    -webkit-text-stroke: 1px #67645e;
+    paint-order: stroke fill;
     letter-spacing: -0.01em;
   }
   .rh-clin-stat-{{ section.id }} span {
     display: block;
-    margin-top: 8px;
+    margin-top: 6px;
     font-size: 1rem;              /* 16px, up from 12px */
     font-weight: 700;
     line-height: 1.4;
@@ -209,14 +209,19 @@
     border: 0;
     border-bottom: 1px solid rgba(103, 100, 94, .25);
     background: transparent;
-    padding: 17px 0;
+    padding: 20px 0;
     color: #67645e;
+    opacity: 0.55;
     cursor: pointer;
-    font: 600 1.25rem/1 var(--font-heading--family);
+    font: 600 26px/1 var(--font-heading--family);
     text-align: left;
     text-transform: lowercase;
+    transition: opacity 0.25s ease;
   }
-  .rh-clin-tab-{{ section.id }}[aria-selected='true'] { color: #67645e; }
+  /* The tab you're on is full strength; the other reads lighter. */
+  .rh-clin-tab-{{ section.id }}[aria-selected='true'],
+  .rh-clin-tab-{{ section.id }}:hover { opacity: 1; }
+  .rh-clin-tab-{{ section.id }}:last-child { border-bottom: 0; }
 
   @media (max-width: 749px) {
     /* Mobile: image first (top), content card below, gap: 0 so they read as
@@ -245,13 +250,14 @@
       margin-bottom: 16px;
     }
     .rh-clin-stats-{{ section.id }} { gap: 22px; }
-    .rh-clin-stat-{{ section.id }} strong { font-size: 2.25rem; }  /* 36px on mobile */
+    .rh-clin-stat-{{ section.id }} strong { font-size: 32px; }
     .rh-clin-stat-{{ section.id }} span { font-size: 0.9375rem; }   /* 15px on mobile */
     .rh-clin-bullets-{{ section.id }} { gap: 12px; }
     .rh-clin-panel-{{ section.id }} .rh-clin-footnote-{{ section.id }} { margin-top: 14px; padding-top: 12px; }
-    .rh-clin-tab-{{ section.id }} { padding: 10px 0; font-size: 1rem; }
+    .rh-clin-tab-{{ section.id }} { padding: 14px 0; font-size: 20px; }
+    .rh-clin-stats-{{ section.id }} { gap: 26px; }
     .rh-clin-tablist-{{ section.id }} { margin-top: 14px; }
-    .rh-clin-consumer-label-{{ section.id }} { margin: 0 0 16px; }
+    .rh-clin-consumer-label-{{ section.id }} { margin: 0 0 22px; font-size: 14px; }
   }
 </style>
 
