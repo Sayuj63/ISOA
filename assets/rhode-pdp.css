@@ -145,6 +145,20 @@
     border-radius: inherit;
   }
 
+  /* The inner content column is a flex column that Horizon sizes to 100% of
+     the card. With a fixed-height card that made the browser shrink blocks to
+     fit instead of letting the card scroll — and the accordion, whose
+     overflow is hidden, has no content-based minimum, so it collapsed to 0px
+     and vanished. Let the column grow with its content and stop children
+     shrinking: the card's own overflow-y then scrolls the extra. */
+  .product-information__grid--half .product-details > .group-block > .group-block-content {
+    height: auto !important;
+    min-height: 100%;
+  }
+  .product-information__grid--half .product-details > .group-block > .group-block-content > * {
+    flex-shrink: 0;
+  }
+
   .product-information__grid--half .product-information__media {
     height: 100% !important;
     align-self: stretch !important;
@@ -1059,3 +1073,28 @@ main#MainContent {
     line-height: 1.5 !important;
   }
 }
+
+/* ── Buy button ───────────────────────────────────────────────────────────
+   Same pill as the homepage product-card BUY button (rhode-collection-cards
+   .isoa-rc-cta): solid white, no outline, 48px tall, 17px regular type.
+   isoua-button-overrides.css styles every CTA as the thin outline pill with
+   !important at 0,2,0; the #MainContent id is what lets this one differ.
+   Hover still runs the shared direction-hover fill (brown, white text). */
+main#MainContent .product-details .shopify-payment-button__button,
+main#MainContent .product-details .add-to-cart-button {
+  box-sizing: border-box !important;
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  padding: 0 20px !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  color: #67645e !important;
+  font-size: 17px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.02em !important;
+  line-height: 48px !important;
+}
+
