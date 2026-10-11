@@ -14,11 +14,7 @@ Responsive + Fully Dynamic
 >
   <div class="ss-whats-inside-inner">
 
-    <div class="ss-whats-inside-image">
-      <div class="ss-side-title" aria-hidden="true">
-        {{ section.settings.side_title }}
-      </div>
-
+    <div class="ss-whats-inside-image"{% if section.settings.image != blank %} style="--wi-ratio: {{ section.settings.image.aspect_ratio }};"{% endif %}>
       {% if section.settings.image != blank %}
         {{
           section.settings.image
@@ -26,12 +22,17 @@ Responsive + Fully Dynamic
           | image_tag:
           loading: 'lazy',
           widths: '400,600,800,1000,1200,1400,1600,1800',
+          sizes: '(min-width: 768px) 50vw, 100vw',
           class: 'ss-image'
         }}
       {% endif %}
     </div>
 
     <div class="ss-whats-inside-content">
+
+      <div class="ss-side-title" aria-hidden="true">
+        {{ section.settings.side_title }}
+      </div>
 
       <div class="ss-content-wrap">
 
@@ -107,9 +108,11 @@ Responsive + Fully Dynamic
   padding: {{ section.settings.content_padding_mobile }}px;
 }
 
-/* "what's inside" label — now overlaid on the image top-left, white with a
-   soft dark drop-shadow so it stays legible on any image. Vertical writing
-   direction (reads bottom-to-top after the rotate). */
+/* "what's inside" label — top-left of the text card, set vertically (Rhode's
+   layout). The card is its positioning context. */
+.ss-whats-inside-content{
+  position: relative;
+}
 .ss-side-title{
   position: absolute;
   top: 20px;
@@ -123,13 +126,10 @@ Responsive + Fully Dynamic
   font-weight:700;
   line-height:1;
 
-  color: #ffffff;
+  color: {{ section.settings.side_title_color }};
   text-transform: lowercase;
   white-space: nowrap;
   pointer-events: none;
-  filter:
-    drop-shadow(0 0 3px rgba(0, 0, 0, 0.7))
-    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.55));
 }
 
 .ss-content-wrap{

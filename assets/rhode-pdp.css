@@ -454,7 +454,9 @@ main#MainContent {
     margin-inline: auto !important;
     box-sizing: border-box;
   }
-  main#MainContent [class^="ss-whats-inside-"] {
+  /* The section wrapper only — a bare [class^="ss-whats-inside-"] also
+     matched -image and -content and stripped the text card's padding. */
+  main#MainContent section[class^="ss-whats-inside-"] {
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
@@ -1241,6 +1243,54 @@ main#MainContent .product-details .accordion .icon-plus path {
     letter-spacing: -0.03em !important;
     color: #67645e !important;
     text-transform: lowercase !important;
+  }
+}
+
+/* ── What's inside (ss-whats-inside) ─────────────────────────────────────
+   Rhode's layout: the photo keeps its own proportions (so it shows at its
+   native resolution instead of being upscaled to fill a taller box), and the
+   text card carries the vertical "what's inside" label at its top-left with
+   the copy indented ~30% and anchored to the bottom. Headings use the PDP
+   display face (DM Sans 800, same as the product name). */
+main#MainContent .ss-whats-inside-content .ss-side-title,
+main#MainContent .ss-whats-inside-content .ss-heading {
+  font-family: 'DM Sans', var(--font-heading--family);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #67645e;
+}
+main#MainContent .ss-whats-inside-content .ss-heading {
+  line-height: 1.1;
+}
+@media screen and (min-width: 768px) {
+  main#MainContent .ss-whats-inside-image {
+    aspect-ratio: var(--wi-ratio, 1);
+  }
+  main#MainContent .ss-whats-inside-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 40px 32px 40px 30% !important;
+  }
+  main#MainContent .ss-whats-inside-content .ss-side-title {
+    top: 30px;
+    left: 34px;
+  }
+  main#MainContent .ss-whats-inside-content .ss-heading {
+    margin: 0 0 24px;
+  }
+  main#MainContent .ss-whats-inside-content .ss-text {
+    line-height: 1.55;
+  }
+}
+
+/* Application slider: two equal columns like every other split on the
+   PDP (its own grid is `auto | image_width%`, which put the divide 16px off
+   the hero's). */
+@media screen and (min-width: 750px) {
+  main#MainContent [class^="featured-body-"],
+  main#MainContent [class*=" featured-body-"] {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
   }
 }
 
