@@ -1,10 +1,10 @@
 /* ============================================================================
    Rhode-style "Complete Your Routine" PDP block
    ----------------------------------------------------------------------------
-   Fixed-width container (fills its parent column), fixed max-height, inner
-   list scrolls when more products than fit. Cards are a 2-column grid on
-   desktop that collapses to 1 column at narrow widths. Bulk-add via the
-   SELECT ITEMS button at the bottom; checkbox on each card drives selection.
+   Fills its parent column. Cards are a 2-column grid on desktop that
+   collapses to 1 column at narrow widths; no inner scroll box (the PDP
+   details card scrolls). Bulk-add via the SELECT ITEMS button at the
+   bottom; checkbox on each card drives selection.
    ============================================================================ */
 
 rhode-cyr.rh-cyr {
