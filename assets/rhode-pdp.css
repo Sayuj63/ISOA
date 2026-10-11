@@ -1327,3 +1327,53 @@ main#MainContent .ss-side-title--on-image {
     letter-spacing: 0.01em;
   }
 }
+
+/* Cross-sell cards, mobile: Rhode's phone card — no star row, bigger
+   wordmark and name/price, the subtitle shown, and dots under the slider. */
+[id$="__section_store_featured_collection_6_hnPVwp"] .isoa-fc6-dots {
+  display: none;
+}
+@media screen and (max-width: 749px) {
+  [id$="__section_store_featured_collection_6_hnPVwp"] .isoa-rc-brand {
+    font-size: 40px;
+    letter-spacing: -0.04em;
+  }
+  [id$="__section_store_featured_collection_6_hnPVwp"] .isoa-rc-badge {
+    font-size: 13px;
+  }
+  [id$="__section_store_featured_collection_6_hnPVwp"] .isoa-rc-reviews {
+    display: none;
+  }
+  [id$="__section_store_featured_collection_6_hnPVwp"] .isoa-rc-title,
+  [id$="__section_store_featured_collection_6_hnPVwp"] .isoa-rc-price {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  [id$="__section_store_featured_collection_6_hnPVwp"] .isoa-rc-subtitle {
+    font-size: 14px;
+  }
+  [id$="__section_store_featured_collection_6_hnPVwp"] .isoa-fc6-dots {
+    position: static;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+  }
+  [id$="__section_store_featured_collection_6_hnPVwp"] .isoa-fc6-dots .swiper-pagination-bullet {
+    width: 7px;
+    height: 7px;
+    margin: 0;
+    border-radius: 50%;
+    background: #9a978f;
+    opacity: 1;
+    transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+  }
+  [id$="__section_store_featured_collection_6_hnPVwp"] .isoa-fc6-dots .swiper-pagination-bullet-active {
+    width: 10px;
+    height: 10px;
+    background: #67645e;
+  }
+}
+
