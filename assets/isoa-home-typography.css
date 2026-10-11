@@ -112,9 +112,9 @@ body.template-index [id*="media_with_content_6PehFB"] .text-block > * {
   line-height: 1.45 !important;
 }
 
-body.template-index [id*="media_with_content_6PehFB"] h1,
-body.template-index [id*="media_with_content_6PehFB"] h2,
-body.template-index [id*="media_with_content_6PehFB"] h3 {
+body.template-index [id*="media_with_content_6PehFB"] .text-block h1,
+body.template-index [id*="media_with_content_6PehFB"] .text-block h2,
+body.template-index [id*="media_with_content_6PehFB"] .text-block h3 {
   font-size: 14px !important;
   line-height: 1.3 !important;
   letter-spacing: -0.005em !important;
@@ -149,6 +149,16 @@ body.template-index [id*="ss_slider_5_4PzGG9"] [class*="slider-heading-"] *,
 body.template-index [id*="ss_slider_5_4PzGG9"] [class*="slider-text-"] * {
   font-size: 11px !important;
   line-height: 1.35 !important;
+}
+
+body.template-index [class*="collection-btn-"] {
+  width: 36px !important;
+  height: 36px !important;
+}
+
+body.template-index [class*="slider-btn-"] {
+  width: 32px !important;
+  height: 32px !important;
 }
 
 /* Values / accordion editorial block. */
@@ -263,9 +273,9 @@ body.template-index footer [class*="footer-newsletter-submit-"] {
     line-height: 1.45 !important;
   }
 
-  body.template-index [id*="media_with_content_6PehFB"] h1,
-  body.template-index [id*="media_with_content_6PehFB"] h2,
-  body.template-index [id*="media_with_content_6PehFB"] h3,
+  body.template-index [id*="media_with_content_6PehFB"] .text-block h1,
+  body.template-index [id*="media_with_content_6PehFB"] .text-block h2,
+  body.template-index [id*="media_with_content_6PehFB"] .text-block h3,
   body.template-index [id*="ss_image_with_text_KKFA76"] [class*="image-with-heading-"] *,
   body.template-index [id*="ss_image_with_text_KKFA76"] h1,
   body.template-index [id*="ss_image_with_text_KKFA76"] h2,
@@ -314,5 +324,10 @@ body.template-index footer [class*="footer-newsletter-submit-"] {
   body.template-index footer [class*="footer-newsletter-input-"],
   body.template-index footer [class*="footer-newsletter-submit-"] {
     line-height: 28px !important;
+  }
+
+  body.template-index [class*="slider-btn-"] {
+    width: 28px !important;
+    height: 28px !important;
   }
 }
