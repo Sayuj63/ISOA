@@ -165,8 +165,30 @@
 }
 
 .isoa-rc-stars {
+  position: relative;
+  display: inline-block;
+  width: 5.2em;
+  overflow: hidden;
+  font-family: Arial, sans-serif !important;
   letter-spacing: 0.05em;
+  line-height: 1;
   color: #67645e;
+  white-space: nowrap;
+}
+
+.isoa-rc-stars__empty,
+.isoa-rc-stars__fill {
+  display: block;
+  font-family: Arial, sans-serif !important;
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+
+.isoa-rc-stars__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--isoa-rc-rating, 0%);
+  overflow: hidden;
 }
 
 .isoa-rc-review-count {
@@ -753,4 +775,3 @@ body.template-collection .products-count-wrapper * {
     font-size: 14px;
   }
 }
-
