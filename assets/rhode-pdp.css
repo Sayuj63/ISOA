@@ -417,7 +417,9 @@ main#MainContent {
     calc(var(--page-width, 1440px) - var(--page-margin, 40px) * 2),
     calc(100% - var(--page-margin, 40px) * 2)
   );
-  --rhode-gap: 16px;
+  /* Column gap for the split sections — follows the template's one spacing
+     value (--rhode-pdp-gap, top of this file). */
+  --rhode-gap: var(--rhode-pdp-gap);
 }
 
 @media (min-width: 750px) {
@@ -490,7 +492,7 @@ main#MainContent {
   main#MainContent .section--page-width .section-content-wrapper.layout-panel-flex--row {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
-    gap: 16px !important;
+    gap: var(--rhode-gap) !important;
     align-items: stretch !important;
     /* Give the row a minimum height so the image doesn't collapse when the
        text card is short. Matches the row height when the image was still

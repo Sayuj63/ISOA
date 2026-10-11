@@ -591,7 +591,7 @@
         "button_style": "outline",
         "slider_view": 3.2,
         "slider_view_mobile": 1.5,
-        "slider_gap": 16,
+        "slider_gap": 32,
         "slider_gap_mobile": 20,
         "slider_mt": 24,
         "slider_mt_mobile": 24,
