@@ -4,7 +4,7 @@
   photo left | card right, same 720px row as the other PDP splits.
 
   Card: title (36px) + subtitle (16px), then a 384px "stage" where each
-  slide shows its product swatch art (cropped wide, cover) with the product
+  slide shows its product swatch art (whole square fitted in, centred) with the product
   name, a rule ending in a dot, and the description at 38% down / 50% wide.
   Five 79px circles below; the active one fills pink and its label rises
   in underneath.
@@ -47,7 +47,7 @@
               src="{{ fallback | asset_img_url: '1320x' }}"
               srcset="{{ fallback | asset_img_url: '660x' }} 660w, {{ fallback | asset_img_url: '1000x' }} 1000w, {{ fallback | asset_img_url: '1320x' }} 1320w"
               sizes="(min-width: 750px) 50vw, 100vw"
-              width="1320" height="1440" loading="lazy"
+              width="1320" height="1440" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
               alt="{{ block.settings.product_name | escape }}"
             >
           {%- endif -%}
@@ -79,7 +79,7 @@
               }}
             {%- elsif forloop.index <= 4 -%}
               {%- assign swatch = 'isoa-otg-swatch-' | append: forloop.index | append: '.png' -%}
-              <img class="rh-otg__swatch" src="{{ swatch | asset_img_url: '1200x' }}" width="1200" height="1200" loading="lazy" alt="">
+              <img class="rh-otg__swatch" src="{{ swatch | asset_img_url: '1200x' }}" width="1200" height="1200" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" alt="">
             {%- endif -%}
             <div class="rh-otg__copy">
               <p class="rh-otg__product">{{ block.settings.product_name }}</p>
@@ -190,7 +190,7 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     pointer-events: none;
   }
   #rh-otg-{{ sid }} .rh-otg__copy {
