@@ -376,7 +376,7 @@ body.template-product main#MainContent .shopify-section :where(
 }
 
 /* Product information: title, routine cards, and accordion controls. */
-body.template-product [id$="__main"] .product-details > .group-block > .group-block-content > .text-block > h1 {
+body.template-product main#MainContent [id$="__main"] .product-details > .group-block > .group-block-content > .text-block > h1 {
   font-family: var(--isoa-site-font) !important;
   font-size: 44px !important;
   letter-spacing: -0.025em !important;
@@ -430,11 +430,13 @@ body.template-product [id$="__ss_featured_products_4_ycPmw7"] [class^="featured-
   font-size: 12px !important;
 }
 
-body.template-product [id$="__ss_featured_products_4_ycPmw7"] [class^="featured-title-desktop-"] {
+body.template-product [id$="__ss_featured_products_4_ycPmw7"] [class^="featured-title-desktop-"],
+body.template-product [id$="__ss_featured_products_4_ycPmw7"] [class*=" featured-title-desktop-"] {
   font-size: 32px !important;
 }
 
-body.template-product [id$="__ss_featured_products_4_ycPmw7"] [class^="featured-title-desktop-"]::before {
+body.template-product [id$="__ss_featured_products_4_ycPmw7"] [class^="featured-title-desktop-"]::before,
+body.template-product [id$="__ss_featured_products_4_ycPmw7"] [class*=" featured-title-desktop-"]::before {
   font-size: 13px !important;
 }
 
@@ -507,12 +509,13 @@ body.template-product [id$="__ss_packaging_cUBeaP"] :is(.packaging-description, 
 }
 
 body.template-product [id$="__ss_packaging_cUBeaP"] [class*="vertical"] span,
-body.template-product [id$="__ss_packaging_cUBeaP"] .packaging-vertical-text span {
+body.template-product [id$="__ss_packaging_cUBeaP"] .packaging-vertical-text span,
+body.template-product [id$="__ss_packaging_cUBeaP"] .packaging-side-text span {
   font-size: 28px !important;
 }
 
 @media screen and (max-width: 749px) {
-  body.template-product [id$="__main"] .product-details > .group-block > .group-block-content > .text-block > h1 {
+  body.template-product main#MainContent [id$="__main"] .product-details > .group-block > .group-block-content > .text-block > h1 {
     font-size: 32px !important;
   }
 
@@ -616,7 +619,8 @@ body.template-product [id$="__ss_packaging_cUBeaP"] .packaging-vertical-text spa
   }
 
   body.template-product [id$="__ss_packaging_cUBeaP"] [class*="vertical"] span,
-  body.template-product [id$="__ss_packaging_cUBeaP"] .packaging-vertical-text span {
+  body.template-product [id$="__ss_packaging_cUBeaP"] .packaging-vertical-text span,
+  body.template-product [id$="__ss_packaging_cUBeaP"] .packaging-side-text span {
     font-size: 22px !important;
   }
 }
