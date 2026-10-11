@@ -1,0 +1,303 @@
+{% comment %}
+  Rhode-style Peptide Lip Tint sticky bar. Desktop shows all nine shade
+  previews; mobile uses the compact shade pill. The cart action uses Horizon's
+  native AJAX product-form component and therefore opens the cart drawer.
+{% endcomment %}
+
+{%- liquid
+  assign sid = section.id
+  assign current_variant = product.selected_or_first_available_variant
+  assign product_form_id = 'RhodeLipStickyForm-' | append: sid
+-%}
+
+<aside class="rh-lip-sticky rh-lip-sticky--{{ sid }}" data-rh-lip-sticky aria-label="Peptide lip tint purchase bar">
+  <div class="rh-lip-sticky__desktop-left">
+    <strong class="rh-lip-sticky__title">{{ product.title }}</strong>
+    {% render 'rhode-lip-shade-list', product: product, mode: 'sticky' %}
+  </div>
+
+  <div class="rh-lip-sticky__mobile-picker">
+    {% render 'rhode-lip-shade-list', product: product, mode: 'mobile' %}
+  </div>
+
+  <product-form-component
+    class="rh-lip-sticky__form-component"
+    data-section-id="{{ section.id }}"
+    data-product-id="{{ product.id }}"
+    data-product-url="{{ product.url }}"
+    data-quantity-default="1"
+    on:submit="/handleSubmit"
+  >
+    <div class="visually-hidden" aria-live="assertive" role="status" aria-atomic="true" ref="liveRegion"></div>
+    {%- form 'product', product, id: product_form_id, data-type: 'add-to-cart-form' -%}
+      <input type="hidden" name="id" ref="variantId" value="{{ current_variant.id }}" data-lip-sticky-variant>
+      <input type="hidden" name="quantity" value="1">
+      <span class="visually-hidden" ref="addToCartTextError"></span>
+      <add-to-cart-component ref="addToCartButtonContainer">
+        <button
+          class="rh-lip-sticky__buy"
+          type="submit"
+          name="add"
+          ref="addToCartButton"
+          on:click="/handleClick"
+          {% unless current_variant.available %}disabled{% endunless %}
+        >
+          <span class="rh-lip-sticky__buy-desktop">
+            BUY LIP TINT - <strong>{{ current_variant.price | money_without_trailing_zeros }}</strong>
+          </span>
+          <span class="rh-lip-sticky__buy-mobile">
+            BUY - <strong>{{ current_variant.price | money_without_trailing_zeros }}</strong>
+          </span>
+        </button>
+      </add-to-cart-component>
+    {%- endform -%}
+  </product-form-component>
+</aside>
+
+<style>
+  .rh-lip-sticky--{{ sid }} {
+    position: fixed;
+    z-index: 50;
+    right: var(--page-margin);
+    bottom: 0;
+    left: var(--page-margin);
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: auto;
+    height: 92px;
+    padding: 12px;
+    border-radius: 12px 12px 0 0;
+    background: rgba(255, 255, 255, 0.77);
+    color: #67645e;
+    box-shadow: 0 -5px 20px rgba(52, 46, 42, 0.05);
+    backdrop-filter: blur(10px);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(105%);
+    transition: opacity 0.35s ease, visibility 0.35s ease, transform 0.35s ease;
+  }
+
+  .rh-lip-sticky--{{ sid }}.is-visible {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .rh-lip-sticky--{{ sid }} .rh-lip-sticky__desktop-left {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .rh-lip-sticky--{{ sid }} .rh-lip-sticky__title {
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.5;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .rh-lip-sticky--{{ sid }} .rh-lip-shades__sticky-list {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .rh-lip-sticky--{{ sid }} .rh-lip-swatch {
+    position: relative;
+    display: block;
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background-color: transparent;
+    background-image: var(--shade-image);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 1;
+    appearance: none;
+  }
+
+  .rh-lip-sticky--{{ sid }} .rh-lip-swatch[disabled] {
+    cursor: default;
+  }
+
+  .rh-lip-sticky--{{ sid }} .rh-lip-swatch.is-selected::after {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border: 1px solid #67645e;
+    border-radius: 50%;
+  }
+
+  .rh-lip-sticky--{{ sid }} .rh-lip-sticky__form-component,
+  .rh-lip-sticky--{{ sid }} .rh-lip-sticky__form-component form,
+  .rh-lip-sticky--{{ sid }} add-to-cart-component {
+    display: block;
+    flex: 0 0 auto;
+    margin: 0;
+  }
+
+  .rh-lip-sticky--{{ sid }} .rh-lip-sticky__buy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 238px;
+    height: 49px;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 40px;
+    background: #67645e;
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .rh-lip-sticky--{{ sid }} .rh-lip-sticky__buy strong {
+    font-weight: 700;
+  }
+
+  .rh-lip-sticky--{{ sid }} .rh-lip-sticky__buy-mobile,
+  .rh-lip-sticky--{{ sid }} .rh-lip-sticky__mobile-picker {
+    display: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .rh-lip-sticky--{{ sid }} {
+      right: 0;
+      left: 0;
+      height: 72px;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 0;
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    .rh-lip-sticky--{{ sid }} .rh-lip-sticky__desktop-left,
+    .rh-lip-sticky--{{ sid }} .rh-lip-sticky__buy-desktop {
+      display: none;
+    }
+
+    .rh-lip-sticky--{{ sid }} .rh-lip-sticky__mobile-picker,
+    .rh-lip-sticky--{{ sid }} .rh-lip-sticky__buy-mobile {
+      display: block;
+    }
+
+    .rh-lip-sticky--{{ sid }} .rh-lip-sticky__mobile-picker,
+    .rh-lip-sticky--{{ sid }} .rh-lip-sticky__form-component {
+      min-width: 0;
+      flex: 1 1 50%;
+    }
+
+    .rh-lip-sticky--{{ sid }} .rh-lip-shades__mobile-select {
+      position: relative;
+      box-sizing: border-box;
+      display: flex;
+      width: 100%;
+      height: 44px;
+      align-items: center;
+      gap: 10px;
+      padding: 5px 24px 5px 8px;
+      border: 1px solid rgba(109, 110, 112, 0.6);
+      border-radius: 50px;
+      background: #fff;
+    }
+
+    .rh-lip-sticky--{{ sid }} .rh-lip-shades__mobile-dot {
+      display: block;
+      width: 32px;
+      height: 32px;
+      flex: 0 0 32px;
+      border-radius: 50%;
+      background-image: var(--shade-image);
+      background-position: center;
+      background-size: cover;
+    }
+
+    .rh-lip-sticky--{{ sid }} .rh-lip-shades__mobile-label {
+      min-width: 0;
+      overflow: hidden;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1;
+      text-overflow: ellipsis;
+      text-transform: lowercase;
+      white-space: nowrap;
+    }
+
+    .rh-lip-sticky--{{ sid }} .rh-lip-shades__chevron {
+      position: absolute;
+      right: 12px;
+      width: 10px;
+      height: 6px;
+    }
+
+    .rh-lip-sticky--{{ sid }} .rh-lip-shades__mobile-select select {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      opacity: 0;
+    }
+
+    .rh-lip-sticky--{{ sid }} .rh-lip-sticky__form-component form,
+    .rh-lip-sticky--{{ sid }} add-to-cart-component,
+    .rh-lip-sticky--{{ sid }} .rh-lip-sticky__buy {
+      width: 100%;
+    }
+
+    .rh-lip-sticky--{{ sid }} .rh-lip-sticky__buy {
+      height: 44px;
+      padding: 0 10px;
+      font-size: 12px;
+    }
+  }
+
+  .sticky-add-to-cart__bar,
+  .sticky-add-to-cart {
+    display: none !important;
+  }
+</style>
+
+<script>
+  (() => {
+    const bar = document.querySelector('.rh-lip-sticky--{{ sid }}');
+    if (!bar || bar.dataset.stickyReady === 'true') return;
+    bar.dataset.stickyReady = 'true';
+
+    const trigger = document.querySelector('[data-rh-hero], .product-information');
+    const updateFallback = () => bar.classList.toggle('is-visible', window.scrollY > 420);
+
+    if ('IntersectionObserver' in window && trigger) {
+      const observer = new IntersectionObserver((entries) => {
+        bar.classList.toggle('is-visible', !entries[0].isIntersecting);
+      }, { threshold: 0 });
+      observer.observe(trigger);
+    } else {
+      updateFallback();
+      window.addEventListener('scroll', updateFallback, { passive: true });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Rhode lip sticky ATC",
+  "settings": [],
+  "presets": [
+    { "name": "Rhode lip sticky ATC" }
+  ],
+  "enabled_on": { "templates": ["product"] }
+}
+{% endschema %}

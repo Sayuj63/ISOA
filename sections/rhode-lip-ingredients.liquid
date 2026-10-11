@@ -1,0 +1,497 @@
+{% comment %}
+  Peptide Lip Tint educational ingredients section. The education and full
+  list panels share one fixed content cell, so toggling never changes the page
+  height. On mobile, the full list scrolls inside that same cell.
+{% endcomment %}
+
+{%- assign sid = section.id -%}
+
+<section
+  class="rh-lip-ingredients rh-lip-ingredients--{{ sid }}"
+  data-rh-lip-ingredients
+  style="--rh-lip-bg: {{ section.settings.panel_color }}; --rh-lip-ink: {{ section.settings.text_color }};"
+>
+  <div class="rh-lip-ingredients__grid">
+    <div class="rh-lip-ingredients__media">
+      {%- if section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 1800
+          | image_tag:
+            loading: 'lazy',
+            widths: '400, 600, 800, 1000, 1200, 1400, 1800',
+            sizes: '(min-width: 750px) 48vw, calc(100vw - 32px)',
+            class: 'rh-lip-ingredients__image',
+            alt: section.settings.image_alt
+        }}
+      {%- else -%}
+        <img
+          class="rh-lip-ingredients__image"
+          src="https://www.rhodeskin.com/cdn/shop/files/pretzel-ingredients_1280x.jpg?v=1771983486"
+          alt="{{ section.settings.image_alt | escape }}"
+          width="1280"
+          height="1396"
+          loading="lazy"
+        >
+      {%- endif -%}
+
+      <span class="rh-lip-ingredients__mobile-side-title" aria-hidden="true">
+        {{ section.settings.side_title }}
+      </span>
+
+      <button
+        class="rh-lip-ingredients__open rh-lip-ingredients__open--desktop"
+        type="button"
+        data-open-ingredients
+        aria-expanded="false"
+        aria-controls="RhLipIngredientsFull-{{ sid }}"
+      >
+        {{ section.settings.button_label }}
+      </button>
+    </div>
+
+    <div class="rh-lip-ingredients__content">
+      <div class="rh-lip-ingredients__education" data-education-panel>
+        <div class="rh-lip-ingredients__side-title" aria-hidden="true">
+          {{ section.settings.side_title }}
+        </div>
+
+        <div class="rh-lip-ingredients__body">
+          <p class="rh-lip-ingredients__intro">{{ section.settings.intro }}</p>
+          <h2 class="rh-lip-ingredients__hero-name">{{ section.settings.hero_ingredient }}</h2>
+          <p class="rh-lip-ingredients__hero-copy">{{ section.settings.hero_copy }}</p>
+          <div class="rh-lip-ingredients__rule" aria-hidden="true"></div>
+          <p class="rh-lip-ingredients__also">{{ section.settings.also_made_with }}</p>
+          <button
+            class="rh-lip-ingredients__open rh-lip-ingredients__open--mobile"
+            type="button"
+            data-open-ingredients
+            aria-expanded="false"
+            aria-controls="RhLipIngredientsFull-{{ sid }}"
+          >
+            {{ section.settings.button_label }}
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="RhLipIngredientsFull-{{ sid }}"
+        class="rh-lip-ingredients__full"
+        data-ingredients-panel
+        role="region"
+        aria-label="Full ingredients list"
+        hidden
+      >
+        <button class="rh-lip-ingredients__close" type="button" data-close-ingredients aria-label="Close ingredients">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m6.5 6.5 11 11m0-11-11 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <h2 class="rh-lip-ingredients__full-title">{{ section.settings.ingredients_heading }}</h2>
+        <div class="rh-lip-ingredients__full-copy rte">{{ section.settings.full_ingredients }}</div>
+        <p class="rh-lip-ingredients__contact">
+          {{ section.settings.contact_intro }}
+          <a href="{{ section.settings.contact_link }}">{{ section.settings.contact_label }}</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .rh-lip-ingredients--{{ sid }} {
+    width: 100%;
+    padding: {{ section.settings.padding_top }}px var(--page-margin) {{ section.settings.padding_bottom }}px;
+    color: var(--rh-lip-ink);
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 32px;
+    width: 100%;
+    max-width: calc(var(--page-width) - var(--page-margin) * 2);
+    margin-inline: auto;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__media,
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__content {
+    position: relative;
+    aspect-ratio: 671 / 579;
+    min-width: 0;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__content,
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__education,
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__full {
+    background: var(--rh-lip-bg);
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__education,
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__full {
+    position: absolute;
+    inset: 0;
+    box-sizing: border-box;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__education {
+    display: grid;
+    grid-template-columns: 31% minmax(0, 1fr);
+    padding: 28px 25px 33px;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__side-title {
+    justify-self: start;
+    align-self: start;
+    font-family: 'DM Sans', var(--font-heading--family);
+    font-size: 33px;
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 0.92;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__body {
+    display: flex;
+    min-width: 0;
+    height: 100%;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-right: 7px;
+  }
+
+  .rh-lip-ingredients--{{ sid }} p {
+    margin: 0;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__intro,
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__hero-copy,
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__also {
+    font-size: clamp(14px, 1.13vw, 16.2px);
+    line-height: 1.48;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__intro {
+    margin-bottom: 24px;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__hero-name,
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__full-title {
+    margin: 0;
+    font-family: 'DM Sans', var(--font-heading--family);
+    font-weight: 800;
+    letter-spacing: -0.045em;
+    line-height: 1;
+    text-transform: lowercase;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__hero-name {
+    margin-bottom: 19px;
+    font-size: 33px;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__rule {
+    width: 100%;
+    height: 1px;
+    margin: 22px 0 19px;
+    background: currentColor;
+    opacity: 0.8;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__also strong {
+    font-weight: 700;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__open {
+    box-sizing: border-box;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.22);
+    color: inherit;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__open--desktop {
+    position: absolute;
+    z-index: 2;
+    top: 24px;
+    right: 24px;
+    width: 262px;
+    height: 34px;
+    border-color: #fff;
+    color: #fff;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__open--mobile,
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__mobile-side-title {
+    display: none;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__full {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 32px;
+    scrollbar-width: thin;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__full[hidden] {
+    display: none;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__close {
+    position: sticky;
+    z-index: 2;
+    top: 0;
+    float: right;
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    margin: -2px -2px 0 16px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #8a8883;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__close svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__full-title {
+    margin: 68px 0 34px;
+    font-size: 57.6px;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__full-copy,
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__full-copy p,
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__contact {
+    font-size: clamp(14px, 1.13vw, 16.2px);
+    line-height: 1.5;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__full-copy p {
+    margin: 0;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__contact {
+    margin-top: 24px;
+  }
+
+  .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__contact a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .rh-lip-ingredients--{{ sid }} {
+      padding: {{ section.settings.padding_top_mobile }}px 16px {{ section.settings.padding_bottom_mobile }}px;
+    }
+
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__grid {
+      display: flex;
+      height: 669px;
+      max-width: none;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__media {
+      width: 100%;
+      aspect-ratio: 408 / 358;
+      flex: 0 0 auto;
+      border-radius: 12px;
+    }
+
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__content {
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      flex: 1 1 auto;
+      aspect-ratio: auto;
+      border-radius: 12px;
+    }
+
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__education {
+      display: block;
+      padding: 22px 19px 33px 13px;
+    }
+
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__side-title {
+      display: none;
+    }
+
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__mobile-side-title {
+      position: absolute;
+      z-index: 2;
+      top: 18px;
+      left: 15px;
+      display: block;
+      font-family: 'DM Sans', var(--font-heading--family);
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+    }
+
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__body {
+      display: flex;
+      height: 100%;
+      justify-content: flex-start;
+      padding: 0;
+    }
+
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__intro,
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__hero-copy,
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__also {
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__intro {
+      margin-bottom: 16px;
+    }
+
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__hero-name {
+      margin-bottom: 12px;
+      font-size: 19px;
+    }
+
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__rule {
+      margin: 13px 0 10px;
+    }
+
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__open--desktop {
+      display: none;
+    }
+
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__open--mobile {
+      display: block;
+      width: 238px;
+      height: 31px;
+      margin-top: auto;
+      font-size: 12px;
+    }
+
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__full {
+      padding: 32px;
+    }
+
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__close {
+      top: 0;
+      width: 24px;
+      height: 24px;
+      margin: 0 0 0 12px;
+    }
+
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__close svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__full-title {
+      margin: 0 0 19px;
+      font-size: 40px;
+    }
+
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__full-copy,
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__full-copy p,
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__contact {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__contact {
+      margin-top: 18px;
+      padding-bottom: 2px;
+    }
+  }
+</style>
+
+<script>
+  (() => {
+    const root = document.querySelector('.rh-lip-ingredients--{{ sid }}');
+    if (!root || root.dataset.ingredientsReady === 'true') return;
+    root.dataset.ingredientsReady = 'true';
+
+    const education = root.querySelector('[data-education-panel]');
+    const full = root.querySelector('[data-ingredients-panel]');
+    const openers = Array.from(root.querySelectorAll('[data-open-ingredients]'));
+    const close = root.querySelector('[data-close-ingredients]');
+    let lastTrigger = null;
+
+    const showFull = (trigger) => {
+      lastTrigger = trigger;
+      education.hidden = true;
+      full.hidden = false;
+      full.scrollTop = 0;
+      openers.forEach((button) => button.setAttribute('aria-expanded', 'true'));
+      close.focus({ preventScroll: true });
+    };
+
+    const showEducation = () => {
+      full.hidden = true;
+      education.hidden = false;
+      openers.forEach((button) => button.setAttribute('aria-expanded', 'false'));
+      if (lastTrigger) lastTrigger.focus({ preventScroll: true });
+    };
+
+    openers.forEach((button) => button.addEventListener('click', () => showFull(button)));
+    close.addEventListener('click', showEducation);
+    root.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !full.hidden) showEducation();
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Rhode lip ingredients",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Texture image" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Pretzel lip tint texture" },
+    { "type": "text", "id": "side_title", "label": "Side title", "default": "what’s inside" },
+    { "type": "textarea", "id": "intro", "label": "Introduction", "default": "Peptides are our go-to skincare ingredient and come in many forms with unique benefits. Get to know the one in this formula." },
+    { "type": "text", "id": "hero_ingredient", "label": "Hero ingredient", "default": "palmitoyl tripeptide-1" },
+    { "type": "textarea", "id": "hero_copy", "label": "Hero ingredient description", "default": "a short chain of amino acids that hydrates, smooths, and plumps lips while reducing the look of fine lines" },
+    { "type": "inline_richtext", "id": "also_made_with", "label": "Also made with", "default": "also made with <strong>SHEA BUTTER, BABASSU, CUPUAÇU</strong>" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "FULL INGREDIENTS LIST" },
+    { "type": "text", "id": "ingredients_heading", "label": "Ingredients heading", "default": "ingredients" },
+    { "type": "richtext", "id": "full_ingredients", "label": "Full ingredients", "default": "<p>Hydrogenated Polyisobutene, Diisostearyl Malate, Butyrospermum Parkii (Shea) Butter, Polybutene, Microcrystalline Wax (Cera Microcristallina) (Cire Microcristalline), Synthetic Beeswax, Synthetic Wax, Octyldodecanol, Polyglyceryl-2 Triisostearate, Hydrogenated Poly(C6-14 Olefin), Dimer Dilinoleyl Dimer Dilinoleate, Glyceryl Behenate/Eicosadioate, Triethyl Citrate, Tocopherol, Tocopheryl Acetate, Tetrahexyldecyl Ascorbate, Palmitoyl Tripeptide-1, Orbignya Oleifera Seed Oil*, Theobroma Grandiflorum Seed Butter, Lactic Acid, Tribehenin, Stevioside, Ethylhexyl Palmitate, Sorbitan Isostearate, Tin Oxide, Mica, Calcium Sodium Borosilicate, Synthetic Fluorphlogopite, Disteardimonium Hectorite, O-Cymen-5-Ol, Fragrance (Parfum), Benzyl Benzoate, Vanillin, Titanium Dioxide (CI 77891), Iron Oxides (CI 77491, CI 77499)<br><br>*Certified Organic Ingredient / Ingrédient Certifié Biologique</p>" },
+    { "type": "text", "id": "contact_intro", "label": "Contact sentence", "default": "If you have questions about a specific ingredient, feel free to" },
+    { "type": "text", "id": "contact_label", "label": "Contact link label", "default": "contact our team" },
+    { "type": "url", "id": "contact_link", "label": "Contact link" },
+    { "type": "color", "id": "panel_color", "label": "Panel color", "default": "#f1f0ed" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#67645e" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Top padding", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Bottom padding", "default": 0 },
+    { "type": "range", "id": "padding_top_mobile", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Mobile top padding", "default": 0 },
+    { "type": "range", "id": "padding_bottom_mobile", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Mobile bottom padding", "default": 0 }
+  ],
+  "presets": [
+    { "name": "Rhode lip ingredients" }
+  ],
+  "enabled_on": { "templates": ["product"] }
+}
+{% endschema %}

@@ -1,0 +1,104 @@
+{% doc %}
+  Rhode peptide-lip-tint shade controls. The live Isoua product currently has
+  one Shopify variant (Pretzel), so missing shades are rendered faithfully but
+  disabled. When matching variants are later added in Admin, their controls
+  enable automatically by matching the variant title handle.
+
+  @param {product} product - Current product.
+  @param {string} mode - hero, sticky, or mobile.
+{% enddoc %}
+
+{%- liquid
+  assign shade_data = 'sweet pea|sweetpea-circle_1_300x.png?v=1772556926|pearly warm pink~jelly bean|jelly-bean_1_300x.png?v=1755973352|shimmery sheer pink~ribbon|rib_1_300x.png?v=1695241157|sheer pink~pretzel|pretzel-circle_1_300x.png?v=1772556898|shimmery warm mauve~toast|taos_1_300x.png?v=1695241157|rose taupe~salty tan|swatch-saltytan_300x.png?v=1718226273|soft mauve~raspberry jelly|Rasp_1_300x.png?v=1695241157|crushed berry~pbj|PBJ-swatch_ac37044f-53db-4eef-8e12-607f00b4dc0c_300x.png?v=1741894187|warm berry brown~espresso|swatch-Espresso_1_300x.png?v=1695241157|rich brown' | split: '~'
+  assign fallback_variant = product.selected_or_first_available_variant
+-%}
+
+{%- if mode == 'hero' -%}
+  <div class="rh-lip-shades__limited" aria-label="Limited edition shades">
+    {%- assign shade = shade_data.first | split: '|' -%}
+    <button
+      class="rh-lip-swatch"
+      type="button"
+      aria-label="Sweet pea — preview only"
+      aria-disabled="true"
+      disabled
+      style="--shade-image: url('https://www.rhodeskin.com/cdn/shop/files/{{ shade[1] }}')"
+    ></button>
+    <span>Limited Edition</span>
+  </div>
+  <p class="rh-lip-shades__group-label">Core Shades</p>
+  <div class="rh-lip-shades__core" aria-label="Core shades">
+{%- elsif mode == 'sticky' -%}
+  <div class="rh-lip-shades__sticky-list" aria-label="Lip tint shades">
+{%- elsif mode == 'mobile' -%}
+  <div class="rh-lip-shades__mobile-select">
+    <span
+      class="rh-lip-shades__mobile-dot"
+      aria-hidden="true"
+      style="--shade-image: url('https://www.rhodeskin.com/cdn/shop/files/pretzel-circle_1_300x.png?v=1772556898')"
+    ></span>
+    <span class="rh-lip-shades__mobile-label">pretzel</span>
+    <svg class="rh-lip-shades__chevron" viewBox="0 0 12 8" aria-hidden="true">
+      <path d="M1 1.25 6 6.25l5-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    <select aria-label="Shade" data-lip-shade-select>
+{%- endif -%}
+
+{%- for shade_record in shade_data -%}
+    {%- assign shade = shade_record | split: '|' -%}
+    {%- assign shade_name = shade[0] -%}
+    {%- assign shade_handle = shade_name | handleize -%}
+    {%- assign matching_variant = blank -%}
+    {%- for variant in product.variants -%}
+      {%- assign variant_handle = variant.title | handleize -%}
+      {%- if variant_handle == shade_handle -%}
+        {%- assign matching_variant = variant -%}
+        {%- break -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if product.has_only_default_variant and shade_handle == 'pretzel' -%}
+      {%- assign matching_variant = fallback_variant -%}
+    {%- endif -%}
+
+    {%- if mode == 'hero' -%}
+      {%- unless forloop.first -%}
+        <button
+          class="rh-lip-swatch{% if shade_handle == 'pretzel' %} is-selected{% endif %}"
+          type="button"
+          aria-label="{{ shade_name | escape }}{% if matching_variant == blank %} — preview only{% endif %}"
+          aria-pressed="{% if shade_handle == 'pretzel' %}true{% else %}false{% endif %}"
+          {% if matching_variant == blank %}aria-disabled="true" disabled{% endif %}
+          {% if matching_variant != blank %}data-lip-shade data-variant-id="{{ matching_variant.id }}"{% endif %}
+          data-shade-name="{{ shade_name | escape }}"
+          data-shade-description="{{ shade[2] | escape }}"
+          style="--shade-image: url('https://www.rhodeskin.com/cdn/shop/files/{{ shade[1] }}')"
+        ></button>
+      {%- endunless -%}
+    {%- elsif mode == 'sticky' -%}
+      <button
+        class="rh-lip-swatch{% if shade_handle == 'pretzel' %} is-selected{% endif %}"
+        type="button"
+        title="{{ shade_name | escape }}{% if matching_variant == blank %} — preview only{% endif %}"
+        aria-label="{{ shade_name | escape }}{% if matching_variant == blank %} — preview only{% endif %}"
+        aria-pressed="{% if shade_handle == 'pretzel' %}true{% else %}false{% endif %}"
+        {% if matching_variant == blank %}aria-disabled="true" disabled{% endif %}
+        {% if matching_variant != blank %}data-lip-shade data-variant-id="{{ matching_variant.id }}"{% endif %}
+        data-shade-name="{{ shade_name | escape }}"
+        style="--shade-image: url('https://www.rhodeskin.com/cdn/shop/files/{{ shade[1] }}')"
+      ></button>
+    {%- elsif mode == 'mobile' -%}
+      <option
+        value="{{ matching_variant.id | default: '' }}"
+        data-shade-name="{{ shade_name | escape }}"
+        {% if shade_handle == 'pretzel' %}selected{% endif %}
+        {% if matching_variant == blank %}disabled{% endif %}
+      >{{ shade_name }}</option>
+    {%- endif -%}
+{%- endfor -%}
+
+{%- if mode == 'hero' or mode == 'sticky' -%}
+  </div>
+{%- elsif mode == 'mobile' -%}
+    </select>
+  </div>
+{%- endif -%}

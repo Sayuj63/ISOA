@@ -1,0 +1,145 @@
+{% doc %}
+  Rhode-style Peptide Lip Tint shade picker for the PDP details card.
+  It mirrors the live Pretzel layout and binds to real variants when present.
+{% enddoc %}
+
+{%- assign product = closest.product -%}
+
+<div class="rh-lip-shades" data-rh-lip-shades {{ block.shopify_attributes }}>
+  <p class="rh-lip-shades__current">
+    <span>Shade:</span>
+    <strong data-lip-shade-name>pretzel</strong>
+    <span aria-hidden="true">&nbsp;–&nbsp;</span>
+    <span data-lip-shade-description>shimmery warm mauve</span>
+  </p>
+  {% render 'rhode-lip-shade-list', product: product, mode: 'hero' %}
+</div>
+
+{% stylesheet %}
+  .rh-lip-shades {
+    width: 100%;
+    padding-top: 22px;
+    border-top: 1px solid #c4c4c4;
+    color: #67645e;
+  }
+
+  .rh-lip-shades__current {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    margin: 0 0 22px;
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .rh-lip-shades__current strong {
+    font-weight: 700;
+    text-transform: lowercase;
+  }
+
+  .rh-lip-shades__limited {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .rh-lip-shades__limited > span,
+  .rh-lip-shades__group-label {
+    margin: 0;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .rh-lip-shades__group-label {
+    margin-bottom: 10px;
+  }
+
+  .rh-lip-shades__core,
+  .rh-lip-shades__sticky-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .rh-lip-swatch {
+    position: relative;
+    display: inline-block;
+    flex: 0 0 auto;
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background-color: transparent;
+    background-image: var(--shade-image);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: none;
+    cursor: pointer;
+    opacity: 1;
+    appearance: none;
+  }
+
+  .rh-lip-swatch[disabled] {
+    cursor: default;
+    opacity: 1;
+  }
+
+  .rh-lip-swatch.is-selected::after {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border: 1px solid #67645e;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .rh-lip-swatch:focus-visible {
+    outline: 2px solid #4b342c;
+    outline-offset: 5px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .rh-lip-shades__current {
+      margin-bottom: 16px;
+      font-size: 12px;
+    }
+
+    .rh-lip-shades__limited {
+      margin-bottom: 12px;
+    }
+
+    .rh-lip-shades__core {
+      gap: 10px;
+    }
+
+    .rh-lip-swatch {
+      width: 28px;
+      height: 28px;
+    }
+
+    .rh-lip-shades__limited > span,
+    .rh-lip-shades__group-label {
+      font-size: 10px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Lip tint shades",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Lip tint shades"
+    }
+  ]
+}
+{% endschema %}
