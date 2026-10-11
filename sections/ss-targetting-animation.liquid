@@ -20,6 +20,7 @@ FULLY FIXED + SHOPIFY 2.0
           <div
             class="rh-media__item {% if forloop.first %}is-active{% endif %}"
             data-index="{{ forloop.index0 }}"
+            style="--rh-i: {{ forloop.index0 }};"
             {{ block.shopify_attributes }}
           >
 
@@ -423,47 +424,20 @@ scale(calc(var(--text-scale) / 100));}
     overflow: hidden !important;
   }
 
-  /* Images move like a vertical slider tied to the word list: picking a word
-     further down slides the new image up into frame and pushes the old one
-     out the top; going back up (or autoplay wrapping) slides them down. The
-     script sets data-from / data-to and the is-parking / is-leaving classes;
-     only the incoming and outgoing images are ever visible. */
-  /* Idle images sit hidden and off-frame with no transition, so one that
-     just finished leaving never sweeps back across the frame. */
+  /* Images form one vertical strip in word order; the script sets
+     --rh-active on .rh-media and every image sits (its index - active) frames
+     away. Picking a word further down slides the strip up, back up slides it
+     down. Because each image transitions from wherever it currently is, a new
+     hover mid-slide just retargets the motion — no jumps when someone runs
+     the mouse quickly across the words. */
   #benefits-{{ section.id }} .rh-media__item{
     opacity: 1;
-    visibility: hidden;
-    transform: translateY(100%);
-    transition: none;
-  }
-  #benefits-{{ section.id }} .rh-media__item.is-active,
-  #benefits-{{ section.id }} .rh-media__item.is-leaving{
     visibility: visible;
-    transition:
-      transform var(--rh-dur) var(--rh-ease) var(--rh-img-delay),
-      visibility 0s;
+    transform: translateY(calc((var(--rh-i, 0) - var(--rh-active, 0)) * 100%));
+    transition: transform var(--rh-dur) var(--rh-ease) var(--rh-img-delay);
   }
   #benefits-{{ section.id }} .rh-media__item.is-active{
-    transform: translateY(0);
     z-index: 2;
-  }
-  #benefits-{{ section.id }} .rh-media__item.is-leaving{
-    transform: translateY(-100%);
-    z-index: 1;
-  }
-  #benefits-{{ section.id }} .rh-media__item.is-leaving[data-to="below"]{
-    transform: translateY(100%);
-  }
-  /* Parked just off-frame on the side it will enter from, with no transition,
-     for the one frame before it becomes active. */
-  #benefits-{{ section.id }} .rh-media__item.is-parking{
-    transition: none !important;
-  }
-  #benefits-{{ section.id }} .rh-media__item.is-parking[data-from="below"]{
-    transform: translateY(100%);
-  }
-  #benefits-{{ section.id }} .rh-media__item.is-parking[data-from="above"]{
-    transform: translateY(-100%);
   }
   @media (prefers-reduced-motion: reduce){
     #benefits-{{ section.id }}{
@@ -598,35 +572,36 @@ document.addEventListener('DOMContentLoaded', function(){
 
   let activeIndex = 0;
 
+  const media = section.querySelector('.rh-media');
+  // How long one slide lasts (transition + delay); read from the CSS so the
+  // two never drift apart. Falls back to 1.32s.
+  const slideMs = (() => {
+    const cs = getComputedStyle(section);
+    const dur = parseFloat(cs.getPropertyValue('--rh-dur')) || 1.2;
+    const delay = parseFloat(cs.getPropertyValue('--rh-img-delay')) || 0.12;
+    return (dur + delay) * 1000;
+  })();
+  let lastChange = 0;
+
   /* Rhode-style hover: swap classes immediately on every hover — no
      `isAnimating` guard, no setTimeout between text and image. The CSS
      clip-path transition on `.rh-text-inner--secondary` handles the
      L→R fill (incoming) and R→L unfill (outgoing) in parallel. The image
-     slide starts on the same tick; its small lag comes from the CSS
+     strip moves on the same tick; its small lag from rest comes from the CSS
      transition-delay, not from script timers. */
 
   function activateSlide(index){
     index = Number(index);
     if(index === activeIndex) return;
 
-    // A word further down the list slides the images up; back up, down.
-    const down = index < activeIndex;
-    const incoming = imageItems[index];
-    const outgoing = imageItems[activeIndex];
-
-    imageItems.forEach((el) => el.classList.remove('is-leaving'));
-
-    // Park the incoming image off-frame on the side it enters from, then
-    // let the next style pass animate it into place.
-    if(incoming){
-      incoming.dataset.from = down ? 'above' : 'below';
-      incoming.classList.add('is-parking');
-      void incoming.offsetHeight;
-      incoming.classList.remove('is-parking');
-    }
-    if(outgoing){
-      outgoing.dataset.to = down ? 'below' : 'above';
-      outgoing.classList.add('is-leaving');
+    // Move the image strip. The colour fill leads by --rh-img-delay from
+    // rest; if the strip is already moving, retarget it straight away so a
+    // fast run across the words never pauses mid-slide.
+    if(media){
+      const now = performance.now();
+      media.style.setProperty('--rh-img-delay', now - lastChange < slideMs ? '0s' : '');
+      media.style.setProperty('--rh-active', index);
+      lastChange = now;
     }
 
     textItems.forEach((el, i) => el.classList.toggle('is-active', i === index));
