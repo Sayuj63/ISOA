@@ -282,7 +282,6 @@
               "type": "rhode-complete-your-routine",
               "settings": {
                 "heading": "COMPLETE YOUR ROUTINE",
-                "max_height": 420,
                 "card_radius": 10,
                 "cta_label": "SELECT ITEMS",
                 "cta_label_single": "ADD TO CART"

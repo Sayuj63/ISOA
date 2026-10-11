@@ -2,9 +2,10 @@
   Rhode-style "Complete Your Routine" block for the PDP right column.
 
   Sits between the Buy button and the ingredient accordion. Shows a merchant-
-  picked list of complementary products inside a fixed-height scrollable
-  container; each card has a checkbox + variant dropdown; a bottom
-  "SELECT ITEMS" button bulk-adds checked items via /cart/add.js.
+  picked list of complementary products as a 2-column card grid (Rhode's PDP
+  layout); each card has a checkbox + variant dropdown; a bottom
+  "SELECT ITEMS" button bulk-adds checked items via /cart/add.js. No inner
+  scroll box — the PDP details card it lives in already scrolls.
 
   Falls back to Shopify's recommendations.products when no products are picked
   via the theme editor, so a merchant-less installation still shows something.
@@ -14,7 +15,6 @@
   assign heading     = block.settings.heading | default: 'COMPLETE YOUR ROUTINE'
   assign cta_label   = block.settings.cta_label | default: 'SELECT ITEMS'
   assign cta_label_single = block.settings.cta_label_single | default: 'ADD TO CART'
-  assign max_height  = block.settings.max_height | default: 420
   assign card_radius = block.settings.card_radius | default: 10
   assign items       = block.settings.products
   # Fallback 1: pull from the current product's first collection minus itself.
@@ -34,7 +34,7 @@
   class="rh-cyr"
   data-section-id="{{ section.id }}"
   data-block-id="{{ block.id }}"
-  style="--rh-cyr-max-h: {{ max_height }}px; --rh-cyr-card-radius: {{ card_radius }}px;"
+  style="--rh-cyr-card-radius: {{ card_radius }}px;"
   {{ block.shopify_attributes }}
 >
   <div class="rh-cyr__divider" aria-hidden="true"></div>
@@ -47,9 +47,16 @@
         {%- liquid
           assign v = p.selected_or_first_available_variant | default: p.variants.first
           assign thumb = v.featured_image | default: p.featured_image
-          # Short description: strip tags + collapse to one line, then truncate.
-          assign desc_raw = p.metafields.custom.short_description.value | default: p.description
-          assign desc_text = desc_raw | strip_html | strip_newlines | truncate: 42
+          # One short line under the title, like Rhode's "The spotwear holder".
+          # Same subtitle the homepage card uses (custom.card_subtitle), then
+          # custom.short_description, then a trimmed product description.
+          assign desc_text = p.metafields.custom.card_subtitle.value | default: p.metafields.custom.card_subtitle
+          if desc_text == blank
+            assign desc_text = p.metafields.custom.short_description.value | default: p.metafields.custom.short_description
+          endif
+          if desc_text == blank
+            assign desc_text = p.description | strip_html | strip_newlines | truncatewords: 6
+          endif
           assign has_variants = false
           if p.variants.size > 1
             assign has_variants = true
@@ -59,8 +66,8 @@
           <a class="rh-cyr__link" href="{{ p.url }}" aria-label="{{ p.title | escape }}">
             {%- if thumb -%}
               {{- thumb
-                | image_url: width: 160
-                | image_tag: loading: 'lazy', widths: '80,120,160,240', class: 'rh-cyr__thumb', alt: p.title | escape -}}
+                | image_url: width: 240
+                | image_tag: loading: 'lazy', widths: '120,160,240,320', sizes: '80px', class: 'rh-cyr__thumb', alt: p.title | escape -}}
             {%- else -%}
               <div class="rh-cyr__thumb rh-cyr__thumb--placeholder"></div>
             {%- endif -%}
@@ -138,6 +145,8 @@
       {{ cta_label }}
     </button>
   </div>
+
+  <div class="rh-cyr__divider rh-cyr__divider--bottom" aria-hidden="true"></div>
 </rhode-cyr>
 
 {{ 'rhode-complete-your-routine.css' | asset_url | stylesheet_tag }}
@@ -158,15 +167,6 @@
       "id": "products",
       "label": "Routine products",
       "limit": 6
-    },
-    {
-      "type": "range",
-      "id": "max_height",
-      "label": "Scroll container height (px)",
-      "min": 240,
-      "max": 640,
-      "step": 20,
-      "default": 420
     },
     {
       "type": "range",
