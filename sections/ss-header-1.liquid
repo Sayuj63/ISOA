@@ -659,17 +659,13 @@
     height: fit-content;
   }
 
-  /* ── Rhode-style mobile drawer ──────────────────────────────────────────────
-     White shell with a 12px radius and a 16px bottom lip; the grey panel sits
-     inside it and slides out from behind the header bar (z-index 2 vs the
-     header body's 3). Category tabs translate a row of product cards, then a
-     row of page links sits below. Values measured from rhodeskin.com at
-     390x844 — the --mm-* vars are the single place to tune them. */
+  /* Mobile drawer: one featured-product list, shop CTA, page links and country.
+     The white shell slides behind the header bar; its grey panel scrolls. */
   .header-menu-mobile-{{ section.id }} {
-    --mm-text: 14px;
-    --mm-card-gap: 10px;
-    --mm-card-height: 84px;
-    --mm-thumb: 60px;
+    --mm-text: 12px;
+    --mm-card-gap: 8px;
+    --mm-card-height: 60px;
+    --mm-thumb: 48px;
     --mm-radius: 12px;
     --mm-shell-pad: 16px;
     --mm-open-height: 95vh;
@@ -709,8 +705,8 @@
        static panel, and the compositor does all the work. */
     height: calc(var(--mm-open-height) - var(--mm-shell-pad));
     padding-bottom: {{ padding_bottom | times: 0.75 | round: 0 }}px;
-    padding-left: {{ padding_horizontal_mobile }}rem;
-    padding-right: {{ padding_horizontal_mobile }}rem;
+    padding-left: 8px;
+    padding-right: 8px;
     background-color: {{ mobile_menu_bg_color }};
     border-radius: var(--mm-radius);
     display: flex;
@@ -728,87 +724,23 @@
     display: none;
   }
 
-  /* Category tabs — horizontal scroll, 1px underline that slides to the active tab. */
-  .header-mm-tabs-{{ section.id }} {
-    position: relative;
+  .header-mm-products-{{ section.id }} {
     flex: 0 0 auto;
-    display: flex;
-    align-items: center;
-    padding-bottom: 5px;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .header-mm-tabs-{{ section.id }}::-webkit-scrollbar {
-    display: none;
-  }
-
-  .header-mm-tab-{{ section.id }} {
-    flex: 0 0 auto;
-    padding: 0;
-    margin-right: 34px;
-    background: none;
-    border: 0;
-    font-family: inherit;
-    font-size: var(--mm-text);
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    color: {{ link_color }};
-    opacity: 0.5;
-    cursor: pointer;
-    transition: opacity .3s ease;
-  }
-
-  .header-mm-tab-{{ section.id }}.is-current {
-    opacity: 1;
-  }
-
-  .header-mm-indicator-{{ section.id }} {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 0;
-    height: 1px;
-    background-color: {{ link_color }};
-    transition: left .3s cubic-bezier(.76,0,.24,1), width .3s cubic-bezier(.76,0,.24,1);
-  }
-
-  /* Clip the sliding panels at the card column, not at the drawer's wider
-     shell. Otherwise 16px of the neighbouring tab's cards peeks through the
-     side gutters. The viewport stays put while the strip moves inside it. */
-  .header-mm-viewport-{{ section.id }} {
-    flex: 0 0 auto;
+    display: grid;
+    gap: var(--mm-card-gap);
     width: 100%;
-    overflow: hidden;
-  }
-
-  /* Panels — one per tab, laid side by side and translated into view. */
-  .header-mm-panels-{{ section.id }} {
-    display: flex;
-    align-items: flex-start;
-    width: 100%;
-    overflow: visible;
-    transition: transform .5s cubic-bezier(.76,0,.24,1);
-  }
-
-  .header-mm-panel-{{ section.id }} {
-    flex: 0 0 100%;
-    width: 100%;
-    padding-top: 24px;
+    padding-top: 8px;
   }
 
   .header-mm-card-{{ section.id }} {
     position: relative;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
     height: var(--mm-card-height);
     padding-left: 8px;
-    margin-bottom: var(--mm-card-gap);
     background-color: #ffffff;
-    border-radius: 8px;
+    border-radius: 6px;
     text-decoration: none;
   }
 
@@ -834,7 +766,7 @@
   }
 
   .header-mm-card-title-{{ section.id }} {
-    font-size: var(--mm-text);
+    font-size: 11px;
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: 0.02em;
@@ -864,26 +796,73 @@
     text-transform: lowercase;
   }
 
+  .header-mm-shop-{{ section.id }} {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    min-width: 112px;
+    height: 28px;
+    margin-top: 16px;
+    padding: 0 16px;
+    border: 1px solid {{ link_color }};
+    border-radius: 999px;
+    color: {{ link_color }};
+    background: transparent;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
   .header-mm-links-{{ section.id }} {
     flex: 0 0 auto;
     display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-top: 24px;
-    padding-top: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 20px;
     border-top: 1px solid #c4c4c4;
   }
 
-  .header-mm-links-{{ section.id }} h3 {
+  .header-mm-links-{{ section.id }} a {
     margin: 0;
-    font-size: 20px;
+    font-size: 14px;
     font-weight: 700;
     line-height: 1.2;
-  }
-
-  .header-mm-links-{{ section.id }} a {
     color: {{ link_color }};
     text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .header-mm-country-{{ section.id }} {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #c4c4c4;
+    color: {{ link_color }};
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .header-mm-country-{{ section.id }} form {
+    min-width: 0;
+  }
+
+  .header-mm-country-{{ section.id }} select {
+    max-width: 190px;
+    border: 0;
+    background: transparent;
+    color: {{ link_color }};
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
   }
 
   .header-mega-menu-{{ section.id }} {
@@ -1526,93 +1505,86 @@
 
           <div class="header-menu-mobile-{{ section.id }}">
             <div class="header-menu-mobile-inner-{{ section.id }}">
-              {%- if section.blocks.size > 0 -%}
-                <div
-                  class="header-mm-tabs-{{ section.id }}"
-                  role="tablist"
-                  aria-label="Shop categories"
-                >
-                  {%- for block in section.blocks -%}
-                    <button
-                      type="button"
-                      class="header-mm-tab-{{ section.id }}{% if forloop.first %} is-current{% endif %}"
-                      id="header-mm-tab-{{ section.id }}-{{ forloop.index0 }}"
-                      data-mm-tab="{{ forloop.index0 }}"
-                      role="tab"
-                      aria-controls="header-mm-panel-{{ section.id }}-{{ forloop.index0 }}"
-                      aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
-                      tabindex="{% if forloop.first %}0{% else %}-1{% endif %}"
-                      {{ block.shopify_attributes }}
-                    >
-                      {{ block.settings.tab_label }}
-                    </button>
-                  {%- endfor -%}
-                  <span class="header-mm-indicator-{{ section.id }}"></span>
-                </div>
-
-                <div class="header-mm-viewport-{{ section.id }}">
-                <div class="header-mm-panels-{{ section.id }}">
-                  {%- for block in section.blocks -%}
-                    <div
-                      class="header-mm-panel-{{ section.id }}{% if forloop.first %} is-current{% endif %}"
-                      id="header-mm-panel-{{ section.id }}-{{ forloop.index0 }}"
-                      data-mm-panel="{{ forloop.index0 }}"
-                      role="tabpanel"
-                      aria-labelledby="header-mm-tab-{{ section.id }}-{{ forloop.index0 }}"
-                      aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
-                      {% unless forloop.first %}inert{% endunless %}
-                    >
-                      {%- assign mm_products = block.settings.collection.products -%}
-                      {%- if mm_products.size > 0 -%}
-                        {%- assign mm_limit = block.settings.product_limit | default: 5 -%}
-                        {%- for card in mm_products limit: mm_limit -%}
-                          {%- assign mm_short = card.metafields.custom.card_short_name -%}
-                          {%- if mm_short == blank -%}{%- assign mm_short = card.title -%}{%- endif -%}
-                          {%- assign mm_sub = card.metafields.custom.card_subtitle -%}
-                          {%- if mm_sub == blank -%}{%- assign mm_sub = card.type -%}{%- endif -%}
-                          {%- assign mm_badge = card.metafields.custom.tag -%}
-                          <a class="header-mm-card-{{ section.id }}" href="{{ card.url }}">
-                            <span class="header-mm-card-img-{{ section.id }}">
-                              {%- if card.featured_image -%}
-                                <img
-                                  src="{{ card.featured_image | image_url: width: 120 }}"
-                                  alt="{{ card.title | escape }}"
-                                  width="60"
-                                  height="60"
-                                  loading="lazy"
-                                >
-                              {%- endif -%}
-                            </span>
-                            <span class="header-mm-card-body-{{ section.id }}">
-                              <span class="header-mm-card-title-{{ section.id }}">{{ mm_short | upcase }}</span>
-                              {%- if mm_sub != blank -%}
-                                <span class="header-mm-card-sub-{{ section.id }}">{{ mm_sub }}</span>
-                              {%- endif -%}
-                            </span>
-                            {%- if mm_badge != blank -%}
-                              <span class="header-mm-card-badge-{{ section.id }}">{{ mm_badge }}</span>
-                            {%- endif -%}
-                          </a>
-                        {%- endfor -%}
+              {%- assign mm_mobile_collection = collections['all'] -%}
+              {%- assign mm_mobile_limit = 5 -%}
+              {%- for mm_block in section.blocks -%}
+                {%- if mm_block.settings.tab_label == 'ALL' and mm_block.settings.collection != blank -%}
+                  {%- assign mm_mobile_collection = mm_block.settings.collection -%}
+                  {%- assign mm_mobile_limit = mm_block.settings.product_limit | default: 5 -%}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endfor -%}
+              {%- if mm_mobile_collection.products.size > 0 -%}
+                <div class="header-mm-products-{{ section.id }}">
+                  {%- for card in mm_mobile_collection.products limit: mm_mobile_limit -%}
+                    {%- assign mm_short = card.metafields.custom.card_short_name -%}
+                    {%- if mm_short == blank -%}{%- assign mm_short = card.title -%}{%- endif -%}
+                    {%- assign mm_sub = card.metafields.custom.card_subtitle -%}
+                    {%- if mm_sub == blank -%}{%- assign mm_sub = card.type -%}{%- endif -%}
+                    {%- assign mm_badge = card.metafields.custom.tag -%}
+                    <a class="header-mm-card-{{ section.id }}" href="{{ card.url }}">
+                      <span class="header-mm-card-img-{{ section.id }}">
+                        {%- if card.featured_image -%}
+                          <img
+                            src="{{ card.featured_image | image_url: width: 120 }}"
+                            alt="{{ card.title | escape }}"
+                            width="48"
+                            height="48"
+                            loading="lazy"
+                          >
+                        {%- endif -%}
+                      </span>
+                      <span class="header-mm-card-body-{{ section.id }}">
+                        <span class="header-mm-card-title-{{ section.id }}">{{ mm_short | upcase }}</span>
+                        {%- if mm_sub != blank -%}
+                          <span class="header-mm-card-sub-{{ section.id }}">{{ mm_sub }}</span>
+                        {%- endif -%}
+                      </span>
+                      {%- if mm_badge != blank -%}
+                        <span class="header-mm-card-badge-{{ section.id }}">{{ mm_badge }}</span>
                       {%- endif -%}
-                    </div>
+                    </a>
                   {%- endfor -%}
-                </div>
                 </div>
               {%- endif -%}
+
+              <a class="header-mm-shop-{{ section.id }}" href="{{ routes.all_products_collection_url }}">SHOP ISOUA</a>
 
               <div class="header-mm-links-{{ section.id }}">
                 {%- assign mm_links = section.settings.mobile_links_menu -%}
                 {%- if mm_links != blank -%}
                   {%- for link in mm_links.links -%}
-                    <h3><a href="{{ link.url }}">{{ link.title }}</a></h3>
+                    {%- if link.title == 'ABOUT' or link.title == 'About' -%}
+                      <a href="{{ link.url }}">{{ link.title }}</a>
+                    {%- endif -%}
                   {%- endfor -%}
                 {%- endif -%}
-                {%- if use_search and search_menu_mobile -%}
-                  <h3><a href="{{ routes.search_url }}">{{ search_text }}</a></h3>
+                {%- if pages['sustainability'] != blank -%}
+                  <a href="{{ pages['sustainability'].url }}">SUSTAINABILITY</a>
+                {%- endif -%}
+                {%- if pages['impact'] != blank -%}
+                  <a href="{{ pages['impact'].url }}">IMPACT</a>
+                {%- endif -%}
+                {%- if pages['faq'] != blank -%}
+                  <a href="{{ pages['faq'].url }}">FAQ</a>
                 {%- endif -%}
                 {%- if use_account and account_menu_mobile -%}
-                  <h3><a href="{{ routes.account_url }}">{{ account_text }}</a></h3>
+                  <a href="{{ routes.account_url }}">{{ account_text }}</a>
+                {%- endif -%}
+              </div>
+
+              <div class="header-mm-country-{{ section.id }}">
+                <span>Country/region:</span>
+                {%- if localization.available_countries.size > 1 -%}
+                  {% form 'localization' %}
+                    <select name="country_code" aria-label="Country/region">
+                      {%- for country in localization.available_countries -%}
+                        <option value="{{ country.iso_code }}"{% if country.iso_code == localization.country.iso_code %} selected{% endif %}>{{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})</option>
+                      {%- endfor -%}
+                    </select>
+                  {% endform %}
+                {%- else -%}
+                  <strong>{{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})</strong>
                 {%- endif -%}
               </div>
             </div>
@@ -1845,7 +1817,7 @@
     // front and on resize instead.
     function setMobileInnerOffset() {
       if (headerMobileInner && headerBody) {
-        headerMobileInner.style.paddingTop = headerBody.clientHeight + {{ padding_top | times: 3 }} - 25 + "px";
+        headerMobileInner.style.paddingTop = headerBody.clientHeight + 8 + "px";
       }
     }
     setMobileInnerOffset();
@@ -1902,68 +1874,9 @@
       })
     }
 
-    // Mobile drawer: category tabs translate a row of product-card panels.
-    // The indicator tracks the active tab by offsetLeft/offsetWidth so it
-    // stays aligned without hardcoding any widths.
-    const mmTabs = header.querySelectorAll('.header-mm-tab-{{ section.id }}');
-    const mmPanels = header.querySelector('.header-mm-panels-{{ section.id }}');
-    const mmPanelItems = header.querySelectorAll('.header-mm-panel-{{ section.id }}');
-    const mmIndicator = header.querySelector('.header-mm-indicator-{{ section.id }}');
-
-    function moveIndicator(tab) {
-      if (!mmIndicator || !tab) return;
-      mmIndicator.style.left = tab.offsetLeft + 'px';
-      mmIndicator.style.width = tab.offsetWidth + 'px';
-    }
-
-    function selectTab(index) {
-      const safeIndex = Math.max(0, Math.min(Number(index) || 0, mmTabs.length - 1));
-      mmTabs.forEach((tab, i) => {
-        const isCurrent = i === safeIndex;
-        tab.classList.toggle('is-current', isCurrent);
-        tab.setAttribute('aria-selected', String(isCurrent));
-        tab.tabIndex = isCurrent ? 0 : -1;
-      });
-      mmPanelItems.forEach((panel, i) => {
-        const isCurrent = i === safeIndex;
-        panel.classList.toggle('is-current', isCurrent);
-        panel.setAttribute('aria-hidden', String(!isCurrent));
-        panel.inert = !isCurrent;
-      });
-      if (mmPanels) {
-        mmPanels.style.transform = 'translate3d(-' + safeIndex * 100 + '%, 0, 0)';
-      }
-      moveIndicator(mmTabs[safeIndex]);
-    }
-
-    mmTabs.forEach((tab, index) => {
-      tab.addEventListener('click', () => {
-        selectTab(index);
-        tab.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
-      });
-      tab.addEventListener('keydown', (event) => {
-        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
-        event.preventDefault();
-        let nextIndex = index;
-        if (event.key === 'ArrowLeft') nextIndex = (index - 1 + mmTabs.length) % mmTabs.length;
-        if (event.key === 'ArrowRight') nextIndex = (index + 1) % mmTabs.length;
-        if (event.key === 'Home') nextIndex = 0;
-        if (event.key === 'End') nextIndex = mmTabs.length - 1;
-        selectTab(nextIndex);
-        mmTabs[nextIndex].focus();
-      });
-    });
-
-    // The indicator is width:0 until JS paints it, so settle it on load and
-    // again whenever the panel geometry changes.
-    if (mmTabs.length) {
-      requestAnimationFrame(() => selectTab(0));
-      if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(() => {
-          const current = header.querySelector('.header-mm-tab-{{ section.id }}.is-current');
-          moveIndicator(current);
-        });
-      }
+    const countrySelect = header.querySelector('.header-mm-country-{{ section.id }} select');
+    if (countrySelect) {
+      countrySelect.addEventListener('change', () => countrySelect.form?.submit());
     }
 
     // When the window is resized, debounce the answer's height:
@@ -1972,10 +1885,7 @@
       updateHeaderTopOffset();
       setMobileInnerOffset();
       clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        const current = header.querySelector('.header-mm-tab-{{ section.id }}.is-current');
-        moveIndicator(current);
-      }, 250);
+      resizeTimer = setTimeout(setMobileInnerOffset, 250);
     });
   }
 }
