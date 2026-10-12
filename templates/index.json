@@ -643,7 +643,7 @@
         "media_height": "auto",
         "section_width": "page-width",
         "extend_media": false,
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
         "padding-block-start": 24,
         "padding-block-end": 24
       }
@@ -725,10 +725,10 @@
         "padding-block-end": 20
       }
     },
-    "ss_image_with_text_KKFA76": {
+    "ss_image_with_text_dJnLFQ": {
       "type": "ss-image-with-text",
       "blocks": {
-        "heading_DDArrH": {
+        "heading_xrwpJt": {
           "type": "heading",
           "settings": {
             "heading": "<p><strong>sweet, salty, here to stay</strong></p>",
@@ -743,7 +743,7 @@
             "heading_color": "#67645e"
           }
         },
-        "text_BRGXQR": {
+        "text_Fh3cEL": {
           "type": "text",
           "settings": {
             "text": "<p>Pretzel is now a part of the core rhode lineup. Swipe it on for a shimmery warm mauve tint, a caramel-glazed pretzel scent, and nourished, hydrated lips.</p>",
@@ -758,7 +758,7 @@
             "text_color": "#121212"
           }
         },
-        "button_9pVLiq": {
+        "button_bez4XY": {
           "type": "button",
           "settings": {
             "button": "A FOREVER THING",
@@ -789,9 +789,9 @@
         }
       },
       "block_order": [
-        "heading_DDArrH",
-        "text_BRGXQR",
-        "button_9pVLiq"
+        "heading_xrwpJt",
+        "text_Fh3cEL",
+        "button_bez4XY"
       ],
       "name": "SS - Image with text #1",
       "settings": {
@@ -1212,7 +1212,7 @@
     "ss_featured_collection_13_mbQxXN",
     "media_with_content_6PehFB",
     "product_hotspots_7xKcFa",
-    "ss_image_with_text_KKFA76",
+    "ss_image_with_text_dJnLFQ",
     "ss_image_with_text_qPqKib",
     "ss_slider_5_4PzGG9",
     "ss_image_with_text_15_aE3G3D"
