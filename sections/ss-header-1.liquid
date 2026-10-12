@@ -668,7 +668,9 @@
     --mm-thumb: 48px;
     --mm-radius: 12px;
     --mm-shell-pad: 16px;
-    --mm-open-height: 95vh;
+    /* JS replaces this with the space below the header in the visual viewport.
+       This fallback still leaves room at the bottom before JS initializes. */
+    --mm-open-height: calc(100vh - 80px);
 
     position: absolute;
     top: 5px;
@@ -1813,6 +1815,7 @@
 
     let burger_icon = header.querySelector('.header-menu-icon-{{ section.id }}');
     let headerBody = header.querySelector('.header-body-{{ section.id }}');
+    let mobileMenu = header.querySelector('.header-menu-mobile-{{ section.id }}');
     let headerMobileInner = header.querySelector('.header-menu-mobile-inner-{{ section.id }}');
     let headerMegaMenus = header.querySelectorAll('.header-mega-menu-{{ section.id }}');
 
@@ -1827,8 +1830,22 @@
     }
     setMobileInnerOffset();
 
+    // 95vh plus the drawer's offset below the page top ran its grey background
+    // beyond the bottom of short phones. Measure the *visible* viewport so
+    // Safari's moving browser chrome is accounted for as well.
+    function sizeMobileMenu() {
+      if (!mobileMenu || window.innerWidth >= 1024) return;
+      const viewport = window.visualViewport;
+      const bottom = viewport ? viewport.offsetTop + viewport.height : window.innerHeight;
+      const top = mobileMenu.getBoundingClientRect().top;
+      const available = Math.max(0, Math.floor(bottom - top - 12));
+      mobileMenu.style.setProperty('--mm-open-height', `${available}px`);
+    }
+    sizeMobileMenu();
+
     if(burger_icon) {
       burger_icon.addEventListener('click', () => {
+        sizeMobileMenu();
         header.classList.toggle('open');
         if(header.classList.contains('open')) {
           document.body.style.overflow = 'hidden';
@@ -1889,9 +1906,15 @@
     window.addEventListener('resize', () => {
       updateHeaderTopOffset();
       setMobileInnerOffset();
+      sizeMobileMenu();
       clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(setMobileInnerOffset, 250);
+      resizeTimer = setTimeout(() => {
+        setMobileInnerOffset();
+        sizeMobileMenu();
+      }, 250);
     });
+    window.visualViewport?.addEventListener('resize', sizeMobileMenu);
+    window.visualViewport?.addEventListener('scroll', sizeMobileMenu);
   }
 }
 
