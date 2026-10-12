@@ -94,7 +94,7 @@
   position: relative;
   flex: 0 0 auto;
   padding: 20px;
-  font-size: 22px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1.2;
   text-align: center;
@@ -149,7 +149,7 @@
   border-radius: 10px;
   background-color: #ffffff;
   color: var(--rhode-drawer-ink);
-  font-size: 22px;
+  font-size: 16px;
   line-height: 1.2;
 }
 
@@ -170,7 +170,7 @@
 .isoa-sd__suggestions {
   flex: 0 0 auto;
   padding: 20px 36px 0;
-  font-size: 22px;
+  font-size: 16px;
   line-height: 1.5;
 }
 
@@ -246,7 +246,7 @@
 }
 
 .isoa-sd__product-title {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 19.2px;
   letter-spacing: 0.324px;
@@ -434,7 +434,7 @@
 
 .isoa-cd__title {
   margin: 0;
-  font-size: 19.2px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0.384px;
@@ -575,7 +575,7 @@
 }
 
 .isoa-cd__item-title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 27px;
   letter-spacing: 0.36px;
@@ -586,7 +586,7 @@
 
 .isoa-cd__item-price {
   flex: 0 0 auto;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   white-space: nowrap;
 }
@@ -617,7 +617,7 @@
 
 .isoa-cd__upsell-title {
   margin: 0 0 8px;
-  font-size: 21.6px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0.432px;
@@ -675,7 +675,7 @@
 }
 
 .isoa-cd__upsell-name {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1.5;
   letter-spacing: 0.36px;
@@ -733,13 +733,13 @@
 }
 
 .isoa-cd__summary-label {
-  font-size: 18.72px;
+  font-size: 16px;
   font-weight: 400;
   text-transform: lowercase;
 }
 
 .isoa-cd__summary-value {
-  font-size: 18.72px;
+  font-size: 16px;
   font-weight: 700;
 }
 

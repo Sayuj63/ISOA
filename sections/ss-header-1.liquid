@@ -1520,12 +1520,21 @@
           <div class="header-menu-mobile-{{ section.id }}">
             <div class="header-menu-mobile-inner-{{ section.id }}">
               {%- if section.blocks.size > 0 -%}
-                <div class="header-mm-tabs-{{ section.id }}">
+                <div
+                  class="header-mm-tabs-{{ section.id }}"
+                  role="tablist"
+                  aria-label="Shop categories"
+                >
                   {%- for block in section.blocks -%}
                     <button
                       type="button"
                       class="header-mm-tab-{{ section.id }}{% if forloop.first %} is-current{% endif %}"
+                      id="header-mm-tab-{{ section.id }}-{{ forloop.index0 }}"
                       data-mm-tab="{{ forloop.index0 }}"
+                      role="tab"
+                      aria-controls="header-mm-panel-{{ section.id }}-{{ forloop.index0 }}"
+                      aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                      tabindex="{% if forloop.first %}0{% else %}-1{% endif %}"
                       {{ block.shopify_attributes }}
                     >
                       {{ block.settings.tab_label }}
@@ -1536,7 +1545,15 @@
 
                 <div class="header-mm-panels-{{ section.id }}">
                   {%- for block in section.blocks -%}
-                    <div class="header-mm-panel-{{ section.id }}" data-mm-panel="{{ forloop.index0 }}">
+                    <div
+                      class="header-mm-panel-{{ section.id }}{% if forloop.first %} is-current{% endif %}"
+                      id="header-mm-panel-{{ section.id }}-{{ forloop.index0 }}"
+                      data-mm-panel="{{ forloop.index0 }}"
+                      role="tabpanel"
+                      aria-labelledby="header-mm-tab-{{ section.id }}-{{ forloop.index0 }}"
+                      aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
+                      {% unless forloop.first %}inert{% endunless %}
+                    >
                       {%- assign mm_products = block.settings.collection.products -%}
                       {%- if mm_products.size > 0 -%}
                         {%- assign mm_limit = block.settings.product_limit | default: 5 -%}
@@ -1881,6 +1898,7 @@
     // stays aligned without hardcoding any widths.
     const mmTabs = header.querySelectorAll('.header-mm-tab-{{ section.id }}');
     const mmPanels = header.querySelector('.header-mm-panels-{{ section.id }}');
+    const mmPanelItems = header.querySelectorAll('.header-mm-panel-{{ section.id }}');
     const mmIndicator = header.querySelector('.header-mm-indicator-{{ section.id }}');
 
     function moveIndicator(tab) {
@@ -1890,17 +1908,41 @@
     }
 
     function selectTab(index) {
+      const safeIndex = Math.max(0, Math.min(Number(index) || 0, mmTabs.length - 1));
       mmTabs.forEach((tab, i) => {
-        tab.classList.toggle('is-current', i === index);
+        const isCurrent = i === safeIndex;
+        tab.classList.toggle('is-current', isCurrent);
+        tab.setAttribute('aria-selected', String(isCurrent));
+        tab.tabIndex = isCurrent ? 0 : -1;
+      });
+      mmPanelItems.forEach((panel, i) => {
+        const isCurrent = i === safeIndex;
+        panel.classList.toggle('is-current', isCurrent);
+        panel.setAttribute('aria-hidden', String(!isCurrent));
+        panel.inert = !isCurrent;
       });
       if (mmPanels) {
-        mmPanels.style.transform = 'translate3d(-' + index * 100 + '%, 0, 0)';
+        mmPanels.style.transform = 'translate3d(-' + safeIndex * 100 + '%, 0, 0)';
       }
-      moveIndicator(mmTabs[index]);
+      moveIndicator(mmTabs[safeIndex]);
     }
 
     mmTabs.forEach((tab, index) => {
-      tab.addEventListener('click', () => selectTab(index));
+      tab.addEventListener('click', () => {
+        selectTab(index);
+        tab.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'smooth' });
+      });
+      tab.addEventListener('keydown', (event) => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        let nextIndex = index;
+        if (event.key === 'ArrowLeft') nextIndex = (index - 1 + mmTabs.length) % mmTabs.length;
+        if (event.key === 'ArrowRight') nextIndex = (index + 1) % mmTabs.length;
+        if (event.key === 'Home') nextIndex = 0;
+        if (event.key === 'End') nextIndex = mmTabs.length - 1;
+        selectTab(nextIndex);
+        mmTabs[nextIndex].focus();
+      });
     });
 
     // The indicator is width:0 until JS paints it, so settle it on load and
