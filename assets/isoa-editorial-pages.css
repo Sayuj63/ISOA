@@ -1,0 +1,141 @@
+/* Our Story, Sustainability and Contact use the same 10px panel system and
+   San Francisco type scale as the rest of the site. Keep these adjustments
+   page-scoped: the SS sections are also used on the homepage and PDP. */
+
+body.page-our-story {
+  --isoa-story-gap: 10px;
+}
+
+/* Place the opening line in the clear sky, below the overlaid navigation.
+   The theme editor changed this hero to a row layout with bottom alignment,
+   which put dark text across the dark boat and the two figures. */
+body.page-our-story [id*="hero_bxzGJg"] .hero__content-wrapper {
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+}
+
+body.page-our-story [id*="hero_bxzGJg"] .text-block,
+body.page-our-story [id*="hero_bxzGJg"] .text-block p {
+  color: #282622 !important;
+}
+
+/* Shared editorial card copy. The section defaults were 11–12px, noticeably
+   smaller than the site's 13–14px body copy. */
+body.page-our-story .content-for-layout [id*="ss_image_with_text_"] [class*="image-with-heading-"] :is(h1, h2, h3, p),
+body.page-sustainability .content-for-layout [id*="ss_image_with_text_"] [class*="image-with-heading-"] :is(h1, h2, h3, p) {
+  font-size: 24px !important;
+  line-height: 1.25 !important;
+  letter-spacing: -0.01em !important;
+}
+
+body.page-our-story .content-for-layout [id*="ss_image_with_text_"] [class*="image-with-text-"] :is(p, li),
+body.page-sustainability .content-for-layout [id*="ss_image_with_text_"] [class*="image-with-text-"] :is(p, li) {
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
+
+body.page-our-story [id*="ss_image_with_text_15_VLxknD"] [class*="image-text-heading-"] :is(h1, h2, h3, p) {
+  font-size: 24px !important;
+  line-height: 1.25 !important;
+}
+
+body.page-our-story [id*="ss_image_with_text_15_VLxknD"] [class*="image-text-text-"] :is(p, li) {
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+}
+
+body.page-our-story [id*="ss_image_with_text_15_VLxknD"] [class*="image-text-toggle-text-"] {
+  font-size: 20px !important;
+  line-height: 1.3 !important;
+}
+
+/* Sustainability uses alternating 0/18/24px section padding in the editor.
+   Each visual card now contributes 5px at both ends, giving a steady 10px
+   join while its 40px / 16px site rail stays unchanged. */
+body.page-sustainability .content-for-layout > .shopify-section[id*="ss_image_with_text_"] > div[class^="section-"] {
+  padding-block: 5px !important;
+}
+
+body.page-sustainability .content-for-layout > .shopify-section[id*="ss_featured_collection_"] > div[class^="section-"] {
+  padding-block: 5px !important;
+}
+
+body.page-sustainability .content-for-layout [class$="-settings"] {
+  border-radius: 10px !important;
+  overflow: hidden !important;
+}
+
+body.page-sustainability .content-for-layout [class*="image-with-image-"],
+body.page-sustainability .content-for-layout [class*="image-with-content-"] {
+  border-radius: 0 !important;
+}
+
+body.page-sustainability .content-for-layout .hero__container,
+body.page-sustainability .content-for-layout .hero__media-grid,
+body.page-sustainability .content-for-layout .hero__media-wrapper,
+body.page-sustainability .content-for-layout .hero__media {
+  border-radius: 10px !important;
+  overflow: hidden !important;
+}
+
+/* Contact SEND: use the normal outlined pill footprint. The inherited
+   direction-hover rule compressed it to 59x24px on phones. */
+body.page-contact-us .shopify-section button[class*="ai-contact-form-submit-"] {
+  display: block !important;
+  width: 200px !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  height: 32px !important;
+  min-height: 32px !important;
+  max-height: 32px !important;
+  margin: 16px auto 0 !important;
+  padding: 0 20px !important;
+  border: 1px solid #67645e !important;
+  border-radius: 999px !important;
+  background-color: transparent !important;
+  color: #67645e !important;
+  font: 500 14px/30px -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif !important;
+  letter-spacing: 0.04em !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body.page-contact-us .shopify-section button[class*="ai-contact-form-submit-"]:hover {
+    background-color: #67645e !important;
+    color: #fff !important;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  body.page-our-story .content-for-layout [id*="ss_image_with_text_"] [class*="image-with-heading-"] :is(h1, h2, h3, p),
+  body.page-sustainability .content-for-layout [id*="ss_image_with_text_"] [class*="image-with-heading-"] :is(h1, h2, h3, p) {
+    font-size: 20px !important;
+  }
+
+  body.page-our-story .content-for-layout [id*="ss_image_with_text_"] [class*="image-with-text-"] :is(p, li),
+  body.page-sustainability .content-for-layout [id*="ss_image_with_text_"] [class*="image-with-text-"] :is(p, li) {
+    font-size: 13px !important;
+  }
+
+  body.page-our-story [id*="ss_image_with_text_15_VLxknD"] [class*="image-text-heading-"] :is(h1, h2, h3, p) {
+    font-size: 20px !important;
+  }
+
+  body.page-our-story [id*="ss_image_with_text_15_VLxknD"] [class*="image-text-text-"] :is(p, li) {
+    font-size: 13px !important;
+  }
+
+  body.page-our-story [id*="ss_image_with_text_15_VLxknD"] [class*="image-text-toggle-text-"] {
+    font-size: 16px !important;
+  }
+
+  body.page-contact-us .shopify-section button[class*="ai-contact-form-submit-"] {
+    width: 180px !important;
+    height: 28px !important;
+    min-height: 28px !important;
+    max-height: 28px !important;
+    font-size: 13px !important;
+    line-height: 26px !important;
+  }
+}

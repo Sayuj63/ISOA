@@ -536,6 +536,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     {{ content_for_header }}
 
+    {% if page.handle == 'our-story' or page.handle == 'sustainability' or page.handle == 'contact-us' %}
+      {{ 'isoa-editorial-pages.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+
   </head>
 
   <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }} template-{{ template.name }}{% if page %} page-{{ page.handle }}{% endif %}">
