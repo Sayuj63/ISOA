@@ -78,6 +78,10 @@ body.page-sustainability .content-for-layout .hero__media {
   overflow: hidden !important;
 }
 
+body.page-sustainability [id*="hero_efkYrN"] .hero {
+  padding-bottom: 5px !important;
+}
+
 /* Contact SEND: use the normal outlined pill footprint. The inherited
    direction-hover rule compressed it to 59x24px on phones. */
 body.page-contact-us .shopify-section button[class*="ai-contact-form-submit-"] {
