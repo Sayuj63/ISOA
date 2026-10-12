@@ -375,12 +375,13 @@
     height: 51px;
     outline: none;
     box-shadow: none;
+    background-color: #f4f3f0;
     font-size: 16px;
   }
 
   .isoa-drawer .isoa-sd__input:focus-visible {
     outline: none;
-    background-color: #f4f3f0;
+    background-color: #eeece8;
   }
 
   .isoa-sd__suggestions {
