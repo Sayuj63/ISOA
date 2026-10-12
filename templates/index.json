@@ -58,6 +58,7 @@
         "hero_tagline_text",
         "hero_routine_button"
       ],
+      "custom_css": [],
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "video",
@@ -138,12 +139,12 @@
       "settings": {
         "collection": "frontpage",
         "collection_show": 4,
-        "slider_view": 3,
+        "slider_view": 3.4,
         "slider_view_mobile": 1.2,
-        "slider_gap": 40,
+        "slider_gap": 16,
         "slider_gap_mobile": 12,
-        "slide_padding_vertical": 28,
-        "slide_padding_vertical_mobile": 16,
+        "slide_padding_vertical": 16,
+        "slide_padding_vertical_mobile": 12,
         "slide_padding_horizontal": 16,
         "slide_padding_horizontal_mobile": 12,
         "slide_radius": 12,
@@ -244,10 +245,16 @@
     },
     "isoa_banner_bubbles": {
       "type": "isoa-banner",
+      "custom_css": [],
       "settings": {
+        "bundled": "bubbles",
+        "image_alt": "Drops of serum beside an open bottle",
         "heading": "one of everything really good",
+        "text": "<p>At isoua, our philosophy is to make one of everything really good. To us, that means a collection of intentional, high-performance essentials you reach for every day — the ones you love, rely on, and always come back to.</p>",
         "button_label": "SHOP ISOUA",
-        "button_link": "shopify://collections/all"
+        "button_link": "shopify://collections/all",
+        "style": "card",
+        "radius": 10
       }
     },
     "hero_hLYCmb": {
@@ -637,8 +644,8 @@
         "section_width": "page-width",
         "extend_media": false,
         "color_scheme": "scheme-1",
-        "padding-block-start": 20,
-        "padding-block-end": 20
+        "padding-block-start": 12,
+        "padding-block-end": 12
       }
     },
     "product_hotspots_7xKcFa": {
@@ -817,8 +824,8 @@
         "margin_bottom": 0,
         "margin_horizontal": 0.5,
         "margin_horizontal_mobile": 0,
-        "padding_top": 28,
-        "padding_bottom": 28,
+        "padding_top": 12,
+        "padding_bottom": 12,
         "padding_horizontal": 2,
         "padding_horizontal_mobile": 1,
         "width": "page",
@@ -1185,8 +1192,8 @@
         "margin_bottom": 0,
         "margin_horizontal": 0,
         "margin_horizontal_mobile": 0,
-        "padding_top": 28,
-        "padding_bottom": 28,
+        "padding_top": 12,
+        "padding_bottom": 0,
         "padding_horizontal": 5,
         "padding_horizontal_mobile": 1.5,
         "full_width": true,
