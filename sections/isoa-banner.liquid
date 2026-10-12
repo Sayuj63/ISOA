@@ -76,7 +76,7 @@
   {%- endfor -%}
 {%- endcapture -%}
 
-<section class="isoa-banner isoa-banner-{{ section.id }} isoa-banner--{{ section.settings.style | default: 'card' }}" style="--isoa-banner-radius: {{ section.settings.radius | default: 20 }}px;">
+<section class="isoa-banner isoa-banner-{{ section.id }} isoa-banner--{{ section.settings.style | default: 'card' }}" style="--isoa-banner-radius: {{ section.settings.radius | default: 10 }}px;">
   <div class="isoa-banner__inner">
     <picture class="isoa-banner__media">
       <source
@@ -139,7 +139,7 @@
     aspect-ratio: var(--isoa-banner-ratio);
     overflow: hidden;
     /* 20px matches the rounded homepage hero; set per instance. */
-    border-radius: var(--isoa-banner-radius, 20px);
+    border-radius: var(--isoa-banner-radius, 10px);
     background-color: #f8f8fa;
   }
 
