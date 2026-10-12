@@ -1098,31 +1098,31 @@
         "item_rX4Kn9": {
           "type": "item",
           "settings": {
-            "toggle_text": "Heading 1",
-            "heading": "<h2>Heading 1</h2>",
-            "text": "<p>Welcome your customers to your store by sharing temporary offers or explaining to them what your products are about.</p>",
+            "toggle_text": "mission",
+            "heading": "<p>To RESTORE, PROTECT, and NURTURE the skin you have now for lasting results that reveal themselves over time.</p>",
+            "text": "",
             "button_label": "OUR VALUES",
-            "button_link": ""
+            "button_link": "shopify://pages/our-story"
           }
         },
         "item_GqY7cp": {
           "type": "item",
           "settings": {
-            "toggle_text": "Heading 2",
-            "heading": "<h2>Heading 2</h2>",
-            "text": "<p>Create trust with your customers by explaining the story of your brand. Share your values or what is important to you.</p>",
+            "toggle_text": "philanthropy",
+            "heading": "<p>ISOUA FUTURES FOUNDATION supports organisations that work to dismantle the barriers that hold women back.</p>",
+            "text": "",
             "button_label": "OUR IMPACT",
-            "button_link": "shopify://pages/sustainability"
+            "button_link": "shopify://pages/impact"
           }
         },
         "item_LMDFXM": {
           "type": "item",
           "settings": {
-            "toggle_text": "Heading 3",
-            "heading": "<h2>Heading 3</h2>",
-            "text": "<p>Share information about your product with your customers. Describe a product, and share info about your production process...</p>",
+            "toggle_text": "sustainability",
+            "heading": "<p>From consciously-sourced ingredients to packaging made with post-consumer recycled materials, we’re committed to MINDFUL SKINCARE.</p>",
+            "text": "",
             "button_label": "OUR FOOTPRINT",
-            "button_link": "shopify://pages/privacy-policy"
+            "button_link": "shopify://pages/sustainability"
           }
         }
       },
