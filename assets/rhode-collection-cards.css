@@ -733,6 +733,63 @@ body.template-collection .product-grid .isoa-rc-subtitle {
   letter-spacing: 0.02em;
 }
 
+/* The editorial tile occupies the same card slot and uses the same content
+   and CTA insets. Its frame must follow the collection-specific card ratio,
+   not the shorter ratio used by shared cards elsewhere on the site. */
+body.template-collection .product-grid .isoa-rc-promo {
+  container-type: inline-size;
+}
+body.template-collection .product-grid .isoa-rc-promo__frame {
+  aspect-ratio: 432 / 523;
+}
+body.template-collection .product-grid .isoa-rc-promo__heading {
+  left: 28px;
+  right: 28px;
+  bottom: 28px;
+  font-family: var(--font-body--family);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  transition: opacity 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+body.template-collection .product-grid .isoa-rc-promo__cta {
+  box-sizing: border-box;
+  left: 12px;
+  right: 12px;
+  bottom: 16px;
+  height: clamp(36px, 11.24cqi, 48px);
+  padding: 0 clamp(10px, 3.75cqi, 16px);
+  border: 0;
+  background: #ffffff;
+  color: #67645e;
+  font-size: clamp(11px, 3.85cqi, 17px);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: clamp(36px, 11.24cqi, 48px);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.55s cubic-bezier(0.76, 0, 0.24, 1) 0.15s,
+              transform 0.55s cubic-bezier(0.76, 0, 0.24, 1) 0.15s;
+}
+@media (hover: hover) and (pointer: fine) {
+  body.template-collection .product-grid .isoa-rc-promo:hover .isoa-rc-promo__heading,
+  body.template-collection .product-grid .isoa-rc-promo:focus-within .isoa-rc-promo__heading {
+    opacity: 0;
+  }
+  body.template-collection .product-grid .isoa-rc-promo:hover .isoa-rc-promo__cta,
+  body.template-collection .product-grid .isoa-rc-promo:focus-within .isoa-rc-promo__cta {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Until a promo photo is selected, keep the placeholder tile's copy readable. */
+body.template-collection .product-grid .isoa-rc-promo:has(svg.isoa-rc-promo__img) .isoa-rc-promo__heading {
+  color: #67645e;
+  text-shadow: none;
+}
+
 @media (max-width: 749px) {
   body.template-collection .product-grid .isoa-rc-frame {
     aspect-ratio: 175 / 289;
@@ -762,6 +819,30 @@ body.template-collection .product-grid .isoa-rc-subtitle {
   body.template-collection .product-grid .isoa-rc-title {
     font-size: 12px;
     line-height: 1.2;
+  }
+  body.template-collection .product-grid .isoa-rc-promo__frame {
+    aspect-ratio: 175 / 289;
+  }
+  body.template-collection .product-grid .isoa-rc-promo__heading {
+    left: 12px;
+    right: 12px;
+    bottom: 51px;
+    font-size: 12px;
+    line-height: 1.2;
+    opacity: 1;
+  }
+  body.template-collection .product-grid .isoa-rc-promo__cta {
+    border: 1px solid currentColor;
+    background: transparent;
+    color: var(--promo-text, #ffffff);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  body.template-collection .product-grid .isoa-rc-promo:has(svg.isoa-rc-promo__img) .isoa-rc-promo__cta {
+    color: #67645e;
   }
   /* One mobile CTA footprint for every tile in the collection grid. The
      site-wide compact type tokens were shrinking product pills to 151 × 24
