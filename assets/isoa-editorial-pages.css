@@ -3,7 +3,18 @@
    page-scoped: the SS sections are also used on the homepage and PDP. */
 
 body.page-our-story {
-  --isoa-story-gap: 10px;
+  --isoa-story-gap: 12px;
+}
+
+/* The values feature has a 20px seam between image and copy. Give each side
+   its own inner corners, matching the other 10px cards on this page. Keep the
+   stacked phone version joined so no background peeks through its seam. */
+@media screen and (min-width: 750px) {
+  body.page-our-story .content-for-layout .shopify-section[id*="ss_image_with_text_15_VLxknD"] [class*="image-text-image-"],
+  body.page-our-story .content-for-layout .shopify-section[id*="ss_image_with_text_15_VLxknD"] [class*="image-text-content-"] {
+    border-radius: 10px !important;
+    overflow: hidden !important;
+  }
 }
 
 /* Place the opening line in the clear sky, below the overlaid navigation.
@@ -49,15 +60,15 @@ body.page-our-story [id*="ss_image_with_text_15_VLxknD"] [class*="image-text-tog
   line-height: 1.3 !important;
 }
 
-/* Sustainability uses alternating 0/18/24px section padding in the editor.
-   Each visual card now contributes 5px at both ends, giving a steady 10px
-   join while its 40px / 16px site rail stays unchanged. */
+/* Each neighbouring card contributes 6px, giving a 12px visual join. The
+   final card contributes no bottom padding so it also sits 12px above the
+   footer panel, matching the collection page. */
 body.page-sustainability .content-for-layout > .shopify-section[id*="ss_image_with_text_"] > div[class^="section-"] {
-  padding-block: 5px !important;
+  padding-block: 6px !important;
 }
 
 body.page-sustainability .content-for-layout > .shopify-section[id*="ss_featured_collection_"] > div[class^="section-"] {
-  padding-block: 5px !important;
+  padding-block: 6px 0 !important;
 }
 
 body.page-sustainability .content-for-layout [class$="-settings"] {
@@ -79,7 +90,7 @@ body.page-sustainability .content-for-layout .hero__media {
 }
 
 body.page-sustainability [id*="hero_efkYrN"] .hero {
-  padding-bottom: 5px !important;
+  padding-bottom: 6px !important;
 }
 
 /* Contact SEND: use the normal outlined pill footprint. The inherited
