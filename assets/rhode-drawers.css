@@ -343,6 +343,18 @@
 }
 
 @media screen and (max-width: 749px) {
+  /* Search is an opaque, edge-to-edge surface on phones; only the cart keeps
+     the inset, dimmed-page treatment. */
+  .isoa-sd__panel.isoa-drawer {
+    width: 100dvw;
+    max-width: 100dvw;
+    height: 100dvh;
+    max-height: 100dvh;
+    margin: 0;
+    border-radius: 0;
+    background-color: #fff;
+  }
+
   .isoa-sd__head {
     padding: 18px 20px 16px;
     font-size: 16px;
@@ -361,7 +373,14 @@
 
   .isoa-drawer .isoa-sd__input {
     height: 51px;
+    outline: none;
+    box-shadow: none;
     font-size: 16px;
+  }
+
+  .isoa-drawer .isoa-sd__input:focus-visible {
+    outline: none;
+    background-color: #f4f3f0;
   }
 
   .isoa-sd__suggestions {

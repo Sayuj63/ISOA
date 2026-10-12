@@ -60,7 +60,7 @@
     <p class="rh-lip-shades__group-label">Core Shades</p>
   {%- endif -%}
 
-  <div class="{% if mode == 'hero' %}rh-lip-shades__core{% elsif mode == 'sticky' %}rh-lip-shades__sticky-list{% else %}rh-lip-shades__mobile-select{% endif %}"{% if mode == 'hero' %} aria-label="Core shades"{% elsif mode == 'sticky' %} aria-label="Lip tint shades"{% endif %}>
+  <div class="{% if mode == 'hero' %}rh-lip-shades__core{% elsif mode == 'sticky' %}rh-lip-shades__sticky-list{% else %}rh-lip-shades__mobile-wrap{% endif %}"{% if mode == 'hero' %} aria-label="Core shades"{% elsif mode == 'sticky' %} aria-label="Lip tint shades"{% endif %}>
     {%- if mode == 'mobile' -%}
       <button type="button" class="rh-lip-shades__mobile-select" data-lip-shade-trigger aria-haspopup="dialog" aria-expanded="false">
       <span
@@ -91,7 +91,13 @@
         {%- assign matching_variant = fallback_variant -%}
       {%- endif -%}
 
-      {%- if mode == 'sticky' or forloop.first == false -%}
+      {%- assign show_swatch = false -%}
+      {%- if mode == 'sticky' -%}
+        {%- assign show_swatch = true -%}
+      {%- elsif mode == 'hero' and forloop.first == false -%}
+        {%- assign show_swatch = true -%}
+      {%- endif -%}
+      {%- if show_swatch -%}
         <button
           class="rh-lip-swatch{% if shade_handle == 'pretzel' %} is-selected{% endif %}"
           type="button"
