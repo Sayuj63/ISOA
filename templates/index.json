@@ -731,7 +731,7 @@
         "heading_DDArrH": {
           "type": "heading",
           "settings": {
-            "heading": "<p><strong>mist your makeup</strong></p>",
+            "heading": "<p><strong>sweet, salty, here to stay</strong></p>",
             "heading_custom": false,
             "heading_font": "josefin_sans_n4",
             "heading_size": 28,
@@ -746,7 +746,7 @@
         "text_BRGXQR": {
           "type": "text",
           "settings": {
-            "text": "<p>Hydrating essentials for your everyday glam routine, including Highlight Milk, Pocket Bronze, and Little Glazing Mist. </p>",
+            "text": "<p>Pretzel is now a part of the core rhode lineup. Swipe it on for a shimmery warm mauve tint, a caramel-glazed pretzel scent, and nourished, hydrated lips.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
@@ -761,7 +761,7 @@
         "button_9pVLiq": {
           "type": "button",
           "settings": {
-            "button": "GET READY WITH RHODE",
+            "button": "A FOREVER THING",
             "url": "",
             "open_in_new_tab": false,
             "button_style": "non_outline",
