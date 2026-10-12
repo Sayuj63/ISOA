@@ -143,8 +143,9 @@
       gap: 6px;
     }
     .rhode-satc-{{ sid }} .rs-cta {
-      height: 44px;
-      padding: 0 20px;
+      height: 44px !important;
+      min-height: 44px !important;
+      padding: 0 20px !important;
       font-size: 11px;
     }
     .rhode-satc-{{ sid }} .rs-mobile-picker { position: relative; display: flex; align-items: center; min-width: 0; flex: 1 1 52%; height: 44px; overflow: hidden; border: 1px solid rgb(103 100 94 / 60%); border-radius: 999px; background: #fff; }
@@ -153,7 +154,7 @@
     .rhode-satc-{{ sid }} .rs-mobile-picker select { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
     .rhode-satc-{{ sid }} .rs-mobile-picker::after { content: ''; position: absolute; right: 12px; width: 0; height: 0; border: 5px solid transparent; border-top-color: currentColor; transform: translateY(3px); pointer-events: none; }
     .rhode-satc-{{ sid }} > form { display: flex; min-width: 0; flex: 1 1 48%; }
-    .rhode-satc-{{ sid }} > form .rs-cta { width: 100%; }
+    .rhode-satc-{{ sid }} > form .rs-cta { width: 100% !important; }
   }
 
   /* Kill Horizon's default sticky-add-to-cart on this template. */
