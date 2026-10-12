@@ -5,6 +5,7 @@
 {% endcomment %}
 
 {%- assign sid = section.id -%}
+{%- assign display_side_title = section.settings.side_title | replace: '’', "'" -%}
 
 <section
   class="rh-lip-ingredients rh-lip-ingredients--{{ sid }}"
@@ -36,7 +37,7 @@
       {%- endif -%}
 
       <span class="rh-lip-ingredients__mobile-side-title" aria-hidden="true">
-        {{ section.settings.side_title }}
+        {{ display_side_title | escape }}
       </span>
 
       <button
@@ -53,7 +54,7 @@
     <div class="rh-lip-ingredients__content">
       <div class="rh-lip-ingredients__education" data-education-panel>
         <div class="rh-lip-ingredients__side-title" aria-hidden="true">
-          {{ section.settings.side_title }}
+          {{ display_side_title | escape }}
         </div>
 
         <div class="rh-lip-ingredients__body">
@@ -152,14 +153,16 @@
   .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__side-title {
     justify-self: start;
     align-self: start;
-    font-family: 'DM Sans', var(--font-heading--family);
-    font-size: 33px;
+    font-family: var(--isoa-site-font, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif);
+    font-size: 28px;
     font-weight: 800;
-    letter-spacing: -0.045em;
-    line-height: 0.92;
+    letter-spacing: -0.03em;
+    word-spacing: -0.18em;
+    line-height: 1;
     writing-mode: vertical-rl;
     text-orientation: mixed;
     white-space: nowrap;
+    transform: translate(9px, 2px);
   }
 
   .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__body {
@@ -344,13 +347,14 @@
     .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__mobile-side-title {
       position: absolute;
       z-index: 2;
-      top: 18px;
-      left: 15px;
+      top: 20px;
+      left: 20px;
       display: block;
-      font-family: 'DM Sans', var(--font-heading--family);
-      font-size: 18px;
+      font-family: var(--isoa-site-font, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif);
+      font-size: 20px;
       font-weight: 800;
-      letter-spacing: -0.04em;
+      letter-spacing: -0.03em;
+      word-spacing: -0.18em;
       line-height: 1;
       writing-mode: vertical-rl;
       text-orientation: mixed;
