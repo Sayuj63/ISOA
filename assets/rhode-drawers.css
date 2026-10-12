@@ -773,7 +773,7 @@
   border-radius: 40px !important;
   background-color: var(--rhode-drawer-ink) !important;
   color: #ffffff !important;
-  font-size: 16.88px !important;
+  font-size: 16px !important;
   font-weight: 400 !important;
   letter-spacing: 0.3376px !important;
   line-height: 1.5 !important;
@@ -1007,8 +1007,8 @@
      type down, so the pills keep their 46.2 / 30.2 heights. */
   .isoa-cd__checkout,
   .isoa-cd__add {
-    font-size: 14.78px !important;
-    letter-spacing: 0.2956px !important;
+    font-size: 14px !important;
+    letter-spacing: 0.28px !important;
   }
 
   .isoa-cd__add {
@@ -1016,7 +1016,7 @@
     height: 30px !important;
     margin-block-start: 8px;
     padding: 0 14px !important;
-    font-size: 14.78px !important;
+    font-size: 14px !important;
     line-height: 30px !important;
   }
 
