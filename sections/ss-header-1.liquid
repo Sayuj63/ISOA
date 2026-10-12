@@ -775,10 +775,16 @@
     transition: left .3s cubic-bezier(.76,0,.24,1), width .3s cubic-bezier(.76,0,.24,1);
   }
 
-  /* Panels — one per tab, laid side by side and translated into view. The
-     mobile-inner shell owns horizontal clipping. Clipping this transformed
-     strip itself would keep the clip rectangle on panel one and make every
-     later tab appear blank after the translate. */
+  /* Clip the sliding panels at the card column, not at the drawer's wider
+     shell. Otherwise 16px of the neighbouring tab's cards peeks through the
+     side gutters. The viewport stays put while the strip moves inside it. */
+  .header-mm-viewport-{{ section.id }} {
+    flex: 0 0 auto;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* Panels — one per tab, laid side by side and translated into view. */
   .header-mm-panels-{{ section.id }} {
     display: flex;
     align-items: flex-start;
@@ -1544,6 +1550,7 @@
                   <span class="header-mm-indicator-{{ section.id }}"></span>
                 </div>
 
+                <div class="header-mm-viewport-{{ section.id }}">
                 <div class="header-mm-panels-{{ section.id }}">
                   {%- for block in section.blocks -%}
                     <div
@@ -1590,6 +1597,7 @@
                       {%- endif -%}
                     </div>
                   {%- endfor -%}
+                </div>
                 </div>
               {%- endif -%}
 
