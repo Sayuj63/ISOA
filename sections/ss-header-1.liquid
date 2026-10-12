@@ -766,6 +766,11 @@
   }
 
   .header-mm-card-title-{{ section.id }} {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     font-size: 11px;
     font-weight: 700;
     line-height: 1.2;
@@ -775,7 +780,7 @@
   }
 
   .header-mm-card-sub-{{ section.id }} {
-    font-size: var(--mm-text);
+    font-size: 11px;
     font-weight: 400;
     line-height: 1.5;
     letter-spacing: 0.02em;
@@ -830,7 +835,7 @@
 
   .header-mm-links-{{ section.id }} a {
     margin: 0;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 700;
     line-height: 1.2;
     color: {{ link_color }};
@@ -847,7 +852,7 @@
     padding-top: 20px;
     border-top: 1px solid #c4c4c4;
     color: {{ link_color }};
-    font-size: 12px;
+    font-size: 11px;
     line-height: 1.3;
   }
 
