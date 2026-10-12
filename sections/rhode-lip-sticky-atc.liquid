@@ -20,6 +20,13 @@
     {% render 'rhode-lip-shade-list', product: product, mode: 'mobile' %}
   </div>
 
+  <dialog class="rh-lip-shade-dialog" data-lip-shade-dialog aria-label="Choose a shade">
+    <div class="rh-lip-shade-dialog__panel">
+      <button type="button" class="rh-lip-shade-dialog__close" data-lip-shade-close aria-label="Close shade picker">−</button>
+      {% render 'rhode-lip-shade-list', product: product, mode: 'sheet' %}
+    </div>
+  </dialog>
+
   <product-form-component
     class="rh-lip-sticky__form-component"
     data-section-id="{{ section.id }}"
@@ -243,12 +250,47 @@
     }
 
     .rh-lip-sticky--{{ sid }} .rh-lip-shades__mobile-select select {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
+      appearance: none;
+    }
+
+    .rh-lip-sticky--{{ sid }} .rh-lip-shades__mobile-select {
+      border: 0;
+      color: inherit;
       cursor: pointer;
-      opacity: 0;
+      text-align: left;
+    }
+
+    .rh-lip-shade-dialog {
+      width: min(520px, calc(100vw - 32px));
+      max-width: none;
+      max-height: min(720px, calc(100dvh - 32px));
+      padding: 0;
+      border: 0;
+      border-radius: 12px;
+      background: #d9d7d1;
+      color: #67645e;
+      overflow: hidden;
+    }
+
+    .rh-lip-shade-dialog::backdrop { background: rgb(38 34 30 / 70%); }
+    .rh-lip-shade-dialog__panel { position: relative; max-height: inherit; overflow-y: auto; padding: 56px 32px 32px; }
+    .rh-lip-shade-dialog__close { position: absolute; top: 16px; right: 20px; width: 28px; height: 28px; border: 0; border-radius: 50%; background: #67645e; color: #fff; font-size: 25px; line-height: 22px; cursor: pointer; }
+    .rh-lip-shades__sheet-heading { margin: 0 0 14px; font-size: 17px; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; }
+    .rh-lip-shades__sheet-group + .rh-lip-shades__sheet-group { margin-top: 28px; }
+    .rh-lip-shade-option { display: flex; align-items: center; width: 100%; min-height: 56px; gap: 12px; padding: 10px 14px; border: 0; border-radius: 10px; background: transparent; color: inherit; font: inherit; font-size: 16px; text-align: left; cursor: pointer; }
+    .rh-lip-shade-option.is-selected { background: #f7f6f4; }
+    .rh-lip-shade-option[disabled] { cursor: default; }
+    .rh-lip-shade-option__dot { width: 34px; height: 34px; flex: 0 0 34px; border: 1px solid #fff; border-radius: 50%; background-image: var(--shade-image); background-position: center; background-size: cover; box-shadow: 0 0 0 1px rgb(103 100 94 / 55%); }
+    .rh-lip-shade-option strong { font-weight: 700; }
+
+    @media (min-width: 750px) {
+      .rh-lip-shade-dialog { position: fixed; inset: auto 40px 104px auto; margin: 0; }
+    }
+
+    @media (max-width: 749px) {
+      .rh-lip-shade-dialog { position: fixed; inset: auto 16px 84px; margin: 0; width: auto; }
+      .rh-lip-shade-dialog__panel { padding: 56px 16px 18px; }
+      .rh-lip-shade-option { min-height: 54px; font-size: 15px; }
     }
 
     .rh-lip-sticky--{{ sid }} .rh-lip-sticky__form-component form,
@@ -277,6 +319,33 @@
     bar.dataset.stickyReady = 'true';
 
     const trigger = document.querySelector('[data-rh-hero], .product-information');
+    const dialog = bar.querySelector('[data-lip-shade-dialog]');
+    const picker = bar.querySelector('[data-lip-shade-trigger]');
+    const close = bar.querySelector('[data-lip-shade-close]');
+    const variantInput = bar.querySelector('[data-lip-sticky-variant]');
+    const mobileLabel = bar.querySelector('[data-lip-shade-trigger] .rh-lip-shades__mobile-label');
+    const mobileDot = bar.querySelector('[data-lip-shade-trigger] .rh-lip-shades__mobile-dot');
+    const buyStrong = bar.querySelector('.rh-lip-sticky__buy-mobile strong');
+    const choose = (button) => {
+      if (!button || button.disabled || !button.dataset.variantId) return;
+      variantInput.value = button.dataset.variantId;
+      bar.querySelectorAll('[data-lip-shade]').forEach((item) => {
+        const selected = item.dataset.shadeName === button.dataset.shadeName;
+        item.classList.toggle('is-selected', selected);
+        item.setAttribute('aria-pressed', selected ? 'true' : 'false');
+      });
+      bar.querySelectorAll('[data-lip-shade-option]').forEach((item) => item.classList.toggle('is-selected', item.dataset.shadeName === button.dataset.shadeName));
+      if (mobileLabel) mobileLabel.textContent = button.dataset.shadeName;
+      if (mobileDot) mobileDot.style.setProperty('--shade-image', button.querySelector('.rh-lip-shade-option__dot')?.style.getPropertyValue('--shade-image') || button.style.getPropertyValue('--shade-image'));
+      if (buyStrong && button.dataset.price) buyStrong.textContent = button.dataset.price;
+      dialog?.close();
+      picker?.setAttribute('aria-expanded', 'false');
+    };
+    bar.querySelectorAll('[data-lip-shade]').forEach((button) => button.addEventListener('click', () => choose(button)));
+    bar.querySelectorAll('[data-lip-shade-option]').forEach((button) => button.addEventListener('click', () => choose(button)));
+    picker?.addEventListener('click', () => { dialog?.showModal(); picker.setAttribute('aria-expanded', 'true'); });
+    close?.addEventListener('click', () => { dialog?.close(); picker?.setAttribute('aria-expanded', 'false'); });
+    dialog?.addEventListener('click', (event) => { if (event.target === dialog) { dialog.close(); picker?.setAttribute('aria-expanded', 'false'); } });
     const updateFallback = () => bar.classList.toggle('is-visible', window.scrollY > 420);
 
     if ('IntersectionObserver' in window && trigger) {

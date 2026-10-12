@@ -46,6 +46,7 @@
     min-width: 0;
     flex: 1 1 auto;
   }
+  .rhode-satc-{{ sid }} .rs-mobile-picker { display: none; }
   .rhode-satc-{{ sid }} .rs-title {
     margin: 0;
     font-size: 14px;
@@ -132,8 +133,7 @@
       gap: 10px;
     }
     .rhode-satc-{{ sid }} .rs-title {
-      font-size: 11px;
-      letter-spacing: 0.1em;
+      display: none;
     }
     .rhode-satc-{{ sid }} .rs-swatch {
       width: 24px;
@@ -143,9 +143,17 @@
       gap: 6px;
     }
     .rhode-satc-{{ sid }} .rs-cta {
-      padding: 12px 20px;
+      height: 44px;
+      padding: 0 20px;
       font-size: 11px;
     }
+    .rhode-satc-{{ sid }} .rs-mobile-picker { position: relative; display: flex; align-items: center; min-width: 0; flex: 1 1 52%; height: 44px; overflow: hidden; border: 1px solid rgb(103 100 94 / 60%); border-radius: 999px; background: #fff; }
+    .rhode-satc-{{ sid }} .rs-mobile-picker img { width: 34px; height: 34px; margin-left: 6px; border-radius: 50%; object-fit: contain; }
+    .rhode-satc-{{ sid }} .rs-mobile-picker span { min-width: 0; padding: 0 26px 0 10px; overflow: hidden; color: {{ section.settings.title_color }}; font-size: 13px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+    .rhode-satc-{{ sid }} .rs-mobile-picker select { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+    .rhode-satc-{{ sid }} .rs-mobile-picker::after { content: ''; position: absolute; right: 12px; width: 0; height: 0; border: 5px solid transparent; border-top-color: currentColor; transform: translateY(3px); pointer-events: none; }
+    .rhode-satc-{{ sid }} > form { display: flex; min-width: 0; flex: 1 1 48%; }
+    .rhode-satc-{{ sid }} > form .rs-cta { width: 100%; }
   }
 
   /* Kill Horizon's default sticky-add-to-cart on this template. */
@@ -191,10 +199,19 @@
     {%- endif -%}
   </div>
 
+  <div class="rs-mobile-picker">
+    {%- assign mobile_image = v.featured_image | default: p.featured_image -%}
+    {%- if mobile_image != blank -%}<img data-rs-mobile-image src="{{ mobile_image | image_url: width: 96 }}" alt="">{%- endif -%}
+    <span data-rs-mobile-label>{{ v.title | default: p.title }}</span>
+    <select aria-label="Choose variant" data-rs-variant-select>
+      {%- for variant in p.variants -%}<option value="{{ variant.id }}" data-price="{{ variant.price | money }}" data-label="{{ variant.title | escape }}" data-image="{% if variant.featured_image != blank %}{{ variant.featured_image | image_url: width: 96 }}{% elsif p.featured_image != blank %}{{ p.featured_image | image_url: width: 96 }}{% endif %}" {% if variant.id == v.id %}selected{% endif %}>{{ variant.title }}</option>{%- endfor -%}
+    </select>
+  </div>
+
   <form method="post" action="/cart/add" enctype="multipart/form-data">
-    <input type="hidden" name="id" value="{{ v.id }}">
+    <input type="hidden" name="id" value="{{ v.id }}" data-rs-variant-id>
     <input type="hidden" name="quantity" value="1">
-    <button type="submit" class="rs-cta" {% unless v.available %}disabled{% endunless %}>
+    <button type="submit" class="rs-cta" data-rs-cta {% unless v.available %}disabled{% endunless %}>
       {%- if v.available -%}
         {{ btn_label }} - {{ v.price | money }}
       {%- else -%}
@@ -208,6 +225,18 @@
   (function () {
     var bar = document.querySelector('.rhode-satc-{{ sid }}');
     if (!bar) return;
+    var select = bar.querySelector('[data-rs-variant-select]');
+    var id = bar.querySelector('[data-rs-variant-id]');
+    var label = bar.querySelector('[data-rs-mobile-label]');
+    var image = bar.querySelector('[data-rs-mobile-image]');
+    var cta = bar.querySelector('[data-rs-cta]');
+    if (select) select.addEventListener('change', function () {
+      var option = select.selectedOptions[0];
+      if (id) id.value = option.value;
+      if (label) label.textContent = option.dataset.label || option.textContent;
+      if (image && option.dataset.image) image.src = option.dataset.image;
+      if (cta && option.dataset.price) cta.textContent = '{{ btn_label }} - ' + option.dataset.price;
+    });
     var trigger = document.querySelector('{{ section.settings.hero_selector }}');
     if (!trigger) {
       // Fallback: show once user scrolls 400px down.

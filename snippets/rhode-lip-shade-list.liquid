@@ -5,7 +5,7 @@
   enable automatically by matching the variant title handle.
 
   @param {product} product - Current product.
-  @param {string} mode - hero, sticky, or mobile.
+  @param {string} mode - hero, sticky, mobile, or sheet.
 {% enddoc %}
 
 {%- liquid
@@ -14,6 +14,36 @@
 -%}
 
 <div class="rh-lip-shades__renderer rh-lip-shades__renderer--{{ mode }}">
+  {%- if mode == 'sheet' -%}
+    <div class="rh-lip-shades__sheet-group">
+      <p class="rh-lip-shades__sheet-heading">Limited Edition</p>
+      {%- assign limited_shade = shade_data.first | split: '|' -%}
+      <button type="button" class="rh-lip-shade-option" data-lip-shade-option aria-disabled="true" disabled>
+        <span class="rh-lip-shade-option__dot" style="--shade-image: url('https://www.rhodeskin.com/cdn/shop/files/{{ limited_shade[1] }}')"></span>
+        <span><strong>{{ limited_shade[0] }}</strong> - {{ limited_shade[2] }}</span>
+      </button>
+    </div>
+    <div class="rh-lip-shades__sheet-group">
+      <p class="rh-lip-shades__sheet-heading">Core Shades</p>
+      {%- for shade_record in shade_data offset: 1 -%}
+        {%- assign shade = shade_record | split: '|' -%}
+        {%- assign shade_name = shade[0] -%}
+        {%- assign shade_handle = shade_name | handleize -%}
+        {%- assign matching_variant = blank -%}
+        {%- for variant in product.variants -%}
+          {%- assign variant_handle = variant.title | handleize -%}
+          {%- if variant_handle == shade_handle -%}{%- assign matching_variant = variant -%}{%- break -%}{%- endif -%}
+        {%- endfor -%}
+        {%- if product.has_only_default_variant and shade_handle == 'pretzel' -%}{%- assign matching_variant = fallback_variant -%}{%- endif -%}
+        <button type="button" class="rh-lip-shade-option{% if shade_handle == 'pretzel' %} is-selected{% endif %}" data-lip-shade-option
+          data-shade-name="{{ shade_name | escape }}" data-shade-description="{{ shade[2] | escape }}"
+          {% if matching_variant != blank %}data-lip-shade data-variant-id="{{ matching_variant.id }}" data-price="{{ matching_variant.price | money_without_trailing_zeros | escape }}"{% else %}aria-disabled="true" disabled{% endif %}>
+          <span class="rh-lip-shade-option__dot" style="--shade-image: url('https://www.rhodeskin.com/cdn/shop/files/{{ shade[1] }}')"></span>
+          <span><strong>{{ shade_name }}</strong> - {{ shade[2] }}</span>
+        </button>
+      {%- endfor -%}
+    </div>
+  {%- else -%}
   {%- if mode == 'hero' -%}
     <div class="rh-lip-shades__limited" aria-label="Limited edition shades">
       {%- assign limited_shade = shade_data.first | split: '|' -%}
@@ -32,6 +62,7 @@
 
   <div class="{% if mode == 'hero' %}rh-lip-shades__core{% elsif mode == 'sticky' %}rh-lip-shades__sticky-list{% else %}rh-lip-shades__mobile-select{% endif %}"{% if mode == 'hero' %} aria-label="Core shades"{% elsif mode == 'sticky' %} aria-label="Lip tint shades"{% endif %}>
     {%- if mode == 'mobile' -%}
+      <button type="button" class="rh-lip-shades__mobile-select" data-lip-shade-trigger aria-haspopup="dialog" aria-expanded="false">
       <span
         class="rh-lip-shades__mobile-dot"
         aria-hidden="true"
@@ -41,7 +72,7 @@
       <svg class="rh-lip-shades__chevron" viewBox="0 0 10 6" aria-hidden="true">
         <path d="M4.29296 5.292 0.707479 1.70717C0.0774266 1.07723.523574 0 1.41452 0h7.17096c.89095 0 1.33709 1.07723.70704 1.70717L5.70704 5.292a1 1 0 0 1-1.41408 0Z" fill="currentColor"/>
       </svg>
-      <select aria-label="Shade" data-lip-shade-select>
+      </button>
     {%- endif -%}
 
     {%- for shade_record in shade_data -%}
@@ -60,14 +91,7 @@
         {%- assign matching_variant = fallback_variant -%}
       {%- endif -%}
 
-      {%- if mode == 'mobile' -%}
-        <option
-          value="{{ matching_variant.id | default: '' }}"
-          data-shade-name="{{ shade_name | escape }}"
-          {% if shade_handle == 'pretzel' %}selected{% endif %}
-          {% if matching_variant == blank %}disabled{% endif %}
-        >{{ shade_name }}</option>
-      {%- elsif mode == 'sticky' or forloop.first == false -%}
+      {%- if mode == 'sticky' or forloop.first == false -%}
         <button
           class="rh-lip-swatch{% if shade_handle == 'pretzel' %} is-selected{% endif %}"
           type="button"
@@ -78,13 +102,12 @@
           {% if matching_variant != blank %}data-lip-shade data-variant-id="{{ matching_variant.id }}"{% endif %}
           data-shade-name="{{ shade_name | escape }}"
           data-shade-description="{{ shade[2] | escape }}"
+          {% if matching_variant != blank %}data-price="{{ matching_variant.price | money_without_trailing_zeros | escape }}"{% endif %}
           style="--shade-image: url('https://www.rhodeskin.com/cdn/shop/files/{{ shade[1] }}')"
         ></button>
       {%- endif -%}
     {%- endfor -%}
 
-    {%- if mode == 'mobile' -%}
-      </select>
-    {%- endif -%}
   </div>
+  {%- endif -%}
 </div>
