@@ -59,6 +59,13 @@
   }
 }
 
+/* The active homepage hero uses a clipping container around its media.
+   Round both layers alike so the visible corners are exactly 10px. */
+body.template-index [id*="hero_gVmLGg"] .hero__container,
+body.template-index [id*="hero_gVmLGg"] .hero__media {
+  border-radius: 10px !important;
+}
+
 /* =============================================================================
    About Us / Our Story page — mobile polish (2026-08-12)
    -----------------------------------------------------------------------------
