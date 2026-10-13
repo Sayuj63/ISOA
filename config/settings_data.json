@@ -11,6 +11,7 @@
   "current": {
     "logo_height": 56,
     "logo_height_mobile": 100,
+    "favicon": "shopify://shop_images/c1f4a9f4-6c5f-49d6-8165-1d80532beab7.png",
     "type_body_font": "inter_n4",
     "type_subheading_font": "inter_n5",
     "type_heading_font": "inter_i8",
@@ -86,6 +87,26 @@
     "variant_button_border_width": 1,
     "variant_button_radius": 14,
     "variant_button_width": "equal-width-buttons",
+    "sections": {
+      "isoa-search-drawer": {
+        "type": "isoa-search-drawer",
+        "settings": {
+          "collection": "",
+          "suggestions_limit": 11
+        }
+      },
+      "isoa-cart-drawer": {
+        "type": "isoa-cart-drawer",
+        "settings": {
+          "auto_open": true,
+          "upsell_collection": "",
+          "upsell_title": "Complete your isoua",
+          "upsell_emphasis": "ROUTINE",
+          "checkout_label": "Checkout",
+          "tax_note": "*shipping, taxes, and discounts calculated at checkout."
+        }
+      }
+    },
     "content_for_index": [],
     "color_schemes": {
       "scheme-1": {
