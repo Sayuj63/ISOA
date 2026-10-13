@@ -63,7 +63,6 @@
       "settings": {
         "media_type_1": "video",
         "image_1": "shopify://shop_images/woman-applying-lipstick.jpg",
-        "video_1": "shopify://files/videos/4f1ebd2d6b534f728f96e914064fd7f5.mp4",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": true,
