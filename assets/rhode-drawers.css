@@ -389,10 +389,6 @@
     font-size: 13px;
   }
 
-  .isoa-sd__product-title {
-    font-size: 12px;
-  }
-
   .isoa-sd__rule {
     margin-inline: 17px;
   }
@@ -429,7 +425,7 @@
   }
 
   .isoa-sd__product-title {
-    font-size: 14px;
+    font-size: 12px;
     line-height: 16.8px;
     letter-spacing: 0.2796px;
   }
