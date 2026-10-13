@@ -509,6 +509,21 @@
         "padding-block-end": 0
       }
     },
+    "isoa_pdp_trust": {
+      "type": "isoa-pdp-trust",
+      "blocks": {
+        "trust_vegan": { "type": "badge", "settings": { "icon": "vegan", "label": "Vegan" } },
+        "trust_cruelty_free": { "type": "badge", "settings": { "icon": "cruelty_free", "label": "Cruelty Free" } },
+        "trust_non_comedogenic": { "type": "badge", "settings": { "icon": "non_comedogenic", "label": "Non Comedogenic" } }
+      },
+      "block_order": ["trust_vegan", "trust_cruelty_free", "trust_non_comedogenic"],
+      "settings": {
+        "shipping_text": "Free shipping on prepaid orders",
+        "delivery_text": "5–7 working days",
+        "offer_tag": "Sitewide",
+        "offer_text": "Free shipping pan India on prepaid orders."
+      }
+    },
     "ss_slider_5_m7VKpN": {
       "type": "ss-slider-5",
       "blocks": {
@@ -1977,6 +1992,7 @@
   },
   "order": [
     "main",
+    "isoa_pdp_trust",
     "ss_slider_5_m7VKpN",
     "ss_image_split_row_TniKMq",
     "ss_targetting_animation_Wqer7m",
