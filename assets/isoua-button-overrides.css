@@ -770,3 +770,73 @@ body.page-our-story .shopify-section[id*="ss_featured_collection_6_new_ppPVk9"] 
     padding: 0 0 16px !important;
   }
 }
+
+/* Impact: all three hero photos use the same 10px clipping radius as the
+   other editorial pages. The hero media was 10px but its outer clip was 20px. */
+body.page-impact .content-for-layout .hero__container,
+body.page-impact .content-for-layout .hero__media-grid,
+body.page-impact .content-for-layout .hero__media-wrapper,
+body.page-impact .content-for-layout .hero__media {
+  border-radius: 10px !important;
+  overflow: hidden !important;
+}
+
+/* The shippers' image and copy are one card. Remove the extra inset above and
+   below the image; the outer card alone owns the rounded corners. */
+body.page-impact [id*="ss_image_with_text_14_nEexmb"] [class$="-settings"] {
+  padding-block: 0 !important;
+}
+
+body.page-impact [id*="ss_image_with_text_14_nEexmb"] [class^="image-text-body-"] {
+  gap: 0 !important;
+}
+
+body.page-impact [id*="ss_image_with_text_14_nEexmb"] [class^="image-text-image-"],
+body.page-impact [id*="ss_image_with_text_14_nEexmb"] [class^="image-text-image-"] :is(img, svg) {
+  border-radius: 0 !important;
+}
+
+/* Match the scrolling word to the heading's SF Display weight and size. The
+   supplied ISOUA mark has transparent margins, so enlarge it inside the
+   existing 32px icon slot without rotating the mark itself. */
+body.page-impact [id*="ss_image_with_text_14_nEexmb"] [class^="image-text-scrolling-text-"] {
+  font-family: var(--font-heading--family) !important;
+  font-size: 32px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.2 !important;
+}
+
+body.page-impact [id*="ss_image_with_text_14_nEexmb"] [class^="image-text-scrolling-icon-"] {
+  position: relative;
+  width: 32px !important;
+  height: 32px !important;
+  flex: 0 0 32px;
+  overflow: hidden;
+}
+
+body.page-impact [id*="ss_image_with_text_14_nEexmb"] img.isoa-impact-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200% !important;
+  height: 200% !important;
+  max-width: none !important;
+  object-fit: contain !important;
+  transform: translate(-50%, -50%) !important;
+  animation: none !important;
+  -webkit-animation: none !important;
+}
+
+@media screen and (min-width: 1024px) {
+  /* The ticker rail turns sideways on desktop; keep the brand mark upright. */
+  body.page-impact [id*="ss_image_with_text_14_nEexmb"] [class^="image-text-scrolling-icon-"] {
+    transform: rotate(90deg);
+  }
+}
+
+@media screen and (max-width: 749px) {
+  body.page-impact [id*="ss_image_with_text_14_nEexmb"] [class^="image-text-scrolling-text-"] {
+    font-size: 22px !important;
+  }
+}
