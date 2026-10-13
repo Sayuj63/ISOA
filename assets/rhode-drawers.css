@@ -10,8 +10,9 @@
   base.css on source order at equal specificity, the same contract
   rhode-cart.css and rhode-search.css use.
 
-  Reference values measured from rhodeskin.com on 2026-09-17 at 1440 and 390.
-  The reference keeps both drawers in one fixed aside (`.Offcanvas--right`,
+  Reference values measured from rhodeskin.com on 2026-09-17 at 1440 and 390;
+  the search typography is intentionally smaller for ISOUA. The reference
+  keeps both drawers in one fixed aside (`.Offcanvas--right`,
   680.4x900, z-index 9999) with a separate full-viewport dimmer
   (`.Offcanvas-bgDimmer`, rgba(0,0,0,.75), z-index 9999).
 */
@@ -164,9 +165,8 @@
   display: none;
 }
 
-/* Reference: 22px type on a 33px line, bold label, ~20px below the field.
-   Fixed-height (flex: 0 0 auto) so the product rows below are what shrink
-   and scroll, not this list. */
+/* The compact search copy sits above the independently scrollable product rows.
+   Fixed-height (flex: 0 0 auto) keeps this list from shrinking with results. */
 .isoa-sd__suggestions {
   flex: 0 0 auto;
   padding: 20px 36px 0;
