@@ -1,0 +1,90 @@
+.isoa-cookie-banner[hidden] {
+  display: none;
+}
+
+.isoa-cookie-banner {
+  position: fixed;
+  z-index: 9999;
+  right: 20px;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 900px;
+  margin-inline: auto;
+  padding: 18px 20px;
+  border: 1px solid #dedcd8;
+  border-radius: 10px;
+  background: #f1f0ed;
+  box-shadow: 0 8px 32px rgb(0 0 0 / 0.12);
+  color: #67645e;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.isoa-cookie-banner__copy p {
+  margin: 0 0 3px;
+}
+
+.isoa-cookie-banner__copy a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.isoa-cookie-banner__actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 8px;
+}
+
+.isoa-cookie-banner__button {
+  min-height: 36px;
+  padding: 8px 15px;
+  border: 1px solid #67645e;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.isoa-cookie-banner__button--outline {
+  background: transparent;
+  color: #67645e;
+}
+
+.isoa-cookie-banner__button--filled {
+  background: #67645e;
+  color: #fff;
+}
+
+.isoa-cookie-banner__button:focus-visible,
+.isoa-cookie-banner__copy a:focus-visible {
+  outline: 2px solid #67645e;
+  outline-offset: 3px;
+}
+
+@media (max-width: 749px) {
+  .isoa-cookie-banner {
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    display: block;
+    padding: 16px;
+    font-size: 12px;
+  }
+
+  .isoa-cookie-banner__actions {
+    margin-top: 14px;
+  }
+
+  .isoa-cookie-banner__button {
+    flex: 1 1 0;
+    padding-inline: 8px;
+  }
+}
