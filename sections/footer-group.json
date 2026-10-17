@@ -59,15 +59,15 @@
             "linkedin_text": "LinkedIn",
             "linkedin": "",
             "instagram_text": "Instagram",
-            "instagram": "#",
-            "youtube_text": "YouTube",
-            "youtube": "#",
+            "instagram": "https://www.instagram.com/isouaskin",
+            "youtube_text": "",
+            "youtube": "",
             "pinterest_text": "Pinterest",
-            "pinterest": "#",
+            "pinterest": "",
             "whatsapp_text": "WhatsApp",
-            "whatsapp": "#",
-            "tiktok_text": "TikTok",
-            "tiktok": "#"
+            "whatsapp": "https://wa.me/919625046100",
+            "tiktok_text": "",
+            "tiktok": ""
           }
         },
         "column_zwH3Mc": {
@@ -209,7 +209,7 @@
         "link_hover_color": "#333333",
         "background_style": "solid",
         "background_color": "#f1f0ed",
-        "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
+        "background_gradient": "linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(242, 242, 242, 1) 100%)",
         "border_color": "#67645e",
         "margin_top": 12,
         "margin_bottom": 20,
