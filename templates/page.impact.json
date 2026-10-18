@@ -253,7 +253,7 @@
         "media_type_1": "image",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
-        "custom_mobile_media": false,
+        "custom_mobile_media": true,
         "media_type_1_mobile": "image",
         "image_1_mobile": "shopify://shop_images/image_f73e951f-1256-4a48-befd-1b3463dd990f.png",
         "media_type_2_mobile": "image",
