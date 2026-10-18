@@ -233,77 +233,16 @@
         "cat_returns",
         "cat_contact"
       ],
+      "custom_css": [],
+      "name": "isoua FAQ",
       "settings": {
         "heading": "FAQ"
-      }
-    },
-    "blocks_gKLRM3": {
-      "type": "_blocks",
-      "blocks": {
-        "text_zhrnCn": {
-          "type": "text",
-          "name": "t:names.text",
-          "settings": {
-            "text": "<p><em>Your skin doesn't need more. It needs better timing, better restraint, better care.</em></p><p><em>ISOUA—The Science of Skin Rejuvenation.</em></p>",
-            "width": "100%",
-            "max_width": "none",
-            "alignment": "center",
-            "type_preset": "h5",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground-heading)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 24,
-            "padding-block-end": 10,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "text_zhrnCn"
-      ],
-      "custom_css": [],
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 0,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "color_scheme": "scheme-1",
-        "background_media": "none",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "border": "solid",
-        "border_width": 0,
-        "border_opacity": 0,
-        "border_radius": 10,
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "gradient",
-        "gradient_direction": "to top",
-        "padding-block-start": 12,
-        "padding-block-end": 12
       }
     }
   },
   "order": [
     "hero_3XNEAa",
     "main",
-    "rhode_faq_main",
-    "blocks_gKLRM3"
+    "rhode_faq_main"
   ]
 }
