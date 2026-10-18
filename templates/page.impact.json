@@ -218,7 +218,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>We only have ONE FACE (and ONE WORLD) to PROTECT.</p>",
+            "text": "<p>One FACE. One WORLD. Both Worth PROTECTING.</p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
