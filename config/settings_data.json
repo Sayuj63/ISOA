@@ -424,7 +424,7 @@
       "scheme-759cdb13-ce5e-4501-bb7c-f78910d5a21b": {
         "settings": {
           "background": "#ffffff",
-          "foreground_heading": "#000000",
+          "foreground_heading": "#FFFFFF",
           "foreground": "#67645e",
           "primary": "#000000cf",
           "primary_hover": "#000000",
