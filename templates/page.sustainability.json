@@ -69,7 +69,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<p>One of Everything Good That Really Works, including more thoughtful choices for the world around us.</p>",
+            "text": "<p>Thoughtfully made. Better for you, kinder to our planet.</p>",
             "width": "fit-content",
             "max_width": "none",
             "alignment": "left",
@@ -85,7 +85,7 @@
             "background_color": "#00000026",
             "corner_radius": 0,
             "padding-block-start": 0,
-            "padding-block-end": 30,
+            "padding-block-end": 15,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
@@ -185,7 +185,6 @@
         "content_align": "left",
         "content_align_mobile": "left",
         "content_vertical_align": "center",
-        "image": "shopify://shop_images/IMG_8805_4c6fea16-f3eb-465b-bf5d-9671a86cc635.jpg",
         "image_url": "",
         "image_radius": 10,
         "image_border_thickness": 0,
