@@ -64,6 +64,64 @@
     },
     "hero_efkYrN": {
       "type": "hero",
+      "blocks": {
+        "text_iXdw7L": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<p>Care Beyond the Skin.</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "text_aY7L39": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>One of Everything Good That Really Works — including more thoughtful choices for the world around us.</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_iXdw7L",
+        "text_aY7L39"
+      ],
       "custom_css": [
         ".hero {padding: 1.5vw; padding-top: 0; overflow: hidden;}",
         ".hero img,.hero__media img,.hero__media {border-radius: 10px;}",
@@ -72,7 +130,6 @@
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
-        "image_1": "shopify://shop_images/image_b86ad320-eb99-4d51-9373-41e94e1c8aec.png",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": true,
@@ -503,7 +560,7 @@
         "heading_H4Wr7M": {
           "type": "heading",
           "settings": {
-            "heading": "<h2>Supply Chain</h2>",
+            "heading": "<p>Better choices at every step.</p>",
             "heading_custom": false,
             "heading_font": "josefin_sans_n4",
             "heading_size": 28,
@@ -518,7 +575,7 @@
         "text_Qn4cQA": {
           "type": "text",
           "settings": {
-            "text": "<p>We are optimising our supply chain to reduce emissions and improve efficiency. For example, we minimise air freight from our manufacturers and continuously look for ways to reduce package weight and size, lowering the carbon footprint of every shipment.<br/><br/>At ISOUA, we believe that caring for your skin and caring for the planet can go hand in hand. We are committed to ongoing improvements and transparent reporting of our sustainability efforts.</p>",
+            "text": "<p>A product's footprint extends beyond its packaging. We consider how our products are manufactured, packed, and transported, looking for opportunities to reduce unnecessary weight, minimise shipping volume, and improve logistical efficiency.<br/><br/>Where practical, we seek to reduce reliance on air freight and identify more efficient shipping arrangements, while maintaining the quality and integrity of our products.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
@@ -582,7 +639,7 @@
         "heading_7Ht4Wa": {
           "type": "heading",
           "settings": {
-            "heading": "<h2>Our Progress</h2>",
+            "heading": "<p>Less excess. More intention.</p>",
             "heading_custom": false,
             "heading_font": "josefin_sans_n4",
             "heading_size": 28,
@@ -597,7 +654,7 @@
         "text_NMXa4p": {
           "type": "text",
           "settings": {
-            "text": "<p>We recognise that sustainability is an ongoing journey. While we are not perfect yet, we are committed to making measurable improvements and sharing our progress transparently.</p>",
+            "text": "<p>We believe better skincare isn't about having more. It's about making considered choices, creating products with purpose, and building routines around what your skin actually needs.<br/><br/>We encourage mindful consumption and thoughtful product use, because a more considered approach to skincare begins with choosing well and making the most of what you have.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
@@ -617,6 +674,85 @@
       "name": "SS - Image with text #1",
       "settings": {
         "layout": "image_content",
+        "layout_mobile": "image_content",
+        "layout_advanced": false,
+        "layout_gap": 32,
+        "layout_gap_mobile": 24,
+        "layout_border_thickness": 0,
+        "layout_radius": 0,
+        "use_shadow": false,
+        "content_align": "left",
+        "content_align_mobile": "left",
+        "content_vertical_align": "center",
+        "image_url": "",
+        "image_radius": 16,
+        "image_border_thickness": 0,
+        "image_ratio": "square",
+        "image_ratio_mobile": "square",
+        "layout_border_color": "#121212",
+        "image_border_color": "#121212",
+        "shadow_color": "#0000001a",
+        "background_style": "solid",
+        "background_color": "#ffffff",
+        "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
+        "outer_background_color": "#ffffff",
+        "border_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1.5,
+        "width": "page",
+        "content_width": 1200,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
+    "ss_image_with_text_Jh9X8i": {
+      "type": "ss-image-with-text",
+      "blocks": {
+        "heading_ydGAmx": {
+          "type": "heading",
+          "settings": {
+            "heading": "<p>Not perfect. Always progressing.</p>",
+            "heading_custom": false,
+            "heading_font": "josefin_sans_n4",
+            "heading_size": 28,
+            "heading_size_mobile": 24,
+            "heading_advanced": false,
+            "heading_height": 130,
+            "heading_mt": 0,
+            "heading_mt_mobile": 0,
+            "heading_color": "#67645e"
+          }
+        },
+        "text_qQJp6i": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We recognise that more responsible skincare is not achieved overnight. Some of our current materials and processes still have room for improvement, and we believe transparency means acknowledging that.<br/><br/>We continue to assess our choices, explore better alternatives, and identify opportunities for meaningful change. As our practices evolve, we aim to communicate our progress clearly and substantiate our environmental claims.<br/><br/>Our commitment is not to claim perfection, but to keep making more considered decisions.</p>",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 12,
+            "text_size_mobile": 12,
+            "text_advanced": false,
+            "text_height": 150,
+            "text_mt": 12,
+            "text_mt_mobile": 12,
+            "text_color": "#67645e"
+          }
+        }
+      },
+      "block_order": [
+        "heading_ydGAmx",
+        "text_qQJp6i"
+      ],
+      "name": "SS - Image with text #1",
+      "settings": {
+        "layout": "content_image",
         "layout_mobile": "image_content",
         "layout_advanced": false,
         "layout_gap": 32,
@@ -816,6 +952,7 @@
     "ss_image_with_text_p6NUdm",
     "ss_image_with_text_DAyeyb",
     "ss_image_with_text_qwJcCc",
+    "ss_image_with_text_Jh9X8i",
     "ss_featured_collection_6_jmeVAp"
   ]
 }
