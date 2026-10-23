@@ -247,7 +247,7 @@
         "section_width": "page-width",
         "section_height": "",
         "section_height_custom": 8,
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-2",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
@@ -278,7 +278,7 @@
             "heading_height": 130,
             "heading_mt": 0,
             "heading_mt_mobile": 0,
-            "heading_color": "#121212"
+            "heading_color": "#67645E"
           }
         },
         "text_4k3Uy7": {
@@ -293,7 +293,7 @@
             "text_height": 150,
             "text_mt": 12,
             "text_mt_mobile": 12,
-            "text_color": "#121212"
+            "text_color": "#67645E"
           }
         }
       },
@@ -1067,7 +1067,7 @@
         "section_width": "page-width",
         "section_height": "custom",
         "section_height_custom": 7,
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-1",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
@@ -1157,7 +1157,7 @@
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
-                "type_preset": "h1",
+                "type_preset": "rte",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
                 "line_height": "normal",
@@ -1306,7 +1306,7 @@
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
-                "type_preset": "h1",
+                "type_preset": "rte",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
                 "line_height": "normal",
@@ -1455,7 +1455,7 @@
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "center",
-                "type_preset": "h1",
+                "type_preset": "rte",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
                 "line_height": "normal",
@@ -1556,7 +1556,7 @@
         "section_width": "page-width",
         "section_height": "",
         "section_height_custom": 50,
-        "color_scheme": "scheme-3",
+        "color_scheme": "scheme-1",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
@@ -1579,11 +1579,11 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<h2>Welcome to the&nbsp;</h2><h2>WORLD of isoua</h2>",
+            "text": "<h2>cruelty-free • vegan • gluten-free • dermatologist-tested • available fragrance-free</h2>",
             "width": "fit-content",
-            "max_width": "normal",
+            "max_width": "none",
             "alignment": "left",
-            "type_preset": "custom",
+            "type_preset": "paragraph",
             "font": "var(--font-body--family)",
             "font_size": "5.5rem",
             "line_height": "tight",
@@ -1605,7 +1605,7 @@
           "type": "button",
           "name": "t:names.button",
           "settings": {
-            "label": "COME ON IN",
+            "label": "SHOP THE LINEUP",
             "link": "https://www.isoua.com/collections/all",
             "open_in_new_tab": false,
             "style_class": "button",
@@ -1641,8 +1641,8 @@
         "horizontal_alignment": "flex-start",
         "vertical_alignment": "center",
         "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-end",
-        "vertical_alignment_flex_direction_column": "flex-end",
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "vertical_alignment_flex_direction_column": "flex-start",
         "gap": 14,
         "section_width": "page-width",
         "section_height": "custom",
