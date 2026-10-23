@@ -337,7 +337,7 @@ For inquiries or permissions, contact daniel@section.store
     max-width: min(var(--page-width) - var(--page-margin) * 2, calc(100% - var(--page-margin) * 2)) !important;
     margin-inline: auto !important;
     padding: 0 !important;
-    {%- unless template == 'product.rhode-product-page' -%}
+    {%- unless template == 'product.recovery-mask' -%}
     overflow: hidden !important;
     /* Grey pill box — same #f1f0ed as header inner pill; border-radius matches the 10px used across other sections. overflow:hidden above clips the image's outer corners so no per-element radius tricks are needed. Off on the PDP because that template shows image + text as two separate cards with a gap. -vamshi */
     background-color: #f1f0ed !important;
@@ -346,7 +346,7 @@ For inquiries or permissions, contact daniel@section.store
   }
 
   .image-with-body-{{ section.id }} {
-    {%- if template == 'product.rhode-product-page' -%}
+    {%- if template == 'product.recovery-mask' -%}
     /* PDP: two separate cards with a 16px column gap (matches the site-wide split gap). */
     gap: 16px !important;
     {%- else -%}
@@ -372,7 +372,7 @@ For inquiries or permissions, contact daniel@section.store
     }
   }
 
-  {%- unless template == 'product.rhode-product-page' -%}
+  {%- unless template == 'product.recovery-mask' -%}
   /* Image: no radius — the parent grey box (overflow:hidden + border-radius:10px) clips
      all outer corners. Inner edge is sharp (gap:0 between columns). Off on the PDP so
      image + content each render as their own rounded card. -vamshi */
@@ -394,7 +394,7 @@ For inquiries or permissions, contact daniel@section.store
   }
   {%- endunless -%}
 
-  {%- if template == 'product.rhode-product-page' -%}
+  {%- if template == 'product.recovery-mask' -%}
   /* PDP: image + content are separate rounded cards. Both use 10px radius,
      matching the rest of the PDP section cards. -vamshi */
   .image-with-image-{{ section.id }} {

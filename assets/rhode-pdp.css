@@ -1,5 +1,5 @@
 /* Rhode PDP — equal-height columns + thumbnail-overlay.
-   Loaded on product.rhode-product-page and product.spotwear-pdp via theme.liquid. */
+   Loaded on product.recovery-mask and product.rhode-lip-tint via theme.liquid. */
 
 /* ── PDP spacing rhythm ────────────────────────────────────────────────────
    One value spaces the whole template: the gap between one section's visible
@@ -31,8 +31,7 @@ main#MainContent > .shopify-section + .shopify-section:not([id$="__rhode_sticky_
 main#MainContent {
   /* Row height of the hero — and of the split sections below it, so the PDP
      keeps one rhythm. Below the header height, viewport-relative, but clamped
-     so it never grows past 820 or shrinks under 560. spotwear-pdp overrides
-     this via section custom_css. */
+     so it never grows past 820 or shrinks under 560. */
   --rhode-pdp-h: clamp(560px, calc(100vh - var(--header-height, 96px) - 120px), 820px);
 }
 
