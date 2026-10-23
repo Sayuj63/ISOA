@@ -529,7 +529,7 @@
           "type": "item",
           "settings": {
             "toggle_text": "our values",
-            "heading": "<p></p><p>our values</p><p></p>",
+            "heading": "<p><strong>our values</strong></p>",
             "text": "<p>It was important to us to build a value-driven business. At ISOUA, we believe in: Simplicity. Affordability. Authenticity. Quality. Transparency.</p>",
             "button_label": "",
             "button_link": ""
@@ -539,7 +539,7 @@
           "type": "item",
           "settings": {
             "toggle_text": "scientifically proven formulas",
-            "heading": "<p><br/>scientifically proven formulas<br/><br/></p>",
+            "heading": "<p><strong>scientifically proven formulas</strong></p>",
             "text": "<p>Developed with award-winning dermatologists, chemists and industry leaders, our skin barrier-focused formulas are designed to bring visible benefits—instantly and years down the isoua.</p>",
             "button_label": "",
             "button_link": ""
@@ -549,7 +549,7 @@
           "type": "item",
           "settings": {
             "toggle_text": "our minimal footprint",
-            "heading": "<p><br/>our minimal footprint<br/><br/></p>",
+            "heading": "<p><strong>our minimal footprint</strong></p>",
             "text": "<p>Less, but better.&nbsp;From limited releases to consciously sourced ingredients, we are committed to mindful skincare.&nbsp;Vegan. Cruelty-free. Fragrance-free. No excess.</p>",
             "button_label": "",
             "button_link": ""
@@ -630,77 +630,6 @@
         "border_thickness": 0,
         "section_radius": 0,
         "lazy": true
-      }
-    },
-    "hero_aVBdBQ": {
-      "type": "hero",
-      "blocks": {
-        "text_Nj7cxM": {
-          "type": "text",
-          "name": "t:names.text",
-          "settings": {
-            "text": "<p>MINIMAL skincare, minimal FOOTPRINT.<br/></p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "custom",
-            "font": "var(--font-heading--family)",
-            "font_size": "2.75rem",
-            "line_height": "tight",
-            "letter_spacing": "tight",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "var(--color-foreground-heading)",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "text_Nj7cxM"
-      ],
-      "disabled": true,
-      "custom_css": [
-        ".hero {padding: 2vw; border-radius: 10px; overflow: hidden;}",
-        ".hero img,.hero__media img,.hero__media {border-radius: 10px;}"
-      ],
-      "name": "t:names.hero",
-      "settings": {
-        "media_type_1": "image",
-        "media_type_2": "image",
-        "stack_media_on_mobile": false,
-        "custom_mobile_media": false,
-        "media_type_1_mobile": "image",
-        "image_1_mobile": "shopify://shop_images/image_f73e951f-1256-4a48-befd-1b3463dd990f.png",
-        "media_type_2_mobile": "image",
-        "link": "",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 14,
-        "section_width": "page-width",
-        "section_height": "large",
-        "section_height_custom": 50,
-        "color_scheme": "scheme-1",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "gradient",
-        "gradient_direction": "to top",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 4,
-        "padding-block-end": 4
       }
     },
     "ss_featured_collection_6_new_ppPVk9": {
@@ -1668,7 +1597,6 @@
     "ss_image_with_text_15_r6efeX",
     "hero_r96NWP",
     "ss_image_with_text_15_VLxknD",
-    "hero_aVBdBQ",
     "ss_featured_collection_6_new_ppPVk9",
     "ss_slider_5_McA8G4",
     "section_NKG9AC",
