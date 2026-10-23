@@ -62,43 +62,43 @@
         "padding-block-end": 0
       }
     },
-    "hero_efkYrN": {
+    "hero_iJ8x9V": {
       "type": "hero",
       "blocks": {
-        "text_iXdw7L": {
+        "text_qkUpFP": {
           "type": "text",
-          "name": "t:names.heading",
+          "name": "t:names.text",
           "settings": {
             "text": "<p>Thoughtfully made. Better for you, kinder to our planet.</p>",
             "width": "fit-content",
-            "max_width": "none",
+            "max_width": "normal",
             "alignment": "left",
-            "type_preset": "h5",
+            "type_preset": "custom",
             "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
+            "font_size": "5.5rem",
+            "line_height": "tight",
+            "letter_spacing": "tight",
             "case": "none",
             "wrap": "pretty",
-            "color": "var(--color-foreground)",
+            "color": "var(--color-foreground-heading)",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
             "padding-block-start": 0,
-            "padding-block-end": 15,
+            "padding-block-end": 43,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 100
           },
           "blocks": {}
         }
       },
       "block_order": [
-        "text_iXdw7L"
+        "text_qkUpFP"
       ],
       "custom_css": [
-        ".hero {padding: 1.5vw; padding-top: 0; overflow: hidden;}",
-        ".hero img,.hero__media img,.hero__media {border-radius: 10px;}",
-        "@media screen and (max-width: 749px) {.hero {margin-top: 0; position: relative; z-index: 0; }}"
+        ".hero {padding: 1.5vw; border-radius: 10px; overflow: hidden;}",
+        ".hero__media-wrapper {border-radius: 10px; overflow: hidden;}",
+        ".hero img,.hero__media img,.hero__media {border-radius: 10px;}"
       ],
       "name": "t:names.hero",
       "settings": {
@@ -113,25 +113,25 @@
         "link": "",
         "open_in_new_tab": false,
         "content_direction": "column",
-        "vertical_on_mobile": false,
-        "horizontal_alignment": "space-between",
-        "vertical_alignment": "flex-end",
-        "align_baseline": true,
-        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "flex-start",
         "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 10,
+        "gap": 14,
         "section_width": "page-width",
         "section_height": "custom",
         "section_height_custom": 65,
         "color_scheme": "scheme-759cdb13-ce5e-4501-bb7c-f78910d5a21b",
         "toggle_overlay": false,
-        "overlay_color": "#12121266",
-        "overlay_style": "solid",
-        "gradient_direction": "to bottom",
+        "overlay_color": "#00000026",
+        "overlay_style": "gradient",
+        "gradient_direction": "to top",
         "blurred_reflection": false,
         "reflection_opacity": 75,
-        "padding-block-start": 24,
-        "padding-block-end": 24
+        "padding-block-start": 5,
+        "padding-block-end": 5
       }
     },
     "ss_image_with_text_DinG6y": {
@@ -682,7 +682,7 @@
   },
   "order": [
     "main",
-    "hero_efkYrN",
+    "hero_iJ8x9V",
     "ss_image_with_text_DinG6y",
     "ss_image_with_text_BYPfY3",
     "ss_image_with_text_FhJ4Yn",
