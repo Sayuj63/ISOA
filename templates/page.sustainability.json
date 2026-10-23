@@ -155,7 +155,7 @@
         "text_8jWfVK": {
           "type": "text",
           "settings": {
-            "text": "<p>At ISOUA, we believe caring for your skin should go hand in hand with caring for the world around us. From the materials we choose to the way our products are made and delivered, we strive to make more considered decisions at every step. Sustainability is an ongoing process, guided by transparency, thoughtful design, and a commitment to doing better.</p>",
+            "text": "<p>We believe taking care of your skin and being thoughtful about the world around us should go hand in hand. It shapes how we approach our packaging, our products, and the choices we make along the way. We’re not here to claim perfection. We’re here to keep doing better.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
@@ -213,13 +213,13 @@
         "lazy": true
       }
     },
-    "ss_image_with_text_4MTWxE": {
+    "ss_image_with_text_BYPfY3": {
       "type": "ss-image-with-text",
       "blocks": {
-        "heading_Etk6FH": {
+        "heading_9zmze7": {
           "type": "heading",
           "settings": {
-            "heading": "<p>Less waste. More thoughtful choices.</p>",
+            "heading": "<p>Less waste. More thought.</p>",
             "heading_custom": false,
             "heading_font": "josefin_sans_n4",
             "heading_size": 28,
@@ -231,10 +231,10 @@
             "heading_color": "#67645e"
           }
         },
-        "text_TJBmWR": {
+        "text_87YTq9": {
           "type": "text",
           "settings": {
-            "text": "<p>Our products are packaged in thoughtfully designed paper boxes and individual paper pouches that help protect product quality and integrity. While our current mask format requires protective plastic packaging, we recognise the importance of reducing unnecessary materials wherever possible.<br/><br/>We prioritise recycled paper for our outer packaging and continue to explore more sustainable alternatives for other components, balancing environmental considerations with product safety, stability, and performance.<br/></p>",
+            "text": "<p>We use recycled paper for our outer boxes and protective packaging to keep our products safe. We aim to use materials purposefully, balancing product protection with the need to avoid unnecessary packaging. Our outer paper boxes can be recycled where local facilities accept them; disposal options for inner packaging depend on the material and local facilities.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
@@ -248,8 +248,8 @@
         }
       },
       "block_order": [
-        "heading_Etk6FH",
-        "text_TJBmWR"
+        "heading_9zmze7",
+        "text_87YTq9"
       ],
       "name": "SS - Image with text #1",
       "settings": {
@@ -265,24 +265,24 @@
         "content_align_mobile": "left",
         "content_vertical_align": "center",
         "image_url": "",
-        "image_radius": 16,
+        "image_radius": 10,
         "image_border_thickness": 0,
-        "image_ratio": "square",
-        "image_ratio_mobile": "square",
+        "image_ratio": "original",
+        "image_ratio_mobile": "original",
         "layout_border_color": "#121212",
         "image_border_color": "#121212",
         "shadow_color": "#0000001a",
         "background_style": "solid",
-        "background_color": "#ffffff",
+        "background_color": "#f1f0ed",
         "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
         "outer_background_color": "#ffffff",
         "border_color": "#121212",
         "margin_top": 0,
         "margin_bottom": 0,
-        "margin_horizontal": 0,
-        "margin_horizontal_mobile": 0,
-        "padding_top": 24,
-        "padding_bottom": 24,
+        "margin_horizontal": 3,
+        "margin_horizontal_mobile": 2,
+        "padding_top": 12,
+        "padding_bottom": 0,
         "padding_horizontal": 5,
         "padding_horizontal_mobile": 1.5,
         "width": "page",
@@ -298,7 +298,7 @@
         "heading_3TNMJN": {
           "type": "heading",
           "settings": {
-            "heading": "<p>Small choices matter.</p>",
+            "heading": "<p>Progress without compromise.<br/><br/></p>",
             "heading_custom": false,
             "heading_font": "josefin_sans_n4",
             "heading_size": 28,
@@ -313,7 +313,7 @@
         "text_MJ4Bpj": {
           "type": "text",
           "settings": {
-            "text": "<p>Our outer paper boxes can be recycled where local facilities accept them. Inner packaging may require different disposal methods depending on its material and local recycling capabilities.<br/><br/>We encourage responsible disposal and the separation of packaging components wherever practical. We are also exploring alternatives that could make our packaging easier to recycle or compost, where appropriate facilities are available.</p>",
+            "text": "<p>We’re exploring alternative materials for our packaging that could help reduce their environmental impact without compromising skin compatibility, safety, or performance. Better alternatives matter only when they work as well as they should.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
@@ -377,7 +377,7 @@
         "heading_G9RAAG": {
           "type": "heading",
           "settings": {
-            "heading": "<p>Innovation with intention.</p>",
+            "heading": "<p>Care beyond the product.</p>",
             "heading_custom": false,
             "heading_font": "josefin_sans_n4",
             "heading_size": 28,
@@ -392,7 +392,7 @@
         "text_YKVqzm": {
           "type": "text",
           "settings": {
-            "text": "<p>Effective skincare and responsible material choices should not be mutually exclusive. We are exploring developments in hydrocolloid technologies to better understand opportunities for reducing the environmental impact of our masks.<br/><br/>Our focus is on identifying more responsible material alternatives without compromising skin compatibility, product performance, or safety. Any future material choices must be supported by appropriate testing and evidence.</p>",
+            "text": "<p>Our products are not tested on animals. We also recognise that the impact of a product extends beyond its formula. Materials, manufacturing, packaging, and transportation all matter, and we continue to consider where improvements can be made.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
@@ -457,7 +457,7 @@
         "heading_PJEYMA": {
           "type": "heading",
           "settings": {
-            "heading": "<p>Care, without compromise.</p>",
+            "heading": "<p>Always progressing.</p>",
             "heading_custom": false,
             "heading_font": "josefin_sans_n4",
             "heading_size": 28,
@@ -472,7 +472,7 @@
         "text_6GqQmx": {
           "type": "text",
           "settings": {
-            "text": "<p>Our products are not tested on animals. We recognise that responsibility extends beyond the finished product, and we aim to make considered decisions about the materials, manufacturing partners, and processes involved in bringing our products to you.</p>",
+            "text": "<p>We know there’s more to do. We’ll continue to question our choices, assess our materials and processes, and look for more considered alternatives. We believe progress means being honest about where we are, thoughtful about where we can go, and transparent about the difference.<br/></p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
@@ -503,243 +503,6 @@
         "content_align_mobile": "left",
         "content_vertical_align": "center",
         "image": "shopify://shop_images/Photoroom_20261023_051954.png",
-        "image_url": "",
-        "image_radius": 16,
-        "image_border_thickness": 0,
-        "image_ratio": "square",
-        "image_ratio_mobile": "square",
-        "layout_border_color": "#121212",
-        "image_border_color": "#121212",
-        "shadow_color": "#0000001a",
-        "background_style": "solid",
-        "background_color": "#ffffff",
-        "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
-        "outer_background_color": "#ffffff",
-        "border_color": "#121212",
-        "margin_top": 0,
-        "margin_bottom": 0,
-        "margin_horizontal": 0,
-        "margin_horizontal_mobile": 0,
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "padding_horizontal": 5,
-        "padding_horizontal_mobile": 1.5,
-        "width": "page",
-        "content_width": 1200,
-        "border_thickness": 0,
-        "section_radius": 0,
-        "lazy": true
-      }
-    },
-    "ss_image_with_text_DAyeyb": {
-      "type": "ss-image-with-text",
-      "blocks": {
-        "heading_H4Wr7M": {
-          "type": "heading",
-          "settings": {
-            "heading": "<p>Better choices at every step.</p>",
-            "heading_custom": false,
-            "heading_font": "josefin_sans_n4",
-            "heading_size": 28,
-            "heading_size_mobile": 24,
-            "heading_advanced": false,
-            "heading_height": 130,
-            "heading_mt": 0,
-            "heading_mt_mobile": 0,
-            "heading_color": "#67645e"
-          }
-        },
-        "text_Qn4cQA": {
-          "type": "text",
-          "settings": {
-            "text": "<p>A product's footprint extends beyond its packaging. We consider how our products are manufactured, packed, and transported, looking for opportunities to reduce unnecessary weight, minimise shipping volume, and improve logistical efficiency.<br/><br/>Where practical, we seek to reduce reliance on air freight and identify more efficient shipping arrangements, while maintaining the quality and integrity of our products.</p>",
-            "text_custom": false,
-            "text_font": "josefin_sans_n4",
-            "text_size": 12,
-            "text_size_mobile": 12,
-            "text_advanced": true,
-            "text_height": 150,
-            "text_mt": 12,
-            "text_mt_mobile": 12,
-            "text_color": "#67645e"
-          }
-        }
-      },
-      "block_order": [
-        "heading_H4Wr7M",
-        "text_Qn4cQA"
-      ],
-      "name": "SS - Image with text #1",
-      "settings": {
-        "layout": "content_image",
-        "layout_mobile": "image_content",
-        "layout_advanced": false,
-        "layout_gap": 32,
-        "layout_gap_mobile": 24,
-        "layout_border_thickness": 0,
-        "layout_radius": 0,
-        "use_shadow": false,
-        "content_align": "left",
-        "content_align_mobile": "left",
-        "content_vertical_align": "center",
-        "image_url": "",
-        "image_radius": 16,
-        "image_border_thickness": 0,
-        "image_ratio": "square",
-        "image_ratio_mobile": "square",
-        "layout_border_color": "#121212",
-        "image_border_color": "#121212",
-        "shadow_color": "#0000001a",
-        "background_style": "solid",
-        "background_color": "#ffffff",
-        "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
-        "outer_background_color": "#ffffff",
-        "border_color": "#121212",
-        "margin_top": 0,
-        "margin_bottom": 0,
-        "margin_horizontal": 0,
-        "margin_horizontal_mobile": 0,
-        "padding_top": 24,
-        "padding_bottom": 24,
-        "padding_horizontal": 5,
-        "padding_horizontal_mobile": 1.5,
-        "width": "page",
-        "content_width": 1200,
-        "border_thickness": 0,
-        "section_radius": 0,
-        "lazy": true
-      }
-    },
-    "ss_image_with_text_qwJcCc": {
-      "type": "ss-image-with-text",
-      "blocks": {
-        "heading_7Ht4Wa": {
-          "type": "heading",
-          "settings": {
-            "heading": "<p>Less excess. More intention.</p>",
-            "heading_custom": false,
-            "heading_font": "josefin_sans_n4",
-            "heading_size": 28,
-            "heading_size_mobile": 24,
-            "heading_advanced": false,
-            "heading_height": 130,
-            "heading_mt": 0,
-            "heading_mt_mobile": 0,
-            "heading_color": "#67645e"
-          }
-        },
-        "text_NMXa4p": {
-          "type": "text",
-          "settings": {
-            "text": "<p>We believe better skincare isn't about having more. It's about making considered choices, creating products with purpose, and building routines around what your skin actually needs.<br/><br/>We encourage mindful consumption and thoughtful product use, because a more considered approach to skincare begins with choosing well and making the most of what you have.</p>",
-            "text_custom": false,
-            "text_font": "josefin_sans_n4",
-            "text_size": 12,
-            "text_size_mobile": 12,
-            "text_advanced": false,
-            "text_height": 150,
-            "text_mt": 12,
-            "text_mt_mobile": 12,
-            "text_color": "#67645e"
-          }
-        }
-      },
-      "block_order": [
-        "heading_7Ht4Wa",
-        "text_NMXa4p"
-      ],
-      "name": "SS - Image with text #1",
-      "settings": {
-        "layout": "image_content",
-        "layout_mobile": "image_content",
-        "layout_advanced": false,
-        "layout_gap": 32,
-        "layout_gap_mobile": 24,
-        "layout_border_thickness": 0,
-        "layout_radius": 0,
-        "use_shadow": false,
-        "content_align": "left",
-        "content_align_mobile": "left",
-        "content_vertical_align": "center",
-        "image_url": "",
-        "image_radius": 16,
-        "image_border_thickness": 0,
-        "image_ratio": "square",
-        "image_ratio_mobile": "square",
-        "layout_border_color": "#121212",
-        "image_border_color": "#121212",
-        "shadow_color": "#0000001a",
-        "background_style": "solid",
-        "background_color": "#ffffff",
-        "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
-        "outer_background_color": "#ffffff",
-        "border_color": "#121212",
-        "margin_top": 0,
-        "margin_bottom": 0,
-        "margin_horizontal": 0,
-        "margin_horizontal_mobile": 0,
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "padding_horizontal": 5,
-        "padding_horizontal_mobile": 1.5,
-        "width": "page",
-        "content_width": 1200,
-        "border_thickness": 0,
-        "section_radius": 0,
-        "lazy": true
-      }
-    },
-    "ss_image_with_text_Jh9X8i": {
-      "type": "ss-image-with-text",
-      "blocks": {
-        "heading_ydGAmx": {
-          "type": "heading",
-          "settings": {
-            "heading": "<p>Not perfect. Always progressing.</p>",
-            "heading_custom": false,
-            "heading_font": "josefin_sans_n4",
-            "heading_size": 28,
-            "heading_size_mobile": 24,
-            "heading_advanced": false,
-            "heading_height": 130,
-            "heading_mt": 0,
-            "heading_mt_mobile": 0,
-            "heading_color": "#67645e"
-          }
-        },
-        "text_qQJp6i": {
-          "type": "text",
-          "settings": {
-            "text": "<p>We recognise that more responsible skincare is not achieved overnight. Some of our current materials and processes still have room for improvement, and we believe transparency means acknowledging that.<br/><br/>We continue to assess our choices, explore better alternatives, and identify opportunities for meaningful change. As our practices evolve, we aim to communicate our progress clearly and substantiate our environmental claims.<br/><br/>Our commitment is not to claim perfection, but to keep making more considered decisions.</p>",
-            "text_custom": false,
-            "text_font": "josefin_sans_n4",
-            "text_size": 12,
-            "text_size_mobile": 12,
-            "text_advanced": false,
-            "text_height": 150,
-            "text_mt": 12,
-            "text_mt_mobile": 12,
-            "text_color": "#67645e"
-          }
-        }
-      },
-      "block_order": [
-        "heading_ydGAmx",
-        "text_qQJp6i"
-      ],
-      "name": "SS - Image with text #1",
-      "settings": {
-        "layout": "content_image",
-        "layout_mobile": "image_content",
-        "layout_advanced": false,
-        "layout_gap": 32,
-        "layout_gap_mobile": 24,
-        "layout_border_thickness": 0,
-        "layout_radius": 0,
-        "use_shadow": false,
-        "content_align": "left",
-        "content_align_mobile": "left",
-        "content_vertical_align": "center",
         "image_url": "",
         "image_radius": 16,
         "image_border_thickness": 0,
@@ -923,13 +686,10 @@
     "main",
     "hero_efkYrN",
     "ss_image_with_text_DinG6y",
-    "ss_image_with_text_4MTWxE",
+    "ss_image_with_text_BYPfY3",
     "ss_image_with_text_FhJ4Yn",
     "ss_image_with_text_Fd8CCX",
     "ss_image_with_text_p6NUdm",
-    "ss_image_with_text_DAyeyb",
-    "ss_image_with_text_qwJcCc",
-    "ss_image_with_text_Jh9X8i",
     "ss_featured_collection_6_jmeVAp"
   ]
 }
