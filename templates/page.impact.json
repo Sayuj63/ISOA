@@ -68,7 +68,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>MINIMAL skincare, minimal FOOTPRINT.<br/></p>",
+            "text": "<h1>MINIMAL skincare. MINDFUL approach.</h1>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -152,7 +152,7 @@
         "text_zDeTLJ": {
           "type": "text",
           "settings": {
-            "text": "<p>At ISOUA, we believe better skincare starts with making less, but making it count. From limited product releases to consciously sourced ingredients, every choice is intentional. Together with our community, we're building a more mindful approach to skincare — one that puts purpose before excess.</p>",
+            "text": "<p>We believe good skincare should consider more than what goes on your skin. It should also consider how products are made, packaged, and used. From product development to material choices, we're working towards a more mindful approach to skincare. Not more for the sake of more, but what matters, made to work.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
@@ -290,7 +290,7 @@
           "settings": {
             "toggle_text": "our formulas",
             "heading": "<p><br/>minimal & good for you<br/><br/></p>",
-            "text": "<p>A responsible approach to cruelty-free, clean, vegan ingredients. Suitable for all skin types. Fragrance-free and dermatologist-developed.</p>",
+            "text": "<p>We believe skincare should work hard without unnecessary extras. Our formulas are developed with skin compatibility and performance in mind. ISOUA products are vegan, cruelty-free, fragrance-free, and dermatologist-developed, with suitability varying by product.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -300,7 +300,7 @@
           "settings": {
             "toggle_text": "our packaging",
             "heading": "<p>fyi, we use pcr</p>",
-            "text": "<p>ISOUA’s bottles, tubes, and caps are made with post-consumer recycled (PCR) materials. See more details on each product's page—along with easy-to-follow recycling instructions.</p>",
+            "text": "<p>ISOUA’s bottles, tubes, and caps are made with post-consumer recycled (PCR) materials, giving previously used plastics another use. We continue to consider how packaging can protect product quality while making more purposeful material choices.&nbsp;</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -310,7 +310,7 @@
           "settings": {
             "toggle_text": "your empties",
             "heading": "<p>we've got you</p>",
-            "text": "<p>Easily ship back at least 3 empty products if you'd like us to recycle them for you. Email hello@isoua.com for a complimentary shipping label.</p>",
+            "text": "<p>Easily ship back at least 3 empty products if you'd like us to recycle them for you. Email isoua.help@gmail.com &nbsp;for a complimentary shipping label, and we’ll guide you through the return process.</p>",
             "button_label": "",
             "button_link": ""
           }
