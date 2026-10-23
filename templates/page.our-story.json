@@ -110,7 +110,6 @@
         "text_YwUJGV",
         "button_V7q9aU"
       ],
-      "disabled": true,
       "custom_css": [
         ".hero {padding: 1.5vw; border-radius: 10px; overflow: hidden;}",
         ".hero__media-wrapper {border-radius: 10px; overflow: hidden;}",
@@ -209,10 +208,10 @@
             "image": "shopify://shop_images/Photoroom_20261018_053417.png",
             "link": "",
             "image_ratio": "square",
-            "width": "fit-content",
-            "custom_width": 0,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
+            "width": "custom",
+            "custom_width": 10,
+            "width_mobile": "custom",
+            "custom_width_mobile": 10,
             "height": "fit",
             "border": "none",
             "border_width": 1,
@@ -231,7 +230,6 @@
         "text_kd69Kz",
         "image_FJkrK4"
       ],
-      "disabled": true,
       "custom_css": [
         "{margin-left: 40px; margin-right: 40px; padding-top: 24px; padding-bottom: 24px; text-align: center; border-radius: 10px !important; overflow: hidden;}",
         "@media screen and (max-width: 749px) {{margin-left: 16px; margin-right: 16px; padding-top: 24px; padding-bottom: 24px; border-radius: 10px; border-radius: 10px !important; overflow: hidden; }}"
@@ -303,7 +301,6 @@
         "heading_DjwTBV",
         "text_4k3Uy7"
       ],
-      "disabled": true,
       "name": "SS - Image with text #1",
       "settings": {
         "layout": "content_image",
@@ -345,20 +342,130 @@
         "lazy": true
       }
     },
-    "hero_BU3jQP": {
+    "ss_image_with_text_15_r6efeX": {
+      "type": "ss-image-with-text-15",
+      "blocks": {
+        "item_66Jien": {
+          "type": "item",
+          "settings": {
+            "toggle_text": "our values",
+            "heading": "<p><strong>our values</strong></p>",
+            "text": "<p>It was important to us to build a value-driven business. At ISOUA, we believe in: Simplicity. Affordability. Authenticity. Quality. Transparency.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "item_ec9wBg": {
+          "type": "item",
+          "settings": {
+            "toggle_text": "scientifically proven formulas",
+            "heading": "<p><strong>rooted in science</strong></p>",
+            "text": "<p>Expert-led. Science-backed. Developed with dermatologists and chemists, our formulas are designed to deliver visible results—instantly, and with continued use.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "item_t89FDF": {
+          "type": "item",
+          "settings": {
+            "toggle_text": "our minimal footprint",
+            "heading": "<p><strong>The ISOUA philosophy</strong></p>",
+            "text": "<p>Less, but better. From limited releases to consciously sourced ingredients, we are committed to mindful skincare. Vegan. Cruelty-free. Fragrance-free. No excess.</p>",
+            "button_label": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_66Jien",
+        "item_ec9wBg",
+        "item_t89FDF"
+      ],
+      "name": "SS - Image With Text #15",
+      "settings": {
+        "body_gap": 20,
+        "body_gap_mobile": 16,
+        "image_url": "",
+        "image_position": "left",
+        "image_position_mobile": "top",
+        "image_radius": 12,
+        "image_border_thickness": 0,
+        "image_ratio": "portrait",
+        "image_ratio_mobile": "portrait",
+        "content_padding_vertical": 12,
+        "content_padding_vertical_mobile": 12,
+        "content_padding_horizontal": 32,
+        "content_padding_horizontal_mobile": 16,
+        "content_radius": 12,
+        "content_border_thickness": 0,
+        "content_horizontal_align": "start",
+        "content_horizontal_align_mobile": "start",
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 32,
+        "heading_size_mobile": 22,
+        "heading_height": 130,
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 14,
+        "text_size_mobile": 12,
+        "text_height": 170,
+        "text_mt": 24,
+        "toggle_text_padding_vertical": 10,
+        "toggle_text_padding_vertical_mobile": 16,
+        "toggle_text_border_thickness": 1,
+        "toggle_text_custom": false,
+        "toggle_text_font": "josefin_sans_n4",
+        "toggle_text_size": 26,
+        "toggle_text_size_mobile": 20,
+        "toggle_text_height": 130,
+        "content_border_color": "#000000",
+        "content_bg_color": "#f1f0ed",
+        "heading_color": "#67645e",
+        "text_color": "#67645e",
+        "toggle_text_border_color": "#c4c4c4",
+        "toggle_text_color": "#67645e",
+        "pill_button_size": 14,
+        "pill_button_size_mobile": 13,
+        "pill_button_padding_vertical": 12,
+        "pill_button_padding_vertical_mobile": 10,
+        "pill_button_padding_horizontal": 32,
+        "pill_button_padding_horizontal_mobile": 28,
+        "pill_button_mt": 28,
+        "pill_button_mt_mobile": 20,
+        "image_border_color": "#000000",
+        "background_color": "#ffffff",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_horizontal": 3,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": true,
+        "content_width": 120,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
+    "hero_r96NWP": {
       "type": "hero",
       "blocks": {
-        "text_HhniwP": {
+        "text_YgKVfw": {
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>MINIMAL skincare, minimal FOOTPRINT.<br/></p>",
+            "text": "<p>EDITED, efficacious, INTENTIONAL.</p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
             "type_preset": "custom",
-            "font": "var(--font-heading--family)",
-            "font_size": "2.75rem",
+            "font": "var(--font-body--family)",
+            "font_size": "5.5rem",
             "line_height": "tight",
             "letter_spacing": "tight",
             "case": "none",
@@ -376,11 +483,11 @@
         }
       },
       "block_order": [
-        "text_HhniwP"
+        "text_YgKVfw"
       ],
-      "disabled": true,
       "custom_css": [
-        ".hero {padding: 2vw; border-radius: 10px; overflow: hidden;}",
+        ".hero {padding: 1.5vw; border-radius: 10px; overflow: hidden;}",
+        ".hero__media-wrapper {border-radius: 10px; overflow: hidden;}",
         ".hero img,.hero__media img,.hero__media {border-radius: 10px;}"
       ],
       "name": "t:names.hero",
@@ -388,9 +495,8 @@
         "media_type_1": "image",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
-        "custom_mobile_media": false,
+        "custom_mobile_media": true,
         "media_type_1_mobile": "image",
-        "image_1_mobile": "shopify://shop_images/image_f73e951f-1256-4a48-befd-1b3463dd990f.png",
         "media_type_2_mobile": "image",
         "link": "",
         "open_in_new_tab": false,
@@ -403,17 +509,17 @@
         "vertical_alignment_flex_direction_column": "center",
         "gap": 14,
         "section_width": "page-width",
-        "section_height": "large",
-        "section_height_custom": 50,
-        "color_scheme": "scheme-1",
+        "section_height": "custom",
+        "section_height_custom": 65,
+        "color_scheme": "scheme-759cdb13-ce5e-4501-bb7c-f78910d5a21b",
         "toggle_overlay": false,
         "overlay_color": "#00000026",
         "overlay_style": "gradient",
         "gradient_direction": "to top",
         "blurred_reflection": false,
         "reflection_opacity": 75,
-        "padding-block-start": 0,
-        "padding-block-end": 0
+        "padding-block-start": 5,
+        "padding-block-end": 5
       }
     },
     "ss_image_with_text_15_VLxknD": {
@@ -455,7 +561,6 @@
         "item_P3tjNF",
         "item_nyCpfz"
       ],
-      "disabled": true,
       "name": "SS - Image With Text #15",
       "settings": {
         "body_gap": 20,
@@ -640,7 +745,6 @@
         "slide_HqTLTk",
         "slide_kMEBWy"
       ],
-      "disabled": true,
       "name": "SECTION STORE - Featured Collection #6",
       "settings": {
         "collection": "frontpage",
@@ -1560,7 +1664,8 @@
     "hero_JYYJYq",
     "section_qNCadN",
     "ss_image_with_text_bwqzNC",
-    "hero_BU3jQP",
+    "ss_image_with_text_15_r6efeX",
+    "hero_r96NWP",
     "ss_image_with_text_15_VLxknD",
     "hero_aVBdBQ",
     "ss_featured_collection_6_new_ppPVk9",
