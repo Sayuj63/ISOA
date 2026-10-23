@@ -479,11 +479,12 @@
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
+        "image_1": "shopify://shop_images/Reclining_in_Burgundy_and_White.png",
         "media_type_2": "image",
-        "image_2": "shopify://shop_images/Sultry_Portrait_on_a_Maroon_Leather_Couch.png",
         "stack_media_on_mobile": false,
         "custom_mobile_media": true,
         "media_type_1_mobile": "image",
+        "image_1_mobile": "shopify://shop_images/Sultry_Portrait_on_a_Maroon_Leather_Couch.png",
         "media_type_2_mobile": "image",
         "link": "",
         "open_in_new_tab": false,
