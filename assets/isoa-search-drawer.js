@@ -155,6 +155,8 @@ class SearchDrawerComponent extends DialogComponent {
 
     if (this.#idleResultsHTML !== null) results.innerHTML = this.#idleResultsHTML;
 
+    // Back to the idle view: suggestions + divider return.
+    this.classList.remove('is-searching');
     this.#setBusy(false);
     this.#announce(0, '');
   }
@@ -177,6 +179,10 @@ class SearchDrawerComponent extends DialogComponent {
       this.#showIdleResults();
       return;
     }
+
+    // While a term is in the field, Rhode drops the suggestions list and
+    // shows only the result count + results (see rhode-drawers.css).
+    this.classList.add('is-searching');
 
     const abortController = new AbortController();
     this.#abortController = abortController;

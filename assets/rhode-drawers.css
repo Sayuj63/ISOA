@@ -150,8 +150,9 @@
   border-radius: 10px;
   background-color: #ffffff;
   color: var(--rhode-drawer-ink);
-  font-size: 14px;
+  font-size: 22px;
   line-height: 1.2;
+  outline: none;
 }
 
 .isoa-sd__input::placeholder {
@@ -243,6 +244,9 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+  /* Drops a photo's white backdrop into the panel colour, so packshots shot
+     on white don't show as a box. */
+  mix-blend-mode: multiply;
 }
 
 .isoa-sd__product-title {
@@ -313,18 +317,29 @@
 /* "9 results for 'barrier'" above the rows, as on Rhode. There is no
    search page — results only ever show in this drawer. */
 .isoa-sd__count {
-  margin: 0;
-  padding: 16px 36px 0;
-  font-size: 14px;
+  flex: 0 0 auto;
+  margin: 0 36px;
+  padding: 0 0 16px;
+  border-block-end: 1px solid var(--rhode-drawer-rule);
+  font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.02em;
   color: var(--rhode-drawer-ink);
 }
 
+/* Searching: Rhode hides the suggestions list and its divider; the count
+   sits right under the field and carries the divider itself. */
+.isoa-sd.is-searching .isoa-sd__suggestions,
+.isoa-sd.is-searching .isoa-sd__rule {
+  display: none;
+}
+.isoa-sd.is-searching .isoa-sd__results {
+  padding-block-start: 24px;
+}
+
 /* The reference shows no focus ring — its field has no border to begin with —
    but every control in the drawer is reachable by keyboard, so each needs one
    that is actually visible against the off-white panel. */
-.isoa-drawer .isoa-sd__input:focus-visible,
 .isoa-sd__close:focus-visible,
 .isoa-sd__product:focus-visible,
 .isoa-sd__suggestion:focus-visible {
@@ -366,7 +381,7 @@
     outline: none;
     box-shadow: none;
     background-color: #f4f3f0;
-    font-size: 13px;
+    font-size: 16px;
   }
 
   .isoa-drawer .isoa-sd__input:focus-visible {
@@ -394,8 +409,13 @@
   }
 
   .isoa-sd__count {
-    padding: 14px 17px 0;
-    font-size: 13px;
+    margin-inline: 17px;
+    padding-bottom: 14px;
+    font-size: 14px;
+  }
+
+  .isoa-sd.is-searching .isoa-sd__results {
+    padding-block-start: 16px;
   }
 
   .isoa-sd__results[aria-busy='true']::after {
