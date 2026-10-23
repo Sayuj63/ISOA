@@ -158,7 +158,7 @@
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
-            "type_preset": "h1",
+            "type_preset": "rte",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
             "line_height": "normal",
@@ -179,7 +179,7 @@
         "text_kd69Kz": {
           "type": "text",
           "settings": {
-            "text": "<p>My journey with PCOS and cystic acne led me to create products that are simple, effective, and accessible.</p><p>ISOUA is built on science-led formulations that cut through the noise, focusing only on what truly works.</p><p>Designed for acne-prone, sensitive skin, these are everyday essentials made to support your skin through every phase, keeping it clear, calm, and balanced.</p>",
+            "text": "<p>At ISOUA, we believe in <strong>one of everything good that really works.</strong></p><p>Rooted in science and thoughtful formulation, we create effective, accessible skincare designed to earn a place in your everyday routine. From a really good mask or serum to a moisturiser or blush, every product is made to become a go-to—something you reach for daily and never want to leave behind when you travel.</p><p>My journey with PCOS and cystic acne inspired me to create a simpler approach to skincare: products that cut through the noise and focus on what truly matters.</p><p>Built on science-led formulations, ISOUA is about doing more with less. Our essentials are designed with acne-prone and sensitive skin in mind, helping support skin that feels clear, calm, hydrated, and balanced through its changing needs.</p>",
             "width": "100%",
             "max_width": "none",
             "alignment": "center",
@@ -348,30 +348,30 @@
         "item_66Jien": {
           "type": "item",
           "settings": {
-            "toggle_text": "our values",
-            "heading": "<p><strong>our values</strong></p>",
-            "text": "<p>It was important to us to build a value-driven business. At ISOUA, we believe in: Simplicity. Affordability. Authenticity. Quality. Transparency.</p>",
-            "button_label": "",
+            "toggle_text": "curated skincare",
+            "heading": "<p><strong>curated skincare</strong></p>",
+            "text": "<p>Our efficacious, intentional skincare essentials hydrate and nourish your barrier, giving an instant glazed effect and improving skin’s look and feel over time.</p>",
+            "button_label": "THE ROUTINE",
             "button_link": ""
           }
         },
         "item_ec9wBg": {
           "type": "item",
           "settings": {
-            "toggle_text": "scientifically proven formulas",
-            "heading": "<p><strong>rooted in science</strong></p>",
-            "text": "<p>Expert-led. Science-backed. Developed with dermatologists and chemists, our formulas are designed to deliver visible results—instantly, and with continued use.</p>",
-            "button_label": "",
+            "toggle_text": "hybrid makeup",
+            "heading": "<p><strong>hybrid makeup</strong></p>",
+            "text": "<p>We believe makeup should multitask, adding a touch of colour while caring for your skin. Our hybrid formulas include high-performance ingredients for hydrating and nourishing benefits.</p>",
+            "button_label": "GET READY",
             "button_link": ""
           }
         },
         "item_t89FDF": {
           "type": "item",
           "settings": {
-            "toggle_text": "our minimal footprint",
-            "heading": "<p><strong>The ISOUA philosophy</strong></p>",
-            "text": "<p>Less, but better. From limited releases to consciously sourced ingredients, we are committed to mindful skincare. Vegan. Cruelty-free. Fragrance-free. No excess.</p>",
-            "button_label": "",
+            "toggle_text": "on-the-go essentials",
+            "heading": "<p><strong>on-the-go essentials</strong></p>",
+            "text": "<p>Bring&nbsp;isoua&nbsp;everywhere with our ready-to-wear formula. Designed to throw in your purse, makeup bag, or suitcase for skincare anytime, anywhere.</p>",
+            "button_label": "TAKE TO-GO",
             "button_link": ""
           }
         }
@@ -529,7 +529,7 @@
           "type": "item",
           "settings": {
             "toggle_text": "our values",
-            "heading": "<p><strong>our values</strong></p>",
+            "heading": "<p></p><p>our values</p><p></p>",
             "text": "<p>It was important to us to build a value-driven business. At ISOUA, we believe in: Simplicity. Affordability. Authenticity. Quality. Transparency.</p>",
             "button_label": "",
             "button_link": ""
@@ -539,8 +539,8 @@
           "type": "item",
           "settings": {
             "toggle_text": "scientifically proven formulas",
-            "heading": "<p><strong>rooted in science</strong></p>",
-            "text": "<p>Expert-led. Science-backed. Developed with dermatologists and chemists, our formulas are designed to deliver visible results—instantly, and with continued use.</p>",
+            "heading": "<p><br/>scientifically proven formulas<br/><br/></p>",
+            "text": "<p>Developed with award-winning dermatologists, chemists and industry leaders, our skin barrier-focused formulas are designed to bring visible benefits—instantly and years down the isoua.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -549,8 +549,8 @@
           "type": "item",
           "settings": {
             "toggle_text": "our minimal footprint",
-            "heading": "<p><strong>The ISOUA philosophy</strong></p>",
-            "text": "<p>Less, but better. From limited releases to consciously sourced ingredients, we are committed to mindful skincare. Vegan. Cruelty-free. Fragrance-free. No excess.</p>",
+            "heading": "<p><br/>our minimal footprint<br/><br/></p>",
+            "text": "<p>Less, but better.&nbsp;From limited releases to consciously sourced ingredients, we are committed to mindful skincare.&nbsp;Vegan. Cruelty-free. Fragrance-free. No excess.</p>",
             "button_label": "",
             "button_link": ""
           }
@@ -570,8 +570,8 @@
         "image_position_mobile": "top",
         "image_radius": 12,
         "image_border_thickness": 0,
-        "image_ratio": "portrait",
-        "image_ratio_mobile": "portrait",
+        "image_ratio": "original",
+        "image_ratio_mobile": "original",
         "content_padding_vertical": 12,
         "content_padding_vertical_mobile": 12,
         "content_padding_horizontal": 32,
@@ -856,62 +856,66 @@
     "ss_slider_5_McA8G4": {
       "type": "ss-slider-5",
       "blocks": {
-        "slide_z7FkJh": {
+        "slide_KpdCr4": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/spotwear-benefits-1_2480x_4ca5e71e-9381-4dbc-bc8b-7909bf5f32aa.jpg",
             "image_url": "",
             "text": "",
             "url": ""
           }
         },
-        "slide_GztgHN": {
+        "slide_r9q64M": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/spotwear-benefits-2_2480x_9ab8ef0a-1b63-49be-ac58-7cee57eaa8ed.jpg",
             "image_url": "",
-            "text": "",
+            "text": "<p>Collection title</p>",
             "url": ""
           }
         },
-        "slide_HtYeWx": {
+        "slide_DAcaWK": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/spotwear-carousel-1_36d1a278-3a24-4a24-ae30-4c2efcdd2817_102.jpg",
             "image_url": "",
-            "text": "",
+            "text": "<p>Collection title</p>",
             "url": ""
           }
         },
-        "slide_LB97Ca": {
+        "slide_YEqx4j": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/spotwear-carousel-5_1024x_832a22ad-2180-4903-b881-c1b8c754fbf2.jpg",
             "image_url": "",
-            "text": "",
+            "text": "<p>Collection title</p>",
             "url": ""
           }
         },
-        "slide_pyBVgh": {
+        "slide_pVm3A4": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/spotwear-carousel-3_medium_f32c5e63-172d-4865-9ffd-ea5f98071cdf.jpg",
             "image_url": "",
-            "text": "",
+            "text": "<p>Collection title</p>",
+            "url": ""
+          }
+        },
+        "slide_AgNeqn": {
+          "type": "slide",
+          "settings": {
+            "image_url": "",
+            "text": "<p>Collection title</p>",
             "url": ""
           }
         }
       },
       "block_order": [
-        "slide_z7FkJh",
-        "slide_GztgHN",
-        "slide_HtYeWx",
-        "slide_LB97Ca",
-        "slide_pyBVgh"
+        "slide_KpdCr4",
+        "slide_r9q64M",
+        "slide_DAcaWK",
+        "slide_YEqx4j",
+        "slide_pVm3A4",
+        "slide_AgNeqn"
       ],
       "name": "SS - Slider #5",
       "settings": {
-        "heading": "<h2>spotted on you</h2>",
+        "heading": "<p><strong>research-backed ingredients</strong></p>",
         "heading_custom": false,
         "heading_font": "josefin_sans_n4",
         "heading_size": 22,
@@ -958,8 +962,8 @@
         "navigation_pt": 20,
         "navigation_pt_mobile": 12,
         "navigation_border_thickness": 1,
-        "arrow_size": 24,
-        "arrow_size_mobile": 24,
+        "arrow_size": 16,
+        "arrow_size_mobile": 16,
         "button_color": "#000000",
         "button_hover_color": "#ffffff",
         "button_bg_color": "",
@@ -969,8 +973,8 @@
         "image_border_color": "#000000",
         "text_color": "#ffffff",
         "navigation_border_color": "#000000",
-        "arrow_color": "#000000",
-        "arrow_hover_color": "#000000",
+        "arrow_color": "#67645E",
+        "arrow_hover_color": "#67645E",
         "heading_color": "#67645e",
         "background_color": "#f1f0ed",
         "background_gradient": "",
