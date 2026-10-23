@@ -68,7 +68,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<h2>Welcome to the WORLD of isoua</h2>",
+            "text": "<h2>Welcome to the&nbsp;</h2><h2>WORLD of isoua</h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -84,16 +84,33 @@
             "background_color": "#00000026",
             "corner_radius": 0,
             "padding-block-start": 0,
-            "padding-block-end": 43,
+            "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 100
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "button_V7q9aU": {
+          "type": "button",
+          "name": "t:names.button",
+          "settings": {
+            "label": "COME ON IN",
+            "link": "https://www.isoua.com/collections/all",
+            "open_in_new_tab": false,
+            "style_class": "button",
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
           },
           "blocks": {}
         }
       },
       "block_order": [
-        "text_YwUJGV"
+        "text_YwUJGV",
+        "button_V7q9aU"
       ],
+      "disabled": true,
       "custom_css": [
         ".hero {padding: 1.5vw; border-radius: 10px; overflow: hidden;}",
         ".hero__media-wrapper {border-radius: 10px; overflow: hidden;}",
@@ -102,12 +119,10 @@
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
-        "image_1": "shopify://shop_images/638D5629-48B2-4B67-AA0E-F71BDAC8C96B.png",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": true,
         "media_type_1_mobile": "image",
-        "image_1_mobile": "shopify://shop_images/IMG_8686.jpg",
         "media_type_2_mobile": "image",
         "link": "",
         "open_in_new_tab": false,
@@ -116,7 +131,7 @@
         "horizontal_alignment": "flex-start",
         "vertical_alignment": "center",
         "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
+        "horizontal_alignment_flex_direction_column": "flex-end",
         "vertical_alignment_flex_direction_column": "flex-end",
         "gap": 14,
         "section_width": "page-width",
@@ -140,7 +155,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<p><strong>A NOTE FROM OUR FOUNDER</strong></p>",
+            "text": "<p><strong>A NOTE FROM ALYSSA</strong></p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
@@ -216,6 +231,7 @@
         "text_kd69Kz",
         "image_FJkrK4"
       ],
+      "disabled": true,
       "custom_css": [
         "{margin-left: 40px; margin-right: 40px; padding-top: 24px; padding-bottom: 24px; text-align: center; border-radius: 10px !important; overflow: hidden;}",
         "@media screen and (max-width: 749px) {{margin-left: 16px; margin-right: 16px; padding-top: 24px; padding-bottom: 24px; border-radius: 10px; border-radius: 10px !important; overflow: hidden; }}"
@@ -287,6 +303,7 @@
         "heading_DjwTBV",
         "text_4k3Uy7"
       ],
+      "disabled": true,
       "name": "SS - Image with text #1",
       "settings": {
         "layout": "content_image",
@@ -361,6 +378,7 @@
       "block_order": [
         "text_HhniwP"
       ],
+      "disabled": true,
       "custom_css": [
         ".hero {padding: 2vw; border-radius: 10px; overflow: hidden;}",
         ".hero img,.hero__media img,.hero__media {border-radius: 10px;}"
@@ -437,6 +455,7 @@
         "item_P3tjNF",
         "item_nyCpfz"
       ],
+      "disabled": true,
       "name": "SS - Image With Text #15",
       "settings": {
         "body_gap": 20,
@@ -505,6 +524,365 @@
         "content_width": 120,
         "border_thickness": 0,
         "section_radius": 0,
+        "lazy": true
+      }
+    },
+    "hero_aVBdBQ": {
+      "type": "hero",
+      "blocks": {
+        "text_Nj7cxM": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>MINIMAL skincare, minimal FOOTPRINT.<br/></p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "custom",
+            "font": "var(--font-heading--family)",
+            "font_size": "2.75rem",
+            "line_height": "tight",
+            "letter_spacing": "tight",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "var(--color-foreground-heading)",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_Nj7cxM"
+      ],
+      "disabled": true,
+      "custom_css": [
+        ".hero {padding: 2vw; border-radius: 10px; overflow: hidden;}",
+        ".hero img,.hero__media img,.hero__media {border-radius: 10px;}"
+      ],
+      "name": "t:names.hero",
+      "settings": {
+        "media_type_1": "image",
+        "media_type_2": "image",
+        "stack_media_on_mobile": false,
+        "custom_mobile_media": false,
+        "media_type_1_mobile": "image",
+        "image_1_mobile": "shopify://shop_images/image_f73e951f-1256-4a48-befd-1b3463dd990f.png",
+        "media_type_2_mobile": "image",
+        "link": "",
+        "open_in_new_tab": false,
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 14,
+        "section_width": "page-width",
+        "section_height": "large",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-1",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "gradient",
+        "gradient_direction": "to top",
+        "blurred_reflection": false,
+        "reflection_opacity": 75,
+        "padding-block-start": 4,
+        "padding-block-end": 4
+      }
+    },
+    "ss_featured_collection_6_new_ppPVk9": {
+      "type": "ss-featured-collection-6-new",
+      "blocks": {
+        "slide_JFMrhP": {
+          "type": "slide",
+          "settings": {
+            "product": "",
+            "heading": "Slide 1",
+            "button_text": "SHOP NOW"
+          }
+        },
+        "slide_tri89N": {
+          "type": "slide",
+          "settings": {
+            "product": "",
+            "heading": "Slide 2",
+            "button_text": "SHOP NOW"
+          }
+        },
+        "slide_HqTLTk": {
+          "type": "slide",
+          "settings": {
+            "product": "",
+            "heading": "Slide 3",
+            "button_text": "SHOP NOW"
+          }
+        },
+        "slide_kMEBWy": {
+          "type": "slide",
+          "settings": {
+            "product": "",
+            "heading": "Slide 4",
+            "button_text": "SHOP NOW"
+          }
+        }
+      },
+      "block_order": [
+        "slide_JFMrhP",
+        "slide_tri89N",
+        "slide_HqTLTk",
+        "slide_kMEBWy"
+      ],
+      "disabled": true,
+      "name": "SECTION STORE - Featured Collection #6",
+      "settings": {
+        "collection": "frontpage",
+        "collection_show": 4,
+        "slider_view": 2.4,
+        "slider_view_mobile": 1.2,
+        "slider_gap": 24,
+        "slider_gap_mobile": 12,
+        "slide_padding_vertical": 28,
+        "slide_padding_vertical_mobile": 16,
+        "slide_padding_horizontal": 16,
+        "slide_padding_horizontal_mobile": 12,
+        "slide_radius": 12,
+        "slide_border_thickness": 0,
+        "slide_ratio": "portrait",
+        "slide_ratio_mobile": "portrait",
+        "slide_overlay": 0,
+        "slide_shadow": false,
+        "content_use_bg": false,
+        "heading": "Store",
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 32,
+        "heading_size_mobile": 24,
+        "heading_height": 130,
+        "title_custom": false,
+        "title_font": "josefin_sans_n4",
+        "title_size": 16,
+        "title_size_mobile": 12,
+        "title_height": 150,
+        "price_from": "From",
+        "price_custom": false,
+        "price_font": "josefin_sans_n4",
+        "price_size": 16,
+        "price_size_mobile": 12,
+        "price_height": 150,
+        "price_compare": false,
+        "hide_vendor": false,
+        "vendor_custom": false,
+        "vendor_font": "josefin_sans_n4",
+        "vendor_size": 16,
+        "vendor_size_mobile": 14,
+        "vendor_height": 130,
+        "vendor_mt": 8,
+        "vendor_mt_mobile": 8,
+        "button_text": "SHOP NOW",
+        "button_custom": false,
+        "button_font": "josefin_sans_n4",
+        "button_size": 12,
+        "button_size_mobile": 12,
+        "button_height": 100,
+        "button_padding_vertical": 14,
+        "button_padding_vertical_mobile": 12,
+        "button_padding_horizontal": 12,
+        "button_padding_horizontal_mobile": 12,
+        "button_radius": 100,
+        "button_border_thickness": 0,
+        "button_mt_mobile": 16,
+        "button_style": "non_outline",
+        "arrow_size": 48,
+        "arrow_size_mobile": 48,
+        "arrow_icon_size": 8,
+        "arrow_icon_size_mobile": 8,
+        "arrow_border_thickness": 0,
+        "arrow_radius": 100,
+        "arrow_hover_effect": "color",
+        "arrow_show_desktop": true,
+        "arrow_show_mobile": false,
+        "slide_bg_color": "#f8f8f8",
+        "slide_border_color": "#696660",
+        "slide_shadow_color": "#696660",
+        "slide_overlay_color": "#000000",
+        "heading_color": "#696660",
+        "content_bg": "linear-gradient(180deg, rgba(255, 255, 255, 0) 55%, rgba(255, 255, 255, 0.7) 100%)",
+        "title_color": "#696660",
+        "price_color": "#696660",
+        "price_original_color": "#696660",
+        "vendor_color": "#696660",
+        "button_color": "#696660",
+        "button_hover_color": "#ffffff",
+        "button_bg_color": "#ffffff",
+        "button_bg_hover_color": "#696660",
+        "button_border_color": "#696660",
+        "button_border_hover_color": "#696660",
+        "arrow_color": "#696660",
+        "arrow_hover_color": "#ffffff",
+        "arrow_bg_color": "#ffffff",
+        "arrow_bg_hover_color": "#696660",
+        "arrow_border_color": "#696660",
+        "arrow_border_hover_color": "#696660",
+        "background_color": "#ffffff",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 12,
+        "padding_bottom": 12,
+        "padding_horizontal": 2,
+        "padding_horizontal_mobile": 1.5,
+        "full_width": true,
+        "content_width": 120,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
+    "ss_slider_5_McA8G4": {
+      "type": "ss-slider-5",
+      "blocks": {
+        "slide_z7FkJh": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/spotwear-benefits-1_2480x_4ca5e71e-9381-4dbc-bc8b-7909bf5f32aa.jpg",
+            "image_url": "",
+            "text": "",
+            "url": ""
+          }
+        },
+        "slide_GztgHN": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/spotwear-benefits-2_2480x_9ab8ef0a-1b63-49be-ac58-7cee57eaa8ed.jpg",
+            "image_url": "",
+            "text": "",
+            "url": ""
+          }
+        },
+        "slide_HtYeWx": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/spotwear-carousel-1_36d1a278-3a24-4a24-ae30-4c2efcdd2817_102.jpg",
+            "image_url": "",
+            "text": "",
+            "url": ""
+          }
+        },
+        "slide_LB97Ca": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/spotwear-carousel-5_1024x_832a22ad-2180-4903-b881-c1b8c754fbf2.jpg",
+            "image_url": "",
+            "text": "",
+            "url": ""
+          }
+        },
+        "slide_pyBVgh": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/spotwear-carousel-3_medium_f32c5e63-172d-4865-9ffd-ea5f98071cdf.jpg",
+            "image_url": "",
+            "text": "",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_z7FkJh",
+        "slide_GztgHN",
+        "slide_HtYeWx",
+        "slide_LB97Ca",
+        "slide_pyBVgh"
+      ],
+      "name": "SS - Slider #5",
+      "settings": {
+        "heading": "<h2>spotted on you</h2>",
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 22,
+        "heading_size_mobile": 22,
+        "heading_height": 130,
+        "heading_align": "left",
+        "heading_align_mobile": "left",
+        "button": "",
+        "button_url": "",
+        "button_custom": false,
+        "button_font": "josefin_sans_n4",
+        "button_size": 12,
+        "button_size_mobile": 12,
+        "button_height": 100,
+        "button_padding_vertical": 16,
+        "button_padding_vertical_mobile": 16,
+        "button_padding_horizontal": 24,
+        "button_padding_horizontal_mobile": 24,
+        "button_radius": 100,
+        "button_border_thickness": 1,
+        "button_style": "outline",
+        "slider_view": 3.2,
+        "slider_view_mobile": 1.5,
+        "slider_gap": 32,
+        "slider_gap_mobile": 20,
+        "slider_mt": 24,
+        "slider_mt_mobile": 24,
+        "image_radius": 24,
+        "image_border_thickness": 0,
+        "image_ratio": "square",
+        "image_ratio_mobile": "square",
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 0,
+        "text_size_mobile": 0,
+        "text_height": 50,
+        "text_mt": 0,
+        "text_padding_horizontal": 0,
+        "text_padding_horizontal_mobile": 0,
+        "text_align": "left",
+        "text_align_mobile": "left",
+        "navigation_mt": 40,
+        "navigation_mt_mobile": 24,
+        "navigation_pt": 20,
+        "navigation_pt_mobile": 12,
+        "navigation_border_thickness": 1,
+        "arrow_size": 24,
+        "arrow_size_mobile": 24,
+        "button_color": "#000000",
+        "button_hover_color": "#ffffff",
+        "button_bg_color": "",
+        "button_bg_hover_color": "#000000",
+        "button_border_color": "#000000",
+        "button_border_hover_color": "#000000",
+        "image_border_color": "#000000",
+        "text_color": "#ffffff",
+        "navigation_border_color": "#000000",
+        "arrow_color": "#000000",
+        "arrow_hover_color": "#000000",
+        "heading_color": "#67645e",
+        "background_color": "#f1f0ed",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1,
+        "full_width": false,
+        "content_width": 140,
+        "border_thickness": 0,
+        "section_radius": 10,
         "lazy": true
       }
     },
@@ -1090,20 +1468,20 @@
         "padding-block-end": 4
       }
     },
-    "hero_aVBdBQ": {
+    "hero_fhnTCy": {
       "type": "hero",
       "blocks": {
-        "text_Nj7cxM": {
+        "text_RwDpKE": {
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>MINIMAL skincare, minimal FOOTPRINT.<br/></p>",
+            "text": "<h2>Welcome to the&nbsp;</h2><h2>WORLD of isoua</h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
             "type_preset": "custom",
-            "font": "var(--font-heading--family)",
-            "font_size": "2.75rem",
+            "font": "var(--font-body--family)",
+            "font_size": "5.5rem",
             "line_height": "tight",
             "letter_spacing": "tight",
             "case": "none",
@@ -1118,13 +1496,30 @@
             "padding-inline-end": 0
           },
           "blocks": {}
+        },
+        "button_pMfC6j": {
+          "type": "button",
+          "name": "t:names.button",
+          "settings": {
+            "label": "COME ON IN",
+            "link": "https://www.isoua.com/collections/all",
+            "open_in_new_tab": false,
+            "style_class": "button",
+            "width": "fit-content",
+            "custom_width": 100,
+            "width_mobile": "fit-content",
+            "custom_width_mobile": 100
+          },
+          "blocks": {}
         }
       },
       "block_order": [
-        "text_Nj7cxM"
+        "text_RwDpKE",
+        "button_pMfC6j"
       ],
       "custom_css": [
-        ".hero {padding: 2vw; border-radius: 10px; overflow: hidden;}",
+        ".hero {padding: 1.5vw; border-radius: 10px; overflow: hidden;}",
+        ".hero__media-wrapper {border-radius: 10px; overflow: hidden;}",
         ".hero img,.hero__media img,.hero__media {border-radius: 10px;}"
       ],
       "name": "t:names.hero",
@@ -1132,9 +1527,8 @@
         "media_type_1": "image",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
-        "custom_mobile_media": false,
+        "custom_mobile_media": true,
         "media_type_1_mobile": "image",
-        "image_1_mobile": "shopify://shop_images/image_f73e951f-1256-4a48-befd-1b3463dd990f.png",
         "media_type_2_mobile": "image",
         "link": "",
         "open_in_new_tab": false,
@@ -1143,171 +1537,21 @@
         "horizontal_alignment": "flex-start",
         "vertical_alignment": "center",
         "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
+        "horizontal_alignment_flex_direction_column": "flex-end",
+        "vertical_alignment_flex_direction_column": "flex-end",
         "gap": 14,
         "section_width": "page-width",
-        "section_height": "large",
-        "section_height_custom": 50,
-        "color_scheme": "scheme-1",
+        "section_height": "custom",
+        "section_height_custom": 65,
+        "color_scheme": "scheme-759cdb13-ce5e-4501-bb7c-f78910d5a21b",
         "toggle_overlay": false,
         "overlay_color": "#00000026",
         "overlay_style": "gradient",
         "gradient_direction": "to top",
         "blurred_reflection": false,
         "reflection_opacity": 75,
-        "padding-block-start": 4,
-        "padding-block-end": 4
-      }
-    },
-    "ss_featured_collection_6_new_ppPVk9": {
-      "type": "ss-featured-collection-6-new",
-      "blocks": {
-        "slide_JFMrhP": {
-          "type": "slide",
-          "settings": {
-            "product": "",
-            "heading": "Slide 1",
-            "button_text": "SHOP NOW"
-          }
-        },
-        "slide_tri89N": {
-          "type": "slide",
-          "settings": {
-            "product": "",
-            "heading": "Slide 2",
-            "button_text": "SHOP NOW"
-          }
-        },
-        "slide_HqTLTk": {
-          "type": "slide",
-          "settings": {
-            "product": "",
-            "heading": "Slide 3",
-            "button_text": "SHOP NOW"
-          }
-        },
-        "slide_kMEBWy": {
-          "type": "slide",
-          "settings": {
-            "product": "",
-            "heading": "Slide 4",
-            "button_text": "SHOP NOW"
-          }
-        }
-      },
-      "block_order": [
-        "slide_JFMrhP",
-        "slide_tri89N",
-        "slide_HqTLTk",
-        "slide_kMEBWy"
-      ],
-      "name": "SECTION STORE - Featured Collection #6",
-      "settings": {
-        "collection": "frontpage",
-        "collection_show": 4,
-        "slider_view": 2.4,
-        "slider_view_mobile": 1.2,
-        "slider_gap": 24,
-        "slider_gap_mobile": 12,
-        "slide_padding_vertical": 28,
-        "slide_padding_vertical_mobile": 16,
-        "slide_padding_horizontal": 16,
-        "slide_padding_horizontal_mobile": 12,
-        "slide_radius": 12,
-        "slide_border_thickness": 0,
-        "slide_ratio": "portrait",
-        "slide_ratio_mobile": "portrait",
-        "slide_overlay": 0,
-        "slide_shadow": false,
-        "content_use_bg": false,
-        "heading": "Store",
-        "heading_custom": false,
-        "heading_font": "josefin_sans_n4",
-        "heading_size": 32,
-        "heading_size_mobile": 24,
-        "heading_height": 130,
-        "title_custom": false,
-        "title_font": "josefin_sans_n4",
-        "title_size": 16,
-        "title_size_mobile": 12,
-        "title_height": 150,
-        "price_from": "From",
-        "price_custom": false,
-        "price_font": "josefin_sans_n4",
-        "price_size": 16,
-        "price_size_mobile": 12,
-        "price_height": 150,
-        "price_compare": false,
-        "hide_vendor": false,
-        "vendor_custom": false,
-        "vendor_font": "josefin_sans_n4",
-        "vendor_size": 16,
-        "vendor_size_mobile": 14,
-        "vendor_height": 130,
-        "vendor_mt": 8,
-        "vendor_mt_mobile": 8,
-        "button_text": "SHOP NOW",
-        "button_custom": false,
-        "button_font": "josefin_sans_n4",
-        "button_size": 12,
-        "button_size_mobile": 12,
-        "button_height": 100,
-        "button_padding_vertical": 14,
-        "button_padding_vertical_mobile": 12,
-        "button_padding_horizontal": 12,
-        "button_padding_horizontal_mobile": 12,
-        "button_radius": 100,
-        "button_border_thickness": 0,
-        "button_mt_mobile": 16,
-        "button_style": "non_outline",
-        "arrow_size": 48,
-        "arrow_size_mobile": 48,
-        "arrow_icon_size": 8,
-        "arrow_icon_size_mobile": 8,
-        "arrow_border_thickness": 0,
-        "arrow_radius": 100,
-        "arrow_hover_effect": "color",
-        "arrow_show_desktop": true,
-        "arrow_show_mobile": false,
-        "slide_bg_color": "#f8f8f8",
-        "slide_border_color": "#696660",
-        "slide_shadow_color": "#696660",
-        "slide_overlay_color": "#000000",
-        "heading_color": "#696660",
-        "content_bg": "linear-gradient(180deg, rgba(255, 255, 255, 0) 55%, rgba(255, 255, 255, 0.7) 100%)",
-        "title_color": "#696660",
-        "price_color": "#696660",
-        "price_original_color": "#696660",
-        "vendor_color": "#696660",
-        "button_color": "#696660",
-        "button_hover_color": "#ffffff",
-        "button_bg_color": "#ffffff",
-        "button_bg_hover_color": "#696660",
-        "button_border_color": "#696660",
-        "button_border_hover_color": "#696660",
-        "arrow_color": "#696660",
-        "arrow_hover_color": "#ffffff",
-        "arrow_bg_color": "#ffffff",
-        "arrow_bg_hover_color": "#696660",
-        "arrow_border_color": "#696660",
-        "arrow_border_hover_color": "#696660",
-        "background_color": "#ffffff",
-        "background_gradient": "",
-        "border_color": "#000000",
-        "margin_top": 0,
-        "margin_bottom": 0,
-        "margin_horizontal": 0,
-        "margin_horizontal_mobile": 0,
-        "padding_top": 12,
-        "padding_bottom": 12,
-        "padding_horizontal": 2,
-        "padding_horizontal_mobile": 1.5,
-        "full_width": true,
-        "content_width": 120,
-        "border_thickness": 0,
-        "section_radius": 0,
-        "lazy": true
+        "padding-block-start": 5,
+        "padding-block-end": 5
       }
     }
   },
@@ -1318,9 +1562,11 @@
     "ss_image_with_text_bwqzNC",
     "hero_BU3jQP",
     "ss_image_with_text_15_VLxknD",
+    "hero_aVBdBQ",
+    "ss_featured_collection_6_new_ppPVk9",
+    "ss_slider_5_McA8G4",
     "section_NKG9AC",
     "section_RKjyxn",
-    "hero_aVBdBQ",
-    "ss_featured_collection_6_new_ppPVk9"
+    "hero_fhnTCy"
   ]
 }
