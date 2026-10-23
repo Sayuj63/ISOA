@@ -686,108 +686,42 @@
 /* =============================================================================
    Collection page — Rhode's /collections/shop card, measured at 1440 and 390
    (2026-10-11). Taller frame than the shared card (432 × 523 desktop,
-   175 × 289 phone), 28px inset on desktop, wordmark 50px, name + price 18px
-   bold, subtitle 16px. Scoped to the collection template so the homepage
+   175 × 289 phone). Scoped to the collection template so the homepage
    slider and PDP cross-sell keep their own sizing.
    ============================================================================= */
 body.template-collection .product-grid .isoa-rc-frame {
   aspect-ratio: 432 / 523;
 }
+/* Text inside the card uses the homepage card's type scale (30px wordmark,
+   14px name/price, 12px subtitle, 10px stars + pill) so a card reads the
+   same wherever it appears; only the frame proportions follow Rhode's
+   collection grid. */
 body.template-collection .product-grid .isoa-rc-brand {
-  top: 28px;
-  left: 28px;
-  font-size: 50px;
-  letter-spacing: -0.04em;
+  top: 20px;
+  left: 24px;
+  font-size: 30px;
 }
 body.template-collection .product-grid .isoa-rc-badge {
-  top: 39px;
-  right: 21px;
-  padding: 4px 8px;
-  font-family: 'DM Sans', var(--font-heading--family, var(--font-body--family));
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: -0.01em;
+  top: 20px;
+  right: 20px;
+  padding: 6px 12px;
+  font-size: 10px;
+  font-weight: 700;
 }
 body.template-collection .product-grid .isoa-rc-info {
-  padding: 0 28px 28px;
-  row-gap: 0;
-}
-body.template-collection .product-grid .isoa-rc-reviews {
-  margin-bottom: 5px;
-  font-size: 16px;
+  padding: 20px 24px 22px;
 }
 body.template-collection .product-grid .isoa-rc-stars,
 body.template-collection .product-grid .isoa-rc-review-count {
-  font-size: 16px;
+  font-size: 10px;
 }
 body.template-collection .product-grid .isoa-rc-title,
 body.template-collection .product-grid .isoa-rc-price {
-  font-size: 18px;
-  line-height: 1.5;
-  letter-spacing: 0.02em;
+  font-size: 14px;
 }
 body.template-collection .product-grid .isoa-rc-subtitle {
   margin: 0;
-  font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: 0.02em;
-}
-
-/* The editorial tile occupies the same card slot and uses the same content
-   and CTA insets. Its frame must follow the collection-specific card ratio,
-   not the shorter ratio used by shared cards elsewhere on the site. */
-body.template-collection .product-grid .isoa-rc-promo {
-  container-type: inline-size;
-}
-body.template-collection .product-grid .isoa-rc-promo__frame {
-  aspect-ratio: 432 / 523;
-}
-body.template-collection .product-grid .isoa-rc-promo__heading {
-  left: 28px;
-  right: 28px;
-  bottom: 28px;
-  font-family: var(--font-body--family);
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.5;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  transition: opacity 0.5s cubic-bezier(0.76, 0, 0.24, 1);
-}
-body.template-collection .product-grid .isoa-rc-promo__cta {
-  box-sizing: border-box;
-  left: 12px;
-  right: 12px;
-  bottom: 16px;
-  height: clamp(36px, 11.24cqi, 48px);
-  padding: 0 clamp(10px, 3.75cqi, 16px);
-  border: 0;
-  background: #ffffff;
-  color: #67645e;
-  font-size: clamp(11px, 3.85cqi, 17px);
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: clamp(36px, 11.24cqi, 48px);
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.55s cubic-bezier(0.76, 0, 0.24, 1) 0.15s,
-              transform 0.55s cubic-bezier(0.76, 0, 0.24, 1) 0.15s;
-}
-@media (hover: hover) and (pointer: fine) {
-  body.template-collection .product-grid .isoa-rc-promo:hover .isoa-rc-promo__heading,
-  body.template-collection .product-grid .isoa-rc-promo:focus-within .isoa-rc-promo__heading {
-    opacity: 0;
-  }
-  body.template-collection .product-grid .isoa-rc-promo:hover .isoa-rc-promo__cta,
-  body.template-collection .product-grid .isoa-rc-promo:focus-within .isoa-rc-promo__cta {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-/* Until a promo photo is selected, keep the placeholder tile's copy readable. */
-body.template-collection .product-grid .isoa-rc-promo:has(svg.isoa-rc-promo__img) .isoa-rc-promo__heading {
-  color: #67645e;
-  text-shadow: none;
+  font-size: 12px;
 }
 
 @media (max-width: 749px) {
