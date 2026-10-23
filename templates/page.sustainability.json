@@ -121,8 +121,8 @@
         "vertical_alignment_flex_direction_column": "flex-end",
         "gap": 10,
         "section_width": "page-width",
-        "section_height": "large",
-        "section_height_custom": 100,
+        "section_height": "custom",
+        "section_height_custom": 65,
         "color_scheme": "scheme-759cdb13-ce5e-4501-bb7c-f78910d5a21b",
         "toggle_overlay": false,
         "overlay_color": "#12121266",
@@ -155,7 +155,7 @@
         "text_8jWfVK": {
           "type": "text",
           "settings": {
-            "text": "<p>We believe taking care of your skin and being thoughtful about the world around us should go hand in hand. This belief shapes how we approach our products, packaging, and the choices we make along the way. We’re not here to claim perfection. We’re here to keep doing better.</p>",
+            "text": "<p>Good skincare should care for more than skin alone. At ISOUA, that means looking beyond the formula to the materials, packaging, and processes behind our products. We don't claim to have every answer. We believe in asking better questions, making informed choices, and improving wherever we can.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
@@ -234,7 +234,7 @@
         "text_87YTq9": {
           "type": "text",
           "settings": {
-            "text": "<p>We use recycled paper for our outer boxes and protective packaging to help keep our products safe. We aim to use materials purposefully, balancing product protection with the need to avoid unnecessary packaging. Our outer paper boxes can be recycled where local facilities accept them; disposal options for inner packaging depend on the material and local facilities.</p>",
+            "text": "<p>Our outer boxes and protective packaging use recycled paper to help keep our products safe. We consider how much packaging each product needs, balancing protection with avoiding unnecessary materials. Our outer paper boxes can be recycled where local facilities accept them. Inner packaging may require different disposal methods depending on its material and local recycling infrastructure.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
@@ -313,7 +313,7 @@
         "text_MJ4Bpj": {
           "type": "text",
           "settings": {
-            "text": "<p>We’re exploring alternative materials for our masks that could help reduce their environmental impact without compromising skin compatibility, safety, or performance. Any alternative must meet the standards our products are designed to uphold. Better materials matter only when they work as well as they should.</p>",
+            "text": "<p>We're exploring alternative materials for our products and packaging with an aim of reducing their environmental impact. Any alternative must meet our requirements for skin compatibility, safety, quality, and performance. We won't consider a material a better choice simply because it sounds more sustainable. It needs to work as it should, too.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
@@ -392,7 +392,7 @@
         "text_YKVqzm": {
           "type": "text",
           "settings": {
-            "text": "<p>Our products are not tested on animals. We also recognise that a product’s impact extends beyond its formula. Materials, manufacturing, packaging, and transportation all matter. We continue to assess these areas and consider where meaningful improvements can be made.</p>",
+            "text": "<p>Our products are not tested on animals. We also recognise that responsibility extends beyond the finished formula. The materials we choose, how products are manufactured, how they're packaged, and how they're transported all form part of the wider picture. We continue to examine these areas to identify where improvements are possible.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
@@ -422,7 +422,6 @@
         "content_align": "left",
         "content_align_mobile": "left",
         "content_vertical_align": "center",
-        "image": "shopify://shop_images/IMG_8855.png",
         "image_url": "",
         "image_radius": 16,
         "image_border_thickness": 0,
@@ -472,7 +471,7 @@
         "text_6GqQmx": {
           "type": "text",
           "settings": {
-            "text": "<p>Responsible skincare is an ongoing process. We’ll continue to evaluate our materials, question established choices, and explore more considered alternatives. We believe progress means being honest about where we stand, clear about what still needs work, and transparent about the steps we take along the way.</p>",
+            "text": "<p>We know our current choices aren't the end of the conversation. We'll continue reviewing our materials and processes, questioning what can be done better, and evaluating alternatives carefully. We believe transparency means being clear about what we do today, honest about what still needs work, and accountable for the progress we make.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
@@ -502,7 +501,6 @@
         "content_align": "left",
         "content_align_mobile": "left",
         "content_vertical_align": "center",
-        "image": "shopify://shop_images/Photoroom_20261023_051954.png",
         "image_url": "",
         "image_radius": 16,
         "image_border_thickness": 0,
