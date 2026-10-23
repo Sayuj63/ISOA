@@ -263,7 +263,7 @@ assign inside_box_padding_mobile = section.settings.inside_box_padding_mobile
 
 }
 
-{%- if template == 'product.recovery-mask' or template == 'product.rhode-lip-tint' -%}
+{%- if template.name == 'product' and template.suffix != blank -%}
   /* PDP width rail. Horizon's subgrid already places every `.section-{id}` at
      the pill rail (40 → viewport-40) via `grid-column: 2`, so the OUTER is
      already pill-flush — the INNER just needs to fill it. Applying the

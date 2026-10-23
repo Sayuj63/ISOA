@@ -16,7 +16,7 @@
   var mql = window.matchMedia(MOBILE_QUERY);
 
   function init() {
-    // Only run on PDP (recovery-mask / rhode-lip-tint templates) and only on mobile.
+    // Only run on PDP (alternate product templates) and only on mobile.
     if (!mql.matches) return;
     var mediaWrap = document.querySelector('.product-information__media');
     if (!mediaWrap) return;

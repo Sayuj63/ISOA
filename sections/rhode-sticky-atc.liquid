@@ -158,7 +158,7 @@
   }
 
   /* Kill Horizon's default sticky-add-to-cart on this template. */
-  {% if template == 'product.recovery-mask' %}
+  {% if template.name == 'product' and template.suffix != blank and template.suffix != 'rhode-lip-tint' %}
     .sticky-add-to-cart__bar,
     .sticky-add-to-cart {
       display: none !important;

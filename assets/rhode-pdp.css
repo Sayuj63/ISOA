@@ -1,5 +1,5 @@
 /* Rhode PDP — equal-height columns + thumbnail-overlay.
-   Loaded on product.recovery-mask and product.rhode-lip-tint via theme.liquid. */
+   Loaded on every alternate product template (product.<suffix>) via theme.liquid. */
 
 /* ── PDP spacing rhythm ────────────────────────────────────────────────────
    One value spaces the whole template: the gap between one section's visible

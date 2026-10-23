@@ -494,7 +494,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,800&display=swap">
 
     {%- render 'stylesheets' -%}
-    {% if template == 'product.recovery-mask' or template == 'product.rhode-lip-tint' %}
+    {%- comment -%} Every alternate product template is a Rhode PDP; the plain product.json is not. {%- endcomment -%}
+    {% if template.name == 'product' and template.suffix != blank %}
       {{ 'rhode-pdp.css' | asset_url | stylesheet_tag }}
       {{ 'rhode-collection-cards.css' | asset_url | stylesheet_tag }}
       <script src="{{ 'rhode-pdp-mobile-gallery.js' | asset_url }}" defer></script>

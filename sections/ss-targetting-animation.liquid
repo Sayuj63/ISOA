@@ -375,7 +375,7 @@ scale(calc(var(--text-scale) / 100));}
   display:none;
 }
 
-{% if template == 'product.recovery-mask' or template == 'product.rhode-lip-tint' %}
+{% if template.name == 'product' and template.suffix != blank %}
   /* --- PDP override: grey pill container at header-pill width, centered text block,
      outlined pink secondary layer with clip-path slide reveal. -vamshi */
 
