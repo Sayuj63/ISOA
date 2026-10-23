@@ -182,7 +182,6 @@
         "content_align": "left",
         "content_align_mobile": "left",
         "content_vertical_align": "end",
-        "image": "shopify://shop_images/IMG_8686.jpg",
         "image_url": "",
         "image_radius": 16,
         "image_border_thickness": 0,
@@ -325,7 +324,6 @@
       "settings": {
         "body_gap": 20,
         "body_gap_mobile": 16,
-        "image": "shopify://shop_images/IMG_8769.jpg",
         "image_url": "",
         "image_position": "left",
         "image_position_mobile": "top",
