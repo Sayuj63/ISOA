@@ -234,7 +234,7 @@
         "text_87YTq9": {
           "type": "text",
           "settings": {
-            "text": "<p>We use recycled paper for our outer boxes and protective packaging to help keep our products safe. We aim to use materials purposefully, balancing product protection with the need to avoid unnecessary packaging. Our outer paper boxes can be recycled where local facilities accept them; disposal options for inner packaging depend on the material and local facilities.</p>",
+            "text": "<p>We use recycled paper for our outer boxes and protective packaging to help keep our products safe. We consider how much packaging is needed to protect each product while avoiding unnecessary materials. Recycling options vary by component and location, so we encourage customers to check local facilities.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
@@ -313,7 +313,7 @@
         "text_MJ4Bpj": {
           "type": "text",
           "settings": {
-            "text": "<p>We’re exploring alternative materials for our packaging that could help reduce their environmental impact without compromising skin compatibility, safety, or performance. We believe better alternatives must meet the same standards of quality and efficacy as the products they’re designed to replace.</p>",
+            "text": "<p>We’re exploring alternative materials for our products and packaging to reduce their environmental impact. Any alternative must meet our expectations for skin compatibility, safety, quality, and performance. We believe progress matters most when better choices work just as well.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
@@ -392,7 +392,7 @@
         "text_YKVqzm": {
           "type": "text",
           "settings": {
-            "text": "<p>Our products are not tested on animals. We also recognise that a product’s impact extends beyond its formula. Materials, manufacturing, packaging, and transportation all matter. We continue to consider these factors as we assess where meaningful improvements can be made.</p>",
+            "text": "<p>We believe care should extend beyond the products we create. Our products are not tested on animals, and we recognise that responsibility also means considering the materials, manufacturing, packaging, and transportation behind them. These are areas we continue to assess as we look for meaningful opportunities to improve.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
@@ -472,7 +472,7 @@
         "text_6GqQmx": {
           "type": "text",
           "settings": {
-            "text": "<p>We know there’s more to do. We’ll continue to question our choices, assess our materials and processes, and explore more considered alternatives. For us, progress means being honest about where we are, thoughtful about where we can go, and transparent about the steps we take along the way.</p>",
+            "text": "<p>We know responsible skincare is an ongoing process. We’ll continue to evaluate our materials, question established choices, and explore better alternatives. We may not have every answer today, but we believe in being honest about where we stand and transparent about the progress we make.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
