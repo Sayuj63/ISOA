@@ -95,7 +95,7 @@
   position: relative;
   flex: 0 0 auto;
   padding: 20px;
-  font-size: 14px;
+  font-size: 22px;
   font-weight: 700;
   line-height: 1.2;
   text-align: center;
@@ -250,7 +250,7 @@
 }
 
 .isoa-sd__product-title {
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 19.2px;
   letter-spacing: 0.324px;
@@ -362,7 +362,7 @@
 
   .isoa-sd__head {
     padding: 18px 20px 16px;
-    font-size: 13px;
+    font-size: 16px;
   }
 
   .isoa-sd__close {
@@ -432,7 +432,7 @@
   }
 
   .isoa-sd__product-title {
-    font-size: 12px;
+    font-size: 14px;
     line-height: 16.8px;
     letter-spacing: 0.2796px;
   }
