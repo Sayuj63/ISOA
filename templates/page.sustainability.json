@@ -155,7 +155,7 @@
         "text_8jWfVK": {
           "type": "text",
           "settings": {
-            "text": "<p>We believe taking care of your skin and being thoughtful about the world around us should go hand in hand. It shapes how we approach our packaging, our products, and the choices we make along the way. We’re not here to claim perfection. We’re here to keep doing better.</p>",
+            "text": "<p>We believe taking care of your skin and being thoughtful about the world around us should go hand in hand. This belief shapes how we approach our packaging, our products, and the choices we make along the way. We’re not here to claim perfection. We’re here to keep doing better.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
@@ -219,7 +219,7 @@
         "heading_9zmze7": {
           "type": "heading",
           "settings": {
-            "heading": "<p>Less waste. More thought.</p>",
+            "heading": "<h2>Packaging with purpose.</h2>",
             "heading_custom": false,
             "heading_font": "josefin_sans_n4",
             "heading_size": 28,
@@ -234,7 +234,7 @@
         "text_87YTq9": {
           "type": "text",
           "settings": {
-            "text": "<p>We use recycled paper for our outer boxes and protective packaging to keep our products safe. We aim to use materials purposefully, balancing product protection with the need to avoid unnecessary packaging. Our outer paper boxes can be recycled where local facilities accept them; disposal options for inner packaging depend on the material and local facilities.</p>",
+            "text": "<p>We use recycled paper for our outer boxes and protective packaging to help keep our products safe. We aim to use materials purposefully, balancing product protection with the need to avoid unnecessary packaging. Our outer paper boxes can be recycled where local facilities accept them; disposal options for inner packaging depend on the material and local facilities.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
@@ -313,7 +313,7 @@
         "text_MJ4Bpj": {
           "type": "text",
           "settings": {
-            "text": "<p>We’re exploring alternative materials for our packaging that could help reduce their environmental impact without compromising skin compatibility, safety, or performance. Better alternatives matter only when they work as well as they should.</p>",
+            "text": "<p>We’re exploring alternative materials for our packaging that could help reduce their environmental impact without compromising skin compatibility, safety, or performance. We believe better alternatives must meet the same standards of quality and efficacy as the products they’re designed to replace.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
@@ -392,7 +392,7 @@
         "text_YKVqzm": {
           "type": "text",
           "settings": {
-            "text": "<p>Our products are not tested on animals. We also recognise that the impact of a product extends beyond its formula. Materials, manufacturing, packaging, and transportation all matter, and we continue to consider where improvements can be made.</p>",
+            "text": "<p>Our products are not tested on animals. We also recognise that a product’s impact extends beyond its formula. Materials, manufacturing, packaging, and transportation all matter. We continue to consider these factors as we assess where meaningful improvements can be made.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
@@ -472,7 +472,7 @@
         "text_6GqQmx": {
           "type": "text",
           "settings": {
-            "text": "<p>We know there’s more to do. We’ll continue to question our choices, assess our materials and processes, and look for more considered alternatives. We believe progress means being honest about where we are, thoughtful about where we can go, and transparent about the difference.<br/></p>",
+            "text": "<p>We know there’s more to do. We’ll continue to question our choices, assess our materials and processes, and explore more considered alternatives. For us, progress means being honest about where we are, thoughtful about where we can go, and transparent about the steps we take along the way.</p>",
             "text_custom": false,
             "text_font": "josefin_sans_n4",
             "text_size": 12,
