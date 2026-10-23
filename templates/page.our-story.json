@@ -61,10 +61,10 @@
         "padding-block-end": 0
       }
     },
-    "hero_JYYJYq": {
+    "hero_44KViy": {
       "type": "hero",
       "blocks": {
-        "text_YwUJGV": {
+        "text_J6fygr": {
           "type": "text",
           "name": "t:names.text",
           "settings": {
@@ -84,7 +84,7 @@
             "background_color": "#00000026",
             "corner_radius": 0,
             "padding-block-start": 0,
-            "padding-block-end": 0,
+            "padding-block-end": 26,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
@@ -92,7 +92,7 @@
         }
       },
       "block_order": [
-        "text_YwUJGV"
+        "text_J6fygr"
       ],
       "custom_css": [
         ".hero {padding: 1.5vw; border-radius: 10px; overflow: hidden;}",
@@ -102,12 +102,12 @@
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
-        "image_1": "shopify://shop_images/Untitled_Design.png",
+        "image_1": "shopify://shop_images/Model_Lounging_on_Burgundy_Leather_Sofa.png",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": true,
         "media_type_1_mobile": "image",
-        "image_1_mobile": "shopify://shop_images/isoua_3.png",
+        "image_1_mobile": "shopify://shop_images/Sultry_Portrait_on_a_Maroon_Leather_Couch.png",
         "media_type_2_mobile": "image",
         "link": "",
         "open_in_new_tab": false,
@@ -116,7 +116,7 @@
         "horizontal_alignment": "flex-start",
         "vertical_alignment": "center",
         "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
+        "horizontal_alignment_flex_direction_column": "center",
         "vertical_alignment_flex_direction_column": "flex-end",
         "gap": 14,
         "section_width": "page-width",
@@ -367,6 +367,7 @@
         "item_ec9wBg",
         "item_t89FDF"
       ],
+      "disabled": true,
       "name": "SS - Image With Text #15",
       "settings": {
         "body_gap": 20,
@@ -1579,7 +1580,7 @@
   },
   "order": [
     "main",
-    "hero_JYYJYq",
+    "hero_44KViy",
     "section_qNCadN",
     "ss_image_with_text_bwqzNC",
     "ss_image_with_text_15_r6efeX",
