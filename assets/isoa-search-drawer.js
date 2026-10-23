@@ -56,7 +56,9 @@ class SearchDrawerComponent extends DialogComponent {
     this.addEventListener(DialogOpenEvent.eventName, this.#handleOpen);
     this.addEventListener(DialogCloseEvent.eventName, this.#handleClose);
     this.addEventListener('input', this.#handleInput);
+    this.addEventListener('submit', this.#handleSubmit);
     document.addEventListener('pointerdown', this.#rememberTrigger, true);
+    this.#openFromUrl();
   }
 
   disconnectedCallback() {
@@ -64,6 +66,7 @@ class SearchDrawerComponent extends DialogComponent {
     this.removeEventListener(DialogOpenEvent.eventName, this.#handleOpen);
     this.removeEventListener(DialogCloseEvent.eventName, this.#handleClose);
     this.removeEventListener('input', this.#handleInput);
+    this.removeEventListener('submit', this.#handleSubmit);
     document.removeEventListener('pointerdown', this.#rememberTrigger, true);
     this.#abortController?.abort();
   }
@@ -103,6 +106,37 @@ class SearchDrawerComponent extends DialogComponent {
     // product rows are not what should receive focus back.
     if (trigger && !this.contains(trigger)) this.#trigger = trigger;
   };
+
+  /**
+   * There is no search page — like Rhode, results only ever live in this
+   * drawer. Enter runs the search here instead of submitting to /search.
+   */
+  #handleSubmit = (event) => {
+    if (!(event.target instanceof HTMLFormElement) || !event.target.matches('[role="search"]')) return;
+    event.preventDefault();
+    const input = this.refs.searchInput;
+    if (input instanceof HTMLInputElement) this.#render(input.value.trim());
+  };
+
+  /**
+   * Old /search links (bookmarks, Google) are redirected by layout/theme.liquid
+   * to /?search=<terms>; open the drawer on those terms, then drop the param
+   * so a reload doesn't reopen it.
+   */
+  #openFromUrl() {
+    const url = new URL(window.location.href);
+    if (!url.searchParams.has('search')) return;
+    const term = (url.searchParams.get('search') || '').trim();
+    url.searchParams.delete('search');
+    history.replaceState(history.state, '', url.pathname + url.search + url.hash);
+
+    requestAnimationFrame(() => {
+      this.showDialog?.();
+      const input = this.refs.searchInput;
+      if (input instanceof HTMLInputElement) input.value = term;
+      if (term) this.#render(term);
+    });
+  }
 
   #handleInput = (event) => {
     const input = event.target;

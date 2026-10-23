@@ -160,6 +160,9 @@
     >
       {%- if predictive_search.performed -%}
         {%- if predictive_results.size > 0 -%}
+          <p class="isoa-sd__count">
+            {{ predictive_results.size }} {% if predictive_results.size == 1 %}result{% else %}results{% endif %} for '{{ predictive_search.terms | escape }}'
+          </p>
           <ul class="isoa-sd__products" role="list">
             {%- for product in predictive_results -%}
               <li data-search-result>
@@ -167,14 +170,6 @@
               </li>
             {%- endfor -%}
           </ul>
-
-          <a
-            class="isoa-sd__view-all"
-            href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}"
-          >
-            {{ 'content.search_results_view_all' | t }}
-            <span class="visually-hidden">{{ predictive_search.terms | escape }}</span>
-          </a>
         {%- else -%}
           <p class="isoa-sd__empty">
             {{ 'content.search_results_no_results' | t: terms: predictive_search.terms }}

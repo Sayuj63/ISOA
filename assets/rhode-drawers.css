@@ -301,9 +301,7 @@
   }
 }
 
-/* Shown when the query matched nothing. The count for a successful search is
-   announced through the drawer's live region instead, so it is not repeated
-   on screen. */
+/* Shown when the query matched nothing. */
 .isoa-sd__empty {
   margin: 0;
   padding: 20px 36px 18px;
@@ -312,22 +310,15 @@
   color: var(--rhode-drawer-ink);
 }
 
-.isoa-sd__view-all {
-  flex: 0 0 auto;
-  margin: 0 36px;
-  padding: 18px 0 22px;
-  border-block-start: 1px solid var(--rhode-drawer-rule);
+/* "9 results for 'barrier'" above the rows, as on Rhode. There is no
+   search page — results only ever show in this drawer. */
+.isoa-sd__count {
+  margin: 0;
+  padding: 16px 36px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
   color: var(--rhode-drawer-ink);
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 19.2px;
-  letter-spacing: 0.324px;
-  text-transform: uppercase;
-  text-decoration: none;
-}
-
-.isoa-sd__view-all:hover {
-  text-decoration: underline;
 }
 
 /* The reference shows no focus ring — its field has no border to begin with —
@@ -336,8 +327,7 @@
 .isoa-drawer .isoa-sd__input:focus-visible,
 .isoa-sd__close:focus-visible,
 .isoa-sd__product:focus-visible,
-.isoa-sd__suggestion:focus-visible,
-.isoa-sd__view-all:focus-visible {
+.isoa-sd__suggestion:focus-visible {
   outline: 2px solid var(--rhode-drawer-ink);
   outline-offset: 2px;
 }
@@ -403,12 +393,9 @@
     line-height: 22.4px;
   }
 
-  .isoa-sd__view-all {
-    margin-inline: 17px;
-    padding: 16px 0 18px;
-    font-size: 14px;
-    line-height: 16.8px;
-    letter-spacing: 0.2796px;
+  .isoa-sd__count {
+    padding: 14px 17px 0;
+    font-size: 13px;
   }
 
   .isoa-sd__results[aria-busy='true']::after {

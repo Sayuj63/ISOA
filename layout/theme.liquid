@@ -443,6 +443,14 @@
 {% endif %}
 
   <head>
+    {%- comment -%}
+      No search page: search lives in the drawer (sections/isoa-search-drawer).
+      Any visit to /search is sent to the homepage with the terms, and the
+      drawer opens on them (assets/isoa-search-drawer.js #openFromUrl).
+    {%- endcomment -%}
+    {%- if template.name == 'search' -%}
+      <script>window.location.replace({{ routes.root_url | json }} + '?search=' + encodeURIComponent({{ search.terms | json }} || ''));</script>
+    {%- endif -%}
     <meta name="google-site-verification" content="7JPairUoXsJQ4-4AX8O-PN-Y58LaUVCdHkqJftTfSEc" />
     
 <!-- Google Tag Manager -->
