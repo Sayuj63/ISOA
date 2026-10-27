@@ -326,7 +326,7 @@
                     "text_x6E4qX": {
                       "type": "text",
                       "settings": {
-                        "text": "<ul><li>Provides lightweight hydration for blemish-prone skin</li><li>Helps soothe and comfort stressed skin</li><li>Supports the skin barrier and helps reduce moisture loss</li><li>Helps improve the appearance of post-acne marks and uneven tone</li><li>Softens rough texture for smoother, healthier-looking skin</li></ul>",
+                        "text": "<ul><li>Lightweight hydration for blemish-prone skin</li><li>Helps soothe and comfort stressed skin</li><li>Supports the skin barrier and helps reduce moisture loss</li><li>Helps improve the appearance of post-acne marks and uneven skin tone</li><li>Softens rough texture for smoother, softer-feeling skin</li></ul>",
                         "width": "fit-content",
                         "max_width": "none",
                         "alignment": "left",
@@ -404,7 +404,7 @@
                     "text_GqXfJT": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>CERAMIDE NP — helps reinforce the skin’s natural moisture barrier and reduce moisture loss.<br/>NIACINAMIDE — helps improve the appearance of uneven skin tone and supports a healthy-looking skin barrier.<br/>PANTHENOL (PRO-VITAMIN B5) — helps hydrate, soften, and comfort dry skin.<br/>AZELAIC ACID — helps improve the appearance of uneven skin tone and post-acne marks.<br/>ECTOIN — helps maintain skin hydration and support skin comfort.<br/>GLYCERIN — a humectant that draws moisture into the skin to help keep it hydrated and soft.</p>",
+                        "text": "<p>4% Niacinamide helps support the skin barrier and improve the appearance of uneven skin tone and post-acne marks.<br/>2.5% Azelaic Acid Complex helps improve the appearance of uneven skin tone and post-blemish marks.</p><p>2.5% Panthenol (Pro-Vitamin B5) helps hydrate, soften, and condition skin.</p><p>4% Glycerin attracts moisture to keep skin hydrated and soft.</p><p>10% Aloe Leaf Water helps condition skin and maintain a comfortable, hydrated feel.</p><p>Ceramide NP helps support the skin’s natural moisture barrier and reduce moisture loss.</p><p>0.2% Ectoin helps maintain skin hydration and support skin comfort.</p><p>2% Betaine helps maintain moisture and leave skin feeling soft and supple.</p>",
                         "width": "100%",
                         "max_width": "none",
                         "alignment": "left",
@@ -690,14 +690,14 @@
           "type": "feature",
           "settings": {
             "label": "GOOD FOR:",
-            "value": "All skin types"
+            "value": "Blemish-prone skin that also experiences dehydration, dryness, rough texture, or uneven-looking tone."
           }
         },
         "feature_7HH34A": {
           "type": "feature",
           "settings": {
             "label": "FEELS LIKE:",
-            "value": "Lightweight, milky serum"
+            "value": "A lightweight, milky serum that leaves skin feeling soft and hydrated."
           }
         },
         "feature_J8CJxB": {
@@ -705,6 +705,13 @@
           "settings": {
             "label": "SMELLS LIKE:",
             "value": "Fragrance-Free"
+          }
+        },
+        "feature_n89VFA": {
+          "type": "feature",
+          "settings": {
+            "label": "WHERE IT FITS:",
+            "value": "After cleansing, with placement adjusted to your acne treatment's directions, and before moisturiser."
           }
         },
         "feature_H4D8Ya": {
@@ -719,6 +726,7 @@
         "feature_KrtPXd",
         "feature_7HH34A",
         "feature_J8CJxB",
+        "feature_n89VFA",
         "feature_H4D8Ya"
       ],
       "name": "SS - Dynamic Feature Split",
@@ -785,16 +793,23 @@
             "image": "shopify://shop_images/spotwear-flower-hover_2480x_8b9331b8-7531-4595-976d-ba70afeffc95.jpg",
             "heading": "smoother"
           }
+        },
+        "item_UTCqnH": {
+          "type": "item",
+          "settings": {
+            "heading": "brighter"
+          }
         }
       },
       "block_order": [
         "item_qB8tpU",
         "item_QcFhYc",
-        "item_GFb3Qe"
+        "item_GFb3Qe",
+        "item_UTCqnH"
       ],
       "name": "Interactive Benefits",
       "settings": {
-        "top_heading": "LEAVES SKIN LOOKING",
+        "top_heading": "YOUR PREP STEP TO:",
         "section_bg": "#ffffff",
         "container_width": 1400,
         "desktop_image_width": 2,
