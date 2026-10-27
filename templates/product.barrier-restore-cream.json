@@ -140,9 +140,9 @@
                   "settings": {
                     "text": "<h1><strong>{{ closest.product.metafields.custom.subheading_product_details.value }}</strong></h1>",
                     "width": "100%",
-                    "max_width": "none",
+                    "max_width": "narrow",
                     "alignment": "left",
-                    "type_preset": "h5",
+                    "type_preset": "paragraph",
                     "font": "var(--font-heading--family)",
                     "font_size": "0.875rem",
                     "line_height": "normal",
@@ -159,38 +159,37 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
-                },
-                "text_A96qDa": {
-                  "type": "text",
-                  "name": "t:names.text",
-                  "settings": {
-                    "text": "<h2>{{ closest.product.metafields.custom.product_rating.value }}</h2>",
-                    "width": "100%",
-                    "max_width": "normal",
-                    "alignment": "right",
-                    "type_preset": "h6",
-                    "font": "var(--font-heading--family)",
-                    "font_size": "0.875rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "var(--color-foreground)",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
                 }
               },
               "block_order": [
-                "text_UCV8Qn",
-                "text_A96qDa"
+                "text_UCV8Qn"
               ]
+            },
+            "text_6UFGM7": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<h2>{{ closest.product.metafields.custom.product_rating.value }}</h2>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h6",
+                "font": "var(--font-heading--family)",
+                "font_size": "0.875rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
             },
             "text_aEtTtq": {
               "type": "text",
@@ -327,7 +326,7 @@
                     "text_x6E4qX": {
                       "type": "text",
                       "settings": {
-                        "text": "<ul><li>Targets multiple breakouts at once</li><li>Clinically proven to visibly reduce spots</li><li>Leaves breakouts looking smaller, flatter & less red</li><li>Absorbs excess oil & draws out impurities</li><li>Helps calm visible inflammation</li><li>Supports the skin’s natural healing process</li><li>Protects the skin barrier from external stressors</li></ul>",
+                        "text": "<ul><li>Provides lightweight hydration for blemish-prone skin</li><li>Helps soothe and comfort stressed skin</li><li>Supports the skin barrier and helps reduce moisture loss</li><li>Helps improve the appearance of post-acne marks and uneven tone</li><li>Softens rough texture for smoother, healthier-looking skin</li></ul>",
                         "width": "fit-content",
                         "max_width": "none",
                         "alignment": "left",
@@ -366,7 +365,7 @@
                     "text_bABhBY": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>Apply to a clean, dry spot. No skincare underneath. Press gently to seal. Wear for 6–8 hours before removing. Remove and cleanse, then follow with your skincare. Use as needed or twice a week.<br/><br/>*isoua trick: wear it overnight for maximum results.</p>",
+                        "text": "<p><strong>AM</strong><br/>After cleansing, gently press Barrier Milk onto your face and neck. Follow with moisturiser, sunscreen, and makeup.</p><p><strong>PM</strong><br/>After cleansing, use your acne treatment according to its directions. Apply Barrier Milk and follow with barrier cream, if needed and compatible with your treatment.</p><p><strong>ISOUA tip:</strong> For soft, hydrated skin, layer Barrier Milk under your moisturiser.</p>",
                         "width": "100%",
                         "max_width": "none",
                         "alignment": "left",
@@ -405,7 +404,7 @@
                     "text_GqXfJT": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>HYDROCOLLOID —  a clinically trusted, gel-like material widely used in advanced wound care to absorb fluids while safeguarding the skin. When applied to acne-prone skin, it draws out excess oil and impurities from congested pores and creates a protective barrier. This barrier shields the skin from stressors and supports gentle, irritation-free recovery.</p>",
+                        "text": "<p>CERAMIDE NP — helps reinforce the skin’s natural moisture barrier and reduce moisture loss.<br/>NIACINAMIDE — helps improve the appearance of uneven skin tone and supports a healthy-looking skin barrier.<br/>PANTHENOL (PRO-VITAMIN B5) — helps hydrate, soften, and comfort dry skin.<br/>AZELAIC ACID — helps improve the appearance of uneven skin tone and post-acne marks.<br/>ECTOIN — helps maintain skin hydration and support skin comfort.<br/>GLYCERIN — a humectant that draws moisture into the skin to help keep it hydrated and soft.</p>",
                         "width": "100%",
                         "max_width": "none",
                         "alignment": "left",
@@ -484,6 +483,7 @@
           "block_order": [
             "text_6bXyHJ",
             "group_tGCQbn",
+            "text_6UFGM7",
             "text_aEtTtq",
             "price_pe7BCR",
             "isoa_direct_buy",
