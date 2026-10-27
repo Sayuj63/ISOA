@@ -1117,35 +1117,30 @@
           "type": "step",
           "settings": {
             "index": "1",
-            "label": "HIGHLIGHT",
+            "label": "RECOVER",
             "title": "highlight milk",
-            "subtitle": "MULTIPURPOSE LUMINIZER"
+            "subtitle": "MULTIPURPOSE LUMINIZER",
+            "image": "shopify://shop_images/isoua_3_a0aef32f-0d86-4f89-a49c-792dc9967edf.png"
           }
         },
         "step_8AnqyP": {
           "type": "step",
           "settings": {
             "index": "2",
-            "label": "HIGHLIGHT",
+            "label": "TARGET",
             "title": "highlight milk",
-            "subtitle": "MULTIPURPOSE LUMINIZER"
+            "subtitle": "MULTIPURPOSE LUMINIZER",
+            "image": "shopify://shop_images/IMG_8888.jpg"
           }
         },
         "step_2": {
           "type": "step",
           "settings": {
             "index": "1",
-            "label": "COMFORT",
+            "label": "HYDRATE",
             "title": "prep hydrator",
-            "subtitle": "HYDRATING SKIN PRIMER"
-          }
-        },
-        "row_1_1": {
-          "type": "row",
-          "settings": {
-            "step_index": "1",
-            "label": "WHAT IT IS",
-            "content": "A hybrid luminizer that enhances bare skin and makeup with a shimmery, naturally luminous finish."
+            "subtitle": "HYDRATING SKIN PRIMER",
+            "image": "shopify://shop_images/IMG_8834.jpg"
           }
         },
         "row_1_2": {
@@ -1153,7 +1148,7 @@
           "settings": {
             "step_index": "1",
             "label": "BENEFITS",
-            "content": "• Provides all-day hydration • Leaves skin looking luminous with a soft, pearly finish"
+            "content": "• Replenishes moisture without a heavy-cream feel\n<br>\n• Supports the skin barrier and helps soften rough texture\n<br>\n• Helps improve the appearance of uneven skin tone and post-acne marks"
           }
         },
         "row_1_3": {
@@ -1161,7 +1156,7 @@
           "settings": {
             "step_index": "1",
             "label": "WHERE IT FITS IN YOUR ROUTINE",
-            "content": "On its own on bare skin, mixed into makeup, or layered with skincare and SPF."
+            "content": "On its own on clean bare skin, mixed into makeup, or layered with skincare and SPF."
           }
         },
         "row_1_4": {
@@ -1169,7 +1164,7 @@
           "settings": {
             "step_index": "1",
             "label": "THE EFFECT",
-            "content": "Hydrated, glowy skin with a pearly finish"
+            "content": "Soft, hydrated, comfortable skin with a smoother, more even-looking appearance"
           }
         },
         "row_1_5": {
@@ -1177,7 +1172,7 @@
           "settings": {
             "step_index": "1",
             "label": "KEY INGREDIENTS",
-            "content": "Ceramide Trio • Mineral Complex • Vitamin E • Glycerin"
+            "content": "Niacinamide • Azelaic Acid Complex • Panthenol • Glycerin • Aloe Vera • Ceramide NP • Ectoin"
           }
         },
         "row_2_1": {
@@ -1225,7 +1220,6 @@
         "step_1",
         "step_8AnqyP",
         "step_2",
-        "row_1_1",
         "row_1_2",
         "row_1_3",
         "row_1_4",
