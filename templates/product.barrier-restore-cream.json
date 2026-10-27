@@ -526,6 +526,27 @@
             "label": "Cruelty Free"
           }
         },
+        "badge_Up3PWz": {
+          "type": "badge",
+          "settings": {
+            "icon": "non_toxic",
+            "label": "Non Toxic"
+          }
+        },
+        "badge_XBACPW": {
+          "type": "badge",
+          "settings": {
+            "icon": "sulphate_free",
+            "label": "SULPHATE FREE"
+          }
+        },
+        "badge_RzkXdD": {
+          "type": "badge",
+          "settings": {
+            "icon": "paraben_free",
+            "label": "PARABEN FREE"
+          }
+        },
         "trust_non_comedogenic": {
           "type": "badge",
           "settings": {
@@ -537,6 +558,9 @@
       "block_order": [
         "trust_vegan",
         "trust_cruelty_free",
+        "badge_Up3PWz",
+        "badge_XBACPW",
+        "badge_RzkXdD",
         "trust_non_comedogenic"
       ],
       "settings": {
@@ -1280,7 +1304,7 @@
       "type": "ss-packaging",
       "name": "Packaging",
       "settings": {
-        "image": "shopify://shop_images/spotwear-recycling-desktop_2000x_ac757d77-e957-45e7-aeaa-23904a779c25.png",
+        "image": "shopify://shop_images/Screenshot_2026-10-28_033956.png",
         "section_width": 120,
         "section_radius": 10,
         "section_border": 0,
@@ -1293,15 +1317,15 @@
         "side_width": 88,
         "side_width_mobile": 64,
         "image_radius": 12,
-        "image_height": 460,
+        "image_height": 300,
         "image_height_mobile": 320,
-        "heading": "ready-to-wear skincare",
-        "description": "Learn more about the materials of Spotwear.",
-        "material_1_title": "Spot Stickers",
-        "material_1_text": "Made of 100% Hydrocolloid",
-        "material_2_title": "Pouch",
-        "material_2_text": "Aluminum",
-        "vertical_text": "packaging",
+        "heading": "less harm, more hydration.",
+        "description": "Barrier Milk packaging is made with upcycled post-consumer (PCR) materials.",
+        "material_1_title": "",
+        "material_1_text": "",
+        "material_2_title": "",
+        "material_2_text": "",
+        "vertical_text": "",
         "heading_size": 36,
         "heading_size_mobile": 24,
         "text_size": 16,
