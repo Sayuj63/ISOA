@@ -697,7 +697,7 @@
           "type": "feature",
           "settings": {
             "label": "FEELS LIKE:",
-            "value": "Comfy, second-skin feel that stays on all day"
+            "value": "Lightweight, milky serum"
           }
         },
         "feature_J8CJxB": {
@@ -742,7 +742,7 @@
         "image": "shopify://shop_images/spotwear-featured_2480x_c88cd919-cea2-4d6d-9edf-de18cf8a7c86.jpg",
         "image_radius": 10,
         "image_ratio": "landscape",
-        "heading": "<h2>Clinically-proven PATCHES for SPOT CARE on the go.</h2>",
+        "heading": "<p>Lightweight HYDRATION and BARRIER SUPPORT for acne-prone skin.</p>",
         "heading_size": 40,
         "heading_size_mobile": 22,
         "heading_line_height": 120,
@@ -769,21 +769,21 @@
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/spotwear-benefits-1_2480x_4ca5e71e-9381-4dbc-bc8b-7909bf5f32aa.jpg",
-            "heading": "smaller"
+            "heading": "calmer"
           }
         },
         "item_QcFhYc": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/spotwear-benefits-2_2480x_9ab8ef0a-1b63-49be-ac58-7cee57eaa8ed.jpg",
-            "heading": "flatter"
+            "heading": "hydrated"
           }
         },
         "item_GFb3Qe": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/spotwear-flower-hover_2480x_8b9331b8-7531-4595-976d-ba70afeffc95.jpg",
-            "heading": "less red"
+            "heading": "smoother"
           }
         }
       },
@@ -794,7 +794,7 @@
       ],
       "name": "Interactive Benefits",
       "settings": {
-        "top_heading": "LEAVES SPOTS LOOKING",
+        "top_heading": "LEAVES SKIN LOOKING",
         "section_bg": "#ffffff",
         "container_width": 1400,
         "desktop_image_width": 2,
