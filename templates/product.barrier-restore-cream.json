@@ -1314,6 +1314,49 @@
         "border_color": "#000000"
       }
     },
+    "17931386857106fa34": {
+      "type": "_blocks",
+      "blocks": {
+        "okendo_reviews_widget_GJPaq4": {
+          "type": "shopify://apps/okendo/blocks/reviews-widget/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+          "settings": {
+            "product": "{{product}}",
+            "widget_type": "reviews_widget"
+          }
+        }
+      },
+      "block_order": [
+        "okendo_reviews_widget_GJPaq4"
+      ],
+      "custom_css": [],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-3",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 10,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
     "section_store_featured_collection_6_hnPVwp": {
       "type": "section-store-featured-collection-6",
       "blocks": {
@@ -1492,6 +1535,7 @@
     "rhode_prep_toggle_new",
     "rhode_pdp_on_the_go",
     "ss_packaging_cUBeaP",
+    "17931386857106fa34",
     "section_store_featured_collection_6_hnPVwp",
     "rhode_sticky_atc"
   ]
