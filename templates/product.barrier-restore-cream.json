@@ -1015,68 +1015,29 @@
         "lazy": true
       }
     },
-    "ss_whats_inside_8w8VfA": {
-      "type": "ss-whats-inside",
-      "blocks": {
-        "item_Gx6zwx": {
-          "type": "item",
-          "settings": {
-            "top_text": "",
-            "heading": "",
-            "text": "<p>Hydrocolloid is a sticky, gel-like material that acts like a bandage on the skin.</p>"
-          }
-        },
-        "item_FXwneF": {
-          "type": "item",
-          "settings": {
-            "top_text": "",
-            "heading": "how it works",
-            "text": "<p>Designed for use on surface-level spots, Hydrocolloid patches create a comfy, protective bubble. They shield against stressors and form a gel that helps draw out excess oil.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "item_Gx6zwx",
-        "item_FXwneF"
-      ],
-      "name": "SS Whats Inside",
+    "rhode_lip_ingredients_L93tNx": {
+      "type": "rhode-lip-ingredients",
+      "name": "Rhode lip ingredients",
       "settings": {
-        "image": "shopify://shop_images/spotwear-ingredients_2000x_7664a955-22bd-4d5b-ad82-36191e3f454d.png",
-        "side_title": "what's inside",
-        "max_width": 1400,
-        "desktop_gap": 32,
-        "mobile_gap": 16,
-        "pt": 0,
-        "pb": 0,
-        "pt_mobile": 0,
-        "pb_mobile": 0,
-        "side": 2.5,
-        "side_mobile": 0,
-        "radius": 10,
-        "image_radius": 10,
-        "content_radius": 10,
-        "content_padding": 42,
-        "content_padding_mobile": 16,
-        "side_title_gap": 40,
-        "side_title_gap_mobile": 18,
-        "side_title_size": 32,
-        "side_title_size_mobile": 24,
-        "heading_size": 32,
-        "heading_size_mobile": 26,
-        "text_size": 16,
-        "text_size_mobile": 14,
-        "top_text_size": 14,
-        "top_text_size_mobile": 13,
-        "item_spacing": 26,
-        "item_spacing_mobile": 10,
-        "border_width": 0,
-        "bg_color": "#ffffff",
-        "content_bg": "#f1f0ed",
-        "heading_color": "#67645e",
+        "image": "shopify://shop_images/IMG_8834.jpg",
+        "image_alt": "Pretzel lip tint texture",
+        "side_title": "what’s inside",
+        "intro": "a thoughtful blend of barrier-supporting ingredients and hydrators that help replenish moisture, comfort skin, and maintain a healthy-looking skin barrier.",
+        "hero_ingredient": "ceramide np",
+        "hero_copy": "a skin-identical lipid that helps reinforce the skin’s natural moisture barrier and reduce moisture loss.",
+        "also_made_with": "also made with <strong>NIACINAMIDE, PANTHENOL, AND ECTOIN</strong> to help hydrate, soothe, and improve the appearance of uneven skin tone.&nbsp;",
+        "button_label": "FULL INGREDIENTS LIST",
+        "ingredients_heading": "ingredients",
+        "full_ingredients": "<p>Water (Aqua), Aloe Barbadensis Leaf Water, Caprylic/Capric Triglyceride, Glycerin, Niacinamide, Hydrogenated Polydecene, Propylene Glycol, Panthenol, Cyclodextrin, Betaine, Ceteareth-25, Cetearyl Alcohol, Ceteareth-6, Dimethicone, Potassium Cetyl Phosphate, Polyacrylamide, Phenoxyethanol, C13-14 Isoparaffin, Ethylhexylglycerin, Stearyl Alcohol, Azelaic Acid, Ectoin, Butylene Glycol, Xanthan Gum, Laureth-7, Tocopheryl Acetate, Tromethamine, Hexylene Glycol, Capryloyl Glycine, Disodium EDTA, Dipotassium Phosphate, Ceramide NP, Xylitylglucoside.</p>",
+        "contact_intro": "If you have questions about a specific ingredient, feel free to",
+        "contact_label": "contact our team",
+        "contact_link": "shopify://pages/contact-us",
+        "panel_color": "#f1f0ed",
         "text_color": "#67645e",
-        "divider_color": "#9a978f",
-        "side_title_color": "#67645e",
-        "border_color": "#000000"
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
       }
     },
     "rhode_clinical_results_new": {
@@ -2010,7 +1971,7 @@
     "ss_image_split_row_TniKMq",
     "ss_targetting_animation_Wqer7m",
     "ss_featured_products_4_ycPmw7",
-    "ss_whats_inside_8w8VfA",
+    "rhode_lip_ingredients_L93tNx",
     "rhode_clinical_results_new",
     "rhode_pdp_on_the_go",
     "ss_packaging_cUBeaP",
