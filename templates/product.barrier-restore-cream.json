@@ -1018,71 +1018,26 @@
     "ss_whats_inside_8w8VfA": {
       "type": "ss-whats-inside",
       "blocks": {
-        "item_W6jmPq": {
+        "item_Gx6zwx": {
           "type": "item",
           "settings": {
             "top_text": "",
             "heading": "",
-            "text": "<p>Barrier Milk brings together barrier-supporting lipids, skin-conditioning ingredients, and moisture-binding humectants to care for skin that needs hydration and comfort.</p>"
+            "text": "<p>Hydrocolloid is a sticky, gel-like material that acts like a bandage on the skin.</p>"
           }
         },
         "item_FXwneF": {
           "type": "item",
           "settings": {
             "top_text": "",
-            "heading": "ceramide np",
-            "text": "<p>A skin-identical lipid that helps support the skin’s natural moisture barrier and reduce moisture loss.</p>"
-          }
-        },
-        "item_jUpLfn": {
-          "type": "item",
-          "settings": {
-            "top_text": "",
-            "heading": "niacinamide",
-            "text": "<p>A form of vitamin B3 that helps improve the appearance of uneven skin tone and supports a healthy-looking skin barrier.</p><p></p>"
-          }
-        },
-        "item_dhccJh": {
-          "type": "item",
-          "settings": {
-            "top_text": "",
-            "heading": "panthenol",
-            "text": "<p>Also known as pro-vitamin B5, panthenol helps hydrate and soften skin while improving the feeling of dryness and discomfort.</p>"
-          }
-        },
-        "item_kDmhM4": {
-          "type": "item",
-          "settings": {
-            "top_text": "",
-            "heading": "azelaic acid",
-            "text": "<p>Helps improve the appearance of uneven skin tone and post-acne marks.</p>"
-          }
-        },
-        "item_D73Vfd": {
-          "type": "item",
-          "settings": {
-            "top_text": "",
-            "heading": "ectoin",
-            "text": "<p>A moisture-supporting ingredient that helps maintain hydration and keep skin feeling comfortable.</p>"
-          }
-        },
-        "item_mrL78K": {
-          "type": "item",
-          "settings": {
-            "top_text": "",
-            "heading": "glycerin",
-            "text": "<p>A humectant that attracts and retains moisture, leaving skin feeling hydrated and supple.</p>"
+            "heading": "how it works",
+            "text": "<p>Designed for use on surface-level spots, Hydrocolloid patches create a comfy, protective bubble. They shield against stressors and form a gel that helps draw out excess oil.</p>"
           }
         }
       },
       "block_order": [
-        "item_W6jmPq",
-        "item_FXwneF",
-        "item_jUpLfn",
-        "item_dhccJh",
-        "item_kDmhM4",
-        "item_D73Vfd",
-        "item_mrL78K"
+        "item_Gx6zwx",
+        "item_FXwneF"
       ],
       "name": "SS Whats Inside",
       "settings": {
