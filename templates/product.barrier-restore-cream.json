@@ -138,7 +138,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<h1>{{ closest.product.metafields.custom.subheading_product_details.value }}</h1>",
+                    "text": "<h1><strong>{{ closest.product.metafields.custom.subheading_product_details.value }}</strong></h1>",
                     "width": "100%",
                     "max_width": "none",
                     "alignment": "left",
