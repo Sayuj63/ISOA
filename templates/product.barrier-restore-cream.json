@@ -1175,14 +1175,6 @@
             "content": "Niacinamide • Azelaic Acid Complex • Panthenol • Glycerin • Aloe Vera • Ceramide NP • Ectoin"
           }
         },
-        "row_2_1": {
-          "type": "row",
-          "settings": {
-            "step_index": "2",
-            "label": "WHAT IT IS",
-            "content": "A hydrating primer that preps skin with a smooth, dewy base for makeup or skincare."
-          }
-        },
         "row_2_2": {
           "type": "row",
           "settings": {
@@ -1224,7 +1216,6 @@
         "row_1_3",
         "row_1_4",
         "row_1_5",
-        "row_2_1",
         "row_2_2",
         "row_2_3",
         "row_2_4",
