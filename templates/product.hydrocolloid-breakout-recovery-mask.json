@@ -679,7 +679,8 @@
         "content_width": 140,
         "border_thickness": 0,
         "section_radius": 10,
-        "lazy": true
+        "lazy": true,
+        "swipe_cursor": true
       }
     },
     "ss_image_split_row_TniKMq": {

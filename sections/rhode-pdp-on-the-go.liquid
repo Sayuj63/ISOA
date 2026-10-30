@@ -26,11 +26,12 @@
   assign active_color = section.settings.active_circle_color | default: '#e29fc8'
   assign first_image = section.blocks.first.settings.image
 -%}
+{%- comment -%} Without block images the built-in 1320×1440 photos show, so "Original" uses their proportions. {%- endcomment -%}
 {%- assign image_size_desktop = '' -%}
 {%- if section.settings.image_size != blank and section.settings.image_size != 'fill' -%}
-  {%- capture image_size_desktop -%}{%- render 'isoa-image-ratio', ratio: section.settings.image_size, image: first_image, custom_width: section.settings.image_size_w, custom_height: section.settings.image_size_h, fallback: '4 / 5' -%}{%- endcapture -%}
+  {%- capture image_size_desktop -%}{%- render 'isoa-image-ratio', ratio: section.settings.image_size, image: first_image, custom_width: section.settings.image_size_w, custom_height: section.settings.image_size_h, fallback: '1320 / 1440' -%}{%- endcapture -%}
 {%- endif -%}
-{%- capture image_size_mobile -%}{%- render 'isoa-image-ratio', ratio: section.settings.image_size_mobile, image: first_image, custom_width: section.settings.image_size_mobile_w, custom_height: section.settings.image_size_mobile_h, fallback: '4 / 3' -%}{%- endcapture -%}
+{%- capture image_size_mobile -%}{%- render 'isoa-image-ratio', ratio: section.settings.image_size_mobile, image: first_image, custom_width: section.settings.image_size_mobile_w, custom_height: section.settings.image_size_mobile_h, fallback: '1320 / 1440' -%}{%- endcapture -%}
 
 <section class="rh-otg" id="rh-otg-{{ sid }}" data-rh-otg style="--rh-otg-active: 0;">
   <div class="rh-otg__grid">

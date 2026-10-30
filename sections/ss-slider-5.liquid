@@ -885,6 +885,18 @@ For inquiries or permissions, contact daniel@section.store
     </div>
 </div>
 
+{%- if section.settings.swipe_cursor -%}
+  {%- comment -%} As on the homepage product slider: a "swipe" cursor on desktop and a swipe hint on phones stand in for the progress bar and arrows. {%- endcomment -%}
+  <style>
+    .slider-navigation-{{ section.id }} {
+      display: none;
+    }
+  </style>
+  {%- assign swipe_slider = '.slider-slider-' | append: section.id -%}
+  {% render 'isoa-swipe-cursor', slider: swipe_slider %}
+  {% render 'isoa-swipe-hint', slider: swipe_slider %}
+{%- endif -%}
+
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
@@ -1431,6 +1443,13 @@ For inquiries or permissions, contact daniel@section.store
         {
             "type": "header",
             "content": "Navigation Arrows Settings"
+        },
+        {
+            "type": "checkbox",
+            "id": "swipe_cursor",
+            "label": "Swipe cursor instead of arrows",
+            "info": "Hides the progress bar and arrows; shows a \"swipe\" cursor on desktop and a swipe hint on phones.",
+            "default": false
         },
         {
             "type": "range",

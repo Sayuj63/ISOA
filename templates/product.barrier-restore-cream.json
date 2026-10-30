@@ -703,7 +703,8 @@
         "content_width": 140,
         "border_thickness": 0,
         "section_radius": 10,
-        "lazy": true
+        "lazy": true,
+        "swipe_cursor": true
       }
     },
     "ss_image_split_row_TniKMq": {
@@ -790,7 +791,8 @@
         "section_bg": "#ffffff",
         "content_bg": "#ebe7e2",
         "heading_color": "#5b5b5b",
-        "text_color": "#5b5b5b"
+        "text_color": "#5b5b5b",
+        "image_size_mobile": "original"
       }
     },
     "ss_targetting_animation_Wqer7m": {
@@ -866,7 +868,8 @@
         "animation_speed": 850,
         "active_scale": 100,
         "enable_autoplay": true,
-        "autoplay_speed": 2500
+        "autoplay_speed": 2500,
+        "image_ratio_mobile": "original"
       }
     },
     "ss_featured_products_4_ycPmw7": {
@@ -1075,7 +1078,9 @@
         "padding_top": 0,
         "padding_bottom": 0,
         "padding_top_mobile": 0,
-        "padding_bottom_mobile": 0
+        "padding_bottom_mobile": 0,
+        "join_mobile": true,
+        "image_ratio_mobile": "original"
       }
     },
     "rhode_clinical_results_new": {
@@ -1260,7 +1265,7 @@
         "row_3_5"
       ],
       "settings": {
-        "image_ratio_mobile": "square",
+        "image_ratio_mobile": "original",
         "image_ratio_mobile_w": 2,
         "image_ratio_mobile_h": 1,
         "padding_top": 0,
@@ -1323,7 +1328,8 @@
         "subtitle": "Essentials to throw in your purse or pocket.",
         "card_bg_color": "#f1f0ed",
         "image_bg_color": "#e5e3df",
-        "active_circle_color": "#e29fc8"
+        "active_circle_color": "#e29fc8",
+        "image_size_mobile": "original"
       }
     },
     "ss_packaging_cUBeaP": {
@@ -1628,7 +1634,7 @@
         "image_ratio": "custom",
         "image_ratio_w": 14,
         "image_ratio_h": 15,
-        "image_ratio_mobile": "same",
+        "image_ratio_mobile": "original",
         "image_ratio_mobile_w": 1,
         "image_ratio_mobile_h": 1,
         "heading": "FAQ",

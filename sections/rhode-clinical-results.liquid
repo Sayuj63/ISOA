@@ -1,8 +1,8 @@
 {%- assign image_size_desktop = '' -%}
 {%- if section.settings.image_size != blank and section.settings.image_size != 'fill' -%}
-  {%- capture image_size_desktop -%}{%- render 'isoa-image-ratio', ratio: section.settings.image_size, image: section.settings.portrait, custom_width: section.settings.image_size_w, custom_height: section.settings.image_size_h, fallback: '4 / 5' -%}{%- endcapture -%}
+  {%- capture image_size_desktop -%}{%- render 'isoa-image-ratio', ratio: section.settings.image_size, image: section.settings.portrait, custom_width: section.settings.image_size_w, custom_height: section.settings.image_size_h, fallback: '220 / 240' -%}{%- endcapture -%}
 {%- endif -%}
-{%- capture image_size_mobile -%}{%- render 'isoa-image-ratio', ratio: section.settings.image_size_mobile, image: section.settings.portrait, custom_width: section.settings.image_size_mobile_w, custom_height: section.settings.image_size_mobile_h, fallback: '3 / 2' -%}{%- endcapture -%}
+{%- capture image_size_mobile -%}{%- render 'isoa-image-ratio', ratio: section.settings.image_size_mobile, image: section.settings.portrait, custom_width: section.settings.image_size_mobile_w, custom_height: section.settings.image_size_mobile_h, fallback: '220 / 240' -%}{%- endcapture -%}
 <style>
   .section-{{ section.id }} {
     margin: 0;
@@ -451,7 +451,7 @@
       { "value": "portrait", "label": "Portrait" },
       { "value": "landscape", "label": "Landscape" },
       { "value": "custom", "label": "Custom" }
-    ], "default": "custom" },
+    ], "default": "original" },
     { "type": "range", "id": "image_size_mobile_w", "label": "Custom width (mobile)", "min": 1, "max": 40, "step": 1, "default": 3, "visible_if": "{{ section.settings.image_size_mobile == 'custom' }}" },
     { "type": "range", "id": "image_size_mobile_h", "label": "Custom height (mobile)", "min": 1, "max": 40, "step": 1, "default": 2, "visible_if": "{{ section.settings.image_size_mobile == 'custom' }}" },
     {

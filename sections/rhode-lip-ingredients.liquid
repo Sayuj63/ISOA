@@ -343,6 +343,21 @@
       border-radius: 12px;
     }
 
+    {%- if section.settings.join_mobile %}
+    /* "Join image and text on mobile": one card, photo on top. */
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__grid {
+      gap: 0;
+    }
+
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__media {
+      border-radius: 12px 12px 0 0;
+    }
+
+    .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__content {
+      border-radius: 0 0 12px 12px;
+    }
+    {%- endif %}
+
     .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__education {
       display: block;
       padding: 22px 19px 33px 13px;
@@ -514,6 +529,7 @@
     ], "default": "custom" },
     { "type": "range", "id": "image_ratio_mobile_w", "label": "Custom width on mobile", "min": 1, "max": 40, "step": 1, "default": 8, "visible_if": "{{ section.settings.image_ratio_mobile == 'custom' }}" },
     { "type": "range", "id": "image_ratio_mobile_h", "label": "Custom height on mobile", "min": 1, "max": 40, "step": 1, "default": 7, "visible_if": "{{ section.settings.image_ratio_mobile == 'custom' }}" },
+    { "type": "checkbox", "id": "join_mobile", "label": "Join image and text on mobile", "default": false },
     { "type": "text", "id": "side_title", "label": "Side title", "default": "what’s inside" },
     { "type": "textarea", "id": "intro", "label": "Introduction", "default": "Peptides are our go-to skincare ingredient and come in many forms with unique benefits. Get to know the one in this formula." },
     { "type": "text", "id": "hero_ingredient", "label": "Hero ingredient", "default": "palmitoyl tripeptide-1" },

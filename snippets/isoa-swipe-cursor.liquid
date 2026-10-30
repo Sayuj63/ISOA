@@ -1,0 +1,101 @@
+{%- doc -%}
+  Rhode's "swipe" cursor: over a carousel the pointer becomes a frosted
+  circle pinned to the mouse. Mouse/trackpad only — touch has no cursor (use
+  isoa-swipe-hint there). It stays on over links inside the carousel, as on
+  Rhode; only buttons get the normal pointer back.
+
+  @param {string} slider - selector of the carousel element
+
+  @example
+  {% render 'isoa-swipe-cursor', slider: '.collection-slider-template--123__abc' %}
+{%- enddoc -%}
+
+<style>
+  /* Class doubled to keep the weight the per-section selectors had over the
+     sections' own cursor rules. */
+  @media (hover: hover) and (pointer: fine) {
+    .has-swipe-cursor.has-swipe-cursor,
+    .has-swipe-cursor.has-swipe-cursor a {
+      cursor: none;
+    }
+    .has-swipe-cursor.has-swipe-cursor button {
+      cursor: pointer;
+    }
+  }
+
+  .isoa-swipe-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 110px;
+    height: 110px;
+    margin: -55px 0 0 -55px;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.6);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    color: #67645e;
+    font-family: 'DM Sans', var(--font-heading--family, var(--font-body--family));
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.1s linear;
+  }
+
+  .isoa-swipe-cursor.is-visible {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  (() => {
+    if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    const slider = document.querySelector({{ slider | json }});
+    if (!slider || slider.dataset.swipeCursor) return;
+    slider.dataset.swipeCursor = 'true';
+    slider.classList.add('has-swipe-cursor');
+
+    // On <body>, not in the section, so no transformed ancestor can turn
+    // position: fixed into position: absolute.
+    const cursor = document.createElement('div');
+    cursor.className = 'isoa-swipe-cursor';
+    cursor.setAttribute('aria-hidden', 'true');
+    cursor.textContent = 'swipe';
+    document.body.append(cursor);
+
+    // Pinned to the pointer, no easing. An eased trail started from wherever
+    // the circle was last left, so it visibly flew in from the side before
+    // settling under the mouse.
+    let x = -1, y = -1;
+
+    const update = (target) => {
+      cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      const onSlider = target instanceof Element && slider.contains(target);
+      cursor.classList.toggle('is-visible', onSlider && !target.closest('button'));
+    };
+
+    document.addEventListener('pointermove', (event) => {
+      x = event.clientX;
+      y = event.clientY;
+      update(event.target);
+    }, { passive: true });
+
+    // Pointer left the window entirely.
+    document.addEventListener('pointerout', (event) => {
+      if (!event.relatedTarget) cursor.classList.remove('is-visible');
+    });
+
+    // Scrolling moves the cards under a mouse that has not moved, and the
+    // browser sends no pointer event for that — re-check what is under it.
+    window.addEventListener('scroll', () => {
+      if (x >= 0) update(document.elementFromPoint(x, y));
+    }, { passive: true });
+  })();
+</script>
