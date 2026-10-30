@@ -1,0 +1,76 @@
+{%- doc -%}
+  Rhode's touch "swipe" hint for a product carousel: a frosted 75px circle on
+  the first card, vertically centred near its right edge. It stays put until
+  the first swipe, then shrinks and fades for good. Touch screens only; on a
+  mouse, the sections keep their cursor-following circle instead.
+
+  @param {string} slider - selector of the carousel's .swiper element
+
+  @example
+  {% render 'isoa-swipe-hint', slider: '.collection-slider-template--123__abc' %}
+{%- enddoc -%}
+
+<style>
+  .isoa-swipe-hint {
+    position: absolute;
+    left: 80%;
+    bottom: 50%;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.5);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 100px rgb(0 0 0 / 0.25);
+    color: #67645e;
+    font-family: 'DM Sans', var(--font-heading--family, var(--font-body--family));
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    text-transform: lowercase;
+    pointer-events: none;
+    transform: translate(-80%, 50%);
+    transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s;
+  }
+
+  .isoa-swipe-hint.is-done {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-80%, 50%) scale(0.8);
+  }
+</style>
+
+<script>
+  (function () {
+    if (!window.matchMedia('(hover: none)').matches) return;
+    var slider = document.querySelector({{ slider | json }});
+    if (!slider || slider.querySelector('.isoa-swipe-hint')) return;
+
+    var hint = document.createElement('span');
+    hint.className = 'isoa-swipe-hint';
+    hint.setAttribute('aria-hidden', 'true');
+    hint.textContent = 'swipe';
+    slider.appendChild(hint);
+
+    // Retire on the first horizontal drag, whichever way the carousel moves.
+    var startX = 0;
+    function done() {
+      hint.classList.add('is-done');
+      slider.removeEventListener('touchstart', onStart);
+      slider.removeEventListener('touchmove', onMove);
+    }
+    function onStart(event) {
+      startX = event.touches[0].clientX;
+    }
+    function onMove(event) {
+      if (Math.abs(event.touches[0].clientX - startX) > 10) done();
+    }
+    slider.addEventListener('touchstart', onStart, { passive: true });
+    slider.addEventListener('touchmove', onMove, { passive: true });
+  })();
+</script>

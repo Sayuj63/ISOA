@@ -1,0 +1,329 @@
+{% comment %}
+  Product FAQ, after rhodeskin.com's glazing milk PDP: the question card on
+  the left with its content settled at the bottom, the photo on the right
+  (stacked, photo first, on phones). Opening one question closes the others. Each question is a native <details>, so it opens without script
+  and is announced as expandable. The subheading defaults to the product's
+  own name.
+{% endcomment %}
+
+{%- liquid
+  assign sid = section.id
+  assign subheading = section.settings.subheading
+  if subheading == blank and product
+    assign subheading = 'Find out more about ' | append: product.title | append: '.'
+  endif
+  assign questions = section.blocks | where: 'type', 'question'
+-%}
+
+{%- capture ratio_desktop -%}
+  {%- render 'isoa-image-ratio', ratio: section.settings.image_ratio, image: section.settings.image, custom_width: section.settings.image_ratio_w, custom_height: section.settings.image_ratio_h, fallback: '1 / 1' -%}
+{%- endcapture -%}
+{%- if section.settings.image_ratio_mobile == 'same' -%}
+  {%- assign ratio_mobile = ratio_desktop -%}
+{%- else -%}
+  {%- capture ratio_mobile -%}
+    {%- render 'isoa-image-ratio', ratio: section.settings.image_ratio_mobile, image: section.settings.image, custom_width: section.settings.image_ratio_mobile_w, custom_height: section.settings.image_ratio_mobile_h, fallback: '1 / 1' -%}
+  {%- endcapture -%}
+{%- endif -%}
+
+<section
+  class="rh-faq rh-faq--{{ sid }}"
+  aria-labelledby="RhFaqTitle-{{ sid }}"
+  style="--rh-faq-ratio: {{ ratio_desktop | strip }}; --rh-faq-ratio-mobile: {{ ratio_mobile | strip }};"
+>
+  <div class="rh-faq__grid{% if section.settings.image == blank %} rh-faq__grid--no-image{% endif %}">
+    {%- if section.settings.image != blank -%}
+      <div class="rh-faq__media">
+        {{
+          section.settings.image
+          | image_url: width: 1800
+          | image_tag:
+            loading: 'lazy',
+            widths: '400, 600, 800, 1000, 1200, 1400, 1800',
+            sizes: '(min-width: 750px) 48vw, calc(100vw - 32px)',
+            class: 'rh-faq__image',
+            alt: section.settings.image.alt
+        }}
+      </div>
+    {%- endif -%}
+
+    <div class="rh-faq__card">
+      <h2 id="RhFaqTitle-{{ sid }}" class="rh-faq__title">{{ section.settings.heading }}</h2>
+      {%- if subheading != blank -%}
+        <p class="rh-faq__sub">{{ subheading }}</p>
+      {%- endif -%}
+
+      <div class="rh-faq__list">
+        {%- for block in questions -%}
+          {%- if block.settings.question != blank -%}
+            <details class="rh-faq__item" {{ block.shopify_attributes }}>
+              <summary class="rh-faq__q">
+                <span>{{ block.settings.question }}</span>
+                <span class="rh-faq__icon" aria-hidden="true"></span>
+              </summary>
+              <div class="rh-faq__a">{{ block.settings.answer }}</div>
+            </details>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .rh-faq--{{ sid }} {
+    padding: 0 var(--page-margin);
+    color: #67645e;
+  }
+
+  .rh-faq--{{ sid }} .rh-faq__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--rhode-pdp-gap, 32px);
+    max-width: calc(var(--page-width) - var(--page-margin) * 2);
+    margin-inline: auto;
+  }
+
+  .rh-faq--{{ sid }} .rh-faq__grid--no-image {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .rh-faq--{{ sid }} .rh-faq__media {
+    order: 2;
+    aspect-ratio: var(--rh-faq-ratio);
+    overflow: hidden;
+    border-radius: 10px;
+    background: #e5e3df;
+  }
+
+  .rh-faq--{{ sid }} .rh-faq__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .rh-faq--{{ sid }} .rh-faq__card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 32px;
+    border-radius: 10px;
+    background: #f1f0ed;
+  }
+
+  .rh-faq--{{ sid }} .rh-faq__title {
+    margin: 0;
+    color: inherit;
+    font-family: var(--isoa-site-font, inherit);
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  .rh-faq--{{ sid }} .rh-faq__sub {
+    margin: 6px 0 24px;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .rh-faq--{{ sid }} .rh-faq__item {
+    border-bottom: 1px solid #dad8d4;
+  }
+
+  .rh-faq--{{ sid }} .rh-faq__item:last-child {
+    border-bottom: 0;
+  }
+
+  .rh-faq--{{ sid }} .rh-faq__q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 0;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .rh-faq--{{ sid }} .rh-faq__q::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Filled circle with a plus that turns into a minus. */
+  .rh-faq--{{ sid }} .rh-faq__icon {
+    position: relative;
+    flex: 0 0 19px;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    background: #84827e;
+    transition: opacity 0.7s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+
+  .rh-faq--{{ sid }} .rh-faq__item[open] .rh-faq__icon {
+    opacity: 0.5;
+  }
+
+  .rh-faq--{{ sid }} .rh-faq__icon::before,
+  .rh-faq--{{ sid }} .rh-faq__icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 9px;
+    height: 1px;
+    background: #fff;
+    transform: translate(-50%, -50%);
+    transition: transform 0.25s ease;
+  }
+
+  .rh-faq--{{ sid }} .rh-faq__icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .rh-faq--{{ sid }} .rh-faq__item[open] .rh-faq__icon::after {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  .rh-faq--{{ sid }} .rh-faq__a {
+    padding: 0 38px 18px 0;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .rh-faq--{{ sid }} .rh-faq__a p {
+    margin: 0 0 8px;
+  }
+
+  .rh-faq--{{ sid }} .rh-faq__a p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .rh-faq--{{ sid }} {
+      padding-inline: 16px;
+    }
+
+    .rh-faq--{{ sid }} .rh-faq__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+    }
+
+    /* Phone: photo and questions read as one card, as on Rhode. */
+    .rh-faq--{{ sid }} .rh-faq__media {
+      order: 0;
+      aspect-ratio: var(--rh-faq-ratio-mobile);
+      border-radius: 10px 10px 0 0;
+    }
+
+    .rh-faq--{{ sid }} .rh-faq__card {
+      padding: 24px 20px 12px;
+      border-radius: 0 0 10px 10px;
+    }
+
+    .rh-faq--{{ sid }} .rh-faq__grid--no-image .rh-faq__card {
+      border-radius: 10px;
+    }
+
+    .rh-faq--{{ sid }} .rh-faq__title {
+      font-size: 28px;
+    }
+
+    .rh-faq--{{ sid }} .rh-faq__sub {
+      margin-bottom: 16px;
+      font-size: 13px;
+    }
+
+    .rh-faq--{{ sid }} .rh-faq__q {
+      font-size: 12px;
+    }
+
+    .rh-faq--{{ sid }} .rh-faq__a {
+      padding-right: 0;
+      font-size: 13px;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    var items = document.querySelectorAll('.rh-faq--{{ sid }} .rh-faq__item');
+    items.forEach(function (item) {
+      item.addEventListener('toggle', function () {
+        if (!item.open) return;
+        items.forEach(function (other) {
+          if (other !== item) other.open = false;
+        });
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product FAQ",
+  "tag": "div",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image size",
+      "options": [
+        { "value": "original", "label": "Original" },
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "landscape", "label": "Landscape" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "square"
+    },
+    { "type": "range", "id": "image_ratio_w", "label": "Custom width", "min": 1, "max": 40, "step": 1, "default": 1, "visible_if": "{{ section.settings.image_ratio == 'custom' }}" },
+    { "type": "range", "id": "image_ratio_h", "label": "Custom height", "min": 1, "max": 40, "step": 1, "default": 1, "visible_if": "{{ section.settings.image_ratio == 'custom' }}" },
+    {
+      "type": "select",
+      "id": "image_ratio_mobile",
+      "label": "Image size on mobile",
+      "options": [
+        { "value": "same", "label": "Same as desktop" },
+        { "value": "original", "label": "Original" },
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "landscape", "label": "Landscape" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "same"
+    },
+    { "type": "range", "id": "image_ratio_mobile_w", "label": "Custom width on mobile", "min": 1, "max": 40, "step": 1, "default": 1, "visible_if": "{{ section.settings.image_ratio_mobile == 'custom' }}" },
+    { "type": "range", "id": "image_ratio_mobile_h", "label": "Custom height on mobile", "min": 1, "max": 40, "step": 1, "default": 1, "visible_if": "{{ section.settings.image_ratio_mobile == 'custom' }}" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "FAQ" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "info": "Leave empty for \"Find out more about [product name].\"" }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Where does it fit into my daily routine?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Answer goes here.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product FAQ",
+      "blocks": [
+        { "type": "question" },
+        { "type": "question", "settings": { "question": "Is it vegan or cruelty-free?" } }
+      ]
+    }
+  ],
+  "enabled_on": { "templates": ["product"] }
+}
+{% endschema %}

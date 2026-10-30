@@ -499,6 +499,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       {{ 'rhode-pdp.css' | asset_url | stylesheet_tag }}
       {{ 'rhode-collection-cards.css' | asset_url | stylesheet_tag }}
       <script src="{{ 'rhode-pdp-mobile-gallery.js' | asset_url }}" defer></script>
+      <script src="{{ 'isoa-pdp-rating.js' | asset_url }}" defer></script>
+      <script src="{{ 'isoa-pdp-gallery-slide.js' | asset_url }}" defer></script>
     {% endif %}
     {% if template contains 'collection' %}
       {{ 'isoua-collection-mobile.css' | asset_url | stylesheet_tag }}

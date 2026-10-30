@@ -1,8 +1,63 @@
 {% comment %}
-  PDP reassurance, placed directly after the buy area. The icon shapes follow
-  the supplied reference; only substantiated ISOUA claims should be added as
-  blocks in the product template. Shipping copy comes from ISOUA's site policy.
+  PDP reassurance, placed directly after the buy area: one grey panel with the
+  claim badges on top and the delivery facts underneath. Only substantiated
+  ISOUA claims should be added as badge blocks. Shipping copy comes from
+  ISOUA's site policy.
 {% endcomment %}
+
+{%- liquid
+  # Expected delivery is printed as real dates. Liquid computes them at render
+  # time (in the shop's timezone) so crawlers and no-JS visitors see dates; the
+  # script below recomputes on the visitor's clock because Shopify caches pages.
+  assign min_days = section.settings.delivery_min
+  assign max_days = section.settings.delivery_max
+  if max_days < min_days
+    assign max_days = min_days
+  endif
+  assign skip_days = ''
+  if section.settings.skip_sundays
+    assign skip_days = skip_days | append: '0'
+  endif
+  if section.settings.skip_saturdays
+    assign skip_days = skip_days | append: '6'
+  endif
+
+  assign ts = 'now' | date: '%s' | plus: 0
+  assign counted = 0
+  assign min_ts = ts
+  assign max_ts = ts
+  for i in (1..30)
+    assign ts = ts | plus: 86400
+    assign weekday = ts | date: '%w'
+    unless skip_days contains weekday
+      assign counted = counted | plus: 1
+      if counted == min_days
+        assign min_ts = ts
+      endif
+      if counted == max_days
+        assign max_ts = ts
+        break
+      endif
+    endunless
+  endfor
+
+  assign min_label = min_ts | date: '%a, %-d %b'
+  assign max_label = max_ts | date: '%a, %-d %b'
+  if min_label == max_label
+    assign delivery_label = max_label
+  else
+    assign delivery_label = min_label | append: ' – ' | append: max_label
+  endif
+
+  # The offer card only earns its place when it says something the shipping
+  # line does not.
+  assign shipping_key = section.settings.shipping_text | downcase | remove: ' ' | remove: '.'
+  assign offer_key = section.settings.offer_text | downcase | remove: ' ' | remove: '.' | remove: 'panindia'
+  assign show_offer = false
+  if section.settings.offer_text != blank and offer_key != shipping_key
+    assign show_offer = true
+  endif
+-%}
 
 {% style %}
   .isoa-pdp-trust-{{ section.id }} {
@@ -13,78 +68,63 @@
   .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__inner {
     max-width: min(calc(var(--page-width) - var(--page-margin) * 2), calc(100% - var(--page-margin) * 2));
     margin: 16px auto 0;
-  }
-
-  .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__badges {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    gap: clamp(28px, 5vw, 72px);
-    padding: 26px 20px;
+    padding: 28px 32px 0;
     border-radius: 10px;
     background: #f1f0ed;
   }
 
+  .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__badges {
+    display: grid;
+    grid-template-columns: repeat(var(--badge-count), minmax(0, 1fr));
+    gap: 16px;
+    padding-bottom: 26px;
+  }
+
   .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__badge {
     display: flex;
-    flex: 0 1 150px;
     flex-direction: column;
     align-items: center;
-    gap: 7px;
+    gap: 10px;
     min-width: 0;
     text-align: center;
   }
 
   .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__icon {
     display: block;
-    width: 76px;
-    height: 76px;
+    width: 64px;
+    height: 64px;
     flex: 0 0 auto;
   }
 
   .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__badge-label {
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 11px;
+    font-weight: 600;
     line-height: 1.25;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
   }
 
   .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__bottom {
     display: grid;
-    grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
-    gap: 16px;
-    margin-top: 16px;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: column;
+    border-top: 1px solid #dad8d4;
   }
 
-  .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__delivery,
-  .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__offer {
-    min-width: 0;
-    border: 1px solid #dad8d4;
-    border-radius: 10px;
-    background: #fff;
-  }
-
-  .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__delivery {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    padding: 16px 0;
-  }
-
-  .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__delivery-item {
+  .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__item {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
     min-width: 0;
-    padding: 0 16px;
+    padding: 20px 16px;
   }
 
-  .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__delivery-item + .isoa-pdp-trust__delivery-item {
+  .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__item + .isoa-pdp-trust__item {
     border-left: 1px solid #dad8d4;
   }
 
-  .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__delivery-icon {
+  .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__item-icon {
     display: grid;
     flex: 0 0 34px;
     place-items: center;
@@ -92,154 +132,97 @@
     height: 34px;
     border-radius: 50%;
     background: #67645e;
-    color: #fff;
+    color: #f1f0ed;
   }
 
-  .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__delivery-icon svg {
-    width: 19px;
-    height: 19px;
+  .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__item-icon svg {
+    width: 18px;
+    height: 18px;
   }
 
   .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__eyebrow {
     display: block;
     margin-bottom: 3px;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 500;
     line-height: 1.2;
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
 
-  .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__delivery-value {
+  .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__value {
     display: block;
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 1.25;
-    text-transform: uppercase;
-  }
-
-  .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__offer {
-    padding: 16px 20px;
-  }
-
-  .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__offer-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-
-  .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__offer h2 {
-    margin: 0;
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 1.2;
-  }
-
-  .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__offer-tag {
-    padding: 4px 9px;
-    border: 1px solid currentColor;
-    border-radius: 999px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    line-height: 1;
-    text-transform: uppercase;
-  }
-
-  .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__offer p {
-    margin: 8px 0 0;
     font-size: 13px;
-    line-height: 1.4;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__value--caps {
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
   }
 
   @media (max-width: 749px) {
     .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__inner {
       margin-top: 12px;
+      padding: 20px 16px 0;
     }
 
     .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__badges {
-      display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px 4px;
-      padding: 18px 10px;
+      gap: 18px 4px;
+      padding-bottom: 20px;
     }
 
     .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__icon {
-      width: 58px;
-      height: 58px;
+      width: 52px;
+      height: 52px;
     }
 
     .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__badge-label {
-      font-size: 10px;
+      font-size: 9px;
     }
 
     .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__bottom {
-      grid-template-columns: 1fr;
-      gap: 12px;
-      margin-top: 12px;
+      grid-auto-flow: row;
     }
 
-    .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__delivery {
-      padding: 14px 0;
-    }
-
-    .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__delivery-item {
+    .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__item {
       justify-content: flex-start;
-      gap: 8px;
-      padding: 0 12px;
+      padding: 14px 4px;
     }
 
-    .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__delivery-icon {
+    .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__item + .isoa-pdp-trust__item {
+      border-top: 1px solid #dad8d4;
+      border-left: 0;
+    }
+
+    .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__item-icon {
       flex-basis: 30px;
       width: 30px;
       height: 30px;
     }
 
-    .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__delivery-icon svg {
-      width: 17px;
-      height: 17px;
+    .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__item-icon svg {
+      width: 16px;
+      height: 16px;
     }
 
-    .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__eyebrow {
-      font-size: 9px;
-    }
-
-    .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__delivery-value {
-      font-size: 11px;
-    }
-
-    .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__offer {
-      padding: 14px 16px;
-    }
-
-    .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__offer h2 {
-      font-size: 13px;
-    }
-
-    .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__offer p {
+    .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__value {
       font-size: 12px;
-    }
-  }
-
-  @media (max-width: 360px) {
-    .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__delivery {
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-
-    .isoa-pdp-trust-{{ section.id }} .isoa-pdp-trust__delivery-item + .isoa-pdp-trust__delivery-item {
-      padding-top: 12px;
-      border-top: 1px solid #dad8d4;
-      border-left: 0;
     }
   }
 {% endstyle %}
 
+{%- assign badge_count = 0 -%}
+{%- for block in section.blocks -%}
+  {%- if block.settings.label != blank -%}{%- assign badge_count = badge_count | plus: 1 -%}{%- endif -%}
+{%- endfor -%}
+
 <section class="isoa-pdp-trust-{{ section.id }}" aria-label="Product assurances">
   <div class="isoa-pdp-trust__inner">
-    {%- if section.blocks.size > 0 -%}
-      <div class="isoa-pdp-trust__badges">
+    {%- if badge_count > 0 -%}
+      <div class="isoa-pdp-trust__badges" style="--badge-count: {{ badge_count }};">
         {%- for block in section.blocks -%}
           {%- if block.settings.label != blank -%}
             <div class="isoa-pdp-trust__badge" {{ block.shopify_attributes }}>
@@ -252,55 +235,93 @@
     {%- endif -%}
 
     <div class="isoa-pdp-trust__bottom">
-      <div class="isoa-pdp-trust__delivery" aria-label="Shipping and delivery">
-        <div class="isoa-pdp-trust__delivery-item">
-          <span class="isoa-pdp-trust__delivery-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 3h13v13H1V3zM14 8h4l3 3v5h-7V8z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-              <circle cx="5.5" cy="18.5" r="2" stroke="currentColor" stroke-width="1.8"/>
-              <circle cx="18.5" cy="18.5" r="2" stroke="currentColor" stroke-width="1.8"/>
-              <path d="M3.5 18.5H1v-2.5M16.5 18.5H14V16M21 18.5h-.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      {%- if section.settings.shipping_text != blank -%}
+        <div class="isoa-pdp-trust__item">
+          <span class="isoa-pdp-trust__item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 5h12v11H2zM14 9h4l3 3v4h-7z"/>
+              <circle cx="6" cy="18" r="2"/>
+              <circle cx="17" cy="18" r="2"/>
             </svg>
           </span>
           <div>
             <span class="isoa-pdp-trust__eyebrow">Delivery</span>
-            <strong class="isoa-pdp-trust__delivery-value">{{ section.settings.shipping_text | escape }}</strong>
+            <strong class="isoa-pdp-trust__value isoa-pdp-trust__value--caps">{{ section.settings.shipping_text | escape }}</strong>
           </div>
         </div>
-        <div class="isoa-pdp-trust__delivery-item">
-          <span class="isoa-pdp-trust__delivery-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="3" y="4" width="18" height="17" rx="2" stroke="currentColor" stroke-width="1.8"/>
-              <path d="M3 9h18M8 2v4M16 2v4M7 13h2M11 13h2M15 13h2M7 17h2M11 17h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      {%- endif -%}
+
+      <div class="isoa-pdp-trust__item">
+        <span class="isoa-pdp-trust__item-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="4" width="18" height="17" rx="2"/>
+            <path d="M3 9h18M8 2v4M16 2v4"/>
+          </svg>
+        </span>
+        <div>
+          <span class="isoa-pdp-trust__eyebrow">Expected delivery</span>
+          <strong
+            class="isoa-pdp-trust__value"
+            data-isoa-delivery
+            data-min="{{ min_days }}"
+            data-max="{{ max_days }}"
+            data-skip="{{ skip_days }}"
+          >{{ delivery_label }}</strong>
+        </div>
+      </div>
+
+      {%- if show_offer -%}
+        <div class="isoa-pdp-trust__item">
+          <span class="isoa-pdp-trust__item-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 12V4h8l10 10-8 8L3 12Z"/>
+              <circle cx="7.5" cy="8.5" r="1.2"/>
             </svg>
           </span>
           <div>
-            <span class="isoa-pdp-trust__eyebrow">Expected delivery</span>
-            <strong class="isoa-pdp-trust__delivery-value">{{ section.settings.delivery_text | escape }}</strong>
+            <span class="isoa-pdp-trust__eyebrow">{{ section.settings.offer_tag | default: 'Offer' | escape }}</span>
+            <strong class="isoa-pdp-trust__value">{{ section.settings.offer_text | escape }}</strong>
           </div>
-        </div>
-      </div>
-      {%- if section.settings.offer_text != blank -%}
-        <div class="isoa-pdp-trust__offer">
-          <div class="isoa-pdp-trust__offer-head">
-            <h2>Available offers</h2>
-            <span class="isoa-pdp-trust__offer-tag">{{ section.settings.offer_tag | escape }}</span>
-          </div>
-          <p>{{ section.settings.offer_text | escape }}</p>
         </div>
       {%- endif -%}
     </div>
   </div>
 </section>
 
+<script>
+  (function () {
+    var el = document.querySelector('.isoa-pdp-trust-{{ section.id }} [data-isoa-delivery]');
+    if (!el) return;
+    var min = +el.dataset.min, max = +el.dataset.max, skip = el.dataset.skip;
+    var d = new Date(), counted = 0, from = null, to = null;
+    for (var i = 0; i < 30 && !to; i++) {
+      d.setDate(d.getDate() + 1);
+      if (skip.indexOf(String(d.getDay())) !== -1) continue;
+      counted++;
+      if (counted === min) from = new Date(d);
+      if (counted === max) to = new Date(d);
+    }
+    if (!from || !to) return;
+    var fmt = function (x) {
+      return x.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+    };
+    el.textContent = min === max ? fmt(to) : fmt(from) + ' – ' + fmt(to);
+  })();
+</script>
+
 {% schema %}
 {
   "name": "ISOUA PDP trust",
   "settings": [
     { "type": "text", "id": "shipping_text", "label": "Shipping message", "default": "Free shipping on prepaid orders" },
-    { "type": "text", "id": "delivery_text", "label": "Delivery window", "default": "5–7 working days" },
-    { "type": "text", "id": "offer_tag", "label": "Offer tag", "default": "Sitewide" },
-    { "type": "text", "id": "offer_text", "label": "Offer message", "default": "Free shipping pan India on prepaid orders." }
+    { "type": "header", "content": "Expected delivery" },
+    { "type": "range", "id": "delivery_min", "label": "Earliest delivery (working days)", "min": 1, "max": 14, "step": 1, "default": 5 },
+    { "type": "range", "id": "delivery_max", "label": "Latest delivery (working days)", "min": 1, "max": 14, "step": 1, "default": 7 },
+    { "type": "checkbox", "id": "skip_sundays", "label": "Sundays are not working days", "default": true },
+    { "type": "checkbox", "id": "skip_saturdays", "label": "Saturdays are not working days", "default": false },
+    { "type": "header", "content": "Offer" },
+    { "type": "text", "id": "offer_tag", "label": "Offer label", "default": "Offer" },
+    { "type": "text", "id": "offer_text", "label": "Offer message", "info": "Hidden when empty or when it repeats the shipping message." }
   ],
   "blocks": [
     {

@@ -510,9 +510,10 @@ body.template-product [id$="__ss_packaging_cUBeaP"] :is(.packaging-description, 
   font-size: 14px !important;
 }
 
+/* The side strip's small "CLICK HERE" prompt keeps its own 13px. */
 body.template-product [id$="__ss_packaging_cUBeaP"] [class*="vertical"] span,
 body.template-product [id$="__ss_packaging_cUBeaP"] .packaging-vertical-text span,
-body.template-product [id$="__ss_packaging_cUBeaP"] .packaging-side-text span {
+body.template-product [id$="__ss_packaging_cUBeaP"] .packaging-side-text span:not(.packaging-side-text__cta) {
   font-size: 28px !important;
 }
 
@@ -622,7 +623,7 @@ body.template-product [id$="__ss_packaging_cUBeaP"] .packaging-side-text span {
 
   body.template-product [id$="__ss_packaging_cUBeaP"] [class*="vertical"] span,
   body.template-product [id$="__ss_packaging_cUBeaP"] .packaging-vertical-text span,
-  body.template-product [id$="__ss_packaging_cUBeaP"] .packaging-side-text span {
+  body.template-product [id$="__ss_packaging_cUBeaP"] .packaging-side-text span:not(.packaging-side-text__cta) {
     font-size: 22px !important;
   }
 }

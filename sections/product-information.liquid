@@ -1,8 +1,26 @@
 
 
+{%- comment -%}
+  The Okendo reviews app embed prints its own Product JSON-LD with the same
+  @id (/products/<handle>#product), including brand, offers and, once there
+  are reviews, the rating. Google merged it with this one and flagged
+  "Duplicate field 'brand'" (Search Console, barrier-milk, 2026-10-28), which
+  blocked indexing. Okendo's copy is the one that can carry ratings, so this
+  one is only printed when Okendo is not installed. Liquid can't see app
+  embeds, so Okendo's shop metafield stands in: if the app stays installed
+  but its embed is switched off in the theme editor, restore this block.
+{%- endcomment -%}
+{%- liquid
+  assign okendo_on = false
+  if shop.metafields.okendo.SubscriberId != blank
+    assign okendo_on = true
+  endif
+-%}
+{%- unless okendo_on -%}
 <script type="application/ld+json">
   {{ closest.product | structured_data }}
 </script>
+{%- endunless -%}
 
 {% capture media_gallery %}
   {%- content_for 'block',

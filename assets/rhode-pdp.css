@@ -222,7 +222,7 @@ main#MainContent {
   .product-information__grid--half .product-information__media slideshow-controls[thumbnails] .slideshow-controls__thumbnails {
     display: flex !important;
     flex-direction: column !important;
-    gap: 10px !important;
+    gap: 12px !important;
     align-items: flex-start !important;
     margin-inline: 0 !important;
     padding-inline: 0 !important;
@@ -230,17 +230,19 @@ main#MainContent {
     width: auto !important;
   }
 
+  /* Rhode's thumbnails: small landscape tiles (52 × 35), 12px corners, no
+     frame. The one on screen is full strength, the rest sit at half. */
   .product-information__grid--half .product-information__media slideshow-controls[thumbnails] .slideshow-controls__thumbnail {
-    width: 56px !important;
-    height: 56px !important;
-    flex: 0 0 56px;
+    width: 52px !important;
+    height: 35px !important;
+    flex: 0 0 35px;
     padding: 0;
-    border-radius: 14px;
+    border: 0;
+    border-radius: 12px;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-    border: 1.5px solid transparent;
-    transition: border-color 0.2s ease, transform 0.2s ease;
+    background: #dedcd9;
+    opacity: 0.5;
+    transition: opacity 0.7s cubic-bezier(0.76, 0, 0.24, 1);
   }
 
   .product-information__grid--half .product-information__media slideshow-controls[thumbnails] .slideshow-controls__thumbnail img,
@@ -251,9 +253,14 @@ main#MainContent {
     border-radius: inherit;
   }
 
-  .product-information__grid--half .product-information__media slideshow-controls[thumbnails] .slideshow-controls__thumbnail[aria-selected='true'] {
-    border-color: rgba(255, 255, 255, 0.95);
-    transform: scale(1.04);
+  .product-information__grid--half .product-information__media slideshow-controls[thumbnails] .slideshow-controls__thumbnail[aria-selected='true'],
+  .product-information__grid--half .product-information__media slideshow-controls[thumbnails] .slideshow-controls__thumbnail:hover {
+    opacity: 1;
+  }
+
+  /* Rhode's desktop gallery has no arrows: thumbnails are the only control. */
+  .product-information__grid--half .product-information__media slideshow-arrows {
+    display: none !important;
   }
 }
 
@@ -1378,3 +1385,87 @@ main#MainContent .ss-side-title--on-image {
   }
 }
 
+
+/* Rating half star. The product_rating metafield uses U+2BEA (star with left
+   half black), which iOS has no glyph for and draws as a box of lines.
+   assets/isoa-pdp-rating.js swaps it for a plain star (every font has one),
+   drawn faint with a solid left half laid over it. */
+.isoa-half-star {
+  position: relative;
+  display: inline-block;
+  color: rgb(103 100 94 / 0.3);
+}
+
+.isoa-half-star::before {
+  content: '\2605';
+  position: absolute;
+  inset: 0 50% 0 0;
+  overflow: hidden;
+  color: var(--color-foreground, #67645e);
+}
+
+/* "See full ingredients list" in the hero's key ingredients row. The section
+   with id="full-ingredients" (rhode-lip-ingredients) catches the click,
+   scrolls itself into view and opens the full list. */
+.product-details a[href="#full-ingredients"] {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  margin-top: 4px;
+  padding: 0 16px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  color: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.product-details a[href="#full-ingredients"]:hover {
+  background: #67645e;
+  color: #f1f0ed;
+}
+
+/* Okendo reviews. The app block sits in a Horizon "_blocks" section whose
+   grey background layer has no radius or padding, so the widget read as a
+   bare band. Card it like every other PDP section: 10px corners on the rail,
+   inner padding, site type. :has() keys off the widget itself so the rule
+   follows the block into any product template. */
+.shopify-section:has(.okeReviews) .section-background {
+  border-radius: 10px;
+}
+
+.shopify-section:has(.okeReviews) .custom-section-content {
+  padding: 54px 108px 32px;
+}
+
+.okeReviews.oke-w {
+  max-width: none;
+  font-family: var(--isoa-site-font, inherit);
+  color: #67645e;
+  --oke-text-regular-fontFamily: var(--isoa-site-font, inherit);
+  --oke-text-primaryColor: #67645e;
+  --oke-text-secondaryColor: #67645e;
+  --oke-stars-foregroundColor: #67645e;
+  --oke-button-borderRadius: 999px;
+  --oke-button-borderColor: #67645e;
+  --oke-button-textColor: #67645e;
+  --oke-button-backgroundColorHover: #67645e;
+  --oke-button-textColorHover: #f1f0ed;
+  --oke-border-color: #dad8d4;
+}
+
+@media screen and (max-width: 749px) {
+  .shopify-section:has(.okeReviews) .section-background {
+    left: 16px;
+    right: 16px;
+    width: auto;
+  }
+
+  .shopify-section:has(.okeReviews) .custom-section-content {
+    padding: 32px 16px;
+  }
+}

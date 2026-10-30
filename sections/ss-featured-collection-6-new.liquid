@@ -1115,6 +1115,10 @@ For inquiries or permissions, contact daniel@section.store
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
+{%- comment -%} Touch screens: Rhode's "swipe" circle on the first card until the first swipe. {%- endcomment -%}
+{%- assign swipe_slider = '.collection-slider-' | append: section.id -%}
+{% render 'isoa-swipe-hint', slider: swipe_slider %}
+
 <script>
   function initScrollingProducts() {
     document.querySelector('.collection-slider-{{ section.id }}').classList.remove('preview');

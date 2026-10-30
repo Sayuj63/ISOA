@@ -100,7 +100,7 @@
               "settings": {
                 "content_direction": "row",
                 "vertical_on_mobile": false,
-                "horizontal_alignment": "flex-end",
+                "horizontal_alignment": "flex-start",
                 "vertical_alignment": "center",
                 "align_baseline": false,
                 "horizontal_alignment_flex_direction_column": "flex-start",
@@ -138,9 +138,9 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<h1><strong>{{ closest.product.metafields.custom.subheading_product_details.value }}</strong></h1>",
+                    "text": "<p><strong>{{ closest.product.metafields.custom.subheading_product_details.value }}</strong></p>",
                     "width": "100%",
-                    "max_width": "narrow",
+                    "max_width": "none",
                     "alignment": "left",
                     "type_preset": "paragraph",
                     "font": "var(--font-heading--family)",
@@ -404,7 +404,7 @@
                     "text_GqXfJT": {
                       "type": "text",
                       "settings": {
-                        "text": "<p><span style=\"text-decoration:underline\">4% Niacinamide</span> helps support the skin barrier and improve the appearance of uneven skin tone and post-acne marks.<br/><br/><span style=\"text-decoration:underline\">2.5% Azelaic Acid Complex </span>helps improve the appearance of uneven skin tone and post-blemish marks.</p><p><span style=\"text-decoration:underline\">2.5% Panthenol (Pro-Vitamin B5) </span>helps hydrate, soften, and condition skin.</p><p><span style=\"text-decoration:underline\">4% Glycerin</span> attracts moisture to keep skin hydrated and soft.</p><p><span style=\"text-decoration:underline\">10% Aloe Leaf Water</span> helps condition skin and maintain a comfortable, hydrated feel.</p><p><span style=\"text-decoration:underline\">Ceramide NP</span> helps support the skin’s natural moisture barrier and reduce moisture loss.</p><p><span style=\"text-decoration:underline\">0.2% Ectoin </span>helps maintain skin hydration and support skin comfort.</p><p><span style=\"text-decoration:underline\">2% Betaine </span>helps maintain moisture and leave skin feeling soft and supple.</p>",
+                        "text": "<p><span style=\"text-decoration:underline\">4% Niacinamide</span> helps support the skin barrier and improve the appearance of uneven skin tone and post-acne marks.<br/><br/><span style=\"text-decoration:underline\">2.5% Azelaic Acid Complex </span>helps improve the appearance of uneven skin tone and post-blemish marks.</p><p><span style=\"text-decoration:underline\">2.5% Panthenol (Pro-Vitamin B5) </span>helps hydrate, soften, and condition skin.</p><p><span style=\"text-decoration:underline\">4% Glycerin</span> attracts moisture to keep skin hydrated and soft.</p><p><span style=\"text-decoration:underline\">10% Aloe Leaf Water</span> helps condition skin and maintain a comfortable, hydrated feel.</p><p><span style=\"text-decoration:underline\">Ceramide NP</span> helps support the skin’s natural moisture barrier and reduce moisture loss.</p><p><span style=\"text-decoration:underline\">0.2% Ectoin </span>helps maintain skin hydration and support skin comfort.</p><p><span style=\"text-decoration:underline\">2% Betaine </span>helps maintain moisture and leave skin feeling soft and supple.</p><p><a href=\"#full-ingredients\">See full ingredients list</a></p>",
                         "width": "100%",
                         "max_width": "none",
                         "alignment": "left",
@@ -565,7 +565,6 @@
       ],
       "settings": {
         "shipping_text": "Free shipping on prepaid orders",
-        "delivery_text": "5–7 working days",
         "offer_tag": "Sitewide",
         "offer_text": "Free shipping pan India on prepaid orders."
       }
@@ -1120,7 +1119,8 @@
             "label": "RECOVER",
             "title": "highlight milk",
             "subtitle": "MULTIPURPOSE LUMINIZER",
-            "image": "shopify://shop_images/isoua_3_a0aef32f-0d86-4f89-a49c-792dc9967edf.png"
+            "image": "shopify://shop_images/isoua_3_a0aef32f-0d86-4f89-a49c-792dc9967edf.png",
+            "product": "recovery-mask"
           }
         },
         "step_8AnqyP": {
@@ -1130,17 +1130,19 @@
             "label": "TARGET",
             "title": "highlight milk",
             "subtitle": "MULTIPURPOSE LUMINIZER",
-            "image": "shopify://shop_images/IMG_8888.jpg"
+            "image": "shopify://shop_images/IMG_8888.jpg",
+            "product": "spotwear"
           }
         },
         "step_2": {
           "type": "step",
           "settings": {
-            "index": "1",
+            "index": "3",
             "label": "HYDRATE",
-            "title": "prep hydrator",
-            "subtitle": "HYDRATING SKIN PRIMER",
-            "image": "shopify://shop_images/IMG_8834.jpg"
+            "title": "barrier milk",
+            "subtitle": "CERAMIDE RECOVERY ESSENCE",
+            "image": "shopify://shop_images/IMG_8834.jpg",
+            "product": "barrier-milk"
           }
         },
         "row_1_2": {
@@ -1206,6 +1208,38 @@
             "label": "KEY INGREDIENTS",
             "content": "Hyaluronic Acid • Peptides • Niacinamide • Squalane"
           }
+        },
+        "row_3_2": {
+          "type": "row",
+          "settings": {
+            "step_index": "3",
+            "label": "BENEFITS",
+            "content": "• Replenishes moisture without a heavy-cream feel\n<br>\n• Supports the skin barrier and helps soften rough texture\n<br>\n• Helps improve the appearance of uneven skin tone and post-acne marks"
+          }
+        },
+        "row_3_3": {
+          "type": "row",
+          "settings": {
+            "step_index": "3",
+            "label": "WHERE IT FITS IN YOUR ROUTINE",
+            "content": "On its own on clean bare skin, mixed into makeup, or layered with skincare and SPF."
+          }
+        },
+        "row_3_4": {
+          "type": "row",
+          "settings": {
+            "step_index": "3",
+            "label": "THE EFFECT",
+            "content": "Soft, hydrated, comfortable skin with a smoother, more even-looking appearance"
+          }
+        },
+        "row_3_5": {
+          "type": "row",
+          "settings": {
+            "step_index": "3",
+            "label": "KEY INGREDIENTS",
+            "content": "Niacinamide • Azelaic Acid Complex • Panthenol • Glycerin • Aloe Vera • Ceramide NP • Ectoin"
+          }
         }
       },
       "block_order": [
@@ -1219,9 +1253,16 @@
         "row_2_2",
         "row_2_3",
         "row_2_4",
-        "row_2_5"
+        "row_2_5",
+        "row_3_2",
+        "row_3_3",
+        "row_3_4",
+        "row_3_5"
       ],
       "settings": {
+        "image_ratio_mobile": "custom",
+        "image_ratio_mobile_w": 2,
+        "image_ratio_mobile_h": 1,
         "padding_top": 0,
         "padding_bottom": 24
       }
@@ -1299,9 +1340,10 @@
         "padding_side_mobile": 16,
         "content_gap": 40,
         "content_gap_mobile": 20,
-        "side_width": 88,
+        "side_width": 72,
         "side_width_mobile": 64,
         "image_radius": 12,
+        "image_ratio": "original",
         "image_height": 300,
         "image_height_mobile": 320,
         "heading": "less harm, more hydration.",
@@ -1310,13 +1352,18 @@
         "material_1_text": "",
         "material_2_title": "",
         "material_2_text": "",
-        "vertical_text": "",
+        "vertical_text": "how to recycle",
+        "side_cta": "CLICK HERE",
+        "back_label": "packaging",
+        "back_cta": "SEE DETAILS",
+        "recycle_heading": "how to recycle",
+        "recycle_body": "<p>Once your Barrier Milk is empty, here is how to give each part its next life:</p><p><strong>1. Unit carton</strong> — flatten it and recycle it with paper and cardboard. It is 100% recyclable and made from FSC-certified paper.</p><p><strong>2. Cap and bottle</strong> — rinse out any remaining product, then recycle both with plastics. They are made from PET #1, which most recycling collections accept.</p><p><em>FYI: check with your local collection service for what it accepts in your area.</em></p>",
         "heading_size": 36,
         "heading_size_mobile": 24,
         "text_size": 16,
         "text_size_mobile": 15,
-        "vertical_text_size": 34,
-        "vertical_text_size_mobile": 28,
+        "vertical_text_size": 32,
+        "vertical_text_size_mobile": 24,
         "section_bg": "#eceae7",
         "side_bg": "#918d87",
         "text_color": "#67645e",
@@ -1530,6 +1577,63 @@
         "cta_hover_bg_color": "#4d4b45",
         "cta_text_color": "#ffffff"
       }
+    },
+    "rhode_pdp_faq": {
+      "type": "rhode-pdp-faq",
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "Where does Barrier Milk fit into my daily routine?",
+            "answer": "<p>Morning and night, after cleansing. In the morning, press it onto your face and neck, then follow with moisturiser, sunscreen and makeup. At night, apply it after your acne treatment and before barrier cream.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use it with my acne treatment?",
+            "answer": "<p>Yes. Use your acne treatment according to its directions first, then apply Barrier Milk. Follow with barrier cream if needed and compatible with your treatment.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "What does it feel like on skin?",
+            "answer": "<p>A lightweight, milky serum that leaves skin feeling soft and hydrated. It is fragrance-free.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "Is it dermatologist tested?",
+            "answer": "<p>Yes. Barrier Milk is dermatologist-tested and non-comedogenic.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Is it vegan or cruelty-free?",
+            "answer": "<p>Yes. Barrier Milk is vegan, cruelty-free and gluten-free.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5"
+      ],
+      "settings": {
+        "image_ratio": "square",
+        "image_ratio_w": 1,
+        "image_ratio_h": 1,
+        "image_ratio_mobile": "same",
+        "image_ratio_mobile_w": 1,
+        "image_ratio_mobile_h": 1,
+        "heading": "FAQ",
+        "subheading": ""
+      }
     }
   },
   "order": [
@@ -1544,6 +1648,7 @@
     "rhode_prep_toggle_new",
     "rhode_pdp_on_the_go",
     "ss_packaging_cUBeaP",
+    "rhode_pdp_faq",
     "17931386857106fa34",
     "section_store_featured_collection_6_hnPVwp",
     "rhode_sticky_atc"

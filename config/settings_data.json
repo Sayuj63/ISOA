@@ -238,8 +238,8 @@
       "scheme-4": {
         "settings": {
           "background": "#edecebcc",
-          "foreground_heading": "#000000",
-          "foreground": "#000000cf",
+          "foreground_heading": "#67645e",
+          "foreground": "#67645e",
           "primary": "#000000cf",
           "primary_hover": "#000000",
           "border": "#1d368680",

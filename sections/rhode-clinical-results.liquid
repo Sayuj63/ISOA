@@ -200,6 +200,25 @@
     letter-spacing: 0.02em;
   }
   .rh-clin-panel-{{ section.id }} .rh-clin-footnote-{{ section.id }} { margin-top: auto; padding-top: 32px; }
+  /* Community tab: one customer's words, large, as on Rhode. */
+  .rh-clin-quote-{{ section.id }} { margin: 0; }
+  .rh-clin-quote-{{ section.id }} p {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+  .rh-clin-quote-{{ section.id }} cite {
+    display: block;
+    margin-top: 20px;
+    font-size: 16px;
+    font-style: normal;
+  }
+  @media (max-width: 749px) {
+    .rh-clin-quote-{{ section.id }} p { font-size: 22px; }
+    .rh-clin-quote-{{ section.id }} cite { margin-top: 14px; font-size: 14px; }
+  }
   .rh-clin-tablist-{{ section.id }} {
     display: grid;
     margin-top: 22px;
@@ -265,16 +284,45 @@
   <div class="section-{{ section.id }}-inner">
     <div class="rh-clin-grid-{{ section.id }}">
       <div class="rh-clin-card-{{ section.id }}">
-        {%- assign bullet_blocks = section.blocks | where: 'type', 'bullet' -%}
+        {%- liquid
+          assign bullet_blocks = section.blocks | where: 'type', 'bullet'
+          assign consumer_stats = section.blocks | where: 'type', 'consumer_stat'
+          assign community_stats = section.blocks | where: 'type', 'community_stat'
+          assign show_community = false
+          if section.settings.tab3_label != blank
+            if community_stats.size > 0 or section.settings.community_quote != blank
+              assign show_community = true
+            endif
+          endif
+        -%}
         <div class="rh-clin-panel-{{ section.id }} is-active" data-rh-clin-panel="consumer" role="tabpanel">
-          <p class="rh-clin-consumer-label-{{ section.id }}">After 8 hours</p>
-          <div class="rh-clin-stats-{{ section.id }}">
-            <p class="rh-clin-stat-{{ section.id }}"><strong>100%</strong><span>Agreed the patch stayed on all day and felt comfortable to wear</span></p>
-            <p class="rh-clin-stat-{{ section.id }}"><strong>100%</strong><span>Agreed the patch helped absorb excess oil</span></p>
-            <p class="rh-clin-stat-{{ section.id }}"><strong>94%</strong><span>Agreed the patch helped minimize the look of their spot</span></p>
-            <p class="rh-clin-stat-{{ section.id }}"><strong>90%</strong><span>Agreed their spot looked smaller, flatter, and less red</span></p>
-          </div>
-          <div class="rh-clin-footnote-{{ section.id }}"><p>*Based on a 31-subject consumer perception study after 8 hours of use.</p></div>
+          {%- comment -%}
+            Without consumer_stat blocks the section keeps the copy it shipped
+            with (the Spotwear patch study), so existing pages don't change.
+            Add blocks to give each product its own figures.
+          {%- endcomment -%}
+          {%- if consumer_stats.size > 0 -%}
+            {%- if section.settings.consumer_label != blank -%}
+              <p class="rh-clin-consumer-label-{{ section.id }}">{{ section.settings.consumer_label }}</p>
+            {%- endif -%}
+            <div class="rh-clin-stats-{{ section.id }}">
+              {%- for block in consumer_stats -%}
+                <p class="rh-clin-stat-{{ section.id }}" {{ block.shopify_attributes }}><strong>{{ block.settings.value }}</strong><span>{{ block.settings.text }}</span></p>
+              {%- endfor -%}
+            </div>
+            {%- if section.settings.consumer_footnote != blank -%}
+              <div class="rh-clin-footnote-{{ section.id }}">{{ section.settings.consumer_footnote }}</div>
+            {%- endif -%}
+          {%- else -%}
+            <p class="rh-clin-consumer-label-{{ section.id }}">After 8 hours</p>
+            <div class="rh-clin-stats-{{ section.id }}">
+              <p class="rh-clin-stat-{{ section.id }}"><strong>100%</strong><span>Agreed the patch stayed on all day and felt comfortable to wear</span></p>
+              <p class="rh-clin-stat-{{ section.id }}"><strong>100%</strong><span>Agreed the patch helped absorb excess oil</span></p>
+              <p class="rh-clin-stat-{{ section.id }}"><strong>94%</strong><span>Agreed the patch helped minimize the look of their spot</span></p>
+              <p class="rh-clin-stat-{{ section.id }}"><strong>90%</strong><span>Agreed their spot looked smaller, flatter, and less red</span></p>
+            </div>
+            <div class="rh-clin-footnote-{{ section.id }}"><p>*Based on a 31-subject consumer perception study after 8 hours of use.</p></div>
+          {%- endif -%}
         </div>
         <div class="rh-clin-panel-{{ section.id }}" data-rh-clin-panel="clinical" role="tabpanel" hidden>
           <h2 class="rh-clin-heading-{{ section.id }}">{{ section.settings.heading }}</h2>
@@ -283,9 +331,37 @@
           </ul>
           <div class="rh-clin-footnote-{{ section.id }}">{{ section.settings.footnote }}</div>
         </div>
+        {%- if show_community -%}
+          <div class="rh-clin-panel-{{ section.id }}" data-rh-clin-panel="community" role="tabpanel" hidden>
+            {%- if section.settings.community_label != blank -%}
+              <p class="rh-clin-consumer-label-{{ section.id }}">{{ section.settings.community_label }}</p>
+            {%- endif -%}
+            {%- if section.settings.community_quote != blank -%}
+              <blockquote class="rh-clin-quote-{{ section.id }}">
+                <p>“{{ section.settings.community_quote }}”</p>
+                {%- if section.settings.community_author != blank -%}
+                  <cite>- {{ section.settings.community_author }}</cite>
+                {%- endif -%}
+              </blockquote>
+            {%- endif -%}
+            {%- if community_stats.size > 0 -%}
+              <div class="rh-clin-stats-{{ section.id }}">
+                {%- for block in community_stats -%}
+                  <p class="rh-clin-stat-{{ section.id }}" {{ block.shopify_attributes }}><strong>{{ block.settings.value }}</strong><span>{{ block.settings.text }}</span></p>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+            {%- if section.settings.community_footnote != blank -%}
+              <div class="rh-clin-footnote-{{ section.id }}">{{ section.settings.community_footnote }}</div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
         <div class="rh-clin-tablist-{{ section.id }}" role="tablist" aria-label="Study result type">
           <button class="rh-clin-tab-{{ section.id }}" type="button" role="tab" aria-selected="true" data-rh-clin-tab="consumer">{{ section.settings.tab1_label }}</button>
           <button class="rh-clin-tab-{{ section.id }}" type="button" role="tab" aria-selected="false" data-rh-clin-tab="clinical">{{ section.settings.tab2_label }}</button>
+          {%- if show_community -%}
+            <button class="rh-clin-tab-{{ section.id }}" type="button" role="tab" aria-selected="false" data-rh-clin-tab="community">{{ section.settings.tab3_label }}</button>
+          {%- endif -%}
         </div>
       </div>
 
@@ -382,6 +458,54 @@
     },
     {
       "type": "header",
+      "content": "Consumer study (tab 1)",
+      "info": "Add 'Consumer study stat' blocks to replace the default Spotwear figures."
+    },
+    {
+      "type": "text",
+      "id": "consumer_label",
+      "label": "Label above the figures",
+      "default": "After 8 hours"
+    },
+    {
+      "type": "richtext",
+      "id": "consumer_footnote",
+      "label": "Footnote"
+    },
+    {
+      "type": "header",
+      "content": "Community results (tab 3)",
+      "info": "The tab shows once it has a label and a customer quote or at least one 'Community result' block."
+    },
+    {
+      "type": "text",
+      "id": "tab3_label",
+      "label": "Tab 3 label",
+      "default": "community results"
+    },
+    {
+      "type": "textarea",
+      "id": "community_quote",
+      "label": "Customer quote",
+      "info": "A real customer's words, without quotation marks."
+    },
+    {
+      "type": "text",
+      "id": "community_author",
+      "label": "Customer name"
+    },
+    {
+      "type": "text",
+      "id": "community_label",
+      "label": "Label above the figures"
+    },
+    {
+      "type": "richtext",
+      "id": "community_footnote",
+      "label": "Footnote"
+    },
+    {
+      "type": "header",
       "content": "Section padding"
     },
     {
@@ -406,6 +530,22 @@
     }
   ],
   "blocks": [
+    {
+      "type": "consumer_stat",
+      "name": "Consumer study stat",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Figure", "default": "100%" },
+        { "type": "text", "id": "text", "label": "Statement", "default": "Agreed skin felt hydrated" }
+      ]
+    },
+    {
+      "type": "community_stat",
+      "name": "Community result",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Figure", "default": "100%" },
+        { "type": "text", "id": "text", "label": "Statement", "default": "Said they would recommend it" }
+      ]
+    },
     {
       "type": "bullet",
       "name": "Bullet",

@@ -61,6 +61,7 @@
 
   /* Card column — the grey text card. */
   .rh-prep-card-{{ section.id }} {
+    min-width: 0;
     background: #f1f0ed;
     border-radius: 10px;
     padding: 28px 40px;
@@ -92,11 +93,12 @@
     cursor: pointer;
     padding: 0;
     line-height: 1.1;
-    transition: background 0.2s ease, color 0.2s ease;
+    opacity: 0.5;
+    transition: background 0.7s cubic-bezier(0.76, 0, 0.24, 1), color 0.7s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.7s cubic-bezier(0.76, 0, 0.24, 1);
   }
 
-  .rh-prep-{{ section.id }}.is-active-1 .rh-prep-circle-{{ section.id }}[data-rh-prep-step="1"],
-  .rh-prep-{{ section.id }}.is-active-2 .rh-prep-circle-{{ section.id }}[data-rh-prep-step="2"] {
+  .rh-prep-circle-{{ section.id }}[aria-pressed='true'] {
+    opacity: 1;
     background: #67645e;
     color: #fff;
     border-color: #67645e;
@@ -183,6 +185,47 @@
     margin: 0;
   }
 
+  /* Per-step BUY pill (Rhode's glazing milk routine): adds that step's
+     product to the cart without leaving the page. */
+  .rh-prep-title-row-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .rh-prep-buy-wrap--mobile {
+    display: none;
+  }
+  .rh-prep-buy-{{ section.id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    min-height: 33px;
+    padding: 4px 28px;
+    white-space: nowrap;
+    border: 1px solid #67645e;
+    border-radius: 999px;
+    background: transparent;
+    color: #67645e;
+    font-family: var(--font-body--family);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .rh-prep-buy-{{ section.id }}:hover,
+  .rh-prep-buy-{{ section.id }}.is-added {
+    background: #67645e;
+    color: #f1f0ed;
+  }
+  .rh-prep-buy-{{ section.id }}[disabled] {
+    opacity: 0.5;
+    cursor: default;
+  }
+
   @media (min-width: 750px) {
     /* Desktop: image left, card right — 2-col grid. Aspect keeps the image
        tall enough to feel like a hero product shot next to the card. */
@@ -205,11 +248,22 @@
     }
     .rh-prep-image-viewport-{{ section.id }} {
       border-radius: 10px 10px 0 0;
-      aspect-ratio: 2 / 1;
+      aspect-ratio: var(--rh-prep-ratio-mobile, 2 / 1);
     }
     .rh-prep-card-{{ section.id }} {
       border-radius: 0 0 10px 10px;
       padding: 14px 18px 16px;
+    }
+    .rh-prep-buy-wrap--desktop {
+      display: none;
+    }
+    .rh-prep-buy-wrap--mobile {
+      display: block;
+      margin-top: 12px;
+    }
+    .rh-prep-buy-{{ section.id }} {
+      min-height: 30px;
+      font-size: 12px;
     }
     .rh-prep-circle-{{ section.id }} {
       width: 60px;
@@ -245,10 +299,13 @@
 </style>
 
 {%- assign step_blocks = section.blocks | where: 'type', 'step' | sort: 'settings.index' -%}
+{%- capture ratio_mobile -%}
+  {%- render 'isoa-image-ratio', ratio: section.settings.image_ratio_mobile, image: step_blocks.first.settings.image, custom_width: section.settings.image_ratio_mobile_w, custom_height: section.settings.image_ratio_mobile_h, fallback: '2 / 1' -%}
+{%- endcapture -%}
 
 <section class="section-{{ section.id }}" aria-label="prep toggle">
   <div class="section-{{ section.id }}-inner">
-    <div class="rh-prep-{{ section.id }} is-active-1" data-rh-prep-root style="--rh-prep-n: {{ step_blocks.size }}; --rh-prep-active: 0;">
+    <div class="rh-prep-{{ section.id }}" data-rh-prep-root style="--rh-prep-n: {{ step_blocks.size }}; --rh-prep-active: 0; --rh-prep-ratio-mobile: {{ ratio_mobile | strip }};">
       <div class="rh-prep-layout-{{ section.id }}">
 
         <!-- Image column: own track, slides in sync with the content track. -->
@@ -288,7 +345,36 @@
               {%- for step in step_blocks -%}
                 {%- assign sidx = step.settings.index -%}
                 <div class="rh-prep-panel-{{ section.id }}" data-rh-prep-panel="{{ sidx }}">
-                  <h2 class="rh-prep-title-{{ section.id }}">{{ step.settings.title }}</h2>
+                  {%- liquid
+                    assign step_product = step.settings.product
+                    assign show_buy = false
+                    if step_product != blank and step_product.id != product.id
+                      assign show_buy = true
+                      assign step_variant = step_product.selected_or_first_available_variant
+                      assign step_name = step_product.metafields.custom.card_short_name | default: step_product.title
+                    endif
+                  -%}
+                  {%- capture buy_button -%}
+                    {%- if show_buy -%}
+                      <button
+                        type="button"
+                        class="rh-prep-buy-{{ section.id }}"
+                        data-rh-prep-buy="{{ step_variant.id }}"
+                        {% unless step_variant.available %}disabled{% endunless %}
+                        aria-label="Add {{ step_product.title | escape }} to cart"
+                      >
+                        {%- if step_variant.available -%}
+                          {{ 'BUY ' | append: step_name | upcase }}
+                        {%- else -%}
+                          {{ 'products.product.sold_out' | t }}
+                        {%- endif -%}
+                      </button>
+                    {%- endif -%}
+                  {%- endcapture -%}
+                  <div class="rh-prep-title-row-{{ section.id }}">
+                    <h2 class="rh-prep-title-{{ section.id }}">{{ step.settings.title }}</h2>
+                    {%- if show_buy -%}<div class="rh-prep-buy-wrap-{{ section.id }} rh-prep-buy-wrap--desktop">{{ buy_button }}</div>{%- endif -%}
+                  </div>
                   <p class="rh-prep-subtitle-{{ section.id }}">{{ step.settings.subtitle }}</p>
                   <hr class="rh-prep-divider-{{ section.id }}" />
 
@@ -302,6 +388,8 @@
                       {%- endif -%}
                     {%- endfor -%}
                   </div>
+
+                  {%- if show_buy -%}<div class="rh-prep-buy-wrap-{{ section.id }} rh-prep-buy-wrap--mobile">{{ buy_button }}</div>{%- endif -%}
                 </div>
               {%- endfor -%}
             </div>
@@ -322,24 +410,64 @@
     var buttons = Array.from(root.querySelectorAll('[data-rh-prep-step]'));
     var isDesktop = window.matchMedia('(min-width: 750px)');
 
-    function setActive(idx) {
-      root.classList.remove('is-active-1', 'is-active-2');
-      root.classList.add('is-active-' + idx);
-      // Track is 0-indexed; step attr is 1-indexed.
-      root.style.setProperty('--rh-prep-active', String(parseInt(idx, 10) - 1));
-      buttons.forEach(function (b) {
-        b.setAttribute('aria-pressed', b.getAttribute('data-rh-prep-step') === idx ? 'true' : 'false');
+    // Circles, image slides and panels are rendered in the same order, so a
+    // circle's position is its slide's position in both tracks.
+    function setActive(position) {
+      root.style.setProperty('--rh-prep-active', String(position));
+      buttons.forEach(function (b, i) {
+        b.setAttribute('aria-pressed', i === position ? 'true' : 'false');
       });
     }
 
-    buttons.forEach(function (btn) {
-      var idx = btn.getAttribute('data-rh-prep-step');
+    buttons.forEach(function (btn, position) {
       // Desktop: hover activates + slides. Mobile: tap fires click.
       btn.addEventListener('mouseenter', function () {
-        if (isDesktop.matches) setActive(idx);
+        if (isDesktop.matches) setActive(position);
       });
-      btn.addEventListener('click', function () { setActive(idx); });
-      btn.addEventListener('focus', function () { setActive(idx); });
+      btn.addEventListener('click', function () { setActive(position); });
+      btn.addEventListener('focus', function () { setActive(position); });
+    });
+
+    // BUY pills: add the step's product, refresh the header count and open
+    // the cart drawer, the same way the Complete Your Routine block does.
+    root.querySelectorAll('[data-rh-prep-buy]').forEach(function (buy) {
+      buy.addEventListener('click', function () {
+        var label = buy.innerHTML;
+        buy.disabled = true;
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ items: [{ id: Number(buy.dataset.rhPrepBuy), quantity: 1 }] })
+        })
+          .then(function (res) { if (!res.ok) throw new Error(res.status); return fetch('/cart.js'); })
+          .then(function (res) { return res.json(); })
+          .then(function (cart) {
+            var drawerItems = document.querySelector('#isoa-cart-drawer cart-items-component') || document.querySelector('cart-items-component');
+            document.dispatchEvent(new CustomEvent('cart:update', {
+              bubbles: true,
+              detail: {
+                resource: cart,
+                sourceId: (drawerItems && drawerItems.dataset.sectionId) || 'rhode-prep',
+                data: { itemCount: cart.item_count, source: 'rhode-prep' }
+              }
+            }));
+            var drawer = document.querySelector('#isoa-cart-drawer');
+            if (drawer) {
+              drawer.classList.add('is-open');
+              document.body.classList.add('isoa-cd-open');
+            }
+            buy.classList.add('is-added');
+            buy.textContent = 'ADDED';
+          })
+          .catch(function () { buy.textContent = 'TRY AGAIN'; })
+          .finally(function () {
+            setTimeout(function () {
+              buy.classList.remove('is-added');
+              buy.innerHTML = label;
+              buy.disabled = false;
+            }, 1600);
+          });
+      });
     });
   })();
 </script>
@@ -350,6 +478,22 @@
   "tag": "section",
   "class": "rhode-prep-toggle",
   "settings": [
+    {
+      "type": "select",
+      "id": "image_ratio_mobile",
+      "label": "Image size on mobile",
+      "options": [
+        { "value": "original", "label": "Original" },
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "landscape", "label": "Landscape" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "custom",
+      "info": "Desktop images fill the column beside the text card. Original follows the first step's image."
+    },
+    { "type": "range", "id": "image_ratio_mobile_w", "label": "Custom width on mobile", "min": 1, "max": 40, "step": 1, "default": 2, "visible_if": "{{ section.settings.image_ratio_mobile == 'custom' }}" },
+    { "type": "range", "id": "image_ratio_mobile_h", "label": "Custom height on mobile", "min": 1, "max": 40, "step": 1, "default": 1, "visible_if": "{{ section.settings.image_ratio_mobile == 'custom' }}" },
     {
       "type": "header",
       "content": "Section padding"
@@ -386,7 +530,10 @@
           "label": "Step index",
           "options": [
             { "value": "1", "label": "1" },
-            { "value": "2", "label": "2" }
+            { "value": "2", "label": "2" },
+            { "value": "3", "label": "3" },
+            { "value": "4", "label": "4" },
+            { "value": "5", "label": "5" }
           ],
           "default": "1"
         },
@@ -412,6 +559,12 @@
           "type": "image_picker",
           "id": "image",
           "label": "Product image (slides in when active)"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product to buy",
+          "info": "Shows a BUY button with this product's price under the step."
         }
       ]
     },
@@ -425,7 +578,10 @@
           "label": "Belongs to step",
           "options": [
             { "value": "1", "label": "Step 1" },
-            { "value": "2", "label": "Step 2" }
+            { "value": "2", "label": "Step 2" },
+            { "value": "3", "label": "Step 3" },
+            { "value": "4", "label": "Step 4" },
+            { "value": "5", "label": "Step 5" }
           ],
           "default": "1"
         },

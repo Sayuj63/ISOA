@@ -141,6 +141,24 @@
     },
 
     {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image size",
+      "options": [
+        { "value": "fixed", "label": "Fixed height" },
+        { "value": "original", "label": "Original" },
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "landscape", "label": "Landscape" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "fixed",
+      "info": "Fixed height uses the two height sliders below. Original follows the image's own proportions, so it never shows empty bands."
+    },
+    { "type": "range", "id": "image_ratio_w", "label": "Custom width", "min": 1, "max": 40, "step": 1, "default": 4, "visible_if": "{{ section.settings.image_ratio == 'custom' }}" },
+    { "type": "range", "id": "image_ratio_h", "label": "Custom height", "min": 1, "max": 40, "step": 1, "default": 3, "visible_if": "{{ section.settings.image_ratio == 'custom' }}" },
+
+    {
       "type": "range",
       "id": "image_height",
       "min": 300,
@@ -208,7 +226,48 @@
       "type": "text",
       "id": "vertical_text",
       "label": "Vertical Text",
+      "default": "packaging",
+      "info": "With a recycling panel below, the side strip becomes the button that opens it."
+    },
+
+    {
+      "type": "header",
+      "content": "How to recycle panel"
+    },
+    {
+      "type": "text",
+      "id": "side_cta",
+      "label": "Side strip prompt",
+      "default": "CLICK HERE"
+    },
+    {
+      "type": "text",
+      "id": "back_label",
+      "label": "Side strip label on the recycling panel",
       "default": "packaging"
+    },
+    {
+      "type": "text",
+      "id": "back_cta",
+      "label": "Side strip prompt on the recycling panel",
+      "default": "SEE DETAILS"
+    },
+    {
+      "type": "text",
+      "id": "recycle_heading",
+      "label": "Recycling heading",
+      "default": "how to recycle"
+    },
+    {
+      "type": "richtext",
+      "id": "recycle_body",
+      "label": "Recycling steps",
+      "info": "Leave empty to hide the panel."
+    },
+    {
+      "type": "image_picker",
+      "id": "recycle_image",
+      "label": "Recycling image"
     },
 
     {
@@ -314,10 +373,20 @@
 }
 {% endschema %}
 
-<section class="packaging-{{ section.id }}">
-  <div class="packaging-wrapper">
+{%- if section.settings.image_ratio != 'fixed' -%}
+  {%- capture packaging_ratio -%}
+    {%- render 'isoa-image-ratio', ratio: section.settings.image_ratio, image: section.settings.image, custom_width: section.settings.image_ratio_w, custom_height: section.settings.image_ratio_h, fallback: '4 / 3' -%}
+  {%- endcapture -%}
+{%- endif -%}
 
-    <div class="packaging-content">
+{%- assign has_recycle = false -%}
+{%- if section.settings.recycle_body != blank -%}{%- assign has_recycle = true -%}{%- endif -%}
+
+<section class="packaging-{{ section.id }}">
+  <div class="packaging-wrapper{% if has_recycle %} packaging-wrapper--slides{% endif %}" data-packaging>
+
+    <div class="packaging-slides">
+    <div class="packaging-content packaging-slide is-active" data-packaging-slide>
 
       <div class="packaging-left">
         <h2>{{ section.settings.heading }}</h2>
@@ -326,18 +395,22 @@
           {{ section.settings.description }}
         </div>
 
-        <div class="packaging-material">
-          <h4>{{ section.settings.material_1_title }}</h4>
-          <p>{{ section.settings.material_1_text }}</p>
-        </div>
+        {%- if section.settings.material_1_title != blank or section.settings.material_1_text != blank -%}
+          <div class="packaging-material">
+            <h4>{{ section.settings.material_1_title }}</h4>
+            <p>{{ section.settings.material_1_text }}</p>
+          </div>
+        {%- endif -%}
 
-        <div class="packaging-material">
-          <h4>{{ section.settings.material_2_title }}</h4>
-          <p>{{ section.settings.material_2_text }}</p>
-        </div>
+        {%- if section.settings.material_2_title != blank or section.settings.material_2_text != blank -%}
+          <div class="packaging-material">
+            <h4>{{ section.settings.material_2_title }}</h4>
+            <p>{{ section.settings.material_2_text }}</p>
+          </div>
+        {%- endif -%}
       </div>
 
-      <div class="packaging-right">
+      <div class="packaging-right{% if packaging_ratio != blank %} packaging-right--ratio{% endif %}"{% if packaging_ratio != blank %} style="aspect-ratio: {{ packaging_ratio | strip }};"{% endif %}>
         {% if section.settings.image != blank %}
           <img
             src="{{ section.settings.image | image_url: width: 1600 }}"
@@ -349,9 +422,38 @@
 
     </div>
 
-    <div class="packaging-side-text">
-      <span>{{ section.settings.vertical_text }}</span>
+    {%- if has_recycle -%}
+      <div class="packaging-recycle packaging-slide" data-packaging-slide aria-hidden="true">
+        <div class="packaging-recycle__copy">
+          <h2>{{ section.settings.recycle_heading }}</h2>
+          <div class="packaging-recycle__body">{{ section.settings.recycle_body }}</div>
+        </div>
+        {%- if section.settings.recycle_image != blank -%}
+          <div class="packaging-recycle__media">
+            {{ section.settings.recycle_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400, 600, 800, 1200', sizes: '(min-width: 990px) 36vw, 100vw', alt: section.settings.recycle_image.alt }}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
     </div>
+
+    {%- comment -%}
+      An empty label column used to render as a bare grey bar, so it only
+      shows with a label. With a recycling panel it is the button that swaps
+      between the two, as on rhodeskin.com.
+    {%- endcomment -%}
+    {%- if section.settings.vertical_text != blank -%}
+      {%- if has_recycle -%}
+        <button type="button" class="packaging-side-text packaging-side-text--button" data-packaging-toggle aria-expanded="false">
+          <span class="packaging-side-text__label" data-label-front="{{ section.settings.vertical_text | escape }}" data-label-back="{{ section.settings.back_label | escape }}">{{ section.settings.vertical_text }}</span>
+          <span class="packaging-side-text__cta" data-label-front="{{ section.settings.side_cta | escape }}" data-label-back="{{ section.settings.back_cta | escape }}">{{ section.settings.side_cta }}</span>
+        </button>
+      {%- else -%}
+        <div class="packaging-side-text">
+          <span>{{ section.settings.vertical_text }}</span>
+        </div>
+      {%- endif -%}
+    {%- endif -%}
 
   </div>
 </section>
@@ -448,6 +550,15 @@
   display:block;
 }
 
+.packaging-{{ section.id }} .packaging-right.packaging-right--ratio{
+  height:auto;
+  background:transparent;
+}
+
+.packaging-{{ section.id }} .packaging-right--ratio img{
+  object-fit:cover;
+}
+
 .packaging-{{ section.id }} .packaging-side-text{
   width:{{ section.settings.side_width }}px;
   background:{{ section.settings.side_bg }};
@@ -504,6 +615,10 @@
 
   .packaging-{{ section.id }} .packaging-right{
     height:{{ section.settings.image_height_mobile }}px;
+  }
+
+  .packaging-{{ section.id }} .packaging-right.packaging-right--ratio{
+    height:auto;
   }
 
   .packaging-{{ section.id }} .packaging-side-text{
@@ -573,4 +688,138 @@
   }
 }
 {%- endif -%}
+
+/* Two panels in one card: both share the same grid cell, so the card is as
+   tall as the taller one and nothing jumps when they swap. */
+.packaging-{{ section.id }} .packaging-wrapper--slides .packaging-slides{
+  flex:1;
+  display:grid;
+  min-width:0;
+  overflow:hidden;
+}
+.packaging-{{ section.id }} .packaging-wrapper--slides .packaging-slide{
+  grid-area:1 / 1;
+  min-width:0;
+  transition:transform 1s cubic-bezier(.76,0,.24,1), visibility 1s;
+}
+.packaging-{{ section.id }} .packaging-wrapper--slides .packaging-slide:not(.is-active){
+  visibility:hidden;
+  transform:translateX(100%);
+}
+.packaging-{{ section.id }} .packaging-wrapper--slides .packaging-content:not(.is-active){
+  transform:translateX(-100%);
+}
+
+.packaging-{{ section.id }} .packaging-recycle{
+  display:grid;
+  grid-template-columns:minmax(0, 1.3fr) minmax(0, 1fr);
+  gap:{{ section.settings.content_gap }}px;
+  align-items:end;
+  padding:32px 48px 32px 40px;
+  color:{{ section.settings.text_color }};
+}
+.packaging-{{ section.id }} .packaging-recycle__copy{
+  padding-bottom:20px;
+}
+.packaging-{{ section.id }} .packaging-recycle__body{
+  margin-top:24px;
+  font-size:{{ section.settings.text_size }}px;
+  line-height:1.5;
+}
+.packaging-{{ section.id }} .packaging-recycle__body p{
+  margin:0 0 12px;
+}
+.packaging-{{ section.id }} .packaging-recycle__body a{
+  color:inherit;
+  text-decoration:underline;
+}
+.packaging-{{ section.id }} .packaging-recycle__media{
+  align-self:stretch;
+  overflow:hidden;
+  border-radius:{{ section.settings.image_radius }}px;
+}
+.packaging-{{ section.id }} .packaging-recycle__media img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.packaging-{{ section.id }} .packaging-side-text--button{
+  flex-direction:column;
+  justify-content:space-between;
+  align-items:center;
+  padding:28px 0;
+  border:0;
+  color:#fff;
+  font:inherit;
+  cursor:pointer;
+}
+.packaging-{{ section.id }} .packaging-side-text--button span{
+  white-space:nowrap;
+}
+.packaging-{{ section.id }} .packaging-side-text--button .packaging-side-text__cta{
+  writing-mode:vertical-rl;
+  font-family:var(--font-body--family);
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  order:-1;
+}
+
+@media screen and (max-width: 989px){
+  .packaging-{{ section.id }} .packaging-wrapper--slides .packaging-slide:not(.is-active){
+    transform:translateY(100%);
+  }
+  .packaging-{{ section.id }} .packaging-wrapper--slides .packaging-content:not(.is-active){
+    transform:translateY(-100%);
+  }
+  .packaging-{{ section.id }} .packaging-recycle{
+    grid-template-columns:1fr;
+    padding:28px 24px 24px;
+  }
+  .packaging-{{ section.id }} .packaging-recycle__copy{
+    padding-bottom:0;
+  }
+  .packaging-{{ section.id }} .packaging-recycle__body{
+    margin-top:16px;
+    font-size:{{ section.settings.text_size_mobile }}px;
+  }
+  .packaging-{{ section.id }} .packaging-recycle__media{
+    aspect-ratio:4 / 3;
+  }
+  .packaging-{{ section.id }} .packaging-side-text--button{
+    flex-direction:row;
+    justify-content:space-between;
+    padding:0 24px;
+  }
+  .packaging-{{ section.id }} .packaging-side-text--button .packaging-side-text__cta{
+    writing-mode:initial;
+    order:0;
+  }
+}
 </style>
+
+<script>
+  (function () {
+    var root = document.querySelector('.packaging-{{ section.id }} [data-packaging]');
+    var toggle = root && root.querySelector('[data-packaging-toggle]');
+    if (!toggle) return;
+    var slides = root.querySelectorAll('[data-packaging-slide]');
+    var labels = toggle.querySelectorAll('[data-label-front]');
+    var back = false;
+    toggle.addEventListener('click', function () {
+      back = !back;
+      slides.forEach(function (slide, i) {
+        var active = back ? i === 1 : i === 0;
+        slide.classList.toggle('is-active', active);
+        slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+      });
+      labels.forEach(function (el) {
+        el.textContent = back ? el.dataset.labelBack : el.dataset.labelFront;
+      });
+      toggle.setAttribute('aria-expanded', back ? 'true' : 'false');
+    });
+  })();
+</script>

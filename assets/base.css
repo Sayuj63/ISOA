@@ -4231,10 +4231,15 @@ product-recommendations:has([data-has-recommendations='false']) {
 
 /* -----------------------------------------
    BUTTON BASE
+   Gallery arrows and thumbnails are Horizon .button elements too
+   (slideshow-control); :where(:not(.slideshow-control)) keeps them out of
+   the pill, which had squashed thumbnails into 30px dark lozenges. :where()
+   adds no specificity, so every override written against these rules still
+   wins exactly as before.
    ----------------------------------------- */
 
-.button,
-.button-secondary,
+.button:where(:not(.slideshow-control)),
+.button-secondary:where(:not(.slideshow-control)),
 .isoua-pill-button {
   display: inline-flex !important;
   align-items: center !important;
@@ -4273,7 +4278,7 @@ product-recommendations:has([data-has-recommendations='false']) {
    PRIMARY BUTTON
    ----------------------------------------- */
 
-.button:not(.button--secondary),
+.button:where(:not(.slideshow-control)):not(.button--secondary),
 .isoua-pill-button {
   background-color: #4a4a4a !important;
   color: #fff !important;
@@ -4283,7 +4288,7 @@ product-recommendations:has([data-has-recommendations='false']) {
 
 /* Primary hover */
 
-.button:not(.button--secondary):hover,
+.button:where(:not(.slideshow-control)):not(.button--secondary):hover,
 .isoua-pill-button:hover {
   background-color: #fff !important;
   color: #4a4a4a !important;
@@ -4296,7 +4301,7 @@ product-recommendations:has([data-has-recommendations='false']) {
    ----------------------------------------- */
 
 .button--secondary,
-.button-secondary {
+.button-secondary:where(:not(.slideshow-control)) {
   background-color: transparent !important;
   color: #4a4a4a !important;
   border-color: #4a4a4a !important;
@@ -4306,7 +4311,7 @@ product-recommendations:has([data-has-recommendations='false']) {
 /* Secondary hover */
 
 .button--secondary:hover,
-.button-secondary:hover {
+.button-secondary:where(:not(.slideshow-control)):hover {
   background-color: #4a4a4a !important;
   color: #fff !important;
   border-color: #4a4a4a !important;
@@ -4317,10 +4322,10 @@ product-recommendations:has([data-has-recommendations='false']) {
    REMOVE EXTRA THEME EFFECTS
    ----------------------------------------- */
 
-.button::before,
-.button::after,
-.button-secondary::before,
-.button-secondary::after,
+.button:where(:not(.slideshow-control))::before,
+.button:where(:not(.slideshow-control))::after,
+.button-secondary:where(:not(.slideshow-control))::before,
+.button-secondary:where(:not(.slideshow-control))::after,
 .isoua-pill-button::before,
 .isoua-pill-button::after {
   box-shadow: none !important;
@@ -4331,8 +4336,8 @@ product-recommendations:has([data-has-recommendations='false']) {
    PRESS ANIMATION
    ----------------------------------------- */
 
-.button:active,
-.button-secondary:active,
+.button:where(:not(.slideshow-control)):active,
+.button-secondary:where(:not(.slideshow-control)):active,
 .isoua-pill-button:active {
   transform: scale(0.98);
 }
@@ -4343,8 +4348,8 @@ product-recommendations:has([data-has-recommendations='false']) {
    ----------------------------------------- */
 
 @media screen and (max-width: 749px) {
-  .button,
-  .button-secondary,
+  .button:where(:not(.slideshow-control)),
+  .button-secondary:where(:not(.slideshow-control)),
   .isoua-pill-button {
     height: 20px !important;
     min-height: 30px !important;

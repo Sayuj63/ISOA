@@ -5,7 +5,12 @@ FULLY FIXED + SHOPIFY 2.0
 =============================================================================
 {% endcomment %}
 
-<section id="benefits-{{ section.id }}" class="rh-benefits">
+{%- assign first_image = section.blocks.first.settings.image -%}
+{%- capture ratio_mobile -%}
+  {%- render 'isoa-image-ratio', ratio: section.settings.image_ratio_mobile, image: first_image, custom_width: section.settings.image_ratio_mobile_w, custom_height: section.settings.image_ratio_mobile_h, fallback: '1 / 1' -%}
+{%- endcapture -%}
+
+<section id="benefits-{{ section.id }}" class="rh-benefits" style="--rh-ratio-mobile: {{ ratio_mobile | strip }};">
 
   <div class="rh-benefits__container">
 
@@ -540,9 +545,17 @@ scale(calc(var(--text-scale) / 100));}
       grid-template-columns: 1fr !important;
       min-height: 0;
     }
+    /* The images are absolutely positioned, so the box needs its height from
+       something in flow. aspect-ratio on the box itself collapsed to 0 on
+       some iOS Safari versions (stretched grid item, nothing in flow); an
+       in-flow spacer with the ratio sizes it the same in every browser. */
     #benefits-{{ section.id }} .rh-media{
       height: auto !important;
-      aspect-ratio: 1 / 1;
+    }
+    #benefits-{{ section.id }} .rh-media::before{
+      content: '';
+      display: block;
+      aspect-ratio: var(--rh-ratio-mobile, 1 / 1);
     }
     #benefits-{{ section.id }} .rh-content{
       padding: 32px 20px 40px !important;
@@ -825,6 +838,23 @@ document.addEventListener('DOMContentLoaded', function(){
       "step":10,
       "default":420
     },
+
+    {
+      "type":"select",
+      "id":"image_ratio_mobile",
+      "label":"Image size on mobile (product pages)",
+      "options":[
+        { "value":"original", "label":"Original" },
+        { "value":"square", "label":"Square" },
+        { "value":"portrait", "label":"Portrait" },
+        { "value":"landscape", "label":"Landscape" },
+        { "value":"custom", "label":"Custom" }
+      ],
+      "default":"square",
+      "info":"Original follows the first image."
+    },
+    { "type":"range", "id":"image_ratio_mobile_w", "label":"Custom width on mobile", "min":1, "max":40, "step":1, "default":1, "visible_if":"{{ section.settings.image_ratio_mobile == 'custom' }}" },
+    { "type":"range", "id":"image_ratio_mobile_h", "label":"Custom height on mobile", "min":1, "max":40, "step":1, "default":1, "visible_if":"{{ section.settings.image_ratio_mobile == 'custom' }}" },
 
     {
       "type":"range",

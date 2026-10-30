@@ -6,11 +6,22 @@
 
 {%- assign sid = section.id -%}
 {%- assign display_side_title = section.settings.side_title | replace: '’', "'" -%}
+{%- capture ratio_desktop -%}
+  {%- render 'isoa-image-ratio', ratio: section.settings.image_ratio, image: section.settings.image, custom_width: section.settings.image_ratio_w, custom_height: section.settings.image_ratio_h, fallback: '22 / 19' -%}
+{%- endcapture -%}
+{%- if section.settings.image_ratio_mobile == 'same' -%}
+  {%- assign ratio_mobile = ratio_desktop -%}
+{%- else -%}
+  {%- capture ratio_mobile -%}
+    {%- render 'isoa-image-ratio', ratio: section.settings.image_ratio_mobile, image: section.settings.image, custom_width: section.settings.image_ratio_mobile_w, custom_height: section.settings.image_ratio_mobile_h, fallback: '8 / 7' -%}
+  {%- endcapture -%}
+{%- endif -%}
 
 <section
+  id="full-ingredients"
   class="rh-lip-ingredients rh-lip-ingredients--{{ sid }}"
   data-rh-lip-ingredients
-  style="--rh-lip-bg: {{ section.settings.panel_color }}; --rh-lip-ink: {{ section.settings.text_color }};"
+  style="--rh-lip-bg: {{ section.settings.panel_color }}; --rh-lip-ink: {{ section.settings.text_color }}; --rh-lip-ratio: {{ ratio_desktop | strip }}; --rh-lip-ratio-mobile: {{ ratio_mobile | strip }};"
 >
   <div class="rh-lip-ingredients__grid">
     <div class="rh-lip-ingredients__media">
@@ -118,7 +129,7 @@
   .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__media,
   .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__content {
     position: relative;
-    aspect-ratio: 671 / 579;
+    aspect-ratio: var(--rh-lip-ratio);
     min-width: 0;
     overflow: hidden;
     border-radius: 12px;
@@ -157,7 +168,6 @@
     font-size: 28px;
     font-weight: 800;
     letter-spacing: -0.03em;
-    word-spacing: -0.18em;
     line-height: 1;
     writing-mode: vertical-rl;
     text-orientation: mixed;
@@ -313,7 +323,6 @@
 
     .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__grid {
       display: flex;
-      height: clamp(666px, calc(642.6px + 6vw), 669px);
       max-width: none;
       flex-direction: column;
       gap: 8px;
@@ -321,16 +330,15 @@
 
     .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__media {
       width: 100%;
-      aspect-ratio: 408 / 358;
+      aspect-ratio: var(--rh-lip-ratio-mobile);
       flex: 0 0 auto;
       border-radius: 12px;
     }
 
     .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__content {
       width: 100%;
-      height: auto;
-      min-height: 0;
-      flex: 1 1 auto;
+      height: 348px;
+      flex: 0 0 auto;
       aspect-ratio: auto;
       border-radius: 12px;
     }
@@ -354,7 +362,6 @@
       font-size: 20px;
       font-weight: 800;
       letter-spacing: -0.03em;
-      word-spacing: -0.18em;
       line-height: 1;
       writing-mode: vertical-rl;
       text-orientation: mixed;
@@ -465,6 +472,16 @@
     };
 
     openers.forEach((button) => button.addEventListener('click', () => showFull(button)));
+
+    // Links to #full-ingredients elsewhere on the page (the hero's key
+    // ingredients row) scroll here and open the list instead of just jumping.
+    document.addEventListener('click', (event) => {
+      const link = event.target.closest('a[href="#full-ingredients"]');
+      if (!link) return;
+      event.preventDefault();
+      root.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      showFull(link);
+    });
     close.addEventListener('click', showEducation);
     root.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && !full.hidden) showEducation();
@@ -478,6 +495,25 @@
   "settings": [
     { "type": "image_picker", "id": "image", "label": "Texture image" },
     { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Pretzel lip tint texture" },
+    { "type": "select", "id": "image_ratio", "label": "Image size", "options": [
+      { "value": "original", "label": "Original" },
+      { "value": "square", "label": "Square" },
+      { "value": "portrait", "label": "Portrait" },
+      { "value": "landscape", "label": "Landscape" },
+      { "value": "custom", "label": "Custom" }
+    ], "default": "custom", "info": "On desktop the text panel beside the image takes the same size." },
+    { "type": "range", "id": "image_ratio_w", "label": "Custom width", "min": 1, "max": 40, "step": 1, "default": 22, "visible_if": "{{ section.settings.image_ratio == 'custom' }}" },
+    { "type": "range", "id": "image_ratio_h", "label": "Custom height", "min": 1, "max": 40, "step": 1, "default": 19, "visible_if": "{{ section.settings.image_ratio == 'custom' }}" },
+    { "type": "select", "id": "image_ratio_mobile", "label": "Image size on mobile", "options": [
+      { "value": "same", "label": "Same as desktop" },
+      { "value": "original", "label": "Original" },
+      { "value": "square", "label": "Square" },
+      { "value": "portrait", "label": "Portrait" },
+      { "value": "landscape", "label": "Landscape" },
+      { "value": "custom", "label": "Custom" }
+    ], "default": "custom" },
+    { "type": "range", "id": "image_ratio_mobile_w", "label": "Custom width on mobile", "min": 1, "max": 40, "step": 1, "default": 8, "visible_if": "{{ section.settings.image_ratio_mobile == 'custom' }}" },
+    { "type": "range", "id": "image_ratio_mobile_h", "label": "Custom height on mobile", "min": 1, "max": 40, "step": 1, "default": 7, "visible_if": "{{ section.settings.image_ratio_mobile == 'custom' }}" },
     { "type": "text", "id": "side_title", "label": "Side title", "default": "what’s inside" },
     { "type": "textarea", "id": "intro", "label": "Introduction", "default": "Peptides are our go-to skincare ingredient and come in many forms with unique benefits. Get to know the one in this formula." },
     { "type": "text", "id": "hero_ingredient", "label": "Hero ingredient", "default": "palmitoyl tripeptide-1" },

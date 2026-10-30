@@ -1,0 +1,32 @@
+{%- doc -%}
+  Turns an "Image size" setting into a CSS aspect-ratio value, so sections can
+  offer the same Original / Square / Portrait / Landscape / Custom choice as
+  Shopify's own sections. Square, portrait and landscape use Horizon's ratios.
+
+  @param {string} ratio - original, square, portrait, landscape or custom
+  @param {image} [image] - image whose own proportions "original" uses
+  @param {number} [custom_width] - custom ratio width part
+  @param {number} [custom_height] - custom ratio height part
+  @param {string} fallback - ratio used when "original" has no image to read
+
+  @example
+  {%- capture ratio -%}{% render 'isoa-image-ratio', ratio: section.settings.image_ratio, image: section.settings.image, custom_width: section.settings.image_ratio_w, custom_height: section.settings.image_ratio_h, fallback: '22 / 19' %}{%- endcapture -%}
+{%- enddoc -%}
+{%- liquid
+  case ratio
+    when 'square'
+      echo '1 / 1'
+    when 'portrait'
+      echo '4 / 5'
+    when 'landscape'
+      echo '16 / 9'
+    when 'custom'
+      echo custom_width | default: 1 | append: ' / ' | append: custom_height | default: 1
+    else
+      if image != blank
+        echo image.width | append: ' / ' | append: image.height
+      else
+        echo fallback
+      endif
+  endcase
+-%}
