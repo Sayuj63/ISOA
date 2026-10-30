@@ -880,7 +880,7 @@ main#MainContent {
     letter-spacing: -0.03em !important;
     color: #67645e !important;
     margin-top: 18px !important;
-    margin-bottom: 10px !important;
+    margin-bottom: 0 !important;
     text-transform: lowercase !important;
   }
 
@@ -1133,8 +1133,8 @@ main#MainContent {
 
   /* 12a · PDP hero — details card. Horizon renders `.product-details >
      .group-block` with generous 25.2px padding-block from a Horizon token.
-     Slash to 14px on mobile, and reduce the vertical gap between inner
-     group-blocks (BENEFITS / APPLICATION / KEY INGREDIENTS accordion rows). */
+     Slash to 14px on mobile, with a 10px gap between its blocks (Horizon
+     has no separate mobile Gap setting). */
   main#MainContent .product-details > .group-block {
     padding-block: 14px !important;
     padding-inline: 14px !important;
@@ -1142,9 +1142,7 @@ main#MainContent {
   main#MainContent .product-details > .group-block > .group-block-content {
     gap: 10px !important;
   }
-  main#MainContent .product-details .group-block .group-block {
-    padding-block: 8px !important;
-  }
+
 
   /* 12b · ss-whats-inside — tighten heading + text margins per item. Settings
      drive per-item spacing already (item_spacing_mobile: 10). This trims the
@@ -1468,4 +1466,12 @@ main#MainContent .ss-side-title--on-image {
   .shopify-section:has(.okeReviews) .custom-section-content {
     padding: 32px 16px;
   }
+}
+
+/* Hero copy spacing comes from the theme editor only: the details card's
+   Gap setting and each block's padding. main.css gives every text-block
+   paragraph a 7px !important margin, which stacked on top of the gap around
+   the one-line subheading and couldn't be reduced from settings. */
+main#MainContent .product-details .text-block > p:only-child {
+  margin-block: 0 !important;
 }

@@ -151,6 +151,12 @@
     cursor: pointer;
   }
 
+  /* The theme's global summary:hover turns questions black, and on touch
+     screens that hover sticks after a tap. */
+  .rh-faq--{{ sid }} .rh-faq__q:hover {
+    color: inherit;
+  }
+
   .rh-faq--{{ sid }} .rh-faq__q::-webkit-details-marker {
     display: none;
   }

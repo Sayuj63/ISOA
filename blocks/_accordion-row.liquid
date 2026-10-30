@@ -2,8 +2,13 @@
 {% assign block_settings = block.settings %}
 
 {% capture accordion_row_children %}
+  {%- comment -%}
+    Rows sharing a name form an exclusive group: the browser closes the open
+    row when another opens. One group per section.
+  {%- endcomment -%}
   <details
     class="details"
+    name="accordion-{{ section.id }}"
     data-testid="accordion-details"
     {% if block_settings.open_by_default %}
       open

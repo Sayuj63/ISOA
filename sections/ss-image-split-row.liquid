@@ -1,3 +1,9 @@
+{%- assign image_size_desktop = '' -%}
+{%- if section.settings.image_size != blank and section.settings.image_size != 'fill' -%}
+  {%- capture image_size_desktop -%}{%- render 'isoa-image-ratio', ratio: section.settings.image_size, image: section.settings.image, custom_width: section.settings.image_size_w, custom_height: section.settings.image_size_h, fallback: '4 / 5' -%}{%- endcapture -%}
+{%- endif -%}
+{%- capture image_size_mobile -%}{%- render 'isoa-image-ratio', ratio: section.settings.image_size_mobile, image: section.settings.image, custom_width: section.settings.image_size_mobile_w, custom_height: section.settings.image_size_mobile_h, fallback: '1 / 1' -%}{%- endcapture -%}
+
 {% comment %}
 =========================================================
 SS - Dynamic Feature Split Section
@@ -306,10 +312,10 @@ assign inside_box_padding_mobile = section.settings.inside_box_padding_mobile
   }
 
   @media screen and (max-width: 1023px) {
-    /* Square — taller than the landscape setting so the subject fills the
-       frame on a phone. */
+    /* "Image size (mobile)" setting; square by default so the subject fills
+       the frame on a phone. */
     .feature-image-{{ section.id }} {
-      aspect-ratio: 1 / 1;
+      aspect-ratio: {{ image_size_mobile | strip }};
     }
   }
 
@@ -327,6 +333,15 @@ assign inside_box_padding_mobile = section.settings.inside_box_padding_mobile
     .feature-image-{{ section.id }} {
       aspect-ratio: auto;
     }
+    {%- if image_size_desktop != blank %}
+    /* "Image size (desktop)" picked: the image keeps those proportions
+       instead of stretching to the text card's height. */
+    .feature-image-{{ section.id }} {
+      align-self: center;
+      aspect-ratio: {{ image_size_desktop | strip }};
+      height: auto;
+    }
+    {%- endif %}
     .feature-image-{{ section.id }} svg {
       background: #f1f0ed;
     }
@@ -641,8 +656,29 @@ assign inside_box_padding_mobile = section.settings.inside_box_padding_mobile
           "label": "Landscape",
           "value": "landscape"
         }
-      ]
+      ],
+      "info": "Used outside product pages. Product pages use the image size settings below."
     },
+    { "type": "header", "content": "Image size on product pages" },
+    { "type": "select", "id": "image_size", "label": "Image size (desktop)", "options": [
+      { "value": "fill", "label": "Match text card" },
+      { "value": "original", "label": "Original" },
+      { "value": "square", "label": "Square" },
+      { "value": "portrait", "label": "Portrait" },
+      { "value": "landscape", "label": "Landscape" },
+      { "value": "custom", "label": "Custom" }
+    ], "default": "fill", "info": "Match text card keeps the image as tall as the text beside it." },
+    { "type": "range", "id": "image_size_w", "label": "Custom width (desktop)", "min": 1, "max": 40, "step": 1, "default": 4, "visible_if": "{{ section.settings.image_size == 'custom' }}" },
+    { "type": "range", "id": "image_size_h", "label": "Custom height (desktop)", "min": 1, "max": 40, "step": 1, "default": 5, "visible_if": "{{ section.settings.image_size == 'custom' }}" },
+    { "type": "select", "id": "image_size_mobile", "label": "Image size (mobile)", "options": [
+      { "value": "original", "label": "Original" },
+      { "value": "square", "label": "Square" },
+      { "value": "portrait", "label": "Portrait" },
+      { "value": "landscape", "label": "Landscape" },
+      { "value": "custom", "label": "Custom" }
+    ], "default": "square" },
+    { "type": "range", "id": "image_size_mobile_w", "label": "Custom width (mobile)", "min": 1, "max": 40, "step": 1, "default": 1, "visible_if": "{{ section.settings.image_size_mobile == 'custom' }}" },
+    { "type": "range", "id": "image_size_mobile_h", "label": "Custom height (mobile)", "min": 1, "max": 40, "step": 1, "default": 1, "visible_if": "{{ section.settings.image_size_mobile == 'custom' }}" },
 
     {
       "type": "header",

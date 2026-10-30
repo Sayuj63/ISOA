@@ -1260,7 +1260,7 @@
         "row_3_5"
       ],
       "settings": {
-        "image_ratio_mobile": "custom",
+        "image_ratio_mobile": "square",
         "image_ratio_mobile_w": 2,
         "image_ratio_mobile_h": 1,
         "padding_top": 0,
@@ -1625,14 +1625,15 @@
         "question_5"
       ],
       "settings": {
-        "image_ratio": "square",
-        "image_ratio_w": 1,
-        "image_ratio_h": 1,
+        "image_ratio": "custom",
+        "image_ratio_w": 14,
+        "image_ratio_h": 15,
         "image_ratio_mobile": "same",
         "image_ratio_mobile_w": 1,
         "image_ratio_mobile_h": 1,
         "heading": "FAQ",
-        "subheading": ""
+        "subheading": "",
+        "image": "shopify://shop_images/brc-hero-1-desktop_2480x_3e4d6d62-b3ae-42f6-924f-638806561f61.webp"
       }
     }
   },

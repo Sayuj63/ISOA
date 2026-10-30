@@ -24,7 +24,13 @@
   assign card_bg = section.settings.card_bg_color | default: '#f1f0ed'
   assign image_bg = section.settings.image_bg_color | default: '#e5e3df'
   assign active_color = section.settings.active_circle_color | default: '#e29fc8'
+  assign first_image = section.blocks.first.settings.image
 -%}
+{%- assign image_size_desktop = '' -%}
+{%- if section.settings.image_size != blank and section.settings.image_size != 'fill' -%}
+  {%- capture image_size_desktop -%}{%- render 'isoa-image-ratio', ratio: section.settings.image_size, image: first_image, custom_width: section.settings.image_size_w, custom_height: section.settings.image_size_h, fallback: '4 / 5' -%}{%- endcapture -%}
+{%- endif -%}
+{%- capture image_size_mobile -%}{%- render 'isoa-image-ratio', ratio: section.settings.image_size_mobile, image: first_image, custom_width: section.settings.image_size_mobile_w, custom_height: section.settings.image_size_mobile_h, fallback: '4 / 3' -%}{%- endcapture -%}
 
 <section class="rh-otg" id="rh-otg-{{ sid }}" data-rh-otg style="--rh-otg-active: 0;">
   <div class="rh-otg__grid">
@@ -127,12 +133,19 @@
   }
 
   /* ── Photo strip ── */
+  /* The slides are absolutely positioned, so an in-flow spacer gives the box
+     its "Image size (mobile)" proportions (aspect-ratio on the box itself can
+     collapse to 0 on older iPhone Safari). */
   #rh-otg-{{ sid }} .rh-otg__media {
     position: relative;
     overflow: hidden;
-    aspect-ratio: 4 / 3;
     border-radius: 10px 10px 0 0;
     background: {{ image_bg }};
+  }
+  #rh-otg-{{ sid }} .rh-otg__media::before {
+    content: '';
+    display: block;
+    aspect-ratio: {{ image_size_mobile | strip }};
   }
   #rh-otg-{{ sid }} .rh-otg__slide {
     position: absolute;
@@ -308,10 +321,22 @@
       height: var(--rhode-pdp-h, 720px);
     }
     #rh-otg-{{ sid }} .rh-otg__media {
-      aspect-ratio: auto;
       height: 100%;
       border-radius: 10px;
     }
+    #rh-otg-{{ sid }} .rh-otg__media::before {
+      {%- if image_size_desktop != blank %}
+      aspect-ratio: {{ image_size_desktop | strip }};
+      {%- else %}
+      display: none;
+      {%- endif %}
+    }
+    {%- if image_size_desktop != blank %}
+    #rh-otg-{{ sid }} .rh-otg__media {
+      height: auto;
+      align-self: center;
+    }
+    {%- endif %}
     #rh-otg-{{ sid }} .rh-otg__card {
       padding: 32px;
       border-radius: 10px;
@@ -394,6 +419,26 @@
   "tag": "section",
   "class": "section",
   "settings": [
+    { "type": "header", "content": "Image size" },
+    { "type": "select", "id": "image_size", "label": "Image size (desktop)", "options": [
+      { "value": "fill", "label": "Match text card" },
+      { "value": "original", "label": "Original" },
+      { "value": "square", "label": "Square" },
+      { "value": "portrait", "label": "Portrait" },
+      { "value": "landscape", "label": "Landscape" },
+      { "value": "custom", "label": "Custom" }
+    ], "default": "fill", "info": "Match text card keeps the image as tall as the text beside it." },
+    { "type": "range", "id": "image_size_w", "label": "Custom width (desktop)", "min": 1, "max": 40, "step": 1, "default": 4, "visible_if": "{{ section.settings.image_size == 'custom' }}" },
+    { "type": "range", "id": "image_size_h", "label": "Custom height (desktop)", "min": 1, "max": 40, "step": 1, "default": 5, "visible_if": "{{ section.settings.image_size == 'custom' }}" },
+    { "type": "select", "id": "image_size_mobile", "label": "Image size (mobile)", "options": [
+      { "value": "original", "label": "Original" },
+      { "value": "square", "label": "Square" },
+      { "value": "portrait", "label": "Portrait" },
+      { "value": "landscape", "label": "Landscape" },
+      { "value": "custom", "label": "Custom" }
+    ], "default": "custom" },
+    { "type": "range", "id": "image_size_mobile_w", "label": "Custom width (mobile)", "min": 1, "max": 40, "step": 1, "default": 4, "visible_if": "{{ section.settings.image_size_mobile == 'custom' }}" },
+    { "type": "range", "id": "image_size_mobile_h", "label": "Custom height (mobile)", "min": 1, "max": 40, "step": 1, "default": 3, "visible_if": "{{ section.settings.image_size_mobile == 'custom' }}" },
     {
       "type": "text",
       "id": "title",

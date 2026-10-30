@@ -185,16 +185,13 @@
     margin: 0;
   }
 
-  /* Per-step BUY pill (Rhode's glazing milk routine): adds that step's
-     product to the cart without leaving the page. */
+  /* Per-step BUY pill (Rhode's glazing milk routine), beside the step title:
+     adds that step's product to the cart without leaving the page. */
   .rh-prep-title-row-{{ section.id }} {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-  }
-  .rh-prep-buy-wrap--mobile {
-    display: none;
   }
   .rh-prep-buy-{{ section.id }} {
     display: inline-flex;
@@ -237,6 +234,14 @@
       aspect-ratio: auto;
       align-self: stretch;
     }
+    {%- if image_size_desktop != blank %}
+    /* "Image size (desktop)" picked: keep those proportions instead of the
+       text card's height. */
+    .rh-prep-image-viewport-{{ section.id }} {
+      aspect-ratio: {{ image_size_desktop | strip }};
+      align-self: center;
+    }
+    {%- endif %}
   }
 
   @media (max-width: 749px) {
@@ -254,16 +259,11 @@
       border-radius: 0 0 10px 10px;
       padding: 14px 18px 16px;
     }
-    .rh-prep-buy-wrap--desktop {
-      display: none;
-    }
-    .rh-prep-buy-wrap--mobile {
-      display: block;
-      margin-top: 12px;
-    }
+    /* Phone: the BUY pill stays beside the title, sized down. */
     .rh-prep-buy-{{ section.id }} {
-      min-height: 30px;
-      font-size: 12px;
+      min-height: 26px;
+      padding: 3px 14px;
+      font-size: 11px;
     }
     .rh-prep-circle-{{ section.id }} {
       width: 60px;
@@ -302,6 +302,10 @@
 {%- capture ratio_mobile -%}
   {%- render 'isoa-image-ratio', ratio: section.settings.image_ratio_mobile, image: step_blocks.first.settings.image, custom_width: section.settings.image_ratio_mobile_w, custom_height: section.settings.image_ratio_mobile_h, fallback: '2 / 1' -%}
 {%- endcapture -%}
+{%- assign image_size_desktop = '' -%}
+{%- if section.settings.image_size != blank and section.settings.image_size != 'fill' -%}
+  {%- capture image_size_desktop -%}{%- render 'isoa-image-ratio', ratio: section.settings.image_size, image: step_blocks.first.settings.image, custom_width: section.settings.image_size_w, custom_height: section.settings.image_size_h, fallback: '4 / 5' -%}{%- endcapture -%}
+{%- endif -%}
 
 <section class="section-{{ section.id }}" aria-label="prep toggle">
   <div class="section-{{ section.id }}-inner">
@@ -373,7 +377,7 @@
                   {%- endcapture -%}
                   <div class="rh-prep-title-row-{{ section.id }}">
                     <h2 class="rh-prep-title-{{ section.id }}">{{ step.settings.title }}</h2>
-                    {%- if show_buy -%}<div class="rh-prep-buy-wrap-{{ section.id }} rh-prep-buy-wrap--desktop">{{ buy_button }}</div>{%- endif -%}
+                    {{ buy_button }}
                   </div>
                   <p class="rh-prep-subtitle-{{ section.id }}">{{ step.settings.subtitle }}</p>
                   <hr class="rh-prep-divider-{{ section.id }}" />
@@ -389,7 +393,6 @@
                     {%- endfor -%}
                   </div>
 
-                  {%- if show_buy -%}<div class="rh-prep-buy-wrap-{{ section.id }} rh-prep-buy-wrap--mobile">{{ buy_button }}</div>{%- endif -%}
                 </div>
               {%- endfor -%}
             </div>
@@ -478,10 +481,21 @@
   "tag": "section",
   "class": "rhode-prep-toggle",
   "settings": [
+    { "type": "header", "content": "Image size" },
+    { "type": "select", "id": "image_size", "label": "Image size (desktop)", "options": [
+      { "value": "fill", "label": "Match text card" },
+      { "value": "original", "label": "Original" },
+      { "value": "square", "label": "Square" },
+      { "value": "portrait", "label": "Portrait" },
+      { "value": "landscape", "label": "Landscape" },
+      { "value": "custom", "label": "Custom" }
+    ], "default": "fill", "info": "Match text card keeps the image as tall as the text beside it." },
+    { "type": "range", "id": "image_size_w", "label": "Custom width (desktop)", "min": 1, "max": 40, "step": 1, "default": 4, "visible_if": "{{ section.settings.image_size == 'custom' }}" },
+    { "type": "range", "id": "image_size_h", "label": "Custom height (desktop)", "min": 1, "max": 40, "step": 1, "default": 5, "visible_if": "{{ section.settings.image_size == 'custom' }}" },
     {
       "type": "select",
       "id": "image_ratio_mobile",
-      "label": "Image size on mobile",
+      "label": "Image size (mobile)",
       "options": [
         { "value": "original", "label": "Original" },
         { "value": "square", "label": "Square" },

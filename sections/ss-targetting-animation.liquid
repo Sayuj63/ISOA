@@ -9,6 +9,10 @@ FULLY FIXED + SHOPIFY 2.0
 {%- capture ratio_mobile -%}
   {%- render 'isoa-image-ratio', ratio: section.settings.image_ratio_mobile, image: first_image, custom_width: section.settings.image_ratio_mobile_w, custom_height: section.settings.image_ratio_mobile_h, fallback: '1 / 1' -%}
 {%- endcapture -%}
+{%- assign image_size_desktop = '' -%}
+{%- if section.settings.image_size != blank and section.settings.image_size != 'fill' -%}
+  {%- capture image_size_desktop -%}{%- render 'isoa-image-ratio', ratio: section.settings.image_size, image: first_image, custom_width: section.settings.image_size_w, custom_height: section.settings.image_size_h, fallback: '4 / 5' -%}{%- endcapture -%}
+{%- endif -%}
 
 <section id="benefits-{{ section.id }}" class="rh-benefits" style="--rh-ratio-mobile: {{ ratio_mobile | strip }};">
 
@@ -538,6 +542,22 @@ scale(calc(var(--text-scale) / 100));}
     display: none !important;
   }
 
+  {%- if image_size_desktop != blank %}
+  /* "Image size (desktop)" picked: the image box takes those proportions
+     (from an in-flow spacer, as on mobile) instead of the text card's height. */
+  @media screen and (min-width: 769px){
+    #benefits-{{ section.id }} .rh-media{
+      height: auto !important;
+      align-self: center !important;
+    }
+    #benefits-{{ section.id }} .rh-media::before{
+      content: '';
+      display: block;
+      aspect-ratio: {{ image_size_desktop | strip }};
+    }
+  }
+  {%- endif %}
+
   /* Mobile: image flush across the top of the pill as a square (same as the
      split section above), copy below with its own padding. */
   @media screen and (max-width: 768px){
@@ -839,6 +859,17 @@ document.addEventListener('DOMContentLoaded', function(){
       "default":420
     },
 
+    { "type": "header", "content": "Image size on product pages" },
+    { "type": "select", "id": "image_size", "label": "Image size (desktop)", "options": [
+      { "value": "fill", "label": "Match text card" },
+      { "value": "original", "label": "Original" },
+      { "value": "square", "label": "Square" },
+      { "value": "portrait", "label": "Portrait" },
+      { "value": "landscape", "label": "Landscape" },
+      { "value": "custom", "label": "Custom" }
+    ], "default": "fill", "info": "Match text card keeps the image as tall as the text beside it." },
+    { "type": "range", "id": "image_size_w", "label": "Custom width (desktop)", "min": 1, "max": 40, "step": 1, "default": 4, "visible_if": "{{ section.settings.image_size == 'custom' }}" },
+    { "type": "range", "id": "image_size_h", "label": "Custom height (desktop)", "min": 1, "max": 40, "step": 1, "default": 5, "visible_if": "{{ section.settings.image_size == 'custom' }}" },
     {
       "type":"select",
       "id":"image_ratio_mobile",
