@@ -553,6 +553,8 @@
 .packaging-{{ section.id }} .packaging-right.packaging-right--ratio{
   height:auto;
   background:transparent;
+  /* Never taller than the PDP hero, whatever proportions are picked. */
+  max-height:var(--rhode-pdp-h, 720px);
 }
 
 .packaging-{{ section.id }} .packaging-right--ratio img{
@@ -619,6 +621,8 @@
 
   .packaging-{{ section.id }} .packaging-right.packaging-right--ratio{
     height:auto;
+    max-height:75vh;
+    max-height:75svh;
   }
 
   .packaging-{{ section.id }} .packaging-side-text{

@@ -171,7 +171,10 @@
     .rh-clin-image-{{ section.id }} {
       align-self: center;
       min-height: 0;
+      width: 100%;
       aspect-ratio: {{ image_size_desktop | strip }};
+      /* Never taller than the hero, whatever proportions are picked. */
+      max-height: var(--rhode-pdp-h, 720px);
     }
   }
   {%- endif %}
@@ -277,7 +280,11 @@
     }
     .rh-clin-image-{{ section.id }} {
       order: 1;
+      width: 100%;
       aspect-ratio: {{ image_size_mobile | strip }};
+      /* A tall pick crops rather than filling more than the screen. */
+      max-height: 75vh;
+      max-height: 75svh;
       border-radius: 10px 10px 0 0;
     }
     .rh-clin-heading-{{ section.id }} {

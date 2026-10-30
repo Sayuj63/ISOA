@@ -147,6 +147,9 @@
     content: '';
     display: block;
     aspect-ratio: {{ image_size_mobile | strip }};
+    /* A tall pick crops rather than filling more than the screen. */
+    max-height: 75vh;
+    max-height: 75svh;
   }
   #rh-otg-{{ sid }} .rh-otg__slide {
     position: absolute;
@@ -328,6 +331,8 @@
     #rh-otg-{{ sid }} .rh-otg__media::before {
       {%- if image_size_desktop != blank %}
       aspect-ratio: {{ image_size_desktop | strip }};
+      /* The row is the hero's height; a taller pick spilled out of it. */
+      max-height: var(--rhode-pdp-h, 720px);
       {%- else %}
       display: none;
       {%- endif %}

@@ -129,7 +129,10 @@
   .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__media,
   .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__content {
     position: relative;
+    width: 100%;
     aspect-ratio: var(--rh-lip-ratio);
+    /* Never taller than the hero, whatever proportions are picked. */
+    max-height: var(--rhode-pdp-h, 720px);
     min-width: 0;
     overflow: hidden;
     border-radius: 12px;
@@ -331,6 +334,8 @@
     .rh-lip-ingredients--{{ sid }} .rh-lip-ingredients__media {
       width: 100%;
       aspect-ratio: var(--rh-lip-ratio-mobile);
+      max-height: 75vh;
+      max-height: 75svh;
       flex: 0 0 auto;
       border-radius: 12px;
     }

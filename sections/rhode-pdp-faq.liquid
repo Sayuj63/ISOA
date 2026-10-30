@@ -90,7 +90,10 @@
 
   .rh-faq--{{ sid }} .rh-faq__media {
     order: 2;
+    width: 100%;
     aspect-ratio: var(--rh-faq-ratio);
+    /* Never taller than the hero, whatever proportions are picked. */
+    max-height: var(--rhode-pdp-h, 720px);
     overflow: hidden;
     border-radius: 10px;
     background: #e5e3df;
@@ -225,6 +228,9 @@
     .rh-faq--{{ sid }} .rh-faq__media {
       order: 0;
       aspect-ratio: var(--rh-faq-ratio-mobile);
+      /* A tall pick crops rather than filling more than the screen. */
+      max-height: 75vh;
+      max-height: 75svh;
       border-radius: 10px 10px 0 0;
     }
 

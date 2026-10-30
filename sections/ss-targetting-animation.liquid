@@ -554,6 +554,8 @@ scale(calc(var(--text-scale) / 100));}
       content: '';
       display: block;
       aspect-ratio: {{ image_size_desktop | strip }};
+      /* Never taller than the hero, whatever proportions are picked. */
+      max-height: var(--rhode-pdp-h, 720px);
     }
   }
   {%- endif %}
@@ -576,6 +578,9 @@ scale(calc(var(--text-scale) / 100));}
       content: '';
       display: block;
       aspect-ratio: var(--rh-ratio-mobile, 1 / 1);
+      /* A tall pick crops rather than filling more than the screen. */
+      max-height: 75vh;
+      max-height: 75svh;
     }
     #benefits-{{ section.id }} .rh-content{
       padding: 32px 20px 40px !important;

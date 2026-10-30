@@ -314,8 +314,13 @@ assign inside_box_padding_mobile = section.settings.inside_box_padding_mobile
   @media screen and (max-width: 1023px) {
     /* "Image size (mobile)" setting; square by default so the subject fills
        the frame on a phone. */
+    /* Capped so a tall pick (portrait, original) can't push the section past
+       the screen; the photo crops instead. */
     .feature-image-{{ section.id }} {
+      width: 100%;
       aspect-ratio: {{ image_size_mobile | strip }};
+      max-height: 75vh;
+      max-height: 75svh;
     }
   }
 
@@ -338,8 +343,11 @@ assign inside_box_padding_mobile = section.settings.inside_box_padding_mobile
        instead of stretching to the text card's height. */
     .feature-image-{{ section.id }} {
       align-self: center;
+      width: 100%;
       aspect-ratio: {{ image_size_desktop | strip }};
       height: auto;
+      /* Never taller than the hero, whatever proportions are picked. */
+      max-height: var(--rhode-pdp-h, 720px);
     }
     {%- endif %}
     .feature-image-{{ section.id }} svg {
