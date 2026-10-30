@@ -45,7 +45,6 @@
     '.shopify-section .isoua-pill-button',
     '.shopify-section [class*="ai-contact-form-submit-"]',
     '.shopify-section .rh-cta',
-    '.shopify-section .rs-cta',
     '.shopify-section .shopify-payment-button__button',
     '.shopify-section .shopify-payment-button__button--unbranded',
     '.shopify-section .product-information .add-to-cart-button',
@@ -55,8 +54,8 @@
     '.isoa-rc-cta',
     // Quick-add "Add" / "Choose" buttons on product grid cards.
     '.quick-add__button',
-    // PDP sticky add-to-cart bar's ATC button (separate from the
-    // product-information ATC and from .rs-cta which is already covered).
+    // Horizon's own sticky add-to-cart button. The Rhode sticky bar's .rs-cta
+    // is left out on purpose: it is a filled brown pill like the hero's BUY.
     '.sticky-add-to-cart__button',
     // Store-wide CTA pass (2026-10-08): mega-menu SHOP, footer SUBSCRIBE,
     // generic button-secondary outside the hero (Shop now, Continue shopping),

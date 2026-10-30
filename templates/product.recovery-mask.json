@@ -541,7 +541,6 @@
       ],
       "settings": {
         "shipping_text": "Free shipping on prepaid orders",
-        "delivery_text": "5–7 working days",
         "offer_tag": "Sitewide",
         "offer_text": "Free shipping pan India on prepaid orders."
       }
@@ -2000,14 +1999,14 @@
       "type": "rhode-sticky-atc",
       "settings": {
         "title_override": "SPOTWEAR DAISY",
-        "cta_label": "BUY {SHAPE}",
+        "cta_label": "BUY {PRODUCT}",
         "sold_out_label": "SOLD OUT",
         "hero_selector": "[data-rh-hero], .product-information",
         "bar_bg_color": "#faf7f2",
         "title_color": "#67645e",
         "text_color": "#67645e",
-        "cta_bg_color": "#67645e",
-        "cta_hover_bg_color": "#4d4b45",
+        "cta_bg_color": "#4b342c",
+        "cta_hover_bg_color": "#36231d",
         "cta_text_color": "#ffffff"
       }
     }

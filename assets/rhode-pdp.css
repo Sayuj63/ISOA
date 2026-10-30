@@ -761,15 +761,10 @@ main#MainContent {
   }
 
 
-  /* 3 · rhode-sticky-atc — tighten padding, drop the swatch strip if content
-     starts to wrap. Title font already shrinks (11px) via the section's own
-     mobile @media. Also cap the CTA width so it doesn't overrun the bar. */
+  /* 3 · rhode-sticky-atc — tighten padding and cap the title width. The CTA
+     is sized by the section itself. */
   [class*="rhode-satc-"] {
     padding: 8px 12px !important;
-  }
-  [class*="rhode-satc-"] .rs-cta {
-    padding: 10px 16px !important;
-    font-size: 11px !important;
   }
   [class*="rhode-satc-"] .rs-title {
     max-width: 40vw;

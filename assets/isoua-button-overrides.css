@@ -246,7 +246,6 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 .shopify-section .isoua-pill-button,
 .shopify-section [class*="ai-contact-form-submit-"],
 .shopify-section .rh-cta,
-.shopify-section .rs-cta,
 .shopify-section .shopify-payment-button__button,
 .shopify-section .shopify-payment-button__button--unbranded,
 .shopify-section .product-information .add-to-cart-button {
@@ -297,7 +296,6 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 .shopify-section .isoua-pill-button > *,
 .shopify-section [class*="ai-contact-form-submit-"] *,
 .shopify-section .rh-cta > *,
-.shopify-section .rs-cta > *,
 .shopify-section .shopify-payment-button__button > *,
 .shopify-section .product-information .add-to-cart-button > * {
   color: inherit !important;
@@ -320,7 +318,6 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 .shopify-section .isoua-pill-button svg path,
 .shopify-section [class*="ai-contact-form-submit-"] svg path,
 .shopify-section .rh-cta svg path,
-.shopify-section .rs-cta svg path,
 .shopify-section .shopify-payment-button__button svg path,
 .shopify-section .product-information .add-to-cart-button svg path {
   fill: #67645e !important;
@@ -354,7 +351,6 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
 .shopify-section .isoua-pill-button,
 .shopify-section [class*="ai-contact-form-submit-"],
 .shopify-section .rh-cta,
-.shopify-section .rs-cta,
 .shopify-section .shopify-payment-button__button,
 .shopify-section .shopify-payment-button__button--unbranded,
 .shopify-section .product-information .add-to-cart-button {
@@ -374,7 +370,6 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
   .shopify-section .isoua-pill-button:hover,
   .shopify-section [class*="ai-contact-form-submit-"]:hover,
   .shopify-section .rh-cta:hover,
-  .shopify-section .rs-cta:hover,
   .shopify-section .shopify-payment-button__button:hover,
   .shopify-section .product-information .add-to-cart-button:hover {
     background-color: #67645e !important;
@@ -395,7 +390,6 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
   .shopify-section .isoua-pill-button:hover svg path,
   .shopify-section [class*="ai-contact-form-submit-"]:hover svg path,
   .shopify-section .rh-cta:hover svg path,
-  .shopify-section .rs-cta:hover svg path,
   .shopify-section .shopify-payment-button__button:hover svg path,
   .shopify-section .product-information .add-to-cart-button:hover svg path {
     fill: #ffffff !important;
@@ -415,7 +409,6 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
   .shopify-section .isoua-pill-button:active,
   .shopify-section [class*="ai-contact-form-submit-"]:active,
   .shopify-section .rh-cta:active,
-  .shopify-section .rs-cta:active,
   .shopify-section .shopify-payment-button__button:active,
   .shopify-section .product-information .add-to-cart-button:active {
     background-color: #f1f0ed !important;
@@ -474,7 +467,6 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
   body .shopify-section .isoua-pill-button,
   body .shopify-section [class*="ai-contact-form-submit-"],
   body .shopify-section .rh-cta,
-  body .shopify-section .rs-cta,
   body .shopify-section .shopify-payment-button__button,
   body .shopify-section .shopify-payment-button__button--unbranded,
   body .shopify-section .product-information .add-to-cart-button {
@@ -493,7 +485,6 @@ body.page-do-not-sell-or-share-my-personal-information .content-for-layout > .sh
   body .shopify-section .isoua-pill-button > *,
   body .shopify-section [class*="ai-contact-form-submit-"] *,
   body .shopify-section .rh-cta > *,
-  body .shopify-section .rs-cta > *,
   body .shopify-section .shopify-payment-button__button > *,
   body .shopify-section .product-information .add-to-cart-button > * {
     font-weight: 400 !important;

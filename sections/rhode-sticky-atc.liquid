@@ -7,8 +7,16 @@
 {%- assign sid = section.id -%}
 {%- assign p = product -%}
 {%- assign v = p.selected_or_first_available_variant -%}
-{%- assign last_word = p.title | split: ' ' | last | upcase -%}
-{%- assign btn_label = section.settings.cta_label | replace: '{SHAPE}', last_word -%}
+{%- liquid
+  assign last_word = p.title | split: ' ' | last | upcase
+  assign product_name = p.metafields.custom.card_short_name | default: p.title | upcase
+  assign btn_label = section.settings.cta_label | replace: '{SHAPE}', last_word | replace: '{PRODUCT}', product_name
+  # A product with only Shopify's "Default Title" variant has nothing to pick.
+  assign has_choice = true
+  if p.has_only_default_variant
+    assign has_choice = false
+  endif
+-%}
 
 <style>
   .rhode-satc-{{ sid }} {
@@ -102,22 +110,30 @@
     margin: 0;
     flex-shrink: 0;
   }
+  /* Same pill as the hero's BUY button (blocks/isoa-direct-buy.liquid):
+     filled, 44px, 14px regular caps with the price in bold. */
   .rhode-satc-{{ sid }} .rs-cta {
-    position: relative;
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3em;
+    height: 44px;
+    padding: 0 32px;
     border: 0;
     border-radius: 999px;
-    padding: 16px 36px;
     background: {{ section.settings.cta_bg_color }};
     color: {{ section.settings.cta_text_color }};
-    font-family: inherit;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
+    font-family: var(--font-body--family);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
     cursor: pointer;
     transition: background 0.35s cubic-bezier(0.76, 0, 0.24, 1);
     white-space: nowrap;
+  }
+  .rhode-satc-{{ sid }} .rs-cta strong {
+    font-weight: 700;
   }
   .rhode-satc-{{ sid }} .rs-cta:hover {
     background: {{ section.settings.cta_hover_bg_color }};
@@ -143,17 +159,18 @@
       gap: 6px;
     }
     .rhode-satc-{{ sid }} .rs-cta {
-      height: 44px !important;
-      min-height: 44px !important;
-      padding: 0 20px !important;
-      font-size: 11px;
+      height: 40px;
+      padding: 0 16px;
+      font-size: 12px;
     }
-    .rhode-satc-{{ sid }} .rs-mobile-picker { position: relative; display: flex; align-items: center; min-width: 0; flex: 1 1 52%; height: 44px; overflow: hidden; border: 1px solid rgb(103 100 94 / 60%); border-radius: 999px; background: #fff; }
-    .rhode-satc-{{ sid }} .rs-mobile-picker img { width: 34px; height: 34px; margin-left: 6px; border-radius: 50%; object-fit: contain; }
-    .rhode-satc-{{ sid }} .rs-mobile-picker span { min-width: 0; padding: 0 26px 0 10px; overflow: hidden; color: {{ section.settings.title_color }}; font-size: 13px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+    .rhode-satc-{{ sid }} .rs-mobile-picker { position: relative; display: flex; align-items: center; min-width: 0; flex: 1 1 45%; height: 40px; overflow: hidden; border: 1px solid rgb(103 100 94 / 60%); border-radius: 999px; background: #fff; }
+    .rhode-satc-{{ sid }} .rs-mobile-picker img { width: 30px; height: 30px; margin-left: 5px; border-radius: 50%; object-fit: contain; }
+    .rhode-satc-{{ sid }} .rs-mobile-picker span { min-width: 0; padding: 0 26px 0 8px; overflow: hidden; color: {{ section.settings.title_color }}; font-size: 12px; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; }
+    .rhode-satc-{{ sid }} .rs-left:empty,
+    .rhode-satc-{{ sid }} .rs-left:not(:has(.rs-swatches)) { display: none; }
     .rhode-satc-{{ sid }} .rs-mobile-picker select { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
     .rhode-satc-{{ sid }} .rs-mobile-picker::after { content: ''; position: absolute; right: 12px; width: 0; height: 0; border: 5px solid transparent; border-top-color: currentColor; transform: translateY(3px); pointer-events: none; }
-    .rhode-satc-{{ sid }} > form { display: flex; min-width: 0; flex: 1 1 48%; }
+    .rhode-satc-{{ sid }} > form { display: flex; min-width: 0; flex: 1 1 55%; }
     .rhode-satc-{{ sid }} > form .rs-cta { width: 100% !important; }
   }
 
@@ -200,21 +217,23 @@
     {%- endif -%}
   </div>
 
+  {%- if has_choice -%}
   <div class="rs-mobile-picker">
     {%- assign mobile_image = v.featured_image | default: p.featured_image -%}
     {%- if mobile_image != blank -%}<img data-rs-mobile-image src="{{ mobile_image | image_url: width: 96 }}" alt="">{%- endif -%}
     <span data-rs-mobile-label>{{ v.title | default: p.title }}</span>
     <select aria-label="Choose variant" data-rs-variant-select>
-      {%- for variant in p.variants -%}<option value="{{ variant.id }}" data-price="{{ variant.price | money }}" data-label="{{ variant.title | escape }}" data-image="{% if variant.featured_image != blank %}{{ variant.featured_image | image_url: width: 96 }}{% elsif p.featured_image != blank %}{{ p.featured_image | image_url: width: 96 }}{% endif %}" {% if variant.id == v.id %}selected{% endif %}>{{ variant.title }}</option>{%- endfor -%}
+      {%- for variant in p.variants -%}<option value="{{ variant.id }}" data-price="{{ variant.price | money_without_trailing_zeros }}" data-label="{{ variant.title | escape }}" data-image="{% if variant.featured_image != blank %}{{ variant.featured_image | image_url: width: 96 }}{% elsif p.featured_image != blank %}{{ p.featured_image | image_url: width: 96 }}{% endif %}" {% if variant.id == v.id %}selected{% endif %}>{{ variant.title }}</option>{%- endfor -%}
     </select>
   </div>
+  {%- endif -%}
 
   <form method="post" action="/cart/add" enctype="multipart/form-data">
     <input type="hidden" name="id" value="{{ v.id }}" data-rs-variant-id>
     <input type="hidden" name="quantity" value="1">
     <button type="submit" class="rs-cta" data-rs-cta {% unless v.available %}disabled{% endunless %}>
       {%- if v.available -%}
-        {{ btn_label }} - {{ v.price | money }}
+        {{ btn_label }} —<strong>{{ v.price | money_without_trailing_zeros }}</strong>
       {%- else -%}
         {{ section.settings.sold_out_label }}
       {%- endif -%}
@@ -236,7 +255,12 @@
       if (id) id.value = option.value;
       if (label) label.textContent = option.dataset.label || option.textContent;
       if (image && option.dataset.image) image.src = option.dataset.image;
-      if (cta && option.dataset.price) cta.textContent = '{{ btn_label }} - ' + option.dataset.price;
+      if (cta && option.dataset.price) {
+        cta.textContent = {{ btn_label | append: ' —' | json }};
+        var price = document.createElement('strong');
+        price.textContent = option.dataset.price;
+        cta.appendChild(price);
+      }
     });
     var trigger = document.querySelector('{{ section.settings.hero_selector }}');
     if (!trigger) {
@@ -262,14 +286,14 @@
   "name": "Rhode · Sticky ATC",
   "settings": [
     { "type": "text",  "id": "title_override",   "label": "Title override (leave as product title, or type a custom label)", "default": "SPOTWEAR DAISY" },
-    { "type": "text",  "id": "cta_label",        "label": "CTA label (use {SHAPE} for last word of product title)", "default": "BUY {SHAPE}" },
+    { "type": "text",  "id": "cta_label",        "label": "CTA label", "info": "{PRODUCT} is the product's short name, {SHAPE} the last word of its title.", "default": "BUY {PRODUCT}" },
     { "type": "text",  "id": "sold_out_label",   "label": "Sold-out label", "default": "SOLD OUT" },
     { "type": "text",  "id": "hero_selector",    "label": "Selector to watch (hero — hide bar while visible)", "default": "[data-rh-hero], .product-information" },
     { "type": "color", "id": "bar_bg_color",       "label": "Bar background",       "default": "#faf7f2" },
     { "type": "color", "id": "title_color",        "label": "Title color",          "default": "#67645e" },
     { "type": "color", "id": "text_color",         "label": "Body text",            "default": "#67645e" },
-    { "type": "color", "id": "cta_bg_color",       "label": "CTA background",       "default": "#67645e" },
-    { "type": "color", "id": "cta_hover_bg_color", "label": "CTA hover background", "default": "#4d4b45" },
+    { "type": "color", "id": "cta_bg_color",       "label": "CTA background",       "default": "#4b342c" },
+    { "type": "color", "id": "cta_hover_bg_color", "label": "CTA hover background", "default": "#36231d" },
     { "type": "color", "id": "cta_text_color",     "label": "CTA text",             "default": "#ffffff" }
   ],
   "presets": [
