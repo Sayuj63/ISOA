@@ -259,66 +259,47 @@ For inquiries or permissions, contact daniel@section.store
 {% endif %}
 
 
-{% if image_ratio_mobile == "portrait" %}
-  <style>
-    .image-with-image-{{ section.id }} {
-      aspect-ratio: 12/10;
-    }
-  </style>
-{% elsif image_ratio_mobile == "landscape" %}
-  <style>
+{%- comment -%} Image size settings → aspect-ratio. Original follows the uploaded photo. {%- endcomment -%}
+{%- capture image_ratio_css -%}{%- render 'isoa-image-ratio', ratio: image_ratio, image: image, fallback: '1 / 1' -%}{%- endcapture -%}
+{%- capture image_ratio_mobile_css -%}{%- render 'isoa-image-ratio', ratio: image_ratio_mobile, image: image, fallback: '1 / 1' -%}{%- endcapture -%}
+<style>
+  /* An in-flow spacer in the picked proportions sets the row height and the
+     image box stretches to the row, so on desktop the photo always matches the
+     text card. A ratio on the box itself (the old 12/10, 12/9, 12/8 values,
+     which also mislabelled Portrait as landscape) kept it short beside a
+     taller card. The photo is pinned, not height: 100%, because Safari
+     resolves a % height against the uncapped box once max-height kicks in. */
   .image-with-image-{{ section.id }} {
-    aspect-ratio: 12/8;
+    position: relative;
+    width: 100%;
+    aspect-ratio: auto;
   }
-  </style>
-{% elsif image_ratio_mobile == "square" %}
-  <style>
-    .image-with-image-{{ section.id }} {
-      aspect-ratio: 12/9;
+  .image-with-image-{{ section.id }}::before {
+    content: '';
+    display: block;
+    aspect-ratio: {{ image_ratio_mobile_css | strip }};
+    /* A tall pick crops rather than filling more than the screen. */
+    max-height: 75vh;
+    max-height: 75svh;
+  }
+  .image-with-image-{{ section.id }} img,
+  .image-with-image-{{ section.id }} svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  @media (min-width: 1024px) {
+    .image-with-image-{{ section.id }}::before {
+      aspect-ratio: {{ image_ratio_css | strip }};
+      /* Never taller than the screen, whatever photo or size is picked. */
+      max-height: min(820px, calc(100vh - 80px));
+      max-height: min(820px, calc(100svh - 80px));
     }
-  </style>
-{% else %}
-  <style>
-    .image-with-image-{{ section.id }} {
-      aspect-ratio: auto;
-    }
-  </style>
-{% endif %}
+  }
+</style>
 
-{% if image_ratio == "portrait" %}
-  <style>
-    @media(min-width: 1024px) {
-      .image-with-image-{{ section.id }} {
-        aspect-ratio: 12/10;
-      }
-    }
-    
-  </style>
-{% elsif image_ratio == "landscape" %}
-  <style>
-    @media(min-width: 1024px) {
-      .image-with-image-{{ section.id }} {
-        aspect-ratio: 12/8;
-      }
-    }  
-  </style>
-{% elsif image_ratio == "square" %}
-  <style>
-    @media(min-width: 1024px) {
-      .image-with-image-{{ section.id }} {
-        aspect-ratio: 12/9;
-      }
-    }    
-  </style>
-{% else %}
-  <style>
-     @media(min-width: 1024px) {
-      .image-with-image-{{ section.id }} {
-        aspect-ratio: auto;
-      }
-    }
-  </style>
-{% endif %}
 
 <style>
   /* Structure mirrors the announcement bar: outer = full viewport width (its bg is driven by the "Outer section background" picker in the theme editor), inner pill width = same min() formula the .section grid uses for the announcement bar — so they line up. -vamshi */
@@ -717,7 +698,8 @@ For inquiries or permissions, contact daniel@section.store
         <div class="image-with-image-{{ section.id }}">
           {% if image != blank %}
             {%- liquid assign img_alt = image.alt | escape -%}
-            {%- capture sizes -%}(min-width: {{ content_width }}px) {{ content_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2){%- endcapture -%}
+            {%- comment -%} Two columns only from 1024px; below that the image is full width, so the old half-width sizes loaded a 170px file into a 358px phone box. {%- endcomment -%}
+            {%- capture sizes -%}(min-width: 1024px) 50vw, 100vw{%- endcapture -%}
               {{ image | image_url: width: 1500 | image_tag:
                 loading: loading_attribute,
                 width: image.width,
@@ -923,6 +905,7 @@ For inquiries or permissions, contact daniel@section.store
         "type": "header",
         "content": "Image"
       },
+      {"type": "paragraph", "content": "Recommended upload: 1320 × 1440 px (11:12), JPG under 1 MB. With Image size on Original (default on this site) the box follows your photo, so nothing is cropped on mobile; desktop height is capped at 820 px or the screen height. Other sizes: Square 1360 × 1360, Portrait 1360 × 1700, Landscape 1440 × 810. Keep the subject about 8% in from every edge."},
       {
         "type": "image_picker",
         "id": "image",

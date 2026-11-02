@@ -143,6 +143,17 @@
     background-color: #f8f8fa;
   }
 
+  /* The portrait phone image made the banner 84% of an iPhone screen (and
+     taller than an iPad's). Capped so it crops instead; width: 100% stops the
+     cap narrowing the box through its aspect-ratio. */
+  @media screen and (max-width: 820px) {
+    .isoa-banner__inner {
+      width: 100%;
+      max-height: 75vh;
+      max-height: 75svh;
+    }
+  }
+
   .isoa-banner__media,
   .isoa-banner__media img {
     position: absolute;
@@ -222,6 +233,7 @@
   "name": "ISOA banner",
   "class": "isoa-banner-section",
   "settings": [
+    {"type": "paragraph", "content": "Recommended upload: desktop 2720 × 1282 px (2.12:1), mobile 1080 × 1677 px (about 0.64:1). The banner takes each image's own shape, so other sizes work too; on phones it is capped at 75% of the screen height and crops beyond that."},
     {
       "type": "image_picker",
       "id": "image_desktop",
