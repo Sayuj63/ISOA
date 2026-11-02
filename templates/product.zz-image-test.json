@@ -1,0 +1,1677 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "product-information",
+      "blocks": {
+        "media-gallery": {
+          "type": "_product-media-gallery",
+          "static": true,
+          "settings": {
+            "media_presentation": "carousel",
+            "media_columns": "two",
+            "image_gap": 4,
+            "large_first_image": false,
+            "icons_style": "chevron",
+            "slideshow_controls_style": "thumbnails",
+            "slideshow_mobile_controls_style": "hint",
+            "thumbnail_position": "bottom",
+            "thumbnail_width": 44,
+            "thumbnail_radius": 10,
+            "aspect_ratio": "adapt",
+            "constrain_to_viewport": true,
+            "media_fit": "cover",
+            "media_radius": 10,
+            "extend_media": false,
+            "zoom": false,
+            "video_loop": false,
+            "hide_variants": true,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "product-details": {
+          "type": "_product-details",
+          "static": true,
+          "settings": {
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "details_position": "flex-start",
+            "gap": 22,
+            "sticky_details_desktop": false,
+            "inherit_color_scheme": false,
+            "color_scheme": "scheme-4",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 10,
+            "padding-block-start": 36,
+            "padding-block-end": 36,
+            "padding-inline-start": 32,
+            "padding-inline-end": 32
+          },
+          "blocks": {
+            "text_6bXyHJ": {
+              "type": "text",
+              "name": "Product title",
+              "settings": {
+                "text": "<h1>{{ closest.product.title }}</h1>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-heading--family)",
+                "font_size": "2.5rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "group_tGCQbn": {
+              "type": "group",
+              "name": "t:names.group",
+              "settings": {
+                "content_direction": "row",
+                "vertical_on_mobile": false,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 100,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "link": "",
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "text_UCV8Qn": {
+                  "type": "text",
+                  "name": "t:names.text",
+                  "settings": {
+                    "text": "<p><strong>{{ closest.product.metafields.custom.subheading_product_details.value }}</strong></p>",
+                    "width": "100%",
+                    "max_width": "none",
+                    "alignment": "left",
+                    "type_preset": "paragraph",
+                    "font": "var(--font-heading--family)",
+                    "font_size": "0.875rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground-heading)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_UCV8Qn"
+              ]
+            },
+            "text_6UFGM7": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<h2>{{ closest.product.metafields.custom.product_rating.value }}</h2>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h6",
+                "font": "var(--font-heading--family)",
+                "font_size": "0.875rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_aEtTtq": {
+              "type": "text",
+              "name": "Product description",
+              "settings": {
+                "text": "{{ closest.product.description }}",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-primary--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_pe7BCR": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "disabled": true,
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": true,
+                "type_preset": "custom",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1.25rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "isoa_direct_buy": {
+              "type": "isoa-direct-buy",
+              "settings": {},
+              "blocks": {}
+            },
+            "buy_buttons_eYQEYi": {
+              "type": "buy-buttons",
+              "disabled": true,
+              "settings": {
+                "stacking": true,
+                "show_pickup_availability": false,
+                "gift_card_form": true,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "disabled": true,
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "disabled": true,
+                  "static": true,
+                  "settings": {
+                    "style_class": "button"
+                  },
+                  "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                }
+              },
+              "block_order": []
+            },
+            "rhode_cyr_pdp": {
+              "type": "rhode-complete-your-routine",
+              "settings": {
+                "heading": "COMPLETE YOUR ROUTINE",
+                "products": [],
+                "card_radius": 10,
+                "cta_label": "SELECT ITEMS",
+                "cta_label_single": "ADD TO CART"
+              },
+              "blocks": {}
+            },
+            "accordion_XKk6GG": {
+              "type": "accordion",
+              "name": "t:names.accordion",
+              "settings": {
+                "icon": "plus",
+                "dividers": true,
+                "type_preset": "paragraph",
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 10,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "accordion_row_T8EC9a": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "BENEFITS",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 12
+                  },
+                  "blocks": {
+                    "text_x6E4qX": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<ul><li>Lightweight hydration for blemish-prone skin</li><li>Helps soothe and comfort stressed skin</li><li>Supports the skin barrier and helps reduce moisture loss</li><li>Helps improve the appearance of post-acne marks and uneven skin tone</li><li>Softens rough texture for smoother, softer-feeling skin</li></ul>",
+                        "width": "fit-content",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "paragraph",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_x6E4qX"
+                  ]
+                },
+                "accordion_row_bypDPJ": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "APPLICATION",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text_bABhBY": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p><strong>AM</strong><br/>After cleansing, gently press Barrier Milk onto your face and neck. Follow with moisturiser, sunscreen, and makeup.</p><p><strong>PM</strong><br/>After cleansing, use your acne treatment according to its directions. Apply Barrier Milk and follow with barrier cream, if needed and compatible with your treatment.</p><p><strong>ISOUA tip:</strong> For soft, hydrated skin, layer Barrier Milk under your moisturiser.</p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_bABhBY"
+                  ]
+                },
+                "accordion_row_HfgbPj": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "KEY INGREDIENTS",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text_GqXfJT": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p><span style=\"text-decoration:underline\">4% Niacinamide</span> helps support the skin barrier and improve the appearance of uneven skin tone and post-acne marks.<br/><br/><span style=\"text-decoration:underline\">2.5% Azelaic Acid Complex </span>helps improve the appearance of uneven skin tone and post-blemish marks.</p><p><span style=\"text-decoration:underline\">2.5% Panthenol (Pro-Vitamin B5) </span>helps hydrate, soften, and condition skin.</p><p><span style=\"text-decoration:underline\">4% Glycerin</span> attracts moisture to keep skin hydrated and soft.</p><p><span style=\"text-decoration:underline\">10% Aloe Leaf Water</span> helps condition skin and maintain a comfortable, hydrated feel.</p><p><span style=\"text-decoration:underline\">Ceramide NP</span> helps support the skin’s natural moisture barrier and reduce moisture loss.</p><p><span style=\"text-decoration:underline\">0.2% Ectoin </span>helps maintain skin hydration and support skin comfort.</p><p><span style=\"text-decoration:underline\">2% Betaine </span>helps maintain moisture and leave skin feeling soft and supple.</p><p><a href=\"#full-ingredients\">See full ingredients list</a></p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_GqXfJT"
+                  ]
+                },
+                "accordion_row_FMV8dz": {
+                  "type": "_accordion-row",
+                  "disabled": true,
+                  "settings": {
+                    "heading": "HOW IT WORKS?",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text_f3iedd": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Breakouts occur when pores become clogged with excess oil, bacteria, and debris. Hydrocolloid technology absorbs these impurities from inflamed pores and simultaneously protects the skin from external irritants. By maintaining a moist healing environment, the sheet supports the skin’s natural repair process, promoting calm, low-irritation healing.</p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_f3iedd"
+                  ]
+                }
+              },
+              "block_order": [
+                "accordion_row_T8EC9a",
+                "accordion_row_bypDPJ",
+                "accordion_row_HfgbPj",
+                "accordion_row_FMV8dz"
+              ]
+            }
+          },
+          "block_order": [
+            "text_6bXyHJ",
+            "group_tGCQbn",
+            "text_6UFGM7",
+            "text_aEtTtq",
+            "price_pe7BCR",
+            "isoa_direct_buy",
+            "buy_buttons_eYQEYi",
+            "rhode_cyr_pdp",
+            "accordion_XKk6GG"
+          ]
+        }
+      },
+      "custom_css": [
+        ".announcement-bar {border-radius: 10px;}",
+        ".h5 {font-size: 12px; text-transform: uppercase; min-height: 0px;}"
+      ],
+      "settings": {
+        "content_width": "content-center-aligned",
+        "desktop_media_position": "left",
+        "equal_columns": true,
+        "limit_details_width": false,
+        "gap": 12,
+        "enable_sticky_add_to_cart": true,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 16,
+        "padding-block-end": 0
+      }
+    },
+    "isoa_pdp_trust": {
+      "type": "isoa-pdp-trust",
+      "blocks": {
+        "trust_vegan": {
+          "type": "badge",
+          "settings": {
+            "icon": "vegan",
+            "label": "Vegan"
+          }
+        },
+        "trust_cruelty_free": {
+          "type": "badge",
+          "settings": {
+            "icon": "cruelty_free",
+            "label": "Cruelty Free"
+          }
+        },
+        "badge_Up3PWz": {
+          "type": "badge",
+          "settings": {
+            "icon": "non_toxic",
+            "label": "Non Toxic"
+          }
+        },
+        "badge_XBACPW": {
+          "type": "badge",
+          "settings": {
+            "icon": "sulphate_free",
+            "label": "SULPHATE FREE"
+          }
+        },
+        "badge_RzkXdD": {
+          "type": "badge",
+          "settings": {
+            "icon": "paraben_free",
+            "label": "PARABEN FREE"
+          }
+        },
+        "trust_non_comedogenic": {
+          "type": "badge",
+          "settings": {
+            "icon": "non_comedogenic",
+            "label": "Non Comedogenic"
+          }
+        }
+      },
+      "block_order": [
+        "trust_vegan",
+        "trust_cruelty_free",
+        "badge_Up3PWz",
+        "badge_XBACPW",
+        "badge_RzkXdD",
+        "trust_non_comedogenic"
+      ],
+      "settings": {
+        "shipping_text": "Free shipping on prepaid orders",
+        "offer_tag": "Sitewide",
+        "offer_text": "Free shipping pan India on prepaid orders."
+      }
+    },
+    "ss_slider_5_m7VKpN": {
+      "type": "ss-slider-5",
+      "blocks": {
+        "slide_gkYkj4": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/isoa-test-slider-tile-800x800.jpg",
+            "image_url": "",
+            "text": "",
+            "url": ""
+          }
+        },
+        "slide_tgfeWR": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/isoa-test-slider-tile-800x800.jpg",
+            "image_url": "",
+            "text": "",
+            "url": ""
+          }
+        },
+        "slide_BKfkNg": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/isoa-test-slider-tile-800x800.jpg",
+            "image_url": "",
+            "text": "",
+            "url": ""
+          }
+        },
+        "slide_76TPQM": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/isoa-test-slider-tile-800x800.jpg",
+            "image_url": "",
+            "text": "",
+            "url": ""
+          }
+        },
+        "slide_FabkjX": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/isoa-test-slider-tile-800x800.jpg",
+            "image_url": "",
+            "text": "",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_gkYkj4",
+        "slide_tgfeWR",
+        "slide_BKfkNg",
+        "slide_76TPQM",
+        "slide_FabkjX"
+      ],
+      "name": "SS - Slider #5",
+      "settings": {
+        "heading": "<h2>spotted on you</h2>",
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 22,
+        "heading_size_mobile": 22,
+        "heading_height": 130,
+        "heading_align": "left",
+        "heading_align_mobile": "left",
+        "button": "",
+        "button_url": "",
+        "button_custom": false,
+        "button_font": "josefin_sans_n4",
+        "button_size": 12,
+        "button_size_mobile": 12,
+        "button_height": 100,
+        "button_padding_vertical": 16,
+        "button_padding_vertical_mobile": 16,
+        "button_padding_horizontal": 24,
+        "button_padding_horizontal_mobile": 24,
+        "button_radius": 100,
+        "button_border_thickness": 1,
+        "button_style": "outline",
+        "slider_view": 3.2,
+        "slider_view_mobile": 1.5,
+        "slider_gap": 32,
+        "slider_gap_mobile": 20,
+        "slider_mt": 24,
+        "slider_mt_mobile": 24,
+        "image_radius": 24,
+        "image_border_thickness": 0,
+        "image_ratio": "square",
+        "image_ratio_mobile": "square",
+        "text_custom": false,
+        "text_font": "josefin_sans_n4",
+        "text_size": 0,
+        "text_size_mobile": 0,
+        "text_height": 50,
+        "text_mt": 0,
+        "text_padding_horizontal": 0,
+        "text_padding_horizontal_mobile": 0,
+        "text_align": "left",
+        "text_align_mobile": "left",
+        "navigation_mt": 40,
+        "navigation_mt_mobile": 24,
+        "navigation_pt": 20,
+        "navigation_pt_mobile": 12,
+        "navigation_border_thickness": 1,
+        "swipe_cursor": true,
+        "arrow_size": 24,
+        "arrow_size_mobile": 24,
+        "button_color": "#000000",
+        "button_hover_color": "#ffffff",
+        "button_bg_color": "",
+        "button_bg_hover_color": "#000000",
+        "button_border_color": "#000000",
+        "button_border_hover_color": "#000000",
+        "image_border_color": "#000000",
+        "text_color": "#ffffff",
+        "navigation_border_color": "#000000",
+        "arrow_color": "#000000",
+        "arrow_hover_color": "#000000",
+        "heading_color": "#67645e",
+        "background_color": "#f1f0ed",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 36,
+        "padding_bottom": 36,
+        "padding_horizontal": 5,
+        "padding_horizontal_mobile": 1,
+        "full_width": false,
+        "content_width": 140,
+        "border_thickness": 0,
+        "section_radius": 10,
+        "lazy": true
+      }
+    },
+    "ss_image_split_row_TniKMq": {
+      "type": "ss-image-split-row",
+      "blocks": {
+        "feature_KrtPXd": {
+          "type": "feature",
+          "settings": {
+            "label": "GOOD FOR:",
+            "value": "Blemish-prone skin that also experiences dehydration, dryness, rough texture, or uneven-looking tone."
+          }
+        },
+        "feature_7HH34A": {
+          "type": "feature",
+          "settings": {
+            "label": "FEELS LIKE:",
+            "value": "A lightweight, milky serum that leaves skin feeling soft and hydrated."
+          }
+        },
+        "feature_J8CJxB": {
+          "type": "feature",
+          "settings": {
+            "label": "SMELLS LIKE:",
+            "value": "Fragrance-Free"
+          }
+        },
+        "feature_n89VFA": {
+          "type": "feature",
+          "settings": {
+            "label": "WHERE IT FITS:",
+            "value": "After cleansing, with placement adjusted to your acne treatment's directions, and before moisturiser."
+          }
+        },
+        "feature_H4D8Ya": {
+          "type": "feature",
+          "settings": {
+            "label": "FYI:",
+            "value": "Sweatproof • Waterproof <br>\nCruelty-Free • Vegan • Gluten-Free <br>  \nDermatologist-Tested  • Non-Comedogenic"
+          }
+        }
+      },
+      "block_order": [
+        "feature_KrtPXd",
+        "feature_7HH34A",
+        "feature_J8CJxB",
+        "feature_n89VFA",
+        "feature_H4D8Ya"
+      ],
+      "name": "SS - Dynamic Feature Split",
+      "settings": {
+        "section_width": 1400,
+        "layout": "content_image",
+        "layout_mobile": "image_content",
+        "desktop_gap": 32,
+        "mobile_gap": 10,
+        "section_padding_top": 0,
+        "section_padding_bottom": 0,
+        "section_padding_horizontal": 0.5,
+        "section_padding_top_mobile": 0,
+        "section_padding_bottom_mobile": 0,
+        "section_padding_horizontal_mobile": 1,
+        "content_padding": 40,
+        "content_padding_mobile": 16,
+        "inside_box_padding": 0,
+        "inside_box_padding_mobile": 0,
+        "content_radius": 10,
+        "image": "shopify://shop_images/isoa-test-split-row-1320x1440.jpg",
+        "image_radius": 10,
+        "image_ratio": "landscape",
+        "image_size_mobile": "original",
+        "heading": "<p>Lightweight HYDRATION and BARRIER SUPPORT for dry acne-prone skin.</p>",
+        "heading_size": 30,
+        "heading_size_mobile": 22,
+        "heading_line_height": 120,
+        "label_size": 16,
+        "label_size_mobile": 12,
+        "value_size": 16,
+        "value_size_mobile": 14,
+        "text_line_height": 160,
+        "row_spacing": 18,
+        "row_spacing_mobile": 10,
+        "border_thickness": 0,
+        "border_color": "#d9d9d9",
+        "row_border_color": "#d9d9d9",
+        "section_bg": "#ffffff",
+        "content_bg": "#ebe7e2",
+        "heading_color": "#5b5b5b",
+        "text_color": "#5b5b5b"
+      }
+    },
+    "ss_targetting_animation_Wqer7m": {
+      "type": "ss-targetting-animation",
+      "blocks": {
+        "item_qB8tpU": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/isoa-test-benefits-1320x1440.jpg",
+            "heading": "calmer"
+          }
+        },
+        "item_QcFhYc": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/isoa-test-benefits-1320x1440.jpg",
+            "heading": "hydrated"
+          }
+        },
+        "item_GFb3Qe": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/isoa-test-benefits-1320x1440.jpg",
+            "heading": "smoother"
+          }
+        },
+        "item_UTCqnH": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/isoa-test-benefits-1320x1440.jpg",
+            "heading": "brighter"
+          }
+        }
+      },
+      "block_order": [
+        "item_qB8tpU",
+        "item_QcFhYc",
+        "item_GFb3Qe",
+        "item_UTCqnH"
+      ],
+      "name": "Interactive Benefits",
+      "settings": {
+        "top_heading": "YOUR PREP STEP TO:",
+        "section_bg": "#ffffff",
+        "container_width": 1400,
+        "desktop_image_width": 2,
+        "desktop_content_width": 2,
+        "desktop_gap": 20,
+        "mobile_gap": 10,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_side_desktop": 40,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "padding_side_mobile": 16,
+        "image_height_desktop": 500,
+        "image_height_mobile": 500,
+        "image_ratio_mobile": "original",
+        "image_radius_desktop": 10,
+        "image_radius_mobile": 10,
+        "text_font": "inter_n4",
+        "text_size_desktop": 64,
+        "text_size_mobile": 40,
+        "text_weight": 700,
+        "text_line_height": 1,
+        "text_letter_spacing": 0,
+        "text_color": "#8d8d8d",
+        "active_text_color": "#d69cc4",
+        "heading_color": "#5d5d5d",
+        "active_dot_color": "#ece082",
+        "top_heading_size_desktop": 18,
+        "top_heading_size_mobile": 16,
+        "text_gap_desktop": 1,
+        "text_gap_mobile": 1,
+        "animation_speed": 850,
+        "active_scale": 100,
+        "enable_autoplay": true,
+        "autoplay_speed": 2500
+      }
+    },
+    "ss_featured_products_4_ycPmw7": {
+      "type": "ss-featured-products-4",
+      "blocks": {
+        "text_htaA33": {
+          "type": "text",
+          "settings": {
+            "text": "<p>APPLICATION</p>",
+            "text_custom": false,
+            "text_font": "josefin_sans_n4",
+            "text_size": 12,
+            "text_size_mobile": 12,
+            "text_height": 130,
+            "text_color": "#67645e"
+          }
+        },
+        "button_QYA3G7": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "button": "EXPLORE THE FULL RANGE",
+            "url": "",
+            "open_in_new_tab": false,
+            "button_style": "outline",
+            "button_custom": false,
+            "button_font": "josefin_sans_n4",
+            "button_size": 12,
+            "button_size_mobile": 12,
+            "button_advanced": false,
+            "button_height": 100,
+            "button_padding_horizontal": 24,
+            "button_padding_horizontal_mobile": 24,
+            "button_padding_vertical": 16,
+            "button_padding_vertical_mobile": 16,
+            "button_radius": 100,
+            "button_border_thickness": 1,
+            "button_full_width_mobile": true,
+            "button_color": "#121212",
+            "button_hover_color": "#ffffff",
+            "button_bg_color": "#ffffff",
+            "button_bg_hover_color": "#121212",
+            "button_border_color": "#121212",
+            "button_border_hover_color": "#121212"
+          }
+        },
+        "slide_4mVBGh": {
+          "type": "slide",
+          "settings": {
+            "thumbnail_image": "shopify://shop_images/isoa-test-application-thumb-660x600.jpg",
+            "main_image": "shopify://shop_images/isoa-test-application-main-1320x1650.jpg",
+            "title": "After AM cleansing, gently press Barrier Milk onto your face and neck. Follow with moisturiser, sunscreen, and makeup.",
+            "description": "",
+            "url": ""
+          }
+        },
+        "slide_JMQmVR": {
+          "type": "slide",
+          "settings": {
+            "thumbnail_image": "shopify://shop_images/isoa-test-application-thumb-660x600.jpg",
+            "main_image": "shopify://shop_images/isoa-test-application-main-1320x1650.jpg",
+            "title": "After PM cleansing, apply your acne treatment as directed. Follow with Barrier Milk and moisturiser.",
+            "description": "",
+            "url": ""
+          }
+        },
+        "slide_z6jyAL": {
+          "type": "slide",
+          "settings": {
+            "thumbnail_image": "shopify://shop_images/isoa-test-application-thumb-660x600.jpg",
+            "main_image": "shopify://shop_images/isoa-test-application-main-1320x1650.jpg",
+            "title": "isoua trick: Layer Barrier Milk under your favourite liquid highlighter for a fresh, dewy-looking base.",
+            "description": "",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_htaA33",
+        "button_QYA3G7",
+        "slide_4mVBGh",
+        "slide_JMQmVR",
+        "slide_z6jyAL"
+      ],
+      "name": "SS - Featured products #4",
+      "settings": {
+        "layout": "content_image",
+        "layout_mobile": "content_image",
+        "layout_gap": 32,
+        "layout_gap_mobile": 16,
+        "image_width": 50,
+        "mobile_thumb_1": "shopify://shop_images/isoa-test-application-mobile-thumb-600x600.jpg",
+        "mobile_thumb_2": "shopify://shop_images/isoa-test-application-mobile-thumb-600x600.jpg",
+        "mobile_main": "shopify://shop_images/isoa-test-application-mobile-main-1240x800.jpg",
+        "content_radius": 10,
+        "content_border_thickness": 0,
+        "content_align": "left",
+        "content_align_mobile": "left",
+        "thumbnail_width": 140,
+        "thumbnail_gap": 16,
+        "thumbnail_ratio": "portrait",
+        "thumbnail_radius": 10,
+        "thumbnail_border_thickness": 1,
+        "image_radius": 10,
+        "image_border_thickness": 0,
+        "title_custom": false,
+        "title_font": "josefin_sans_n4",
+        "title_size": 24,
+        "title_size_mobile": 20,
+        "title_advanced": false,
+        "title_height": 130,
+        "title_mt": 4,
+        "title_mt_mobile": 16,
+        "description_custom": false,
+        "description_font": "josefin_sans_n4",
+        "description_size": 14,
+        "description_size_mobile": 13,
+        "description_height": 150,
+        "buttons_mt": 24,
+        "buttons_mt_mobile": 24,
+        "shop_button": "",
+        "open_in_new_tab": false,
+        "shop_button_style": "outline",
+        "shop_button_custom": false,
+        "shop_button_font": "josefin_sans_n4",
+        "shop_button_size": 14,
+        "shop_button_size_mobile": 14,
+        "shop_button_advanced": false,
+        "shop_button_height": 100,
+        "shop_button_padding_horizontal": 24,
+        "shop_button_padding_horizontal_mobile": 24,
+        "shop_button_padding_vertical": 16,
+        "shop_button_padding_vertical_mobile": 16,
+        "shop_button_radius": 100,
+        "shop_button_border_thickness": 1,
+        "shop_button_full_width_mobile": true,
+        "arrow_show_desktop": true,
+        "arrow_show_mobile": true,
+        "arrow_size": 32,
+        "arrow_size_mobile": 32,
+        "arrow_icon_size": 8,
+        "arrow_icon_size_mobile": 8,
+        "arrow_radius": 100,
+        "arrow_border_thickness": 0,
+        "arrow_hover_effect": "color",
+        "pagination_custom": false,
+        "pagination_font": "josefin_sans_n4",
+        "pagination_size": 10,
+        "pagination_size_mobile": 10,
+        "pagination_height": 130,
+        "thumbnail_active_border_color": "#121212",
+        "title_color": "#afafaf",
+        "title_active_color": "#121212",
+        "description_color": "#121212",
+        "pagination_color": "#121212",
+        "content_bg_color": "#f3f3f3",
+        "content_border_color": "#121212",
+        "image_border_color": "#121212",
+        "shop_button_color": "#ffffff",
+        "shop_button_hover_color": "#121212",
+        "shop_button_bg_color": "#121212",
+        "shop_button_bg_hover_color": "#ffffff",
+        "shop_button_border_color": "#121212",
+        "shop_button_border_hover_color": "#121212",
+        "arrow_color": "#121212",
+        "arrow_hover_color": "#ffffff",
+        "arrow_bg_color": "#ffffff",
+        "arrow_bg_hover_color": "#121212",
+        "arrow_border_color": "#121212",
+        "arrow_border_hover_color": "#121212",
+        "background_style": "solid",
+        "background_color": "#ffffff",
+        "background_gradient": "linear-gradient(180deg, #FFFFFF 0%, #F2F2F2 100%)",
+        "border_color": "#121212",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_horizontal": 2.5,
+        "padding_horizontal_mobile": 1,
+        "width": "page",
+        "content_width": 1200,
+        "border_thickness": 0,
+        "section_radius": 10,
+        "lazy": true
+      }
+    },
+    "rhode_lip_ingredients_L93tNx": {
+      "type": "rhode-lip-ingredients",
+      "name": "Rhode lip ingredients",
+      "settings": {
+        "image": "shopify://shop_images/isoa-test-whats-inside-1320x1140.jpg",
+        "image_alt": "Pretzel lip tint texture",
+        "image_ratio_mobile": "original",
+        "join_mobile": true,
+        "side_title": "what’s inside",
+        "intro": "a thoughtful blend of barrier-supporting ingredients and hydrators that help replenish moisture, comfort skin, and maintain a healthy-looking skin barrier.",
+        "hero_ingredient": "ceramide np",
+        "hero_copy": "a skin-identical lipid that helps reinforce the skin’s natural moisture barrier and reduce moisture loss.",
+        "also_made_with": "also made with <strong>NIACINAMIDE, PANTHENOL, AND ECTOIN</strong> to help hydrate, soothe, and improve the appearance of uneven skin tone.&nbsp;",
+        "button_label": "FULL INGREDIENTS LIST",
+        "ingredients_heading": "ingredients",
+        "full_ingredients": "<p>Water (Aqua), Aloe Barbadensis Leaf Water, Caprylic/Capric Triglyceride, Glycerin, Niacinamide, Hydrogenated Polydecene, Propylene Glycol, Panthenol, Cyclodextrin, Betaine, Ceteareth-25, Cetearyl Alcohol, Ceteareth-6, Dimethicone, Potassium Cetyl Phosphate, Polyacrylamide, Phenoxyethanol, C13-14 Isoparaffin, Ethylhexylglycerin, Stearyl Alcohol, Azelaic Acid, Ectoin, Butylene Glycol, Xanthan Gum, Laureth-7, Tocopheryl Acetate, Tromethamine, Hexylene Glycol, Capryloyl Glycine, Disodium EDTA, Dipotassium Phosphate, Ceramide NP, Xylitylglucoside.</p>",
+        "contact_intro": "If you have questions about a specific ingredient, feel free to",
+        "contact_label": "contact our team",
+        "contact_link": "shopify://pages/contact-us",
+        "panel_color": "#f1f0ed",
+        "text_color": "#67645e",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
+      }
+    },
+    "rhode_clinical_results_new": {
+      "type": "rhode-clinical-results",
+      "blocks": {
+        "bullet_1": {
+          "type": "bullet",
+          "settings": {
+            "text": "CLINICALLY PROVEN TO MINIMIZE THE LOOK OF SPOTS"
+          }
+        },
+        "bullet_2": {
+          "type": "bullet",
+          "settings": {
+            "text": "SWEATPROOF FOR UP TO 30 MINUTES AND WATERPROOF"
+          }
+        }
+      },
+      "block_order": [
+        "bullet_1",
+        "bullet_2"
+      ],
+      "settings": {
+        "heading": "clinical results",
+        "portrait": "shopify://shop_images/isoa-test-clinical-1320x1440.jpg",
+        "footnote": "<p>*Based on a 31-subject clinical study after immediate and 8 hours of use.</p>",
+        "tab1_label": "consumer study results",
+        "tab1_content": "<p>Consumer study results.</p>",
+        "tab2_label": "clinical results",
+        "tab2_content": "<p>Clinical results.</p>",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "rhode_prep_toggle_new": {
+      "type": "rhode-prep-toggle",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "index": "1",
+            "label": "RECOVER",
+            "title": "highlight milk",
+            "subtitle": "MULTIPURPOSE LUMINIZER",
+            "image": "shopify://shop_images/isoa-test-prep-1320x1440.jpg",
+            "product": "recovery-mask"
+          }
+        },
+        "step_8AnqyP": {
+          "type": "step",
+          "settings": {
+            "index": "2",
+            "label": "TARGET",
+            "title": "highlight milk",
+            "subtitle": "MULTIPURPOSE LUMINIZER",
+            "image": "shopify://shop_images/isoa-test-prep-1320x1440.jpg",
+            "product": "spotwear"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "index": "3",
+            "label": "HYDRATE",
+            "title": "barrier milk",
+            "subtitle": "CERAMIDE RECOVERY ESSENCE",
+            "image": "shopify://shop_images/isoa-test-prep-1320x1440.jpg",
+            "product": "barrier-milk"
+          }
+        },
+        "row_1_2": {
+          "type": "row",
+          "settings": {
+            "step_index": "1",
+            "label": "BENEFITS",
+            "content": "• Replenishes moisture without a heavy-cream feel\n<br>\n• Supports the skin barrier and helps soften rough texture\n<br>\n• Helps improve the appearance of uneven skin tone and post-acne marks"
+          }
+        },
+        "row_1_3": {
+          "type": "row",
+          "settings": {
+            "step_index": "1",
+            "label": "WHERE IT FITS IN YOUR ROUTINE",
+            "content": "On its own on clean bare skin, mixed into makeup, or layered with skincare and SPF."
+          }
+        },
+        "row_1_4": {
+          "type": "row",
+          "settings": {
+            "step_index": "1",
+            "label": "THE EFFECT",
+            "content": "Soft, hydrated, comfortable skin with a smoother, more even-looking appearance"
+          }
+        },
+        "row_1_5": {
+          "type": "row",
+          "settings": {
+            "step_index": "1",
+            "label": "KEY INGREDIENTS",
+            "content": "Niacinamide • Azelaic Acid Complex • Panthenol • Glycerin • Aloe Vera • Ceramide NP • Ectoin"
+          }
+        },
+        "row_2_2": {
+          "type": "row",
+          "settings": {
+            "step_index": "2",
+            "label": "BENEFITS",
+            "content": "• Deeply hydrates and plumps • Creates a smooth base that helps makeup wear better"
+          }
+        },
+        "row_2_3": {
+          "type": "row",
+          "settings": {
+            "step_index": "2",
+            "label": "WHERE IT FITS IN YOUR ROUTINE",
+            "content": "After cleansing and serums, before SPF and makeup."
+          }
+        },
+        "row_2_4": {
+          "type": "row",
+          "settings": {
+            "step_index": "2",
+            "label": "THE EFFECT",
+            "content": "Soft, dewy, primed skin"
+          }
+        },
+        "row_2_5": {
+          "type": "row",
+          "settings": {
+            "step_index": "2",
+            "label": "KEY INGREDIENTS",
+            "content": "Hyaluronic Acid • Peptides • Niacinamide • Squalane"
+          }
+        },
+        "row_3_2": {
+          "type": "row",
+          "settings": {
+            "step_index": "3",
+            "label": "BENEFITS",
+            "content": "• Replenishes moisture without a heavy-cream feel\n<br>\n• Supports the skin barrier and helps soften rough texture\n<br>\n• Helps improve the appearance of uneven skin tone and post-acne marks"
+          }
+        },
+        "row_3_3": {
+          "type": "row",
+          "settings": {
+            "step_index": "3",
+            "label": "WHERE IT FITS IN YOUR ROUTINE",
+            "content": "On its own on clean bare skin, mixed into makeup, or layered with skincare and SPF."
+          }
+        },
+        "row_3_4": {
+          "type": "row",
+          "settings": {
+            "step_index": "3",
+            "label": "THE EFFECT",
+            "content": "Soft, hydrated, comfortable skin with a smoother, more even-looking appearance"
+          }
+        },
+        "row_3_5": {
+          "type": "row",
+          "settings": {
+            "step_index": "3",
+            "label": "KEY INGREDIENTS",
+            "content": "Niacinamide • Azelaic Acid Complex • Panthenol • Glycerin • Aloe Vera • Ceramide NP • Ectoin"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_8AnqyP",
+        "step_2",
+        "row_1_2",
+        "row_1_3",
+        "row_1_4",
+        "row_1_5",
+        "row_2_2",
+        "row_2_3",
+        "row_2_4",
+        "row_2_5",
+        "row_3_2",
+        "row_3_3",
+        "row_3_4",
+        "row_3_5"
+      ],
+      "settings": {
+        "image_ratio_mobile": "original",
+        "image_ratio_mobile_w": 2,
+        "image_ratio_mobile_h": 1,
+        "padding_top": 0,
+        "padding_bottom": 24
+      }
+    },
+    "rhode_pdp_on_the_go": {
+      "type": "rhode-pdp-on-the-go",
+      "blocks": {
+        "slide_spotwear": {
+          "type": "product",
+          "settings": {
+            "image": "shopify://shop_images/isoa-test-on-the-go-1320x1440.jpg",
+            "label": "SPOT",
+            "product_name": "spotwear",
+            "description": "create a comfy, protective bubble to leave spots looking smaller, flatter, and less red"
+          }
+        },
+        "slide_depuff": {
+          "type": "product",
+          "settings": {
+            "image": "shopify://shop_images/isoa-test-on-the-go-1320x1440.jpg",
+            "label": "DEPUFF",
+            "product_name": "peptide eye prep",
+            "description": "depuff and brighten whenever your under-eyes need a little wake-up"
+          }
+        },
+        "slide_mist": {
+          "type": "product",
+          "settings": {
+            "image": "shopify://shop_images/isoa-test-on-the-go-1320x1440.jpg",
+            "label": "MIST",
+            "product_name": "glazing mist",
+            "description": "mist throughout the day for a hydrating, glowy refresh"
+          }
+        },
+        "slide_nourish": {
+          "type": "product",
+          "settings": {
+            "image": "shopify://shop_images/isoa-test-on-the-go-1320x1440.jpg",
+            "label": "NOURISH",
+            "product_name": "peptide lip treatment",
+            "description": "swipe it on anytime to hydrate lips with a glossy, high-shine finish"
+          }
+        },
+        "slide_prep": {
+          "type": "product",
+          "settings": {
+            "image": "shopify://shop_images/isoa-test-on-the-go-1320x1440.jpg",
+            "label": "PREP",
+            "product_name": "glazing milk",
+            "description": "a lightweight ceramide facial essence to prep skin for the rest of your routine"
+          }
+        }
+      },
+      "block_order": [
+        "slide_spotwear",
+        "slide_depuff",
+        "slide_mist",
+        "slide_nourish",
+        "slide_prep"
+      ],
+      "settings": {
+        "image_size_mobile": "original",
+        "title": "Take your rhode ON THE GO.",
+        "subtitle": "Essentials to throw in your purse or pocket.",
+        "card_bg_color": "#f1f0ed",
+        "image_bg_color": "#e5e3df",
+        "active_circle_color": "#e29fc8"
+      }
+    },
+    "ss_packaging_cUBeaP": {
+      "type": "ss-packaging",
+      "name": "Packaging",
+      "settings": {
+        "image": "shopify://shop_images/isoa-test-packaging-1200x830.jpg",
+        "section_width": 120,
+        "section_radius": 10,
+        "section_border": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_side": 40,
+        "padding_side_mobile": 16,
+        "content_gap": 40,
+        "content_gap_mobile": 20,
+        "side_width": 72,
+        "side_width_mobile": 64,
+        "image_radius": 12,
+        "image_ratio": "original",
+        "image_height": 300,
+        "image_height_mobile": 320,
+        "heading": "less harm, more hydration.",
+        "description": "Barrier Milk packaging is made with upcycled post-consumer (PCR) materials.",
+        "material_1_title": "",
+        "material_1_text": "",
+        "material_2_title": "",
+        "material_2_text": "",
+        "vertical_text": "how to recycle",
+        "side_cta": "CLICK HERE",
+        "back_label": "packaging",
+        "back_cta": "SEE DETAILS",
+        "recycle_heading": "how to recycle",
+        "recycle_body": "<p>Once your Barrier Milk is empty, here is how to give each part its next life:</p><p><strong>1. Unit carton</strong> — flatten it and recycle it with paper and cardboard. It is 100% recyclable and made from FSC-certified paper.</p><p><strong>2. Cap and bottle</strong> — rinse out any remaining product, then recycle both with plastics. They are made from PET #1, which most recycling collections accept.</p><p><em>FYI: check with your local collection service for what it accepts in your area.</em></p>",
+        "heading_size": 36,
+        "heading_size_mobile": 24,
+        "text_size": 16,
+        "text_size_mobile": 15,
+        "vertical_text_size": 32,
+        "vertical_text_size_mobile": 24,
+        "section_bg": "#eceae7",
+        "side_bg": "#918d87",
+        "text_color": "#67645e",
+        "border_color": "#000000"
+      }
+    },
+    "17931386857106fa34": {
+      "type": "_blocks",
+      "blocks": {
+        "okendo_reviews_widget_GJPaq4": {
+          "type": "shopify://apps/okendo/blocks/reviews-widget/bb689e69-ea70-4661-8fb7-ad24a2e23c29",
+          "settings": {
+            "product": "{{product}}",
+            "widget_type": "reviews_widget"
+          }
+        }
+      },
+      "block_order": [
+        "okendo_reviews_widget_GJPaq4"
+      ],
+      "custom_css": [],
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "center",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 12,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "color_scheme": "scheme-3",
+        "background_media": "none",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 10,
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
+    "section_store_featured_collection_6_hnPVwp": {
+      "type": "section-store-featured-collection-6",
+      "blocks": {
+        "slide_piXCUY": {
+          "type": "slide",
+          "settings": {
+            "product": "spotwear",
+            "image": "shopify://shop_images/isoa-test-cross-sell-1200x1400.jpg",
+            "heading": "Slide 1",
+            "button_text": "SHOP NOW"
+          }
+        },
+        "slide_YgDBGM": {
+          "type": "slide",
+          "settings": {
+            "product": "the-peptide-eye-prep-set",
+            "image": "shopify://shop_images/isoa-test-cross-sell-1200x1400.jpg",
+            "heading": "FEELS LIKE:",
+            "button_text": "Comfy, second-skin feel that stays on all day"
+          }
+        },
+        "slide_EGrgLp": {
+          "type": "slide",
+          "settings": {
+            "product": "hydrocolloid-breakout-recovery-mask",
+            "image": "shopify://shop_images/isoa-test-cross-sell-1200x1400.jpg",
+            "heading": "SMELLS LIKE:",
+            "button_text": "Fragrance-Free"
+          }
+        },
+        "slide_brcJrc": {
+          "type": "slide",
+          "settings": {
+            "product": "",
+            "image": "shopify://shop_images/isoa-test-cross-sell-1200x1400.jpg",
+            "heading": "Slide 4",
+            "button_text": "SHOP NOW"
+          }
+        }
+      },
+      "block_order": [
+        "slide_piXCUY",
+        "slide_YgDBGM",
+        "slide_EGrgLp",
+        "slide_brcJrc"
+      ],
+      "name": "SECTION STORE - Featured Collection #6",
+      "settings": {
+        "collection": "",
+        "collection_show": 10,
+        "slider_view": 3,
+        "slider_view_mobile": 1.2,
+        "slider_gap": 32,
+        "slider_gap_mobile": 20,
+        "slide_padding_vertical": 28,
+        "slide_padding_vertical_mobile": 16,
+        "slide_padding_horizontal": 16,
+        "slide_padding_horizontal_mobile": 12,
+        "slide_radius": 12,
+        "slide_border_thickness": 0,
+        "slide_ratio": "portrait",
+        "slide_ratio_mobile": "portrait",
+        "slide_overlay": 0,
+        "slide_shadow": false,
+        "content_use_bg": false,
+        "heading": "Store",
+        "heading_custom": false,
+        "heading_font": "josefin_sans_n4",
+        "heading_size": 32,
+        "heading_size_mobile": 12,
+        "heading_height": 130,
+        "title_custom": false,
+        "title_font": "josefin_sans_n4",
+        "title_size": 24,
+        "title_size_mobile": 20,
+        "title_height": 150,
+        "price_from": "From",
+        "price_custom": false,
+        "price_font": "josefin_sans_n4",
+        "price_size": 16,
+        "price_size_mobile": 12,
+        "price_height": 150,
+        "price_compare": false,
+        "hide_vendor": false,
+        "vendor_custom": false,
+        "vendor_font": "josefin_sans_n4",
+        "vendor_size": 16,
+        "vendor_size_mobile": 14,
+        "vendor_height": 130,
+        "vendor_mt": 8,
+        "vendor_mt_mobile": 8,
+        "button_text": "SHOP NOW",
+        "button_custom": false,
+        "button_font": "josefin_sans_n4",
+        "button_size": 12,
+        "button_size_mobile": 12,
+        "button_height": 100,
+        "button_padding_vertical": 14,
+        "button_padding_vertical_mobile": 12,
+        "button_padding_horizontal": 12,
+        "button_padding_horizontal_mobile": 12,
+        "button_radius": 100,
+        "button_border_thickness": 0,
+        "button_mt_mobile": 16,
+        "button_style": "non_outline",
+        "arrow_size": 48,
+        "arrow_size_mobile": 48,
+        "arrow_icon_size": 8,
+        "arrow_icon_size_mobile": 8,
+        "arrow_border_thickness": 0,
+        "arrow_radius": 100,
+        "arrow_hover_effect": "color",
+        "arrow_show_desktop": true,
+        "arrow_show_mobile": false,
+        "slide_bg_color": "#f8f8f8",
+        "slide_border_color": "#696660",
+        "slide_shadow_color": "#696660",
+        "slide_overlay_color": "#000000",
+        "heading_color": "#696660",
+        "content_bg": "linear-gradient(180deg, rgba(255, 255, 255, 0) 55%, rgba(255, 255, 255, 0.7) 100%)",
+        "title_color": "#696660",
+        "price_color": "#696660",
+        "price_original_color": "#696660",
+        "vendor_color": "#696660",
+        "button_color": "#696660",
+        "button_hover_color": "#ffffff",
+        "button_bg_color": "#ffffff",
+        "button_bg_hover_color": "#696660",
+        "button_border_color": "#696660",
+        "button_border_hover_color": "#696660",
+        "arrow_color": "#696660",
+        "arrow_hover_color": "#ffffff",
+        "arrow_bg_color": "#ffffff",
+        "arrow_bg_hover_color": "#696660",
+        "arrow_border_color": "#696660",
+        "arrow_border_hover_color": "#696660",
+        "background_color": "#ffffff",
+        "background_gradient": "",
+        "border_color": "#000000",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_horizontal": 0,
+        "margin_horizontal_mobile": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_horizontal": 3,
+        "padding_horizontal_mobile": 1,
+        "full_width": true,
+        "content_width": 120,
+        "border_thickness": 0,
+        "section_radius": 0,
+        "lazy": true
+      }
+    },
+    "rhode_sticky_atc": {
+      "type": "rhode-sticky-atc",
+      "settings": {
+        "title_override": "SPOTWEAR DAISY",
+        "cta_label": "BUY {PRODUCT}",
+        "sold_out_label": "SOLD OUT",
+        "hero_selector": "[data-rh-hero], .product-information",
+        "bar_bg_color": "#faf7f2",
+        "title_color": "#67645e",
+        "text_color": "#67645e",
+        "cta_bg_color": "#4b342c",
+        "cta_hover_bg_color": "#36231d",
+        "cta_text_color": "#ffffff"
+      }
+    },
+    "rhode_pdp_faq": {
+      "type": "rhode-pdp-faq",
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "Where does Barrier Milk fit into my daily routine?",
+            "answer": "<p>Morning and night, after cleansing. In the morning, press it onto your face and neck, then follow with moisturiser, sunscreen and makeup. At night, apply it after your acne treatment and before barrier cream.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Can I use it with my acne treatment?",
+            "answer": "<p>Yes. Use your acne treatment according to its directions first, then apply Barrier Milk. Follow with barrier cream if needed and compatible with your treatment.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "What does it feel like on skin?",
+            "answer": "<p>A lightweight, milky serum that leaves skin feeling soft and hydrated. It is fragrance-free.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "Is it dermatologist tested?",
+            "answer": "<p>Yes. Barrier Milk is dermatologist-tested and non-comedogenic.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "Is it vegan or cruelty-free?",
+            "answer": "<p>Yes. Barrier Milk is vegan, cruelty-free and gluten-free.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/isoa-test-faq-1400x1500.jpg",
+        "image_ratio": "custom",
+        "image_ratio_w": 14,
+        "image_ratio_h": 15,
+        "image_ratio_mobile": "original",
+        "image_ratio_mobile_w": 1,
+        "image_ratio_mobile_h": 1,
+        "heading": "FAQ",
+        "subheading": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "isoa_pdp_trust",
+    "ss_slider_5_m7VKpN",
+    "ss_image_split_row_TniKMq",
+    "ss_targetting_animation_Wqer7m",
+    "ss_featured_products_4_ycPmw7",
+    "rhode_lip_ingredients_L93tNx",
+    "rhode_clinical_results_new",
+    "rhode_prep_toggle_new",
+    "rhode_pdp_on_the_go",
+    "ss_packaging_cUBeaP",
+    "rhode_pdp_faq",
+    "17931386857106fa34",
+    "section_store_featured_collection_6_hnPVwp",
+    "rhode_sticky_atc"
+  ]
+}
