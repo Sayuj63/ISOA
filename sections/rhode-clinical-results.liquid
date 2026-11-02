@@ -158,26 +158,39 @@
     position: relative;
   }
 
+  /* Pinned, not height: 100% — in flow the photo's own proportions set the
+     row height (~724px at 1440, growing with the viewport), and Safari
+     resolves a % height against the uncapped mobile box. */
   .rh-clin-image-{{ section.id }} img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
   }
-  {%- if image_size_desktop != blank %}
-  /* "Image size (desktop)" picked: those proportions instead of the text
-     card's height. */
   @media (min-width: 750px) {
+    {%- if image_size_desktop == blank %}
+    /* Fill: same height as the PDP hero, the card growing it if needed. */
+    .rh-clin-grid-{{ section.id }} {
+      min-height: var(--rhode-pdp-h, 720px);
+    }
+    {%- else %}
+    /* "Image size (desktop)" picked: a spacer in those proportions (never
+       taller than the hero) sets the row height; the image box still
+       stretches to the row, so it always matches the card. */
+    .rh-clin-card-{{ section.id }},
     .rh-clin-image-{{ section.id }} {
-      align-self: center;
       min-height: 0;
-      width: 100%;
+    }
+    .rh-clin-image-{{ section.id }}::before {
+      content: '';
+      display: block;
       aspect-ratio: {{ image_size_desktop | strip }};
-      /* Never taller than the hero, whatever proportions are picked. */
       max-height: var(--rhode-pdp-h, 720px);
     }
+    {%- endif %}
   }
-  {%- endif %}
 
 
   .rh-clin-panel-{{ section.id }} { display: none; }

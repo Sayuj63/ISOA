@@ -322,7 +322,11 @@
     #rh-otg-{{ sid }} .rh-otg__grid {
       grid-template-columns: 1fr 1fr;
       gap: var(--rhode-pdp-gap, 32px);
-      height: var(--rhode-pdp-h, 720px);
+      {%- if image_size_desktop == blank %}
+      /* min-, not height: a card with more copy grows the row instead of
+         spilling out of it. */
+      min-height: var(--rhode-pdp-h, 720px);
+      {%- endif %}
     }
     #rh-otg-{{ sid }} .rh-otg__media {
       height: 100%;
@@ -330,19 +334,14 @@
     }
     #rh-otg-{{ sid }} .rh-otg__media::before {
       {%- if image_size_desktop != blank %}
+      /* The spacer sets the row height; the media still stretches to the
+         row, so it always matches the card. Never taller than the hero. */
       aspect-ratio: {{ image_size_desktop | strip }};
-      /* The row is the hero's height; a taller pick spilled out of it. */
       max-height: var(--rhode-pdp-h, 720px);
       {%- else %}
       display: none;
       {%- endif %}
     }
-    {%- if image_size_desktop != blank %}
-    #rh-otg-{{ sid }} .rh-otg__media {
-      height: auto;
-      align-self: center;
-    }
-    {%- endif %}
     #rh-otg-{{ sid }} .rh-otg__card {
       padding: 32px;
       border-radius: 10px;

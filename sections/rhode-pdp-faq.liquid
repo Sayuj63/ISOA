@@ -88,18 +88,31 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
+  /* An in-flow spacer in the picked proportions (never taller than the
+     hero) sets the row height, and the media stretches to the row, so the
+     photo always matches the card — also when a question opens and the card
+     grows. A ratio on the media itself kept it short beside a taller card. */
   .rh-faq--{{ sid }} .rh-faq__media {
+    position: relative;
     order: 2;
     width: 100%;
-    aspect-ratio: var(--rh-faq-ratio);
-    /* Never taller than the hero, whatever proportions are picked. */
-    max-height: var(--rhode-pdp-h, 720px);
     overflow: hidden;
     border-radius: 10px;
     background: #e5e3df;
   }
 
+  .rh-faq--{{ sid }} .rh-faq__media::before {
+    content: '';
+    display: block;
+    aspect-ratio: var(--rh-faq-ratio);
+    max-height: var(--rhode-pdp-h, 720px);
+  }
+
+  /* Pinned rather than height: 100%, which Safari resolves against the
+     uncapped height once the cap kicks in. */
   .rh-faq--{{ sid }} .rh-faq__image {
+    position: absolute;
+    inset: 0;
     display: block;
     width: 100%;
     height: 100%;
@@ -227,11 +240,14 @@
     /* Phone: photo and questions read as one card, as on Rhode. */
     .rh-faq--{{ sid }} .rh-faq__media {
       order: 0;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .rh-faq--{{ sid }} .rh-faq__media::before {
       aspect-ratio: var(--rh-faq-ratio-mobile);
       /* A tall pick crops rather than filling more than the screen. */
       max-height: 75vh;
       max-height: 75svh;
-      border-radius: 10px 10px 0 0;
     }
 
     .rh-faq--{{ sid }} .rh-faq__card {

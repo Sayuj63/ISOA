@@ -543,12 +543,12 @@ scale(calc(var(--text-scale) / 100));}
   }
 
   {%- if image_size_desktop != blank %}
-  /* "Image size (desktop)" picked: the image box takes those proportions
-     (from an in-flow spacer, as on mobile) instead of the text card's height. */
+  /* "Image size (desktop)" picked: an in-flow spacer in those proportions
+     (as on mobile) sets the row height instead of the hero height, and the
+     image box still stretches to the row so it matches the text card. */
   @media screen and (min-width: 769px){
-    #benefits-{{ section.id }} .rh-media{
-      height: auto !important;
-      align-self: center !important;
+    #benefits-{{ section.id }} .rh-benefits__grid{
+      min-height: 0;
     }
     #benefits-{{ section.id }} .rh-media::before{
       content: '';

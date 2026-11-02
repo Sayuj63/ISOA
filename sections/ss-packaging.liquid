@@ -551,13 +551,18 @@
 }
 
 .packaging-{{ section.id }} .packaging-right.packaging-right--ratio{
+  position:relative;
   height:auto;
   background:transparent;
   /* Never taller than the PDP hero, whatever proportions are picked. */
   max-height:var(--rhode-pdp-h, 720px);
 }
 
+/* Pinned rather than height:100%, which Safari resolves against the
+   uncapped height once the max-height cap kicks in. */
 .packaging-{{ section.id }} .packaging-right--ratio img{
+  position:absolute;
+  inset:0;
   object-fit:cover;
 }
 

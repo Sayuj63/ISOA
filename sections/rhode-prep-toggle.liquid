@@ -248,15 +248,20 @@
       aspect-ratio: auto;
       align-self: stretch;
     }
-    {%- if image_size_desktop != blank %}
-    /* "Image size (desktop)" picked: keep those proportions instead of the
-       text card's height. */
-    .rh-prep-image-viewport-{{ section.id }} {
-      width: 100%;
+    {%- if image_size_desktop == blank %}
+    /* Fill: same height as the PDP hero, the card growing it if needed. */
+    .rh-prep-layout-{{ section.id }} {
+      min-height: var(--rhode-pdp-h, 720px);
+    }
+    {%- else %}
+    /* "Image size (desktop)" picked: a spacer in those proportions (never
+       taller than the hero) sets the row height; the viewport still
+       stretches to the row, so it always matches the card. */
+    .rh-prep-image-viewport-{{ section.id }}::before {
+      content: '';
+      display: block;
       aspect-ratio: {{ image_size_desktop | strip }};
-      /* Never taller than the hero, whatever proportions are picked. */
       max-height: var(--rhode-pdp-h, 720px);
-      align-self: center;
     }
     {%- endif %}
   }

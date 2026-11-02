@@ -295,20 +295,19 @@ assign inside_box_padding_mobile = section.settings.inside_box_padding_mobile
   .feature-heading-{{ section.id }} p {
     font-style: normal;
   }
-  /* Rhode's version of this section (rhodeskin.com spotwear PDP): the photo
-     is shown whole — fitted, never cropped — on white, so a cut-out like the
-     basketball keeps its top and its reflection. */
   .feature-image-{{ section.id }} {
     position: relative;
     background: #ffffff;
   }
   /* Out of flow: the photo fills whatever box the layout gives it instead of
      sizing that box. In flow, a portrait photo's own proportions pushed the
-     desktop row to ~840px, past the hero height it should match. */
-  .feature-image-{{ section.id }} img {
+     desktop row to ~840px, past the hero height it should match. Cover, so
+     every Image size choice is filled edge to edge instead of letterboxed. */
+  .feature-image-{{ section.id }} img,
+  .feature-image-{{ section.id }} svg {
     position: absolute;
     inset: 0;
-    object-fit: contain;
+    object-fit: cover;
   }
 
   @media screen and (max-width: 1023px) {
@@ -328,9 +327,11 @@ assign inside_box_padding_mobile = section.settings.inside_box_padding_mobile
     /* Same height as the PDP hero above (--rhode-pdp-h, rhode-pdp.css), with
        the copy anchored to the bottom of the card as on Rhode. The image
        column fills that height instead of following its aspect ratio. */
+    {%- if image_size_desktop == blank %}
     .feature-grid-{{ section.id }} {
       min-height: var(--rhode-pdp-h, 720px);
     }
+    {%- endif %}
     .feature-content-{{ section.id }} {
       justify-content: flex-end;
       align-items: flex-start;
@@ -339,14 +340,15 @@ assign inside_box_padding_mobile = section.settings.inside_box_padding_mobile
       aspect-ratio: auto;
     }
     {%- if image_size_desktop != blank %}
-    /* "Image size (desktop)" picked: the image keeps those proportions
-       instead of stretching to the text card's height. */
-    .feature-image-{{ section.id }} {
-      align-self: center;
+    /* "Image size (desktop)" picked: a spacer in those proportions (never
+       taller than the hero) sets the row height, and the image box still
+       stretches to the row, so it always matches the text card. A ratio on
+       the box itself made it shrink and centre beside a taller card. */
+    .feature-image-{{ section.id }}::before {
+      content: '';
+      display: block;
       width: 100%;
       aspect-ratio: {{ image_size_desktop | strip }};
-      height: auto;
-      /* Never taller than the hero, whatever proportions are picked. */
       max-height: var(--rhode-pdp-h, 720px);
     }
     {%- endif %}
